@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>经典语录 | 文艺 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .page-header p { font-size: 1.05rem; opacity: 0.88; }
+
+        .gallery-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: #c41e3a; text-decoration: none; margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* 语录分类 */
+        .quotes-categories {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1.25rem;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        /* 语录网格 */
+        .quotes-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .quote-detail-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .quote-detail-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .quote-detail-card.marx { border-left-color: #8b0000; }
+        .quote-detail-card.engels { border-left-color: #4a5568; }
+        .quote-detail-card.lenin { border-left-color: #d4a017; }
+        .quote-detail-card.stalin { border-left-color: #744210; }
+        .quote-detail-card.mao { border-left-color: #c41e3a; }
+
+        .quote-detail-card blockquote {
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        .quote-detail-card blockquote p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .quote-detail-card cite {
+            display: block;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            font-style: normal;
+        }
+
+        .quote-detail-card cite::before {
+            content: '—— ';
+        }
+
+        .quote-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #f0f0f0;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.75rem;
+        }
+
+        body.dark-mode .category-btn {
+            background: #3a3a3a;
+            border-color: #555;
+            color: #ddd;
+        }
+
+        body.dark-mode .category-btn:hover, 
+        body.dark-mode .category-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        body.dark-mode .quote-tag {
+            background: #444;
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            .quotes-detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html" class="active">文艺</a>
+                <a href="../puzzle.html" style="color:#fbbf24;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>💬 经典语录</h1>
+            <p>导师箴言 · 革命智慧 · 精神火炬</p>
+        </section>
+
+        <div class="gallery-container">
+            <a href="../gallery.html" class="back-link">← 返回文艺首页</a>
+
+            <div class="quotes-categories">
+                <button class="category-btn active" data-filter="all">全部</button>
+                <button class="category-btn" data-filter="marx">马克思/恩格斯</button>
+                <button class="category-btn" data-filter="lenin">列宁</button>
+                <button class="category-btn" data-filter="stalin">斯大林</button>
+                <button class="category-btn" data-filter="mao">毛泽东</button>
+            </div>
+
+            <div class="quotes-detail-grid" id="quotesGrid">
+                <div class="quote-detail-card marx" data-category="marx">
+                    <blockquote>
+                        <p>"一个幽灵，共产主义的幽灵，在欧洲游荡。"</p>
+                        <cite>马克思、恩格斯《共产党宣言》</cite>
+                    </blockquote>
+                    <span class="quote-tag">阶级斗争</span>
+                </div>
+
+                <div class="quote-detail-card marx" data-category="marx">
+                    <blockquote>
+                        <p>"工人没有祖国。"</p>
+                        <cite>马克思、恩格斯《共产党宣言》</cite>
+                    </blockquote>
+                    <span class="quote-tag">国际主义</span>
+                </div>
+
+                <div class="quote-detail-card marx" data-category="marx">
+                    <blockquote>
+                        <p>"全世界无产者，联合起来！"</p>
+                        <cite>马克思、恩格斯《共产党宣言》</cite>
+                    </blockquote>
+                    <span class="quote-tag">团结</span>
+                </div>
+
+                <div class="quote-detail-card marx" data-category="marx">
+                    <blockquote>
+                        <p>"哲学家们只是用不同的方式解释世界，而问题在于改变世界。"</p>
+                        <cite>马克思《关于费尔巴哈的提纲》</cite>
+                    </blockquote>
+                    <span class="quote-tag">实践</span>
+                </div>
+
+                <div class="quote-detail-card lenin" data-category="lenin">
+                    <blockquote>
+                        <p>"帝国主义是资本主义的最高阶段。"</p>
+                        <cite>列宁《帝国主义是资本主义的最高阶段》</cite>
+                    </blockquote>
+                    <span class="quote-tag">帝国主义</span>
+                </div>
+
+                <div class="quote-detail-card lenin" data-category="lenin">
+                    <blockquote>
+                        <p>"没有革命的理论，就不会有革命的运动。"</p>
+                        <cite>列宁《怎么办？》</cite>
+                    </blockquote>
+                    <span class="quote-tag">理论建设</span>
+                </div>
+
+                <div class="quote-detail-card lenin" data-category="lenin">
+                    <blockquote>
+                        <p>"国家是阶级矛盾不可调和的产物。"</p>
+                        <cite>列宁《国家与革命》</cite>
+                    </blockquote>
+                    <span class="quote-tag">国家理论</span>
+                </div>
+
+                <div class="quote-detail-card stalin" data-category="stalin">
+                    <blockquote>
+                        <p>"落后就要挨打。"</p>
+                        <cite>斯大林</cite>
+                    </blockquote>
+                    <span class="quote-tag">工业化</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao">
+                    <blockquote>
+                        <p>"枪杆子里出政权。"</p>
+                        <cite>毛泽东八七会议讲话</cite>
+                    </blockquote>
+                    <span class="quote-tag">武装斗争</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao">
+                    <blockquote>
+                        <p>"为人民服务。"</p>
+                        <cite>毛泽东《为人民服务》</cite>
+                    </blockquote>
+                    <span class="quote-tag">群众路线</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao">
+                    <blockquote>
+                        <p>"星星之火，可以燎原。"</p>
+                        <cite>毛泽东《星星之火，可以燎原》</cite>
+                    </blockquote>
+                    <span class="quote-tag">革命乐观主义</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao">
+                    <blockquote>
+                        <p>"一切反动派都是纸老虎。"</p>
+                        <cite>毛泽东与美国记者安娜·路易斯·斯特朗的谈话</cite>
+                    </blockquote>
+                    <span class="quote-tag">战略思想</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao">
+                    <blockquote>
+                        <p>"没有调查，就没有发言权。"</p>
+                        <cite>毛泽东《反对本本主义》</cite>
+                    </blockquote>
+                    <span class="quote-tag">调查研究</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao">
+                    <blockquote>
+                        <p>"从群众中来，到群众中去。"</p>
+                        <cite>毛泽东《关于领导方法的若干问题》</cite>
+                    </blockquote>
+                    <span class="quote-tag">群众路线</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao">
+                    <blockquote>
+                        <p>"战略上要藐视敌人，战术上要重视敌人。"</p>
+                        <cite>毛泽东</cite>
+                    </blockquote>
+                    <span class="quote-tag">战略战术</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao">
+                    <blockquote>
+                        <p>"百花齐放，百家争鸣。"</p>
+                        <cite>毛泽东</cite>
+                    </blockquote>
+                    <span class="quote-tag">文化方针</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // 语录分类筛选
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                
+                // 更新按钮状态
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 筛选语录卡片
+                document.querySelectorAll('.quote-detail-card').forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

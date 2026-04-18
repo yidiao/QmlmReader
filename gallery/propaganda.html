@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新中国宣传画 | 文艺 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .page-header p { font-size: 1.1rem; opacity: 0.9; }
+
+        .gallery-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: #c41e3a; text-decoration: none; margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* 统计栏 */
+        .stats-bar {
+            background: #f9f9f9; padding: 1.5rem; border-radius: 12px;
+            margin-bottom: 2rem; display: flex; justify-content: space-around;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 2rem; font-weight: bold; color: #c41e3a; }
+        .stat-label { color: #666; font-size: 0.9rem; }
+
+        /* 筛选栏 */
+        .filter-bar {
+            background: white; padding: 1.5rem; border-radius: 12px;
+            margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .filter-section { margin-bottom: 1rem; }
+        .filter-section:last-child { margin-bottom: 0; }
+        .filter-label { font-weight: bold; color: #c41e3a; margin-bottom: 0.5rem; display: block; }
+        .filter-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .filter-btn {
+            padding: 0.4rem 1rem; border: 2px solid #e0e0e0;
+            background: white; color: #666; border-radius: 20px;
+            cursor: pointer; transition: all 0.2s; font-size: 0.9rem;
+        }
+        .filter-btn:hover { border-color: #c41e3a; color: #c41e3a; }
+        .filter-btn.active { background: #c41e3a; border-color: #c41e3a; color: white; }
+
+        /* 搜索框 */
+        .search-box {
+            width: 100%; padding: 0.6rem 1rem; border: 2px solid #e0e0e0;
+            border-radius: 20px; font-size: 0.95rem; outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-box:focus { border-color: #c41e3a; }
+
+        /* 结果计数 */
+        .result-count { color: #888; font-size: 0.9rem; margin-bottom: 1rem; }
+
+        /* 图库网格 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+
+        /* 图片卡片 */
+        .gallery-item {
+            background: white; border-radius: 10px; overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.25s;
+            cursor: pointer;
+        }
+        .gallery-item:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+        .gallery-item-image {
+            width: 100%; height: 200px; object-fit: cover;
+            background: #f0f0f0; display: block;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .gallery-item-image.loaded { opacity: 1; }
+        .gallery-item-image.lazy-placeholder {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .gallery-item-info { padding: 0.8rem 1rem; }
+        .gallery-item-title {
+            font-weight: bold; color: #333; font-size: 0.9rem;
+            line-height: 1.4; margin-bottom: 0.4rem;
+            display: -webkit-box; -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .gallery-item-meta {
+            display: flex; justify-content: space-between;
+            font-size: 0.8rem; color: #888;
+        }
+        .gallery-item-vol {
+            padding: 0.15rem 0.5rem; background: #fef2f2;
+            color: #c41e3a; border-radius: 8px; font-weight: bold;
+        }
+
+        /* 加载更多 */
+        .load-more { text-align: center; margin-top: 2.5rem; }
+        .load-more-btn {
+            padding: 0.8rem 2.5rem; background: #c41e3a; color: white;
+            border: none; border-radius: 30px; font-size: 1rem;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .load-more-btn:hover { background: #8b0000; transform: scale(1.04); }
+        .load-more-btn:disabled { background: #ccc; cursor: default; transform: none; }
+
+        /* 模态框 */
+        .modal {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.92); z-index: 9999;
+            justify-content: center; align-items: center; padding: 1rem;
+        }
+        .modal.active { display: flex; }
+        .modal-inner {
+            position: relative; max-width: 90vw; max-height: 90vh;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .modal-image {
+            max-width: 88vw; max-height: 78vh;
+            object-fit: contain; border-radius: 6px;
+            display: block;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .modal-image.loaded { opacity: 1; }
+        .modal-image.loading {
+            background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        .modal-info { color: white; margin-top: 1rem; text-align: center; }
+        .modal-title { font-size: 1.1rem; }
+        .modal-meta { font-size: 0.85rem; color: #aaa; margin-top: 0.3rem; }
+        .modal-close {
+            position: absolute; top: -2.5rem; right: 0;
+            color: white; font-size: 2rem; cursor: pointer;
+            background: none; border: none; line-height: 1;
+        }
+        .modal-nav {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.15); color: white;
+            border: none; padding: 1rem 0.8rem; font-size: 1.5rem;
+            cursor: pointer; border-radius: 8px; transition: background 0.2s;
+        }
+        .modal-nav:hover { background: rgba(255,255,255,0.3); }
+        .modal-prev { left: 1rem; }
+        .modal-next { right: 1rem; }
+        .modal-counter { color: #aaa; font-size: 0.85rem; margin-top: 0.3rem; }
+
+        /* 黑夜模式 */
+        body.dark-mode .filter-bar,
+        body.dark-mode .gallery-item { background: #2a2a2a; }
+        body.dark-mode .stats-bar { background: #2a2a2a; }
+        body.dark-mode .filter-btn { background: #2a2a2a; border-color: #444; color: #ccc; }
+        body.dark-mode .filter-btn:hover { border-color: #ff6b6b; color: #ff6b6b; }
+        body.dark-mode .filter-btn.active { background: #c41e3a; border-color: #c41e3a; color: white; }
+        body.dark-mode .gallery-item-title { color: #e0e0e0; }
+        body.dark-mode .gallery-item-meta { color: #888; }
+        body.dark-mode .filter-label { color: #ff6b6b; }
+        body.dark-mode .back-link { color: #ff6b6b; }
+        body.dark-mode .search-box { background: #2a2a2a; color: #e0e0e0; border-color: #444; }
+        body.dark-mode .result-count { color: #777; }
+        body.dark-mode .stat-label { color: #aaa; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html" class="active">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>社会主义新中国宣传画</h1>
+            <p style="font-size:0.9rem;opacity:0.7;margin-top:0.3rem;">红色年代的视觉记忆 · 社会主义建设的艺术见证</p>
+            <p style="font-size:0.9rem;opacity:0.7;margin-top:0.3rem;">图片来自书格网，免费公开，侵权即删</p>
+        </section>
+
+        <div class="gallery-container">
+            <a href="../gallery.html" class="back-link">← 返回文艺首页</a>
+
+            <!-- 统计信息 -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number">660</div>
+                    <div class="stat-label">宣传画总数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">专辑分类</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1950—1988</div>
+                    <div class="stat-label">年代跨度</div>
+                </div>
+            </div>
+
+            <!-- 筛选栏 -->
+            <div class="filter-bar">
+                <div class="filter-section">
+                    <span class="filter-label">专辑筛选</span>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-vol="all">全部（660）</button>
+                        <button class="filter-btn" data-vol="V01">第一辑（100）</button>
+                        <button class="filter-btn" data-vol="V02">第二辑（514）</button>
+                        <button class="filter-btn" data-vol="V03">第三辑（46）</button>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <span class="filter-label">搜索标题 / 作者</span>
+                    <input type="text" class="search-box" id="searchInput" placeholder="输入关键词，如"雷锋"、"哈琼文"…">
+                </div>
+            </div>
+
+            <div class="result-count" id="resultCount">共 660 张</div>
+
+            <!-- 图库网格 -->
+            <div class="gallery-grid" id="galleryGrid"></div>
+
+            <!-- 加载更多 -->
+            <div class="load-more">
+                <button class="load-more-btn" id="loadMoreBtn" onclick="loadMore()">加载更多</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 模态框 -->
+    <div class="modal" id="imageModal">
+        <button class="modal-nav modal-prev" onclick="modalNav(-1)">&#10094;</button>
+        <div class="modal-inner">
+            <button class="modal-close" onclick="closeModal()" title="关闭(ESC)">&times;</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <div class="modal-title" id="modalTitle"></div>
+                <div class="modal-meta" id="modalMeta"></div>
+                <div class="modal-counter" id="modalCounter"></div>
+            </div>
+        </div>
+        <button class="modal-nav modal-next" onclick="modalNav(1)">&#10095;</button>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+    // ============================================================
+    //  图片数据（真实文件名 + 相对路径）
+    // ============================================================
+        const BASE = '../assets/posters/';
+
+    // 解析文件名 → { vol, src, thumbSrc, title, year, author }
+    function parseFile(vol, filename) {
+        const parts = filename.replace('.jpg','').split('_');
+        const year = parts[1] || '年代不详';
+        const title = parts[2] || filename;
+        const author = parts[3] || '佚名';
+        const subdir = vol === 'V01' ? 'V01-第一辑' : vol === 'V02' ? 'V02-第二辑' : 'V03-第三辑';
+        const fullSrc = BASE + subdir + '/' + filename;
+        return {
+            vol,
+            src: fullSrc,           // 原图路径
+            thumbSrc: fullSrc,      // 缩略图路径（目前复用原图，后续可改为独立缩略图目录）
+            title,
+            year,
+            author,
+            filename
+        };
+    }
+
+    const FILES_V01 = ["001_年代不详_中国人民伟大领袖毛主席_佚名.jpg","002_年代不详_公审恶霸_佚名.jpg","003_年代不详_为工农兵服务同工农兵结合_佚名.jpg","004_1951_加紧生产多打粮食_佚名.jpg","005_年代不详_参军图_佚名.jpg","006_1951_努力学习准备参加新中国的建设_佚名.jpg","007_年代不详_合家欢_佚名.jpg","008_年代不详_喜报临门_佚名.jpg","009_1972_好好学习天天向上_佚名.jpg","010_年代不详_在毛泽东的胜利旗帜下前进_佚名.jpg","011_1951_妈妈我参加了少年儿童队_佚名.jpg","012_年代不详_学习文化_佚名.jpg","013_年代不详_少年儿童队向毛主席献花_佚名.jpg","014_年代不详_工农兵是批林批孔的主力军_佚名.jpg","015_年代不详_庆祝中华人民共和国国庆节_佚名.jpg","016_年代不详_庆祝中华人民共和国成立_佚名.jpg","017_年代不详_建造大铁桥_佚名.jpg","018_1974_打好批林批孔的人民战争_佚名.jpg","019_年代不详_新年劳军_佚名.jpg","020_年代不详_毛主席领导建设新中国_佚名.jpg","021_年代不详_清算图_佚名.jpg","022_年代不详_热爱苏联工程师_佚名.jpg","023_年代不详_生产图_佚名.jpg","024_年代不详_缴爱国公粮_佚名.jpg","025_年代不详_秧歌舞_佚名.jpg","026_年代不详_腰鼓舞_佚名.jpg","027_年代不详_苏联工程师帮助我们修成渝铁路_佚名.jpg","028_年代不详_藏胞热爱毛主席_佚名.jpg","029_1951_要粮有粮要钱有钱要人有人咱们坚决为抗美援朝保家卫国而奋斗_佚名.jpg","030_年代不详_选举图_佚名.jpg","031_年代不详_领土地证_佚名.jpg","032_年代不详_大搞群众运动加速现代水利化_胡今叶.jpg","033_年代不详_接过战笔战斗到底_肖振亚、刘恩斌.jpg","034_年代不详_你办事我放心_佚名.jpg","035_年代不详_毛泽东主席和他的战友_韩德雅.jpg","036_年代不详_三大纪律八项注意_济南部队美术创作学习班.jpg","037_年代不详_从小就爱英雄_黄增立.jpg","038_年代不详_红色园地_白逸如.jpg","039_年代不详_集体户的除夕之夜_佚名.jpg","040_年代不详_勤学苦练勇猛顽强_严坚.jpg","041_年代不详_华国锋主席在天安门城楼上向参加庆祝的首都百万军民亲切招手致意_佚名.jpg","042_年代不详_伟大的中国共产党万岁_江南春、姚中玉.jpg","043_年代不详_走向胜利_彭彬.jpg","044_年代不详_活捉美国鬼子兵_佚名.jpg","045_年代不详_咱队又添新粮仓_佚名.jpg","046_年代不详_开国大典_董希文.jpg","047_年代不详_新中国的儿童_张仃.jpg","048_年代不详_人人防疫粉碎美帝国主义的细菌战_叶善菉.jpg","049_年代不详_学英雄精神走英雄道路_孟养玉.jpg","050_年代不详_胜利进军图_陈兴华.jpg","051_年代不详_做一个红色小宣传员_翁葆樯.jpg","052_年代不详_蔑视美国因为它是纸老虎是完全可以打败的_苏州美协绘.jpg","053_年代不详_提高产量就是加强保卫祖国力量_张凡夫.jpg","054_年代不详_继承和发扬鲁迅的革命精神_佚名.jpg","055_年代不详_职工守则之六关心同志尊师爱徒和睦家庭团结邻里_徐世政.jpg","056_年代不详_咱队的好猎手_刘长恩.jpg","057_年代不详_反对美帝释放日本战犯_佚名.jpg","058_年代不详_我帮爷爷搞革新_刘毅、刘敬瑞、晁德仁.jpg","059_年代不详_大家动手大办农业大搞副食品生产_陆绍权.jpg","060_年代不详_全世界人民团结起来打倒美帝打倒苏修打倒各国反动派_佚名.jpg","061_年代不详_多打井兴水利爱国丰产有保障_徐凤鸣.jpg","062_年代不详_批林批孔的小闯将_曹天舒.jpg","063_年代不详_学好无产阶级专政的理论_刘骥林.jpg","064_年代不详_延安新春_陕西省美术创作组.jpg","065_年代不详_要把无产阶级文化大革命进行到底_佚名.jpg","066_年代不详_俺村又添新机床_佚名.jpg","067_年代不详_祖国山河一片红_佚名.jpg","068_年代不详_把余粮卖给国家支持国家建设_钱大晰.jpg","069_年代不详_公社的节日_佚名.jpg","070_年代不详_解放军攻城战_牛文.jpg","071_年代不详_为祖国负责保证质量合格_武德祖.jpg","072_年代不详_新保管老传统_李元星.jpg","073_年代不详_儿童团长张德新_张惠斌.jpg","074_年代不详_在丰收场上_佚名.jpg","075_年代不详_社会主义到处都在胜利前进_佚名.jpg","076_年代不详_开门办学好_佚名.jpg","077_年代不详_勤奋学习_张天放.jpg","078_年代不详_提高警惕捍卫领空_佚名.jpg","079_年代不详_我爱北京天安门_佚名.jpg","080_年代不详_Whosweptmywalkformeagain_佚名.jpg","081_年代不详_千千万万个雷锋在成长_梁照堂、李醒滔、黄堃源.jpg","082_年代不详_生命不息冲锋不止_佚名.jpg","083_年代不详_革命委员会好_佚名.jpg","084_年代不详_团结起来争取更大的胜利_薛斌摄.jpg","085_年代不详_毛主席和我们心连心_陕西省美术创作组.jpg","086_年代不详_胸怀祖国放眼世界_佚名.jpg","087_年代不详_毛主席在大生产运动中_张自薿、蔡亮、堪北新.jpg","088_年代不详_新春_佚名.jpg","089_年代不详_Victoryiswonbymarchinginstep_佚名.jpg","090_年代不详_人民防空常识挂图_佚名.jpg","091_年代不详_蓬勃新姿（中国画）_秦剑铭、姚玉琪.jpg","092_年代不详_一定要解放台湾_佚名.jpg","093_年代不详_到工农兵群众中去到火热的斗争中去_佚名.jpg","094_年代不详_毛主席和我们心连心_佚名.jpg","095_年代不详_大战曲峪河_刘志德.jpg","096_年代不详_毛主席和林彪同志在天安门上检阅百万文化革命大军_佚名.jpg","097_年代不详_军民同庆丰收年_佚名.jpg","098_年代不详_试播_佚名.jpg","099_年代不详_雏鹰展翅_董善明.jpg","100_年代不详_小英雄谢荣策_林英珊.jpg"];
+
+    const FILES_V02 = [
+        "001_1961_主席来到我们家问长问短把话拉_李琦.jpg","002_1962_毛泽东书法作品_佚名.jpg","003_1963_美帝国主义从越南南方滚出去_哈琼文.jpg","004_1963_女电焊工_马乐群.jpg","005_1963_军民团结如一人试看天下谁能敌_佚名.jpg",
+        "006_1963_河山新貌屏_应野平.jpg","007_1963_河山新貌屏_应野平.jpg","008_1964_贫农的儿子_蔡亮.jpg","009_1964_南京路上好八连_尤崇仁、高山.jpg","010_1964_南京路上好八连_尤崇仁、高山.jpg",
+        "011_1964_听毛主席的话做革命的接班人_赵友萍.jpg","012_1964_百货下乡_顾生岳.jpg","013_1964_继承革命传统做红色接班人_杭鸣时.jpg","014_1964_韶山_佚名.jpg","015_1964_社员都是向阳花_刘振铎.jpg",
+        "016_1964_越学心里越亮堂_林龙华.jpg","017_1964_知识分子劳动化在实际斗争中锻炼在工农群众中扎根_哈琼文.jpg","018_1964_奋发图强自力更生建设祖国_翁逸之.jpg","019_1964_毛主席和我们心连心_韩敏.jpg","020_1964_农村新貌图_韩敏.jpg",
+        "021_1965_学大庆精神_哈琼文.jpg","022_1965_半工半读_金克全.jpg","023_1965_学大寨之风长大寨之志走大寨之路_尹戎生.jpg","024_1965_毛主席的好战士雷锋（木刻）_吴强年.jpg","025_1965_把反革命修正主义分子揪出来示众_全国美术界红色.jpg",
+        "026_1965_全家争五好好了还要好_莫伯华.jpg","027_1965_全世界人民反对美帝国主义的斗争必胜_何孔德.jpg","028_1965_全世界人民反对美帝国主义的斗争必胜_何孔德.jpg","029_1965_学习雷锋好榜样_贺友直.jpg","030_1965_学习雷锋好榜样_贺友直.jpg",
+        "031_1965_学习雷锋好榜样_贺友直.jpg","032_1965_学习雷锋好榜样_贺友直.jpg","033_1965_走大寨之路_钱大昕.jpg","034_1965_坚决支援越南人民抗美救国斗争_钱大昕.jpg","035_1965_沿着毛主席路线胜利前进_中央工艺美术学院.jpg",
+        "036_1965_沿着毛主席路线胜利前进_中央工艺美术学院.jpg","037_1965_学大庆精神_哈琼文.jpg","038_1965_中华人民共和国地图_佚名.jpg","039_1965_我们是共产主义接班人_李中贵.jpg","040_1965_我们是共产主义接班人_李中贵.jpg",
+        "041_1965_小故事员_乐小英、凌健.jpg","042_1965_电到农村_徐寄萍.jpg","043_1965_南方来信_杜滋龄.jpg","044_1965_南方来信_杜滋龄.jpg","045_1965_苍松绶鸟图_张其翼.jpg",
+        "046_1965_将革命进行到底兴无灭资改天换地_哈琼文.jpg","047_1965_好歌唱给知心人_锺为.jpg","048_1965_毛主席怎样说的我就怎样做向王杰同志那样学习毛主席著作_哈琼文.jpg","049_1965_红色少年屏_冯国琳、王真.jpg","050_1965_红色少年屏_冯国琳、王真.jpg",
+        "051_1965_歌唱公社好风光_刘永贤.jpg","052_1965_雄关漫道真如铁而今迈步从头越_彭彬.jpg","053_1965_永远跟着共产党永远跟着毛主席_侯一民、邓澍、周令钊.jpg","054_1965_女炮兵_李百钧.jpg","055_1966_全世界劳动人民大团结万岁_冯健亲、冯芷.jpg",
+        "056_1966_全世界无产者同被压迫人民、被压迫民族联合起来_冯健亲.jpg","057_1966_周恩来_佚名.jpg","058_1966_向刘英俊同志学习宣传最高指示_佚名.jpg","059_1966_我们心中的红太阳_李建平.jpg","060_1966_向刘英俊同志学习捍卫最高指示_佚名.jpg",
+        "061_1966_革命者要在困难面前逞英雄（焦裕禄的话）_沙更世、郭庭荣、刘永凯.jpg","062_1966_向刘英俊同志学习学习最高指示_佚名.jpg","063_1966_立志做一辈子农民_佚名.jpg","064_1966_革命农民运动好得很_佚名.jpg","065_1966_向刘英俊同志学习执行最高指示_佚名.jpg",
+        "066_1967_支援世界人民的反帝斗争_游龙姑.jpg","067_1967_坚决支持亚洲非洲拉丁美洲人民的反帝斗争_周瑞庄.jpg","068_1967_一定要解放台湾_上海市出版革命组.jpg","069_1967_我们心中最红最红的红太阳毛主席万岁万万岁_佚名.jpg","070_1967_毛主席的革命文艺路线胜利万岁_天津人民美术出版社.jpg",
+        "071_1967_打倒苏修砸烂勃列日涅夫的狗头砸烂柯西金的狗头_佚名.jpg","072_1967_刘胡兰生的伟大死的光荣_北京语言学院井岗山.jpg","073_1967_毛主席和我们心连心庆祝1.22三周月_北京语言学.jpg","074_1968_胸怀祖国放眼世界_上海人民出版社.jpg","075_1968_无产阶级专政万岁_上海人民出版社.jpg",
+        "076_1968_毛泽东主席_佚名.jpg","077_1968_中国共产党中央委员会主席毛泽东同志支持美国黑人抗暴斗争的声明（一九六八年四月十六日）_上海人民美术出版社.jpg","078_1968_中国共产党中央委员会主席毛泽东同志支持美国黑人抗暴斗争的声明（一九六八年四月十六日）_上海人民美术出版社.jpg","079_1968_敬祝伟大领袖毛主席万寿无疆_佚名.jpg","080_1968_听毛主席的话向白求恩同志学习_郑叔方新华通讯社.jpg",
+        "081_1968_听毛主席的话向白求恩同志学习_郑叔方新华通讯社.jpg","082_1968_听毛主席的话向白求恩同志学习_郑叔方新华通讯社.jpg","083_1968_听毛主席的话向白求恩同志学习_郑叔方新华通讯社.jpg","084_1968_听毛主席的话向白求恩同志学习_郑叔方新华通讯社.jpg","085_1968_听毛主席的话向白求恩同志学习_郑叔方新华通讯社.jpg",
+        "086_1968_听毛主席的话向白求恩同志学习_郑叔方新华通讯社.jpg","087_1968_听毛主席的话向白求恩同志学习_郑叔方新华通讯社.jpg","088_1968_听毛主席的话向白求恩同志学习_郑叔方新华通讯社.jpg","089_1968_听毛主席的话向白求恩同志学习_郑叔方新华通讯社.jpg","089b_1968_听毛主席的话向白求恩同志学习_郑叔方新华通讯社.jpg",
+        "090_1968_中国共产党中央委员会主席毛泽东同志支持美国黑人抗暴斗争的声明（形势简图）_地图出版社.jpg","091_1968_毛主席去安源_刘春华（北京院校同学）.jpg","092_1968_白求恩_佚名.jpg","093_1968_白求恩（选自毛主席革命路线胜利万岁展览会）_上海革命教育出版社.jpg","094_1968_无产阶级文化大革命全面胜利万岁_中央工艺美术学院.jpg",
+        "095_1968_向无限忠于毛主席革命路线的好干部门合同志学习_上海新画院.jpg","096_1968_向无限忠于毛主席革命路线的好干部门合同志学习_上海新画院.jpg","097_1968_向无限忠于毛主席革命路线的好干部门合同志学习_上海新画院.jpg","098_1968_向无限忠于毛主席革命路线的好干部门合同志学习_上海新画院.jpg","099_1968_向无限忠于毛主席革命路线的好干部门合同志学习_上海新画院.jpg",
+        "100_1968_五位导师_佚名.jpg","101_1968_毛泽东主席_佚名.jpg","102_1968_沿着毛主席的革命文艺路线胜利前进_中央工艺美术学院.jpg","103_1968_砸烂私字_北京语言学院井岗山.jpg","104_1969_提高警惕保卫祖国随时准备歼灭入侵之敌_人民美术出版社.jpg",
+        "105_1969_提高警惕保卫祖国随时准备歼灭入侵之敌_人民美术出版社.jpg","106_1969_坚决执行最高指示全力以赴务歼入侵之敌_红鹰戟、卫红鹰.jpg","107_1969_我们伟大领袖毛主席在天安门城楼上检阅革命群众游行队伍_佚名.jpg","108_1970_向王国福同志学习 拉革命车不松套一直拉到共产主义_佚名.jpg","109_1970_提高警惕保卫祖国随时准备歼灭入侵之敌_关琦铭.jpg",
+        "110_1970_兵民是胜利之本_北京市76中学.jpg","111_1970_全世界人民团结起来打败美国侵略者及其一切走狗_徐汇区.jpg","112_1970_为伟大领袖毛主席争光为伟大社会主义祖国争光_中央工艺美术学院.jpg","113_1970_到工农兵群众中去到火热的斗争中去_佚名.jpg","114_1970_革命现代京剧红灯记_佚名.jpg",
+        "115_1970_拉革命车不松套一直拉到共产主义（王国福组画）_佚名.jpg","116_1970_拉革命车不松套一直拉到共产主义（王国福组画）_佚名.jpg","117_1970_拉革命车不松套一直拉到共产主义（王国福组画）_佚名.jpg","118_1970_拉革命车不松套一直拉到共产主义（王国福组画）_佚名.jpg","119_1970_拉革命车不松套一直拉到共产主义（王国福组画）_佚名.jpg",
+        "120_1970_拉革命车不松套一直拉到共产主义（王国福组画）_佚名.jpg","121_1970_拉革命车不松套一直拉到共产主义（王国福组画）_佚名.jpg","122_1970_要节约闹革命一砖一瓦看方向一针一线为人民_上海市阀门一厂革委会.jpg","123_1970_生命不息冲锋不止_中国人民革命军事博物馆.jpg","124_1970_毛主席视察上海钢铁厂_佚名.jpg",
+        "125_1970_毛主席和我们心连心_佚名.jpg","126_1971_马克思主义列宁主义毛泽东思想万岁_解放军画报社.jpg","127_1971_发扬革命传统永远前进_北京酿酒总厂业余美.jpg","128_1971_抓革命促生产夺取新的胜利_北京人民出版社.jpg","129_1971_让哲学变为群众手里的尖锐武器_天津市工业展览.jpg",
+        "130_1971_认真读书深入批修_北京工农兵陶瓷厂.jpg","131_1971_深入开展革命大批判_北京师范学院革命文艺.jpg","132_1971_亲切的关怀巨大的鼓舞_上海电机厂革委会.jpg","133_1971_《五·七指示》万岁_中国人民解放.jpg","134_1971_为加速实现农业机械化而奋斗_北京市七十六中革命委员.jpg",
+        "135_1971_全世界无产者联合起来_解放军画报社.jpg","136_1971_让哲学变为群众手里的尖锐武器_北京市七十六中.jpg","137_1971_常备不懈务歼入侵之敌_东海红.jpg","138_1971_无产阶级专政万岁纪念巴黎公社一百周年_中国.jpg","139_1971_中国共产党万岁毛主席万岁热烈欢呼中国共产党诞生五十周年_上海动力机厂革委会.jpg",
+        "140_1971_梅花欢喜满天雪（中国画）_佚名.jpg","141_1971_印度支那三国人民必胜美帝国主义必败_佚名.jpg","142_1971_发展体育运动增强人民体质_佚名.jpg","143_1971_南湖革命纪念船（中国画）_佚名.jpg","144_1971_从现在起就要有所准备_东海红.jpg",
+        "145_1971_广播体操图解_中华人民共和国.jpg","146_1971_沿着毛主席《五·七指示》的光辉大道奋勇前进_中国人民革命军事博物馆.jpg","147_1971_军民团结巩固国防_张辛国.jpg","148_1971_幸福的航程_佚名.jpg","149_1971_军民联防铁壁铜墙_中国人民解放.jpg",
+        "150_1971_模范共青团员胡业桃_佚名.jpg","151_1971_大学大用毛主席光辉哲学思想_戚墅堰铁路工厂革委.jpg","152_1971_大搞综合利用为国家创造更多财富_北京酿酒总厂.jpg","153_1971_伟大的教导无穷的力量_江南造船厂.jpg","154_1971_红日照延安（中国画）_佚名.jpg",
+        "155_1971_毛主席万岁万万岁_上海市美术学校工宣队.jpg","156_1971_为社会主义建设争分夺秒攀登带电自由作业新高峰_佚名.jpg","157_1971_韶山（中国画）_佚名.jpg","158_1971_延安精神代代相传_中国人民解放.jpg","159_1971_革命圣地延安_佚名.jpg",
+        "160_1971_毛主席来到炊事房_佚名.jpg","161_1971_延安精神放光芒_佚名.jpg","162_1971_毛主席指引我们胜利前进_佚名.jpg","163_1971_毛主席在井冈山农村调查_佚名.jpg","164_1971_用新的胜利庆祝中国共产党诞生五十周年_佚名.jpg",
+        "165_1971_世界地图_佚名.jpg","166_1972_国际歌团结起来到明天_上海美术设计公司.jpg","167_1972_搞好饮食卫生增强人民健康_佚名.jpg","168_1972_爱民模范盛习友_中国人民解放.jpg","169_1972_学大庆精神鼓革命干劲_天津市建设局.jpg",
+        "170_1972_为实现农业电气化而奋斗_上海美术设计公司.jpg","171_1972_为工农兵服务同工农兵结合_佚名.jpg","172_1972_中华人民共和国地图_佚名.jpg","173_1972_国际歌_上海人民出版社.jpg","174_1972_大力增产化肥支援农业生产_上海美术设计公司.jpg",
+        "175_1972_英特纳雄耐尔就一定要实现纪念无产阶级诗人《国际歌》作者欧仁·鲍狄埃_北京市美术公司创作组.jpg","176_1972_高举红灯打豺狼_北京工农兵画院.jpg","177_1972_贫下中农的好医生_梁洪涛.jpg","178_1972_广州农民运动讲习所（版画）_廖宗怡.jpg","179_1972_煤海盛开大庆花（中国画）_李延生、黄华榜、任贵生.jpg",
+        "180_1972_日新月异（版画）_大连冷冻机械厂.jpg","181_1972_草原女民兵_刘生展.jpg","182_1972_学革命戏做革命人_佚名.jpg","183_1972_矿山新兵（中国画）_杨之光.jpg","184_1972_向阳渠畔春意浓_佚名.jpg",
+        "185_1972_发扬延安精神到工农兵中去_佚名.jpg","186_1972_永不褪色_戴松耕.jpg","187_1972_永远热爱毛主席_范曾、边宝华.jpg","188_1972_永远热爱毛主席_范曾、边宝华.jpg","189_1972_永远热爱毛主席_范曾、边宝华.jpg",
+        "190_1972_永远热爱毛主席_范曾、边宝华.jpg","191_1972_古田会议（油画）_何孔德.jpg","192_1972_劈峰截岭开山渠（中国画）_陈忠义.jpg","193_1972_当代愚公绘新图（户县农民画展）_程民生、常林.jpg","194_1972_军民团结胜利的凯歌_青岛市革命委员会.jpg",
+        "195_1972_军民团结胜利的凯歌_青岛市革命委员会.jpg","196_1972_炉前（油画）_宋武征.jpg","197_1972_细雨育新苗（中国画）_陈学中、王玉珏.jpg","198_1972_红旗渠_人民美术出版社.jpg","199_1972_红旗渠_人民美术出版社.jpg",
+        "200_1972_红旗渠_人民美术出版社.jpg","201_1972_红旗渠_人民美术出版社.jpg","202_1972_好好学习天天向上_常州市工农兵美术学习.jpg","203_1972_农业学大寨_黑龙江北安铁路机务段.jpg","204_1972_农业学大寨_黑龙江北安铁路机务段.jpg",
+        "205_1972_汉字笔画名称_陈百里.jpg","206_1972_向井岗山进军_佚名.jpg","207_1972_向井岗山进军_佚名.jpg","208_1972_劈山引水（油画）_周大正.jpg","209_1972_劈山引水（油画）_周大正.jpg",
+        "210_1972_军民团结情谊深_中国人民解放军八一七二部.jpg","211_1972_侗寨妇女（国画）_周秀清.jpg","212_1972_广播体操图解_中华人民共和国.jpg","213_1972_又是一个丰收年_顾盼、潘鸿海.jpg","214_1972_万里千担一亩田（油画）沙石峪组画之四_北京市美术公司创作组.jpg",
+        "215_1972_革命现代舞剧白毛女紧握钢枪杀敌寇_佚名.jpg","216_1972_为实现发展国民经济第四个五年计划而奋斗_徐汇区房.jpg","217_1972_认真看书学习弄通马克思主义_上海市新闻出版系.jpg","218_1972_庆丰收_韩祥.jpg","219_1972_延安颂_钱松嵒.jpg",
+        "220_1972_黄洋界_江西省美术创作组.jpg","221_1972_三湾_江西省美术创作组.jpg","222_1972_纪念二七大罢工五十周年_佚名.jpg","223_1972_上大学之前_温承诚.jpg","224_1972_遂川工农兵政府旧址_江西省美术创作组.jpg",
+        "225_1972_纪念毛主席的光辉著作《在延安文艺座谈会上的讲话》发表三十周年_古元.jpg","226_1972_毛主席视察广东农村_陈衍宁.jpg","227_1972_龙潭新貌_许家麟.jpg","228_1972_龙潭新貌_许家麟.jpg","229_1972_夜巡（版画）_曹修德、陈坚、马以光.jpg",
+        "230_1972_山村秋色（油画）_门头沟区美术创作组.jpg","231_1972_老民兵讲抗战的故事_佚名.jpg","232_1972_大寨组画_李济远、任启录、徐希.jpg","233_1972_巡逻（版画）_曾照欣.jpg","234_1972_修旧利废大挖增产节约的潜力_佚名.jpg",
+        "235_1972_茅坪_江西省美术创作组.jpg","236_1972_女饲养员_金梅生.jpg","237_1972_送书（油画）_王晖.jpg","238_1972_井冈山_江西省美术创作组.jpg","239_1972_通途劈上彩云间（中国画）_桂林专业业余美术工作者.jpg",
+        "240_1972_铜墙铁壁（油画）_陕西省美术创作组.jpg","241_1972_自力更生艰苦奋斗加快社会主义建设_上海船厂.jpg","242_1972_做人要做这样的人_单联孝.jpg","243_1973_为巩固无产阶级专政站岗放哨_张致知.jpg","244_1973_煤油灯下刻苦学继续革命方向明_上海警备区业余美.jpg",
+        "245_1973_钢铁运输线（油画）_朱忠福.jpg","246_1973_哨（中国画）_陈洞庭.jpg","247_1973_为革命种药为革命采药_佚名.jpg","248_1973_为革命种药为革命采药_佚名.jpg","249_1973_为革命种药为革命采药_佚名.jpg",
+        "250_1973_为革命种药为革命采药_佚名.jpg","251_1973_妈妈出海去_肖纬、谢开基.jpg","252_1973_金铺村岭（套色木刻）_曾松龄.jpg","253_1973_旅客的贴心人_詹钦成、田基德、吴性清.jpg","254_1973_公社假日（中国画）_林丰俗.jpg",
+        "255_1973_林海朝晖（中国画）_王庆淮.jpg","256_1973_志在农村_徐德元.jpg","257_1973_邕江旭日_叶侣梅.jpg","258_1973_多为农业献骏马_刘生展.jpg","259_1973_保育_钮希文.jpg",
+        "260_1973_机器插秧好_黄妙发.jpg","261_1973_我和轮胎比高低_范振家、胡培灵、柳毅.jpg","262_1973_永不休战_汤小铭.jpg","263_1973_放鸭_人民美术出版社.jpg","264_1973_俺社创造了打井机_张和荣、蔡旭.jpg",
+        "265_1973_高山放牧（套色木刻）_邓子敬.jpg","266_1973_枣园灯光（套色木刻）_古元.jpg","267_1973_红太阳光辉暖万代_亢佐田.jpg","268_1973_热带鱼_黄独峰.jpg","269_1973_毛竹丰收_方增先、姚耕云、卢坤峰.jpg",
+        "270_1973_生产队科研小组_姜书璞、杨文仁.jpg","271_1973_老书记_刘志德_户县文化馆.jpg","272_1973_白求恩同志_宋轫.jpg","273_1973_虎门民兵（油画）_汤小铭.jpg","274_1973_向雷锋同志学习_王立志.jpg",
+        "275_1973_鱼水情深（版画）_肖映川.jpg","276_1973_操作练兵为革命纺纱织布为人民_杨顺泰.jpg","277_1973_螺号响了（油画）_邵增虎.jpg","278_1973_综合利用大有文章可做_刘小兵.jpg","279_1973_《国际歌》响彻全球_潘鸿海.jpg",
+        "280_1973_《国际歌》响彻全球_潘鸿海.jpg","281_1973_在毛主席身边成长（油画）_陕西省美术创作组.jpg","282_1973_战备轻骑队（版画）_廖宗怡.jpg","283_1973_边疆新景象_章育青.jpg","284_1973_开路先锋（油画）_陈逸飞、魏景山.jpg",
+        "285_1973_永不休战（油画）_汤小铭.jpg","286_1973_祖国处处有亲人_周振清、王珂、刘水乐.jpg","287_1973_拔河_徐寄萍、吴哲夫、金铭.jpg","288_1973_壮志凌云（油画）_袁浩.jpg","289_1973_打不断的线路（中国画）_戴庆禄、王振贤.jpg",
+        "290_1973_军民团结一家亲_秦大虎.jpg","291_1973_夺丰收广积粮_上海人民出版.jpg","292_1973_文武之道一张一弛（油画）_苏光、王迎春、杨力舟.jpg","293_1973_淮河新歌（版画）_淮安县美术创作组.jpg","294_1973_锦绣江南鱼米乡（中国画）_钱松岩.jpg",
+        "295_1973_常备不懈（中国画）_徐宁.jpg","296_1973_草原长城_张冠哲.jpg","297_1973_春意满深谷_姜宝林.jpg","298_1973_毛主席和我们心连心_陕西省美术创作.jpg","299_1973_漓江雨霁_阳太阳.jpg",
+        "300_1973_全心全意（中国画）_徐志文、郁文华、唐云.jpg","301_1973_新曼巴（藏医水粉画）_朱乃正.jpg","302_1973_文艺轻骑到渔村_李玉凯.jpg","303_1973_山村秋色（油画）_鲁若曾.jpg","304_1973_草原小学_马振祥.jpg",
+        "305_1973_学习人民为人民纪念南京路上好八连命名十周年_上海警备区业余美术创.jpg","306_1973_课余（中国画）_邬邦生.jpg","307_1973_山区售货员_段兼善.jpg","308_1973_风景这边独好（版画）_姜学亮.jpg","309_1973_革命传统代代传_宋贤珍.jpg",
+        "310_1973_为革命钻研技术_佚名.jpg","311_1973_光荣人家春更浓_张伯媛.jpg","312_1973_子弟兵为人民人民热爱子弟兵_王兢.jpg","313_1973_石谷新田_林丰俗.jpg","314_1973_雷锋的故事_王利园、杨顺泰.jpg",
+        "315_1973_雷锋的故事_王利园、杨顺泰.jpg","316_1973_雷锋的故事_王利园、杨顺泰.jpg","317_1973_雷锋的故事_王利园、杨顺泰.jpg","318_1973_劈峰截岭开山渠_陈忠义.jpg","319_1973_丰收之歌_单锡和.jpg",
+        "320_1973_队队有渔_金振陆.jpg","321_1973_敢教日月换新天_佚名.jpg","322_1973_童年（油画）_贾兴桐.jpg","323_1973_田间抽水站（油画）_古月.jpg","324_1973_蓬勃新姿（中国画）_秦剑铭、姚玉琪.jpg",
+        "325_1973_大队办起了图书室（中国画）_徐景文.jpg","326_1973_火树银花不夜天（中国画）_张桂铭.jpg","327_1974_向工农兵学习为工农兵服务_廖艺群.jpg","328_1974_工农兵是批林批孔的主力军_娄家本.jpg","329_1974_加强团结为反对帝国主义特别是霸权主义而斗争_金纪发.jpg",
+        "330_1974_团结战斗反帝反霸_李同欣、朱正善.jpg","331_1974_十大路线指航向满怀豪情夺丰收_奚国荣.jpg","332_1974_毛主席革命文艺路线胜利万岁_丁加生.jpg","333_1974_打好批林批孔的人民战争_张汝济、王角.jpg","334_1974_新书下连_王美芳、张喜良.jpg",
+        "335_1974_解放军叔叔好_张乐平、李慕白、金雪尘.jpg","336_1974_新老干部团结紧朝气蓬勃干革命培养和造就千百万无产阶级革命事业的接班人_佚名.jpg","337_1974_红小兵学军_黄志成、江南春.jpg","338_1974_购销组到咱村_尤文绚.jpg","339_1974_把批林批孔的斗争进行到底_毛水仙、任率英、朱玉成.jpg",
+        "340_1974_引人入胜_耿跃民.jpg","341_1974_农牧结合喜丰收_李连仲.jpg","342_1974_大力支农夺丰收_静安.jpg","343_1974_路过苹果园（小学语文教学图片）_方世聪.jpg","344_1974_草原牧民喜丰收_魏昌有.jpg",
+        "345_1974_户县农民阶级教育画选_牛东公社业余美术组.jpg","346_1974_户县农民阶级教育画选_牛东公社业余美术组.jpg","347_1974_户县农民阶级教育画选_牛东公社业余美术组.jpg","348_1974_户县农民阶级教育画选_牛东公社业余美术组.jpg","349_1974_户县农民阶级教育画选_牛东公社业余美术组.jpg",
+        "350_1974_把批林批孔运动深入、持久地进行下去_佚名.jpg","351_1974_提高警惕加强练兵_蒋仲波、刘小曼.jpg","352_1974_团结有力量_马振祥.jpg","353_1974_上党课（户县农民画展）_刘知贵.jpg","354_1974_社社队队粮满仓_黄恩涛.jpg",
+        "355_1974_董存瑞的故事_李惠芬、曾廷仲.jpg","356_1974_革命纪念地_黄宗瑞.jpg","357_1974_革命纪念地_黄宗瑞.jpg","358_1974_祖国的海港_费正.jpg","359_1974_大队图书室（户县农民画展）_赵坤汉.jpg",
+        "360_1974_秦川麦收_刘知贵.jpg","361_1974_丰收之后_刘知贵.jpg","362_1974_全家学公报（户县农民画展）_杜志廉.jpg","363_1974_申请入党_梁岩.jpg","364_1974_大战曲峪河_刘志德.jpg",
+        "365_1975_加速农业机械化的步伐为农业现代化而奋斗_刘文西.jpg","366_1975_胸怀革命壮志勇攀世界高峰_宋惠民.jpg","367_1975_大干快上支援农业_岳西岩.jpg","368_1975_农业学大寨大干促大变_曹新林.jpg","369_1975_团结战斗学大寨大干大变夺丰收_傅治森.jpg",
+        "370_1975_不靠天_陈文光.jpg","371_1975_千秋功罪我们评说_侯杰、陈文光.jpg","372_1975_姐妹俩_王遵义、殷培华.jpg","373_1975_喜望高原日日新_邵文锦.jpg","374_1975_为把我国建设成为社会主义的现代化强国而努力_陈德周.jpg",
+        "375_1975_妇女能顶半边天管教山河换新颜_王大为.jpg","376_1975_山河新貌（1974年全国美术作品展览版画选）_吕泽兰.jpg","377_1975_山河新貌（1974年全国美术作品展览版画选）_吕泽兰.jpg","378_1975_新山春茶香_陆一飞、姚有信.jpg","379_1975_信儿捎给台湾小朋友_谢从荣、林永权.jpg",
+        "380_1975_渔家儿女_赵文元.jpg","381_1975_炮轰《女儿经》_冯有康.jpg","382_1975_拒腐蚀永不沾_吴梅芬.jpg","383_1975_农业学大寨普及大寨县_佚名.jpg","384_1975_阳澄湖上_徐卫华、张贻庆.jpg",
+        "385_1975_为普及大寨县贡献自己的青春_徐希.jpg","386_1975_团结起来争取更大的胜利_薛斌.jpg","387_1975_大寨_章育青.jpg","388_1975_军民鱼水相依筑成钢铁长城_戴恒杨、林聪.jpg","389_1975_女子突击队_傅长顺、李宏非.jpg",
+        "390_1975_斯大林_佚名.jpg","391_1975_新课堂_鸥洋.jpg","392_1975_步调一致才能取得胜利（1928年毛主席在桂东沙田颁布三大纪律八项注意）_高虹、彭彬、何孔德.jpg","393_1975_幸福渠_秦文美.jpg","394_1975_主课_单伯钦、陈文光.jpg",
+        "395_1975_女支书_刘志德、陈文光.jpg","396_1975_从小就爱学英雄_黄增立.jpg","397_1975_自力更生造大船_李问汉.jpg","398_1975_工农一家喜迎春_富穹、冯健辛.jpg","399_1975_新来的战士_娄德智.jpg",
+        "400_1975_夺丰收广积粮_于宝俭、张万臣.jpg","401_1975_时间就是生命_张辛国.jpg","402_1975_谁又替我把雪扫_刘小莉.jpg","403_1975_锻炼身体建设社会主义新农村_张颂南.jpg","404_1976_人民送我上大学我上大学为人民_于大武.jpg",
+        "405_1976_春满漓江_应野平.jpg","406_1976_毛主席无限信任华主席全国军民热烈拥护华主席_江南春.jpg","407_1976_团结战斗加速建成大寨县_颜承富.jpg","408_1976_支农轻骑_陈秉钧.jpg","409_1976_走五·七道路坚持继续革命_刘长顺.jpg",
+        "410_1976_大寨新貌_佚名.jpg","411_1976_列宁_佚名.jpg","412_1976_井冈山《茅坪》_钱松嵒.jpg","413_1976_恩格斯_佚名.jpg","414_1976_马克思_佚名.jpg",
+        "415_1977_华国锋主席_佚名.jpg","416_1977_毛主席重上井冈山（油画）_全山石、罗工柳.jpg","417_1977_毛主席夸咱能文又能武（油画）_徐兆前、邵增虎.jpg","418_1977_艰苦奋斗创新业扎根农村志不移_冯向杰.jpg","419_1977_毛主席和朱德同志_佚名.jpg",
+        "420_1977_朱德同志_佚名.jpg","421_1977_伟大的领袖和导师毛泽东主席_佚名.jpg","422_1977_温暖（油画）_招炽挺、邵增虎、项而躬.jpg","423_1977_大庆红旗（中国画）_佚名.jpg","424_1977_大寨红旗（中国画）_佚名.jpg",
+        "425_1977_敬爱的周恩来总理永远和我们在一起_周思聪.jpg","426_1977_认真实行三同坚持继续革命_王立志、孟晋元.jpg","427_1977_走向胜利（油画）_彭彬.jpg","428_1977_热情支持社会主义新生事物_37001部队政治部.jpg","429_1977_永远活在我们心中（油画）_刘春华.jpg",
+        "430_1977_八一南昌起义（油画）_黎冰鸿.jpg","431_1977_激扬文字_鸥洋、杨之光.jpg","432_1977_而今迈步从头越（油画）_沈尧伊.jpg","433_1977_南湖晨曦_刘达江、朱宗之.jpg","434_1977_新订治家格言_徐淡文.jpg",
+        "435_1977_朱德_佚名.jpg","436_1977_伟大的领袖和导师毛泽东主席_佚名.jpg","437_1977_毛主席重上井冈山（油画）_全山石、罗工柳.jpg","438_1977_华主席和我们心连心（油画）_张永新.jpg","439_1977_战友（油画）_许宝中、李泽浩.jpg",
+        "440_1977_翻身农奴热爱华主席（国画）_华其敏.jpg","441_1977_战友（油画）_许宝中、李泽浩.jpg","442_1977_壮志凌云_石齐.jpg","443_1977_我们一定要完成解放台湾统一祖国的神圣事业_中国人民解放军39428部队.jpg","444_1977_伟大的领袖和导师毛泽东主席_佚名.jpg",
+        "445_1977_浩气长存（油画）_张合、林如冰.jpg","446_1977_毛主席和周总理朱委员长在一起_佚名.jpg","447_1977_人民胜利了（中国画）_陈忠志.jpg","448_1977_不歇脚的贴心人_陈荣清.jpg","449_1977_工业学大庆普及大庆式企业_梁运清.jpg",
+        "450_1977_转战途中（粉笔画）_杨燕萍.jpg","451_1978_人民的好总理_邹建东.jpg","452_1978_毛主席在抗大_刘文西.jpg","453_1978_花卉条屏_王庆昇.jpg","454_1978_花卉条屏_王庆昇.jpg",
+        "455_1979_关怀_刘文西.jpg","456_1979_周恩来总理1973年1月9日在人民大会堂_佚名.jpg","457_1979_花好月圆_陆抑非.jpg","458_1979_爱因斯坦（德国物理学家）_王麟坤.jpg","459_1979_祖国大地百花争艳（庆祝伟大的中华人民共和国建国三十周年）_张育良.jpg",
+        "460_1979_哥白尼（波兰天文学家）_翁逸之.jpg","461_1979_李时珍（我国医学家和药物学家）_哈琼文.jpg","462_1979_托·阿·爱迪生（美国科学家和发明家）_哈琼文.jpg","463_1979_周恩来同志_佚名.jpg","464_1979_牛顿（英国科学家）_陈丽君.jpg",
+        "465_1979_春华秋实_王庆昇.jpg","466_1979_春华秋实_王庆昇.jpg","467_1979_查理·达尔文（英国科学家）_周瑞庄.jpg","468_1980_刘少奇同志和安源矿工（油画）_侯一民.jpg","469_1980_古代中国长武器_佚名.jpg",
+        "470_1980_迎春_王伟戎.jpg","471_1980_毛泽东同志、刘少奇同志、周恩来同志、朱德同志在一起_佚名.jpg","472_1980_知识为我添双翼_童兆惠.jpg","473_1981_虎（中国画）_刘继卣.jpg","474_1981_宝宝和小猫_于占德.jpg",
+        "475_1981_梁红玉_胡玉璞.jpg","476_1981_月夜抚琴_王遵义.jpg","477_1981_桂林奇峰烟雨_蒙紫.jpg","478_1981_戏春图_毛水仙.jpg","479_1981_四川九寨沟诺日郎大瀑布_何世尧.jpg",
+        "480_1981_岳飞_王福增.jpg","481_1981_梁山一百零八将_李克昌.jpg","482_1981_三国戏出_赵贵德、刘仲武.jpg","483_1981_三国戏出_赵贵德、刘仲武.jpg","484_1981_游鱼嬉莲_吴绶镐.jpg",
+        "485_1981_岳飞抗金兵_畅维臻.jpg","486_1981_春光好_徐福根.jpg","487_1981_庐山含鄱口_刘英杰.jpg","488_1981_丰_单锡和.jpg","489_1981_伽利略（意大利物理学家、力学家和天文学家）_哈琼文.jpg",
+        "490_1981_四川九寨沟寨旁小景_何世尧.jpg","491_1981_自己弹来自己唱_吴性清.jpg","492_1981_鸽子_邹起奎.jpg","493_1981_春晓_金鸿钧.jpg","494_1981_米丘林（苏联植物育种家）_沈绍伦.jpg",
+        "495_1981_四川九寨沟静海_何世尧.jpg","496_1981_富兰克林（美国科学家）_翁逸之.jpg","497_1981_巴甫洛夫（苏联生理学家）_金纪发.jpg","498_1981_娃娃标记图_佚名.jpg","499_1981_春意盎然_郝长栋.jpg",
+        "500_1981_春意盎然_郝长栋.jpg","501_1981_凤钗订婚 越剧《钗头凤》_穆家宏、谢新发.jpg","502_1981_麻姑献寿_马乐群.jpg","503_1982_岳传人物_罗璞.jpg","504_1982_岳传人物_罗璞.jpg",
+        "505_1982_鱼庆欢喜（杨柳青年画传统）_佚名.jpg","506_1983_共产主义一定要实现（纪念卡尔·马克思逝世一百周年）_杨克山.jpg","507_1983_爱社会主义_哈琼文.jpg","508_1986_斯大林_人民美术出版社.jpg","509_1986_恩格斯_人民美术出版社.jpg",
+        "510_1986_列宁_人民美术出版社.jpg","511_1986_马克思_人民美术出版社.jpg","512_1986_毛泽东主席_人民美术出版社.jpg","513_1988_生肖动物_佚名.jpg"
+    ];
+
+    const FILES_V03 = ["001_1964_登山英雄连环挂图_庞亦鹏程绘.jpg","002_1961_我们敬爱的毛主席_王伟戌绘.jpg","003_1964_把新殖民主义者赶出非洲去_王大同、杜詠樵.jpg","004_1964_全民皆兵保卫祖国_翁逸之.jpg","005_1964_学习雷锋好榜样 做永不生锈的螺丝钉_张碧梧绘.jpg","006_年代不详_瑞草延年_佚名.jpg","007_1964_雷锋_李慕白、金雪尘绘.jpg","008_1965_不忘阶级仇永做革命人_陈谋、董舒.jpg","009_1980_繁花似锦 欣欣向荣_赵胜利、关愈.jpg","010_1964_毛主席著作像太阳_范璞、唐德泉.jpg","011_1964_读毛主席书 听毛主席话_庞卡绘.jpg","012_1960_在毛泽东思想光辉照耀下胜利前进_翁逸之绘.jpg","013_1964_雷锋和少年儿童在一起_张峻摄.jpg","014_1965_美帝国主义从多米尼亚加滚出去_曹振峰.jpg","015_1964_经常读报 关心时事_杨玉华.jpg","016_1965_革命的女战士 生产的红旗手_刘秉礼.jpg","017_1955_白求恩医生_丽塔·普里萨曼.jpg","018_1969_黄巢入长安_程十发绘.jpg","019_1980_喜庆丰收_黄妙发.jpg","020_1961_农业十我的志愿 立志做个新型的农民_严幼俊、程自良、张怀江.jpg","021_1964_人民子弟兵_吴哲夫.jpg","022_1964_人人争当五好社员_权正环.jpg","023_1964_年年逢春年年乐 今春人更乐_李树勤.jpg","024_1961_主席走遍全国_李琦.jpg","025_年代不详_故事会_李姣.jpg","026_1964_志在农村_那启明.jpg","027_1964_不爱红装爱武装_佚名.jpg","028_1963_我们也开拖拉机_廉浦.jpg","029_1980_哪吒闹海_史士明.jpg","030_1962_给毛主席拜年_沙更世.jpg","031_1964_列宁_钱大昕.jpg","032_1973_老书记_佚名.jpg","033_1980_渔童_柳忠福.jpg","034_1964_给女民兵示范_张兆柏.jpg","035_1964_知识青年到农村是光荣的革命行动_姜维常.jpg","036_1964_灯庆丰年_高潮.jpg","037_年代不详_大棉花_佚名.jpg","038_年代不详_新年年画_佚名.jpg","039_1964_新中国的少年儿童_沈家琳等.jpg","040_1964_祖国万岁_哈琼文.jpg","041_年代不详_养得好_刘泽文.jpg","042_1965_把美国侵略者从越南南方赶出去_孙世涛.jpg","043_1958_大豆过江_朱会然、华君武.jpg","044_年代不详_永远保持同群众一起劳动的革命传统_张汝济.jpg","045_1964_山村秋景_董其中.jpg","046_1981_万象更新喜迎春_杨馥如、徐飞鸿.jpg"];
+
+    // 组合全部数据
+    const allData = [
+        ...FILES_V01.map(f => parseFile('V01', f)),
+        ...FILES_V02.map(f => parseFile('V02', f)),
+        ...FILES_V03.map(f => parseFile('V03', f))
+    ];
+
+    // ============================================================
+    //  状态
+    // ============================================================
+    let currentVol = 'all';
+    let searchKw = '';
+    let filteredData = [];
+    let displayedCount = 0;
+    const PAGE_SIZE = 24;
+    let modalIndex = 0;  // index in filteredData
+    let imageObserver = null;  // IntersectionObserver for lazy loading
+
+    // ============================================================
+    //  筛选 & 渲染
+    // ============================================================
+    function applyFilter() {
+        const kw = searchKw.toLowerCase();
+        filteredData = allData.filter(item => {
+            const matchVol = currentVol === 'all' || item.vol === currentVol;
+            const matchKw = !kw || item.title.includes(kw) || item.author.toLowerCase().includes(kw);
+            return matchVol && matchKw;
+        });
+        displayedCount = 0;
+        document.getElementById('galleryGrid').innerHTML = '';
+        document.getElementById('resultCount').textContent = '共 ' + filteredData.length + ' 张';
+        // 重新初始化懒加载观察器
+        initLazyLoader();
+        loadMore();
+    }
+
+    function loadMore() {
+        const grid = document.getElementById('galleryGrid');
+        const end = Math.min(displayedCount + PAGE_SIZE, filteredData.length);
+        for (let i = displayedCount; i < end; i++) {
+            grid.appendChild(createCard(filteredData[i], i));
+        }
+        displayedCount = end;
+        const btn = document.getElementById('loadMoreBtn');
+        btn.disabled = displayedCount >= filteredData.length;
+        btn.textContent = btn.disabled ? '已全部加载' : '加载更多（还剩 ' + (filteredData.length - displayedCount) + ' 张）';
+    }
+
+        function createCard(item, idx) {
+            const div = document.createElement('div');
+            div.className = 'gallery-item';
+            div.onclick = () => openModal(idx);
+            const volLabel = { V01: '第一辑', V02: '第二辑', V03: '第三辑' }[item.vol];
+
+            // 使用 data-src 实现懒加载
+            div.innerHTML =
+                '<img class="gallery-item-image lazy-placeholder" data-src="' + item.thumbSrc + '" alt="' + item.title.replace(/"/g, '&quot;') + '" onerror="this.classList.remove(\'lazy-placeholder\');this.style.background=\'#e8e8e8\';this.alt=\'图片加载失败\'">' +
+                '<div class="gallery-item-info">' +
+                '<div class="gallery-item-title">' + item.title + '</div>' +
+                '<div class="gallery-item-meta">' +
+                '<span class="gallery-item-vol">' + volLabel + '</span>' +
+                '<span>' + item.year + (item.author !== '佚名' ? ' · ' + item.author : '') + '</span>' +
+                '</div></div>';
+
+            const img = div.querySelector('img');
+            if (imageObserver) {
+                imageObserver.observe(img);
+            }
+            return div;
+        }
+
+    // 初始化 IntersectionObserver 实现懒加载
+    function initLazyLoader() {
+        if (imageObserver) {
+            imageObserver.disconnect();
+        }
+        
+        imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const src = img.dataset.src;
+                    if (src) {
+                        // 开始加载图片
+                        const tempImg = new Image();
+                        tempImg.onload = () => {
+                            img.src = src;
+                            img.classList.remove('lazy-placeholder');
+                            img.classList.add('loaded');
+                        };
+                        tempImg.onerror = () => {
+                            img.classList.remove('lazy-placeholder');
+                            img.style.background = '#e8e8e8';
+                            img.alt = '图片加载失败';
+                        };
+                        tempImg.src = src;
+                    }
+                    // 加载后停止观察
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '100px 0px',  // 提前 100px 开始加载
+            threshold: 0.01
+        });
+    }
+
+    // ============================================================
+    //  模态框（index 始终基于 filteredData）
+    // ============================================================
+    function openModal(idx) {
+        modalIndex = idx;
+        renderModal();
+        document.getElementById('imageModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('imageModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function renderModal() {
+        const item = filteredData[modalIndex];
+        const modalImg = document.getElementById('modalImage');
+        
+        // 显示加载状态
+        modalImg.classList.remove('loaded');
+        modalImg.classList.add('loading');
+        modalImg.removeAttribute('src');
+        
+        // 加载原图
+        const tempImg = new Image();
+        tempImg.onload = () => {
+            modalImg.src = item.src;
+            modalImg.classList.remove('loading');
+            modalImg.classList.add('loaded');
+        };
+        tempImg.onerror = () => {
+            modalImg.classList.remove('loading');
+            modalImg.alt = '图片加载失败';
+        };
+        tempImg.src = item.src;
+        
+        document.getElementById('modalTitle').textContent = item.title;
+        document.getElementById('modalMeta').textContent =
+            ({V01:'第一辑', V02:'第二辑', V03:'第三辑'}[item.vol]) +
+            ' · ' + item.year +
+            (item.author !== '佚名' ? ' · ' + item.author : '');
+        document.getElementById('modalCounter').textContent =
+            (modalIndex + 1) + ' / ' + filteredData.length;
+    }
+
+    function modalNav(dir) {
+        const next = modalIndex + dir;
+        if (next >= 0 && next < filteredData.length) {
+            modalIndex = next;
+            renderModal();
+            // 若翻到了还没渲染的区域，先加载
+            if (modalIndex >= displayedCount - 3) loadMore();
+        }
+    }
+
+    // 键盘
+    document.addEventListener('keydown', e => {
+        if (!document.getElementById('imageModal').classList.contains('active')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft') modalNav(-1);
+        if (e.key === 'ArrowRight') modalNav(1);
+    });
+    // 点背景关闭
+    document.getElementById('imageModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    // ============================================================
+    //  事件绑定
+    // ============================================================
+    document.querySelectorAll('[data-vol]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('[data-vol]').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentVol = this.dataset.vol;
+            applyFilter();
+        });
+    });
+
+    let searchTimer;
+    document.getElementById('searchInput').addEventListener('input', function() {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => {
+            searchKw = this.value.trim();
+            applyFilter();
+        }, 300);
+    });
+
+    // 黑夜模式
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
+        document.querySelector('.dark-mode-toggle').textContent =
+            document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    }
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        const btn = document.querySelector('.dark-mode-toggle');
+        if (btn) btn.textContent = '☀️';
+    }
+
+    // 初始化
+    initLazyLoader();
+    applyFilter();
+    </script>
+</body>
+</html>

@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>马克思 | 革命导师 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 雷达图图例 */
+        .radar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            margin-top: 12px;
+            font-size: 0.88rem;
+        }
+        .radar-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            user-select: none;
+            transition: opacity 0.2s;
+        }
+        .radar-legend-item:hover { opacity: 0.75; }
+        .radar-legend-item.hidden-dataset span {
+            text-decoration: line-through;
+            opacity: 0.45;
+        }
+        .radar-legend-item.hidden-dataset .radar-legend-dot {
+            opacity: 0.3;
+        }
+        .radar-legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        /* 导师详情页样式 */
+        .master-hero {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .master-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></svg>');
+            background-size: 100px;
+            opacity: 0.5;
+        }
+        
+        .master-hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .master-hero-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            font-weight: bold;
+            color: #c41e3a;
+            border: 6px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+        
+        .master-hero-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .master-hero-info .years {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .master-hero-info .title {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .master-content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Tab导航 */
+        .tab-nav {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 0 1rem;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn:hover {
+            color: #c41e3a;
+        }
+        
+        .tab-btn.active {
+            color: #c41e3a;
+            font-weight: bold;
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #c41e3a;
+        }
+        
+        /* Tab内容 */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-content h2 {
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab-content h3 {
+            color: #333;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .tab-content p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+        
+        /* 时间轴样式 */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #c41e3a, #ff6b6b);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.65rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #c41e3a;
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: #c41e3a;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #c41e3a;
+        }
+        
+        /* 著作卡片 */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .work-card {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .work-card:hover {
+            border-color: #c41e3a;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.1);
+        }
+        
+        .work-card h4 {
+            color: #c41e3a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .work-card .year {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .work-card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        /* 理论贡献 */
+        .contribution-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .contribution-list li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #c41e3a;
+        }
+        
+        .contribution-list li strong {
+            color: #c41e3a;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 黑夜模式 */
+        body.dark-mode .tab-nav,
+        body.dark-mode .tab-content {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode .tab-btn {
+            color: #aaa;
+        }
+        
+        body.dark-mode .tab-btn.active {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .tab-btn.active::after {
+            background: #ff6b6b;
+        }
+        
+        body.dark-mode .tab-content h2 {
+            color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        
+        body.dark-mode .tab-content h3 {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tab-content p {
+            color: #ccc;
+        }
+        
+        body.dark-mode .timeline-content,
+        body.dark-mode .work-card,
+        body.dark-mode .contribution-list li {
+            background: #3a3a3a;
+        }
+        
+        body.dark-mode .work-card {
+            border-color: #555;
+        }
+        
+        body.dark-mode .work-card h4 {
+            color: #ff6b6b;
+        }
+        
+        /* 一目了然图表区 */
+        .visual-section {
+            margin-top: 2rem;
+        }
+        
+        .chart-container {
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 28px;
+        }
+        
+        .chart-container h3 {
+            color: #333;
+            margin-bottom: 6px;
+        }
+        
+        .chart-container .chart-desc {
+            color: #666;
+            font-size: 0.88em;
+            margin-bottom: 16px;
+        }
+        
+        body.dark-mode .chart-container {
+            background: #3a3a3a;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html">文章</a>
+                <a href="../masters.html" class="active">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 返回按钮 -->
+    <div class="back-nav" style="background:#f8f8f8;border-bottom:1px solid #e0e0e0;padding:12px 0;">
+        <div class="container" style="max-width:1000px;margin:0 auto;padding:0 2rem;">
+            <a href="../masters.html" style="display:inline-flex;align-items:center;gap:6px;color:#c41e3a;text-decoration:none;font-size:0.95rem;font-weight:500;">
+                <span style="font-size:1.1rem;">←</span> 返回导师列表
+            </a>
+        </div>
+    </div>
+
+    <main>
+        <!-- 导师头部信息 -->
+        <section class="master-hero">
+            <div class="master-hero-content">
+                <div class="master-hero-avatar">
+                    <img src="../images/masters/marx.jpg"
+                         style="width:180px;height:180px;border-radius:60%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                </div>
+                <div class="master-hero-info">
+                    <h1>卡尔·马克思</h1>
+                    <p class="years">1818年5月5日 — 1883年3月14日</p>
+                    <p class="title">科学社会主义创始人 · 马克思主义创始人 · 全世界无产阶级和劳动人民的伟大导师 · 千年第一思想家</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab内容区 -->
+        <div class="master-content-wrapper">
+            <div class="tab-nav">
+                <button class="tab-btn active" data-tab="biography">生平历程</button>
+                <button class="tab-btn" data-tab="works">代表著作</button>
+                <button class="tab-btn" data-tab="theory">理论贡献</button>
+                <button class="tab-btn" data-tab="visual">一目了然</button>
+                <button class="tab-btn" data-tab="legacy">历史地位</button>
+            </div>
+
+            <!-- 生平历程 -->
+            <div class="tab-content active" data-tab="biography">
+                <h2>生平历程</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1818年</div>
+                        <div class="timeline-content">
+                            <strong>诞生</strong>
+                            <p>5月5日出生于普鲁士王国特里尔市（今德国莱茵兰-普法尔茨州）一个犹太律师家庭。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1835-1841年</div>
+                        <div class="timeline-content">
+                            <strong>求学时期</strong>
+                            <p>先后就读于波恩大学和柏林大学，学习法律、历史和哲学，获耶拿大学哲学博士学位。受黑格尔哲学影响，后转向青年黑格尔派。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1842年</div>
+                        <div class="timeline-content">
+                            <strong>《莱茵报》主编</strong>
+                            <p>担任《莱茵报》主编，开始接触现实社会问题，关注林木盗窃法、摩泽尔河农民状况等议题，思想开始转向唯物主义。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1843年</div>
+                        <div class="timeline-content">
+                            <strong>迁居巴黎</strong>
+                            <p>与燕妮结婚，迁居巴黎。创办《德法年鉴》，发表《论犹太人问题》《〈黑格尔法哲学批判〉导言》，完成从唯心主义向唯物主义、从革命民主主义向共产主义的转变。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1844年</div>
+                        <div class="timeline-content">
+                            <strong>结识恩格斯</strong>
+                            <p>8月在巴黎与恩格斯会面，从此开始长达40年的伟大友谊和合作。合著《神圣家族》《德意志意识形态》。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1847年</div>
+                        <div class="timeline-content">
+                            <strong>加入共产主义者同盟</strong>
+                            <p>加入正义者同盟（后改组为共产主义者同盟），参与起草同盟纲领。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1848年</div>
+                        <div class="timeline-content">
+                            <strong>《共产党宣言》发表</strong>
+                            <p>2月《共产党宣言》在伦敦发表，标志着马克思主义的公开问世。同年欧洲革命爆发，马克思回到德国参加革命。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1849年</div>
+                        <div class="timeline-content">
+                            <strong>流亡伦敦</strong>
+                            <p>革命失败后流亡伦敦，开始长达34年的流亡生活，生活极为贫困。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1859年</div>
+                        <div class="timeline-content">
+                            <strong>《政治经济学批判》</strong>
+                            <p>发表《政治经济学批判》，系统阐述唯物史观，提出社会经济形态演进理论。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1864年</div>
+                        <div class="timeline-content">
+                            <strong>第一国际成立</strong>
+                            <p>国际工人协会（第一国际）在伦敦成立，马克思起草《成立宣言》和《临时章程》，成为国际的灵魂。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1867年</div>
+                        <div class="timeline-content">
+                            <strong>《资本论》第一卷出版</strong>
+                            <p>《资本论》第一卷在汉堡出版，系统阐述剩余价值理论，揭示资本主义剥削的秘密。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1871年</div>
+                        <div class="timeline-content">
+                            <strong>巴黎公社</strong>
+                            <p>巴黎公社革命爆发，马克思热情支持，撰写《法兰西内战》，总结公社经验，发展无产阶级专政理论。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1875年</div>
+                        <div class="timeline-content">
+                            <strong>《哥达纲领批判》</strong>
+                            <p>批判拉萨尔主义，阐述共产主义社会发展两阶段理论，提出"按劳分配"和"按需分配"概念。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1883年</div>
+                        <div class="timeline-content">
+                            <strong>逝世</strong>
+                            <p>3月14日在伦敦寓所逝世，享年64岁。葬于伦敦海格特公墓。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 代表著作 -->
+            <div class="tab-content" data-tab="works">
+                <h2>代表著作</h2>
+                <div class="works-grid">
+                    <div class="work-card">
+                        <h4>《黑格尔法哲学批判》</h4>
+                        <p class="year">1843年</p>
+                        <p>批判黑格尔的国家哲学，提出市民社会决定国家的唯物主义观点，标志向唯物主义的转变。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《论犹太人问题》</h4>
+                        <p class="year">1843年</p>
+                        <p>批判布鲁诺·鲍威尔关于犹太人解放问题的观点，提出政治解放与人类解放的区别，论述人的解放的实质。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《〈黑格尔法哲学批判〉导言》</h4>
+                        <p class="year">1844年</p>
+                        <p>提出无产阶级历史使命学说，论述批判的武器与武器的批判的关系，标志向共产主义的转变。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《1844年经济学哲学手稿》</h4>
+                        <p class="year">1844年</p>
+                        <p>论述异化劳动理论，提出共产主义是私有财产的积极扬弃，是马克思主义形成过程中的重要著作。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《神圣家族》</h4>
+                        <p class="year">1845年（与恩格斯合著）</p>
+                        <p>批判青年黑格尔派的主观唯心主义，论述人民群众是历史的创造者，接近提出唯物史观。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《关于费尔巴哈的提纲》</h4>
+                        <p class="year">1845年</p>
+                        <p>十一条提纲，批判旧唯物主义的直观性，提出实践观点，是"包含着新世界观的天才萌芽的第一个文件"。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《德意志意识形态》</h4>
+                        <p class="year">1845-1846年（与恩格斯合著）</p>
+                        <p>系统阐述唯物史观，提出生产力与生产关系、经济基础与上层建筑的矛盾运动规律，标志马克思主义哲学的形成。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《哲学的贫困》</h4>
+                        <p class="year">1847年</p>
+                        <p>批判蒲鲁东《贫困的哲学》，阐述价值规律、剩余价值来源，是第一部公开发表的马克思主义政治经济学著作。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《共产党宣言》</h4>
+                        <p class="year">1848年（与恩格斯合著）</p>
+                        <p>科学社会主义的第一个纲领性文件，论述阶级斗争理论、资本主义必然灭亡和社会主义必然胜利的规律、无产阶级的历史使命。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《路易·波拿巴的雾月十八日》</h4>
+                        <p class="year">1852年</p>
+                        <p>总结1848年法国革命经验，提出国家机器必须打碎、工农联盟思想，是运用唯物史观分析历史事件的典范。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《政治经济学批判》</h4>
+                        <p class="year">1859年</p>
+                        <p>系统阐述唯物史观，提出社会经济形态演进理论，是《资本论》的预备著作。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《资本论》第一卷</h4>
+                        <p class="year">1867年</p>
+                        <p>马克思主义政治经济学的奠基之作，系统阐述劳动价值论和剩余价值理论，揭示资本主义剥削的秘密和资本主义产生、发展、灭亡的规律。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《法兰西内战》</h4>
+                        <p class="year">1871年</p>
+                        <p>总结巴黎公社经验，阐述无产阶级专政理论，提出"工人阶级不能简单地掌握现成的国家机器"的著名论断。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《哥达纲领批判》</h4>
+                        <p class="year">1875年</p>
+                        <p>批判拉萨尔主义，阐述共产主义社会发展两阶段理论，提出过渡时期实行无产阶级专政的思想。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 理论贡献 -->
+            <div class="tab-content" data-tab="theory">
+                <h2>理论贡献</h2>
+                <ul class="contribution-list">
+                    <li>
+                        <strong>唯物史观（历史唯物主义）</strong>
+                        <p>创立唯物史观，揭示社会发展的客观规律。提出社会存在决定社会意识、生产力决定生产关系、经济基础决定上层建筑的基本原理。指出阶级斗争是阶级社会发展的直接动力，人民群众是历史的创造者。</p>
+                    </li>
+                    <li>
+                        <strong>剩余价值理论</strong>
+                        <p>揭示资本主义剥削的秘密。通过分析劳动力成为商品，阐明剩余价值的来源是雇佣工人的剩余劳动，揭露资本家剥削工人的实质。指出资本主义基本矛盾是生产社会化与生产资料资本主义私人占有之间的矛盾。</p>
+                    </li>
+                    <li>
+                        <strong>科学社会主义</strong>
+                        <p>使社会主义从空想变为科学。揭示资本主义必然灭亡、社会主义必然胜利的客观规律，阐明无产阶级的历史使命是推翻资本主义、建立社会主义和共产主义，指出无产阶级革命和无产阶级专政是实现这一使命的根本道路。</p>
+                    </li>
+                    <li>
+                        <strong>阶级斗争理论</strong>
+                        <p>指出至今一切社会的历史都是阶级斗争的历史，阶级斗争是阶级社会发展的直接动力。分析资本主义社会的阶级结构，阐明无产阶级的历史地位和使命。</p>
+                    </li>
+                    <li>
+                        <strong>无产阶级专政理论</strong>
+                        <p>提出无产阶级专政是资本主义向共产主义过渡时期的政治形式，是达到消灭一切阶级差别、进入无阶级社会的过渡。总结巴黎公社经验，指出必须打碎资产阶级国家机器，建立无产阶级自己的国家政权。</p>
+                    </li>
+                    <li>
+                        <strong>共产主义发展阶段理论</strong>
+                        <p>提出共产主义社会分为第一阶段（社会主义）和高级阶段（共产主义），社会主义阶段实行按劳分配，共产主义阶段实行按需分配。指出在资本主义和共产主义之间有一个过渡时期，这个时期的国家只能是无产阶级的革命专政。</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 一目了然 -->
+            <div class="tab-content" data-tab="visual">
+                <h2>一目了然</h2>
+                <div class="visual-section">
+                    <!-- 雷达图：五导师综合能力对比 -->
+                    <div class="chart-container">
+                        <h3>五大导师综合能力对比（无高低之分，仅能力侧重，彼此为继承发扬关系）</h3>
+                        <p class="chart-desc">统一10项维度，横向比较马克思与其他四位导师各自的能力侧重。当前页突出显示：马克思</p>
+                        <canvas id="marxRadar" style="max-height:400px;"></canvas>
+                        <div class="radar-legend">
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#8b0000;"></div><span>马克思（深红）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#4a5568;"></div><span>恩格斯（青灰）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#d4a017;"></div><span>列宁（金黄）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#744210;"></div><span>斯大林（棕黄）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#e8192c;"></div><span>毛泽东（鲜红）</span></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 思想转变历程 -->
+                    <div class="chart-container">
+                        <h3>思想转变历程</h3>
+                        <p class="chart-desc">从唯心主义到唯物主义、从革命民主主义到共产主义的转变过程</p>
+                        <canvas id="marxTransformChart" style="max-height:280px;"></canvas>
+                    </div>
+                    
+                    <!-- 著作领域分布 -->
+                    <div class="chart-container">
+                        <h3>著作领域分布</h3>
+                        <p class="chart-desc">马克思主要著作按学科领域的分类统计</p>
+                        <canvas id="marxFieldChart" style="max-height:280px;"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 历史地位 -->
+            <div class="tab-content" data-tab="legacy">
+                <h2>历史地位</h2>
+                <h3>千年第一思想家</h3>
+                <p>1999年，英国广播公司（BBC）评选"千年思想家"，马克思位居榜首。2005年，德国评选"最伟大的德国人"，马克思名列第三。马克思的思想深刻影响了人类历史进程，改变了世界格局。</p>
+                
+                <h3>马克思主义的创始人</h3>
+                <p>马克思与恩格斯共同创立了马克思主义，实现了人类思想史上的伟大革命。马克思主义是科学的世界观和方法论，是工人阶级和劳动人民认识世界、改造世界的强大思想武器。马克思主义包括哲学、政治经济学、科学社会主义三个组成部分，是一个完整的科学体系。</p>
+                
+                <h3>国际工人运动的精神领袖</h3>
+                <p>马克思是第一国际的灵魂，指导了19世纪欧洲工人运动的发展。他的思想培育了各国无产阶级政党，推动了国际共产主义运动的兴起。从19世纪末到20世纪，马克思主义成为世界各国工人阶级政党的指导思想。</p>
+                
+                <h3>对20世纪世界历史的影响</h3>
+                <p>以马克思主义为指导的社会主义革命在俄国、中国等一系列国家取得胜利，建立了社会主义政权，形成了与资本主义阵营对峙的社会主义阵营。马克思主义成为20世纪最具影响力的社会思潮之一。</p>
+                
+                <h3>当代意义</h3>
+                <p>尽管20世纪末苏联解体、东欧剧变使世界社会主义运动遭受挫折，但马克思主义并未过时。2008年国际金融危机后，《资本论》重新成为畅销书，马克思对资本主义的批判性分析重新引起关注。马克思主义关于人类解放、社会公正、人与自然和谐发展的思想，对于解决当代全球性问题仍具有重要价值。</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">理论学习 · 斗争精神 · 青年担当</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Tab切换
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                
+                // 切换按钮状态
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 切换内容
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelector(`.tab-content[data-tab="${tabId}"]`).classList.add('active');
+                
+                // 初始化图表
+                if (tabId === 'visual') {
+                    setTimeout(initCharts, 100);
+                }
+            });
+        });
+
+        // 图表初始化
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+            chartsInited = true;
+
+            // 雷达图：五导师综合能力对比
+            const radarCtx = document.getElementById('marxRadar');
+            if (radarCtx) {
+                // 统一10维度：理论深度、组织纪律、学术广度、创新性、战略眼光、领导才能、文笔表达、执行力、群众动员、政治智慧
+                const labels = ['理论深度','组织纪律','学术广度','创新性','战略眼光','领导才能','文笔表达','执行力','群众动员','政治智慧'];
+                const radarChart = new Chart(radarCtx.getContext('2d'), {
+                    type: 'radar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '马克思',
+                                data: [10, 7, 10, 10, 8, 7, 9, 6, 6, 9],
+                                borderColor: '#8b0000',
+                                backgroundColor: 'rgba(139,0,0,0.10)',
+                                pointBackgroundColor: '#8b0000',
+                                borderWidth: 2.5,
+                                pointRadius: 4,
+                                hidden: false,
+                            },
+                            {
+                                label: '恩格斯',
+                                data: [9, 9, 10, 8, 7, 8, 9, 7, 6, 8],
+                                borderColor: '#4a5568',
+                                backgroundColor: 'rgba(74,85,104,0.05)',
+                                pointBackgroundColor: '#4a5568',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '列宁',
+                                data: [9, 9, 8, 10, 10, 10, 8, 9, 9, 10],
+                                borderColor: '#d4a017',
+                                backgroundColor: 'rgba(212,160,23,0.05)',
+                                pointBackgroundColor: '#d4a017',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '斯大林',
+                                data: [7, 10, 6, 6, 9, 10, 6, 10, 8, 9],
+                                borderColor: '#744210',
+                                backgroundColor: 'rgba(116,66,16,0.05)',
+                                pointBackgroundColor: '#744210',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '毛泽东',
+                                data: [9, 8, 8, 10, 10, 10, 9, 9, 10, 10],
+                                borderColor: '#e8192c',
+                                backgroundColor: 'rgba(232,25,44,0.05)',
+                                pointBackgroundColor: '#e8192c',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            r: {
+                                min: 0, max: 10,
+                                ticks: { stepSize: 2, font: { size: 10 } },
+                                pointLabels: { font: { size: 12 } }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false }
+                        }
+                    }
+                });
+
+                // 图例点击切换显示/隐藏
+                document.querySelectorAll('#marxRadar ~ .radar-legend .radar-legend-item').forEach((item, i) => {
+                    // 根据初始 hidden 状态设置图例样式
+                    const ds = radarChart.data.datasets[i];
+                    if (ds.hidden) {
+                        item.classList.add('hidden-dataset');
+                    }
+                    item.addEventListener('click', () => {
+                        ds.hidden = !ds.hidden;
+                        item.classList.toggle('hidden-dataset', !!ds.hidden);
+                        radarChart.update();
+                    });
+                });
+            }
+
+            // 思想转变历程
+            const transformCtx = document.getElementById('marxTransformChart');
+            if (transformCtx) {
+                new Chart(transformCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['1835', '1840', '1843', '1844', '1845', '1846', '1848', '1850', '1860', '1870'],
+                        datasets: [{
+                            label: '唯物主义程度',
+                            data: [2, 3, 5, 7, 9, 10, 10, 10, 10, 10],
+                            borderColor: '#e53e3e',
+                            backgroundColor: 'rgba(229, 62, 62, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }, {
+                            label: '共产主义立场',
+                            data: [1, 2, 4, 7, 9, 10, 10, 10, 10, 10],
+                            borderColor: '#3182ce',
+                            backgroundColor: 'rgba(49, 130, 206, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { min: 0, max: 10, title: { display: true, text: '转变程度' } }
+                        }
+                    }
+                });
+            }
+
+            // 著作领域分布
+            const fieldCtx = document.getElementById('marxFieldChart');
+            if (fieldCtx) {
+                new Chart(fieldCtx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['政治经济学', '哲学', '政治学', '历史学', '其他'],
+                        datasets: [{
+                            data: [35, 25, 20, 12, 8],
+                            backgroundColor: ['#c41e3a', '#e53e3e', '#fc8181', '#feb2b2', '#fed7d7'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'right' }
+                        }
+                    }
+                });
+            }
+        }
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

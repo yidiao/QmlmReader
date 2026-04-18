@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推荐视频 | 文艺 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .page-header p { font-size: 1.05rem; opacity: 0.88; }
+
+        .gallery-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: #c41e3a; text-decoration: none; margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* 分类标签导航 */
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #c41e3a;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: #c41e3a;
+        }
+
+        .category-tab:hover {
+            background: #c41e3a;
+            color: white;
+        }
+
+        .category-tab.active {
+            background: #c41e3a;
+            color: white;
+        }
+
+        /* 分类内容区域 */
+        .category-section {
+            display: none;
+        }
+
+        .category-section.active {
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #c41e3a;
+        }
+
+        /* 视频网格 - 详细版 */
+        .video-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .video-detail-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .video-detail-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .video-detail-thumb {
+            height: 180px;
+            background: linear-gradient(135deg, #c41e3a, #8b0000);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-detail-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .video-detail-thumb::after {
+            content: '▶';
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .video-detail-content {
+            padding: 1.5rem;
+        }
+
+        .video-detail-content h3 {
+            margin: 0 0 0.75rem 0;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+
+        .video-detail-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* 正名分类标签 */
+        .rectify-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .rectify-tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .rectify-tag.leaders { background: #e3f2fd; color: #1976d2; }
+        .rectify-tag.military { background: #fff3e0; color: #f57c00; }
+        .rectify-tag.economy { background: #e8f5e9; color: #388e3c; }
+        .rectify-tag.political { background: #fce4ec; color: #c2185b; }
+
+        body.dark-mode .rectify-tag.leaders { background: #1565c0; color: white; }
+        body.dark-mode .rectify-tag.military { background: #ef6c00; color: white; }
+        body.dark-mode .rectify-tag.economy { background: #2e7d32; color: white; }
+        body.dark-mode .rectify-tag.political { background: #ad1457; color: white; }
+
+        .video-detail-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .video-detail-link:hover {
+            text-decoration: underline;
+        }
+
+        /* UP主推荐区域 */
+        .up-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+        }
+
+        .up-section h2 {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .up-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .up-card {
+            background: var(--card-bg);
+            padding: 1.25rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .up-card h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .up-card p {
+            margin: 0 0 0.75rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .up-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .up-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* 占位卡片样式 */
+        .placeholder-card {
+            background: var(--card-bg);
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            overflow: hidden;
+            color: #888;
+        }
+
+        .placeholder-card .icon {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, #c41e3a, #8b0000);
+            color: white;
+            overflow: hidden;
+        }
+
+        .placeholder-card .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .placeholder-card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        body.dark-mode .up-section {
+            border-top-color: #444;
+        }
+
+        body.dark-mode .placeholder-card {
+            border-color: #555;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html" class="active">文艺</a>
+                <a href="../puzzle.html" style="color:#fbbf24;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>📹 推荐视频</h1>
+            <p>红色影像 · 革命记忆 · 理论学习</p>
+        </section>
+
+        <div class="gallery-container">
+            <a href="../gallery.html" class="back-link">← 返回文艺首页</a>
+
+            <!-- 分类标签 -->
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="classic">🎬 经典老番</button>
+                <button class="category-tab" data-category="recommended">⭐ 笔者推荐</button>
+                <button class="category-tab" data-category="rectify">📜 历史正名</button>
+            </div>
+
+            <!-- 第一部分：经典老番 -->
+            <div class="category-section active" data-category="classic">
+                <h2 class="category-title">经典老番</h2>
+                <p style="color:var(--text-light);margin-bottom:1.5rem;">革命历史经典影像，永恒的艺术瑰宝</p>
+                
+                <div class="video-detail-grid">
+                    <div class="video-detail-card">
+                        <div class="video-detail-thumb">
+                            <img src="../images/icons/东方红舞台剧.jpg" alt="东方红舞台剧" onerror="this.style.display='none'">
+                        </div>
+                        <div class="video-detail-content">
+                            <h3>大型音乐舞蹈史诗《东方红》</h3>
+                            <p class="video-detail-desc">1965年为庆祝中华人民共和国成立16周年而创作，全面展现中国革命历程，是新中国文艺史上的里程碑之作。</p>
+                            <a href="https://www.bilibili.com/video/BV1LM4m1C7iE" target="_blank" class="video-detail-link">b站观看 →</a>
+                        </div>
+                    </div>
+
+                    <div class="video-detail-card">
+                        <div class="video-detail-thumb">
+                            <img src="../images/icons/列宁在十月.jpg" alt="列宁在十月" onerror="this.style.display='none'">
+                        </div>
+                        <div class="video-detail-content">
+                            <h3>电影《列宁在十月》</h3>
+                            <p class="video-detail-desc">苏联经典革命历史影片，展现列宁风采和俄国十月革命的历史进程，是了解十月革命的重要影像资料。</p>
+                            <a href="https://www.bilibili.com/video/BV1Y58QzfEWi" target="_blank" class="video-detail-link">b站观看 →</a>
+                        </div>
+                    </div>
+
+                    <div class="video-detail-card">
+                        <div class="video-detail-thumb">
+                            <img src="../images/icons/列宁在1918.jpg" alt="列宁在1918" onerror="this.style.display='none'">
+                        </div>
+                        <div class="video-detail-content">
+                            <h3>电影《列宁在1918》</h3>
+                            <p class="video-detail-desc">续集，讲述苏维埃政权建立初期的斗争，展现列宁在艰苦环境下的革命 leadership。</p>
+                            <a href="https://www.bilibili.com/video/BV1a3LozKEPD" target="_blank" class="video-detail-link">b站观看 →</a>
+                        </div>
+                    </div>
+
+                    <div class="video-detail-card">
+                        <div class="video-detail-thumb">
+                            <img src="../images/icons/大决战.jpg" alt="大决战" onerror="this.style.display='none'">
+                        </div>
+                        <div class="video-detail-content">
+                            <h3>《大决战》系列</h3>
+                            <p class="video-detail-desc">包括辽沈战役、淮海战役、平津战役三部，全景式展现解放战争三大战役的恢宏场面。</p>
+                            <a href="https://www.bilibili.com/video/BV16bByBREDk" target="_blank" class="video-detail-link">b站观看 →</a>
+                        </div>
+                    </div>
+
+                    <div class="video-detail-card">
+                        <div class="video-detail-thumb">
+                            <img src="../images/icons/列宁读书.jpg" alt="列宁读书" onerror="this.style.display='none'">
+                        </div>
+                        <div class="video-detail-content">
+                            <h3>【白噪音/环境音】跟列宁一起学习</h3>
+                            <p class="video-detail-desc">2小时氛围声，与导师一起学习吧，笔者倾情推荐。适合学习工作时播放。</p>
+                            <a href="https://www.bilibili.com/video/BV1qY411L7UR" target="_blank" class="video-detail-link">b站观看 →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第二部分：笔者推荐 -->
+            <div class="category-section" data-category="recommended">
+                <h2 class="category-title">笔者推荐</h2>
+                <p style="color:var(--text-light);margin-bottom:1.5rem;">精选当代优质UP主的红色视频内容</p>
+                
+                <div class="video-detail-grid">
+                    <!-- 占位卡片 1 -->
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">
+                            <img src="../images/icons/坦坦荡荡.jpg" alt="坦坦荡荡" onerror="this.parentElement.innerHTML='🎬'">
+                        </div>
+                        <div class="placeholder-card-content">
+                            <h3>【补档】坦坦荡荡</h3>
+                            <p> UP主：一颗冷凌檬</p>
+                            <a href="https://www.bilibili.com/video/BV1zvFxzsEGW" target="_blank" class="video-detail-link">跳转 →</a>
+                        </div>
+                    </div>
+
+                    <!-- 占位卡片 2 -->
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">
+                            <img src="../images/icons/雷锋.jpg" alt="雷锋" onerror="this.parentElement.innerHTML='⭐'">
+                        </div>
+                        <div class="placeholder-card-content">
+                            <h3>【死别/雷锋】"光阴啊..."</h3>
+                            <p>UP主：Max161</p>
+                            <a href="https://www.bilibili.com/video/BV1zvJPzCEJi" target="_blank" class="video-detail-link">跳转 →</a>
+                        </div>
+                    </div>
+
+                    <!-- 占位卡片 3 -->
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">📝</div>
+                        <div class="placeholder-card-content">
+                            <h3>【占位符】视频标题</h3>
+                            <p>UP主：待定</p>
+                            <p style="font-size:0.85rem;color:#999;">请手动粘贴视频链接</p>
+                        </div>
+                    </div>
+
+                    <!-- 占位卡片 4 -->
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">📝</div>
+                        <div class="placeholder-card-content">
+                            <h3>【占位符】视频标题</h3>
+                            <p>UP主：待定</p>
+                            <p style="font-size:0.85rem;color:#999;">请手动粘贴视频链接</p>
+                        </div>
+                    </div>
+
+                    <!-- 占位卡片 5 -->
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">📝</div>
+                        <div class="placeholder-card-content">
+                            <h3>【占位符】视频标题</h3>
+                            <p>UP主：待定</p>
+                            <p style="font-size:0.85rem;color:#999;">请手动粘贴视频链接</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UP主推荐 -->
+                <div class="up-section">
+                    <h2>🌟 优质UP主推荐</h2>
+                    <p style="color:var(--text-light);margin-bottom:1.5rem;">笔者精选，没有未圣章圣等人争议大的UP主</p>
+                    <div class="up-grid">
+                        <div class="up-card">
+                            <h4>哈热气的小基米</h4>
+                            <p>当代政治经济学分析</p>
+                            <a href="https://space.bilibili.com/3690985804532704" target="_blank">访问主页 →</a>
+                        </div>
+                        <div class="up-card">
+                            <h4>朱不可夫</h4>
+                            <p>文革一手资料整理</p>
+                            <a href="https://space.bilibili.com/310779443" target="_blank">访问主页 →</a>
+                        </div>
+                        <div class="up-card">
+                            <h4>解诂</h4>
+                            <p>建政梗百科与历史解读</p>
+                            <a href="https://space.bilibili.com/515078764" target="_blank">访问主页 →</a>
+                        </div>
+                        <div class="up-card">
+                            <h4>未竟的朝晖</h4>
+                            <p>比较还原的共和国简史</p>
+                            <a href="https://space.bilibili.com/318817608" target="_blank">访问主页 →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第三部分：历史正名 -->
+            <div class="category-section" data-category="rectify">
+                <h2 class="category-title">历史正名</h2>
+                <p style="color:var(--text-light);margin-bottom:1.5rem;">网络上为历史正名的优质视频，辅助佐证历史真相</p>
+                
+                <div class="video-detail-grid">
+
+                    <!-- 占位卡片：经济模式 -->
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">
+                            <img src="../images/icons/集体化正名.jpg" alt="集体化正名" onerror="this.parentElement.innerHTML='💰'">
+                        </div>
+                        <div class="placeholder-card-content">
+                            <div class="rectify-tags">
+                                <span class="rectify-tag economy">经济模式</span>
+                            </div>
+                            <h3>讲集体化还耍春秋笔法？几个月失误当箭靶，20年实践当空气？脸都不要了！</h3>
+                            <p>破除对人民公社的探索失误以偏概全</p>
+                            <a href="https://www.bilibili.com/video/BV1stWkzqESy" target="_blank" class="video-detail-link">跳转 →</a>
+                        </div>
+                    </div>
+
+                    <!-- 占位卡片：领导人正名 -->
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">👤</div>
+                        <div class="placeholder-card-content">
+                            <div class="rectify-tags">
+                                <span class="rectify-tag leaders">领导人正名</span>
+                            </div>
+                            <h3>【占位符】视频标题</h3>
+                            <p>为革命领袖还原真实历史形象</p>
+                            <p style="font-size:0.85rem;color:#999;">请手动粘贴视频链接</p>
+                        </div>
+                    </div>
+
+                    <!-- 占位卡片：军事行动 -->
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">⚔️</div>
+                        <div class="placeholder-card-content">
+                            <div class="rectify-tags">
+                                <span class="rectify-tag military">军事行动</span>
+                            </div>
+                            <h3>【占位符】视频标题</h3>
+                            <p>澄清被歪曲解读的军事行动</p>
+                            <p style="font-size:0.85rem;color:#999;">请手动粘贴视频链接</p>
+                        </div>
+                    </div>
+
+
+                    <!-- 占位卡片：经济模式 -->
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">💰</div>
+                        <div class="placeholder-card-content">
+                            <div class="rectify-tags">
+                                <span class="rectify-tag economy">经济模式</span>
+                            </div>
+                            <h3>【占位符】视频标题</h3>
+                            <p>破除对社会主义经济的偏见</p>
+                            <p style="font-size:0.85rem;color:#999;">请手动粘贴视频链接</p>
+                        </div>
+                    </div>
+
+                    <!-- 占位卡片：政治整风 -->
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">🏛️</div>
+                        <div class="placeholder-card-content">
+                            <div class="rectify-tags">
+                                <span class="rectify-tag political">政治整风</span>
+                            </div>
+                            <h3>【占位符】视频标题</h3>
+                            <p>理解政治运动的本质和必要性</p>
+                            <p style="font-size:0.85rem;color:#999;">请手动粘贴视频链接</p>
+                        </div>
+                    </div>
+
+                    <!-- 更多占位卡片 -->
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">📝</div>
+                        <div class="placeholder-card-content">
+                            <div class="rectify-tags">
+                                <span class="rectify-tag military">军事行动</span>
+                                <span class="rectify-tag leaders">领导人正名</span>
+                            </div>
+                            <h3>【占位符】视频标题</h3>
+                            <p>可多标签分类</p>
+                            <p style="font-size:0.85rem;color:#999;">请手动粘贴视频链接</p>
+                        </div>
+                    </div>
+
+                    <div class="video-detail-card placeholder-card">
+                        <div class="icon">📝</div>
+                        <div class="placeholder-card-content">
+                            <div class="rectify-tags">
+                                <span class="rectify-tag economy">经济模式</span>
+                            </div>
+                            <h3>【占位符】视频标题</h3>
+                            <p>待补充</p>
+                            <p style="font-size:0.85rem;color:#999;">请手动粘贴视频链接</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // 分类标签切换
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const categoryId = this.dataset.category;
+                
+                // 切换标签状态
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 切换内容区域
+                document.querySelectorAll('.category-section').forEach(s => s.classList.remove('active'));
+                document.querySelector(`.category-section[data-category="${categoryId}"]`).classList.add('active');
+            });
+        });
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

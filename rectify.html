@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正名 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 正名页面样式 */
+        .rectify-hero {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .rectify-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .rectify-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .rectify-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        /* 板块导航 */
+        .section-nav {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .section-nav-btn {
+            padding: 1.5rem 1rem;
+            background: white;
+            border: 2px solid #c41e3a;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .section-nav-btn:hover {
+            background: #c41e3a;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(196, 30, 58, 0.3);
+        }
+        
+        .section-nav-btn.active {
+            background: #c41e3a;
+            color: white;
+        }
+        
+        .section-nav-btn .icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-nav-btn .title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .section-nav-btn .desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 0.3rem;
+        }
+        
+        /* 板块内容 */
+        .section-content {
+            display: none;
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-content.active {
+            display: block;
+        }
+        
+        .section-content h2 {
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-content h3 {
+            color: #333;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .section-content p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+        
+        /* 文章卡片 */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .article-card {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .article-card:hover {
+            border-color: #c41e3a;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.1);
+        }
+        
+        .article-card h4 {
+            color: #c41e3a;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .article-card .summary {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .article-card .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .article-card a {
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .article-card a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 占位符样式 */
+        .placeholder-box {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            color: #888;
+            margin: 1rem 0;
+        }
+        
+        .placeholder-box .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* 历史正名视频入口卡片 */
+        .video-entry-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+
+        .video-entry-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(196, 30, 58, 0.4);
+        }
+
+        .video-entry-icon {
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+
+        .video-entry-content {
+            flex: 1;
+        }
+
+        .video-entry-content h3 {
+            color: white;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.3rem;
+        }
+
+        .video-entry-content p {
+            color: rgba(255,255,255,0.9);
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .video-entry-link {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        body.dark-mode .video-entry-card {
+            background: linear-gradient(135deg, #8b0000 0%, #5c0000 100%);
+        }
+        
+        /* 黑夜模式 */
+        body.dark-mode .section-nav-btn {
+            background: #2a2a2a;
+            border-color: #ff6b6b;
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .section-nav-btn:hover,
+        body.dark-mode .section-nav-btn.active {
+            background: #ff6b6b;
+            color: #1a1a1a;
+        }
+        
+        body.dark-mode .section-content {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode .section-content h2 {
+            color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        
+        body.dark-mode .section-content h3 {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .section-content p {
+            color: #ccc;
+        }
+        
+        body.dark-mode .article-card {
+            background: #3a3a3a;
+            border-color: #555;
+        }
+        
+        body.dark-mode .article-card h4 {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .article-card .summary {
+            color: #aaa;
+        }
+        
+        body.dark-mode .article-card a {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .placeholder-box {
+            background: #3a3a3a;
+            border-color: #555;
+            color: #888;
+        }
+        
+        @media (max-width: 768px) {
+            .section-nav {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">首页</a>
+                <a href="articles.html">文章</a>
+                <a href="masters.html">导师</a>
+                <a href="toolkit.html">工具集</a>
+                <a href="gallery.html">文艺</a>
+                <a href="puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="international.html">🌍 国际共运</a>
+                <a href="rectify.html" class="active">正名</a>
+                <a href="about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 页面头部 -->
+        <section class="rectify-hero">
+            <h1>正名</h1>
+            <p>还原历史真相，澄清歪曲误解，为被污名化的革命事业和革命领袖正名</p>
+        </section>
+
+        <!-- 板块导航 -->
+        <div class="rectify-container">
+            <!-- 历史正名视频入口卡片 -->
+            <div class="video-entry-card" onclick="window.location.href='gallery/videos.html#rectify'">
+                <div class="video-entry-icon">📹</div>
+                <div class="video-entry-content">
+                    <h3>历史正名视频</h3>
+                    <p>精选网络上为革命历史正名的优质视频内容，辅助佐证历史真相。涵盖领导人正名、军事行动、经济模式、政治整风四大类别。</p>
+                    <span class="video-entry-link">点击查看 →</span>
+                </div>
+            </div>
+
+            <div class="section-nav">
+                <button class="section-nav-btn active" data-section="leaders">
+                    <span class="icon">👤</span>
+                    <span class="title">领导人正名</span>
+                    <span class="desc">还原领袖真实形象</span>
+                </button>
+                <button class="section-nav-btn" data-section="military">
+                    <span class="icon">⚔️</span>
+                    <span class="title">军事行动</span>
+                    <span class="desc">澄清战争历史真相</span>
+                </button>
+                <button class="section-nav-btn" data-section="economy">
+                    <span class="icon">💰</span>
+                    <span class="title">经济模式</span>
+                    <span class="desc">破除经济领域偏见</span>
+                </button>
+                <button class="section-nav-btn" data-section="political">
+                    <span class="icon">🏛️</span>
+                    <span class="title">政治整风</span>
+                    <span class="desc">理解政治运动本质</span>
+                </button>
+            </div>
+
+            <!-- 板块1：领导人正名 -->
+            <div class="section-content active" data-section="leaders">
+                <h2>领导人正名</h2>
+                <p>本板块旨在还原被歪曲、污名化的革命领袖的真实历史形象，澄清西方资产阶级和修正主义宣传中的种种谎言，展现无产阶级革命领袖的伟大人格和历史功绩。</p>
+                
+                <h3>文章列表</h3>
+                <div class="article-grid">
+                    <div class="article-card">
+                        <h4>【占位符】斯大林的"大清洗"真相</h4>
+                        <p class="summary">揭示1930年代苏联肃反运动的历史背景、真实规模和必要性，驳斥资产阶级史学对斯大林的妖魔化。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                    <div class="article-card">
+                        <h4>【占位符】毛泽东与"大跃进"</h4>
+                        <p class="summary">还原"大跃进"运动的历史背景、实际成效和失误原因，澄清西方媒体对中国社会主义建设的歪曲报道。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                    <div class="article-card">
+                        <h4>【占位符】列宁与"红色恐怖"</h4>
+                        <p class="summary">分析十月革命后苏维埃政权面临的严峻形势，说明非常措施的历史必要性。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="placeholder-box">
+                    <div class="icon">📝</div>
+                    <p>更多领导人正名文章待补充...</p>
+                </div>
+            </div>
+
+            <!-- 板块2：军事行动 -->
+            <div class="section-content" data-section="military">
+                <h2>军事行动</h2>
+                <p>本板块旨在澄清被歪曲解读的社会主义国家军事行动，还原历史真相，驳斥西方"侵略""扩张"等污名化叙事，展现这些行动的自卫性质和正义性。</p>
+                
+                <h3>文章列表</h3>
+                <div class="article-grid">
+                    <div class="article-card">
+                        <h4>苏联攻打芬兰是侵略？过当防卫！</h4>
+                        <p class="summary">1939年苏芬战争的真相：芬兰白卫军的反苏挑衅、列宁格勒的安全威胁、苏联的自卫反击。</p>
+                        <div class="meta">
+                            <span>已完成</span>
+                            <a href="rectify/finland-war.html">阅读全文 →</a>
+                        </div>
+                    </div>
+                    <div class="article-card">
+                        <h4>【占位符】抗美援朝：保家卫国的正义之战</h4>
+                        <p class="summary">驳斥"中国侵略朝鲜"的荒谬论调，揭示美国武装干涉朝鲜内政、威胁中国安全的真相。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                    <div class="article-card">
+                        <h4>【占位符】苏联入侵阿富汗？支援反帝斗争！</h4>
+                        <p class="summary">1979年苏联出兵阿富汗的历史背景：阿富汗政府的请求、反帝反封建的民主革命、对抗美国支持的极端势力。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                    <div class="article-card">
+                        <h4>【占位符】对越自卫反击战</h4>
+                        <p class="summary">1979年中越边境冲突的真相：越南当局的反华排华、边境挑衅、中国被迫自卫反击。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="placeholder-box">
+                    <div class="icon">📝</div>
+                    <p>更多军事行动正名文章待补充...</p>
+                </div>
+            </div>
+
+            <!-- 板块3：经济模式 -->
+            <div class="section-content" data-section="economy">
+                <h2>经济模式</h2>
+                <p>本板块旨在破除对社会主义经济模式的种种偏见和误解，澄清"计划经济效率低下""公有制扼杀积极性"等错误观点，展现社会主义经济制度的优越性。</p>
+                
+                <h3>文章列表</h3>
+                <div class="article-grid">
+                    <div class="article-card">
+                        <h4>【占位符】苏联计划经济真的失败了吗？</h4>
+                        <p class="summary">用数据说话：苏联工业化速度、工业化成就、人民生活水平提升，对比同期资本主义国家。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                    <div class="article-card">
+                        <h4>【占位符】中国前三十年的经济成就</h4>
+                        <p class="summary">澄清"改革开放前中国经济濒临崩溃"的谎言，展示1949-1978年中国经济建设的辉煌成就。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                    <div class="article-card">
+                        <h4>【占位符】公有制与效率：一个伪命题</h4>
+                        <p class="summary">从理论和实践两个维度论证公有制与效率的关系，揭示私有制经济的内在矛盾。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="placeholder-box">
+                    <div class="icon">📝</div>
+                    <p>更多经济模式正名文章待补充...</p>
+                </div>
+            </div>
+
+            <!-- 板块4：政治整风 -->
+            <div class="section-content" data-section="political">
+                <h2>政治整风</h2>
+                <p>本板块旨在帮助读者理解社会主义国家政治运动的本质和必要性，澄清"迫害""清洗"等污名化叙事，展现这些运动在巩固无产阶级专政、防止资本主义复辟方面的重要作用。</p>
+                
+                <h3>文章列表</h3>
+                <div class="article-grid">
+                    <div class="article-card">
+                        <h4>【占位符】延安整风：一次伟大的马克思主义教育运动</h4>
+                        <p class="summary">还原延安整风运动的历史背景、主要内容、积极成果，澄清"迫害知识分子"的歪曲。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                    <div class="article-card">
+                        <h4>【占位符】文化大革命：防修反修的伟大探索</h4>
+                        <p class="summary">理解文革的历史背景、理论依据、实践探索和历史教训，超越简单的"浩劫"叙事。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                    <div class="article-card">
+                        <h4>【占位符】反右运动：必要还是扩大化？</h4>
+                        <p class="summary">分析1957年反右运动的历史背景、必要性和扩大化错误，全面客观评价这一历史事件。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="placeholder-box">
+                    <div class="icon">📝</div>
+                    <p>更多政治整风正名文章待补充...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 板块切换
+        document.querySelectorAll('.section-nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const sectionId = this.dataset.section;
+                
+                // 切换按钮状态
+                document.querySelectorAll('.section-nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 切换内容
+                document.querySelectorAll('.section-content').forEach(c => c.classList.remove('active'));
+                document.querySelector(`.section-content[data-section="${sectionId}"]`).classList.add('active');
+            });
+        });
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

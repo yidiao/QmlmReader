@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青年马列毛主义驿站 | Qmlm Reader</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="active">首页</a>
+                <a href="articles.html">文章</a>
+                <a href="masters.html">导师</a>
+                <a href="toolkit.html">工具集</a>
+                <a href="gallery.html">文艺</a>
+                <a href="puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="international.html">🌍 国际共运</a>
+                <a href="rectify.html">正名</a>
+                <a href="about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="search-section">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索文章、作者、关键词...">
+                <button onclick="performSearch()">搜索</button>
+            </div>
+            <div class="category-toggle">
+                <button onclick="toggleCategories()">展开分类筛选 ▼</button>
+            </div>
+            <div class="category-filters" id="categoryFilters">
+                <div class="filter-group">
+                    <h4>按重要性</h4>
+                    <label><input type="checkbox" value="5" class="filter-priority"> 五星必读</label>
+                    <label><input type="checkbox" value="4" class="filter-priority"> 四星重点</label>
+                    <label><input type="checkbox" value="3" class="filter-priority"> 三星推荐</label>
+                </div>
+                <div class="filter-group">
+                    <h4>按作者</h4>
+                    <label><input type="checkbox" value="marx" class="filter-author"> 马克思</label>
+                    <label><input type="checkbox" value="engels" class="filter-author"> 恩格斯</label>
+                    <label><input type="checkbox" value="lenin" class="filter-author"> 列宁</label>
+                    <label><input type="checkbox" value="stalin" class="filter-author"> 斯大林</label>
+                    <label><input type="checkbox" value="mao" class="filter-author"> 毛泽东</label>
+                </div>
+                <div class="filter-group">
+                    <h4>按类型</h4>
+                    <label><input type="checkbox" value="philosophy" class="filter-type"> 哲学基础</label>
+                    <label><input type="checkbox" value="political" class="filter-type"> 政治理论</label>
+                    <label><input type="checkbox" value="military" class="filter-type"> 军事战略</label>
+                    <label><input type="checkbox" value="economic" class="filter-type"> 政治经济学</label>
+                    <label><input type="checkbox" value="party" class="filter-type"> 党的建设</label>
+                    <label><input type="checkbox" value="culture" class="filter-type"> 思想文化</label>
+                </div>
+                <div class="filter-group">
+                    <h4>按历史时期</h4>
+                    <label><input type="checkbox" value="early" class="filter-period"> 早期革命</label>
+                    <label><input type="checkbox" value="ww2" class="filter-period"> 抗日战争</label>
+                    <label><input type="checkbox" value="civil" class="filter-period"> 解放战争</label>
+                    <label><input type="checkbox" value="socialist" class="filter-period"> 社会主义建设</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="home-page">
+        <div class="container">
+            <section class="hero">
+                <h2>理论学习 · 斗争精神 · 青年担当</h2>
+                <p>在这里阅读马克思、恩格斯、列宁、斯大林、毛泽东等革命导师的经典著作，深入理解马克思主义理论的精髓。</p>
+                <div class="hero-actions">
+                    <a href="articles.html" class="btn-primary">开始阅读</a>
+                    <a href="masters.html" class="btn-secondary">了解导师</a>
+                </div>
+            </section>
+
+            <section class="featured-section">
+                <h3 class="section-title">五星必读</h3>
+                <div class="featured-grid">
+                    <article class="featured-card">
+                        <span class="priority-badge">五星</span>
+                        <h4><a href="articles/lun-chi-jiu-zhan.html">论持久战</a></h4>
+                        <p class="meta">毛泽东 · 1938年5月 · 军事战略</p>
+                        <p class="desc">面对强大的对手，如何在时间维度上规划斗争节奏</p>
+                    </article>
+                    <article class="featured-card">
+                        <span class="priority-badge">五星</span>
+                        <h4><a href="articles/shi-jian-lun.html">实践论</a></h4>
+                        <p class="meta">毛泽东 · 1937年7月 · 哲学基础</p>
+                        <p class="desc">认识与实践的辩证关系，知与行的统一</p>
+                    </article>
+                    <article class="featured-card">
+                        <span class="priority-badge">五星</span>
+                        <h4><a href="articles/mao-dun-lun.html">矛盾论</a></h4>
+                        <p class="meta">毛泽东 · 1937年8月 · 哲学基础</p>
+                        <p class="desc">唯物辩证法的核心，分析矛盾的主次与性质</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="masters-preview">
+                <h3 class="section-title">革命导师</h3>
+                <div class="masters-grid">
+                    <div class="master-card">
+                        <div class="master-avatar">
+                            <img src="images/masters/marx.jpg"
+                                 style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                        </div>
+                        <h4>马克思</h4>
+                        <p>科学社会主义创始人</p>
+                        <a href="masters/marx.html">查看著作 →</a>
+                    </div>
+                    <div class="master-card">
+                        <div class="master-avatar">
+                            <img src="images/masters/enges.jpg"
+                                 style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                        </div>
+                        <h4>恩格斯</h4>
+                        <p>马克思的亲密战友</p>
+                        <a href="masters/engels.html">查看著作 →</a>
+                    </div>
+                    <div class="master-card">
+                        <div class="master-avatar">
+                            <img src="images/masters/lenin.jpg"
+                                 style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                        </div>
+                        <h4>列宁</h4>
+                        <p>帝国主义时代马克思主义者</p>
+                        <a href="masters/lenin.html">查看著作 →</a>
+                    </div>
+                    <div class="master-card">
+                        <div class="master-avatar">
+                            <img src="images/masters/stalin.jpg"
+                                 style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                        </div>
+                        <h4>斯大林</h4>
+                        <p>苏联社会主义建设领导者</p>
+                        <a href="masters/stalin.html">查看著作 →</a>
+                    </div>
+                    <div class="master-card">
+                        <div class="master-avatar">
+                            <img src="images/masters/mao.jpg"
+                                 style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                        </div>
+                        <h4>毛泽东</h4>
+                        <p>马克思主义中国化开拓者</p>
+                        <a href="masters/mao.html">查看著作 →</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="toolkit-preview">
+                <h3 class="section-title">理论学习工具</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h4>📚 哲学原理</h4>
+                        <p>唯物辩证法、认识论、历史唯物主义核心概念</p>
+                        <a href="toolkit.html#philosophy">进入学习 →</a>
+                    </div>
+                    <div class="tool-card">
+                        <h4>⚔️ 斗争策略</h4>
+                        <p>统一战线、武装斗争、党的建设三大法宝</p>
+                        <a href="toolkit.html#strategy">进入学习 →</a>
+                    </div>
+                    <div class="tool-card">
+                        <h4>📖 经典导读</h4>
+                        <p>重要著作的论证结构和学习方法</p>
+                        <a href="toolkit.html#reading">进入学习 →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 理论拼图入口 -->
+            <section class="puzzle-entry" style="margin-top:48px;">
+                <div style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border-radius:12px;padding:36px 32px;text-align:center;border:1px solid #c53030;">
+                    <div style="font-size:2.5em;margin-bottom:12px;">🧩</div>
+                    <h3 style="color:#fbbf24;font-size:1.4em;margin-bottom:10px;">马哲理论拼图</h3>
+                    <p style="color:#cbd5e0;font-size:0.95em;margin-bottom:20px;max-width:480px;margin-left:auto;margin-right:auto;">
+                        经典著作不是孤立的——它们是一个有机整体。理论拼图将所有文章定位在马哲体系中，帮助你看清每篇文章的理论坐标与相互联系。
+                    </p>
+                    <div style="display:flex;justify-content:center;gap:24px;margin-bottom:20px;flex-wrap:wrap;">
+                        <span style="color:#90cdf4;font-size:0.88em;">哲学基础</span>
+                        <span style="color:#90cdf4;font-size:0.88em;">·</span>
+                        <span style="color:#fc8181;font-size:0.88em;">军事战略</span>
+                        <span style="color:#fc8181;font-size:0.88em;">·</span>
+                        <span style="color:#68d391;font-size:0.88em;">党的建设</span>
+                        <span style="color:#68d391;font-size:0.88em;">·</span>
+                        <span style="color:#fbd38d;font-size:0.88em;">政治理论</span>
+                        <span style="color:#fbd38d;font-size:0.88em;">·</span>
+                        <span style="color:#d6bcfa;font-size:0.88em;">文化文艺</span>
+                    </div>
+                    <a href="puzzle.html" style="display:inline-block;background:#c53030;color:white;padding:12px 32px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:1em;transition:background 0.2s;" onmouseover="this.style.background='#e53e3e'" onmouseout="this.style.background='#c53030'">进入理论拼图 →</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

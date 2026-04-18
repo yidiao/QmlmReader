@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国际共运 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 页面基础 */
+        .page-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #6a0000 100%);
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* 主布局 */
+        .main-layout {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        
+        /* 地图容器 */
+        .map-container {
+            background: linear-gradient(135deg, #1a3a4a 0%, #0d2b3e 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .map-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #ffd700;
+            letter-spacing: 1px;
+        }
+        
+        .world-map {
+            width: 100%;
+            max-height: 500px;
+            display: block;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        
+        /* 图例 */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ccc;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        
+        .legend-color.red { background: #dc2626; box-shadow: 0 0 6px #dc2626; }
+        .legend-color.gold { background: #fbbf24; }
+        .legend-color.orange { background: #f97316; }
+        .legend-color.yellow { background: #eab308; }
+        
+        /* 统计栏 */
+        .stats-bar {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #c41e3a;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* 年代筛选 */
+        .era-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .era-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid #c41e3a;
+            background: white;
+            color: #c41e3a;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .era-btn:hover, .era-btn.active {
+            background: #c41e3a;
+            color: white;
+        }
+        
+        /* 时间轴容器 */
+        .timeline-wrapper {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+        
+        /* 横向滚动时间轴 */
+        .timeline-horizontal {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1.2rem 0.5rem;
+            scroll-behavior: smooth;
+            min-height: 200px;
+            cursor: grab;
+            user-select: none;
+        }
+        
+        .timeline-horizontal:active {
+            cursor: grabbing;
+        }
+        
+        .timeline-horizontal::-webkit-scrollbar {
+            height: 12px;
+        }
+        
+        .timeline-horizontal::-webkit-scrollbar-track {
+            background: #e0e0e0;
+            border-radius: 6px;
+        }
+        
+        .timeline-horizontal::-webkit-scrollbar-thumb {
+            background: linear-gradient(to right, #c41e3a, #e63950);
+            border-radius: 6px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .timeline-horizontal::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to right, #a01830, #c41e3a);
+        }
+        
+        .timeline-card {
+            min-width: 280px;
+            max-width: 280px;
+            background: #fafafa;
+            border-radius: 14px;
+            padding: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .timeline-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .timeline-card.violent { border-left-color: #dc2626; }
+        .timeline-card.parliament { border-left-color: #fbbf24; }
+        .timeline-card.guerrilla { border-left-color: #f97316; }
+        
+        .card-year {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            color: #333;
+        }
+        
+        .card-location {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-desc {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.4;
+        }
+        
+        .card-tags {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .card-tag {
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+        }
+        
+        .card-tag.victory { background: #d4edda; color: #155724; }
+        .card-tag.defeat { background: #f8d7da; color: #721c24; }
+        .card-tag.ongoing { background: #fff3cd; color: #856404; }
+        
+        /* 详细时间轴 */
+        .detailed-timeline {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+        }
+        
+        .detailed-timeline h2 {
+            text-align: center;
+            color: #c41e3a;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #c41e3a, #ff6b6b, #c41e3a);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 0.3rem;
+            width: 16px;
+            height: 16px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #c41e3a;
+        }
+        
+        .timeline-item.major::before {
+            width: 24px;
+            height: 24px;
+            left: -2.65rem;
+            background: #ffd700;
+            box-shadow: 0 0 0 4px #c41e3a;
+        }
+        
+        .timeline-year {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .timeline-item.major .timeline-year {
+            background: #ffd700;
+            color: #8b0000;
+            font-size: 1.2rem;
+        }
+        
+        .timeline-content {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .timeline-content h3 {
+            color: #c41e3a;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .timeline-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content p {
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 0.8rem;
+        }
+        
+        .timeline-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            padding: 0.3rem 0.8rem;
+            background: #eee;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        
+        .tag.victory { background: #d4edda; color: #155724; }
+        .tag.defeat { background: #f8d7da; color: #721c24; }
+        .tag.ongoing { background: #fff3cd; color: #856404; }
+        
+        /* 黑夜模式 */
+        body.dark-mode .timeline-wrapper {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode .timeline-card {
+            background: #3a3a3a;
+        }
+        
+        body.dark-mode .card-title {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .card-desc {
+            color: #bbb;
+        }
+        
+        body.dark-mode .stats-bar {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode .era-btn {
+            background: #2a2a2a;
+            color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        
+        body.dark-mode .era-btn:hover, body.dark-mode .era-btn.active {
+            background: #ff6b6b;
+            color: #1a1a1a;
+        }
+        
+        body.dark-mode .timeline-content {
+            background: #3a3a3a;
+            border-color: #444;
+        }
+        
+        body.dark-mode .timeline-content h3 {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .timeline-content p {
+            color: #ccc;
+        }
+        
+        body.dark-mode .tag {
+            background: #444;
+            color: #ccc;
+        }
+        
+        body.dark-mode .detailed-timeline h2 {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .detailed-timeline {
+            border-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">首页</a>
+                <a href="articles.html">文章</a>
+                <a href="masters.html">导师</a>
+                <a href="toolkit.html">工具集</a>
+                <a href="gallery.html">文艺</a>
+                <a href="puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="international.html" class="active">🌍 国际共运</a>
+                <a href="rectify.html">正名</a>
+                <a href="about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 页面头部 -->
+        <section class="page-header">
+            <h1>🌍 国际共产主义运动</h1>
+            <p>1917-2026 | 世界范围内的社会主义革命与建设历程</p>
+        </section>
+
+        <div class="main-layout">
+            <!-- 统计信息 -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">社会主义国家</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">109</div>
+                    <div class="stat-label">年历史</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">大洲覆盖</div>
+                </div>
+            </div>
+
+            <!-- 年代筛选 -->
+            <div class="era-filter">
+                <button class="era-btn active" data-era="all">全部时期</button>
+                <button class="era-btn" data-era="1917-1945">革命浪潮 (1917-1945)</button>
+                <button class="era-btn" data-era="1945-1991">冷战对峙 (1945-1991)</button>
+                <button class="era-btn" data-era="1991-2026">后冷战时代 (1991-2026)</button>
+            </div>
+
+            <!-- 世界地图 -->
+            <div class="map-container">
+                <div class="map-title">🗺️ 世界社会主义运动热力图（边界模糊处理）</div>
+                <svg class="world-map" viewBox="0 0 1200 650" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="blurMap"><feGaussianBlur stdDeviation="1.2" /></filter>
+                        <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+                        <radialGradient id="gradRed" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff4444" /><stop offset="100%" stop-color="#dc2626" /></radialGradient>
+                        <radialGradient id="gradGold" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffd700" /><stop offset="100%" stop-color="#fbbf24" /></radialGradient>
+                    </defs>
+                    
+                    <!-- 海洋背景 -->
+                    <rect width="1200" height="650" fill="#0d2b3e" />
+                    
+                    <!-- 欧洲西部（英法德意等） -->
+                    <path filter="url(#blurMap)" id="region-europe-west" class="region" data-region="europe-west" data-type="parliament"
+                          d="M480,170 L520,150 L560,145 L590,155 L600,185 L590,215 L560,235 L520,240 L490,225 L475,200 L470,180 L480,170Z"
+                          fill="url(#gradGold)" opacity="0.75" />
+                    
+                    <!-- 欧洲东部/苏联 -->
+                    <path filter="url(#blurMap)" id="region-ussr" class="region" data-region="ussr" data-type="violent"
+                          d="M600,140 L680,120 L780,115 L880,125 L950,150 L960,190 L940,230 L880,250 L800,255 L720,245 L650,230 L610,210 L595,180 L600,140Z"
+                          fill="url(#gradRed)" opacity="0.9" />
+                    
+                    <!-- 东亚大陆 -->
+                    <path filter="url(#blurMap)" id="region-eastasia" class="region" data-region="eastasia" data-type="violent"
+                          d="M900,200 L960,180 L1020,190 L1070,220 L1085,260 L1070,300 L1030,320 L980,325 L935,315 L905,285 L895,250 L895,220 L900,200Z"
+                          fill="url(#gradRed)" opacity="0.95" />
+                    
+                    <!-- 朝鲜半岛 -->
+                    <path filter="url(#blurMap)" id="region-korea" class="region" data-region="korea" data-type="violent"
+                          d="M1055,175 L1075,170 L1090,195 L1085,225 L1070,230 L1055,215 L1045,195 L1055,175Z"
+                          fill="url(#gradRed)" opacity="0.9" />
+                    
+                    <!-- 日本 -->
+                    <path filter="url(#blurMap)" id="region-japan" class="region" data-region="japan" data-type="parliament"
+                          d="M1105,165 L1125,160 L1140,180 L1145,210 L1135,240 L1120,245 L1110,230 L1100,200 L1105,165Z"
+                          fill="url(#gradGold)" opacity="0.7" />
+                    
+                    <!-- 台湾岛 -->
+                    <path filter="url(#blurMap)" id="region-taiwan" class="region" data-region="taiwan" data-type="none"
+                          d="M1085,285 L1100,280 L1110,295 L1105,315 L1090,320 L1080,305 L1080,290 L1085,285Z"
+                          fill="#eab308" opacity="0.5" />
+                    
+                    <!-- 中南半岛 -->
+                    <path filter="url(#blurMap)" id="region-indochina" class="region" data-region="indochina" data-type="violent"
+                          d="M995,310 L1025,300 L1055,315 L1065,345 L1050,375 L1025,385 L1000,375 L985,350 L985,325 L995,310Z"
+                          fill="url(#gradRed)" opacity="0.9" />
+                    
+                    <!-- 印度次大陆 -->
+                    <path filter="url(#blurMap)" id="region-india" class="region" data-region="india" data-type="parliament"
+                          d="M845,300 L885,285 L925,300 L935,340 L925,380 L895,400 L865,390 L845,360 L830,330 L845,300Z"
+                          fill="url(#gradGold)" opacity="0.75" />
+                    
+                    <!-- 蒙古/中亚 -->
+                    <path filter="url(#blurMap)" id="region-centrasia" class="region" data-region="centrasia" data-type="none"
+                          d="M800,200 L860,185 L920,195 L935,230 L915,255 L870,260 L820,250 L795,230 L795,210 L800,200Z"
+                          fill="#eab308" opacity="0.45" />
+                    
+                    <!-- 中东/西亚 -->
+                    <path filter="url(#blurMap)" id="region-mideast" class="region" data-region="mideast" data-type="guerrilla"
+                          d="M700,260 L760,245 L820,260 L835,300 L815,335 L775,350 L735,340 L710,310 L700,280 L700,260Z"
+                          fill="#f97316" opacity="0.65" />
+                    
+                    <!-- 非洲大陆 -->
+                    <path filter="url(#blurMap)" id="region-africa" class="region" data-region="africa" data-type="guerrilla"
+                          d="M560,300 L620,270 L680,275 L730,300 L745,360 L725,420 L680,460 L620,465 L570,445 L545,400 L540,350 L560,300Z"
+                          fill="#f97316" opacity="0.7" />
+                    
+                    <!-- 北美洲 -->
+                    <path filter="url(#blurMap)" id="region-namerica" class="region" data-region="namerica" data-type="parliament"
+                          d="M100,80 L190,50 L290,45 L370,65 L405,105 L395,150 L360,185 L295,205 L220,200 L155,180 L115,145 L95,110 L100,80Z"
+                          fill="url(#gradGold)" opacity="0.75" />
+                    
+                    <!-- 中美洲 -->
+                    <path filter="url(#blurMap)" id="region-central" class="region" data-region="central" data-type="guerrilla"
+                          d="M300,195 L340,185 L360,205 L350,235 L320,245 L290,235 L285,215 L300,195Z"
+                          fill="#f97316" opacity="0.7" />
+                    
+                    <!-- 加勒比/古巴 -->
+                    <path filter="url(#blurMap)" id="region-caribbean" class="region" data-region="caribbean" data-type="violent"
+                          d="M355,220 L385,210 L405,230 L395,260 L365,270 L340,260 L335,240 L355,220Z"
+                          fill="url(#gradRed)" opacity="0.9" />
+                    
+                    <!-- 南美洲 -->
+                    <path filter="url(#blurMap)" id="region-samerica" class="region" data-region="samerica" data-type="violent"
+                          d="M330,270 L390,250 L450,260 L485,305 L495,370 L465,430 L410,465 L350,460 L315,420 L305,365 L310,315 L330,270Z"
+                          fill="url(#gradRed)" opacity="0.85" />
+                    
+                    <!-- 澳大利亚 -->
+                    <path filter="url(#blurMap)" id="region-oceania" class="region" data-region="oceania" data-type="parliament"
+                          d="M920,430 L980,410 L1030,420 L1050,455 L1030,490 L980,500 L935,490 L915,460 L920,430Z"
+                          fill="url(#gradGold)" opacity="0.65" />
+                    
+                    <!-- 标注文字 -->
+                    <text x="540" y="190" fill="#ffd" font-size="11" opacity="0.7">西欧</text>
+                    <text x="720" y="170" fill="#ffd" font-size="10" opacity="0.7">苏联</text>
+                    <text x="960" y="235" fill="#ffd" font-size="10" opacity="0.8">东亚</text>
+                    <text x="1075" y="195" fill="#ffd" font-size="9" opacity="0.7">日本</text>
+                    <text x="870" y="340" fill="#ffd" font-size="10" opacity="0.7">印度</text>
+                    <text x="640" y="370" fill="#ffd" font-size="10" opacity="0.7">非洲</text>
+                    <text x="210" y="120" fill="#ffd" font-size="10" opacity="0.7">北美</text>
+                    <text x="380" y="360" fill="#ffd" font-size="10" opacity="0.7">南美</text>
+                    <text x="370" y="240" fill="#ffd" font-size="9" opacity="0.8">古巴</text>
+                </svg>
+                
+                <div class="legend">
+                    <div class="legend-item"><div class="legend-color red"></div><span>暴力革命/社会主义政权</span></div>
+                    <div class="legend-item"><div class="legend-color gold"></div><span>议会斗争/左翼执政</span></div>
+                    <div class="legend-item"><div class="legend-color orange"></div><span>游击战/武装斗争</span></div>
+                    <div class="legend-item"><div class="legend-color yellow"></div><span>未形成大规模运动</span></div>
+                </div>
+            </div>
+
+            <!-- 横向时间轴 -->
+            <div class="timeline-wrapper" style="margin-top: 0; border-radius: 0 0 20px 20px;">
+                <div class="timeline-horizontal" id="timelineScroll"></div>
+            </div>
+
+            <!-- 详细时间轴 -->
+            <div class="detailed-timeline">
+                <h2>📜 运动历史详览</h2>
+                <div class="timeline" id="detailedTimeline"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 完整历史事件数据
+        const eventsData = [
+            { year: "1917", title: "十月革命胜利", location: "俄国 · 彼得格勒", desc: "列宁领导的布尔什维克党发动武装起义，推翻资产阶级临时政府，建立世界上第一个社会主义国家。", region: "ussr", type: "violent", era: "1917-1945", tags: ["胜利", "政权建立", "世界首创"], major: true },
+            { year: "1918-1922", title: "苏俄内战与外国武装干涉", location: "俄国全境", desc: "14个帝国主义国家武装干涉苏俄，支持白卫军叛乱。红军击败白卫军和外国干涉军，保卫了苏维埃政权。", region: "ussr", type: "violent", era: "1917-1945", tags: ["胜利", "反干涉"] },
+            { year: "1919", title: "共产国际（第三国际）成立", location: "苏联 · 莫斯科", desc: "列宁倡议成立共产国际，统一领导世界各国共产党的革命运动。来自21个国家的35个政党和组织参加成立大会。", region: "ussr", type: "violent", era: "1917-1945", tags: ["国际组织", "理论传播"] },
+            { year: "1921", title: "中国共产党成立", location: "中国 · 上海", desc: "中国共产党第一次全国代表大会召开，中国革命进入新阶段。", region: "eastasia", type: "violent", era: "1917-1945", tags: ["建党", "革命起点"] },
+            { year: "1922", title: "苏维埃社会主义共和国联盟成立", location: "苏联", desc: "俄罗斯、乌克兰、白俄罗斯、外高加索联邦签署联盟条约，成立世界上第一个多民族社会主义联邦国家。", region: "ussr", type: "violent", era: "1917-1945", tags: ["胜利", "国家联盟", "制度创新"], major: true },
+            { year: "1936-1939", title: "西班牙内战", location: "西班牙", desc: "西班牙人民阵线政府与佛朗哥法西斯叛军的战争。国际纵队由54个国家约4万名志愿者组成支援共和国。", region: "europe-west", type: "guerrilla", era: "1917-1945", tags: ["失败", "国际纵队", "反法西斯"] },
+            { year: "1945-1949", title: "东欧社会主义政权建立", location: "东欧多国", desc: "波兰、捷克斯洛伐克、匈牙利、罗马尼亚、保加利亚、阿尔巴尼亚、南斯拉夫等国相继建立人民民主政权。", region: "europe-west", type: "violent", era: "1945-1991", tags: ["胜利", "阵营形成", "欧洲扩展"], major: true },
+            { year: "1945-1954", title: "朝鲜、越南民主共和国成立", location: "朝鲜、越南", desc: "1948年朝鲜民主主义人民共和国成立，1945年越南民主共和国成立。亚洲社会主义力量壮大。", region: "korea", type: "violent", era: "1945-1991", tags: ["胜利", "亚洲扩展", "反帝斗争"], major: true },
+            { year: "1949", title: "中华人民共和国成立", location: "中国", desc: "中国共产党领导的新民主主义革命胜利，中华人民共和国成立，占世界人口四分之一的东方大国走上社会主义道路。", region: "eastasia", type: "violent", era: "1945-1991", tags: ["胜利", "革命胜利", "亚洲扩展"], major: true },
+            { year: "1953", title: "东柏林工人起义", location: "东德 · 东柏林", desc: "东柏林建筑工人因不满劳动定额提高而罢工，蔓延至全国。苏联驻军介入平息事态。", region: "europe-west", type: "violent", era: "1945-1991", tags: ["工人运动", "社会矛盾"] },
+            { year: "1956", title: "匈牙利十月事件", location: "匈牙利", desc: "因反对苏联控制和要求改革而爆发大规模示威，后演变为武装冲突。苏联两次军事干预平息事态。", region: "europe-west", type: "violent", era: "1945-1991", tags: ["失败", "改革失败", "苏东关系"] },
+            { year: "1959", title: "古巴革命胜利", location: "古巴", desc: "菲德尔·卡斯特罗领导的'七二六运动'推翻巴蒂斯塔独裁政权，建立革命政府。古巴成为西半球唯一的社会主义国家。", region: "caribbean", type: "violent", era: "1945-1991", tags: ["胜利", "革命胜利", "美洲突破", "反美斗争"], major: true },
+            { year: "1968", title: "布拉格之春", location: "捷克斯洛伐克", desc: "杜布切克领导'带有人性面孔的社会主义'改革，推行政治经济自由化。苏联及华约国家军事入侵，改革夭折。", region: "europe-west", type: "violent", era: "1945-1991", tags: ["失败", "改革中断", "苏东矛盾"] },
+            { year: "1970-1973", title: "智利人民团结政府", location: "智利", desc: "社会党人阿连德通过民主选举当选总统，推行'智利式社会主义'道路。1973年皮诺切特军事政变，阿连德殉职。", region: "samerica", type: "parliament", era: "1945-1991", tags: ["失败", "政变中断", "和平过渡", "民主社会主义"] },
+            { year: "1975", title: "越南统一", location: "越南", desc: "北越军队攻占西贡，越南战争结束，南北统一，建立越南社会主义共和国。", region: "indochina", type: "violent", era: "1945-1991", tags: ["胜利", "国家统一", "抗美胜利"], major: true },
+            { year: "1979", title: "尼加拉瓜桑地诺革命", location: "尼加拉瓜", desc: "桑地诺民族解放阵线推翻索摩查独裁政权，建立民族复兴政府。实行土地改革、国有化等左翼政策。", region: "central", type: "guerrilla", era: "1945-1991", tags: ["胜利", "革命胜利", "左翼政权"] },
+            { year: "1989-1991", title: "东欧剧变与苏联解体", location: "东欧、苏联", desc: "波兰、匈牙利、东德、捷克斯洛伐克、罗马尼亚、保加利亚等国政权更迭，共产党失去执政地位。1991年苏联解体。", region: "ussr", type: "violent", era: "1991-2026", tags: ["失败", "阵营瓦解", "历史转折"], major: true },
+            { year: "1994", title: "萨帕塔民族解放军起义", location: "墨西哥 · 恰帕斯州", desc: "以'副司令马科斯'为发言人的萨帕塔民族解放军发动起义，争取印第安人权利和社会正义。", region: "central", type: "guerrilla", era: "1991-2026", tags: ["进行中", "持续抗争", "新左翼", "原住民权利"] },
+            { year: "1998-2013", title: "委内瑞拉'玻利瓦尔革命'", location: "委内瑞拉", desc: "乌戈·查韦斯当选总统，推行'21世纪社会主义'，实施石油国有化、土地改革、社会计划等。", region: "samerica", type: "violent", era: "1991-2026", tags: ["胜利", "左翼执政", "21世纪社会主义", "进行中"], major: true },
+            { year: "2006-2011", title: "尼泊尔联邦民主共和国成立", location: "尼泊尔", desc: "尼泊尔共产党（毛主义）结束十年人民战争，通过和平谈判废除君主制，建立共和国。", region: "india", type: "guerrilla", era: "1991-2026", tags: ["胜利", "共和建立", "毛主义", "和平过渡"] },
+            { year: "2006-2019", title: "拉美'粉红浪潮'", location: "拉丁美洲多国", desc: "巴西卢拉、阿根廷基什内尔、玻利维亚莫拉莱斯、厄瓜多尔科雷亚等左翼领导人相继执政。", region: "samerica", type: "parliament", era: "1991-2026", tags: ["胜利", "左翼执政", "区域浪潮"] },
+            { year: "2020-2026", title: "拉美'第二次粉红浪潮'", location: "拉丁美洲", desc: "墨西哥洛佩斯、阿根廷费尔南德斯、智利博里奇、哥伦比亚佩特罗、巴西卢拉等左翼领导人相继执政。", region: "samerica", type: "parliament", era: "1991-2026", tags: ["胜利", "左翼复兴", "进行中", "持续执政"] }
+        ];
+
+        const regionColors = {
+            violent: "#dc2626",
+            parliament: "#fbbf24",
+            guerrilla: "#f97316",
+            none: "#eab308"
+        };
+
+        const tagClasses = {
+            "胜利": "victory",
+            "失败": "defeat",
+            "进行中": "ongoing"
+        };
+
+        // 渲染横向时间轴卡片
+        function renderTimelineCards(filter = 'all') {
+            const container = document.getElementById('timelineScroll');
+            const filtered = eventsData.filter(e => filter === 'all' || e.era === filter);
+            
+            container.innerHTML = filtered.map(ev => {
+                const tagsHtml = ev.tags.map(tag => {
+                    const tagClass = tagClasses[tag] || '';
+                    return `<span class="card-tag ${tagClass}">${tag}</span>`;
+                }).join('');
+                
+                return `
+                    <div class="timeline-card ${ev.type}" data-region="${ev.region}" data-year="${ev.year}">
+                        <div class="card-year">${ev.year}</div>
+                        <div class="card-title">${ev.title}</div>
+                        <div class="card-location">📍 ${ev.location}</div>
+                        <div class="card-desc">${ev.desc.substring(0, 50)}...</div>
+                        <div class="card-tags">${tagsHtml}</div>
+                    </div>
+                `;
+            }).join('');
+
+            // 添加点击事件 - 点击高亮地图对应区域，并根据事件年份更新地图颜色
+            document.querySelectorAll('.timeline-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const region = card.dataset.region;
+                    const year = parseInt(card.dataset.year, 10);
+                    // 根据年份映射到时期
+                    let era = '1991-2026';
+                    if (year < 1945) era = '1917-1945';
+                    else if (year < 1991) era = '1945-1991';
+                    updateMapForEra(era);
+                    highlightRegion(region);
+                });
+            });
+        }
+
+        // 渲染详细时间轴
+        function renderDetailedTimeline(filter = 'all') {
+            const container = document.getElementById('detailedTimeline');
+            const filtered = eventsData.filter(e => filter === 'all' || e.era === filter);
+            
+            container.innerHTML = filtered.map(ev => {
+                const majorClass = ev.major ? 'major' : '';
+                const tagsHtml = ev.tags.map(tag => {
+                    const tagClass = tagClasses[tag] || '';
+                    return `<span class="tag ${tagClass}">${tag}</span>`;
+                }).join('');
+                
+                return `
+                    <div class="timeline-item ${majorClass}" data-year="${ev.year}" data-region="${ev.region}">
+                        <span class="timeline-year">${ev.year}</span>
+                        <div class="timeline-content">
+                            <h3>${ev.title}</h3>
+                            <div class="timeline-location">📍 ${ev.location}</div>
+                            <p>${ev.desc}</p>
+                            <div class="timeline-tags">${tagsHtml}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 高亮地图区域
+        function highlightRegion(regionId) {
+            document.querySelectorAll('.region').forEach(r => {
+                r.setAttribute('stroke', 'none');
+                r.setAttribute('stroke-width', '0');
+                r.removeAttribute('filter');
+            });
+            const target = document.getElementById('region-' + regionId);
+            if (target) {
+                target.setAttribute('stroke', '#ffffff');
+                target.setAttribute('stroke-width', '3');
+                target.setAttribute('filter', 'url(#glow)');
+                setTimeout(() => {
+                    target.setAttribute('stroke', 'none');
+                    target.removeAttribute('filter');
+                }, 2000);
+            }
+        }
+
+        // 动态地图配置 - 各区域在不同时期的状态
+        const regionTimelineConfig = {
+            'ussr': {
+                '1917-1945': { type: 'violent', label: '苏维埃俄国/苏联' },
+                '1945-1991': { type: 'violent', label: '苏联' },
+                '1991-2026': { type: 'none', label: '后苏联地区' }
+            },
+            'europe-west': {
+                '1917-1945': { type: 'parliament', label: '西欧' },
+                '1945-1991': { type: 'violent', label: '东欧社会主义阵营' },
+                '1991-2026': { type: 'parliament', label: '东欧' }
+            },
+            'eastasia': {
+                '1917-1945': { type: 'guerrilla', label: '中国（革命中）' },
+                '1945-1991': { type: 'violent', label: '中华人民共和国' },
+                '1991-2026': { type: 'violent', label: '中国' }
+            },
+            'korea': {
+                '1917-1945': { type: 'none', label: '朝鲜' },
+                '1945-1991': { type: 'violent', label: '朝鲜民主主义人民共和国' },
+                '1991-2026': { type: 'violent', label: '朝鲜' }
+            },
+            'indochina': {
+                '1917-1945': { type: 'guerrilla', label: '越南（抗法）' },
+                '1945-1991': { type: 'violent', label: '越南民主共和国/统一越南' },
+                '1991-2026': { type: 'violent', label: '越南' }
+            },
+            'caribbean': {
+                '1917-1945': { type: 'none', label: '古巴' },
+                '1945-1991': { type: 'violent', label: '古巴（社会主义）' },
+                '1991-2026': { type: 'violent', label: '古巴' }
+            },
+            'samerica': {
+                '1917-1945': { type: 'parliament', label: '南美' },
+                '1945-1991': { type: 'parliament', label: '南美（智利等）' },
+                '1991-2026': { type: 'violent', label: '南美（左翼执政）' }
+            },
+            'central': {
+                '1917-1945': { type: 'none', label: '中美洲' },
+                '1945-1991': { type: 'guerrilla', label: '尼加拉瓜等' },
+                '1991-2026': { type: 'guerrilla', label: '萨帕塔等' }
+            }
+        };
+
+        const regionColorsDynamic = {
+            violent: { fill: 'url(#gradRed)', opacity: '0.9' },
+            parliament: { fill: 'url(#gradGold)', opacity: '0.75' },
+            guerrilla: { fill: '#f97316', opacity: '0.7' },
+            none: { fill: '#eab308', opacity: '0.4' }
+        };
+
+        // 各区域的历史峰值状态（全部时期时显示，代表该地区革命运动最鼎盛时期的状态）
+        const regionPeakState = {
+            'ussr':         'violent',    // 苏联：峰值为社会主义政权
+            'eastasia':     'violent',    // 东亚（中国）：峰值为新中国成立
+            'europe-west':  'parliament', // 西欧：峰值为左翼执政
+            'korea':        'violent',    // 朝鲜：社会主义政权
+            'japan':        'parliament', // 日本：左翼
+            'taiwan':       'none',
+            'indochina':    'violent',    // 越南：社会主义
+            'india':        'parliament',
+            'centrasia':    'none',
+            'mideast':      'guerrilla',
+            'africa':       'guerrilla',
+            'namerica':     'parliament',
+            'central':      'guerrilla',
+            'caribbean':    'violent',    // 古巴：社会主义
+            'samerica':     'violent',    // 南美：左翼执政/革命
+            'oceania':      'parliament'
+        };
+
+        // 更新地图显示 - 根据年代筛选动态改变区域颜色
+        function updateMapForEra(era) {
+            if (era === 'all') {
+                // 全部时期 - 显示各区域历史峰值状态
+                Object.keys(regionTimelineConfig).forEach(regionId => {
+                    const region = document.getElementById('region-' + regionId);
+                    if (region) {
+                        const peakType = regionPeakState[regionId] || 'none';
+                        const colors = regionColorsDynamic[peakType];
+                        region.setAttribute('fill', colors.fill);
+                        region.setAttribute('opacity', colors.opacity);
+                    }
+                });
+                return;
+            }
+
+            Object.keys(regionTimelineConfig).forEach(regionId => {
+                const region = document.getElementById('region-' + regionId);
+                if (region && regionTimelineConfig[regionId][era]) {
+                    const state = regionTimelineConfig[regionId][era];
+                    const colors = regionColorsDynamic[state.type];
+                    region.setAttribute('fill', colors.fill);
+                    region.setAttribute('opacity', colors.opacity);
+                }
+            });
+        }
+
+        // 年代筛选
+        document.querySelectorAll('.era-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const era = this.dataset.era;
+                document.querySelectorAll('.era-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderTimelineCards(era);
+                renderDetailedTimeline(era);
+                updateMapForEra(era);
+            });
+        });
+
+        // 地图区域点击
+        document.querySelectorAll('.region').forEach(region => {
+            region.addEventListener('click', () => {
+                highlightRegion(region.id.replace('region-', ''));
+            });
+        });
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+
+        // 初始化渲染
+        renderTimelineCards('all');
+        renderDetailedTimeline('all');
+        updateMapForEra('all');
+
+        // 时间轴拖拽滚动功能
+        (function initDragScroll() {
+            const slider = document.getElementById('timelineScroll');
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.classList.add('active');
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
+
+            slider.addEventListener('mouseleave', () => {
+                isDown = false;
+                slider.classList.remove('active');
+            });
+
+            slider.addEventListener('mouseup', () => {
+                isDown = false;
+                slider.classList.remove('active');
+            });
+
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2; // 拖拽速度倍数
+                slider.scrollLeft = scrollLeft - walk;
+            });
+
+            // 触摸设备支持
+            slider.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            }, { passive: true });
+
+            slider.addEventListener('touchmove', (e) => {
+                const x = e.touches[0].pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2;
+                slider.scrollLeft = scrollLeft - walk;
+            }, { passive: true });
+        })();
+    </script>
+</body>
+</html>

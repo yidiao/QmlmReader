@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苏联宣传海报 | 文艺 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #8b1a1a 0%, #1a1a2e 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .page-header::before {
+                content: '☭';
+                position: absolute;
+                font-size: 18rem;
+                opacity: 0.04;
+                top: -4rem;
+                right: 4rem;
+                line-height: 1;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .page-header p {
+                font-size: 1.05rem;
+                opacity: 0.88;
+            }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #8b1a1a;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+            .back-link:hover {
+                text-decoration: underline;
+            }
+
+        .stats-bar {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8b1a1a;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .filter-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .filter-section {
+            margin-bottom: 1rem;
+        }
+
+            .filter-section:last-child {
+                margin-bottom: 0;
+            }
+
+        .filter-label {
+            font-weight: bold;
+            color: #8b1a1a;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.4rem 1rem;
+            border: 2px solid #e0e0e0;
+            background: white;
+            color: #666;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+            .filter-btn:hover {
+                border-color: #8b1a1a;
+                color: #8b1a1a;
+            }
+
+            .filter-btn.active {
+                background: #8b1a1a;
+                border-color: #8b1a1a;
+                color: white;
+            }
+
+        .search-box {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+            .search-box:focus {
+                border-color: #8b1a1a;
+            }
+
+        .result-count {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.25s;
+            cursor: pointer;
+        }
+
+            .gallery-item:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            }
+
+        .gallery-item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f0f0f0;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+            .gallery-item-image.loaded {
+                opacity: 1;
+            }
+
+            .gallery-item-image.lazy-placeholder {
+                background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+                background-size: 200% 100%;
+                animation: shimmer 1.5s infinite;
+            }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .gallery-item-info {
+            padding: 0.8rem 1rem;
+        }
+
+        .gallery-item-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 0.4rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .gallery-item-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .gallery-item-cat {
+            padding: 0.15rem 0.5rem;
+            background: #fff0f0;
+            color: #8b1a1a;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .load-more {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        .load-more-btn {
+            padding: 0.8rem 2.5rem;
+            background: #8b1a1a;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+            .load-more-btn:hover {
+                background: #5c0f0f;
+                transform: scale(1.04);
+            }
+
+            .load-more-btn:disabled {
+                background: #ccc;
+                cursor: default;
+                transform: none;
+            }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+            .modal.active {
+                display: flex;
+            }
+
+        .modal-inner {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-image {
+            max-width: 88vw;
+            max-height: 78vh;
+            object-fit: contain;
+            border-radius: 6px;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+            .modal-image.loaded {
+                opacity: 1;
+            }
+
+            .modal-image.loading {
+                background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+                background-size: 200% 100%;
+                animation: shimmer 1.5s infinite;
+                min-width: 300px;
+                min-height: 300px;
+            }
+
+        .modal-info {
+            color: white;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 1.1rem;
+        }
+
+        .modal-meta {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 0.3rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -2.5rem;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+
+        .modal-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: none;
+            padding: 1rem 0.8rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+            .modal-nav:hover {
+                background: rgba(255,255,255,0.3);
+            }
+
+        .modal-prev {
+            left: 1rem;
+        }
+
+        .modal-next {
+            right: 1rem;
+        }
+
+        .modal-counter {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+
+        body.dark-mode .filter-bar,
+        body.dark-mode .gallery-item {
+            background: #2a2a2a;
+        }
+
+        body.dark-mode .stats-bar {
+            background: #2a2a2a;
+        }
+
+        body.dark-mode .filter-btn {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #ccc;
+        }
+
+            body.dark-mode .filter-btn:hover {
+                border-color: #e06060;
+                color: #e06060;
+            }
+
+            body.dark-mode .filter-btn.active {
+                background: #8b1a1a;
+                border-color: #8b1a1a;
+                color: white;
+            }
+
+        body.dark-mode .gallery-item-title {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .gallery-item-meta {
+            color: #888;
+        }
+
+        body.dark-mode .gallery-item-cat {
+            background: #3a1a1a;
+        }
+
+        body.dark-mode .filter-label {
+            color: #e06060;
+        }
+
+        body.dark-mode .back-link {
+            color: #e06060;
+        }
+
+        body.dark-mode .search-box {
+            background: #2a2a2a;
+            color: #e0e0e0;
+            border-color: #444;
+        }
+
+        body.dark-mode .result-count {
+            color: #777;
+        }
+
+        body.dark-mode .stat-label {
+            color: #aaa;
+        }
+
+        body.dark-mode .stat-number {
+            color: #e06060;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html" class="active">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>苏联宣传海报图库</h1>
+            <p>1917—1991 · 苏维埃时代的视觉史诗</p>
+            <p style="font-size:0.9rem;opacity:0.7;margin-top:0.3rem;">卫国战争 · 太空探索 · 社会主义建设 · 反帝国际主义</p>
+            <p style="font-size:0.9rem;opacity:0.7;margin-top:0.3rem;">图片纯笔者手工整理 如有纰漏烦请指正</p>
+        </section>
+
+        <div class="gallery-container">
+            <a href="../gallery.html" class="back-link">← 返回文艺首页</a>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number" id="statTotal">201</div>
+                    <div class="stat-label">海报总数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">主题分类</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1917—1991</div>
+                    <div class="stat-label">年代跨度</div>
+                </div>
+            </div>
+
+            <div class="filter-bar">
+                <div class="filter-section">
+                    <span class="filter-label">主题分类</span>
+                    <div class="filter-buttons" id="catFilterButtons">
+                        <!-- 分类按钮由JS动态生成 -->
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <span class="filter-label">搜索标题</span>
+                    <input type="text" class="search-box" id="searchInput" placeholder="输入关键词，如\" 列宁\"、\"卫国战争\"…">
+                </div>
+            </div>
+
+            <div class="result-count" id="resultCount">共 201 张</div>
+
+            <div class="gallery-grid" id="galleryGrid"></div>
+
+            <div class="load-more">
+                <button class="load-more-btn" id="loadMoreBtn">加载更多</button>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal" id="imageModal">
+        <button class="modal-nav modal-prev" onclick="modalNav(-1)">&#10094;</button>
+        <div class="modal-inner">
+            <button class="modal-close" onclick="closeModal()" title="关闭(ESC)">&times;</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <div class="modal-title" id="modalTitle"></div>
+                <div class="modal-meta" id="modalMeta"></div>
+                <div class="modal-counter" id="modalCounter"></div>
+            </div>
+        </div>
+        <button class="modal-nav modal-next" onclick="modalNav(1)">&#10095;</button>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // ============================================================
+        //  图片数据 - 所有文件名均为书名号《》格式
+        // ============================================================
+        const BASE = '../assets/soviet-posters/';
+
+        // 分类显示名和图标
+        const CATEGORIES = {
+            "卫国战争": { label: "卫国战争", icon: "⚔️", count: 65 },
+            "太空探索": { label: "太空探索", icon: "🚀", count: 25 },
+            "社会宣传": { label: "社会宣传", icon: "📢", count: 23 },
+            "和平建设": { label: "和平建设", icon: "🏗️", count: 17 },
+            "十月革命": { label: "十月革命", icon: "🎗️", count: 16 },
+            "反帝国际主义": { label: "反帝国际主义", icon: "✊", count: 14 },
+            "国内战争": { label: "国内战争", icon: "🔴", count: 11 },
+            "社会主义": { label: "社会主义", icon: "☭", count: 10 },
+            "领袖人物": { label: "领袖人物", icon: "👤", count: 9 },
+            "共青团": { label: "共青团", icon: "🌟", count: 4 },
+            "其他": { label: "其他", icon: "📌", count: 7 }
+        };
+
+        // 原始数据 - 每条 { cat, filename }
+        const RAW_DATA = [
+            // 卫国战争（66）
+            { cat: "卫国战争", filename: "《一切为了前线》.jpg" },
+            { cat: "卫国战争", filename: "《喝第聂伯河的水清除法西斯污秽》_瓦西里·巴伊科夫.jpg" },
+            { cat: "卫国战争", filename: "《前进，博加蒂尔，为了祖国》.jpg" },
+            { cat: "卫国战争", filename: "《我们将在柏林上空升起胜利旗帜！》.jpg" },
+            { cat: "卫国战争", filename: "《我们有一个目标——柏林》.jpg" },
+            { cat: "卫国战争", filename: "《“弗里茨” 的蜕变》.jpg" },
+            { cat: "卫国战争", filename: "《为了祖国、荣誉与自由！》.jpg" },
+            { cat: "卫国战争", filename: "《为了祖国母亲！》.jpg" },
+            { cat: "卫国战争", filename: "《为了苏联祖国，所有民族的儿子都投入战斗》.jpg" },
+            { cat: "卫国战争", filename: "《保卫莫斯科！》.jpg" },
+            { cat: "卫国战争", filename: "《光荣属于乌克兰的解放者！消灭德国侵略者！》.jpg" },
+            { cat: "卫国战争", filename: "《光荣属于战斗中的女战友们！》.jpg" },
+            { cat: "卫国战争", filename: "《光荣属于苏联炮兵！》.jpg" },
+            { cat: "卫国战争", filename: "《共青团万岁！》.jpg" },
+            { cat: "卫国战争", filename: "《加入ДОСАРМ的排雷小组！》.jpg" },
+            { cat: "卫国战争", filename: "《动员一切力量保卫列宁格勒！》.jpg" },
+            { cat: "卫国战争", filename: "《同盟国为自由而战》.jpg" },
+            { cat: "卫国战争", filename: "《在陆地和海上消灭法西斯！》.jpg" },
+            { cat: "卫国战争", filename: "《希特勒想吃？我们来喂他！》.jpg" },
+            { cat: "卫国战争", filename: "《我们必胜》.jpg" },
+            { cat: "卫国战争", filename: "《我们英勇战斗，奋不顾身 —— 苏沃洛夫的孙子，恰帕耶夫的儿子》.jpg" },
+            { cat: "卫国战争", filename: "《我等你，解放者战士！》.jpg" },
+            { cat: "卫国战争", filename: "《敌人的坦克无法通行！》.jpg" },
+            { cat: "卫国战争", filename: "《斩断恶龙之爪》.jpg" },
+            { cat: "卫国战争", filename: "《死亡归于法西斯德国侵略者！》.jpg" },
+            { cat: "卫国战争", filename: "《消灭法西斯毒蛇！》.jpg" },
+            { cat: "卫国战争", filename: "《消灭法西斯！》.jpg" },
+            { cat: "卫国战争", filename: "《用钢铁粉碎法西斯》.jpg" },
+            { cat: "卫国战争", filename: "《白俄罗斯兄弟之吻》（个人翻译）.jpg" },
+            { cat: "卫国战争", filename: "《等我胜利归来！》.jpg" },
+            { cat: "卫国战争", filename: "《素食食人魔，或一枚奖章的两面》.jpg" },
+            { cat: "卫国战争", filename: "《血债血偿，以死抵死！》.jpg" },
+            { cat: "卫国战争", filename: "《铁锤的每一次挥动，都能打击敌人》.jpg" },
+            { cat: "卫国战争", filename: "《防空兵同志们，打击法西斯秃鹫！》.jpg" },
+            { cat: "卫国战争", filename: "《你做了什么来帮助前线》.jpg" },
+            { cat: "卫国战争", filename: "《你给了我们生命》.jpg" },
+            { cat: "卫国战争", filename: "《俄罗斯人总是打败德国人》.jpg" },
+            { cat: "卫国战争", filename: "《保家卫国，全民动员》.jpg" },
+            { cat: "卫国战争", filename: "《兄弟们，挺身复仇吧》.jpg" },  
+            { cat: "卫国战争", filename: "《关于如何制作肉排以及将野味叉住》.jpg" },
+            { cat: "卫国战争", filename: "《冲啊，儿子》.jpg" },
+            { cat: "卫国战争", filename: "《凡持剑入侵者，必死于剑下》.jpg" },
+            { cat: "卫国战争", filename: "《反法西斯侵略者同盟阵线万岁！》.jpg" },
+            { cat: "卫国战争", filename: "《向反法西斯战士致敬》.jpg" },
+            { cat: "卫国战争", filename: "《向德国狗复仇》.jpg" },
+            { cat: "卫国战争", filename: "《向西方冲啊，我们的胜利之路》.jpg" },
+            { cat: "卫国战争", filename: "《向西！》.jpg" },
+            { cat: "卫国战争", filename: "《大家来援助法西斯恐怖的受害者》.jpg" },
+            { cat: "卫国战争", filename: "《希特勒的最后一次赌博》.jpg" },
+            { cat: "卫国战争", filename: "《成为英雄》.jpg" },
+            { cat: "卫国战争", filename: "《我们将保卫列宁的城市！》.jpg" },
+            { cat: "卫国战争", filename: "《我们的事业是正义的，敌人必败！》.jpg" },
+            { cat: "卫国战争", filename: "《我们要无情地消灭法西斯》.jpg" },
+            { cat: "卫国战争", filename: "《战士，乌克兰在等你！》.jpg" },
+            { cat: "卫国战争", filename: "《战斗与判决》.jpg" },
+            { cat: "卫国战争", filename: "《战斗至死》.jpg" },
+            { cat: "卫国战争", filename: "《打到西方去！》.jpg" },
+            { cat: "卫国战争", filename: "《欧洲将获得自由》.jpg" },
+            { cat: "卫国战争", filename: "《每一颗子弹 ，消灭一个德国兵》.jpg" },
+            { cat: "卫国战争", filename: "《波罗的海舰队水手在1944年六月击沉了100艘法西斯船只》.jpg" },
+            { cat: "卫国战争", filename: "《献给苏维埃的战士们——战胜法西斯野兽的胜利者！》.jpg" },
+            { cat: "卫国战争", filename: "《祖国在召唤》.jpg" },
+            { cat: "卫国战争", filename: "《胜利万岁！》.jpg" },
+            { cat: "卫国战争", filename: "《荣耀归于红军》.jpg" },
+            { cat: "卫国战争", filename: "《金属越多，武器越多》.jpg" },
+            // 太空探索（25）
+            { cat: "太空探索", filename: "《20 世纪，火箭飞向星辰；列车驶向远方》.jpg" },
+            { cat: "太空探索", filename: "《为了共产主义的光荣！》.jpg" },
+            { cat: "太空探索", filename: "《为了和平与进步！》.jpg" },
+            { cat: "太空探索", filename: "《以列宁的名义！》.jpg" },
+            { cat: "太空探索", filename: "《光荣属于征服宇宙的人们！》.jpg" },
+            { cat: "太空探索", filename: "《光荣属于苏联人民，宇宙的开拓者！》.jpg" },
+            { cat: "太空探索", filename: "《光荣属于苏联科技工作者！》.jpg" },
+            { cat: "太空探索", filename: "《十月的儿子们，是宇宙的先锋！》.jpg" },
+            { cat: "太空探索", filename: "《征服宇宙！》.jpg" },
+            { cat: "太空探索", filename: "《我们在宇宙的胜利，是苏维埃国家的赞歌！》.jpg" },
+            { cat: "太空探索", filename: "《月球 9 号报告：任务完成！》.jpg" },
+            { cat: "太空探索", filename: "《来苏联旅游：世界首位宇航员的国度》.jpg" },
+            { cat: "太空探索", filename: "《用劳动巩固祖国的力量！》.jpg" },
+            { cat: "太空探索", filename: "《祖国！你第一个在地球上点燃了进步与和平的星星。》.jpg" },
+            { cat: "太空探索", filename: "《童话变成了现实》.jpg" },
+            { cat: "太空探索", filename: "《自豪吧，苏联人，你为地球开启星辰之路》.jpg" },
+            { cat: "太空探索", filename: "《苏联 —— 航天事业的故乡》.jpg" },
+            { cat: "太空探索", filename: "《苏联火箭技术：过去、现在与未来》.jpg" },
+            { cat: "太空探索", filename: "《通往宇宙的路，是苏联的路！》.jpg" },
+            { cat: "太空探索", filename: "《通往宇宙的道路，为人类敞开！》.jpg" },
+            { cat: "太空探索", filename: "《以和平的命运》.jpg" },
+            { cat: "太空探索", filename: "《哈哈，没有上帝》.jpg" },
+            { cat: "太空探索", filename: "《我们将打开遥远的世界》.jpg" },
+            { cat: "太空探索", filename: "《照耀我们的星座》.jpg" },
+            { cat: "太空探索", filename: "《荣耀属于第一位女性航天员》.jpg" },
+            // 社会宣传（23）
+            
+            { cat: "社会宣传", filename: "《任务就在于学习！》.jpg" },
+            { cat: "社会宣传", filename: "《光荣属于英雄的苏联军队 —— 解放者的军队！》.jpg" },
+            { cat: "社会宣传", filename: "《军队是勇敢与爱国主义的学校》.jpg" },
+            { cat: "社会宣传", filename: "《和平-劳动-自由-平等-友情-幸福》.jpg" },
+            { cat: "社会宣传", filename: "《在列宁党的旗帜下，随时准备建立任何功勋！》.jpg" },
+            { cat: "社会宣传", filename: "《将列宁主义的旗帜举得更高》.jpg" },
+            { cat: "社会宣传", filename: "《工作台旁的无神论者（杂志插图）》.jpg" },
+            { cat: "社会宣传", filename: "《并肩而立，向前进发》.jpg" },
+            { cat: "社会宣传", filename: "《想改变现状？那就加入突击队》.jpg" },
+            { cat: "社会宣传", filename: "《愿友谊的旗帜永远飘扬，作为和平与劳动的象征！》.jpg" },
+            { cat: "社会宣传", filename: "《我第一次投票！》.jpg" },
+            { cat: "社会宣传", filename: "《所有人都来投票！》.jpg" },
+            { cat: "社会宣传", filename: "《把酗酒者从工人队伍中清除出去》.jpg" },
+            { cat: "社会宣传", filename: "《烟草是毒药！戒烟！》.jpg" },
+            { cat: "社会宣传", filename: "《神父与酒鬼同样阻碍建设》.jpg" },
+            { cat: "社会宣传", filename: "《红色全景》（封面）.jpg" },
+            { cat: "社会宣传", filename: "《给苏联运输业强大的蒸汽机车》.jpg" },
+            { cat: "社会宣传", filename: "《酗酒就是犯罪！》.jpg" },
+            { cat: "社会宣传", filename: "《亲爱的，要快乐！》.jpg" },
+            { cat: "社会宣传", filename: "《多读书吧同志》.jpg" },
+            { cat: "社会宣传", filename: "《让我们在正确的时间播种——我们将收获粮食山》.jpg" },
+            { cat: "社会宣传", filename: "《酒精是事故的原因》.jpg" },
+            { cat: "社会宣传", filename: "《酗酒的父亲是全家人的悲哀》.jpg" },
+            // 和平建设（17）
+            { cat: "和平建设", filename: "《光荣属于共产主义建设者》.jpg" },
+            { cat: "和平建设", filename: "《为工厂品牌的荣誉而奋斗！》.jpg" },
+            { cat: "和平建设", filename: "《为布尔什维克的丰收而突击收割！》.jpg" },
+            { cat: "和平建设", filename: "《从共产主义星期六义务劳动到建设共产主义！》.jpg" },
+            { cat: "和平建设", filename: "《列宁的思想活着，并必将胜利！》.jpg" },
+            { cat: "和平建设", filename: "《发展养猪业！》.jpg" },
+            { cat: "和平建设", filename: "《大家都来参加检阅竞赛！》.jpg" },
+            { cat: "和平建设", filename: "《好好劳动，面包丰收！》.jpg" },
+            { cat: "和平建设", filename: "《快速、牢固、廉价且美观地建设 —— 这是我们对和平事业的贡献！》.jpg" },
+            { cat: "和平建设", filename: "《我们将夺取胜利的大丰收！》.jpg" },
+            { cat: "和平建设", filename: "《挤奶女工们，让我们让每一头饲料牛都实现高产！》.jpg" },
+            { cat: "和平建设", filename: "《生活变得更好了，生活变得更快乐了！》.jpg" },
+            { cat: "和平建设", filename: "《苏联的，就是优秀的！》.jpg" },
+            { cat: "和平建设", filename: "《让共产主义的灯塔更加明亮！》.jpg" },
+            { cat: "和平建设", filename: "《运输工人们，掌握技术知识，为重建运输业而奋斗！》.jpg" },
+            { cat: "和平建设", filename: "《通过完成造林计划，赢得祖国的崇高奖励！》.jpg" },
+            { cat: "和平建设", filename: "《钢铁同志，机器人》.jpg" },
+            // 十月革命（16）
+            { cat: "十月革命", filename: "《人民和党，是一体的！》.jpg" },
+            { cat: "十月革命", filename: "《伟大的人民为你骄傲，苏联军队是和平的堡垒！》.jpg" },
+            { cat: "十月革命", filename: "《光荣属于保卫我们祖国和平与安全的苏联武装力量！》.jpg" },
+            { cat: "十月革命", filename: "《光荣属于白俄罗斯的解放者！》.jpg" },
+            { cat: "十月革命", filename: "《光荣属于苏联人民！》.jpg" },
+            { cat: "十月革命", filename: "《光荣属于苏联军人！》.jpg" },
+            { cat: "十月革命", filename: "《向十月革命的战士致敬！》.jpg" },
+            { cat: "十月革命", filename: "《向胜利的红军致敬与荣耀！》.jpg" },
+            { cat: "十月革命", filename: "《我们捍卫了和平，也必将守护和平！》.jpg" },
+            { cat: "十月革命", filename: "《我们的未来是共产主义！》.jpg" },
+            { cat: "十月革命", filename: "《我们的道路是通往共产主义！》.jpg" },
+            { cat: "十月革命", filename: "《牢不可破的联盟》.jpg" },
+            { cat: "十月革命", filename: "《繁荣吧，亲爱的白俄罗斯！》.jpg" },
+            { cat: "十月革命", filename: "《红军与海军 20 周年艺术展》.jpg" },
+            { cat: "十月革命", filename: "《绝不放弃十月革命的成果！》.jpg" },
+            { cat: "十月革命", filename: "《坚不可摧的联盟》.jpg" },
+            // 反帝国际主义（14）
+            { cat: "反帝国际主义", filename: "《为了人民的和平与幸福！》.jpg" },
+            { cat: "反帝国际主义", filename: "《军事冒险给帝国主义者带来的只有灾难！》.jpg" },
+            { cat: "反帝国际主义", filename: "《别胡闹！》.jpg" },
+            { cat: "反帝国际主义", filename: "《同一年代，不同的 “天气”》.jpg" },
+            { cat: "反帝国际主义", filename: "《和平面具之下》.jpg" },
+            { cat: "反帝国际主义", filename: "《敌人是狡猾的 —— 保持警惕！》.jpg" },
+            { cat: "反帝国际主义", filename: "《时刻保持警惕！》.jpg" },
+            { cat: "反帝国际主义", filename: "《被拯救的世界，永远铭记……》.jpg" },
+            { cat: "反帝国际主义", filename: "《警惕是我们的武器！》.jpg" },
+            { cat: "反帝国际主义", filename: "《难道你们忘了我们是怎么打败他们的吗！》.jpg" },
+            { cat: "反帝国际主义", filename: "《保持警惕》.jpg" },
+            { cat: "反帝国际主义", filename: "《坚守国家军事机密》.jpg" },
+            { cat: "反帝国际主义", filename: "《对战争说不》.jpg" },
+            { cat: "反帝国际主义", filename: "《是暴力、饥饿、死亡》.jpg" },
+            // 国内战争（11）
+            { cat: "国内战争", filename: "《1920年5月1日》.jpg" },
+            { cat: "国内战争", filename: "《为了苏维埃政权！》.jpg" },
+            { cat: "国内战争", filename: "《你报名当志愿兵了吗？》.jpg" },
+            { cat: "国内战争", filename: "《全部政权归苏维埃！》.jpg" },
+            { cat: "国内战争", filename: "《每一次铁锤的敲打，都是对敌人的打击！》.jpg" },
+            { cat: "国内战争", filename: "《趁现在就割！》.jpg" },
+            { cat: "国内战争", filename: "《为了苏联的彻底解放，英勇的部队向敌人发起猛攻》.jpg" },
+            { cat: "国内战争", filename: "《弗兰格尔来了——拿起武器》.jpg" },
+            { cat: "国内战争", filename: "《红楔入白》.jpg" },
+            { cat: "国内战争", filename: "《走向乌克兰》.jpg" },
+            { cat: "国内战争", filename: "《轮到弗兰格尔了》.jpg" },
+            // 社会主义（10）
+            { cat: "社会主义", filename: "《为苏联服务！》.jpg" },
+            { cat: "社会主义", filename: "《从社会主义站开往共产主义站的列车》.jpg" },
+            { cat: "社会主义", filename: "《共产主义的胜利是不可避免的！》.jpg" },
+            { cat: "社会主义", filename: "《我们将走向富足！》.jpg" },
+            { cat: "社会主义", filename: "《我们继续前进，走向共产主义。》.jpg" },
+            { cat: "社会主义", filename: "《我所知、我所能的一切，都是你的，同志！》.jpg" },
+            { cat: "社会主义", filename: "《社会主义的创造力是无限的！》.jpg" },
+            { cat: "社会主义", filename: "《苏维埃政权加全国电气化，是新世界的基础》.jpg" },
+            { cat: "社会主义", filename: "《我们时代的旗帜》.jpg" },
+            { cat: "社会主义", filename: "《民兵——劳动大军》.jpg" },
+            // 领袖人物（9）
+            { cat: "领袖人物", filename: "《1905年革命工人与列宁团结》.jpg" },
+            { cat: "领袖人物", filename: "《为了人民的幸福！》.jpg" },
+            { cat: "领袖人物", filename: "《光荣属于斯大林 —— 我们的领袖与导师》.jpg" },
+            { cat: "领袖人物", filename: "《列宁 - 斯大林的伟大政党万岁，它是我们时代的智慧、荣誉与良心！》.jpg" },
+            { cat: "领袖人物", filename: "《列宁 - 斯大林的伟大旗帜万岁！》.jpg" },
+            { cat: "领袖人物", filename: "《响应列宁的号召，在党的领导下前进》.jpg" },
+            { cat: "领袖人物", filename: "《在列宁的旗帜下，在斯大林的领导下 —— 向共产主义的胜利前进！》.jpg" },
+            { cat: "领袖人物", filename: "《没有革命的理论，就不会有革命的运动》.jpg" },
+            { cat: "领袖人物", filename: "《列宁永远在我们身边》.jpg" },
+            // 共青团（4）
+            { cat: "共青团", filename: "《共青团英雄荣耀永不磨灭》.jpg" },
+            { cat: "共青团", filename: "《如果你是共青团员，就要用行动来证明你的名字》.jpg" },
+            { cat: "共青团", filename: "《我庄严宣誓……》.jpg" },
+            { cat: "共青团", filename: "《共青团员应该成为战争中的英雄》.jpg" },
+            // 其他（7）
+            { cat: "其他", filename: "《强大的体育强国苏联》.jpg" },
+            { cat: "其他", filename: "《1928 年莫斯科斯巴达克运动会》.jpg" },
+            { cat: "其他", filename: "《1928 年莫斯科斯巴达克运动会：全世界工人运动员的团结》.jpg" },
+            { cat: "其他", filename: "《乌拉尔构成主义日》.jpg" },
+            { cat: "其他", filename: "《斯巴达克斯运动会》.jpg" },
+            { cat: "其他", filename: "《第三共产国际万岁！》.jpg" },
+            { cat: "其他", filename: "《红色全景（英国矿工）》.jpg" }
+        ];
+
+        // 从文件名提取标题（去掉书名号和.jpg后缀）
+        function parseTitle(filename) {
+            let title = filename.replace(/^《/, '').replace(/》/, '');
+            title = title.replace(/\.jpg$/i, '');
+            return title;
+        }
+
+        // 构建完整数据
+        const allData = RAW_DATA.map((item, idx) => ({
+            idx: idx,
+            cat: item.cat,
+            title: parseTitle(item.filename),
+            filename: item.filename,
+            src: BASE + item.cat + '/' + encodeURIComponent(item.filename)
+        }));
+
+        // ============================================================
+        //  状态管理
+        // ============================================================
+        let currentCat = 'all';
+        let searchKw = '';
+        let filteredData = [];
+        let displayedCount = 0;
+        const PAGE_SIZE = 24;
+        let modalIndex = 0;
+        let imageObserver = null;
+
+        // 获取分类按钮HTML
+        function getCatButtonsHTML() {
+            let html = '<button class="filter-btn active" data-cat="all">全部（' + allData.length + '）</button>';
+            for (const [catKey, catInfo] of Object.entries(CATEGORIES)) {
+                html += `<button class="filter-btn" data-cat="${catKey}">${catInfo.icon} ${catInfo.label}（${catInfo.count}）</button>`;
+            }
+            return html;
+        }
+
+        // 筛选
+        function applyFilter() {
+            const kw = searchKw.toLowerCase();
+            filteredData = allData.filter(item => {
+                const matchCat = currentCat === 'all' || item.cat === currentCat;
+                const matchKw = !kw || item.title.toLowerCase().includes(kw);
+                return matchCat && matchKw;
+            });
+            displayedCount = 0;
+            document.getElementById('galleryGrid').innerHTML = '';
+            document.getElementById('resultCount').textContent = '共 ' + filteredData.length + ' 张';
+            document.getElementById('statTotal').textContent = filteredData.length;
+            initLazyLoader();
+            loadMore();
+        }
+
+        function loadMore() {
+            const grid = document.getElementById('galleryGrid');
+            const end = Math.min(displayedCount + PAGE_SIZE, filteredData.length);
+            for (let i = displayedCount; i < end; i++) {
+                grid.appendChild(createCard(filteredData[i], i));
+            }
+            displayedCount = end;
+            const btn = document.getElementById('loadMoreBtn');
+            btn.disabled = displayedCount >= filteredData.length;
+            btn.textContent = btn.disabled ? '已全部加载' : '加载更多（还剩 ' + (filteredData.length - displayedCount) + ' 张）';
+        }
+
+        function createCard(item, idx) {
+            const div = document.createElement('div');
+            div.className = 'gallery-item';
+            div.onclick = () => openModal(idx);
+            const catIcon = CATEGORIES[item.cat]?.icon || '📌';
+            const catLabel = CATEGORIES[item.cat]?.label || item.cat;
+
+            div.innerHTML =
+                '<img class="gallery-item-image lazy-placeholder" data-src="' + item.src + '" alt="' + item.title.replace(/"/g, '&quot;') + '" onerror="this.classList.remove(\'lazy-placeholder\');this.style.background=\'#e8e8e8\';this.alt=\'图片加载失败\'">' +
+                '<div class="gallery-item-info">' +
+                '<div class="gallery-item-title">' + item.title + '</div>' +
+                '<div class="gallery-item-meta">' +
+                '<span class="gallery-item-cat">' + catIcon + ' ' + catLabel + '</span>' +
+                '</div></div>';
+
+            const img = div.querySelector('img');
+            if (imageObserver) imageObserver.observe(img);
+            return div;
+        }
+
+        function initLazyLoader() {
+            if (imageObserver) imageObserver.disconnect();
+            imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const src = img.dataset.src;
+                        if (src) {
+                            const tmp = new Image();
+                            tmp.onload = () => { img.src = src; img.classList.remove('lazy-placeholder'); img.classList.add('loaded'); };
+                            tmp.onerror = () => { img.classList.remove('lazy-placeholder'); img.style.background = '#e8e8e8'; img.alt = '图片加载失败'; };
+                            tmp.src = src;
+                        }
+                        imageObserver.unobserve(img);
+                    }
+                });
+            }, { rootMargin: '100px 0px', threshold: 0.01 });
+        }
+
+        // 模态框
+        function openModal(idx) {
+            modalIndex = idx;
+            renderModal();
+            document.getElementById('imageModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function renderModal() {
+            const item = filteredData[modalIndex];
+            const modalImg = document.getElementById('modalImage');
+            modalImg.classList.remove('loaded');
+            modalImg.classList.add('loading');
+            modalImg.removeAttribute('src');
+            const tmp = new Image();
+            tmp.onload = () => { modalImg.src = item.src; modalImg.classList.remove('loading'); modalImg.classList.add('loaded'); };
+            tmp.onerror = () => { modalImg.classList.remove('loading'); modalImg.alt = '图片加载失败'; };
+            tmp.src = item.src;
+            document.getElementById('modalTitle').textContent = item.title;
+            const catIcon = CATEGORIES[item.cat]?.icon || '📌';
+            const catLabel = CATEGORIES[item.cat]?.label || item.cat;
+            document.getElementById('modalMeta').textContent = catIcon + ' ' + catLabel;
+            document.getElementById('modalCounter').textContent = (modalIndex + 1) + ' / ' + filteredData.length;
+        }
+
+        function modalNav(dir) {
+            const next = modalIndex + dir;
+            if (next >= 0 && next < filteredData.length) {
+                modalIndex = next;
+                renderModal();
+                if (modalIndex >= displayedCount - 3) loadMore();
+            }
+        }
+
+        // 事件绑定
+        function bindEvents() {
+            document.querySelectorAll('[data-cat]').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('[data-cat]').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCat = this.dataset.cat;
+                    applyFilter();
+                });
+            });
+
+            let searchTimer;
+            document.getElementById('searchInput').addEventListener('input', function () {
+                clearTimeout(searchTimer);
+                searchTimer = setTimeout(() => { searchKw = this.value.trim(); applyFilter(); }, 300);
+            });
+
+            document.getElementById('loadMoreBtn').addEventListener('click', () => loadMore());
+
+            document.addEventListener('keydown', e => {
+                if (!document.getElementById('imageModal').classList.contains('active')) return;
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowLeft') modalNav(-1);
+                if (e.key === 'ArrowRight') modalNav(1);
+            });
+
+            document.getElementById('imageModal').addEventListener('click', function (e) {
+                if (e.target === this) closeModal();
+            });
+        }
+
+        // 黑夜模式
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+
+        // 初始化
+        function init() {
+            document.getElementById('catFilterButtons').innerHTML = getCatButtonsHTML();
+            initLazyLoader();
+            bindEvents();
+            applyFilter();
+
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+                const btn = document.querySelector('.dark-mode-toggle');
+                if (btn) btn.textContent = '☀️';
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>

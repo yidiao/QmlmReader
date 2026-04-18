@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列宁 | 革命导师 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 雷达图图例 */
+        .radar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            margin-top: 12px;
+            font-size: 0.88rem;
+        }
+        .radar-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            user-select: none;
+            transition: opacity 0.2s;
+        }
+        .radar-legend-item:hover { opacity: 0.75; }
+        .radar-legend-item.hidden-dataset span {
+            text-decoration: line-through;
+            opacity: 0.45;
+        }
+        .radar-legend-item.hidden-dataset .radar-legend-dot {
+            opacity: 0.3;
+        }
+        .radar-legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        /* 导师详情页样式 */
+        .master-hero {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .master-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></svg>');
+            background-size: 100px;
+            opacity: 0.5;
+        }
+        
+        .master-hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .master-hero-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            font-weight: bold;
+            color: #c41e3a;
+            border: 6px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+        
+        .master-hero-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .master-hero-info .years {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .master-hero-info .title {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .master-content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Tab导航 */
+        .tab-nav {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 0 1rem;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn:hover {
+            color: #c41e3a;
+        }
+        
+        .tab-btn.active {
+            color: #c41e3a;
+            font-weight: bold;
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #c41e3a;
+        }
+        
+        /* Tab内容 */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-content h2 {
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab-content h3 {
+            color: #333;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .tab-content p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+        
+        /* 时间轴样式 */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #c41e3a, #ff6b6b);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.65rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #c41e3a;
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: #c41e3a;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #c41e3a;
+        }
+        
+        /* 著作卡片 */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .work-card {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .work-card:hover {
+            border-color: #c41e3a;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.1);
+        }
+        
+        .work-card h4 {
+            color: #c41e3a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .work-card .year {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .work-card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        .work-card a {
+            display: inline-block;
+            margin-top: 0.8rem;
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .work-card a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 理论贡献 */
+        .contribution-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .contribution-list li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #c41e3a;
+        }
+        
+        .contribution-list li strong {
+            color: #c41e3a;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 黑夜模式 */
+        body.dark-mode .tab-nav,
+        body.dark-mode .tab-content {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode .tab-btn {
+            color: #aaa;
+        }
+        
+        body.dark-mode .tab-btn.active {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .tab-btn.active::after {
+            background: #ff6b6b;
+        }
+        
+        body.dark-mode .tab-content h2 {
+            color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        
+        body.dark-mode .tab-content h3 {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tab-content p {
+            color: #ccc;
+        }
+        
+        body.dark-mode .timeline-content,
+        body.dark-mode .work-card,
+        body.dark-mode .contribution-list li {
+            background: #3a3a3a;
+        }
+        
+        body.dark-mode .work-card {
+            border-color: #555;
+        }
+        
+        body.dark-mode .work-card h4 {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .work-card a {
+            color: #ff6b6b;
+        }
+        
+        /* 一目了然图表区 */
+        .visual-section {
+            margin-top: 2rem;
+        }
+        
+        .chart-container {
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 28px;
+        }
+        
+        .chart-container h3 {
+            color: #333;
+            margin-bottom: 6px;
+        }
+        
+        .chart-container .chart-desc {
+            color: #666;
+            font-size: 0.88em;
+            margin-bottom: 16px;
+        }
+        
+        body.dark-mode .chart-container {
+            background: #3a3a3a;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html">文章</a>
+                <a href="../masters.html" class="active">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 返回按钮 -->
+    <div class="back-nav" style="background:#f8f8f8;border-bottom:1px solid #e0e0e0;padding:12px 0;">
+        <div class="container" style="max-width:1000px;margin:0 auto;padding:0 2rem;">
+            <a href="../masters.html" style="display:inline-flex;align-items:center;gap:6px;color:#c41e3a;text-decoration:none;font-size:0.95rem;font-weight:500;">
+                <span style="font-size:1.1rem;">←</span> 返回导师列表
+            </a>
+        </div>
+    </div>
+
+    <main>
+        <!-- 导师头部信息 -->
+        <section class="master-hero">
+            <div class="master-hero-content">
+                <div class="master-hero-avatar">
+                    <img src="../images/masters/lenin.jpg"
+                         style="width:180px;height:180px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                </div>
+                <div class="master-hero-info">
+                    <h1>弗拉基米尔·伊里奇·列宁</h1>
+                    <p class="years">1870年4月22日 — 1924年1月21日</p>
+                    <p class="title">十月革命领袖 · 世界上第一个社会主义国家苏维埃俄国的缔造者 · 列宁主义创立者 · 帝国主义和无产阶级革命时代的马克思主义</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab内容区 -->
+        <div class="master-content-wrapper">
+            <div class="tab-nav">
+                <button class="tab-btn active" data-tab="biography">生平历程</button>
+                <button class="tab-btn" data-tab="works">代表著作</button>
+                <button class="tab-btn" data-tab="theory">理论贡献</button>
+                <button class="tab-btn" data-tab="visual">一目了然</button>
+                <button class="tab-btn" data-tab="legacy">历史地位</button>
+            </div>
+
+            <!-- 生平历程 -->
+            <div class="tab-content active" data-tab="biography">
+                <h2>生平历程</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1870年</div>
+                        <div class="timeline-content">
+                            <strong>诞生</strong>
+                            <p>4月22日出生于俄国辛比尔斯克（今乌里扬诺夫斯克）一个知识分子家庭，原名弗拉基米尔·伊里奇·乌里扬诺夫。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1887年</div>
+                        <div class="timeline-content">
+                            <strong>兄长殉难</strong>
+                            <p>哥哥亚历山大因参与刺杀沙皇亚历山大三世被处决，这一事件深刻影响了列宁的革命道路选择。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1893年</div>
+                        <div class="timeline-content">
+                            <strong>成为马克思主义者</strong>
+                            <p>移居圣彼得堡，开始系统研究马克思著作，成为职业革命家。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1895年</div>
+                        <div class="timeline-content">
+                            <strong>创建"工人阶级解放斗争协会"</strong>
+                            <p>将圣彼得堡的马克思主义小组统一起来，这是俄国无产阶级政党的萌芽。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1897-1900年</div>
+                        <div class="timeline-content">
+                            <strong>西伯利亚流放</strong>
+                            <p>因革命活动被流放西伯利亚三年，期间完成《俄国资本主义的发展》等重要著作。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1900年</div>
+                        <div class="timeline-content">
+                            <strong>创办《火星报》</strong>
+                            <p>流亡西欧期间创办全俄政治报《火星报》，提出"从思想上建党"的著名口号。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1902年</div>
+                        <div class="timeline-content">
+                            <strong>《怎么办？》出版</strong>
+                            <p>系统阐述建党思想，批判经济派，提出"灌输论"和先锋队政党理论。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1903年</div>
+                        <div class="timeline-content">
+                            <strong>俄国社会民主工党二大</strong>
+                            <p>党分裂为布尔什维克（多数派）和孟什维克（少数派），列宁成为布尔什维克领袖。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1905年</div>
+                        <div class="timeline-content">
+                            <strong>1905年革命</strong>
+                            <p>俄国爆发第一次资产阶级民主革命，列宁提出"无产阶级和农民的革命民主专政"口号。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1912年</div>
+                        <div class="timeline-content">
+                            <strong>布尔什维克成为独立政党</strong>
+                            <p>布拉格会议正式确立布尔什维克的独立地位，与孟什维克彻底决裂。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1914年</div>
+                        <div class="timeline-content">
+                            <strong>《帝国主义论》出版</strong>
+                            <p>第一次世界大战爆发，列宁提出"变帝国主义战争为国内战争"的革命口号。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1917年4月</div>
+                        <div class="timeline-content">
+                            <strong>《四月提纲》</strong>
+                            <p>从瑞士返回俄国，发表《四月提纲》，提出从资产阶级民主革命过渡到社会主义革命的路线。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1917年11月7日</div>
+                        <div class="timeline-content">
+                            <strong>十月革命胜利</strong>
+                            <p>领导布尔什维克党发动武装起义，推翻临时政府，建立世界上第一个社会主义国家。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1918-1920年</div>
+                        <div class="timeline-content">
+                            <strong>国内战争时期</strong>
+                            <p>领导苏维埃政权粉碎外国武装干涉和白匪叛乱，实行"战时共产主义"政策。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1921年</div>
+                        <div class="timeline-content">
+                            <strong>新经济政策</strong>
+                            <p>领导实行新经济政策（NEP），用粮食税代替余粮收集制，恢复国民经济。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1922年</div>
+                        <div class="timeline-content">
+                            <strong>苏联成立</strong>
+                            <p>主持建立苏维埃社会主义共和国联盟（苏联），确立联邦制国家结构。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1924年</div>
+                        <div class="timeline-content">
+                            <strong>逝世</strong>
+                            <p>1月21日在莫斯科附近的哥尔克村逝世，享年53岁。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 代表著作 -->
+            <div class="tab-content" data-tab="works">
+                <h2>代表著作</h2>
+                <div class="works-grid">
+                    <div class="work-card">
+                        <h4>《怎么办？》</h4>
+                        <p class="year">1902年</p>
+                        <p>系统阐述建党学说，批判经济派，提出"灌输论"和先锋队政党理论，为新型无产阶级政党奠定思想基础。</p>
+                        <a href="../articles/lenin/zen-me-ban.html">阅读全文 →</a>
+                    </div>
+                    <div class="work-card">
+                        <h4>《进一步，退两步》</h4>
+                        <p class="year">1904年</p>
+                        <p>批判孟什维克在组织问题上的机会主义，阐述民主集中制原则，论述党的组织纪律的重要性。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《社会民主党在民主革命中的两种策略》</h4>
+                        <p class="year">1905年</p>
+                        <p>分析1905年革命的性质和动力，提出无产阶级领导权和工农联盟思想，论述资产阶级民主革命向社会主义革命转变的前景。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《唯物主义和经验批判主义》</h4>
+                        <p class="year">1909年</p>
+                        <p>批判马赫主义的主观唯心主义，捍卫和发展马克思主义哲学，系统阐述辩证唯物主义认识论。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《帝国主义是资本主义的最高阶段》</h4>
+                        <p class="year">1916年</p>
+                        <p>分析帝国主义的五大特征，揭示帝国主义的经济实质和寄生性，提出帝国主义是无产阶级革命前夜的论断。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《国家与革命》</h4>
+                        <p class="year">1917年</p>
+                        <p>系统阐述马克思主义国家学说，论述无产阶级专政的必要性，提出"打碎资产阶级国家机器"的著名论断。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《无产阶级革命和叛徒考茨基》</h4>
+                        <p class="year">1918年</p>
+                        <p>批判考茨基对无产阶级专政的背叛，捍卫十月革命道路，论述苏维埃政权的民主性质。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《共产主义运动中的"左派"幼稚病》</h4>
+                        <p class="year">1920年</p>
+                        <p>总结俄国革命经验，批判"左"倾教条主义，论述无产阶级政党策略的灵活性和原则性的统一。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 理论贡献 -->
+            <div class="tab-content" data-tab="theory">
+                <h2>理论贡献</h2>
+                <ul class="contribution-list">
+                    <li>
+                        <strong>帝国主义理论</strong>
+                        <p>揭示帝国主义的经济实质是垄断资本主义，分析其五大特征：生产和资本的集中、金融资本的形成、资本输出、国际垄断同盟、列强瓜分世界。指出帝国主义是垂死的资本主义，是无产阶级革命的前夜。</p>
+                    </li>
+                    <li>
+                        <strong>社会主义革命"一国胜利论"</strong>
+                        <p>突破马克思恩格斯关于社会主义革命必须在主要资本主义国家同时发生的设想，提出帝国主义时代社会主义可能首先在少数甚至单独一个资本主义国家内获得胜利的理论，为十月革命提供理论依据。</p>
+                    </li>
+                    <li>
+                        <strong>无产阶级专政学说</strong>
+                        <p>系统阐述马克思主义国家学说，提出"打碎资产阶级国家机器"的论断，论述无产阶级专政的必要性和形式（苏维埃政权），指出无产阶级专政是向无阶级社会过渡的政治形式。</p>
+                    </li>
+                    <li>
+                        <strong>新型无产阶级政党理论</strong>
+                        <p>提出先锋队政党思想，强调党是由先进分子组成的、以科学理论武装的、有严格组织纪律的战斗部队。阐述民主集中制原则，论述党与工人阶级、与群众的关系。</p>
+                    </li>
+                    <li>
+                        <strong>工农联盟思想</strong>
+                        <p>论证农民特别是贫农是工人阶级最可靠的同盟军，提出无产阶级领导权和工农联盟是民主革命胜利和向社会主义过渡的根本保证。</p>
+                    </li>
+                    <li>
+                        <strong>民族殖民地问题理论</strong>
+                        <p>区分压迫民族和被压迫民族，支持被压迫民族的解放运动，提出民族自决权原则，论述无产阶级国际主义与民族解放运动的关系。</p>
+                    </li>
+                    <li>
+                        <strong>新经济政策理论</strong>
+                        <p>提出在小农经济占优势的国家建设社会主义必须利用商品货币关系，通过国家资本主义过渡到社会主义，实行粮食税、租让制、合作社等多种经济成分并存。</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 一目了然 -->
+            <div class="tab-content" data-tab="visual">
+                <h2>一目了然</h2>
+                <div class="visual-section" style="margin-top: 2rem;">
+                    <!-- 雷达图：五导师综合能力对比 -->
+                    <div class="chart-container" style="background: #fafafa;border: 1px solid #eee;border-radius: 10px;padding: 24px;margin-bottom: 28px;">
+                        <h3 style="color: #333;margin-bottom: 6px;">五大导师综合能力对比（无高低之分，仅能力侧重，彼此为继承发扬关系）</h3>
+                        <p style="color: #666;font-size: 0.88em;margin-bottom: 16px;">统一10项维度，横向比较列宁与其他四位导师各自的能力侧重。当前页突出显示：列宁</p>
+                        <canvas id="leninRadar" style="max-height:400px;"></canvas>
+                        <div class="radar-legend">
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#8b0000;"></div><span>马克思（深红）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#4a5568;"></div><span>恩格斯（青灰）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#d4a017;"></div><span>列宁（金黄）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#744210;"></div><span>斯大林（棕黄）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#e8192c;"></div><span>毛泽东（鲜红）</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 论战与理论创新时间线 -->
+                    <div class="chart-container" style="background: #fafafa;border: 1px solid #eee;border-radius: 10px;padding: 24px;margin-bottom: 28px;">
+                        <h3 style="color: #333;margin-bottom: 6px;">论战与理论创新历程</h3>
+                        <p style="color: #666;font-size: 0.88em;margin-bottom: 16px;">列宁通过一系列论战确立和发展革命理论</p>
+                        <canvas id="leninDebateChart"></canvas>
+                        <div style="margin-top:14px;padding:12px 16px;background:#fff5f5;border-left:3px solid #c41e3a;border-radius:4px;font-size:0.88em;color:#444;">
+                            列宁的理论创新往往产生于<strong>论战</strong>之中：与经济派论战提出建党理论，与孟什维克论战确立民主集中制，与第二国际机会主义论战提出帝国主义理论。
+                        </div>
+                    </div>
+
+                    <!-- 人生历程折线图 -->
+                    <div class="chart-container" style="background: #fafafa;border: 1px solid #eee;border-radius: 10px;padding: 24px;margin-bottom: 28px;">
+                        <h3 style="color: #333;margin-bottom: 6px;">人生历程：革命活动与理论贡献</h3>
+                        <p style="color: #666;font-size: 0.88em;margin-bottom: 16px;">列宁一生革命活动和理论贡献的强度变化</p>
+                        <canvas id="leninLifeChart"></canvas>
+                        <div style="margin-top:14px;padding:12px 16px;background:#fff5f5;border-left:3px solid #c41e3a;border-radius:4px;font-size:0.88em;color:#444;">
+                            列宁的革命生涯呈现<strong>持续上升</strong>趋势，1917年十月革命达到顶峰，晚年在新经济政策时期继续理论创新。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 历史地位 -->
+            <div class="tab-content" data-tab="legacy">
+                <h2>历史地位</h2>
+                <h3>世界历史意义</h3>
+                <p>列宁是20世纪最具影响力的革命家之一。他领导的十月革命开创了人类历史新纪元，建立了世界上第一个社会主义国家，使社会主义从理论变为现实。这一事件深刻改变了20世纪世界历史进程，推动了殖民地半殖民地民族解放运动的高涨，形成了社会主义阵营与资本主义阵营对峙的世界格局。</p>
+                
+                <h3>马克思主义发展史地位</h3>
+                <p>列宁主义是帝国主义和无产阶级革命时代的马克思主义。列宁在新的历史条件下，运用马克思主义基本原理分析帝国主义时代的矛盾，创造性地解决了社会主义革命在一国首先胜利、无产阶级专政的形式、新型无产阶级政党建设等一系列重大理论和实践问题，丰富和发展了马克思主义。</p>
+                
+                <h3>对后世的影响</h3>
+                <p>列宁的思想和实践对20世纪世界社会主义运动产生了深远影响。从俄国到中国，从东欧到亚洲、拉丁美洲，许多国家的共产党都以列宁主义为指导思想。列宁关于帝国主义、无产阶级专政、党的建设等理论，至今仍是马克思主义研究的重要课题。</p>
+                
+                <h3>当代价值</h3>
+                <p>列宁对垄断资本主义的分析、对帝国主义本质的揭示，对于理解当代全球化背景下的国际矛盾仍具启发意义。他关于党的建设的思想、关于理论与实际相结合的方法论，对于今天的左翼运动仍有参考价值。同时，对列宁主义的历史经验和教训进行科学总结，也是马克思主义发展史研究的重要内容。</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">理论学习 · 斗争精神 · 青年担当</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Tab切换
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                
+                // 切换按钮状态
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 切换内容
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelector(`.tab-content[data-tab="${tabId}"]`).classList.add('active');
+                
+                // 初始化图表
+                if (tabId === 'visual') {
+                    setTimeout(initCharts, 100);
+                }
+            });
+        });
+
+        // 图表初始化
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+            chartsInited = true;
+
+            // 雷达图：五导师综合能力对比
+            const radarCtx = document.getElementById('leninRadar');
+            if (radarCtx) {
+                const labels = ['理论深度','组织纪律','学术广度','创新性','战略眼光','领导才能','文笔表达','执行力','群众动员','政治智慧'];
+                const radarChart = new Chart(radarCtx.getContext('2d'), {
+                    type: 'radar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '马克思',
+                                data: [10, 7, 10, 10, 8, 7, 9, 6, 6, 9],
+                                borderColor: '#8b0000',
+                                backgroundColor: 'rgba(139,0,0,0.05)',
+                                pointBackgroundColor: '#8b0000',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '恩格斯',
+                                data: [9, 9, 10, 8, 7, 8, 9, 7, 6, 8],
+                                borderColor: '#4a5568',
+                                backgroundColor: 'rgba(74,85,104,0.05)',
+                                pointBackgroundColor: '#4a5568',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '列宁',
+                                data: [9, 9, 8, 10, 10, 10, 8, 9, 9, 10],
+                                borderColor: '#d4a017',
+                                backgroundColor: 'rgba(212,160,23,0.10)',
+                                pointBackgroundColor: '#d4a017',
+                                borderWidth: 2.5,
+                                pointRadius: 4,
+                                hidden: false,
+                            },
+                            {
+                                label: '斯大林',
+                                data: [7, 10, 6, 6, 9, 10, 6, 10, 8, 9],
+                                borderColor: '#744210',
+                                backgroundColor: 'rgba(116,66,16,0.05)',
+                                pointBackgroundColor: '#744210',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '毛泽东',
+                                data: [9, 8, 8, 10, 10, 10, 9, 9, 10, 10],
+                                borderColor: '#e8192c',
+                                backgroundColor: 'rgba(232,25,44,0.05)',
+                                pointBackgroundColor: '#e8192c',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            r: {
+                                min: 0, max: 10,
+                                ticks: { stepSize: 2, font: { size: 10 } },
+                                pointLabels: { font: { size: 12 } }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false }
+                        }
+                    }
+                });
+
+                // 图例点击切换显示/隐藏
+                document.querySelectorAll('#leninRadar ~ .radar-legend .radar-legend-item').forEach((item, i) => {
+                    // 根据初始 hidden 状态设置图例样式
+                    const ds = radarChart.data.datasets[i];
+                    if (ds.hidden) {
+                        item.classList.add('hidden-dataset');
+                    }
+                    item.addEventListener('click', () => {
+                        ds.hidden = !ds.hidden;
+                        item.classList.toggle('hidden-dataset', !!ds.hidden);
+                        radarChart.update();
+                    });
+                });
+            }
+
+            // 论战与理论创新历程
+            const debateCtx = document.getElementById('leninDebateChart');
+            if (debateCtx) {
+                new Chart(debateCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['1899', '1902', '1904', '1905', '1909', '1916', '1917', '1920', '1921'],
+                        datasets: [{
+                            label: '论战强度',
+                            data: [6, 9, 8, 7, 8, 9, 10, 7, 6],
+                            borderColor: '#e53e3e',
+                            backgroundColor: 'rgba(229, 62, 62, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }, {
+                            label: '理论创新',
+                            data: [5, 8, 7, 8, 9, 10, 10, 8, 9],
+                            borderColor: '#3182ce',
+                            backgroundColor: 'rgba(49, 130, 206, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { min: 0, max: 10 }
+                        }
+                    }
+                });
+            }
+
+            // 人生历程折线图
+            const lifeCtx = document.getElementById('leninLifeChart');
+            if (lifeCtx) {
+                new Chart(lifeCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['1890s', '1900-1905', '1905-1910', '1910-1914', '1914-1917', '1917-1924'],
+                        datasets: [{
+                            label: '革命活动',
+                            data: [4, 6, 5, 6, 8, 10],
+                            borderColor: '#c41e3a',
+                            backgroundColor: 'rgba(196, 30, 58, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }, {
+                            label: '理论贡献',
+                            data: [5, 7, 6, 7, 9, 8],
+                            borderColor: '#e53e3e',
+                            backgroundColor: 'rgba(229, 62, 62, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { min: 0, max: 10 }
+                        }
+                    }
+                });
+            }
+        }
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

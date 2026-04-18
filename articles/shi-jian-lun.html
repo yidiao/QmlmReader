@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实践论 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html" class="active">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 返回按钮 -->
+    <div class="back-nav" style="background:#f8f8f8;border-bottom:1px solid #e0e0e0;padding:12px 0;">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../articles.html" style="display:inline-flex;align-items:center;gap:6px;color:#c41e3a;text-decoration:none;font-size:0.95rem;font-weight:500;">
+                <span style="font-size:1.1rem;">←</span> 返回全部文章
+            </a>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="article-detail">
+        <!-- 文章头部信息 -->
+        <header class="article-header">
+            <div class="importance-badge">⭐⭐⭐⭐⭐ 核心必读</div>
+            <h1>实践论</h1>
+            <div class="article-subtitle">论认识和实践的关系——知和行的关系</div>
+            <div class="article-meta">
+                <span class="author">毛泽东</span>
+                <span class="date">1937年7月</span>
+                <span class="category">哲学基础 · 认识论</span>
+                <span class="word-count">约11,000字</span>
+            </div>
+        </header>
+
+        <!-- 标签导航 -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original')">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading')">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty')">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue')">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action')">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual')">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle')">理论拼图</button>
+            <button class="tab-btn" onclick="switchTab('further')">延伸阅读</button>
+        </div>
+
+        <!-- 原文 -->
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro">
+                    <p><strong>阅读提示：</strong>本文约1.1万字，是毛泽东为反对党内主观主义，特别是教条主义而写的认识论著作。点击章节标题可展开/折叠内容。建议通读一遍，再精读"两个飞跃"部分。</p>
+                </div>
+
+                <!-- 前言 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        一、认识的来源——实践是认识的基础
+                    </h3>
+                    <div class="chapter-content">
+                        <p>马克思以前的唯物论，离开人的社会性，离开人的历史发展，去观察认识问题，因此不能了解认识对社会实践的依赖关系，即认识对生产和阶级斗争的依赖关系。</p>
+                        <p>首先，马克思主义者认为人类的生产活动是最基本的实践活动，是决定其他一切活动的东西。人的认识，主要地依赖于物质的生产活动，逐渐地了解自然的现象、自然的性质、自然的规律性、人和自然的关系；而且经过生产活动，也在各种不同程度上逐渐地认识了人和人的一定的相互关系。一切这些知识，离开生产活动是不能得到的。在没有阶级的社会中，每个人以社会一员的资格，同其他社会成员协力，结成一定的生产关系，从事生产活动，以解决人类物质生活问题。在各种阶级的社会中，各阶级的社会成员，则又以各种不同的方式，结成一定的生产关系，从事生产活动，以解决人类物质生活问题。这是人的认识发展的基本来源。</p>
+                        <p>人的社会实践，不限于生产活动一种形式，还有多种其他的形式，阶级斗争，政治生活，科学和艺术的活动，总之社会实际生活的一切领域都是社会的人所参加的。因此，人的认识，在物质生活以外，还从政治生活文化生活中（与物质生活密切联系），在各种不同程度上，知道人和人的各种关系。其中，尤以各种形式的阶级斗争，给予人的认识发展以深刻的影响。在阶级社会中，每一个人都在一定的阶级地位中生活，各种思想无不打上阶级的烙印。</p>
+                        <p>马克思主义者认为人类社会的生产活动，是一步又一步地由低级向高级发展，因此，人们的认识，不论对于自然界方面，对于社会方面，也都是一步又一步地由低级向高级发展，即由浅入深，由片面到更多的方面。在很长的历史时期内，大家对于社会的历史只能限于片面的了解，这一方面是由于剥削阶级的偏见经常歪曲社会的历史，另方面，则由于生产规模的狭小，限制了人们的眼界。人们能够对于社会历史的发展作全面的历史的了解，把对于社会的认识变成了科学，这只是到了伴随巨大生产力——大工业而出现近代无产阶级的时候，这就是马克思主义的科学。</p>
+                        <p>马克思主义者认为，只有人们的社会实践，才是人们对于外界认识的真理性的标准。实际的情形是这样的，只有在社会实践过程中（物质生产过程中，阶级斗争过程中，科学实验过程中），人们达到了思想中所预想的结果时，人们的认识才被证实了。人们要想得到工作的胜利即得到预想的结果，一定要使自己的思想合于客观外界的规律性，如果不合，就会在实践中失败。人们经过失败之后，也就从失败取得教训，改正自己的思想使之适合于外界的规律性，人们就能变失败为胜利，所谓"失败者成功之母"，"吃一堑长一智"，就是这个道理。辩证唯物论的认识论把实践提到第一的地位，认为人的认识一点也不能离开实践，排斥一切否认实践重要性、使认识离开实践的错误理论。列宁这样说过："实践高于（理论的）认识，因为它不但有普遍性的品格，而且还有直接现实性的品格。"马克思主义的辩证唯物论有两个最显著的特点：一个是它的阶级性，公然申明辩证唯物论是为无产阶级服务的；再一个是它的实践性，强调理论对于实践的依赖关系，理论的基础是实践，又转过来为实践服务。判定认识或理论之是否真理，不是依主观上觉得如何而定，而是依客观上社会实践的结果如何而定。真理的标准只能是社会的实践。实践的观点是辩证唯物论的认识论之第一的和基本的观点。</p>
+                        <p>然而人的认识究竟怎样从实践发生，而又服务于实践呢？这只要看一看认识的发展过程就会明了的。</p>
+                    </div>
+                </div>
+
+                <!-- 第一个飞跃 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        二、第一个飞跃：从感性认识到理性认识
+                    </h3>
+                    <div class="chapter-content">
+                        <p>原来人在实践过程中，开始只是看到过程中各个事物的现象方面，看到各个事物的片面，看到各个事物之间的外部联系。例如有些外面的人们到延安来考察，头一二天，他们看到了延安的地形、街道、屋宇，接触了许多的人，参加了宴会、晚会和群众大会，听到了各种说话，看到了各种文件，这些就是事物的现象，事物的各个片面以及这些事物的外部联系。这叫做认识的感性阶段，就是感觉和印象的阶段。也就是延安这些各别的事物作用于考察团先生们的感官，引起了他们的感觉，在他们的脑中生起了许多的印象，以及这些印象间的大概的外部的联系，这是认识的第一个阶段。在这个阶段中，人们还不能造成深刻的概念，作出合乎论理（即合乎逻辑）的结论。</p>
+                        <p>社会实践的继续，使人们在实践中引起感觉和印象的东西反复了多次，于是在人们的脑中生起了一个认识过程中的突变（即飞跃），产生了概念。概念这种东西已经不是事物的现象，不是事物的各个片面，不是它们的外部联系，而是抓着了事物的本质，事物的全体，事物的内部联系了。概念同感觉，不但是数量上的差别，而且有了性质上的差别。循此继进，使用判断和推理的方法，就可产生出合乎论理的结论来。《三国演义》上所谓"眉头一皱计上心来"，我们普通说话所谓"让我想一想"，就是人在脑中运用概念以作判断和推理的工夫。这是认识的第二个阶段。外来的考察团先生们在他们集合了各种材料，加上他们"想了一想"之后，他们就能够作出"共产党的抗日民族统一战线的政策是彻底的、诚恳的和真实的"这样一个判断了。在他们作出这个判断之后，如果他们对于团结救国也是真实的的话，那末他们就能够进一步作出这样的结论："抗日民族统一战线是能够成功的。"这个概念、判断和推理的阶段，在人们对于一个事物的整个认识过程中是更重要的阶段，也就是理性认识的阶段。</p>
+                        <p>认识的真正任务在于经过感觉而到达于思维，到达于逐步了解客观事物的内部矛盾，了解它的规律性，了解这一过程和那一过程间的内部联系，即到达于论理的认识。重复地说，论理的认识所以和感性的认识不同，是因为感性的认识是属于事物之片面的、现象的、外部联系的东西，论理的认识则推进了一大步，到达了事物的全体的、本质的、内部联系的东西，到达了暴露周围世界的内在的矛盾，因而能在周围世界的总体上，在周围世界一切方面的内部联系上去把握周围世界的发展。</p>
+                        <p>这种基于实践的由浅入深的辩证唯物论的关于认识发展过程的理论，在马克思主义以前，是没有一个人这样解决过的。马克思主义的唯物论，第一次正确地解决了这个问题，唯物地而且辩证地指出了认识的深化的运动，指出了社会的人在他们的生产和阶级斗争的复杂的、经常反复的实践中，由感性认识到论理认识的推移的运动。</p>
+                        <p>马克思列宁主义认为：认识过程中两个阶段的特性，在低级阶段，认识表现为感性的，在高级阶段，认识表现为论理的，但任何阶段，都是统一的认识过程中的阶段。感性和理性二者的性质不同，但又不是互相分离的，它们在实践的基础上统一起来了。</p>
+                        <p>我们的实践证明：感觉到了的东西，我们不能立刻理解它，只有理解了的东西才更深刻地感觉它。感觉只解决现象问题，理论才解决本质问题。这些问题的解决，一点也不能离开实践。无论何人要认识什么事物，除了同那个事物接触，即生活于（实践于）那个事物的环境中，是没有法子解决的。</p>
+                        <p>你要知道革命的理论和方法，你就得参加革命。一切真知都是从直接经验发源的。但人不能事事直接经验，事实上多数的认识都是间接经验的东西，这就是一切古代的和外域的知识。这些认识在古人在外人是直接经验的东西，如果在古人外人直接经验时是符合于列宁所说的条件："科学的抽象"，是科学地反映了客观的事物，那末这些认识是可靠的，否则就是不可靠的。中国人有一句老话："不入虎穴，焉得虎子。"这句话对于人们的实践是真理，对于认识论也是真理。离开实践的认识是不可能的。</p>
+                        <p>这里有两个要点必须着重指明。第一个，就是理性认识依赖于感性认识的问题。如果以为理性认识可以不从感性认识得来，他就是一个唯心论者。学术史上有所谓"唯理论"一派，就是只承认理性的实在性，不承认经验的实在性，以为只有理性靠得住，而感觉的经验是靠不住的，这一派的错误在于颠倒了事实。理性的东西所以靠得住，正是由于它来源于感性，否则理性的东西就成了无源之水，无本之木，而只是主观自生的靠不住的东西了。从认识过程的秩序说来，感觉经验是第一的东西，我们强调社会实践在认识过程中的意义，就在于只有社会实践才能使人的认识开始发生，开始从客观外界得到感觉经验。一个闭目塞听、同客观外界根本绝缘的人，是无所谓认识的。认识开始于经验——这就是认识论的唯物论。</p>
+                        <p>第二是认识有待于深化，认识的感性阶段有待于发展到理性阶段——这就是认识论的辩证法。如果以为认识可以停顿在低级的感性阶段，以为只有感性认识可靠，而理性认识是靠不住的，这便是重复了历史上的"经验论"的错误。这种理论的错误，在于不懂得感觉材料固然是客观外界某些真实性的反映，但它们仅是片面的和表面的东西，这种反映是不完全的，是没有反映事物本质的。要完全地反映整个的事物，反映事物的本质，反映事物的内部规律性，就必须经过思考作用，将丰富的感觉材料加以去粗取精、去伪存真、由此及彼、由表及里的改造制作工夫，造成概念和理论的系统，就必须从感性认识跃进到理性认识。这种改造过的认识，不是更空虚了更不可靠了的认识，相反，只要是在认识过程中根据于实践基础而科学地改造过的东西，正如列宁所说乃是更深刻、更正确、更完全地反映客观事物的东西。</p>
+                        <p>理性认识依赖于感性认识，感性认识有待于发展到理性认识，这就是辩证唯物论的认识论。哲学上的"唯理论"和"经验论"都不懂得认识的历史性或辩证性，虽然各有片面的真理（对于唯物的唯理论和经验论而言，非指唯心的唯理论和经验论），但在认识论的全体上则都是错误的。</p>
+                    </div>
+                </div>
+
+                <!-- 第二个飞跃 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        三、第二个飞跃：从理性认识回到实践
+                    </h3>
+                    <div class="chapter-content">
+                        <p>然而认识运动至此还没有完结。辩证唯物论的认识运动，如果只到理性认识为止，那末还只说到问题的一半。而且对于马克思主义的学说来，还只说到非十分重要的那一半。马克思主义的哲学认为十分重要的问题，不在于懂得了客观世界的规律性，因而能够解释世界，而在于拿了这种对于客观规律性的认识去能动地改造世界。在马克思主义看来，理论是重要的，它的重要性充分地表现在列宁说过的一句话："没有革命的理论，就不会有革命的运动。"然而马克思主义看重理论，正是，也仅仅是，因为它能够指导行动。如果有了正确的理论，只是把它空谈一阵，束之高阁，并不实行，那末，这种理论再好也是没有意义的。认识从实践始，经过实践得到了理论的认识，还须再回到实践去。</p>
+                        <p>认识的能动作用，不但表现于从感性的认识到理性的认识之能动的飞跃，更重要的还须表现于从理性的认识到革命的实践这一个飞跃。抓着了世界的规律性的认识，必须把它再回到改造世界的实践中去，再用到生产的实践、革命的阶级斗争和民族斗争的实践以及科学实验的实践中去。这就是检验理论和发展理论的过程，是整个认识过程的继续。</p>
+                        <p>理论的东西之是否符合于客观真理性这个问题，在前面说的由感性到理性之认识运动中是没有完全解决的，也不能完全解决的。要完全地解决这个问题，只有把理性的认识再回到社会实践中去，应用理论于实践，看它是否能够达到预想的目的。许多自然科学理论之所以被称为真理，不但在于自然科学家们创立这些学说的时候，而且在于为尔后的科学实践所证实的时候。马克思列宁主义之所以被称为真理，也不但在于马克思、恩格斯、列宁、斯大林等人科学地构成这些学说的时候，而且在于为尔后革命的阶级斗争和民族斗争的实践所证实的时候。</p>
+                        <p>辩证唯物论之所以为普遍真理，在于经过无论什么人的实践都不能逃出它的范围。人类认识的历史告诉我们，许多理论的真理性是不完全的，经过实践的检验而纠正了它们的不完全性。许多理论是错误的，经过实践的检验而纠正其错误。所谓实践是真理的标准，所谓"生活、实践底观点，应该是认识论底首先的和基本的观点"，理由就在这个地方。斯大林说得好："理论若不和革命实践联系起来，就会变成无对象的理论，同样，实践若不以革命理论为指南，就会变成盲目的实践。"</p>
+                    </div>
+                </div>
+
+                <!-- 实践的循环 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        四、认识的无限发展——实践、认识的螺旋上升
+                    </h3>
+                    <div class="chapter-content">
+                        <p>说到这里，认识运动就算完成了吗？我们的答复是完成了，又没有完成。社会的人们投身于变革在某一发展阶段内的某一客观过程的实践中（不论是关于变革某一自然过程的实践，或变革某一社会过程的实践），由于客观过程的反映和主观能动性的作用，使得人们的认识由感性的推移到了理性的，造成了大体上相应于该客观过程的法则性的思想、理论、计划或方案，然后再应用这种思想、理论、计划或方案于该同一客观过程的实践，如果能够实现预想的目的，即将预定的思想、理论、计划、方案在该同一过程的实践中变为事实，或者大体上变为事实，那末，对于这一具体过程的认识运动算是完成了。</p>
+                        <p>然而对于过程的推移而言，人们的认识运动是没有完成的。</p>
+                        <p>任何过程，不论是属于自然界的和属于社会的，由于内部的矛盾和斗争，都是向前推移向前发展的，人们的认识运动也应跟着推移和发展。依社会运动来说，真正的革命的指导者，不但在于当自己的思想、理论、计划、方案有错误时须得善于改正，而且在于当某一客观过程已经从某一发展阶段向另一发展阶段推移转变的时候，须得善于使自己和参加革命的一切人员在主观认识上也跟着推移转变，即是要使新的革命任务和新的工作方案的提出，适合于新的情况的变化。革命时期情况的变化是很急速的，如果革命党人的认识不能随之而急速变化，就不能引导革命走向胜利。</p>
+                        <p>然而思想落后于实际的事是常有的，这是因为人的认识受了许多社会条件的限制的缘故。我们反对革命队伍中的顽固派，他们的思想不能随变化了的客观情况而前进，在历史上表现为右倾机会主义。这些人看不出矛盾的斗争已将客观过程推向前进了，而他们的认识仍然停止在旧阶段。</p>
+                        <p>我们也反对"左"翼空谈主义。他们的思想超过客观过程的一定发展阶段，有些把幻想看作真理，有些则把仅在将来有现实可能性的理想，勉强地放在现时来做，离开了当前大多数人的实践，离开了当前的现实性，在行动上表现为冒险主义。</p>
+                        <p>唯心论和机械唯物论，机会主义和冒险主义，都是以主观和客观相分裂，以认识和实践相脱离为特征的。以科学的社会实践为特征的马克思列宁主义的认识论，不能不坚决反对这些错误思想。马克思主义者承认，在绝对的总的宇宙发展过程中，各个具体过程的发展都是相对的，因而在绝对真理的长河中，人们对于在各个一定发展阶段上的具体过程的认识只具有相对的真理性。</p>
+                        <p>无数相对的真理之总和，就是绝对的真理。客观过程的发展是充满着矛盾和斗争的发展，人的认识运动的发展也是充满着矛盾和斗争的发展。根据于一定的思想、理论、计划、方案以从事于变革客观现实的实践，一次又一次地向前，人们对于客观现实的认识也就一次又一次地深化。客观现实世界的变化运动永远没有完结，人们在实践中对于真理的认识也就永远没有完结。马克思列宁主义并没有结束真理，而是在实践中不断地开辟认识真理的道路。</p>
+                    </div>
+                </div>
+
+                <!-- 结论 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        五、结论——知行统一观
+                    </h3>
+                    <div class="chapter-content">
+                        <p>我们的结论是主观和客观、理论和实践、知和行的具体的历史的统一，反对一切离开具体历史的"左"的或右的错误思想。</p>
+                        <p>社会的发展到了今天的时代，正确地认识世界和改造世界的责任，已经历史地落在无产阶级及其政党的肩上。这种根据科学认识而定下来的改造世界的实践过程，在世界、在中国均已到达了一个历史的时节——自有历史以来未曾有过的重大时节，这就是整个儿地推翻世界和中国的黑暗面，把它们转变过来成为前所未有的光明世界。无产阶级和革命人民改造世界的斗争，包括实现下述的任务：改造客观世界，也改造自己的主观世界——改造自己的认识能力，改造主观世界同客观世界的关系。</p>
+                        <p>通过实践而发现真理，又通过实践而证实真理和发展真理。从感性认识而能动地发展到理性认识，又从理性认识而能动地指导革命实践，改造主观世界和客观世界。实践、认识、再实践、再认识，这种形式，循环往复以至无穷，而实践和认识之每一循环的内容，都比较地进到了高一级的程度。这就是辩证唯物论的全部认识论，这就是辩证唯物论的知行统一观。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 读法提示 -->
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2>怎么读这篇文章</h2>
+                <div class="guide-block">
+                    <h3>① 先问自己一个问题再开始读</h3>
+                    <p>你是否有过这样的经历：读了很多书、懂了很多道理，但遇到具体问题时仍然不知道怎么办？或者反过来：做了很多事，但不知道为什么做、做对了没有？</p>
+                    <p>带着这个问题读《实践论》，你会发现它在直接回答你。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>② 不要只看结论，要看他是怎么论证的</h3>
+                    <p>很多人读完只记住了"实践出真知"这个结论，这其实是最大的浪费。毛泽东论证的核心是：认识为什么必须来自实践？实践为什么不能代替认识？两者是怎么循环推进的？</p>
+                    <p>这个论证过程本身，比结论更值得仔细看。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>③ 着重读"两个飞跃"的部分</h3>
+                    <p>全文最核心的内容在中间部分：</p>
+                    <ul>
+                        <li><strong>第一个飞跃</strong>：从感性认识（接触现象）→ 理性认识（把握规律）</li>
+                        <li><strong>第二个飞跃</strong>：从理性认识 → 回到实践去检验和改造现实</li>
+                    </ul>
+                    <p>毛泽东说第二个飞跃"更重要"——理解为什么，是读懂这篇文章的关键。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>④ 读到批判"唯理论"和"经验论"时，想想自己</h3>
+                    <p>文章批判了两种错误：</p>
+                    <ul>
+                        <li>"唯理论"：只信理论，不信实践经验（今天的"本本主义"）</li>
+                        <li>"经验论"：只信亲身经验，不上升到理论（今天的"经验主义"）</li>
+                    </ul>
+                    <p>你更容易犯哪种错误？</p>
+                </div>
+                <div class="guide-block">
+                    <h3>⑤ 读完后做一件事</h3>
+                    <p>找一件你正在面对的事——学习、工作、或者任何处境——用"两个飞跃"的框架分析一下：你现在处于哪个阶段？缺的是感性积累，还是理性总结，还是回到实践检验？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 难点解析 -->
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2>容易读错的地方</h2>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读："实践出真知"就是"多试试就会了"</div>
+                    <div class="correct">✅ 正解：这里的"实践"是有目的地、有意识地介入现实的行动，不是盲目试错。"真知"是把握规律的理性认识，不是单纯的经验积累。盲目的实践不会自动产生认识，必须有从感性到理性的主动加工过程。</div>
+                </div>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读："感性认识"比"理性认识"低级，应该尽快跳过</div>
+                    <div class="correct">✅ 正解：两者缺一不可，而且有严格的先后顺序。没有感性基础的理性认识是"无源之水"，是主观臆想；没有理性升华的感性认识只是片面的、表面的。顺序不能颠倒。</div>
+                </div>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：第二个飞跃（理性→实践）只是"把想法付诸行动"</div>
+                    <div class="correct">✅ 正解：第二个飞跃的意义在于"检验"——理性认识是否正确，不能靠逻辑自洽来判断，只能通过回到实践、看结果来验证。这是"实践是检验真理的唯一标准"的哲学基础。</div>
+                </div>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：这篇文章讲的是认识论，跟我的实际生活没关系</div>
+                    <div class="correct">✅ 正解：这是关于"你怎么知道你是对的"的方法论。每个人每天都在用某种认识论做判断，只是不自知。《实践论》揭示的，是认识出错（主观主义、教条主义）的根本原因，以及避免出错的根本途径。</div>
+                </div>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读："实践、认识、再实践、再认识"是一个平面的循环</div>
+                    <div class="correct">✅ 正解：这是螺旋上升，不是原地打转。"每一循环的内容，都比较地进到了高一级的程度"——每次循环都应该比上次更深刻、更接近真理，不是简单重复。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对话空间 -->
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2>这篇文章在回应谁？又在问谁？</h2>
+
+                <div class="dialogue-block">
+                    <h3>它在回应的问题</h3>
+                    <ul>
+                        <li>党内"教条主义"：死背马列公式、照本宣科，不联系中国实际（今天等价于：用理论代替分析现实）</li>
+                        <li>党内"经验主义"：只信自己的经验，拒绝理论学习（今天等价于：凭感觉做判断，拒绝反思）</li>
+                        <li>旧哲学中把认识与实践割裂开的各种观点</li>
+                    </ul>
+                </div>
+
+                <div class="dialogue-block">
+                    <h3>它在问每一个读者</h3>
+                    <ul>
+                        <li>你的"认识"从哪里来？有没有经过真正的实践检验？</li>
+                        <li>你有没有把理论"束之高阁"——懂了但不用、用了但不反思？</li>
+                        <li>你在行动中遇到失败时，有没有认真回来修正自己的认识？还是继续执行原来的方案？</li>
+                        <li>你是"右倾"的——思想落后于现实？还是"左倾"的——思想超前于条件？</li>
+                    </ul>
+                </div>
+
+                <div class="dialogue-block">
+                    <h3>它在等你的回应</h3>
+                    <p>找一次你做错了的判断或决定。用《实践论》的框架追问：</p>
+                    <ul>
+                        <li>我的感性认识够不够充分？我接触到的现象是否全面？</li>
+                        <li>我从感性到理性的加工过程有没有做"去粗取精、去伪存真"？</li>
+                        <li>我的理性认识有没有回到实践中去验证？还是只停在脑子里自洽？</li>
+                    </ul>
+                    <p>这个追问本身，就是在做《实践论》所描述的认识运动。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行动实验 -->
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2>读完之后可以做什么</h2>
+
+                <div class="action-item">
+                    <h3>实验一：阶段自诊</h3>
+                    <p>选一件你正在进行的事（学习某个领域、处理某个困境、参与某项工作），诚实地判断：你现在处于哪个阶段？</p>
+                    <ul>
+                        <li><strong>感性阶段</strong>：还在接触现象、积累经验，尚未形成规律性认识</li>
+                        <li><strong>理性阶段</strong>：已经形成了判断和理论，但还未充分检验</li>
+                        <li><strong>验证阶段</strong>：已将理论付诸实践，正在检验和修正</li>
+                    </ul>
+                    <p>你现在缺的是哪一步？下一步该做什么？</p>
+                </div>
+
+                <div class="action-item">
+                    <h3>实验二：失败复盘</h3>
+                    <p>找一次你的行动失败了的经历（不必是大事）。用认识论的眼光复盘：</p>
+                    <ul>
+                        <li>我当时的判断是否有足够的感性基础？</li>
+                        <li>从感性到理性的加工，有没有错误或遗漏？</li>
+                        <li>理性认识回到实践时，有没有僵化地"照本宣科"，不顾实际情况的变化？</li>
+                    </ul>
+                    <p>找到认识链条上断裂的位置，比找到"谁的错"更有价值。</p>
+                </div>
+
+                <div class="action-item">
+                    <h3>实验三：检验你的"理论"</h3>
+                    <p>列出你持有的一个重要信念或判断（任何领域的）。问自己：</p>
+                    <ul>
+                        <li>这个信念来自于什么？是亲身实践，还是他人传授，还是推理？</li>
+                        <li>它有没有被实践检验过？结果如何？</li>
+                        <li>如果还没有被检验，什么情况下它会被证伪？</li>
+                    </ul>
+                    <p>一个经不起追问的信念，不管多"正确"，都值得重新审视。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 一目了然（可视化） -->
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2>一目了然</h2>
+
+                <!-- 雷达图 -->
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量《实践论》的文章"性格"</p>
+                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                    <div class="chart-legend">
+                        <span style="color:#e53e3e">●《实践论》</span>
+                    </div>
+                </div>
+
+                <!-- 论证节奏曲线 -->
+                <div class="chart-block">
+                    <h3>论证节奏曲线</h3>
+                    <p class="chart-desc">展示文章各部分的"论证强度"——哪里是论证核心，哪里是过渡铺垫</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="argumentCurve"></canvas>
+                    </div>
+                </div>
+
+                <!-- 认识飞跃曲线 -->
+                <div class="chart-block">
+                    <h3>认识过程的两个飞跃</h3>
+                    <p class="chart-desc">认识的深度随实践循环螺旋上升——不是平面循环，而是每次都更深</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="leapChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 三元比较柱状图 -->
+                <div class="chart-block">
+                    <h3>三种认识方式对比</h3>
+                    <p class="chart-desc">唯理论、经验论、辩证唯物论在各维度上的得分对比</p>
+                    <div class="chart-container" style="max-width:600px;margin:0 auto;">
+                        <canvas id="compareChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 理论拼图 -->
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2>在马哲体系中的位置</h2>
+                <div class="puzzle-map">
+                    <div class="puzzle-intro">
+                        <p>读完《实践论》，你会恍然大悟："实践是检验真理的唯一标准"这个命题的哲学基础，正是来自这里。高中政治课上讲的"实践是认识的来源、动力、目的和标准"，就是从这篇文章里提炼出来的。</p>
+                    </div>
+                    <div class="puzzle-position">
+                        <h3>《实践论》在马哲体系中的坐标</h3>
+                        <div class="theory-tree">
+                            <div class="theory-node root">马克思主义哲学</div>
+                            <div class="theory-branches">
+                                <div class="theory-branch">
+                                    <div class="theory-node branch">辩证唯物论</div>
+                                    <div class="theory-sub">
+                                        <div class="theory-node current">认识论<br><small>《实践论》的核心</small></div>
+                                        <div class="theory-node related">唯物论<br><small>物质第一性</small></div>
+                                        <div class="theory-node related">辩证法<br><small>《矛盾论》的核心</small></div>
+                                    </div>
+                                </div>
+                                <div class="theory-branch">
+                                    <div class="theory-node branch">历史唯物主义</div>
+                                    <div class="theory-sub">
+                                        <div class="theory-node related">社会基本矛盾</div>
+                                        <div class="theory-node related">阶级与国家</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="puzzle-connection">
+                        <h3>与其他经典的联结</h3>
+                        <ul>
+                            <li>→ 《矛盾论》：两篇同年写就，认识论与辩证法互为表里</li>
+                            <li>→ 《改造我们的学习》：把《实践论》的哲学原则应用到党的学习方式改革</li>
+                            <li>→ 《反对本本主义》：早期版本的反教条主义，《实践论》的哲学前身</li>
+                            <li>→ 列宁《唯物主义和经验批判主义》：认识论的理论来源</li>
+                        </ul>
+                    </div>
+                    <div class="puzzle-modern">
+                        <h3>它解决的真实问题</h3>
+                        <p>1937年，党内存在严重的主观主义——有人脱离中国实际，搬用苏联经验（教条主义）；有人只凭狭隘的亲身经历做判断，拒绝理论指导（经验主义）。这两种错误在重大关头都会导致革命失败。《实践论》从哲学根源上批判了这两种倾向，为延安整风运动奠定了理论基础。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 延伸阅读 -->
+        <div class="tab-content" id="further">
+            <div class="further-reading">
+                <h2>延伸阅读</h2>
+                <div class="reading-item">
+                    <h3>如果《实践论》让你思考"怎么知道自己是对的"</h3>
+                    <p>→ 读《矛盾论》——认识了"怎么知道"，还需要知道"该怎么分析"</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果《实践论》让你想看它的实践应用</h3>
+                    <p>→ 读《改造我们的学习》——这是《实践论》原则在延安整风中的直接应用，将"两个飞跃"翻译成了具体的学习方法批评</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果《实践论》让你对"教条主义"有了清晰认识</h3>
+                    <p>→ 读《反对党八股》——从认识论的错误，到表达方式的错误，形成完整的批判链</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果《实践论》让你想追溯认识论的哲学来源</h3>
+                    <p>→ 读列宁《唯物主义和经验批判主义》——直接批判马赫主义，是《实践论》哲学前提的重要来源</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果《实践论》让你思考"如何把理论用于实践"</h3>
+                    <p>→ 读《论持久战》——这是把战略理论与具体战争实践结合的最好示范，是《实践论》认识论的绝佳案例</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        /* 文章详情页样式 */
+        .article-detail {
+            max-width: 900px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        .article-header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 2px solid #c53030;
+        }
+
+        .importance-badge {
+            display: inline-block;
+            background: #c53030;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 16px;
+        }
+
+        .article-header h1 {
+            font-size: 2.4em;
+            color: #1a1a1a;
+            margin: 12px 0;
+            font-family: 'STSong', 'SimSun', serif;
+        }
+
+        .article-subtitle {
+            color: #555;
+            font-size: 1.05em;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            color: #666;
+            font-size: 0.9em;
+            flex-wrap: wrap;
+        }
+
+        .tab-nav {
+            display: flex;
+            gap: 4px;
+            margin: 30px 0 0;
+            border-bottom: 2px solid #e2e8f0;
+            overflow-x: auto;
+            padding-bottom: 0;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 18px;
+            cursor: pointer;
+            color: #666;
+            font-size: 0.95em;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover { color: #c53030; }
+        .tab-btn.active {
+            color: #c53030;
+            border-bottom-color: #c53030;
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px 0;
+        }
+        .tab-content.active { display: block; }
+
+        /* 原文样式 */
+        .text-intro {
+            background: #fff8f0;
+            border-left: 4px solid #c53030;
+            padding: 14px 20px;
+            margin-bottom: 24px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .chapter {
+            margin-bottom: 16px;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .chapter-title {
+            background: #f7f7f7;
+            padding: 14px 20px;
+            margin: 0;
+            cursor: pointer;
+            font-size: 1.05em;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .chapter-title:hover { background: #f0f0f0; }
+
+        .toggle-icon {
+            font-size: 0.8em;
+            color: #c53030;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .chapter-title.collapsed .toggle-icon { transform: rotate(-90deg); }
+
+        .chapter-content {
+            padding: 20px 24px;
+            line-height: 1.9;
+            color: #2d2d2d;
+            font-size: 1em;
+        }
+
+        .chapter-content p {
+            margin-bottom: 16px;
+            text-indent: 2em;
+        }
+
+        /* 精读栏目通用 */
+        .reading-guide, .difficulty-section, .dialogue-section,
+        .action-section, .visualization-section, .puzzle-section, .further-reading {
+            line-height: 1.9;
+        }
+
+        .guide-block, .diff-item, .dialogue-block, .action-item,
+        .chart-block, .reading-item {
+            margin-bottom: 28px;
+            padding: 20px 24px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .guide-block h3, .dialogue-block h3, .action-item h3 {
+            color: #c53030;
+            margin-bottom: 12px;
+            font-size: 1.05em;
+        }
+
+        .wrong {
+            background: #fff5f5;
+            border-left: 4px solid #fc8181;
+            padding: 10px 16px;
+            margin-bottom: 10px;
+            border-radius: 0 4px 4px 0;
+            color: #742a2a;
+        }
+
+        .correct {
+            background: #f0fff4;
+            border-left: 4px solid #68d391;
+            padding: 10px 16px;
+            border-radius: 0 4px 4px 0;
+            color: #1a4731;
+        }
+
+        .chart-container { position: relative; }
+        .chart-block h3 { color: #c53030; margin-bottom: 8px; }
+        .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
+        .chart-legend { text-align: center; margin-top: 10px; font-size: 0.9em; }
+        .chart-legend span { margin: 0 10px; }
+
+        /* 理论树 */
+        .theory-tree {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .theory-node {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            margin: 6px;
+        }
+        .theory-node.root { background: #c53030; color: white; font-weight: bold; }
+        .theory-node.branch { background: #2d3748; color: white; }
+        .theory-node.current { background: #c53030; color: white; font-weight: bold; }
+        .theory-node.related { background: #e2e8f0; color: #333; }
+        .theory-branches { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 12px; }
+        .theory-branch { text-align: center; }
+        .theory-sub { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
+
+        .puzzle-intro, .puzzle-position, .puzzle-connection, .puzzle-modern {
+            margin-bottom: 24px;
+            padding: 18px 22px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .puzzle-position h3, .puzzle-connection h3, .puzzle-modern h3 {
+            color: #c53030;
+            margin-bottom: 12px;
+        }
+
+        .further-reading .reading-item h3 { color: #c53030; margin-bottom: 8px; font-size: 1em; }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #1a1a1a;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            height: 60px;
+            z-index: 1000;
+            gap: 16px;
+        }
+        .nav-brand a { color: #e53e3e; font-weight: bold; font-size: 1.1em; text-decoration: none; }
+        .nav-search { flex: 1; display: flex; gap: 6px; max-width: 300px; }
+        .nav-search input { flex: 1; padding: 5px 10px; border-radius: 4px; border: none; font-size: 0.85em; }
+        .nav-search button { background: #e53e3e; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+        .nav-menu { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; }
+        .nav-menu li a { color: #ccc; text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.9em; }
+        .nav-menu li a:hover, .nav-menu li a.active { color: white; background: #c53030; }
+
+        @media (max-width: 600px) {
+            .article-header h1 { font-size: 1.8em; }
+            .tab-btn { padding: 8px 12px; font-size: 0.85em; }
+            .chapter-content { padding: 14px 16px; }
+        }
+    </style>
+
+    <script>
+        // 标签切换
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tabId === 'visual') {
+                setTimeout(initCharts, 100);
+            }
+        }
+
+        // 章节折叠
+        function toggleChapter(titleEl) {
+            const content = titleEl.nextElementSibling;
+            titleEl.classList.toggle('collapsed');
+            content.style.display = titleEl.classList.contains('collapsed') ? 'none' : 'block';
+        }
+
+        // 搜索
+        function search() {
+            const query = document.getElementById('searchInput').value;
+            if (query) alert('搜索功能即将上线，请稍候');
+        }
+
+        // 图表初始化
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+            chartsInited = true;
+
+            // 雷达图：实践论单篇文章
+            const radarCtx = document.getElementById('radarChart').getContext('2d');
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                    datasets: [{
+                        label: '实践论',
+                        data: [9, 7, 5, 8, 6, 7],
+                        borderColor: '#c41e3a',
+                        backgroundColor: 'rgba(196,30,58,0.15)',
+                        pointBackgroundColor: '#c41e3a',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            min: 0, max: 10,
+                            ticks: { stepSize: 2, font: { size: 10 } },
+                            pointLabels: { font: { size: 12 } }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // 论证节奏曲线
+            const argCtx = document.getElementById('argumentCurve').getContext('2d');
+            new Chart(argCtx, {
+                type: 'line',
+                data: {
+                    labels: ['开篇\n实践基础', '感性认识\n阶段', '第一飞跃\n（感→理）', '理性认识\n阶段', '第二飞跃\n（理→践）★', '实践检验\n真理', '循环往复\n无穷发展'],
+                    datasets: [{
+                        label: '论证强度',
+                        data: [6, 7, 8.5, 7.5, 9.5, 8, 8.5],
+                        borderColor: '#e53e3e',
+                        backgroundColor: 'rgba(229,62,62,0.08)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        borderWidth: 2.5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        annotation: {}
+                    },
+                    scales: {
+                        y: {
+                            min: 0, max: 10,
+                            title: { display: true, text: '论证强度' }
+                        },
+                        x: {
+                            ticks: { font: { size: 11 } }
+                        }
+                    }
+                }
+            });
+
+            // 认识飞跃螺旋曲线
+            const leapCtx = document.getElementById('leapChart').getContext('2d');
+            const leapLabels = [];
+            const leapData = [];
+            for (let i = 0; i <= 24; i++) {
+                const cycle = Math.floor(i / 8);
+                const phase = i % 8;
+                const baseHeight = cycle * 2;
+                let val;
+                if (phase < 4) {
+                    val = baseHeight + phase * 0.5;
+                } else {
+                    val = baseHeight + 2 + (phase - 4) * 0.7;
+                }
+                leapData.push(val);
+                if (i % 4 === 0) {
+                    const phaseNames = ['感性', '→', '理性', '→实践→', '感性', '→', '理性', '→实践→'];
+                    leapLabels.push(phaseNames[i % 8] || '');
+                } else {
+                    leapLabels.push('');
+                }
+            }
+
+            new Chart(leapCtx, {
+                type: 'line',
+                data: {
+                    labels: ['实践₁', '感性₁', '理性₁', '实践₂', '感性₂', '理性₂', '实践₃', '感性₃', '理性₃'],
+                    datasets: [{
+                        label: '认识深度',
+                        data: [1, 2.5, 4, 5.2, 6.5, 7.8, 8.8, 9.5, 10],
+                        borderColor: '#e53e3e',
+                        backgroundColor: 'rgba(229,62,62,0.08)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 6,
+                        borderWidth: 2.5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            min: 0, max: 11,
+                            title: { display: true, text: '认识深度（螺旋上升）' }
+                        }
+                    }
+                }
+            });
+
+            // 三元比较柱状图
+            const compareCtx = document.getElementById('compareChart').getContext('2d');
+            new Chart(compareCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['承认实践重要性', '承认理性作用', '两者辩证统一', '能指导行动', '能检验真理'],
+                    datasets: [
+                        {
+                            label: '唯理论',
+                            data: [2, 9, 2, 4, 3],
+                            backgroundColor: 'rgba(229,62,62,0.6)',
+                        },
+                        {
+                            label: '经验论',
+                            data: [9, 2, 2, 6, 5],
+                            backgroundColor: 'rgba(49,130,206,0.6)',
+                        },
+                        {
+                            label: '辩证唯物论',
+                            data: [9, 9, 10, 9, 10],
+                            backgroundColor: 'rgba(56,161,105,0.7)',
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { min: 0, max: 10 }
+                    },
+                    plugins: {
+                        legend: { position: 'top' }
+                    }
+                }
+            });
+        }
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

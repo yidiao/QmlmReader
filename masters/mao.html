@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛泽东 | 革命导师 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 雷达图图例 */
+        .radar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            margin-top: 12px;
+            font-size: 0.88rem;
+        }
+        .radar-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            user-select: none;
+            transition: opacity 0.2s;
+        }
+        .radar-legend-item:hover { opacity: 0.75; }
+        .radar-legend-item.hidden-dataset span {
+            text-decoration: line-through;
+            opacity: 0.45;
+        }
+        .radar-legend-item.hidden-dataset .radar-legend-dot {
+            opacity: 0.3;
+        }
+        .radar-legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        /* 导师详情页样式 */
+        .master-hero {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .master-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></svg>');
+            background-size: 100px;
+            opacity: 0.5;
+        }
+        
+        .master-hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .master-hero-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            font-weight: bold;
+            color: #c41e3a;
+            border: 6px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+        
+        .master-hero-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .master-hero-info .years {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .master-hero-info .title {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .master-content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Tab导航 */
+        .tab-nav {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 0 1rem;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn:hover {
+            color: #c41e3a;
+        }
+        
+        .tab-btn.active {
+            color: #c41e3a;
+            font-weight: bold;
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #c41e3a;
+        }
+        
+        /* Tab内容 */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-content h2 {
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab-content h3 {
+            color: #333;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .tab-content p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+        
+        /* 时间轴样式 */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #c41e3a, #ff6b6b);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.65rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #c41e3a;
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: #c41e3a;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #c41e3a;
+        }
+        
+        /* 著作卡片 */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .work-card {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .work-card:hover {
+            border-color: #c41e3a;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.1);
+        }
+        
+        .work-card h4 {
+            color: #c41e3a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .work-card .year {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .work-card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        .work-card a {
+            display: inline-block;
+            margin-top: 0.8rem;
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .work-card a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 理论贡献 */
+        .contribution-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .contribution-list li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #c41e3a;
+        }
+        
+        .contribution-list li strong {
+            color: #c41e3a;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 黑夜模式 */
+        body.dark-mode .tab-nav,
+        body.dark-mode .tab-content {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode .tab-btn {
+            color: #aaa;
+        }
+        
+        body.dark-mode .tab-btn.active {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .tab-btn.active::after {
+            background: #ff6b6b;
+        }
+        
+        body.dark-mode .tab-content h2 {
+            color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        
+        body.dark-mode .tab-content h3 {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tab-content p {
+            color: #ccc;
+        }
+        
+        body.dark-mode .timeline-content,
+        body.dark-mode .work-card,
+        body.dark-mode .contribution-list li {
+            background: #3a3a3a;
+        }
+        
+        body.dark-mode .work-card {
+            border-color: #555;
+        }
+        
+        body.dark-mode .work-card h4 {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .work-card a {
+            color: #ff6b6b;
+        }
+        
+        /* 一目了然图表区 */
+        .visual-section {
+            margin-top: 2rem;
+        }
+        
+        .chart-container {
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 28px;
+        }
+        
+        .chart-container h3 {
+            color: #333;
+            margin-bottom: 6px;
+        }
+        
+        .chart-container .chart-desc {
+            color: #666;
+            font-size: 0.88em;
+            margin-bottom: 16px;
+        }
+        
+        body.dark-mode .chart-container {
+            background: #3a3a3a;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html">文章</a>
+                <a href="../masters.html" class="active">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 返回按钮 -->
+    <div class="back-nav" style="background:#f8f8f8;border-bottom:1px solid #e0e0e0;padding:12px 0;">
+        <div class="container" style="max-width:1000px;margin:0 auto;padding:0 2rem;">
+            <a href="../masters.html" style="display:inline-flex;align-items:center;gap:6px;color:#c41e3a;text-decoration:none;font-size:0.95rem;font-weight:500;">
+                <span style="font-size:1.1rem;">←</span> 返回导师列表
+            </a>
+        </div>
+    </div>
+
+    <main>
+        <!-- 导师头部信息 -->
+        <section class="master-hero">
+            <div class="master-hero-content">
+                <div class="master-hero-avatar">
+                    <img src="../images/masters/mao.jpg"
+                         style="width:180px;height:180px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                </div>
+                <div class="master-hero-info">
+                    <h1>毛泽东</h1>
+                    <p class="years">1893年12月26日 — 1976年9月9日</p>
+                    <p class="title">中国共产党创始人之一 · 中国人民解放军缔造者 · 中华人民共和国缔造者 · 毛泽东思想创立者 · 伟大的马克思主义者</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab内容区 -->
+        <div class="master-content-wrapper">
+            <div class="tab-nav">
+                <button class="tab-btn active" data-tab="biography">生平历程</button>
+                <button class="tab-btn" data-tab="works">代表著作</button>
+                <button class="tab-btn" data-tab="theory">理论贡献</button>
+                <button class="tab-btn" data-tab="visual">一目了然</button>
+                <button class="tab-btn" data-tab="legacy">历史地位</button>
+            </div>
+
+            <!-- 生平历程 -->
+            <div class="tab-content active" data-tab="biography">
+                <h2>生平历程</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1893年</div>
+                        <div class="timeline-content">
+                            <strong>诞生</strong>
+                            <p>12月26日出生于湖南省湘潭县韶山冲一个农民家庭。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1911年</div>
+                        <div class="timeline-content">
+                            <strong>参加辛亥革命</strong>
+                            <p>到长沙求学，参加湖南新军，投身辛亥革命。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1918年</div>
+                        <div class="timeline-content">
+                            <strong>毕业于湖南第一师范</strong>
+                            <p>组织新民学会，开始接触马克思主义。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1921年</div>
+                        <div class="timeline-content">
+                            <strong>出席中共一大</strong>
+                            <p>7月出席中国共产党第一次全国代表大会，参与创建中国共产党。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1927年</div>
+                        <div class="timeline-content">
+                            <strong>领导秋收起义</strong>
+                            <p>八七会议提出"枪杆子里出政权"著名论断，领导秋收起义，创建井冈山革命根据地，开辟农村包围城市、武装夺取政权的革命道路。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1935年</div>
+                        <div class="timeline-content">
+                            <strong>遵义会议确立领导地位</strong>
+                            <p>遵义会议事实上确立了毛泽东在党中央和红军的领导地位，挽救了党、挽救了红军、挽救了中国革命。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1937-1938年</div>
+                        <div class="timeline-content">
+                            <strong>哲学著作问世</strong>
+                            <p>撰写《实践论》《矛盾论》，系统阐述马克思主义认识论和辩证法，为党的思想路线奠定哲学基础。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1938年</div>
+                        <div class="timeline-content">
+                            <strong>《论持久战》发表</strong>
+                            <p>系统阐述抗日战争的战略方针，批驳"亡国论"和"速胜论"，指明抗战胜利的正确道路。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1942-1945年</div>
+                        <div class="timeline-content">
+                            <strong>延安整风运动</strong>
+                            <p>领导全党整风运动，确立实事求是的思想路线，为党的七大召开和抗战胜利奠定思想基础。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1945年</div>
+                        <div class="timeline-content">
+                            <strong>中共七大</strong>
+                            <p>毛泽东思想被确立为党的指导思想，毛泽东当选为中央委员会主席。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1949年</div>
+                        <div class="timeline-content">
+                            <strong>中华人民共和国成立</strong>
+                            <p>10月1日在北京天安门宣告中华人民共和国成立，中国人民从此站起来了。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1950-1953年</div>
+                        <div class="timeline-content">
+                            <strong>抗美援朝</strong>
+                            <p>作出"抗美援朝，保家卫国"战略决策，中国人民志愿军赴朝作战，维护国家主权和安全。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1956年</div>
+                        <div class="timeline-content">
+                            <strong>《论十大关系》</strong>
+                            <p>发表《论十大关系》，提出探索适合中国国情的社会主义建设道路。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1966-1976年</div>
+                        <div class="timeline-content">
+                            <strong>晚年岁月</strong>
+                            <p>发动并领导"文化大革命"，晚年致力于反修防修、防止资本主义复辟的探索。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1976年</div>
+                        <div class="timeline-content">
+                            <strong>逝世</strong>
+                            <p>9月9日在北京逝世，享年82岁。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 代表著作 -->
+            <div class="tab-content" data-tab="works">
+                <h2>代表著作</h2>
+                <div class="works-grid">
+                    <div class="work-card">
+                        <h4>《中国社会各阶级的分析》</h4>
+                        <p class="year">1925年</p>
+                        <p>分析中国社会各阶级的经济地位和政治态度，明确谁是我们的敌人、谁是我们的朋友这一革命首要问题。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《湖南农民运动考察报告》</h4>
+                        <p class="year">1927年</p>
+                        <p>热情歌颂农民运动的伟大作用，批驳对农民运动的种种污蔑，提出建立农民政权和农民武装的思想。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《中国的红色政权为什么能够存在？》</h4>
+                        <p class="year">1928年</p>
+                        <p>论证中国红色政权存在和发展的条件，阐明工农武装割据的思想。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《星星之火，可以燎原》</h4>
+                        <p class="year">1930年</p>
+                        <p>阐述农村包围城市、武装夺取政权的革命道路理论，批判悲观思想，指出中国革命高潮即将到来。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《实践论》</h4>
+                        <p class="year">1937年</p>
+                        <p>系统阐述马克思主义认识论，论述实践与认识的辩证关系，提出"实践、认识、再实践、再认识"的认识发展规律。</p>
+                        <a href="../articles/shi-jian-lun.html">阅读全文 →</a>
+                    </div>
+                    <div class="work-card">
+                        <h4>《矛盾论》</h4>
+                        <p class="year">1937年</p>
+                        <p>系统阐述唯物辩证法，论述矛盾的普遍性和特殊性、主要矛盾和矛盾的主要方面，提出具体问题具体分析的方法论。</p>
+                        <a href="../articles/mao-dun-lun.html">阅读全文 →</a>
+                    </div>
+                    <div class="work-card">
+                        <h4>《论持久战》</h4>
+                        <p class="year">1938年</p>
+                        <p>分析中日双方的特点，批驳"亡国论"和"速胜论"，提出持久战的战略总方针和三个阶段的科学预见。</p>
+                        <a href="../articles/lun-chi-jiu-zhan.html">阅读全文 →</a>
+                    </div>
+                    <div class="work-card">
+                        <h4>《新民主主义论》</h4>
+                        <p class="year">1940年</p>
+                        <p>系统阐述新民主主义革命理论，论述中国革命的性质、对象、动力、前途，提出新民主主义的政治、经济、文化纲领。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《改造我们的学习》</h4>
+                        <p class="year">1941年</p>
+                        <p>延安整风运动的重要文献，批判主观主义学风，倡导理论联系实际的马克思主义学风。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《论联合政府》</h4>
+                        <p class="year">1945年</p>
+                        <p>中共七大政治报告，提出废除国民党一党专政、建立民主联合政府的主张，阐述党的三大作风。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《论人民民主专政》</h4>
+                        <p class="year">1949年</p>
+                        <p>阐述人民民主专政的理论，论述新中国政权的性质、任务和阶级基础，提出"对人民民主，对敌人专政"的思想。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《论十大关系》</h4>
+                        <p class="year">1956年</p>
+                        <p>总结苏联经验教训，提出探索适合中国国情的社会主义建设道路，论述社会主义建设中的十对重大关系。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《关于正确处理人民内部矛盾的问题》</h4>
+                        <p class="year">1957年</p>
+                        <p>创立社会主义社会矛盾学说，区分敌我矛盾和人民内部矛盾，提出正确处理人民内部矛盾是社会主义国家政治生活主题。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 理论贡献 -->
+            <div class="tab-content" data-tab="theory">
+                <h2>理论贡献</h2>
+                <ul class="contribution-list">
+                    <li>
+                        <strong>新民主主义革命理论</strong>
+                        <p>创造性地提出中国革命必须分两步走：第一步是新民主主义革命，第二步是社会主义革命；提出无产阶级领导的人民大众的反帝反封建的新民主主义革命总路线；建立新民主主义的政治、经济、文化纲领。</p>
+                    </li>
+                    <li>
+                        <strong>农村包围城市、武装夺取政权的革命道路理论</strong>
+                        <p>突破城市中心论，提出在农村建立革命根据地，以农村包围城市、最后夺取全国政权的革命道路。论证红色政权存在发展的条件，阐述工农武装割据思想。</p>
+                    </li>
+                    <li>
+                        <strong>人民军队建设和人民战争理论</strong>
+                        <p>提出党指挥枪的根本原则，确立全心全意为人民服务的建军宗旨，制定三大纪律八项注意。创立人民战争思想，提出兵民是胜利之本，论述战略防御、战略相持、战略反攻的持久战理论。</p>
+                    </li>
+                    <li>
+                        <strong>政策和策略理论</strong>
+                        <p>提出"政策和策略是党的生命"，强调战略上藐视敌人、战术上重视敌人，制定统一战线中独立自主原则，提出利用矛盾、争取多数、反对少数、各个击破的策略方针。</p>
+                    </li>
+                    <li>
+                        <strong>思想政治工作和文化工作理论</strong>
+                        <p>提出政治工作是经济工作和其他一切工作的生命线，确立文艺为工农兵服务的方向，提出百花齐放、百家争鸣的方针，强调意识形态领域阶级斗争的长期性。</p>
+                    </li>
+                    <li>
+                        <strong>党的建设理论</strong>
+                        <p>强调思想建党，提出理论联系实际、密切联系群众、批评与自我批评三大作风，创造整风运动这一马克思主义思想教育形式，提出"惩前毖后、治病救人"的方针。</p>
+                    </li>
+                    <li>
+                        <strong>社会主义革命和建设理论</strong>
+                        <p>提出社会主义工业化和社会主义改造同时并举的过渡时期总路线，创立社会主义社会矛盾学说，提出正确处理人民内部矛盾是社会主义国家政治生活的主题，探索适合中国国情的社会主义建设道路。</p>
+                    </li>
+                    <li>
+                        <strong>哲学思想</strong>
+                        <p>《实践论》《矛盾论》系统阐述马克思主义认识论和辩证法，强调实践第一的观点，提出矛盾的普遍性和特殊性辩证关系是矛盾问题的精髓，倡导具体问题具体分析。</p>
+                    </li>
+                    <li>
+                        <strong>继续革命理论</strong>
+                        <p>晚年提出社会主义社会还存在阶级和阶级斗争，存在资本主义复辟的危险性，提出无产阶级专政下继续革命的理论，发动"文化大革命"进行探索。</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 一目了然 -->
+            <div class="tab-content" data-tab="visual">
+                <h2>一目了然</h2>
+                <div class="visual-section">
+                    <!-- 雷达图：五导师综合能力对比 -->
+                    <div class="chart-container">
+                        <h3>五大导师综合能力对比（无高低之分，仅能力侧重，彼此为继承发扬关系）</h3>
+                        <p class="chart-desc">统一10项维度，横向比较毛泽东与其他四位导师各自的能力侧重。当前页突出显示：毛泽东</p>
+                        <canvas id="maoRadar" style="max-height:400px;"></canvas>
+                        <div class="radar-legend">
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#8b0000;"></div><span>马克思（深红）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#4a5568;"></div><span>恩格斯（青灰）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#d4a017;"></div><span>列宁（金黄）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#744210;"></div><span>斯大林（棕黄）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#e8192c;"></div><span>毛泽东（鲜红）</span></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 革命历程曲线 -->
+                    <div class="chart-container">
+                        <h3>革命活动历程</h3>
+                        <p class="chart-desc">从建党到建国各时期的革命实践强度变化</p>
+                        <canvas id="maoRevolutionChart" style="max-height:280px;"></canvas>
+                    </div>
+                    
+                    <!-- 理论贡献领域 -->
+                    <div class="chart-container">
+                        <h3>理论贡献领域分布</h3>
+                        <p class="chart-desc">毛泽东思想在各领域的理论创新分布</p>
+                        <canvas id="maoTheoryChart" style="max-height:280px;"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 历史地位 -->
+            <div class="tab-content" data-tab="legacy">
+                <h2>历史地位</h2>
+                <h3>中国革命的伟大领袖</h3>
+                <p>毛泽东是领导中国人民彻底改变自己命运和国家面貌的一代伟人。他领导中国共产党和中国人民经过长期艰苦卓绝的斗争，推翻了帝国主义、封建主义、官僚资本主义三座大山，建立了中华人民共和国，实现了民族独立和人民解放。这一伟大历史功绩永载史册。</p>
+                
+                <h3>毛泽东思想的创立者</h3>
+                <p>毛泽东思想是马克思列宁主义在中国的创造性运用和发展，是被实践证明了的关于中国革命和建设的正确理论原则和经验总结。它实现了马克思主义中国化的第一次历史性飞跃，为中国革命和建设提供了科学理论指导。</p>
+                
+                <h3>世界社会主义运动的重要人物</h3>
+                <p>中国革命的胜利极大地改变了世界政治格局，壮大了社会主义力量，鼓舞了殖民地半殖民地人民的民族解放运动。毛泽东思想对国际共产主义运动和世界被压迫民族的解放斗争产生了深远影响。</p>
+                
+                <h3>历史评价</h3>
+                <p>1981年《关于建国以来党的若干历史问题的决议》对毛泽东和毛泽东思想作出科学评价：毛泽东是伟大的马克思主义者，伟大的无产阶级革命家、战略家、理论家，是党的第一代中央领导集体的核心。他的功绩是第一位的，错误是第二位的。毛泽东思想永远是中国共产党的指导思想。</p>
+                
+                <h3>当代意义</h3>
+                <p>毛泽东思想的立场、观点、方法，特别是实事求是、群众路线、独立自主的活的灵魂，至今仍具有重要的指导意义。对毛泽东晚年错误的科学总结，也为后来的改革开放提供了历史借鉴。学习和研究毛泽东思想，对于理解中国革命和建设的历史、把握马克思主义中国化的规律，具有重要价值。</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">理论学习 · 斗争精神 · 青年担当</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Tab切换
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                
+                // 切换按钮状态
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 切换内容
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelector(`.tab-content[data-tab="${tabId}"]`).classList.add('active');
+                
+                // 初始化图表
+                if (tabId === 'visual') {
+                    setTimeout(initCharts, 100);
+                }
+            });
+        });
+
+        // 图表初始化
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+            chartsInited = true;
+
+            // 雷达图：五导师综合能力对比
+            const radarCtx = document.getElementById('maoRadar');
+            if (radarCtx) {
+                const labels = ['理论深度','组织纪律','学术广度','创新性','战略眼光','领导才能','文笔表达','执行力','群众动员','政治智慧'];
+                const radarChart = new Chart(radarCtx.getContext('2d'), {
+                    type: 'radar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '马克思',
+                                data: [10, 7, 10, 10, 8, 7, 9, 6, 6, 9],
+                                borderColor: '#8b0000',
+                                backgroundColor: 'rgba(139,0,0,0.05)',
+                                pointBackgroundColor: '#8b0000',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '恩格斯',
+                                data: [9, 9, 10, 8, 7, 8, 9, 7, 6, 8],
+                                borderColor: '#4a5568',
+                                backgroundColor: 'rgba(74,85,104,0.05)',
+                                pointBackgroundColor: '#4a5568',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '列宁',
+                                data: [9, 9, 8, 10, 10, 10, 8, 9, 9, 10],
+                                borderColor: '#d4a017',
+                                backgroundColor: 'rgba(212,160,23,0.05)',
+                                pointBackgroundColor: '#d4a017',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '斯大林',
+                                data: [7, 10, 6, 6, 9, 10, 6, 10, 8, 9],
+                                borderColor: '#744210',
+                                backgroundColor: 'rgba(116,66,16,0.05)',
+                                pointBackgroundColor: '#744210',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '毛泽东',
+                                data: [9, 8, 8, 10, 10, 10, 9, 9, 10, 10],
+                                borderColor: '#e8192c',
+                                backgroundColor: 'rgba(232,25,44,0.10)',
+                                pointBackgroundColor: '#e8192c',
+                                borderWidth: 2.5,
+                                pointRadius: 4,
+                                hidden: false,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            r: {
+                                min: 0, max: 10,
+                                ticks: { stepSize: 2, font: { size: 10 } },
+                                pointLabels: { font: { size: 12 } }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false }
+                        }
+                    }
+                });
+
+                // 图例点击切换显示/隐藏
+                document.querySelectorAll('#maoRadar ~ .radar-legend .radar-legend-item').forEach((item, i) => {
+                    // 根据初始 hidden 状态设置图例样式
+                    const ds = radarChart.data.datasets[i];
+                    if (ds.hidden) {
+                        item.classList.add('hidden-dataset');
+                    }
+                    item.addEventListener('click', () => {
+                        ds.hidden = !ds.hidden;
+                        item.classList.toggle('hidden-dataset', !!ds.hidden);
+                        radarChart.update();
+                    });
+                });
+            }
+
+            // 革命历程曲线
+            const revolutionCtx = document.getElementById('maoRevolutionChart');
+            if (revolutionCtx) {
+                new Chart(revolutionCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['1921-1927', '1927-1935', '1935-1945', '1945-1949', '1949-1956', '1956-1976'],
+                        datasets: [{
+                            label: '革命实践强度',
+                            data: [6, 8, 9, 10, 7, 5],
+                            borderColor: '#e53e3e',
+                            backgroundColor: 'rgba(229, 62, 62, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }, {
+                            label: '理论创作产出',
+                            data: [5, 7, 9, 8, 7, 4],
+                            borderColor: '#3182ce',
+                            backgroundColor: 'rgba(49, 130, 206, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { min: 0, max: 10 }
+                        }
+                    }
+                });
+            }
+
+            // 理论贡献领域分布
+            const theoryCtx = document.getElementById('maoTheoryChart');
+            if (theoryCtx) {
+                new Chart(theoryCtx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['军事理论', '哲学思想', '政治理论', '经济思想', '文化理论', '党建理论'],
+                        datasets: [{
+                            data: [25, 20, 20, 15, 10, 10],
+                            backgroundColor: ['#c41e3a', '#e53e3e', '#fc8181', '#feb2b2', '#fed7d7', '#fff5f5'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'right' }
+                        }
+                    }
+                });
+            }
+        }
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

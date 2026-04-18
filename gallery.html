@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文艺 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">首页</a>
+                <a href="articles.html">文章</a>
+                <a href="masters.html">导师</a>
+                <a href="toolkit.html">工具集</a>
+                <a href="gallery.html" class="active">文艺</a>
+                <a href="puzzle.html" style="color:#fbbf24;font-weight:bold;">🧩 理论拼图</a>
+                <a href="international.html">🌍 国际共运</a>
+                <a href="rectify.html">正名</a>
+                <a href="about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="gallery-page">
+        <div class="container">
+            <h2 class="section-title">有趣的和文艺的</h2>
+            <p class="section-desc">社会主义建设和宣传的海报、革命歌曲、视频资源</p>
+
+            <!-- 革命歌曲 -->
+            <section class="gallery-section" id="music">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                    <h3 class="gallery-title" style="margin:0;"> 革命歌曲</h3>
+                    <a href="gallery/music.html" style="color:var(--primary-color);font-size:0.9rem;font-weight:500;">查看全部 →</a>
+                </div>
+                <div class="music-grid">
+                    <div class="music-card">
+                        <img src="images/icons/国际歌.jpg" alt="音乐">
+                        <h4>国际歌</h4>
+                        <p class="music-desc">不用拘泥于形式和乐器，同志！我们要让国际歌在世界各地奏响！</p>
+                    </div>
+
+                    <div class="music-card">
+                        <div class="music-icon">
+                        <img src="images/icons/东方红.jpg" alt="音乐">
+                        </div>
+                        <h4>东方红</h4>
+                        <p class="music-desc">歌颂中国共产党和毛泽东的经典歌曲</p>
+                    </div>
+
+                    <div class="music-card">
+                        <div class="music-icon">
+                            <img src="images/icons/我们走在大路上.jpg" alt="音乐">
+                        </div>
+                        <h4>我们走在大路上</h4>
+                        <p class="music-desc">"我们的队伍向太阳，脚踏着祖国的大地"</p>
+                    </div>
+
+                    <div class="music-card">
+                        <div class="music-icon">
+                            <img src="images/icons/三版义勇军进行曲.jpg" alt="音乐">
+                        </div>
+                        <h4>义勇军进行曲</h4>
+                        <p class="music-desc">中华人民共和国国歌</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 推荐视频 -->
+            <section class="gallery-section" id="videos">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                    <h3 class="gallery-title" style="margin:0;"> 推荐视频</h3>
+                    <a href="gallery/videos.html" style="color:var(--primary-color);font-size:0.9rem;font-weight:500;">查看全部 →</a>
+                </div>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-thumb">
+                            <img src="images/icons/东方红舞台剧.jpg" alt="东方红舞台剧" onerror="this.style.display='none'">
+                        </div>
+                        <h4>大型音乐舞蹈史诗《东方红》</h4>
+                        <p class="video-desc">1965年为庆祝中华人民共和国成立16周年而创作</p>
+                        <a href="https://www.bilibili.com/video/BV1LM4m1C7iE" target="_blank" class="video-link">b站观看 →</a>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumb">
+                            <img src="images/icons/列宁在十月.jpg" alt="列宁在十月" onerror="this.style.display='none'">
+                        </div>
+                        <h4>电影《列宁在十月》</h4>
+                        <p class="video-desc">苏联经典革命历史影片，展现列宁风采</p>
+                        <a href="https://www.bilibili.com/video/BV1Y58QzfEWi" target="_blank" class="video-link">b站观看 →</a>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumb">
+                            <img src="images/icons/列宁在1918.jpg" alt="列宁在1918" onerror="this.style.display='none'">
+                        </div>
+                        <h4>电影《列宁在1918》</h4>
+                        <p class="video-desc">续集，讲述苏维埃政权建立初期的斗争</p>
+                        <a href="https://www.bilibili.com/video/BV1a3LozKEPD" target="_blank" class="video-link">b站观看 →</a>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-thumb">
+                            <img src="images/icons/大决战.jpg" alt="大决战" onerror="this.style.display='none'">
+                        </div>
+                        <h4>《大决战》系列</h4>
+                        <p class="video-desc">辽沈战役、淮海战役、平津战役</p>
+                        <a href="https://www.bilibili.com/video/BV16bByBREDk" target="_blank" class="video-link">b站观看 →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 宣传海报 -->
+            <section class="gallery-section" id="posters">
+                <h3 class="gallery-title"> 宣传海报</h3>
+                <div class="poster-grid">
+                    <div class="poster-card" style="border:2px solid #c41e3a;border-radius:10px;overflow:hidden;cursor:pointer;" onclick="location.href='gallery/propaganda.html'">
+                        <div class="poster-placeholder" style="background:linear-gradient(135deg,#c41e3a,#8b0000);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;height:250px;overflow:hidden;">
+                            <img src="images/icons/haohaoxuexi.jpg" alt="新中国宣传画" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">
+                        </div>
+                        <p class="poster-title" style="padding:0.5rem 1rem 0;font-weight:bold;">新中国宣传画图库</p>
+                        <p class="poster-desc" style="padding:0 1rem 0.8rem;color:#666;font-size:0.9rem;">660张红色年代宣传画，三辑收录，支持搜索筛选</p>
+                        <div style="padding:0 1rem 1rem;"><a href="gallery/propaganda.html" style="color:#c41e3a;font-weight:bold;font-size:0.9rem;">进入图库 →</a></div>
+                    </div>
+
+                    <div class="poster-card" style="border:2px solid #8b1a1a;border-radius:10px;overflow:hidden;cursor:pointer;" onclick="location.href='gallery/soviet.html'">
+                        <div class="poster-placeholder" style="background: linear-gradient(135deg,#c41e3a,#8b0000); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 250px; overflow:hidden;">
+                            <img src="images/icons/hongxierubai.jpg" alt="苏联宣传画" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">
+                        </div>
+                        
+                        <p class="poster-title" style="padding:0.5rem 1rem 0;font-weight:bold;">苏联宣传海报图库</p>
+                        <p class="poster-desc" style="padding:0 1rem 0.8rem;color:#666;font-size:0.9rem;">201张苏维埃时代海报，11大主题分类，社会主义建设·卫国战争·太空探索</p>
+                        <div style="padding:0 1rem 1rem;"><a href="gallery/soviet.html" style="color:#8b1a1a;font-weight:bold;font-size:0.9rem;">进入图库 →</a></div>
+                    </div>
+                    <div class="poster-card">
+                        <div class="poster-placeholder">海报占位</div>
+                        <p class="poster-title">新时代插画</p>
+                        <p class="poster-desc">（待整理）</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 经典语录 -->
+            <section class="gallery-section" id="quotes">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                    <h3 class="gallery-title" style="margin:0;"> 经典语录</h3>
+                    <a href="gallery/quotes.html" style="color:var(--primary-color);font-size:0.9rem;font-weight:500;">查看全部 →</a>
+                </div>
+                <div class="quotes-grid">
+                    <blockquote class="quote-card">
+                        <p>"一个幽灵，共产主义的幽灵，在欧洲游荡。"</p>
+                        <cite>—— 马克思、恩格斯《共产党宣言》</cite>
+                    </blockquote>
+                    <blockquote class="quote-card">
+                        <p>"工人没有祖国。"</p>
+                        <cite>—— 马克思、恩格斯《共产党宣言》</cite>
+                    </blockquote>
+                    <blockquote class="quote-card">
+                        <p>"帝国主义是资本主义的最高阶段。"</p>
+                        <cite>—— 列宁</cite>
+                    </blockquote>
+                    <blockquote class="quote-card">
+                        <p>"为人民服务。"</p>
+                        <cite>—— 毛泽东</cite>
+                    </blockquote>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

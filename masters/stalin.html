@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斯大林 | 革命导师 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 雷达图图例 */
+        .radar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            margin-top: 12px;
+            font-size: 0.88rem;
+        }
+        .radar-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            user-select: none;
+            transition: opacity 0.2s;
+        }
+        .radar-legend-item:hover { opacity: 0.75; }
+        .radar-legend-item.hidden-dataset span {
+            text-decoration: line-through;
+            opacity: 0.45;
+        }
+        .radar-legend-item.hidden-dataset .radar-legend-dot {
+            opacity: 0.3;
+        }
+        .radar-legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        /* 导师详情页样式 */
+        .master-hero {
+            background: linear-gradient(135deg, #744210 0%, #975a16 100%);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .master-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></svg>');
+            background-size: 100px;
+            opacity: 0.5;
+        }
+        
+        .master-hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .master-hero-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            font-weight: bold;
+            color: #744210;
+            border: 6px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+        
+        .master-hero-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .master-hero-info .years {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .master-hero-info .title {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .master-content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Tab导航 */
+        .tab-nav {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 0 1rem;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .tab-btn {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn:hover {
+            color: #744210;
+        }
+        
+        .tab-btn.active {
+            color: #744210;
+            font-weight: bold;
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #744210;
+        }
+        
+        /* Tab内容 */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-content h2 {
+            color: #744210;
+            border-bottom: 2px solid #744210;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab-content h3 {
+            color: #333;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .tab-content p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+        
+        /* 时间轴样式 */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #744210, #975a16);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.65rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #744210;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #744210;
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: #744210;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #744210;
+        }
+        
+        /* 著作卡片 */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .work-card {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .work-card:hover {
+            border-color: #744210;
+            box-shadow: 0 4px 15px rgba(116, 66, 16, 0.1);
+        }
+        
+        .work-card h4 {
+            color: #744210;
+            margin-bottom: 0.5rem;
+        }
+        
+        .work-card .year {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .work-card p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        /* 理论贡献 */
+        .contribution-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .contribution-list li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #744210;
+        }
+        
+        .contribution-list li strong {
+            color: #744210;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 一目了然图表区 */
+        .visual-section {
+            margin-top: 2rem;
+        }
+        
+        .chart-container {
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 28px;
+        }
+        
+        .chart-container h3 {
+            color: #333;
+            margin-bottom: 6px;
+        }
+        
+        .chart-container .chart-desc {
+            color: #666;
+            font-size: 0.88em;
+            margin-bottom: 16px;
+        }
+        
+        /* 黑夜模式 */
+        body.dark-mode .tab-nav,
+        body.dark-mode .tab-content {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode .tab-btn {
+            color: #aaa;
+        }
+        
+        body.dark-mode .tab-btn.active {
+            color: #d69e2e;
+        }
+        
+        body.dark-mode .tab-btn.active::after {
+            background: #d69e2e;
+        }
+        
+        body.dark-mode .tab-content h2 {
+            color: #d69e2e;
+            border-color: #d69e2e;
+        }
+        
+        body.dark-mode .tab-content h3 {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .tab-content p {
+            color: #ccc;
+        }
+        
+        body.dark-mode .timeline-content,
+        body.dark-mode .work-card,
+        body.dark-mode .contribution-list li,
+        body.dark-mode .chart-container {
+            background: #3a3a3a;
+        }
+        
+        body.dark-mode .work-card {
+            border-color: #555;
+        }
+        
+        body.dark-mode .work-card h4 {
+            color: #d69e2e;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html">文章</a>
+                <a href="../masters.html" class="active">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 返回按钮 -->
+    <div class="back-nav" style="background:#f8f8f8;border-bottom:1px solid #e0e0e0;padding:12px 0;">
+        <div class="container" style="max-width:1000px;margin:0 auto;padding:0 2rem;">
+            <a href="../masters.html" style="display:inline-flex;align-items:center;gap:6px;color:#744210;text-decoration:none;font-size:0.95rem;font-weight:500;">
+                <span style="font-size:1.1rem;">←</span> 返回导师列表
+            </a>
+        </div>
+    </div>
+
+    <main>
+        <!-- 导师头部信息 -->
+        <section class="master-hero">
+            <div class="master-hero-content">
+                <div class="master-hero-avatar">
+                    <img src="../images/masters/stalin.jpg"
+                         style="width:180px;height:180px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                </div>
+                <div class="master-hero-info">
+                    <h1>约瑟夫·斯大林</h1>
+                    <p class="years">1878年12月18日 — 1953年3月5日</p>
+                    <p class="title">苏联社会主义建设领导者 · 反法西斯战争统帅 · 苏联工业化奠基人 · 列宁事业的继承者</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab内容区 -->
+        <div class="master-content-wrapper">
+            <div class="tab-nav">
+                <button class="tab-btn active" data-tab="biography">生平历程</button>
+                <button class="tab-btn" data-tab="works">代表著作</button>
+                <button class="tab-btn" data-tab="theory">理论贡献</button>
+                <button class="tab-btn" data-tab="visual">一目了然</button>
+                <button class="tab-btn" data-tab="legacy">历史地位</button>
+            </div>
+
+            <!-- 生平历程 -->
+            <div class="tab-content active" data-tab="biography">
+                <h2>生平历程</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1878年</div>
+                        <div class="timeline-content">
+                            <strong>诞生</strong>
+                            <p>12月18日出生于格鲁吉亚哥里市一个鞋匠家庭，原名约瑟夫·维萨里奥诺维奇·朱加什维利。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1898年</div>
+                        <div class="timeline-content">
+                            <strong>加入社会民主工党</strong>
+                            <p>加入俄国社会民主工党，开始从事革命活动。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1903年</div>
+                        <div class="timeline-content">
+                            <strong>拥护布尔什维克</strong>
+                            <p>党分裂后坚定地站在布尔什维克一边，支持列宁的革命路线。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1912年</div>
+                        <div class="timeline-content">
+                            <strong>进入中央委员会</strong>
+                            <p>在布拉格会议上当选为布尔什维克党中央委员会委员，成为列宁的得力助手。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1917年</div>
+                        <div class="timeline-content">
+                            <strong>十月革命</strong>
+                            <p>参与领导彼得格勒武装起义，为十月革命的胜利作出重要贡献。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1922年</div>
+                        <div class="timeline-content">
+                            <strong>总书记</strong>
+                            <p>当选为联共（布）中央委员会总书记，开始主持党的日常工作。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1924年</div>
+                        <div class="timeline-content">
+                            <strong>列宁逝世</strong>
+                            <p>1月21日列宁逝世，斯大林在悼词中宣誓继承列宁事业。随后与托洛茨基、季诺维也夫等人展开路线斗争。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1928-1937年</div>
+                        <div class="timeline-content">
+                            <strong>社会主义工业化和农业集体化</strong>
+                            <p>实施五年计划，推动苏联从农业国向工业国转变。建立重工业体系，为后来的反法西斯战争奠定物质基础。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1941-1945年</div>
+                        <div class="timeline-content">
+                            <strong>伟大卫国战争</strong>
+                            <p>德国入侵后担任国防委员会主席和武装力量最高统帅，领导苏联人民取得反法西斯战争的伟大胜利。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1945年</div>
+                        <div class="timeline-content">
+                            <strong>雅尔塔会议</strong>
+                            <p>参加雅尔塔会议，参与确定战后世界格局，苏联成为超级大国。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1953年</div>
+                        <div class="timeline-content">
+                            <strong>逝世</strong>
+                            <p>3月5日在莫斯科逝世，享年74岁。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 代表著作 -->
+            <div class="tab-content" data-tab="works">
+                <h2>代表著作</h2>
+                <div class="works-grid">
+                    <div class="work-card">
+                        <h4>《论列宁主义基础》</h4>
+                        <p class="year">1924年</p>
+                        <p>系统阐述列宁主义的基本原理，论述列宁对马克思主义的发展，是斯大林理论的代表作。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《论列宁主义的几个问题》</h4>
+                        <p class="year">1926年</p>
+                        <p>进一步阐述列宁主义理论，批判托洛茨基主义，论述一国建成社会主义的可能性。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《联共（布）党史简明教程》</h4>
+                        <p class="year">1938年</p>
+                        <p>系统总结布尔什维克党的历史经验，阐述马克思主义哲学基本原理，在苏联和各国共产党中广泛流传。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《马克思主义和语言学问题》</h4>
+                        <p class="year">1950年</p>
+                        <p>论述语言与上层建筑的区别，讨论语言发展的规律，在语言学界产生重要影响。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《苏联社会主义经济问题》</h4>
+                        <p class="year">1952年</p>
+                        <p>探讨社会主义政治经济学问题，论述社会主义经济规律，是斯大林晚年的重要理论著作。</p>
+                    </div>
+                    <div class="work-card">
+                        <h4>《论经济工作人员的任务》</h4>
+                        <p class="year">1931年</p>
+                        <p>提出"落后就要挨打"的著名论断，强调加快工业化步伐的紧迫性。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 理论贡献 -->
+            <div class="tab-content" data-tab="theory">
+                <h2>理论贡献</h2>
+                <ul class="contribution-list">
+                    <li>
+                        <strong>列宁主义系统阐述</strong>
+                        <p>在《论列宁主义基础》等著作中，系统阐述列宁主义的基本原理，包括帝国主义论、无产阶级专政、工农联盟、民族问题、党的学说等，使列宁主义成为体系化的理论。</p>
+                    </li>
+                    <li>
+                        <strong>一国建成社会主义理论</strong>
+                        <p>论证在帝国主义包围的条件下，单独一国可以建成社会主义，突破了传统马克思主义关于社会主义革命必须在主要资本主义国家同时胜利的设想。</p>
+                    </li>
+                    <li>
+                        <strong>社会主义工业化理论</strong>
+                        <p>提出优先发展重工业的工业化道路，通过五年计划推动苏联快速工业化，为经济落后国家实现工业化提供了一种模式。</p>
+                    </li>
+                    <li>
+                        <strong>马克思主义哲学体系化</strong>
+                        <p>在《联共（布）党史简明教程》第四章中，系统阐述辩证唯物主义和历史唯物主义，提出"马克思主义哲学是辩证唯物主义和历史唯物主义"的经典表述。</p>
+                    </li>
+                    <li>
+                        <strong>民族问题理论</strong>
+                        <p>早期著作《马克思主义和民族问题》系统阐述民族问题的马克思主义观点，提出民族自决权原则，对多民族国家的民族政策有重要影响。</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 一目了然 -->
+            <div class="tab-content" data-tab="visual">
+                <h2>一目了然</h2>
+                <div class="visual-section">
+                    <!-- 雷达图：五导师综合能力对比 -->
+                    <div class="chart-container">
+                        <h3>五大导师综合能力对比（无高低之分，仅能力侧重，彼此为继承发扬关系）</h3>
+                        <p class="chart-desc">统一10项维度，横向比较斯大林与其他四位导师各自的能力侧重。当前页突出显示：斯大林</p>
+                        <canvas id="stalinRadar" style="max-height:400px;"></canvas>
+                        <div class="radar-legend">
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#8b0000;"></div><span>马克思（深红）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#4a5568;"></div><span>恩格斯（青灰）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#d4a017;"></div><span>列宁（金黄）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#744210;"></div><span>斯大林（棕黄）</span></div>
+                            <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#e8192c;"></div><span>毛泽东（鲜红）</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 苏联工业化进程图 -->
+                    <div class="chart-container">
+                        <h3>苏联工业化进程（1928-1940）</h3>
+                        <p class="chart-desc">三个五年计划期间苏联工业产值的增长（以1913年为100）</p>
+                        <canvas id="industrialChart"></canvas>
+                        <div style="margin-top:14px;padding:12px 16px;background:#fffaf0;border-left:3px solid #744210;border-radius:4px;font-size:0.88em;color:#444;">
+                            通过三个五年计划，苏联从落后的农业国迅速转变为世界第二大工业国，为反法西斯战争的胜利奠定了物质基础。
+                        </div>
+                    </div>
+
+                    <!-- 人生历程折线图 -->
+                    <div class="chart-container">
+                        <h3>人生历程：政治地位与历史影响</h3>
+                        <p class="chart-desc">斯大林一生政治地位的变化和历史影响的强度</p>
+                        <canvas id="stalinLifeChart"></canvas>
+                        <div style="margin-top:14px;padding:12px 16px;background:#fffaf0;border-left:3px solid #744210;border-radius:4px;font-size:0.88em;color:#444;">
+                            斯大林的政治生涯在1924年后快速上升，1941-1945年卫国战争期间达到顶峰，战后成为与美国抗衡的超级大国领袖。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 历史地位 -->
+            <div class="tab-content" data-tab="legacy">
+                <h2>历史地位</h2>
+                <h3>苏联社会主义建设</h3>
+                <p>斯大林领导苏联实现了从农业国到工业国的历史性转变。通过三个五年计划，苏联建立了完整的工业体系，工业产值跃居世界第二。这一成就不仅改变了苏联的面貌，也为后来的反法西斯战争胜利奠定了物质基础。苏联的工业化模式对后来的社会主义国家产生了深远影响。</p>
+                
+                <h3>反法西斯战争的胜利</h3>
+                <p>作为苏联最高统帅，斯大林领导苏联人民取得了伟大卫国战争的胜利。苏联红军从莫斯科保卫战到斯大林格勒战役，再到攻克柏林，为打败法西斯德国作出了决定性贡献。这场胜利不仅拯救了苏联，也改变了世界历史进程。</p>
+                
+                <h3>马克思主义发展史地位</h3>
+                <p>斯大林是列宁主义的主要阐释者和传播者。他的著作使列宁主义成为体系化的理论，对20世纪国际共产主义运动产生了广泛影响。同时，他对马克思主义哲学的系统阐述，对后来的马克思主义研究也有重要影响。</p>
+                
+                <h3>历史评价</h3>
+                <p>斯大林是一个复杂的历史人物。他领导苏联取得了工业化建设和反法西斯战争的巨大成就，但也存在严重的错误和问题。对斯大林的评价需要坚持历史唯物主义的方法，既要看到他的历史贡献，也要正视他的历史错误，从中吸取经验教训。</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">理论学习 · 斗争精神 · 青年担当</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Tab切换
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                
+                // 切换按钮状态
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 切换内容
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                document.querySelector(`.tab-content[data-tab="${tabId}"]`).classList.add('active');
+                
+                // 初始化图表
+                if (tabId === 'visual') {
+                    setTimeout(initCharts, 100);
+                }
+            });
+        });
+
+        // 图表初始化
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+            chartsInited = true;
+
+            // 雷达图：五导师综合能力对比
+            const radarCtx = document.getElementById('stalinRadar');
+            if (radarCtx) {
+                const labels = ['理论深度','组织纪律','学术广度','创新性','战略眼光','领导才能','文笔表达','执行力','群众动员','政治智慧'];
+                const radarChart = new Chart(radarCtx.getContext('2d'), {
+                    type: 'radar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '马克思',
+                                data: [10, 7, 10, 10, 8, 7, 9, 6, 6, 9],
+                                borderColor: '#8b0000',
+                                backgroundColor: 'rgba(139,0,0,0.05)',
+                                pointBackgroundColor: '#8b0000',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '恩格斯',
+                                data: [9, 9, 10, 8, 7, 8, 9, 7, 6, 8],
+                                borderColor: '#4a5568',
+                                backgroundColor: 'rgba(74,85,104,0.05)',
+                                pointBackgroundColor: '#4a5568',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '列宁',
+                                data: [9, 9, 8, 10, 10, 10, 8, 9, 9, 10],
+                                borderColor: '#d4a017',
+                                backgroundColor: 'rgba(212,160,23,0.05)',
+                                pointBackgroundColor: '#d4a017',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            },
+                            {
+                                label: '斯大林',
+                                data: [7, 10, 6, 6, 9, 10, 6, 10, 8, 9],
+                                borderColor: '#744210',
+                                backgroundColor: 'rgba(116,66,16,0.10)',
+                                pointBackgroundColor: '#744210',
+                                borderWidth: 2.5,
+                                pointRadius: 4,
+                                hidden: false,
+                            },
+                            {
+                                label: '毛泽东',
+                                data: [9, 8, 8, 10, 10, 10, 9, 9, 10, 10],
+                                borderColor: '#e8192c',
+                                backgroundColor: 'rgba(232,25,44,0.05)',
+                                pointBackgroundColor: '#e8192c',
+                                borderWidth: 1.5,
+                                pointRadius: 3,
+                                hidden: true,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            r: {
+                                min: 0, max: 10,
+                                ticks: { stepSize: 2, font: { size: 10 } },
+                                pointLabels: { font: { size: 12 } }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false }
+                        }
+                    }
+                });
+
+                // 图例点击切换显示/隐藏
+                document.querySelectorAll('#stalinRadar ~ .radar-legend .radar-legend-item').forEach((item, i) => {
+                    // 根据初始 hidden 状态设置图例样式
+                    const ds = radarChart.data.datasets[i];
+                    if (ds.hidden) {
+                        item.classList.add('hidden-dataset');
+                    }
+                    item.addEventListener('click', () => {
+                        ds.hidden = !ds.hidden;
+                        item.classList.toggle('hidden-dataset', !!ds.hidden);
+                        radarChart.update();
+                    });
+                });
+            }
+
+            // 苏联工业化进程图
+            const industrialCtx = document.getElementById('industrialChart');
+            if (industrialCtx) {
+                new Chart(industrialCtx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['1928年', '1932年（一五结束）', '1937年（二五结束）', '1940年'],
+                        datasets: [{
+                            label: '工业产值指数（1913年=100）',
+                            data: [100, 180, 420, 620],
+                            backgroundColor: ['#744210', '#975a16', '#b7791f', '#d69e2e']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: '工业产值指数' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // 人生历程折线图
+            const lifeCtx = document.getElementById('stalinLifeChart');
+            if (lifeCtx) {
+                new Chart(lifeCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['1900-1910', '1910-1917', '1917-1924', '1924-1929', '1929-1941', '1941-1945', '1945-1953'],
+                        datasets: [{
+                            label: '政治地位',
+                            data: [2, 4, 6, 7, 9, 10, 9],
+                            borderColor: '#744210',
+                            backgroundColor: 'rgba(116, 66, 16, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }, {
+                            label: '历史影响',
+                            data: [1, 3, 5, 6, 8, 10, 9],
+                            borderColor: '#975a16',
+                            backgroundColor: 'rgba(151, 90, 22, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { min: 0, max: 10 }
+                        }
+                    }
+                });
+            }
+        }
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

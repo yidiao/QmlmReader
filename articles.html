@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章列表 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">首页</a>
+                <a href="articles.html" class="active">文章</a>
+                <a href="masters.html">导师</a>
+                <a href="toolkit.html">工具集</a>
+                <a href="gallery.html">文艺</a>
+                <a href="puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="international.html">🌍 国际共运</a>
+                <a href="rectify.html">正名</a>
+                <a href="about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="articles-page">
+        <div class="container">
+            <h2 class="section-title">全部文章</h2>
+            
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="5">五星必读</button>
+                <button class="filter-btn" data-filter="4">四星重点</button>
+                <button class="filter-btn" data-filter="3">三星推荐</button>
+                <button class="filter-btn" data-filter="mao">毛泽东</button>
+                <button class="filter-btn" data-filter="lenin">列宁</button>
+            </div>
+
+            <div class="article-grid">
+                <!-- 五星文章 - 毛泽东 -->
+                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1938年5月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/lun-chi-jiu-zhan.html">论持久战</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">分析抗日战争的发展规律，阐明持久战是争取最后胜利的必由之路。</p>
+                    <div class="card-footer">
+                        <span class="article-category">军事战略</span>
+                        <a href="articles/lun-chi-jiu-zhan.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1937年7月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/shi-jian-lun.html">实践论</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">认识与实践的辩证关系，阐明知与行的统一。</p>
+                    <div class="card-footer">
+                        <span class="article-category">哲学基础</span>
+                        <a href="articles/shi-jian-lun.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1937年8月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/mao-dun-lun.html">矛盾论</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">唯物辩证法的核心，分析矛盾的主次与性质。</p>
+                    <div class="card-footer">
+                        <span class="article-category">哲学基础</span>
+                        <a href="articles/mao-dun-lun.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1936年12月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/zhan-lue-wen-ti.html">中国革命战争的战略问题</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">系统阐述中国革命战争的特点、规律和战略战术原则。</p>
+                    <div class="card-footer">
+                        <span class="article-category">军事战略</span>
+                        <a href="articles/zhan-lue-wen-ti.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1938年5月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/you-ji-zhan.html">抗日游击战争的战略问题</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">论述游击战争在抗日战争中的战略地位和作用。</p>
+                    <div class="card-footer">
+                        <span class="article-category">军事战略</span>
+                        <a href="articles/you-ji-zhan.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1940年1月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/xin-min-zhu.html">新民主主义论</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">阐述新民主主义的政治、经济、文化纲领。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治理论</span>
+                        <a href="articles/xin-min-zhu.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1942年5月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/wen-yi-zuo-tan.html">在延安文艺座谈会上的讲话</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">阐述文艺为工农兵服务的方向和原则。</p>
+                    <div class="card-footer">
+                        <span class="article-category">思想文化</span>
+                        <a href="articles/wen-yi-zuo-tan.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1957年2月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/ren-min-nei-bu-mao-dun.html">关于正确处理人民内部矛盾的问题</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">区分敌我矛盾和人民内部矛盾，阐述社会主义社会的矛盾问题。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治理论</span>
+                        <a href="articles/ren-min-nei-bu-mao-dun.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <!-- 五星文章 - 列宁 -->
+                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1902年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/lenin/zen-me-ban.html">怎么办？</a>
+                    </h4>
+                    <p class="article-author">列宁</p>
+                    <p class="article-desc">批判经济派，阐述建党理论，提出"灌输论"。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治理论</span>
+                        <a href="articles/lenin/zen-me-ban.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1909年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/lenin/wei-wu-zhu-yi.html">唯物主义和经验批判主义</a>
+                    </h4>
+                    <p class="article-author">列宁</p>
+                    <p class="article-desc">捍卫和发展马克思主义哲学，批判马赫主义。</p>
+                    <div class="card-footer">
+                        <span class="article-category">哲学基础</span>
+                        <a href="articles/lenin/wei-wu-zhu-yi.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1916年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/lenin/di-guo-zhu-yi.html">帝国主义是资本主义的最高阶段</a>
+                    </h4>
+                    <p class="article-author">列宁</p>
+                    <p class="article-desc">分析帝国主义的本质、特征和历史地位。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治经济学</span>
+                        <a href="articles/lenin/di-guo-zhu-yi.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1917年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/lenin/guo-jia-yu-ge-ming.html">国家与革命</a>
+                    </h4>
+                    <p class="article-author">列宁</p>
+                    <p class="article-desc">马克思主义国家学说的系统阐述，论述无产阶级专政理论。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治理论</span>
+                        <a href="articles/lenin/guo-jia-yu-ge-ming.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1920年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/lenin/zuo-pai-you-zhi-bing.html">共产主义运动中的"左派"幼稚病</a>
+                    </h4>
+                    <p class="article-author">列宁</p>
+                    <p class="article-desc">批判"左"倾错误，阐述无产阶级政党的战略和策略。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治理论</span>
+                        <a href="articles/lenin/zuo-pai-you-zhi-bing.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <!-- 四星文章 -->
+                <article class="article-card priority-4" data-priority="4" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge" style="background: #666;">四星</span>
+                        <span class="article-date">1926年3月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/jie-ji-fen-xi.html">中国社会各阶级的分析</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">分析中国社会各阶级的经济地位和政治态度。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治理论</span>
+                        <a href="articles/jie-ji-fen-xi.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-4" data-priority="4" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge" style="background: #666;">四星</span>
+                        <span class="article-date">1927年3月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/nong-min-yun-dong.html">湖南农民运动考察报告</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">实地考察湖南农民运动，论证农民革命的伟大作用。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治理论</span>
+                        <a href="articles/nong-min-yun-dong.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-4" data-priority="4" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge" style="background: #666;">四星</span>
+                        <span class="article-date">1949年6月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/ren-min-zhuan-zheng.html">论人民民主专政</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">阐述新中国政权的性质和任务。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治理论</span>
+                        <a href="articles/ren-min-zhuan-zheng.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-4" data-priority="4" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge" style="background: #666;">四星</span>
+                        <span class="article-date">1956年4月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/shi-da-guan-xi.html">论十大关系</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">探索适合中国国情的社会主义建设道路。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治理论</span>
+                        <a href="articles/shi-da-guan-xi.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 筛选功能
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                
+                // 切换按钮状态
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 筛选文章
+                document.querySelectorAll('.article-card').forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                    } else if (filter === 'mao' || filter === 'lenin') {
+                        card.style.display = card.dataset.author === filter ? 'block' : 'none';
+                    } else {
+                        card.style.display = card.dataset.priority === filter ? 'block' : 'none';
+                    }
+                });
+            });
+        });
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

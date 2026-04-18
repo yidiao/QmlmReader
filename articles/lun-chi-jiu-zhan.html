@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论持久战 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html" class="active">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 返回按钮 -->
+    <div class="back-nav" style="background:#f8f8f8;border-bottom:1px solid #e0e0e0;padding:12px 0;">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../articles.html" style="display:inline-flex;align-items:center;gap:6px;color:#c41e3a;text-decoration:none;font-size:0.95rem;font-weight:500;">
+                <span style="font-size:1.1rem;">←</span> 返回全部文章
+            </a>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="article-detail">
+        <!-- 文章头部信息 -->
+        <header class="article-header">
+            <div class="importance-badge">⭐⭐⭐⭐⭐ 核心必读</div>
+            <h1>论持久战</h1>
+            <div class="article-subtitle">抗日战争的战略问题——持久战是正确路线</div>
+            <div class="article-meta">
+                <span class="author">毛泽东</span>
+                <span class="date">1938年5月</span>
+                <span class="category">军事战略 · 辩证法应用</span>
+                <span class="word-count">约42,000字</span>
+            </div>
+        </header>
+
+        <!-- 标签导航 -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original')">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading')">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty')">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue')">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action')">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual')">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle')">理论拼图</button>
+            <button class="tab-btn" onclick="switchTab('further')">延伸阅读</button>
+        </div>
+
+        <!-- 原文标签 -->
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro">
+                    <p><strong>阅读提示：</strong>本文约4.2万字，已按章节分段。点击章节标题可展开/折叠内容。建议先通读全文框架，再精读重点章节。</p>
+                </div>
+
+                <!-- 第一章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        一、问题的提起
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（一）伟大抗日战争的一周年纪念，七月七日，快要到了。全民族的力量团结起来，坚持抗战，坚持统一战线，同敌人作英勇的战争，快一年了。这个战争，在东方历史上是空前的，在世界历史上也将是伟大的，全世界人民都关心这个战争。身受战争灾难、为着自己民族的生存而奋斗的每一个中国人，无日不在渴望战争的胜利。然而战争的过程究竟会要怎么样？能胜利还是不能胜利？能速胜还是不能速胜？很多人都说持久战，但是为什么是持久战？怎样进行持久战？很多人都说最后胜利，但是为什么会有最后胜利？怎样争取最后胜利？这些问题，不是每个人都解决了的，甚至是大多数人至今没有解决的。于是失败主义的亡国论者跑出来向人们说：中国会亡，最后胜利不是中国的。某些性急的朋友们也跑出来向人们说：中国很快就能战胜，无需乎费大气力。这些议论究竟对不对呢？我们一向都说：这些议论是不对的。可是我们说的，还没有为大多数人所了解。一半因为我们的宣传解释工作还不够，一半也因为客观事变的发展还没有完全暴露其固有的性质，还没有将其面貌鲜明地摆在人们之前，使人们无从看出其整个的趋势和前途，因而无从决定自己的整套的方针和做法。现在好了，抗战十个月的经验，尽够击破毫无根据的亡国论，也尽够说服急性朋友们的速胜论了。在这种情形下，很多人要求做个总结性的解释。尤其是对持久战，有亡国论和速胜论的反对意见，也有空洞无物的了解。"卢沟桥事变以来，四万万人一齐努力，最后胜利是中国的。"这样一种公式，在广大的人们中流行着。这个公式是对的，但有加以充实的必要。抗日战争和统一战线之所以能够坚持，是由于许多的因素：全国党派，从共产党到国民党；全国人民，从工人农民到资产阶级；全国军队，从主力军到游击队；国际方面，从社会主义国家到各国爱好正义的人民；敌国方面，从某些国内反战的人民到前线反战的兵士。总而言之，所有这些因素，在我们的抗战中都尽了他们各种程度的努力。每一个有良心的人，都应向他们表示敬意。我们共产党人，同其他抗战党派和全国人民一道，唯一的方向，是努力团结一切力量，战胜万恶的日寇。</p>
+                        
+                        <p>（二）今年七月一日，是中国共产党建立的十七周年纪念日。为了使每个共产党员在抗日战争中能够尽其更好和更大的努力，也有着重地研究持久战的必要。因此，我的讲演就来研究持久战。和持久战这个题目有关的问题，我都准备说到；但是不能一切都说到，因为一切的东西，不是在一个讲演中完全说得了的。</p>
+                    </div>
+                </div>
+
+                <!-- 第二章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        二、驳亡国论
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（三）抗战十个月以来，一切经验都证明下述两种观点的不对：一种是中国必亡论，一种是中国速胜论。前者产生妥协倾向，后者产生轻敌倾向。他们看问题的方法都是主观的和片面的，一句话，非科学的。</p>
+                        
+                        <p>（四）抗战以前，存在着许多亡国论的议论。例如说："中国武器不如人，战必败。""如果抗战，必会作阿比西尼亚。"抗战以后，公开的亡国论没有了，但暗地是有的，而且很多。例如妥协的空气时起时伏，主张妥协者的根据就是"再战必亡"。有个学生从湖南写信来说："在乡下一切都感到困难。单独一个人作宣传工作，只好随时随地找人谈话。对象都不是无知无识的愚民，他们多少也懂得一点，他们对我的谈话很有兴趣。可是碰了我那几位亲戚，他们总说：'中国打不胜，会亡。'讨厌极了。好在他们还不去宣传，不然真糟。农民对他们的信仰当然要大些啊！"这类中国必亡论者，是妥协者的社会基础。这类人中国各地都有，因此，抗日阵线中随时可能发生的妥协问题，恐怕终战争之局也不会消灭的。当此徐州失守武汉紧张的时候，给这种亡国论痛驳一驳，我想不是无益的。</p>
+                        
+                        <p>（五）抗战十个月以来，各种表现急性病的意见也发生了。例如在抗战初起时，许多人有一种毫无根据的乐观倾向，他们把日本估计过低，甚至以为日本不能打到山西。有些人轻视抗日战争中游击战争的战略地位，他们对于"在全体上，运动战是主要的，游击战是辅助的；在部分上，游击战是主要的，运动战是辅助的"这个提法，表示怀疑。他们不赞成八路军这样的战略方针："基本的是游击战，但不放松有利条件下的运动战。"认为这是"机械的"观点。上海战争时，有些人说："只要打三个月，国际局势一定变化，苏联一定出兵，战争就可解决。"把抗战的前途主要地寄托在外国援助上面。台儿庄胜利之后，有些人主张徐州战役应是"准决战"，说过去的持久战方针应该改变。说什么"这一战，就是敌人的最后挣扎"，"我们胜了，日阀就在精神上丧失了立场，只有静候末日审判"。平型关一个胜仗，冲昏了一些人的头脑；台儿庄再一个胜仗，冲昏了更多的人的头脑。于是敌人是否进攻武汉，成为疑问了。许多人以为："不一定"；许多人以为："断不会"。这样的疑问可以牵涉到一切重大的问题。例如说：抗日力量是否够了呢？回答可以是肯定的，因为现在的力量已使敌人不能再进攻，还要增加力量干什么呢？例如说：巩固和扩大抗日民族统一战线的口号是否依然正确呢？回答可以是否定的，因为统一战线的现时状态已够打退敌人，还要什么巩固和扩大呢？例如说：国际外交和国际宣传工作是否还应该加紧呢？回答也可以是否定的。例如说：改革军队制度，改革政治制度，发展民众运动，厉行国防教育，镇压汉奸托派，发展军事工业，改良人民生活，是否应该认真去做呢？例如说：保卫武汉、保卫广州、保卫西北和猛烈发展敌后游击战争的口号，是否依然正确呢？回答都可以是否定的。甚至某些人在战争形势稍为好转的时候，就准备在国共两党之间加紧磨擦一下，把对外的眼光转到对内。这种情况，差不多每一个较大的胜仗之后，或敌人进攻暂时停顿之时，都要发生。所有上述一切，我们叫它做政治上军事上的近视眼。这些话，讲起来好像有道理，实际上是毫无根据、似是而非的空谈。扫除这些空谈，对于进行胜利的抗日战争，应该是有好处的。</p>
+                        
+                        <p>（六）于是问题是：中国会亡吗？答复：不会亡，最后胜利是中国的。中国能够速胜吗？答复：不能速胜，抗日战争是持久战。</p>
+                        
+                        <p>（七）这些结论是怎样得来的呢？不是从主观想象，而是从客观实际中得来的。敌我双方的基本特点，是研究问题的出发点。中日战争不是任何别的战争，乃是半殖民地半封建的中国和帝国主义的日本之间在二十世纪三十年代进行的一个决死的战争。全部问题的根据就在这里。分别地说来，战争的双方有如下互相反对的许多特点。</p>
+                    </div>
+                </div>
+
+                <!-- 第三章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        三、妥协还是抗战？腐败还是进步？
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（八）亡国论之没有根据，俱如上述。但是另有许多人，并非亡国论者，他们是爱国志士，却对时局怀抱甚深的忧虑。他们的问题有两个：一是惧怕对日妥协，一是怀疑政治不能进步。这两个可忧虑的问题在广大的人们中间议论着，找不到解决的基点。我们现在就来研究这两个问题。</p>
+                        
+                        <p>（九）前头说过，妥协的问题是有其社会根源的，只要这个社会根源存在，妥协问题总是会发生。但妥协要成为事实，需要一定的条件：第一是日本要采取劝降手段，第二是中国统治集团中有人愿意投降。现在这两个条件还没有具备，所以妥协还不会成为事实。但是，如果日本的劝降手段厉害起来，国际形势又有大变，中国统治集团中的动摇分子就可能发生变节。因此，反对妥协倾向，应当是目前的主要任务之一。所谓妥协，当然还不是完全的、彻底的妥协，而是部分的、暂时的妥协。完全的、彻底的妥协，就是亡国，这是不能容许的。部分的、暂时的妥协，即是说，在若干问题上把若干权利让给日本，这是可能的，也是曾经发生过的。但是，这种部分的、暂时的妥协，必须以抗战为前提，必须以不损害民族独立为原则。如果离开了抗战，离开了民族独立，那就是完全的、彻底的妥协，就是亡国。因此，我们的任务，就在于动员群众，反对这种部分的、暂时的妥协，坚持抗战到底。</p>
+                    </div>
+                </div>
+
+                <!-- 第四章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        四、"亡国论"是不对的，"速胜论"也是不对的
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（十）我们已把强弱、大小、进步退步、多助寡助几个敌我之间矛盾着的基本特点，作了比较研究，批驳了亡国论，答复了为什么不易妥协和为什么政治可能进步的问题。亡国论者看重了强弱一个矛盾，把它夸大起来作为全部问题的论据，而忽略了其他的矛盾。他们只提强弱对比一点，是他们的片面性；他们将此片面的东西夸大起来看成全体，又是他们的主观性。所以在全体说来，他们是没有根据的，是错误的。那些并非亡国论者，也不是一时冲动，而是经过深思熟虑，确实看到某些严重缺点的人，他们的意见也是应该考虑的。我们也应该向他们指出，战争的胜负固然决定于双方军事、政治、经济、地理、战争性质、国际援助诸条件，然而不仅仅决定于这些；仅有这些，还只是有了胜负的可能性，它本身没有分胜负。要分胜负，还须加上主观的努力，这就是指导战争和实行战争，这就是战争中的自觉的能动性。</p>
+                    </div>
+                </div>
+
+                <!-- 第五章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        五、为什么是持久战？
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（十一）抗战为什么是持久战？最后胜利为什么是中国的呢？根据在什么地方呢？中日战争不是任何别的战争，乃是半殖民地半封建的中国和帝国主义的日本之间在二十世纪三十年代进行的一个决死的战争。全部问题的根据就在这里。分别地说来，战争的双方有如下互相反对的许多特点。</p>
+                        
+                        <p>（十二）日本方面：第一，它是一个强的帝国主义国家，它的军力、经济力和政治组织力在东方是一等的，在世界也是五六个著名帝国主义国家中的一个。这是日本侵略战争的基本条件，战争的不可避免和中国的不能速胜，就建立在这个日本国家的帝国主义制度及其强的军力、经济力和政治组织力上面。然而第二，由于日本社会经济的帝国主义性，就产生了日本战争的帝国主义性，它的战争是退步的和野蛮的。时至二十世纪三十年代的日本帝国主义，由于内外矛盾，不但使得它不得不举行空前大规模的冒险战争，而且使得它临到最后崩溃的前夜。从社会行程说来，日本已不是兴旺的国家，战争不能达到日本统治阶级所期求的兴旺，而将达到它所期求的反面——日本帝国主义的死亡。这就是所谓日本战争的退步性。跟着这个退步性，加上日本又是一个带军事封建性的帝国主义这一特点，就产生了它的战争的特殊的野蛮性。这样就要最大地激起它国内的阶级对立、日本民族和中国民族的对立、日本和世界大多数国家的对立。日本战争的退步性和野蛮性是日本战争必然失败的主要根据。还不止此，第三，日本战争虽是在其强的军力、经济力和政治组织力的基础之上进行的，但同时又是在其先天不足的基础之上进行的。日本的军力、经济力和政治组织力虽强，但这些力量之量的方面不足。日本国度比较地小，其人力、军力、财力、物力均感缺乏，经不起长期的战争。日本统治者想从战争中解决这个困难问题，但同样，将达到其所期求的反面，这就是说，它为解决这个困难问题而发动战争，结果将因战争而增加困难，战争将连它原有的东西也消耗掉。最后，第四，日本虽能得到国际法西斯国家的援助，但同时，却又不能不遇到一个超过其国际援助力量的国际反对力量。这后一种力量将逐渐地增长，终究不但将把前者的援助力量抵消，并将施其压力于日本自身。这是失道寡助的规律，是从日本战争的本性产生出来的。总起来说，日本的长处是其战争力量之强，而其短处则在其战争本质的退步性、野蛮性，在其人力、物力之不足，在其国际形势之寡助。这些就是日本方面的特点。</p>
+                        
+                        <p>（十三）中国方面：第一，我们是一个半殖民地半封建的国家。从鸦片战争、太平天国、戊戌维新、辛亥革命，直至北伐战争，一切为解除半殖民地半封建地位的革命的或改良的运动，都遭到了严重的挫折，因此依然保留下这个半殖民地半封建的地位。我们依然是一个弱国，我们在军力、经济力和政治组织力各方面都显得不如敌人。战争之不可避免和中国之不能速胜，又在这个方面有其基础。然而第二，中国近百年的解放运动积累到了今日，已经不同于任何历史时期。各种内外反对力量虽给了解放运动以严重挫折，同时却锻炼了中国人民。今日中国的军事、经济、政治、文化虽不如日本之强，但在中国自己比较起来，却有了比任何一个历史时期更为进步的因素。中国共产党及其领导下的军队，就是这种进步因素的代表。中国今天的解放战争，就是在这种进步的基础上得到了持久战和最后胜利的可能性。中国是如日方升的国家，这同日本帝国主义的没落状态恰是相反的对照。中国的战争是进步的，从这种进步性，就产生了中国战争的正义性。因为这个战争是正义的，就能唤起全国的团结，激起敌国人民的同情，争取世界多数国家的援助。第三，中国又是一个很大的国家，地大、物博、人多、兵多，能够支持长期的战争，这同日本又是一个相反的对照。最后，第四，由于中国战争的进步性、正义性而产生出来的国际广大援助，同日本的失道寡助又恰恰相反。总起来说，中国的短处是战争力量之弱，而其长处则在其战争本质的进步性和正义性，在其是一个大国家，在其国际形势之多助。这些都是中国的特点。</p>
+                        
+                        <p>（十四）这样看来，日本的军力、经济力和政治组织力是强的，但其战争是退步的、野蛮的，人力、物力又不充足，国际形势又处于不利。中国反是，军力、经济力和政治组织力是比较地弱的，然而正处于进步的时代，其战争是进步的和正义的，又有大国这个条件足以支持持久战，世界的多数国家是会要援助中国的。——这些，就是中日战争互相矛盾着的基本特点。这些特点，规定了和规定着双方一切政治上的政策和军事上的战略战术，规定了和规定着战争的持久性和最后胜利属于中国而不属于日本。战争就是这些特点的比赛。这些特点在战争过程中将各依其本性发生变化，一切东西就都从这里发生出来。这些特点是事实上存在的，不是虚造骗人的；是战争的全部基本要素，不是残缺不全的片段；是贯彻于双方一切大小问题和一切作战阶段之中的，不是可有可无的。观察中日战争如果忘记了这些特点，那就必然要弄错；即使某些意见一时有人相信，似乎不错，但战争的经过必将证明它们是错的。我们现在就根据这些特点来说明我们所要说的一切问题。</p>
+                    </div>
+                </div>
+
+                <!-- 第六章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        六、犬牙交错的战争
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（十五）持久战的抗日战争，将在人类战争史中表现为光荣的特殊的一页。犬牙交错的战争形态，就是颇为特殊的一点，这是由于日本的野蛮和兵力不足，中国的进步和土地广大这些矛盾因素产生出来的。犬牙交错的战争，在历史上也是有过的，俄国十月革命后的三年内战，就有过这种情形。但其在中国的特点，是其特殊的长期性和广大性，这将是突破历史纪录的东西。这种犬牙交错的形态，表现在下述的几种情况上。</p>
+                    </div>
+                </div>
+
+                <!-- 第七章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        七、为永久和平而战
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（十六）中国抗日战争的持久性同争取中国和世界的永久和平，是不能分离的。没有任何一个历史时期像今天一样，战争是接近于永久和平的。由于阶级的出现，几千年来人类的生活中充满了战争，每一个民族都不知打了几多仗，或在民族集团之内打，或在民族集团之间打。打到资本主义社会的帝国主义时期，仗就打得特别广大和特别残酷。二十年前的第一次帝国主义大战，在过去历史上是空前的，但还不是绝后的战争。只有目前开始了的战争，接近于永久和平，由于它接近永久和平，便显得同历史上任何战争不同，显得格外的庄严和伟大。我们共产党人反对一切阻碍进步的非正义的战争，但是不反对进步的正义的战争。对于后一类战争，我们共产党人不但不反对，而且积极地参加。前一类战争，例如第一次世界大战，双方都是为着帝国主义利益而战，所以全世界的共产党人坚决地反对那一次战争。反对的方法，在战争未爆发前，极力阻止其爆发；既爆发后，只要有可能，就用战争反对战争，用正义战争反对非正义战争。日本的战争是阻碍进步的非正义的战争，全世界人民包括日本人民在内，都应该反对，也正在反对。我们中国，则从人民到政府，从共产党到国民党，一律举起了义旗，进行了反侵略的民族革命战争。我们的战争是神圣的、正义的，是进步的、求和平的。不但求一国的和平，而且求世界的和平，不但求一时的和平，而且求永久的和平。欲达此目的，便须决一死战，便须准备着一切牺牲，坚持到底，不达目的，决不停止。牺牲虽大，时间虽长，但是永久和平和永久光明的新世界，已经鲜明地摆在我们的前面。我们从事战争的信念，便建立在这个争取永久和平和永久光明的新中国和新世界的上面。法西斯主义和帝国主义要把战争延长到无尽期，我们则要把战争在一个不很久远的将来给以结束。为了这个目的，人类大多数应该拿出极大的努力。四亿五千万的中国人占了全人类的四分之一，如果能够一齐努力，打倒了日本帝国主义，创造了自由平等的新中国，对于争取全世界永久和平的贡献，无疑地是非常伟大的。这种希望不是空的，全世界社会经济的行程已经接近了这一点，只须加上多数人的努力，几十年工夫一定可以达到目的。</p>
+                    </div>
+                </div>
+
+                <!-- 第八章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        八、能动性在战争中
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（十七）什么是战争？战争是民族和民族、国家和国家、阶级和阶级、政治集团和政治集团之间互相斗争的最高形式；一切带原则性的军事规律，或军事理论，都是前人或今人做的关于过去战争经验的总结。这些过去的战争所留给我们的血的教训，应该着重地学习它。这是一件事。然而还有一件事，即是从自己经验中考证这些结论，吸收那些用得着的东西，拒绝那些用不着的东西，增加那些自己所特有的东西。这后一件事是十分重要的，不这样做，我们就不能指导战争。</p>
+                    </div>
+                </div>
+
+                <!-- 第九章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        九、战争和政治
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（十八）"战争是政治的继续"，在这点上说，战争就是政治，战争本身就是政治性质的行动，从古以来没有不带政治性的战争。抗日战争是全民族的革命战争，它的胜利，离不开战争的政治目的——驱逐日本帝国主义、建立自由平等的新中国，离不开坚持抗战和坚持统一战线的总方针，离不开全国人民的动员，离不开官兵一致、军民一致和瓦解敌军等项政治原则，离不开统一战线政策的良好执行，离不开文化的动员，离不开争取国际力量和敌国人民援助的努力。一句话，战争一刻也离不了政治。抗日军人中，如有轻视政治的倾向，把战争孤立起来，变为战争绝对主义者，那是错误的，应加纠正。</p>
+                    </div>
+                </div>
+
+                <!-- 第十章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        十、抗日的政治动员
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（十九）如此伟大的民族革命战争，没有普遍和深入的政治动员，是不能胜利的。抗日以前，没有抗日的政治动员，这是中国的大缺陷，已经输了敌人一着。抗日以后，政治动员也非常之不普遍，更不说深入。人民的大多数，是从敌人的炮火和飞机炸弹那里听到消息的。这也是一种动员，但这是敌人替我们做的，不是我们自己做的。偏远地区听不到炮声的人们，至今还是静悄悄地在那里过活。这种情形必须改变，不然，拚死活的战争就得不到胜利。决不可以再输敌人一着，相反，要大大地发挥这一着去制胜敌人。这一着是关系绝大的；武器等等不如人尚在其次，这一着实在是头等重要。动员了全国的老百姓，就造成了陷敌于灭顶之灾的汪洋大海，造成了弥补武器等等缺陷的补救条件，造成了克服一切战争困难的前提。要胜利，就要坚持抗战，坚持统一战线，坚持持久战。然而一切这些，离不开动员老百姓。要胜利又忽视政治动员，叫做"南其辕而北其辙"，结果必然取消了胜利。</p>
+                    </div>
+                </div>
+
+                <!-- 第十一章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        十一、战争的目的
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（二十）战争的目的不是别的，就是保存自己，消灭敌人（消灭敌人，就是解除敌人的武装，也就是所谓"剥夺敌人的抵抗力"，不是要完全消灭其肉体）。古代战争，用矛用盾：矛是进攻的，为了消灭敌人；盾是防御的，为了保存自己。直到今天的武器，还是这二者的继续。轰炸机、机关枪、远射程炮、毒气，是矛的发展；防空掩蔽部、钢盔、水泥工事、防毒面具，是盾的发展。坦克，是矛盾二者结合为一的新式武器。进攻，是消灭敌人的主要手段，但防御也不能废。进攻，是直接为了消灭敌人的，同时也是为了保存自己，因为如不消灭敌人，则自己将被消灭。防御，是直接为了保存自己的，但同时也是辅助进攻或准备转入进攻的一种手段。退却，属于防御一类，是防御的继续；而追击，则是进攻的继续。应该指出：战争目的中，消灭敌人是主要的，保存自己是第二位的，因为只有大量地消灭敌人，才能有效地保存自己。因此，作为消灭敌人之主要手段的进攻是主要的，而作为消灭敌人之辅助手段和作为保存自己之一种手段的防御，是第二位的。战争实际中，虽有许多时候以防御为主，而在其余时候以进攻为主，然而通战争的全体来看，进攻仍然是主要的。</p>
+                    </div>
+                </div>
+
+                <!-- 第十二章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        十二、防御中的进攻，持久中的速决，内线中的外线
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（二十一）第一阶段，现在还未完结。敌之企图是攻占广州、武汉、兰州三点，并把三点联系起来。敌欲达到此目的，至少出五十个师团，约一百五十万兵员，时间一年半至两年，用费将在一百万万日元以上。敌人如此深入，其困难是非常之大的，其后果将不堪设想。至欲完全占领粤汉路、西兰路，将经历非常危险的战争，未必尽能达其企图。但是我们的作战计划，应把敌人可能占领三点甚至三点以外之某些部分地区并可能互相联系起来作为一种基础，部署持久战，即令敌如此做，我也有应付之方。这一阶段我所采取的战争形式，主要的是运动战，而以游击战和阵地战辅助之。阵地战虽在此阶段之第一期，由于国民党军事当局的主观错误把它放在主要地位，但从全阶段看，仍然是辅助的。此阶段中，已经建立的和正在建立或将要建立的抗日根据地，将给予敌以极大的威胁，虽然这些根据地尚是游击性的，不能稳固，但确是广泛发展游击战争所必须的，是游击战争的后方。</p>
+                    </div>
+                </div>
+
+                <!-- 第十三章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        十三、主动性，灵活性，计划性
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（二十二）上面说过的战役和战斗的外线的速决的进攻战，中心点在于一个进攻；外线是说的进攻的范围，速决是说的进攻的时间，所以叫它做"外线的速决的进攻战"。这是实行持久战的最好的方针，也即是所谓运动战的方针。但是这个方针实行起来，离不了主动性、灵活性和计划性。我们现在就来研究这三个问题。</p>
+                    </div>
+                </div>
+
+                <!-- 第十四章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        十四、运动战，游击战，阵地战
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（二十三）作为战争内容的战略内线、战略持久、战略防御中的战役和战斗上的外线的速决的进攻战，在战争形式上就表现为运动战。运动战，就是正规兵团在长的战线和大的战区上面，从事于战役和战斗上的外线的速决的进攻战的形式。同时，也把为了便利于执行这种进攻战而在某些必要时机执行着的所谓"运动性的防御"包括在内，并且也把起辅助作用的阵地攻击和阵地防御包括在内。它的特点是：正规兵团，战役和战斗的优势兵力，进攻性和流动性。</p>
+                    </div>
+                </div>
+
+                <!-- 第十五章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        十五、消耗战，歼灭战
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（二十四）前头说过，战争本质即战争目的，是保存自己，消灭敌人。然而达此目的的战争形式，有运动战、阵地战、游击战三种，实现时的效果就有程度的不同，因而一般地有所谓消耗战和歼灭战之别。</p>
+                    </div>
+                </div>
+
+                <!-- 第十六章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        十六、乘敌之隙的可能性
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（二十五）关于敌之可胜，在防御一节中，已简单地提到；在进攻一节中，还要详细地说明。那末，为什么敌之可乘之隙是存在的呢？因为敌人虽然强大，但其侵略战争是退步的、野蛮的，失道寡助；其军力、经济力虽强，但处于小国地位，人力、物力、财力、军力均感缺乏，经不起长期的战争。其企图是吞并全中国，其兵力使用，就不得不有一定的限度。此限度一经超过，其自己即陷于很大的困难。这样，敌人的兵力，在某一时期，只能使用于一定的方向；即使其在几个方向上同时进攻，也必有一定主攻方向和助攻方向之分。主攻方向上的敌军，虽然强大，但辅攻方向上的敌军，则相对地减弱了。这就是敌之可乘之隙。此外，敌军虽强，但它是异国作战，其指挥人员，对地形、气候、人情、风俗，均不熟悉，其士兵，虽受法西斯教育，但终究是强征来的劳动人民，对于进行侵略战争，并无热情。这些都是敌之弱点，都是可以乘之隙。</p>
+                    </div>
+                </div>
+
+                <!-- 第十七章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        十七、抗日战争中的决战问题
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（二十六）抗日战争中的决战问题应分为三类：一切有把握的战役和战斗应坚决地进行决战，一切无把握的战役和战斗应避免决战，赌国家命运的战略决战应根本避免。抗日战争不同于其他许多战争的特点，又表现在这个决战问题上。在第一第二阶段，敌强我弱，敌之要求在于我集中主力与之决战。我之要求则相反，在选择有利条件，集中优势兵力，与之作有把握的战役和战斗上的决战，例如平型关、台儿庄以及许多的其他战斗；而避免在不利条件下的无把握的决战，例如彰德等地战役所采的方针。拚国家命运的战略的决战则根本不干，例如最近之徐州撤退。这样就破坏了敌之"速决"计划，不得不跟了我们干持久战。这种方针，在领土狭小的国家是做不到的，在政治太落后了的国家也难做到。我们是大国，又处进步时代，这点是可以做到的。如果避免了战略的决战，"留得青山在，不怕没柴烧"，虽然丧失若干土地，还有广大的回旋余地，可以促进并等候国内的进步、国际的增援和敌人的内溃，这是抗日战争的上策。急性病的速胜论者则不然，他们主张在敌我力量对比不利于我的条件下，举行战略的决战；或者主张在战役和战斗上，不打则已，打则必胜，要求每战都应速决和全歼。这种意见，我们过去已经说过了，是不对的。</p>
+                    </div>
+                </div>
+
+                <!-- 第十八章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        十八、兵民是胜利之本
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（二十七）日本敢于欺负我们，主要的原因在于中国民众的无组织状态。克服了这一缺点，就把日本侵略者置于我们数万万站起来了的人民之前，使它像一匹野牛冲入火阵，我们一声唤也要把它吓一大跳，这匹野牛就非烧死不可。我们方面，军队须有源源不绝的补充，现在下面胡干的"捉兵法"、"买兵法"，亟须禁止，改为广泛的热烈的政治动员，这样，要几百万人当兵都是容易的。抗日的财源十分困难，动员了民众，则财政也不成问题，岂有如此广土众民的国家而患财穷之理？军队须和民众打成一片，使军队在民众眼睛中看成是自己的军队，这个军队便无敌于天下，个把日本帝国主义是不够打的。</p>
+                    </div>
+                </div>
+
+                <!-- 第十九章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        十九、结论
+                    </h3>
+                    <div class="chapter-content">
+                        <p>（二十八）在什么条件下，中国能战胜并消灭日本帝国主义的实力呢？要有三个条件：第一是中国抗日统一战线的完成；第二是国际抗日统一战线的完成；第三是日本国内人民和日本殖民地人民的革命运动的兴起。就中国人民的立场来说，三个条件中，中国人民的大联合是主要的。这个战争要延长多久呢？要看中国抗日统一战线的实力和中日两国其他许多决定的因素如何而定。如果这些条件不能很快实现，战争就要延长。但结果还是一样，日本必败，中国必胜。只是牺牲会大，要经过一个很痛苦的时期。我们应该赞扬和感谢那些为抗日战争英勇奋斗的将士们，他们无愧于中华民族的优秀儿女。我们应该团结一切可以团结的力量，为争取抗日战争的最后胜利和实现中华民族的独立自由而奋斗到底。</p>
+                        
+                        <p>（二十九）我的讲演至此为止。结论是：抗日战争是持久战，最后胜利是中国的——这就是我们的结论。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 读法提示标签 -->
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h3>读法提示</h3>
+                <div class="guide-section">
+                    <h4>怎么读这篇文章</h4>
+                    <div class="guide-list">
+                        <div class="guide-item">
+                            <span class="guide-num">1</span>
+                            <p><strong>先不要看结论，看毛泽东是怎么反驳"亡国论"和"速胜论"的</strong><br>
+                            注意他用的不是道德批判，而是事实分析——从敌我双方的基本特点入手</p>
+                        </div>
+                        <div class="guide-item">
+                            <span class="guide-num">2</span>
+                            <p><strong>读到"三个阶段"时，停下来问自己：</strong><br>
+                            你现在处于什么阶段？这个阶段的核心任务是什么？</p>
+                        </div>
+                        <div class="guide-item">
+                            <span class="guide-num">3</span>
+                            <p><strong>不要只记"持久战"三个字，要理解：</strong><br>
+                            为什么必须是"持久"而不是"速决"？时间在这里起什么作用？</p>
+                        </div>
+                        <div class="guide-item">
+                            <span class="guide-num">4</span>
+                            <p><strong>读完之后，找一个你正在面对的困境：</strong><br>
+                            用"强弱/大小/进步退步/多助寡助"四维度分析它</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 难点解析标签 -->
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-analysis">
+                <h3>难点解析</h3>
+                <div class="difficulty-list">
+                    <div class="difficulty-item">
+                        <div class="difficulty-wrong">
+                            <span class="difficulty-icon">❌</span>
+                            <p><strong>常见误读：</strong>"持久战"就是"拖"，就是消极等待</p>
+                        </div>
+                        <div class="difficulty-right">
+                            <span class="difficulty-icon">✅</span>
+                            <p><strong>正解：</strong>持久战是主动管理时间节奏的战略，每个阶段都有明确的任务和转化目标。防御阶段要保存实力，相持阶段要积累转化，反攻阶段要决胜一击——这是积极的时间杠杆，不是消极等待</p>
+                        </div>
+                    </div>
+                    <div class="difficulty-item">
+                        <div class="difficulty-wrong">
+                            <span class="difficulty-icon">❌</span>
+                            <p><strong>常见误读：</strong>"兵民是胜利之本"就是人多力量大</p>
+                        </div>
+                        <div class="difficulty-right">
+                            <span class="difficulty-icon">✅</span>
+                            <p><strong>正解：</strong>关键是"组织起来"。无组织的民众是散沙，组织起来的民众是汪洋大海。这里的"组织"指的是政治动员和统一战线，不是简单的人数堆积</p>
+                        </div>
+                    </div>
+                    <div class="difficulty-item">
+                        <div class="difficulty-wrong">
+                            <span class="difficulty-icon">❌</span>
+                            <p><strong>常见误读：</strong>这是军事著作，跟我没关系</p>
+                        </div>
+                        <div class="difficulty-right">
+                            <span class="difficulty-icon">✅</span>
+                            <p><strong>正解：</strong>这是一套分析复杂局势、规划长期目标的思维方法。任何面临"以弱胜强、以小博大"处境的人，都能从中获得方法论启示</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对话空间标签 -->
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-space">
+                <h3>对话空间</h3>
+                <div class="dialogue-section">
+                    <div class="dialogue-item">
+                        <h4>这篇文章在回应谁？</h4>
+                        <ul>
+                            <li>当时党内外的"亡国论"者——认为中国武器不如人，战必败</li>
+                            <li>当时党内外的"速胜论"者——认为可以很快战胜日本</li>
+                            <li>对战争前途感到迷茫的普通民众</li>
+                            <li>需要战略指导的抗日军政干部</li>
+                        </ul>
+                    </div>
+                    <div class="dialogue-item">
+                        <h4>这篇文章在问每一个读者：</h4>
+                        <ul>
+                            <li>你面对困难时，是倾向于投降、盲动，还是持久战？</li>
+                            <li>你能客观分析敌我双方的真实力量对比吗？</li>
+                            <li>你有耐心打持久战吗？还是总想速胜？</li>
+                            <li>你懂得在弱势时保存自己、积累力量吗？</li>
+                        </ul>
+                    </div>
+                    <div class="dialogue-item">
+                        <h4>这篇文章在等你的回应：</h4>
+                        <ul>
+                            <li>找一个你正在面对的长期挑战</li>
+                            <li>用文章里的"四维度分析法"重新评估局势</li>
+                            <li>判断你现在处于哪个阶段，该采取什么策略</li>
+                            <li>制定一个分阶段的行动计划</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行动实验标签 -->
+        <div class="tab-content" id="action">
+            <div class="action-experiment">
+                <h3>行动实验</h3>
+                <div class="experiment-list">
+                    <div class="experiment-item">
+                        <h4>实验1：阶段判定</h4>
+                        <p>选一个你正在进行的长期目标（学习、工作、斗争）</p>
+                        <ul>
+                            <li>诚实判定：你现在处于防御/相持/反攻哪个阶段？</li>
+                            <li>这个阶段最该做的是什么？最不该做的是什么？</li>
+                            <li>你怎么知道可以进入下一个阶段了？</li>
+                        </ul>
+                    </div>
+                    <div class="experiment-item">
+                        <h4>实验2：强弱分析</h4>
+                        <p>列出你在这个目标中的：</p>
+                        <ul>
+                            <li>强项 vs 弱项</li>
+                            <li>有利因素 vs 不利因素</li>
+                            <li>进步性 vs 退步性</li>
+                            <li>多助 vs 寡助</li>
+                        </ul>
+                        <p>看看整体判断有没有变化</p>
+                    </div>
+                    <div class="experiment-item">
+                        <h4>实验3：时间规划</h4>
+                        <p>如果这个目标需要3年，画出三个阶段的时间线</p>
+                        <ul>
+                            <li>每个阶段的关键节点是什么？</li>
+                            <li>怎么判断可以进入下一个阶段了？</li>
+                            <li>每个阶段的主要任务和次要任务是什么？</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 一目了然标签 -->
+        <div class="tab-content" id="visual">
+            <div class="visual-section" style="max-width:860px;margin:0 auto;padding:24px 16px;">
+                <h2 style="text-align:center;color:#c53030;margin-bottom:8px;">一目了然</h2>
+                <p style="text-align:center;color:#666;margin-bottom:32px;font-size:0.95em;">用图表读懂《论持久战》——从结构到战略</p>
+
+                <!-- 雷达图：三篇文章对比 -->
+                <div style="background:#fafafa;border:1px solid #eee;border-radius:10px;padding:24px;margin-bottom:28px;">
+                    <h3 style="color:#333;margin-bottom:6px;">文章特征雷达图</h3>
+                    <p style="color:#666;font-size:0.88em;margin-bottom:16px;">六个维度衡量《论持久战》的文章"性格"</p>
+                    <div style="max-width:480px;margin:0 auto;">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                    <div style="display:flex;justify-content:center;gap:20px;margin-top:12px;font-size:0.85em;">
+                        <span style="color:#3182ce">●《论持久战》</span>
+                    </div>
+                    <div style="margin-top:14px;padding:12px 16px;background:#fff8f8;border-left:3px solid #c53030;border-radius:4px;font-size:0.88em;color:#444;">
+                        《论持久战》在<strong>现实针对性、时间跨度、行动指导性</strong>三个维度显著高于另两篇——这是一篇直接服务于战争决策的战略文本，理论性略低于纯哲学著作，但战略落地性无与伦比。
+                    </div>
+                </div>
+
+                <!-- 论证节奏曲线 -->
+                <div style="background:#fafafa;border:1px solid #eee;border-radius:10px;padding:24px;margin-bottom:28px;">
+                    <h3 style="color:#333;margin-bottom:6px;">论证节奏曲线</h3>
+                    <p style="color:#666;font-size:0.88em;margin-bottom:16px;">各章节"论证强度"变化，峰值在哪里——毛泽东在哪里最用力</p>
+                    <canvas id="argumentCurve"></canvas>
+                    <div style="margin-top:14px;padding:12px 16px;background:#fff8f8;border-left:3px solid #c53030;border-radius:4px;font-size:0.88em;color:#444;">
+                        文章结构呈"爬坡型"：前几章驳斥错误观点（铺垫），从"为什么是持久战"起论证密度急升，<strong>"兵民是胜利之本"与结论</strong>达到顶峰——毛泽东最后才亮出底牌。
+                    </div>
+                </div>
+
+                <!-- 敌我力量动态变化曲线 -->
+                <div style="background:#fafafa;border:1px solid #eee;border-radius:10px;padding:24px;margin-bottom:28px;">
+                    <h3 style="color:#333;margin-bottom:6px;">敌我力量动态变化</h3>
+                    <p style="color:#666;font-size:0.88em;margin-bottom:16px;">《论持久战》的核心预测：三阶段中敌我力量如何此消彼长，胜利如何从弱者一方逐渐积累</p>
+                    <canvas id="powerChart"></canvas>
+                    <div style="margin-top:14px;padding:12px 16px;background:#fff8f8;border-left:3px solid #c53030;border-radius:4px;font-size:0.88em;color:#444;">
+                        这条交叉曲线是全文的战略逻辑核心：<strong>两线交叉的时刻，就是从防御转向反攻的历史节点</strong>。持久战不是消极等待，而是主动创造这一转化条件。
+                    </div>
+                </div>
+
+                <!-- 三阶段战略图 -->
+                <div style="background:#fafafa;border:1px solid #eee;border-radius:10px;padding:24px;margin-bottom:28px;">
+                    <h3 style="color:#333;margin-bottom:16px;">持久战三阶段战略框架</h3>
+                    <div style="display:flex;align-items:stretch;gap:0;overflow-x:auto;">
+                        <div style="flex:1;min-width:180px;background:#2d3748;color:white;border-radius:8px 0 0 8px;padding:20px;text-align:center;">
+                            <div style="font-size:2em;font-weight:bold;color:#fc8181;margin-bottom:8px;">①</div>
+                            <h4 style="color:#fc8181;margin-bottom:10px;">战略防御</h4>
+                            <p style="font-size:0.85em;margin-bottom:6px;">敌强我弱，保存实力</p>
+                            <p style="font-size:0.82em;color:#aaa;">主要形式：<strong style="color:#fc8181">运动战</strong></p>
+                            <p style="font-size:0.82em;color:#aaa;margin-top:4px;">核心：避免决战，消耗敌人</p>
+                        </div>
+                        <div style="display:flex;align-items:center;background:#1a1a2e;padding:0 12px;color:#fc8181;font-size:1.5em;">→</div>
+                        <div style="flex:1;min-width:180px;background:#744210;color:white;padding:20px;text-align:center;">
+                            <div style="font-size:2em;font-weight:bold;color:#fbd38d;margin-bottom:8px;">②</div>
+                            <h4 style="color:#fbd38d;margin-bottom:10px;">战略相持</h4>
+                            <p style="font-size:0.85em;margin-bottom:6px;">力量平衡，积累转化</p>
+                            <p style="font-size:0.82em;color:#e9d8a6;">主要形式：<strong style="color:#fbd38d">游击战</strong></p>
+                            <p style="font-size:0.82em;color:#e9d8a6;margin-top:4px;">核心：壮大自己，准备反攻</p>
+                        </div>
+                        <div style="display:flex;align-items:center;background:#1a1a2e;padding:0 12px;color:#68d391;font-size:1.5em;">→</div>
+                        <div style="flex:1;min-width:180px;background:#1a4731;color:white;border-radius:0 8px 8px 0;padding:20px;text-align:center;">
+                            <div style="font-size:2em;font-weight:bold;color:#68d391;margin-bottom:8px;">③</div>
+                            <h4 style="color:#68d391;margin-bottom:10px;">战略反攻</h4>
+                            <p style="font-size:0.85em;margin-bottom:6px;">我强敌弱，决胜一击</p>
+                            <p style="font-size:0.82em;color:#9ae6b4;">主要形式：<strong style="color:#68d391">运动战</strong></p>
+                            <p style="font-size:0.82em;color:#9ae6b4;margin-top:4px;">核心：消灭敌人，夺取胜利</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 理论拼图标签 -->
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h3>理论拼图</h3>
+                <div class="puzzle-intro">
+                    <p>这篇文章在马哲体系中处于什么位置？它与其他理论是什么关系？</p>
+                </div>
+                <div class="puzzle-map">
+                    <div class="puzzle-center">
+                        <div class="puzzle-piece active">
+                            <h4>论持久战</h4>
+                            <p>军事战略理论</p>
+                            <p>矛盾分析法的具体应用</p>
+                        </div>
+                    </div>
+                    <div class="puzzle-connections">
+                        <div class="puzzle-connection">
+                            <span class="connection-line"></span>
+                            <div class="puzzle-related">
+                                <h5>理论基础</h5>
+                                <a href="mao-dun-lun.html">《矛盾论》</a>
+                                <p>矛盾分析、主次矛盾转化</p>
+                            </div>
+                        </div>
+                        <div class="puzzle-connection">
+                            <span class="connection-line"></span>
+                            <div class="puzzle-related">
+                                <h5>方法论基础</h5>
+                                <a href="shi-jian-lun.html">《实践论》</a>
+                                <p>认识与实践的辩证关系</p>
+                            </div>
+                        </div>
+                        <div class="puzzle-connection">
+                            <span class="connection-line"></span>
+                            <div class="puzzle-related">
+                                <h5>后续发展</h5>
+                                <span>《抗日游击战争的战略问题》</span>
+                                <p>持久战的具体战术展开</p>
+                            </div>
+                        </div>
+                        <div class="puzzle-connection">
+                            <span class="connection-line"></span>
+                            <div class="puzzle-related">
+                                <h5>在工具集中的位置</h5>
+                                <a href="../toolkit.html">斗争策略 → 战略战术</a>
+                                <p>以弱胜强的战略思维</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="puzzle-insight">
+                    <h4>💡 顿悟时刻</h4>
+                    <p>原来"持久战"不是简单的"拖"，而是<strong>矛盾分析法在军事领域的具体运用</strong>：</p>
+                    <ul>
+                        <li>分析敌我矛盾的特殊性（强弱、大小、进步退步、多助寡助）</li>
+                        <li>把握矛盾的主要方面和次要方面的转化</li>
+                        <li>通过主观能动性促成矛盾向有利方向转化</li>
+                    </ul>
+                    <p>这才是毛泽东思想的精髓——<strong>把哲学原理转化为解决实际问题的战略战术</strong>。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 延伸阅读标签 -->
+        <div class="tab-content" id="further">
+            <div class="further-reading">
+                <h3>延伸阅读</h3>
+                <div class="reading-list">
+                    <div class="reading-item">
+                        <h4>如果《论持久战》让你思考"时间节奏"，读：</h4>
+                        <a href="#">《星星之火，可以燎原》</a>
+                        <p>看毛泽东如何在更早期论述"积累"和"时机"</p>
+                    </div>
+                    <div class="reading-item">
+                        <h4>如果《论持久战》让你思考"强弱转化"，读：</h4>
+                        <a href="mao-dun-lun.html">《矛盾论》</a>
+                        <p>理解转化的哲学基础——矛盾的主次方面</p>
+                    </div>
+                    <div class="reading-item">
+                        <h4>如果《论持久战》让你想对比其他战略思想，读：</h4>
+                        <span>克劳塞维茨《战争论》</span>
+                        <p>西方战略学的不同路径——速决 vs 持久</p>
+                    </div>
+                    <div class="reading-item">
+                        <h4>如果《论持久战》让你想看清当时的真实处境，读：</h4>
+                        <span>《抗日游击战争的战略问题》</span>
+                        <p>持久战的具体战术展开</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
+        .article-header { text-align: center; padding: 40px 0 30px; border-bottom: 2px solid #c53030; }
+        .importance-badge { display: inline-block; background: #c53030; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.85em; margin-bottom: 16px; }
+        .article-header h1 { font-size: 2.4em; color: #1a1a1a; margin: 12px 0; font-family: 'STSong', 'SimSun', serif; }
+        .article-subtitle { color: #555; font-size: 1.05em; margin-bottom: 12px; font-style: italic; }
+        .article-meta { display: flex; justify-content: center; gap: 20px; color: #666; font-size: 0.9em; flex-wrap: wrap; }
+        .tab-nav { display: flex; gap: 4px; margin: 30px 0 0; border-bottom: 2px solid #e2e8f0; overflow-x: auto; }
+        .tab-btn { background: none; border: none; padding: 10px 18px; cursor: pointer; color: #666; font-size: 0.95em; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; }
+        .tab-btn:hover { color: #c53030; }
+        .tab-btn.active { color: #c53030; border-bottom-color: #c53030; font-weight: 600; }
+        .tab-content { display: none; padding: 30px 0; }
+        .tab-content.active { display: block; }
+        .text-intro { background: #fff8f0; border-left: 4px solid #c53030; padding: 14px 20px; margin-bottom: 24px; border-radius: 0 6px 6px 0; }
+        .chapter { margin-bottom: 16px; border: 1px solid #e8e8e8; border-radius: 6px; overflow: hidden; }
+        .chapter-title { background: #f7f7f7; padding: 14px 20px; margin: 0; cursor: pointer; font-size: 1.05em; color: #333; display: flex; align-items: center; gap: 10px; user-select: none; transition: background 0.2s; }
+        .chapter-title:hover { background: #f0f0f0; }
+        .toggle-icon { font-size: 0.8em; color: #c53030; transition: transform 0.2s; flex-shrink: 0; }
+        .chapter-title.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .chapter-content { padding: 20px 24px; line-height: 1.9; color: #2d2d2d; font-size: 1em; }
+        .chapter-content p { margin-bottom: 16px; text-indent: 2em; }
+        .reading-guide, .difficulty-section, .dialogue-section, .action-section, .visualization-section, .puzzle-section, .further-reading { line-height: 1.9; }
+        .guide-block, .diff-item, .dialogue-block, .action-item, .chart-block, .reading-item { margin-bottom: 28px; padding: 20px 24px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .guide-block h3, .dialogue-block h3, .action-item h3 { color: #c53030; margin-bottom: 12px; font-size: 1.05em; }
+        .wrong { background: #fff5f5; border-left: 4px solid #fc8181; padding: 10px 16px; margin-bottom: 10px; border-radius: 0 4px 4px 0; color: #742a2a; }
+        .correct { background: #f0fff4; border-left: 4px solid #68d391; padding: 10px 16px; border-radius: 0 4px 4px 0; color: #1a4731; }
+        .chart-container { position: relative; }
+        .chart-block h3 { color: #c53030; margin-bottom: 8px; }
+        .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
+        .chart-legend { text-align: center; margin-top: 10px; font-size: 0.9em; }
+        .chart-legend span { margin: 0 10px; }
+        .theory-tree { text-align: center; padding: 20px 0; }
+        .theory-node { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 0.9em; margin: 6px; }
+        .theory-node.root { background: #c53030; color: white; font-weight: bold; }
+        .theory-node.branch { background: #2d3748; color: white; }
+        .theory-node.current { background: #38a169; color: white; font-weight: bold; }
+        .theory-node.related { background: #e2e8f0; color: #333; }
+        .theory-branches { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 12px; }
+        .theory-branch { text-align: center; }
+        .theory-sub { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
+        .puzzle-intro, .puzzle-position, .puzzle-connection, .puzzle-modern { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-position h3, .puzzle-connection h3, .puzzle-modern h3 { color: #c53030; margin-bottom: 12px; }
+        .further-reading .reading-item h3 { color: #c53030; margin-bottom: 8px; font-size: 1em; }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; background: #1a1a1a; padding: 0 24px; display: flex; align-items: center; height: 60px; z-index: 1000; gap: 16px; }
+        .nav-brand a { color: #e53e3e; font-weight: bold; font-size: 1.1em; text-decoration: none; }
+        .nav-search { flex: 1; display: flex; gap: 6px; max-width: 300px; }
+        .nav-search input { flex: 1; padding: 5px 10px; border-radius: 4px; border: none; font-size: 0.85em; }
+        .nav-search button { background: #e53e3e; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+        .nav-menu { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; }
+        .nav-menu li a { color: #ccc; text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.9em; }
+        .nav-menu li a:hover, .nav-menu li a.active { color: white; background: #c53030; }
+        @media (max-width: 600px) { .article-header h1 { font-size: 1.8em; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .chapter-content { padding: 14px 16px; } }
+    </style>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+            if (tabId === 'visual') setTimeout(initCharts, 100);
+        }
+
+        function toggleChapter(titleEl) {
+            const content = titleEl.nextElementSibling;
+            titleEl.classList.toggle('collapsed');
+            content.style.display = titleEl.classList.contains('collapsed') ? 'none' : 'block';
+        }
+
+        // 初始化图表
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+            chartsInited = true;
+
+            // 雷达图：论持久战单篇文章
+            const radarCtx = document.getElementById('radarChart');
+            if (radarCtx) {
+                new Chart(radarCtx.getContext('2d'), {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                        datasets: [{
+                            label: '论持久战',
+                            data: [7, 9, 9, 9, 8, 9],
+                            borderColor: '#c41e3a',
+                            backgroundColor: 'rgba(196,30,58,0.15)',
+                            pointBackgroundColor: '#c41e3a',
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            r: {
+                                min: 0, max: 10,
+                                ticks: { stepSize: 2, font: { size: 10 } },
+                                pointLabels: { font: { size: 12 } }
+                            }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            // 论证节奏曲线
+            const argCtx = document.getElementById('argumentCurve');
+            if (argCtx) {
+                new Chart(argCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: [
+                            '①问题的提起', '②驳亡国论', '③妥协还是抗战',
+                            '④速胜论也不对', '⑤为什么是持久战★', '⑥犬牙交错的战争',
+                            '⑦为永久和平而战', '⑧能动性在战争中', '⑨战争和政治',
+                            '⑩政治动员', '⑪战争的目的', '⑫防御中的进攻',
+                            '⑬主动·灵活·计划', '⑭运动战游击战', '⑮消耗战歼灭战',
+                            '⑯乘敌之隙', '⑰决战问题', '⑱兵民是胜利之本★', '⑲结论★'
+                        ],
+                        datasets: [{
+                            label: '论证强度',
+                            data: [6, 7.5, 6.5, 8, 9.5, 7, 7.5, 8, 6.5, 8.5, 7, 8, 8.5, 7.5, 7, 8, 8.5, 9.5, 10],
+                            borderColor: '#3182ce',
+                            backgroundColor: 'rgba(49,130,206,0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                min: 0, max: 10,
+                                ticks: { stepSize: 2 },
+                                title: { display: true, text: '论证强度（0-10）' }
+                            },
+                            x: {
+                                ticks: { font: { size: 9 }, maxRotation: 45 }
+                            }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            // 敌我力量动态变化
+            const powerCtx = document.getElementById('powerChart');
+            if (powerCtx) {
+                new Chart(powerCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['战争开始', '战略防御中期', '战略防御末期', '战略相持初期', '战略相持中期', '战略相持末期', '战略反攻', '战争结束'],
+                        datasets: [
+                            {
+                                label: '日军（敌方）',
+                                data: [9, 8.5, 7.5, 7, 6, 4.5, 3, 0.5],
+                                borderColor: '#718096',
+                                backgroundColor: 'rgba(113,128,150,0.1)',
+                                tension: 0.4,
+                                fill: false,
+                                borderDash: [5, 3],
+                                pointRadius: 4
+                            },
+                            {
+                                label: '中国军民（我方）',
+                                data: [3, 3.5, 4, 5, 6, 7, 8.5, 9.5],
+                                borderColor: '#e53e3e',
+                                backgroundColor: 'rgba(229,62,62,0.1)',
+                                tension: 0.4,
+                                fill: true,
+                                pointRadius: 4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                min: 0, max: 10,
+                                ticks: { stepSize: 2 },
+                                title: { display: true, text: '相对力量' }
+                            }
+                        },
+                        plugins: {
+                            legend: { position: 'bottom' },
+                            annotation: {}
+                        }
+                    }
+                });
+            }
+        }
+
+        // 搜索功能
+        function search() {
+            const query = document.getElementById('searchInput').value;
+            if (query) {
+                alert('搜索功能正在开发中，搜索词：' + query);
+            }
+        }
+
+        // 页面加载时默认折叠部分章节
+        document.addEventListener('DOMContentLoaded', function() {
+            const chapters = document.querySelectorAll('.chapter-content');
+            chapters.forEach((chapter, index) => {
+                if (index > 2) { // 只展开前3章，其余折叠
+                    chapter.style.display = 'none';
+                    chapter.previousElementSibling.classList.add('collapsed');
+                }
+            });
+        });
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

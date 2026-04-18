@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>革命歌曲 | 文艺 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .page-header p { font-size: 1.05rem; opacity: 0.88; }
+
+        .gallery-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: #c41e3a; text-decoration: none; margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* 音乐网格 - 详细版 */
+        .music-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .music-detail-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .music-detail-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .music-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .music-detail-icon {
+            font-size: 3rem;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #c41e3a, #8b0000);
+            border-radius: 12px;
+            color: white;
+        }
+
+        .music-detail-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .music-detail-title h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: var(--text-color);
+        }
+
+        .music-detail-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .music-versions-list {
+            background: #f8f8f8;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .music-versions-list h4 {
+            margin: 0 0 0.75rem 0;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .music-versions-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .music-versions-list li {
+            margin: 0.5rem 0;
+        }
+
+        .music-versions-list a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .music-versions-list a:hover {
+            text-decoration: underline;
+        }
+
+        .music-versions-list a::before {
+            content: '▶';
+            font-size: 0.7rem;
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .music-versions-list {
+            background: #3a3a3a;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html" class="active">文艺</a>
+                <a href="../puzzle.html" style="color:#fbbf24;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>🎵 革命歌曲</h1>
+            <p>红色旋律 · 时代强音 · 精神传承</p>
+        </section>
+
+        <div class="gallery-container">
+            <a href="../gallery.html" class="back-link">← 返回文艺首页</a>
+
+            <div class="music-detail-grid">
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/国际歌.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>国际歌</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">不用拘泥于形式和乐器，同志！我们要让国际歌在世界各地奏响！</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV1VT411h727" target="_blank">中文版</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV1ZM4y1n7Ms" target="_blank">唐朝乐队摇滚版</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV1My4y1z7PQ" target="_blank">俄语原版</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV1PqemeXEmr" target="_blank">法语原版</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV1qj411871N" target="_blank">法语纪念版</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV1wm4y1p7UU" target="_blank">日语原版</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/东方红.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>东方红</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">歌颂中国共产党和毛泽东的经典歌曲，表达了人民对领袖的深厚感情。</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV1AwmdBjEp7" target="_blank">笔者推荐-毛主席诞辰一百三十二周年版MV</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV1hJ411x7Gk" target="_blank">1965版《东方红》</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/华沙曲.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>华沙曲</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">国际共运史上最具影响力的歌曲之一，传遍世界的无产阶级革命战歌，音乐、历史与革命精神的完美融合</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV1CL411Q7XC" target="_blank">波兰语版</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV1ssX2BTERs" target="_blank">中文版</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV1yJ411g71s" target="_blank">俄文版</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/三版义勇军进行曲.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>义勇军进行曲</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">中华人民共和国国歌，诞生于抗日战争时期，激励着一代又一代中国人。此后还根据时代改编，鼓舞我们继续革命</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV1i4421U7sZ" target="_blank">三版能量都巨大，各有各的美</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/牢不可破的联盟.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>牢不可破的联盟</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">苏联国歌，象征着国际共运的蓬勃和辉煌。斯人已逝，同志前仆后继。</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV19pC9BEEan" target="_blank">1944版（1:21处字幕错误，参考对比版）</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV1Wm4y1W7Cw" target="_blank">1977版</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV1PU421Z759" target="_blank">1944、1977对比版</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/歌唱祖国.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>歌唱祖国</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">笔者闻之动情，听则落泪啊，来之不易的胜利。表达对祖国深沉热爱的经典之作。</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV1iH4y1U7r8" target="_blank">原版</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV11WWnenEgd" target="_blank">1968欧内大好汉版（笔者倾情推荐）</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/胜利日.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>胜利日</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">来之不易的胜利。盛大的欢奏，逝者的哀思</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV1oj411679s" target="_blank">原版</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/我们走在大路上.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>我们走在大路上</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">"我们的队伍向太阳，脚踏着祖国的大地"——充满革命乐观主义精神的经典歌曲。</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV1to4y157D4" target="_blank">1970版</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/咱们工人有力量.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>咱们工人有力量</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">狗资本家，你工人爷爷给你踩背来咯！</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV1qD421N7t" target="_blank">原版</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/社会主义好.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>社会主义好</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">歌颂社会主义建设的歌曲，表达了人民对社会主义制度的拥护和热爱。</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV19nh6ezEqA" target="_blank">原版</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/俄罗斯士兵之歌.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>俄罗斯士兵之歌</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">2025年初由某二战卡牌游戏破圈。歌颂俄罗斯士兵的勇敢、机智、忠诚、无畏，赞美他们为祖国献身的精神，旋律铿锵有力、歌词质朴直白</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV1CoBjYpEsU" target="_blank"> 豪 俊 金 曲 </a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="music-detail-card">
+                    <div class="music-detail-header">
+                        <div class="music-detail-icon">
+                            <img src="../images/icons/最美好的前途.jpg">
+                        </div>
+                        <div class="music-detail-title">
+                            <h3>最美好的前途</h3>
+                        </div>
+                    </div>
+                    <p class="music-detail-desc">本为苏联少儿科幻剧《她来自未来》创作的主题曲，现多用于叹惋和自哀</p>
+                    <div class="music-versions-list">
+                        <h4>推荐版本</h4>
+                        <ul>
+                            <li><a href="https://www.bilibili.com/video/BV1xq4y1T7Sd" target="_blank">高播放量MV</a></li>
+                            <li><a href="https://www.bilibili.com/video/BV1Gb421a7LN" target="_blank">后朋版</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>
