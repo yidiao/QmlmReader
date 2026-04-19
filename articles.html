@@ -5,6 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文章列表 | 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .card-wip-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff9800;
+            color: white;
+            font-size: 0.7em;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+        .article-card.wip {
+            position: relative;
+        }
+        .article-card.wip .article-title a {
+            color: #888;
+        }
+        .article-card.wip .read-more {
+            color: #999 !important;
+            cursor: default;
+            pointer-events: none;
+        }
+        .article-card.wip .read-more:hover {
+            text-decoration: none;
+        }
+        .article-card.wip::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 8px,
+                rgba(255,152,0,0.04) 8px,
+                rgba(255,152,0,0.04) 16px
+            );
+            border-radius: inherit;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header">
@@ -129,6 +172,22 @@
                 <article class="article-card priority-5" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
+                        <span class="article-date">1938年11月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/zhan-zheng-zhan-lue.html">战争和战略问题</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">阐述中国革命战争中武装斗争和军事战略转变的根本问题。</p>
+                    <div class="card-footer">
+                        <span class="article-category">军事战略</span>
+                        <a href="articles/zhan-zheng-zhan-lue.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
                         <span class="article-date">1940年1月</span>
                     </div>
                     <h4 class="article-title">
@@ -161,6 +220,22 @@
                 <article class="article-card priority-5" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
+                        <span class="article-date">1944年4月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/xue-xi-shi-ju.html">学习和时局</a>
+                    </h4>
+                    <p class="article-author">毛泽东</p>
+                    <p class="article-desc">放下包袱和开动机器——精神解放与独立思考的方法论。</p>
+                    <div class="card-footer">
+                        <span class="article-category">思想文化</span>
+                        <a href="articles/xue-xi-shi-ju.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
                         <span class="article-date">1957年2月</span>
                     </div>
                     <h4 class="article-title">
@@ -175,7 +250,8 @@
                 </article>
 
                 <!-- 五星文章 - 列宁 -->
-                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5 wip" data-priority="5" data-author="lenin">
+                    <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1902年</span>
@@ -187,88 +263,83 @@
                     <p class="article-desc">批判经济派，阐述建党理论，提出"灌输论"。</p>
                     <div class="card-footer">
                         <span class="article-category">政治理论</span>
-                        <a href="articles/lenin/zen-me-ban.html" class="read-more">阅读全文 →</a>
+                        <span class="read-more">🚧 正在施工</span>
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5 wip" data-priority="5" data-author="lenin">
+                    <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1909年</span>
                     </div>
-                    <h4 class="article-title">
-                        <a href="articles/lenin/wei-wu-zhu-yi.html">唯物主义和经验批判主义</a>
-                    </h4>
+                    <h4 class="article-title">唯物主义和经验批判主义</h4>
                     <p class="article-author">列宁</p>
                     <p class="article-desc">捍卫和发展马克思主义哲学，批判马赫主义。</p>
                     <div class="card-footer">
                         <span class="article-category">哲学基础</span>
-                        <a href="articles/lenin/wei-wu-zhu-yi.html" class="read-more">阅读全文 →</a>
+                        <span class="read-more">🚧 正在施工</span>
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5 wip" data-priority="5" data-author="lenin">
+                    <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1916年</span>
                     </div>
-                    <h4 class="article-title">
-                        <a href="articles/lenin/di-guo-zhu-yi.html">帝国主义是资本主义的最高阶段</a>
-                    </h4>
+                    <h4 class="article-title">帝国主义是资本主义的最高阶段</h4>
                     <p class="article-author">列宁</p>
                     <p class="article-desc">分析帝国主义的本质、特征和历史地位。</p>
                     <div class="card-footer">
                         <span class="article-category">政治经济学</span>
-                        <a href="articles/lenin/di-guo-zhu-yi.html" class="read-more">阅读全文 →</a>
+                        <span class="read-more">🚧 正在施工</span>
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5 wip" data-priority="5" data-author="lenin">
+                    <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1917年</span>
                     </div>
-                    <h4 class="article-title">
-                        <a href="articles/lenin/guo-jia-yu-ge-ming.html">国家与革命</a>
-                    </h4>
+                    <h4 class="article-title">国家与革命</h4>
                     <p class="article-author">列宁</p>
                     <p class="article-desc">马克思主义国家学说的系统阐述，论述无产阶级专政理论。</p>
                     <div class="card-footer">
                         <span class="article-category">政治理论</span>
-                        <a href="articles/lenin/guo-jia-yu-ge-ming.html" class="read-more">阅读全文 →</a>
+                        <span class="read-more">🚧 正在施工</span>
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5 wip" data-priority="5" data-author="lenin">
+                    <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1920年</span>
                     </div>
-                    <h4 class="article-title">
-                        <a href="articles/lenin/zuo-pai-you-zhi-bing.html">共产主义运动中的"左派"幼稚病</a>
-                    </h4>
+                    <h4 class="article-title">共产主义运动中的"左派"幼稚病</h4>
                     <p class="article-author">列宁</p>
                     <p class="article-desc">批判"左"倾错误，阐述无产阶级政党的战略和策略。</p>
                     <div class="card-footer">
                         <span class="article-category">政治理论</span>
-                        <a href="articles/lenin/zuo-pai-you-zhi-bing.html" class="read-more">阅读全文 →</a>
+                        <span class="read-more">🚧 正在施工</span>
                     </div>
                 </article>
 
                 <!-- 四星文章 -->
-                <article class="article-card priority-4" data-priority="4" data-author="mao">
+                <article class="article-card priority-4 wip" data-priority="4" data-author="mao">
+                    <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
                         <span class="article-date">1926年3月</span>
                     </div>
-                    <h4 class="article-title">
-                        <a href="articles/jie-ji-fen-xi.html">中国社会各阶级的分析</a>
-                    </h4>
+                    <h4 class="article-title">中国社会各阶级的分析</h4>
                     <p class="article-author">毛泽东</p>
                     <p class="article-desc">分析中国社会各阶级的经济地位和政治态度。</p>
                     <div class="card-footer">
                         <span class="article-category">政治理论</span>
-                        <a href="articles/jie-ji-fen-xi.html" class="read-more">阅读全文 →</a>
+                        <span class="read-more">🚧 正在施工</span>
                     </div>
                 </article>
 
@@ -288,35 +359,33 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4" data-priority="4" data-author="mao">
+                <article class="article-card priority-4 wip" data-priority="4" data-author="mao">
+                    <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
                         <span class="article-date">1949年6月</span>
                     </div>
-                    <h4 class="article-title">
-                        <a href="articles/ren-min-zhuan-zheng.html">论人民民主专政</a>
-                    </h4>
+                    <h4 class="article-title">论人民民主专政</h4>
                     <p class="article-author">毛泽东</p>
                     <p class="article-desc">阐述新中国政权的性质和任务。</p>
                     <div class="card-footer">
                         <span class="article-category">政治理论</span>
-                        <a href="articles/ren-min-zhuan-zheng.html" class="read-more">阅读全文 →</a>
+                        <span class="read-more">🚧 正在施工</span>
                     </div>
                 </article>
 
-                <article class="article-card priority-4" data-priority="4" data-author="mao">
+                <article class="article-card priority-4 wip" data-priority="4" data-author="mao">
+                    <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
                         <span class="article-date">1956年4月</span>
                     </div>
-                    <h4 class="article-title">
-                        <a href="articles/shi-da-guan-xi.html">论十大关系</a>
-                    </h4>
+                    <h4 class="article-title">论十大关系</h4>
                     <p class="article-author">毛泽东</p>
                     <p class="article-desc">探索适合中国国情的社会主义建设道路。</p>
                     <div class="card-footer">
                         <span class="article-category">政治理论</span>
-                        <a href="articles/shi-da-guan-xi.html" class="read-more">阅读全文 →</a>
+                        <span class="read-more">🚧 正在施工</span>
                     </div>
                 </article>
             </div>

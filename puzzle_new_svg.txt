@@ -1,0 +1,352 @@
+                    <!-- 方格网背景 -->
+                    <defs>
+                        <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+                            <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(180,180,180,0.12)" stroke-width="0.8"/>
+                        </pattern>
+                        <pattern id="gridBig" width="400" height="400" patternUnits="userSpaceOnUse">
+                            <rect width="400" height="400" fill="url(#grid)"/>
+                            <path d="M 400 0 L 0 0 0 400" fill="none" stroke="rgba(160,160,160,0.18)" stroke-width="1"/>
+                        </pattern>
+                    </defs>
+                    <rect width="2200" height="1400" fill="url(#gridBig)"/>
+
+                    <!-- X轴: 理论-实践维度 -->
+                    <text x="260" y="1320" text-anchor="middle" font-size="14" fill="#c41e3a" opacity="0.6" font-family="-apple-system, sans-serif" font-weight="500">哲学基础</text>
+                    <text x="700" y="1320" text-anchor="middle" font-size="14" fill="#38a169" opacity="0.6" font-family="-apple-system, sans-serif" font-weight="500">党的建设</text>
+                    <text x="1000" y="1320" text-anchor="middle" font-size="14" fill="#3182ce" opacity="0.6" font-family="-apple-system, sans-serif" font-weight="500">军事战略</text>
+                    <text x="1500" y="1320" text-anchor="middle" font-size="14" fill="#805ad5" opacity="0.6" font-family="-apple-system, sans-serif" font-weight="500">政治理论</text>
+                    <text x="1900" y="1320" text-anchor="middle" font-size="14" fill="#d69e2e" opacity="0.6" font-family="-apple-system, sans-serif" font-weight="500">文化·文艺</text>
+
+                    <!-- 维度箭头 -->
+                    <line x1="160" y1="1350" x2="2000" y2="1350" stroke="#aaa" stroke-width="1" opacity="0.3"/>
+                    <text x="140" y="1355" font-size="11" fill="#999" font-family="-apple-system, sans-serif">理论架构</text>
+                    <text x="2020" y="1355" font-size="11" fill="#999" font-family="-apple-system, sans-serif">实践应用</text>
+
+                    <!-- Y轴: 时间轴 -->
+                    <line x1="100" y1="160" x2="100" y2="1240" stroke="#bbb" stroke-width="1" opacity="0.4"/>
+                    <circle cx="100" cy="200" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="204" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1926</text>
+                    <circle cx="100" cy="300" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="304" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1930</text>
+                    <circle cx="100" cy="380" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="384" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1934</text>
+                    <circle cx="100" cy="460" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="464" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1937</text>
+                    <circle cx="100" cy="560" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="564" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1940</text>
+                    <circle cx="100" cy="640" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="644" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1942</text>
+                    <circle cx="100" cy="740" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="744" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1945</text>
+                    <circle cx="100" cy="840" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="844" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1949</text>
+                    <circle cx="100" cy="940" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="944" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1954</text>
+                    <circle cx="100" cy="1000" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="1004" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1957</text>
+                    <circle cx="100" cy="1080" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="1084" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1962</text>
+                    <circle cx="100" cy="1120" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="1124" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1966</text>
+                    <circle cx="100" cy="1220" r="3" fill="#bbb" opacity="0.5"/>
+                    <text x="88" y="1224" text-anchor="end" font-size="11" fill="#999" font-family="-apple-system, sans-serif">1975</text>
+
+                    <!-- 时代分隔 -->
+                    <line x1="120" y1="380" x2="2100" y2="380" stroke="rgba(0,0,0,0.06)" stroke-width="1" stroke-dasharray="4,8"/>
+                    <line x1="120" y1="700" x2="2100" y2="700" stroke="rgba(0,0,0,0.06)" stroke-width="1" stroke-dasharray="4,8"/>
+                    <line x1="120" y1="900" x2="2100" y2="900" stroke="rgba(0,0,0,0.06)" stroke-width="1" stroke-dasharray="4,8"/>
+                    <line x1="120" y1="950" x2="2100" y2="950" stroke="rgba(0,0,0,0.06)" stroke-width="1" stroke-dasharray="4,8"/>
+
+                    <!-- ===== 关联连线（贝塞尔曲线） ===== -->
+                    <path d="M260,460 Q246,520 260,580" fill="none" stroke="#c41e3a" stroke-width="2.0" opacity="0.5" />
+                    <path d="M260,460 Q301,554 380,620" fill="none" stroke="#c41e3a" stroke-width="1.5" opacity="0.35" stroke-dasharray="6,4"/>
+                    <path d="M260,580 Q850,818 1460,1000" fill="none" stroke="#c41e3a" stroke-width="1.5" opacity="0.35" stroke-dasharray="6,4"/>
+                    <path d="M260,580 Q912,799 1580,960" fill="none" stroke="#c41e3a" stroke-width="1.5" opacity="0.35" stroke-dasharray="6,4"/>
+                    <path d="M260,580 Q857,469 1440,300" fill="none" stroke="#c41e3a" stroke-width="1.5" opacity="0.35" stroke-dasharray="6,4"/>
+                    <path d="M880,380 Q923,464 1000,520" fill="none" stroke="#3182ce" stroke-width="2.0" opacity="0.5" />
+                    <path d="M1000,520 Q1038,582 1100,620" fill="none" stroke="#3182ce" stroke-width="1.5" opacity="0.35" />
+                    <path d="M1000,520 Q1098,554 1200,540" fill="none" stroke="#3182ce" stroke-width="2.0" opacity="0.5" />
+                    <path d="M880,380 Q943,592 1060,780" fill="none" stroke="#3182ce" stroke-width="1.5" opacity="0.35" stroke-dasharray="6,4"/>
+                    <path d="M780,220 Q811,312 880,380" fill="none" stroke="#3182ce" stroke-width="2.0" opacity="0.5" />
+                    <path d="M680,240 Q680,454 740,660" fill="none" stroke="#38a169" stroke-width="2.0" opacity="0.5" />
+                    <path d="M700,600 Q713,635 740,660" fill="none" stroke="#38a169" stroke-width="1.5" opacity="0.35" />
+                    <path d="M740,660 Q775,690 820,700" fill="none" stroke="#38a169" stroke-width="2.0" opacity="0.5" />
+                    <path d="M260,460 Q471,559 700,600" fill="none" stroke="#c41e3a" stroke-width="1.5" opacity="0.35" stroke-dasharray="6,4"/>
+                    <path d="M580,320 Q640,292 680,240" fill="none" stroke="#38a169" stroke-width="1.5" opacity="0.35" />
+                    <path d="M1400,180 Q1421,397 1500,600" fill="none" stroke="#805ad5" stroke-width="2.0" opacity="0.5" />
+                    <path d="M1400,180 Q1453,224 1520,240" fill="none" stroke="#805ad5" stroke-width="1.5" opacity="0.35" />
+                    <path d="M1500,600 Q1432,711 1420,840" fill="none" stroke="#805ad5" stroke-width="2.0" opacity="0.5" />
+                    <path d="M1420,840 Q1421,925 1460,1000" fill="none" stroke="#805ad5" stroke-width="2.0" opacity="0.5" />
+                    <path d="M1460,1000 Q1525,994 1580,960" fill="none" stroke="#805ad5" stroke-width="1.5" opacity="0.35" />
+                    <path d="M1560,880 Q1578,980 1640,1060" fill="none" stroke="#805ad5" stroke-width="1.5" opacity="0.35" />
+                    <path d="M1860,620 Q1870,580 1860,540" fill="none" stroke="#d69e2e" stroke-width="1.5" opacity="0.35" />
+                    <path d="M1860,620 Q1868,675 1900,720" fill="none" stroke="#d69e2e" stroke-width="2.0" opacity="0.5" />
+                    <path d="M1860,620 Q1830,860 1860,1100" fill="none" stroke="#d69e2e" stroke-width="2.0" opacity="0.5" />
+                    <path d="M1940,780 Q1955,805 1980,820" fill="none" stroke="#d69e2e" stroke-width="1.5" opacity="0.35" />
+
+                    <!-- ===== 节点 ===== -->
+                    <g class="node-group" onclick="showCard('shijian')" transform="translate(260,460)">
+                        <circle class="node-circle" r="48" fill="#c41e3a" opacity="0.92"/>
+                        <circle class="node-ring" r="52" fill="none" stroke="#c41e3a" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">实践论</text>
+                        <text class="node-label-sub" y="10">认识论基础</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('maodun')" transform="translate(260,580)">
+                        <circle class="node-circle" r="48" fill="#c41e3a" opacity="0.92"/>
+                        <circle class="node-ring" r="52" fill="none" stroke="#c41e3a" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">矛盾论</text>
+                        <text class="node-label-sub" y="10">辩证法核心</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('diaocha')" transform="translate(380,620)">
+                        <circle class="node-circle" r="40" fill="#c41e3a" opacity="0.85"/>
+                        <text class="node-label" y="-8">没有调查</text>
+                        <text class="node-label-sub" y="10">没有发言权</text>
+                        <text class="star-badge" y="28">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('zhanlue')" transform="translate(880,380)">
+                        <circle class="node-circle" r="48" fill="#3182ce" opacity="0.92"/>
+                        <circle class="node-ring" r="52" fill="none" stroke="#3182ce" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">中国革命战争的</text>
+                        <text class="node-label-sub" y="10">战略问题</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('chijiuzhan')" transform="translate(1000,520)">
+                        <circle class="node-circle" r="48" fill="#3182ce" opacity="0.92"/>
+                        <circle class="node-ring" r="52" fill="none" stroke="#3182ce" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">论持久战</text>
+                        <text class="node-label-sub" y="10">战略理论顶峰</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('youjizhan')" transform="translate(1100,620)">
+                        <circle class="node-circle" r="48" fill="#3182ce" opacity="0.92"/>
+                        <circle class="node-ring" r="52" fill="none" stroke="#3182ce" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">抗日游击战争</text>
+                        <text class="node-label-sub" y="10">战略问题</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('zhanzhan')" transform="translate(1200,540)">
+                        <circle class="node-circle" r="48" fill="#3182ce" opacity="0.92"/>
+                        <circle class="node-ring" r="52" fill="none" stroke="#3182ce" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">战争和</text>
+                        <text class="node-label-sub" y="10">战略问题</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('bingli')" transform="translate(1060,780)">
+                        <circle class="node-circle" r="40" fill="#3182ce" opacity="0.85"/>
+                        <text class="node-label" y="-8">集中优势兵力</text>
+                        <text class="node-label-sub" y="10">各个歼灭敌人</text>
+                        <text class="star-badge" y="28">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('jinggangshan')" transform="translate(780,220)">
+                        <circle class="node-circle" r="28" fill="#3182ce" opacity="0.7"/>
+                        <text class="node-label" y="-4">井冈山的斗争</text>
+                        <text class="star-badge" y="18">★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('jiuzheng')" transform="translate(680,240)">
+                        <circle class="node-circle" r="40" fill="#38a169" opacity="0.85"/>
+                        <text class="node-label" y="-8">关于纠正</text>
+                        <text class="node-label-sub" y="10">党内错误思想</text>
+                        <text class="star-badge" y="28">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('ziyouzhuyi')" transform="translate(620,500)">
+                        <circle class="node-circle" r="40" fill="#38a169" opacity="0.85"/>
+                        <text class="node-label" y="-4">反对自由主义</text>
+                        <text class="star-badge" y="18">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('gaizao')" transform="translate(700,600)">
+                        <circle class="node-circle" r="40" fill="#38a169" opacity="0.85"/>
+                        <text class="node-label" y="-8">改造我们的学习</text>
+                        <text class="node-label-sub" y="10">反教条主义</text>
+                        <text class="star-badge" y="28">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('zhengdun')" transform="translate(740,660)">
+                        <circle class="node-circle" r="40" fill="#38a169" opacity="0.85"/>
+                        <text class="node-label" y="-8">整顿党的作风</text>
+                        <text class="node-label-sub" y="10">延安整风</text>
+                        <text class="star-badge" y="28">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('dangbage')" transform="translate(820,700)">
+                        <circle class="node-circle" r="40" fill="#38a169" opacity="0.85"/>
+                        <text class="node-label" y="-4">反对党八股</text>
+                        <text class="star-badge" y="18">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('minzhuzhongzhi')" transform="translate(600,1080)">
+                        <circle class="node-circle" r="28" fill="#38a169" opacity="0.7"/>
+                        <text class="node-label" y="-8">民主集中制</text>
+                        <text class="node-label-sub" y="10">七千人大会</text>
+                        <text class="star-badge" y="28">★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('qianxuzhe')" transform="translate(580,320)">
+                        <circle class="node-circle" r="34" fill="#38a169" opacity="0.78"/>
+                        <text class="node-label" y="-8">关心群众生活</text>
+                        <text class="node-label-sub" y="10">注意工作方法</text>
+                        <text class="star-badge" y="28">★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('wuchanjieji')" transform="translate(700,1140)">
+                        <circle class="node-circle" r="28" fill="#38a169" opacity="0.7"/>
+                        <text class="node-label" y="-8">无产阶级</text>
+                        <text class="node-label-sub" y="10">专政问题</text>
+                        <text class="star-badge" y="28">★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('jieji')" transform="translate(1400,180)">
+                        <circle class="node-circle" r="40" fill="#805ad5" opacity="0.85"/>
+                        <text class="node-label" y="-8">中国社会各</text>
+                        <text class="node-label-sub" y="10">阶级的分析</text>
+                        <text class="star-badge" y="28">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('hunan')" transform="translate(1520,240)">
+                        <circle class="node-circle" r="40" fill="#805ad5" opacity="0.85"/>
+                        <text class="node-label" y="-8">湖南农民运动</text>
+                        <text class="node-label-sub" y="10">考察报告</text>
+                        <text class="star-badge" y="28">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('xinghuo')" transform="translate(1440,300)">
+                        <circle class="node-circle" r="34" fill="#805ad5" opacity="0.78"/>
+                        <text class="node-label" y="-8">星星之火</text>
+                        <text class="node-label-sub" y="10">可以燎原</text>
+                        <text class="star-badge" y="28">★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('zhongguogeming')" transform="translate(1380,560)">
+                        <circle class="node-circle" r="28" fill="#805ad5" opacity="0.7"/>
+                        <text class="node-label" y="-8">中国革命与</text>
+                        <text class="node-label-sub" y="10">中国共产党</text>
+                        <text class="star-badge" y="28">★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('xinminzz')" transform="translate(1500,600)">
+                        <circle class="node-circle" r="48" fill="#805ad5" opacity="0.92"/>
+                        <circle class="node-ring" r="52" fill="none" stroke="#805ad5" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-4">新民主主义论</text>
+                        <text class="star-badge" y="18">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('renmzhuanzheng')" transform="translate(1420,840)">
+                        <circle class="node-circle" r="40" fill="#805ad5" opacity="0.85"/>
+                        <text class="node-label" y="-8">论人民民主专政</text>
+                        <text class="node-label-sub" y="10">建国理论</text>
+                        <text class="star-badge" y="28">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('neibumao')" transform="translate(1460,1000)">
+                        <circle class="node-circle" r="48" fill="#805ad5" opacity="0.92"/>
+                        <circle class="node-ring" r="52" fill="none" stroke="#805ad5" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">关于正确处理</text>
+                        <text class="node-label-sub" y="10">人民内部矛盾</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('shidaguanxi')" transform="translate(1580,960)">
+                        <circle class="node-circle" r="40" fill="#805ad5" opacity="0.85"/>
+                        <text class="node-label" y="-8">论十大关系</text>
+                        <text class="node-label-sub" y="10">社会主义建设</text>
+                        <text class="star-badge" y="28">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('zhiminzhuyi')" transform="translate(1640,1060)">
+                        <circle class="node-circle" r="34" fill="#805ad5" opacity="0.78"/>
+                        <text class="node-label" y="-8">帝国主义是</text>
+                        <text class="node-label-sub" y="10">纸老虎</text>
+                        <text class="star-badge" y="28">★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('diuxiaohuanxiang')" transform="translate(1560,880)">
+                        <circle class="node-circle" r="34" fill="#805ad5" opacity="0.78"/>
+                        <text class="node-label" y="-8">丢掉幻想</text>
+                        <text class="node-label-sub" y="10">准备斗争</text>
+                        <text class="star-badge" y="28">★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('wenhuadageming')" transform="translate(1500,1200)">
+                        <circle class="node-circle" r="28" fill="#805ad5" opacity="0.7"/>
+                        <text class="node-label" y="-8">路线正确</text>
+                        <text class="node-label-sub" y="10">决定一切</text>
+                        <text class="star-badge" y="28">★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('xuexiaojiaoyu')" transform="translate(1620,1140)">
+                        <circle class="node-circle" r="28" fill="#805ad5" opacity="0.7"/>
+                        <text class="node-label" y="-8">学校教育</text>
+                        <text class="node-label-sub" y="10">革命方向</text>
+                        <text class="star-badge" y="28">★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('wenyi')" transform="translate(1860,620)">
+                        <circle class="node-circle" r="48" fill="#d69e2e" opacity="0.92"/>
+                        <circle class="node-ring" r="52" fill="none" stroke="#d69e2e" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">在延安文艺</text>
+                        <text class="node-label-sub" y="10">座谈会上的讲话</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('xuexishiju')" transform="translate(1900,720)">
+                        <circle class="node-circle" r="48" fill="#d69e2e" opacity="0.92"/>
+                        <circle class="node-ring" r="52" fill="none" stroke="#d69e2e" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-4">学习和时局</text>
+                        <text class="star-badge" y="18">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('qingnian')" transform="translate(1860,540)">
+                        <circle class="node-circle" r="40" fill="#d69e2e" opacity="0.85"/>
+                        <text class="node-label" y="-4">青年运动的方向</text>
+                        <text class="star-badge" y="18">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('renmin')" transform="translate(1940,780)">
+                        <circle class="node-circle" r="34" fill="#d69e2e" opacity="0.78"/>
+                        <text class="node-label" y="-4">为人民服务</text>
+                        <text class="star-badge" y="18">★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('yugong')" transform="translate(1980,820)">
+                        <circle class="node-circle" r="34" fill="#d69e2e" opacity="0.78"/>
+                        <text class="node-label" y="-4">愚公移山</text>
+                        <text class="star-badge" y="18">★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('jinianbaiqiuen')" transform="translate(1960,560)">
+                        <circle class="node-circle" r="34" fill="#d69e2e" opacity="0.78"/>
+                        <text class="node-label" y="-4">纪念白求恩</text>
+                        <text class="star-badge" y="18">★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('hongloumeng')" transform="translate(1900,960)">
+                        <circle class="node-circle" r="28" fill="#d69e2e" opacity="0.7"/>
+                        <text class="node-label" y="-4">红楼梦研究</text>
+                        <text class="star-badge" y="18">★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('wenyi_zuotanhui')" transform="translate(1860,1100)">
+                        <circle class="node-circle" r="28" fill="#d69e2e" opacity="0.7"/>
+                        <text class="node-label" y="-8">文艺座谈会</text>
+                        <text class="node-label-sub" y="10">纪要</text>
+                        <text class="star-badge" y="28">★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('lilunwenti')" transform="translate(1940,1220)">
+                        <circle class="node-circle" r="28" fill="#d69e2e" opacity="0.7"/>
+                        <text class="node-label" y="-8">理论问题</text>
+                        <text class="node-label-sub" y="10">谈话要点</text>
+                        <text class="star-badge" y="28">★★</text>
+                    </g>

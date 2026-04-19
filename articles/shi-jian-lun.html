@@ -59,14 +59,14 @@
 
         <!-- 标签导航 -->
         <div class="tab-nav">
-            <button class="tab-btn active" onclick="switchTab('original')">原文</button>
-            <button class="tab-btn" onclick="switchTab('reading')">读法提示</button>
-            <button class="tab-btn" onclick="switchTab('difficulty')">难点解析</button>
-            <button class="tab-btn" onclick="switchTab('dialogue')">对话空间</button>
-            <button class="tab-btn" onclick="switchTab('action')">行动实验</button>
-            <button class="tab-btn" onclick="switchTab('visual')">一目了然</button>
-            <button class="tab-btn" onclick="switchTab('puzzle')">理论拼图</button>
-            <button class="tab-btn" onclick="switchTab('further')">延伸阅读</button>
+            <button class="tab-btn active" onclick="switchTab('original', this)">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
+            <button class="tab-btn" onclick="switchTab('further', this)">延伸阅读</button>
         </div>
 
         <!-- 原文 -->
@@ -401,6 +401,9 @@
         </div>
 
         <!-- 延伸阅读 -->
+<div class="puzzle-timeline"><h3>在思想发展时间轴上的位置</h3><div class="timeline-track"><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1927</div><div class="timeline-label">大革命时期</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1936</div><div class="timeline-label">长征结束</div></div><div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1937</div><div class="timeline-label">延安整风前</div><div class="timeline-here">◀ 本文</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1938</div><div class="timeline-label">抗战全面展开</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1940</div><div class="timeline-label">抗战相持</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1942</div><div class="timeline-label">延安整风</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1944</div><div class="timeline-label">抗战转折</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1957</div><div class="timeline-label">社会主义建设</div></div></div></div>
+<div class="puzzle-links"><h3>文章联结网络</h3><p class="puzzle-links-note">点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（→ 输出影响 · ← 理论来源 · ↔ 相互支撑）</p><div class="conn-grid"><a href="mao-dun-lun.html" class="conn-card" style="border-left-color:#c41e3a;"><span class="conn-dir" style="color:#276749;">→</span><span class="conn-title">《矛盾论》</span><span class="conn-label">哲学基础·辩证法</span><span class="conn-relation">互为表里：认识论与辩证法</span></a><a href="lun-chi-jiu-zhan.html" class="conn-card" style="border-left-color:#2b6cb0;"><span class="conn-dir" style="color:#276749;">→</span><span class="conn-title">《论持久战》</span><span class="conn-label">军事战略·持久战</span><span class="conn-relation">最佳实践案例：辩证法的军事运用</span></a><a href="xue-xi-shi-ju.html" class="conn-card" style="border-left-color:#7b4f12;"><span class="conn-dir" style="color:#276749;">→</span><span class="conn-title">《学习和时局》</span><span class="conn-label">思想文化·学习方法</span><span class="conn-relation">应用延伸：党内学习方法的哲学基础</span></a><a href="ren-min-nei-bu-mao-dun.html" class="conn-card" style="border-left-color:#553c9a;"><span class="conn-dir" style="color:#276749;">→</span><span class="conn-title">《正确处理人民内部矛盾》</span><span class="conn-label">政治理论·社会矛盾</span><span class="conn-relation">社会应用：矛盾论在建设时期的展开</span></a></div></div>
+
         <div class="tab-content" id="further">
             <div class="further-reading">
                 <h2>延伸阅读</h2>
@@ -668,15 +671,43 @@
             .tab-btn { padding: 8px 12px; font-size: 0.85em; }
             .chapter-content { padding: 14px 16px; }
         }
+
+        /* ===== 理论拼图增强样式 ===== */
+        .puzzle-timeline { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-timeline h3 { color: #c53030; margin-bottom: 16px; }
+        .timeline-track { display: flex; gap: 0; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
+        .timeline-item { display: flex; flex-direction: column; align-items: center; min-width: 76px; position: relative; flex: 1; }
+        .timeline-item::after { content: ''; position: absolute; top: 9px; left: 50%; width: 100%; height: 2px; background: #ddd; z-index: 0; }
+        .timeline-item:last-child::after { display: none; }
+        .timeline-dot { width: 18px; height: 18px; border-radius: 50%; background: #ddd; border: 2px solid #bbb; z-index: 1; position: relative; }
+        .timeline-dot-active { width: 22px; height: 22px; border-radius: 50%; background: #c41e3a; border: 3px solid #8b0000; z-index: 1; position: relative; box-shadow: 0 0 8px rgba(196,30,58,0.4); }
+        .timeline-year { font-size: 0.75em; color: #555; margin-top: 6px; font-weight: 500; }
+        .timeline-label { font-size: 0.68em; color: #888; text-align: center; margin-top: 2px; line-height: 1.3; }
+        .timeline-here { font-size: 0.7em; color: #c41e3a; font-weight: bold; margin-top: 2px; white-space: nowrap; }
+        .timeline-item.active .timeline-year { color: #c41e3a; font-weight: bold; }
+
+        .puzzle-links { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-links h3 { color: #c53030; margin-bottom: 8px; }
+        .puzzle-links-note { color: #888; font-size: 0.85em; margin-bottom: 16px; line-height: 1.6; }
+        .conn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+        .conn-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: white; border-radius: 8px; border: 1px solid #e8e8e8; border-left: 4px solid #c41e3a; text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.15s; }
+        a.conn-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .conn-wip { opacity: 0.5; cursor: default; }
+        .conn-dir { font-size: 1.1em; font-weight: bold; line-height: 1; }
+        .conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; margin-top: 2px; }
+        .conn-label { font-size: 0.76em; color: #888; }
+        .conn-relation { font-size: 0.82em; color: #555; line-height: 1.5; margin-top: 3px; border-top: 1px solid #f0f0f0; padding-top: 4px; }
+        .conn-wip-badge { display: inline-block; background: #fed7aa; color: #c05621; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; margin-top: 4px; }
+        @media (max-width: 600px) { .conn-grid { grid-template-columns: 1fr; } }
     </style>
 
     <script>
         // 标签切换
-        function switchTab(tabId) {
+        function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
+            if (btn) btn.classList.add('active');
 
             if (tabId === 'visual') {
                 setTimeout(initCharts, 100);

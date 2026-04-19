@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习和时局 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html" class="active">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="back-nav" style="background:#f8f8f8;border-bottom:1px solid #e0e0e0;padding:12px 0;">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../articles.html" style="display:inline-flex;align-items:center;gap:6px;color:#c41e3a;text-decoration:none;font-size:0.95rem;font-weight:500;">
+                <span style="font-size:1.1rem;">←</span> 返回全部文章
+            </a>
+        </div>
+    </div>
+
+    <main class="article-detail">
+        <header class="article-header">
+            <div class="importance-badge">⭐⭐⭐⭐⭐ 核心必读</div>
+            <h1>学习和时局</h1>
+            <div class="article-subtitle"></div>
+            <div class="article-meta">
+                <span class="author">毛泽东</span>
+                <span class="date">1944年4月12日</span>
+                <span class="category">思想文化 · 党的建设</span>
+                <span class="word-count">约7,000字</span>
+            </div>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
+            <button class="tab-btn" onclick="switchTab('further', this)">延伸阅读</button>
+        </div>
+
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro">
+                    <p><strong>阅读提示：</strong>本文约7000字，分三节。第一节讲研究历史经验的方法——"惩前毖后、治病救人"；第二节分析抗战时局——"人民势力的增强和反人民势力的衰落"；第三节提出"放下包袱和开动机器"——精神解放与独立思考。建议先读第三节，它最精炼、最具方法论价值；再回看第一节对历史经验的分析态度。</p>
+                </div>
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        一 研究历史经验应取何种态度
+                    </h3>
+                    <div class="chapter-content">
+                        <p>一</p>
+                        <p>去年冬季开始，我党高级干部学习了党史中的两条路线问题。</p>
+                        <p>这次学习使广大高级干部的政治水平大大地提高了。在这次学习中，同志们提出了许多问题，中央政治局曾对其中的几个重要问题作了结论。这些结论是：</p>
+                        <p>（一）关于研究历史经验应取何种态度问题。中央认为应使干部对于党内历史问题在思想上完全弄清楚，同时对于历史上犯过错误的同志在作结论时应取宽大的方针，以便一方面，彻底了解我党历史经验，避免重犯错误；又一方面，能够团结一切同志，共同工作。我党历史上，曾经有过反对陈独秀错误路线和李立三</p>
+                        <p>这两个缺点，我们应引为鉴戒。这次处理历史问题，不应着重于一些个别同志的责任方面，而应着重于当时环境的分析，当时错误的内容，当时错误的社会根源、历史根源和思想根源，实行惩前毖后、治病救人的方针，借以达到既要弄清思想又要团结同志这样两个目的。对于人的处理问题取慎重态度，既不含糊敷衍，又不损害同志，这是我们的党兴旺发达的标志之一。</p>
+                        <p>（二）对于任何问题应取分析态度，不要否定一切。例如对于四中全会至遵义会议时期中央的领导路线问题，应作两方面的分析：一方面，应指出那个时期中央领导机关所采取的政治策略、军事策略和干部政策在其主要方面都是错误的；另一方面，应指出当时犯错误的同志在反对蒋介石、主张土地革命和红军斗争这些基本问题上面，和我们之间是没有争论的。即在策略方面也要进行分析。例如在土地问题上，当时的错误是实行了地主不分田、富农分坏田的过左政策，但在没收地主土地分给无地和少地的农民这一点上，则是和我们一致的。列宁说，对于具体情况作具体的分析，是“马克思主义的最本质的东西、马克思主义的活的灵魂”。我们许多同志缺乏分析的头脑，对于复杂事物，不愿作反复深入的分析研究，而爱作绝对肯定或绝对否定的简单结论。我们报纸上分析文章的缺乏，党内分析习惯的还没有完全养成，都表示这个毛病的存在。今后应该改善这种状况。</p>
+                        <p>（三）关于党的第六次全国代表大会文件的讨论。应该指出，第六次全国代表大会的路线是基本上正确的，因为它确定了现时革命的资产阶级民主主义性质，确定了当时形势是处在两个革命高潮之间，批判了机会主义和盲动主义，发布了十大纲领593等，这些都是正确的。第六次全国代表大会亦有缺点，例如没有指出中国革命的极大的长期性和农村根据地在中国革命中的极大的重要性，以及还有其他若干缺点或错误。但无论如何，第六次全国代表大会在我党历史上是起了进步作用的。</p>
+                        <p>（四）关于一九三一年上海临时中央及在其后由此临时中央召开的五中全会594是否合法的问题。中央认为是合法的，但应指出其选举手续不完备，并以此作为历史教训。</p>
+                        <p>（五）关于党内历史上的宗派问题。应该指出，我党历史上存在过并且起了不良作用的宗派，经过遵义会议以来的几次变化，现在已经不存在了。这次党内两条路线的学习，指出这种宗派曾经在历史上存在过并起了不良作用，这是完全必要的。但是如果以为经过一九三五年一月的遵义会议，一九三八年十月的第六届中央委员会第六次全体会议，一九四一年九月的政治局扩大会议，一九四二年的全党整风和一九四三年冬季开始的对于党内历史上两条路线斗争的学习，这样许多次党内斗争的变化之后，还有具备原来的错误的政治纲领和组织形态的那种宗派存在，则是不对的。过去的宗派现在已经没有了。目前剩下的，只是教条主义和经验主义思想形态的残余，我们继续深入地进行整风学习，就可以将它们克服过来。目前在我们党内严重地存在和几乎普遍地存在的乃是带着盲目性的山头主义倾向。例如由于斗争历史不同、工作地域不同（这一根据地和那一根据地的不同，敌占区、国民党统治区和革命根据地的不同）和工作部门不同（这一部分军队和那一部分军队的不同，这一种工作和那一种工作的不同）</p>
+                        <p>而产生的各部分同志间互相不了解、不尊重、不团结的现象，看来好似平常，实则严重地妨碍着党的统一和妨碍着党的战斗力的增强。山头主义的社会历史根源，是中国小资产阶级的特别广大和长期被敌人分割的农村根据地，而党内教育不足则是其主观原因。指出这些原因，说服同志们去掉盲目性，增加自觉性，打通同志间的思想，提倡同志间的互相了解、互相尊重，以实现全党大团结，是我们当前的重要任务。</p>
+                        <p>以上所说的问题，如能在全党获得明确的理解，则不但可以保证这次党内学习一定得到成功，而且将保证中国革命一定得到胜利。</p>
+                    </div>
+                </div>
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        二 目前时局的特点
+                    </h3>
+                    <div class="chapter-content">
+                        <p>二</p>
+                        <p>目前时局有两个特点，一是反法西斯阵线的增强和法西斯阵线的衰落；二是在反法西斯阵线内部人民势力的增强和反人民势力的衰落。前一个特点是很明显的，容易被人们看见。希特勒不，就会被打败，日寇也已处在衰败过程中。后一个特点，比较地</p>
+                        <p>还不明显，还不容易被一般人看见，但是它已在欧洲、在英美、在中国一天一天显露出来。</p>
+                        <p>中国人民势力的增强，要以我党为中心来说明。</p>
+                        <p>我党在抗日时期的发展，可分为三个阶段。一九三七年至一九四〇年为第一个阶段。在此阶段的头两年内，即在一九三七年和一九三八年，日本军阀重视国民党，轻视共产党，故用其主要力量向国民党战线进攻，对它采取以军事打击为主、以政治诱降为辅的政策，而对共产党领导的抗日根据地则不重视，以为不过是少数共产党人在那里打些游击仗罢了。但是自一九三八年十月日本帝国主义者占领武汉以后，他们即已开始改变这个政策，改为重视共产党，轻视国民党；改为以政治诱降为主、以军事打击为辅的政策去对付国民党，而逐渐转移其主力来对付共产党。因为这时日本帝国主义者感觉国民党已不可怕，共产党则是可怕的了。国民党在一九三七年和一九三八年内，抗战是比较努力的，同我党的关系也比较好，对于人民抗日运动虽有许多限制，但也允许有较多的自由。自从武汉失守以后，由于战争失败和仇视共产党这种情绪的发展，国民党就逐渐反动，反共活动逐渐积极，对日抗战逐渐消极。共产党在一九三七年，因为在内战时期受了挫折的结果，仅有四万左 有组织的党员和三万多人的军队，因此为日本军阀所轻视。但到一九四〇年，党员已发展到八十万，军队已发展到近五十万，根据地人口包括一面负担粮税和两面负担粮税的，约达一万万。几年内，我党开辟了一个广大的解放</p>
+                        <p>区战场，以至于能够停止日寇主力向国民党战场作战略进攻至五年半之，，将日军主力吸引到自己周围，挽救了国民党战场的危机，支持了长期的抗战。但在此阶段内，我党一部分同志，犯了一种错误，这种错误就是轻视日本帝国主义（因此不注意战争的长期性和残酷性，主张以大兵团的运动战为主，而轻视游击战争），依赖国民党，缺乏清醒的头脑和缺乏独立的政策（因此产生对国民党的投降主义，对于放手发动群众建立敌后抗日民主根据地和大量扩大我党领导的军队等项政策，发生了动摇）。同时，我党吸收了广大数目的新党员，他们还没有经验；一切敌后根据地也都是新创的，还没有巩固起来。这一阶段内，由于时局开展和党与军队的发展，党内又生长了一种骄气，许多人以为自己了不得了。在这一阶段内，我们曾经克服了党内的 倾偏向，执行了独立政策，不但打击了日本帝国主义，创立了根据地，发展了八路军新四军，而且打退了国民党的第一次反共高潮。</p>
+                        <p>一九四一年和一九四二年为第二阶段。日本帝国主义者为准备和执行反英美的战争，将他们在武汉失守以后已经改变了的方针，即由对国民党为主的方针改为对共产党为主的方针，更加强调起来，更加集中其主力于共产党领导的一切根据地的周围，进行连续的“扫荡”战争，残酷的“三光”政策，着重地打击我党，致使我党在一九四一年和一九四二年这两年内处于极端困难的地位。这一阶段内，我党根据地缩小了，人口降到五千万以下，八路军也缩小到三十多万，干部损失很多，财政经济极端困难。同时，国民党又认为他们已经闲出手来，千方百计地反对我党，发动了第二次反共高潮，和日本帝国主义配合着进攻我们。但是这种困难地位教育了共产党人，使我们学到了很多东西。我们学会了如何反对敌人的“扫荡”战争、“蚕食”政策、“治安强化”运动和、“三光”政策和自首政策；我们学会了或开始学会了统一战线政权的“三三制”政策、土地政策、整顿三风、精兵简政、统一领导、拥政爱民、发展生产等项工作，克服了许多缺点，并且把第一阶段内许多人自以为了不得的那股骄气也克服下去了。</p>
+                        <p>这一阶段内，我们虽然受了很大的损失，但是我们站住脚了，一方面打退了日寇的进攻，一方面又打退了国民党的第二次反共高潮。因为国民党的反共和我们不得不同国民党的反共政策作自卫斗争的这些情况，党内又生长了一种过左的偏向，例如以为国共合作就要破裂，因而过分地打击地主，不注意团结党外人士等。</p>
+                        <p>但是这些过左偏向，也被我们克服过来了。我们指出了在反磨擦斗争中的有理有利有节的原则，指出了在统一战线中又团结又斗争和以斗争求团结的必要，保持了国内和根据地内的抗日民族统一战线。</p>
+                        <p>一九四三年到现在为第三阶段。我们的各项政策更为见效，特别是整顿三风和发展生产这样两项工作，发生了根本性质的效果，使我党在思想基础和物质基础两方面，立于不败之地。此外，我们又在去年学会了或开始学会了审查干部和反对特务的政策。</p>
+                        <p>在这种情形下，我们根据地的面积又扩大了，根据地的人口，包括一面负担和两面负担的，又已上升到八千余万，军队又有了四十七万，民兵二百二十七万，党员发展到了九十多万。</p>
+                        <p>一九四三年，日本军阀对中国的政策没有什么变化，还是以打击共产党为主。从一九四一年至今这三年多以来，百分之六十以上的在华日军是压在我党领导的各个抗日根据地身上。三年多以来，国民党留在敌后的数十万军队经不起日本帝国主义的打击，约有一半投降了敌人，约有一半被敌人消灭，残存的和撤走的为数极少。这些投降敌人的国民党军队反过来进攻我党，我党又要担负抗击百分之九十以上的伪军。国民党只担负抗击不到百分之四十的日军和不到百分之十的伪军。从一九三八年十月武汉失守起，整整五年半时间，日本军阀没有举行过对国民党战场的战略进攻，只有几次较大的战役行动（浙赣、长沙、鄂西、豫南、常、），也是早出晚归，而集中其主要注意力于我党领导的抗日根据地。在此情况下，国民党采取上山政策和观战政策，敌人来了招架一下，敌人退了袖手旁观。一九四三年国民党的国内政策更加反动，发动了第三次反共高潮，但是又被我们打退了。</p>
+                        <p>一九四三年，直至今年春季，日寇在太平洋战线逐渐失利，美国的反攻增强了，西方的希特勒在苏联红军严重打击之下有摇摇欲倒之势。为救死计，日本帝国主义想到要打通平汉、粤汉两条铁路；又以其对重庆国民党的诱降政策还没有得到结果，有给它以再一次打击之必要，故有在今年大举进攻国民党战线的计划。</p>
+                        <p>河南战役已打了一个多月。敌人不过几个师团，国民党几十万军队不战而溃，只有杂牌军还能打一下。汤恩伯部官脱离兵，军脱离民，混乱不堪，损失三分之二以上。胡宗南派到河南的几个师，也是一触即溃。这种情况，完全是几年来国民党厉行反动政策的结果。自武汉失守以来的五年半中，共产党领导的解放区战场担负了抗击日伪主力的重担，这在今后虽然可能发生某些变化，但这种变化也只能是暂时的，因为国民党在五年半以来消极抗日、积极反共的反动政策下所养成的极端腐化状态，今后必将遭到严重的挫败，到了那时，我党抗击敌伪的任务又将加重了。国民党以五年半的袖手旁观，得到了丧失战斗力的结果。共产党以五年半的苦战奋斗，得到了增强战斗力的结果。这一种情况，将决定今后中国的命运。</p>
+                        <p>同志们可以看见，一九三七年七月起至现在止，这七年时间内，在我党领导下的人民民主力量曾经历了上升、下降、再上升三种情况。我党抗击了日寇的残酷进攻，建立了广大的革命根据地，大大地发展了党和军队，打退了国民党的三次大规模的反共高潮，克服了党内发生的 的和“左”的错误思想，全党学得了许多可宝贵的经验。这些就是我们七年工作的总结。</p>
+                        <p>现在的任务是要准备担负比较过去更为重大的责任。我们要准备不论在何种情况下把日寇打出中国去。为使我党能够担负这种责任，就要使我党我军和我们的根据地更加发展和更加巩固起来，就要注意大城市和交通要道的工作，要把城市工作和根据地工作提到同等重要的地位。</p>
+                        <p>关于根据地工作，第一阶段内有大的发展，但是不巩固，因此在第二阶段内一受到敌人的严重打击，就缩小了。在第二阶段内，一切我党领导的抗日根据地都受到了严格的锻炼，比起第一阶段来好得多了；干部和党员的思想和政策的水平，大进一步，没有学会的东西，学会得更多了。但是思想的打通和政策的学习还需要时间，我们还有许多没有学会的东西。我党力量还不够强大，党内还不够统一，还不够巩固，因此还不能担负比较目前更为巨大的责任。今后的问题就是在继续抗战中使我党我军和我们的根据地更加发展和更加巩固，这就是为着将来担负巨大工作的第一个必要的思想准备和物质准备。没有这种准备，我们就不能把日寇赶出去，就不能解放全中国。</p>
+                        <p>关于大城市和交通要道的工作，我们一向是做得很差的。如果现在我们还不争取在大城市和交通要道中被日本帝国主义压迫的千百万劳动群众和市民群众围绕在我党的周围，并准备群众的武装起义，我们的军队和农村根据地就会得不到城市的配合而遇到种种困难。我们十多年来是处在农村中，提倡熟悉农村和建设农村根据地，这是必要的。党的第六次全国代表大会决定的准备城市起义的任务，没有也不可能在这十多年中间去实行。但是现在不同了，第六次全国代表大会的决议要在第七次全国代表大会以后实行了。我党的第七次全国代表大会不，就可能开会，这次代表大会将要讨论加强城市工作和争取全国胜利的问题。</p>
+                        <p>这几天陕甘宁边区召开业主会议，是有重大意义的。一九三七年边区还只有七百个工厂工人，一九四二年有了七千人，现在有了一万二千人。切不可轻视这样的数目字。我们要在根据地内学习好如何管理大城市的工商业主和交通机关，否则到了那时将无所措手足。准备大城市和交通要道的武装起义，并且学习管理工商业主，这是第二个必要的思想准备和物质准备。没有这种准备，我们也就不能把日寇赶出去，也就不能解放全中国。</p>
+                    </div>
+                </div>
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        三 放下包袱和开动机器
+                    </h3>
+                    <div class="chapter-content">
+                        <p>三</p>
+                        <p>为了争取新的胜利，要在党的干部中间提倡放下包袱和开动机器。所谓放下包袱，就是说，我们精神上的许多负担应该加以解除。有许多的东西，只要我们对它们陷入盲目性，缺乏自觉性，就可能成为我们的包袱，成为我们的负担。例如：犯过错误，可以使人觉得自己反正是犯了错误的，从此萎靡不振；未犯错误，也可以使人觉得自己是未犯过错误的，从此骄傲起来。工作无成绩，可以使人悲观丧气；工作有成绩，又可以使人趾高气扬。斗争历史短的，可以因其短而不负责任；斗争历史长的，可以因其长而自以为是。工农分子，可以自己的光荣出身傲视知识分子；</p>
+                        <p>知识分子，又可以自己有某些知识傲视工农分子。各种主务专长，都可以成为高傲自大轻视旁人的资本。甚至年龄也可以成为骄傲的业具：青年人可以因为自己聪明能干而看不起老年人，老年人又可以因为自己富有经验而看不起青年人。对于诸如此类的东西，如果没有自觉性，那它们就会成为负担或包袱。有些同志高高在上，脱离群众，屡犯错误，背上了这类包袱是一个重要的原因。</p>
+                        <p>所以，检查自己背上的包袱，把它放下来，使自己的精神获得解放，实在是联系群众和少犯错误的必要前提之一。我党历史上曾经有过几次表现了大的骄傲，都是吃了亏的。第一次是在一九二七年上半年。那时北伐军到了武汉，一些同志骄傲起来，自以为了不得，忘记了国民党将要袭击我们。结果犯了陈独秀路线的错误，使这次革命归于失败。第二次是在一九三〇年。红军利用蒋冯阎大战的条件，打了一些胜仗，又有一些同志骄傲起来，自以为了不得。结果犯了李立三路线的错误，也使革命力量遭到一些损失。第三次是在一九三一年。红军打破了第三次“围剿”，接着全国人民在日本进攻面前发动了轰轰烈烈的抗日运动，又有一些同志骄傲起来，自以为了不得。结果犯了更严重的路线错误，</p>
+                        <p>使辛苦地聚集起来的革命力量损失了百分之九十左 。第四次是在一九三八年。抗战起来了，统一战线建立了，又有一些同志骄傲起来，自以为了不得，结果犯了和陈独秀路线有某些相似的错误。这一次，又使得受这些同志的错误思想影响最大的那些地方的革命工作，遭到了很大的损失。全党同志对于这几次骄傲，几次错误，都要引为鉴戒。近日我们印了郭沫若论李自成的文章602，也是叫同志们引为鉴戒，不要重犯胜利时骄傲的错误。</p>
+                        <p>所谓开动机器，就是说，要善于使用思想器官。有些人背上虽然没有包袱，有联系群众的长处，但是不善于思索，不愿用脑筋多想苦想，结果仍然做不成事主。再有一些人则因为自己背上有了包袱，就不肯使用脑筋，他们的聪明被包袱压缩了。列宁斯大林经常劝人要善于思索，我们也要这样劝人。脑筋这个机器的作用，是专门思想的。孟子说：“心之官则思。”他对脑筋的作用下了正确的定义。凡事应该用脑筋好好想一想。俗话说：“眉头一皱，计上心来。”就是说多想出智慧。要去掉我们党内浓厚的盲目性，必须提倡思索，学会分析事物的方法，养成分析的习惯。这种习惯，在我们党内是太不够了。如果我们既放下了包袱，又开动了机器，既是轻装，又会思索，那我们就会胜利。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2>怎么读这篇文章</h2>
+                <div class="guide-block">
+                    <h3>① 抓住"惩前毖后、治病救人"</h3>
+                    <p>这是毛泽东处理历史问题的根本方针。不是不要批评错误，而是批评的目的在于"治病"——让人改过、继续前进。不是追究个人责任，而是分析"当时的环境、错误的内容、错误的社会根源、历史根源和思想根源"。这个方法论在任何组织处理内部问题时都适用。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>② 读懂"对任何问题应取分析态度，不要否定一切"</h3>
+                    <p>这是辩证法的精髓。对错误路线也不能"一概否定"——毛泽东说，四中全会至遵义会议时期的中央路线"在其主要方面是错误的"，但也有某些局部正确的东西。这种分析态度避免了从一个极端跳到另一个极端，是"两点论"的典范。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>③ 着重读"放下包袱和开动机器"</h3>
+                    <p>这是全文最精华的部分。"放下包袱"——解除精神负担，不要让成绩、地位、知识、经验成为骄傲自满的资本；"开动机器"——善于独立思考，不要懒于思索。两个动作缺一不可：放下包袱而不开动机器，只是消极地轻松；开动机器而不放下包袱，思想被偏见束缚，想出来的还是歪的。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>④ 注意"骄傲必败"的四个历史教训</h3>
+                    <p>毛泽东列举了党史上四次大的骄傲：1927年北伐到武汉时的骄傲→陈独秀右倾；1930年红军利用蒋冯阎战争发展的骄傲→李立三"左"倾；1931年打破第三次"围剿"的骄傲→王明"左"倾；1938年统一战线建立的骄傲→右倾错误。四次骄傲，四次吃亏——规律极其清晰。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>⑤ 读完后问自己</h3>
+                    <p>你背上有什么"包袱"？你的骄傲在哪里？你有多久没有"开动机器"——真正独立地、深入地思考一个问题了？</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2>容易读错的地方</h2>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读："治病救人"就是不批评、和稀泥</div>
+                    <div class="correct">✅ 正解：毛泽东说得很清楚——"应使干部对于党内历史问题在思想上完全弄清楚"。"完全弄清楚"就是必须批评、必须分析，不能含糊。但批评的目的不是整人，而是让人认识错误、改正错误。"惩前"是为了"毖后"，治病是为了救人——批评是手段，团结是目的。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读："放下包袱"就是忘记过去</div>
+                    <div class="correct">✅ 正解：放下包袱不是忘记历史，而是不要让历史成为精神负担。毛泽东说"有许多的东西，只要我们对它们陷入盲目性，缺乏自觉性，就可能成为我们的包袱"——成绩、经验、学历、年龄，这些东西本身不是包袱，对它们"缺乏自觉"才成为包袱。放下包袱是自觉，不是遗忘。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读："开动机器"就是多开会、多讨论</div>
+                    <div class="correct">✅ 正解：开动机器是个人独立思考——"善于使用思想器官"。毛泽东批评的是"不善于思索，不愿用脑筋多想苦想"。开会的讨论是集体的，开动机器是个人的。没有个人的独立思考，集体的讨论只是人云亦云。先"开动机器"独立思考，再开会交流，才是正确的顺序。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2>这篇文章在回应谁？又在问谁？</h2>
+                <div class="dialogue-block">
+                    <h3>它在回应的问题</h3>
+                    <ul>
+                        <li>党内历史问题的处理方式：是追究个人责任还是分析根源？</li>
+                        <li>对错误路线评价的极端化：要么全盘肯定，要么全盘否定</li>
+                        <li>胜利后滋长的骄傲情绪：抗战形势好转，党内又有人骄傲起来</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在问每一个读者</h3>
+                    <ul>
+                        <li>你背上有什么"包袱"？你的成绩、经验、学历，是在帮助你还是在束缚你？</li>
+                        <li>你有多久没有"开动机器"了？你是不是习惯了接受现成答案？</li>
+                        <li>你对待别人的错误，是"分析态度"还是"否定一切"？</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在等你的回应</h3>
+                    <p>用"放下包袱和开动机器"检视自己：</p>
+                    <ul>
+                        <li>列出你背上最大的三个"包袱"——它们是什么？</li>
+                        <li>想想你最近一次"开动机器"——真正独立深入地思考一个问题——是什么时候？</li>
+                        <li>放下包袱之后，你准备用"开动机器"来思考什么问题？</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2>读完之后可以做什么</h2>
+                <div class="action-item">
+                    <h3>实验一：包袱清单</h3>
+                    <p>花15分钟，诚实地写下你精神上的"包袱"：</p>
+                    <ul>
+                        <li>你引以为傲的东西（学历、成绩、经验）——它是不是让你看不起别人？</li>
+                        <li>你耿耿于怀的东西（失败、委屈、被低估）——它是不是让你放不开手脚？</li>
+                        <li>你习以为常的东西（职位、圈子、习惯）——它是不是让你看不到更大的世界？</li>
+                    </ul>
+                    <p>写完之后，问自己：如果放下这些包袱，我会做什么不同的事？</p>
+                </div>
+                <div class="action-item">
+                    <h3>实验二：开动机器</h3>
+                    <p>选一个你一直在回避深入思考的问题。用30分钟"开动机器"：</p>
+                    <ul>
+                        <li>不搜索、不问人，纯粹自己想</li>
+                        <li>用纸笔写下来，而不是在脑子里转</li>
+                        <li>尝试从至少三个不同角度看这个问题</li>
+                    </ul>
+                </div>
+                <div class="action-item">
+                    <h3>实验三：分析态度</h3>
+                    <p>选一个你强烈反对的观点或人物。用毛泽东的"分析态度"重新审视：</p>
+                    <ul>
+                        <li>不要否定一切——它有没有某些局部正确的东西？</li>
+                        <li>分析环境——它为什么会产生？在什么条件下它有道理？</li>
+                        <li>分析根源——它的社会根源、历史根源、思想根源是什么？</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2>一目了然</h2>
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量《学习和时局》的文章"性格"</p>
+                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-block">
+                    <h3>三次"骄傲必败"的历史教训</h3>
+                    <p class="chart-desc">每次骄傲后革命力量的损失程度</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="prideChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-block">
+                    <h3>放下包袱 vs 开动机器</h3>
+                    <p class="chart-desc">两种精神状态的四象限分析</p>
+                    <div class="chart-container" style="max-width:600px;margin:0 auto;">
+                        <canvas id="compareChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-block">
+                    <h3>我党力量的三阶段消长</h3>
+                    <p class="chart-desc">1937-1944年根据地的发展与巩固</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="leapChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2>在马哲体系中的位置</h2>
+                <div class="puzzle-map">
+                    <div class="puzzle-intro">
+                        <p>本文虽然短小，却浓缩了毛泽东思想方法论的精华。"惩前毖后、治病救人"是辩证法在党内斗争中的运用——对立面的统一而非否定一切；"分析态度"是矛盾分析法——区分主要方面和次要方面；"放下包袱"是反对形而上学——不要让过去的成绩变成今天的桎梏；"开动机器"是认识论的要求——认识必须经过大脑的加工，不能仅凭直觉和经验。</p>
+                    </div>
+                    <div class="puzzle-position">
+                        <h3>《学习和时局》在毛思想体系中的坐标</h3>
+                        <div class="theory-tree">
+                            <div class="theory-node root">毛泽东思想</div>
+                            <div class="theory-branches">
+                                <div class="theory-branch">
+                                    <div class="theory-node branch">思想方法论</div>
+                                    <div class="theory-sub">
+                                        <div class="theory-node current">放下包袱·开动机器<br><small>本文核心</small></div>
+                                        <div class="theory-node related">分析态度<br><small>不要否定一切</small></div>
+                                        <div class="theory-node related">惩前毖后·治病救人<br><small>处理历史问题</small></div>
+                                    </div>
+                                </div>
+                                <div class="theory-branch">
+                                    <div class="theory-node branch">党的建设</div>
+                                    <div class="theory-sub">
+                                        <div class="theory-node related">反对骄傲自满<br><small>四次历史教训</small></div>
+                                        <div class="theory-node related">团结—批评—团结<br><small>整风方针</small></div>
+                                    </div>
+                                </div>
+                                <div class="theory-branch">
+                                    <div class="theory-node branch">认识论</div>
+                                    <div class="theory-sub">
+                                        <div class="theory-node related">实践论<br><small>自觉性</small></div>
+                                        <div class="theory-node related">矛盾论<br><small>两点论</small></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="puzzle-connection">
+                        <h3>与其他经典的联结</h3>
+                        <ul>
+                            <li>→ 《实践论》："放下包袱"就是从盲目性走向自觉性——从"自在"到"自为"</li>
+                            <li>→ 《矛盾论》："分析态度，不要否定一切"是矛盾分析法——区分主要方面和次要方面</li>
+                            <li>→ 《改造我们的学习》：同属延安整风文献，从"学风"问题到"思想方法"问题</li>
+                            <li>→ 《关于正确处理人民内部矛盾的问题》："团结—批评—团结"在建国后发展为处理人民矛盾的民主方法</li>
+                            <li>→ 《学习和时局》是延安整风运动的理论总结——从"改造学习"到"放下包袱"，整风的方法论日趋成熟</li>
+                        </ul>
+                    </div>
+                    <div class="puzzle-modern">
+                        <h3>它解决的真实问题</h3>
+                        <p>1944年，延安整风运动进入总结阶段。高级干部在学习党史路线问题时，出现了两种偏差：一是对历史问题纠缠不休、追究个人责任；二是从一个极端跳到另一个极端，对错误路线全盘否定。同时，抗战形势好转，党内又开始滋长骄傲情绪。毛泽东在中央政治局会议上作这个讲话，一是为党史讨论定调（分析态度、治病救人），二是提醒全党警惕骄傲（四次历史教训），三是提出思想方法（放下包袱、开动机器）。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div class="puzzle-timeline"><h3>在思想发展时间轴上的位置</h3><div class="timeline-track"><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1927</div><div class="timeline-label">大革命时期</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1936</div><div class="timeline-label">长征结束</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1937</div><div class="timeline-label">延安整风前</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1938</div><div class="timeline-label">抗战全面展开</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1940</div><div class="timeline-label">抗战相持</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1942</div><div class="timeline-label">延安整风</div></div><div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1944</div><div class="timeline-label">抗战转折</div><div class="timeline-here">◀ 本文</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1957</div><div class="timeline-label">社会主义建设</div></div></div></div>
+<div class="puzzle-links"><h3>文章联结网络</h3><p class="puzzle-links-note">点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（→ 输出影响 · ← 理论来源 · ↔ 相互支撑）</p><div class="conn-grid"><a href="shi-jian-lun.html" class="conn-card" style="border-left-color:#c41e3a;"><span class="conn-dir" style="color:#2b6cb0;">←</span><span class="conn-title">《实践论》</span><span class="conn-label">哲学基础·认识论</span><span class="conn-relation">认识论来源：放下包袱开动机器是实践论的应用</span></a><a href="mao-dun-lun.html" class="conn-card" style="border-left-color:#c41e3a;"><span class="conn-dir" style="color:#2b6cb0;">←</span><span class="conn-title">《矛盾论》</span><span class="conn-label">哲学基础·辩证法</span><span class="conn-relation">方法论来源：两点论是不能否定一切的辩证法依据</span></a><a href="wen-yi-zuo-tan.html" class="conn-card" style="border-left-color:#7b4f12;"><span class="conn-dir" style="color:#553c9a;">↔</span><span class="conn-title">《在延安文艺座谈会上的讲话》</span><span class="conn-label">思想文化·文艺路线</span><span class="conn-relation">整风背景：同属延安整风的重要思想成果</span></a><a href="ren-min-nei-bu-mao-dun.html" class="conn-card" style="border-left-color:#553c9a;"><span class="conn-dir" style="color:#276749;">→</span><span class="conn-title">《正确处理人民内部矛盾》</span><span class="conn-label">政治理论·社会矛盾</span><span class="conn-relation">方法发展：团结—批评—团结从党内方法到人民矛盾处理方法</span></a></div></div>
+
+        <div class="tab-content" id="further">
+            <div class="further-reading">
+                <h2>延伸阅读</h2>
+                <div class="reading-item">
+                    <h3>如果你想看"放下包袱"的理论根源</h3>
+                    <p>→ 读《实践论》——从盲目性到自觉性，就是放下包袱的认识论基础</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果你对"分析态度"的方法论感兴趣</h3>
+                    <p>→ 读《矛盾论》——"两点论"是"不要否定一切"的哲学依据</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果你想看整风运动的完整脉络</h3>
+                    <p>→ 读《改造我们的学习》《整顿党的作风》《反对党八股》——整风运动三篇经典，本文是它的总结</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果你想看"团结—批评—团结"在建国后的发展</h3>
+                    <p>→ 读《关于正确处理人民内部矛盾的问题》——从党内方法发展为处理人民矛盾的民主方法</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
+        .article-header { text-align: center; padding: 40px 0 30px; border-bottom: 2px solid #c53030; }
+        .importance-badge { display: inline-block; background: #c53030; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.85em; margin-bottom: 16px; }
+        .article-header h1 { font-size: 2.4em; color: #1a1a1a; margin: 12px 0; font-family: 'STSong', 'SimSun', serif; }
+        .article-subtitle { color: #555; font-size: 1.05em; margin-bottom: 12px; font-style: italic; }
+        .article-meta { display: flex; justify-content: center; gap: 20px; color: #666; font-size: 0.9em; flex-wrap: wrap; }
+        .tab-nav { display: flex; gap: 4px; margin: 30px 0 0; border-bottom: 2px solid #e2e8f0; overflow-x: auto; padding-bottom: 0; }
+        .tab-btn { background: none; border: none; padding: 10px 18px; cursor: pointer; color: #666; font-size: 0.95em; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; }
+        .tab-btn:hover { color: #c53030; }
+        .tab-btn.active { color: #c53030; border-bottom-color: #c53030; font-weight: 600; }
+        .tab-content { display: none; padding: 30px 0; }
+        .tab-content.active { display: block; }
+        .text-intro { background: #fff8f0; border-left: 4px solid #c53030; padding: 14px 20px; margin-bottom: 24px; border-radius: 0 6px 6px 0; }
+        .chapter { margin-bottom: 16px; border: 1px solid #e8e8e8; border-radius: 6px; overflow: hidden; }
+        .chapter-title { background: #f7f7f7; padding: 14px 20px; margin: 0; cursor: pointer; font-size: 1.05em; color: #333; display: flex; align-items: center; gap: 10px; user-select: none; transition: background 0.2s; }
+        .chapter-title:hover { background: #f0f0f0; }
+        .toggle-icon { font-size: 0.8em; color: #c53030; transition: transform 0.2s; flex-shrink: 0; }
+        .chapter-title.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .chapter-content { padding: 20px 24px; line-height: 1.9; color: #2d2d2d; font-size: 1em; }
+        .chapter-content p { margin-bottom: 16px; text-indent: 2em; }
+        .reading-guide, .difficulty-section, .dialogue-section, .action-section, .visualization-section, .puzzle-section, .further-reading { line-height: 1.9; }
+        .guide-block, .diff-item, .dialogue-block, .action-item, .chart-block, .reading-item { margin-bottom: 28px; padding: 20px 24px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .guide-block h3, .dialogue-block h3, .action-item h3 { color: #c53030; margin-bottom: 12px; font-size: 1.05em; }
+        .wrong { background: #fff5f5; border-left: 4px solid #fc8181; padding: 10px 16px; margin-bottom: 10px; border-radius: 0 4px 4px 0; color: #742a2a; }
+        .correct { background: #f0fff4; border-left: 4px solid #68d391; padding: 10px 16px; border-radius: 0 4px 4px 0; color: #1a4731; }
+        .chart-container { position: relative; }
+        .chart-block h3 { color: #c53030; margin-bottom: 8px; }
+        .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
+        .theory-tree { text-align: center; padding: 20px 0; }
+        .theory-node { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 0.9em; margin: 6px; }
+        .theory-node.root { background: #c53030; color: white; font-weight: bold; }
+        .theory-node.branch { background: #2d3748; color: white; }
+        .theory-node.current { background: #c53030; color: white; font-weight: bold; }
+        .theory-node.related { background: #e2e8f0; color: #333; }
+        .theory-branches { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 12px; }
+        .theory-branch { text-align: center; }
+        .theory-sub { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
+        .puzzle-intro, .puzzle-position, .puzzle-connection, .puzzle-modern { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-position h3, .puzzle-connection h3, .puzzle-modern h3 { color: #c53030; margin-bottom: 12px; }
+        .further-reading .reading-item h3 { color: #c53030; margin-bottom: 8px; font-size: 1em; }
+        @media (max-width: 600px) { .article-header h1 { font-size: 1.8em; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .chapter-content { padding: 14px 16px; } }
+
+        /* ===== 理论拼图增强样式 ===== */
+        .puzzle-timeline { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-timeline h3 { color: #c53030; margin-bottom: 16px; }
+        .timeline-track { display: flex; gap: 0; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
+        .timeline-item { display: flex; flex-direction: column; align-items: center; min-width: 76px; position: relative; flex: 1; }
+        .timeline-item::after { content: ''; position: absolute; top: 9px; left: 50%; width: 100%; height: 2px; background: #ddd; z-index: 0; }
+        .timeline-item:last-child::after { display: none; }
+        .timeline-dot { width: 18px; height: 18px; border-radius: 50%; background: #ddd; border: 2px solid #bbb; z-index: 1; position: relative; }
+        .timeline-dot-active { width: 22px; height: 22px; border-radius: 50%; background: #c41e3a; border: 3px solid #8b0000; z-index: 1; position: relative; box-shadow: 0 0 8px rgba(196,30,58,0.4); }
+        .timeline-year { font-size: 0.75em; color: #555; margin-top: 6px; font-weight: 500; }
+        .timeline-label { font-size: 0.68em; color: #888; text-align: center; margin-top: 2px; line-height: 1.3; }
+        .timeline-here { font-size: 0.7em; color: #c41e3a; font-weight: bold; margin-top: 2px; white-space: nowrap; }
+        .timeline-item.active .timeline-year { color: #c41e3a; font-weight: bold; }
+
+        .puzzle-links { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-links h3 { color: #c53030; margin-bottom: 8px; }
+        .puzzle-links-note { color: #888; font-size: 0.85em; margin-bottom: 16px; line-height: 1.6; }
+        .conn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+        .conn-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: white; border-radius: 8px; border: 1px solid #e8e8e8; border-left: 4px solid #c41e3a; text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.15s; }
+        a.conn-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .conn-wip { opacity: 0.5; cursor: default; }
+        .conn-dir { font-size: 1.1em; font-weight: bold; line-height: 1; }
+        .conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; margin-top: 2px; }
+        .conn-label { font-size: 0.76em; color: #888; }
+        .conn-relation { font-size: 0.82em; color: #555; line-height: 1.5; margin-top: 3px; border-top: 1px solid #f0f0f0; padding-top: 4px; }
+        .conn-wip-badge { display: inline-block; background: #fed7aa; color: #c05621; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; margin-top: 4px; }
+        @media (max-width: 600px) { .conn-grid { grid-template-columns: 1fr; } }
+    </style>
+
+    <script>
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (btn) btn.classList.add('active');
+            if (tabId === 'visual') { setTimeout(initCharts, 100); }
+        }
+        function toggleChapter(titleEl) {
+            const content = titleEl.nextElementSibling;
+            titleEl.classList.toggle('collapsed');
+            content.style.display = titleEl.classList.contains('collapsed') ? 'none' : 'block';
+        }
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+            chartsInited = true;
+            new Chart(document.getElementById('radarChart').getContext('2d'), {
+                type: 'radar',
+                data: {
+                    labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                    datasets: [{ label: '学习和时局', data: [7, 8, 5, 10, 7, 4], borderColor: '#c41e3a', backgroundColor: 'rgba(196,30,58,0.15)', pointBackgroundColor: '#c41e3a' }]
+                },
+                options: { responsive: true, scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 }, pointLabels: { font: { size: 12 } } } }, plugins: { legend: { display: false } } }
+            });
+            new Chart(document.getElementById('prideChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['1927年\n北伐骄傲', '1930年\n红军发展骄傲', '1931年\n反围剿骄傲', '1938年\n统一战线骄傲'],
+                    datasets: [{ label: '力量损失程度', data: [7, 6, 9, 5], backgroundColor: ['rgba(229,62,62,0.7)', 'rgba(237,137,54,0.7)', 'rgba(196,30,58,0.8)', 'rgba(49,130,206,0.7)'] }]
+                },
+                options: { responsive: true, scales: { y: { min: 0, max: 10, title: { display: true, text: '损失程度（示意）' } } }, plugins: { legend: { display: false } } }
+            });
+            new Chart(document.getElementById('compareChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['思想解放度', '独立思考力', '认识准确性', '行动有效性'],
+                    datasets: [
+                        { label: '背包袱+不开机', data: [1, 1, 2, 2], backgroundColor: 'rgba(229,62,62,0.6)' },
+                        { label: '放包袱+不开机', data: [6, 3, 4, 4], backgroundColor: 'rgba(237,137,54,0.6)' },
+                        { label: '背包袱+开机', data: [3, 7, 4, 4], backgroundColor: 'rgba(49,130,206,0.6)' },
+                        { label: '放包袱+开机★', data: [9, 9, 9, 9], backgroundColor: 'rgba(56,161,105,0.7)' }
+                    ]
+                },
+                options: { responsive: true, scales: { y: { min: 0, max: 10 } }, plugins: { legend: { position: 'top' } } }
+            });
+            new Chart(document.getElementById('leapChart').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['1937\n初创', '1938\n大发展', '1940\n高峰', '1941-42\n困难期', '1943\n恢复', '1944\n再上升'],
+                    datasets: [{ label: '根据地力量', data: [3, 6, 8, 4, 6, 8.5], borderColor: '#e53e3e', backgroundColor: 'rgba(229,62,62,0.08)', fill: true, tension: 0.4, pointRadius: 6, borderWidth: 2.5 }]
+                },
+                options: { responsive: true, scales: { y: { min: 0, max: 10, title: { display: true, text: '力量指数（示意）' } } }, plugins: { legend: { display: false } } }
+            });
+        }
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+        if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+        const dmBtn = document.querySelector('.dark-mode-toggle');
+        if (dmBtn) dmBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    </script>
+</body>
+</html>
