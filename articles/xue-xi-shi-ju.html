@@ -41,7 +41,8 @@
     </div>
 
     <main class="article-detail">
-        <header class="article-header">
+        <header class="article-header" data-category="思想文化">
+            <div class="header-decoration"></div>
             <div class="importance-badge">⭐⭐⭐⭐⭐ 核心必读</div>
             <h1>学习和时局</h1>
             <div class="article-subtitle"></div>
@@ -354,79 +355,145 @@
                 </div>
             </div>
         </div>
+
+
     </main>
 
     <style>
-        .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
-        .article-header { text-align: center; padding: 40px 0 30px; border-bottom: 2px solid #c53030; }
-        .importance-badge { display: inline-block; background: #c53030; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.85em; margin-bottom: 16px; }
-        .article-header h1 { font-size: 2.4em; color: #1a1a1a; margin: 12px 0; font-family: 'STSong', 'SimSun', serif; }
-        .article-subtitle { color: #555; font-size: 1.05em; margin-bottom: 12px; font-style: italic; }
-        .article-meta { display: flex; justify-content: center; gap: 20px; color: #666; font-size: 0.9em; flex-wrap: wrap; }
-        .tab-nav { display: flex; gap: 4px; margin: 30px 0 0; border-bottom: 2px solid #e2e8f0; overflow-x: auto; padding-bottom: 0; }
-        .tab-btn { background: none; border: none; padding: 10px 18px; cursor: pointer; color: #666; font-size: 0.95em; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; }
-        .tab-btn:hover { color: #c53030; }
-        .tab-btn.active { color: #c53030; border-bottom-color: #c53030; font-weight: 600; }
-        .tab-content { display: none; padding: 30px 0; }
-        .tab-content.active { display: block; }
-        .text-intro { background: #fff8f0; border-left: 4px solid #c53030; padding: 14px 20px; margin-bottom: 24px; border-radius: 0 6px 6px 0; }
-        .chapter { margin-bottom: 16px; border: 1px solid #e8e8e8; border-radius: 6px; overflow: hidden; }
-        .chapter-title { background: #f7f7f7; padding: 14px 20px; margin: 0; cursor: pointer; font-size: 1.05em; color: #333; display: flex; align-items: center; gap: 10px; user-select: none; transition: background 0.2s; }
-        .chapter-title:hover { background: #f0f0f0; }
-        .toggle-icon { font-size: 0.8em; color: #c53030; transition: transform 0.2s; flex-shrink: 0; }
-        .chapter-title.collapsed .toggle-icon { transform: rotate(-90deg); }
-        .chapter-content { padding: 20px 24px; line-height: 1.9; color: #2d2d2d; font-size: 1em; }
-        .chapter-content p { margin-bottom: 16px; text-indent: 2em; }
-        .reading-guide, .difficulty-section, .dialogue-section, .action-section, .visualization-section, .puzzle-section, .further-reading { line-height: 1.9; }
-        .guide-block, .diff-item, .dialogue-block, .action-item, .chart-block, .reading-item { margin-bottom: 28px; padding: 20px 24px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .guide-block h3, .dialogue-block h3, .action-item h3 { color: #c53030; margin-bottom: 12px; font-size: 1.05em; }
-        .wrong { background: #fff5f5; border-left: 4px solid #fc8181; padding: 10px 16px; margin-bottom: 10px; border-radius: 0 4px 4px 0; color: #742a2a; }
-        .correct { background: #f0fff4; border-left: 4px solid #68d391; padding: 10px 16px; border-radius: 0 4px 4px 0; color: #1a4731; }
-        .chart-container { position: relative; }
-        .chart-block h3 { color: #c53030; margin-bottom: 8px; }
-        .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
-        .theory-tree { text-align: center; padding: 20px 0; }
-        .theory-node { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 0.9em; margin: 6px; }
-        .theory-node.root { background: #c53030; color: white; font-weight: bold; }
-        .theory-node.branch { background: #2d3748; color: white; }
-        .theory-node.current { background: #c53030; color: white; font-weight: bold; }
-        .theory-node.related { background: #e2e8f0; color: #333; }
-        .theory-branches { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 12px; }
-        .theory-branch { text-align: center; }
-        .theory-sub { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
-        .puzzle-intro, .puzzle-position, .puzzle-connection, .puzzle-modern { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .puzzle-position h3, .puzzle-connection h3, .puzzle-modern h3 { color: #c53030; margin-bottom: 12px; }
-        .further-reading .reading-item h3 { color: #c53030; margin-bottom: 8px; font-size: 1em; }
-        @media (max-width: 600px) { .article-header h1 { font-size: 1.8em; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .chapter-content { padding: 14px 16px; } }
+    /* ===== 思想文化青色渐变头部 ===== */
+    .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
 
-        /* ===== 理论拼图增强样式 ===== */
-        .puzzle-timeline { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .puzzle-timeline h3 { color: #c53030; margin-bottom: 16px; }
-        .timeline-track { display: flex; gap: 0; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
-        .timeline-item { display: flex; flex-direction: column; align-items: center; min-width: 76px; position: relative; flex: 1; }
-        .timeline-item::after { content: ''; position: absolute; top: 9px; left: 50%; width: 100%; height: 2px; background: #ddd; z-index: 0; }
-        .timeline-item:last-child::after { display: none; }
-        .timeline-dot { width: 18px; height: 18px; border-radius: 50%; background: #ddd; border: 2px solid #bbb; z-index: 1; position: relative; }
-        .timeline-dot-active { width: 22px; height: 22px; border-radius: 50%; background: #c41e3a; border: 3px solid #8b0000; z-index: 1; position: relative; box-shadow: 0 0 8px rgba(196,30,58,0.4); }
-        .timeline-year { font-size: 0.75em; color: #555; margin-top: 6px; font-weight: 500; }
-        .timeline-label { font-size: 0.68em; color: #888; text-align: center; margin-top: 2px; line-height: 1.3; }
-        .timeline-here { font-size: 0.7em; color: #c41e3a; font-weight: bold; margin-top: 2px; white-space: nowrap; }
-        .timeline-item.active .timeline-year { color: #c41e3a; font-weight: bold; }
+    .article-header {
+        text-align: center;
+        padding: 3rem 2rem;
+        border-bottom: 2px solid #00695c;
+        color: white;
+        background: linear-gradient(135deg, #002a27 0%, #00695c 50%, #00897b 100%);
+        position: relative;
+        overflow: hidden;
+    }
 
-        .puzzle-links { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .puzzle-links h3 { color: #c53030; margin-bottom: 8px; }
-        .puzzle-links-note { color: #888; font-size: 0.85em; margin-bottom: 16px; line-height: 1.6; }
-        .conn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
-        .conn-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: white; border-radius: 8px; border: 1px solid #e8e8e8; border-left: 4px solid #c41e3a; text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.15s; }
-        a.conn-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
-        .conn-wip { opacity: 0.5; cursor: default; }
-        .conn-dir { font-size: 1.1em; font-weight: bold; line-height: 1; }
-        .conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; margin-top: 2px; }
-        .conn-label { font-size: 0.76em; color: #888; }
-        .conn-relation { font-size: 0.82em; color: #555; line-height: 1.5; margin-top: 3px; border-top: 1px solid #f0f0f0; padding-top: 4px; }
-        .conn-wip-badge { display: inline-block; background: #fed7aa; color: #c05621; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; margin-top: 4px; }
-        @media (max-width: 600px) { .conn-grid { grid-template-columns: 1fr; } }
-    </style>
+    .article-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3Ccircle cx='20' cy='80' r='25' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='0.5'/%3E%3Ccircle cx='80' cy='20' r='20' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='0.5'/%3E%3C/svg%3E");
+        background-size: 120px;
+        pointer-events: none;
+    }
+
+    .article-header > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .importance-badge {
+        display: inline-block;
+        background: rgba(255,215,0,0.9);
+        color: #00695c;
+        padding: 6px 20px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .article-header h1 {
+        font-size: 2.5rem;
+        margin: 0.5rem 0;
+        text-shadow: 2px 3px 6px rgba(0,0,0,0.4);
+        font-family: 'STSong', 'SimSun', serif;
+    }
+
+    .article-subtitle { color: rgba(255,255,255,0.9); font-size: 1.05em; margin-bottom: 12px; font-style: italic; }
+
+    .article-meta {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .article-meta span {
+        background: rgba(0,0,0,0.25);
+        padding: 5px 14px;
+        border-radius: 18px;
+        backdrop-filter: blur(4px);
+    }
+
+    .article-meta .author { font-weight: 600; }
+    .article-meta .category { color: rgba(255,215,0,0.9); }
+
+    .tab-nav { display: flex; gap: 4px; margin: 30px 0 0; border-bottom: 2px solid #e2e8f0; overflow-x: auto; background: #f8f8f8; padding: 1rem; border-radius: 12px 12px 0 0; }
+    .tab-btn { background: none; border: none; padding: 10px 18px; cursor: pointer; color: #666; font-size: 0.95em; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; border-radius: 8px; }
+    .tab-btn:hover { background: #e8e8e8; color: #00695c; }
+    .tab-btn.active { background: #00695c; color: white; font-weight: 600; }
+    .tab-content { display: none; padding: 30px 0; background: white; border-radius: 0 0 12px 12px; }
+    .tab-content.active { display: block; }
+    .text-intro { background: linear-gradient(135deg, #e0f2f1, #b2dfdb); border-left: 4px solid #00897b; padding: 14px 20px; margin-bottom: 24px; border-radius: 0 6px 6px 0; }
+    .chapter { margin-bottom: 16px; border: 1px solid #e8e8e8; border-radius: 8px; overflow: hidden; }
+    .chapter-title { background: linear-gradient(135deg, #00695c, #00897b); padding: 14px 20px; margin: 0; cursor: pointer; font-size: 1.05em; color: white; display: flex; align-items: center; gap: 10px; user-select: none; transition: filter 0.2s; }
+    .chapter-title:hover { filter: brightness(1.1); }
+    .toggle-icon { font-size: 0.8em; transition: transform 0.2s; flex-shrink: 0; }
+    .chapter-title.collapsed .toggle-icon { transform: rotate(-90deg); }
+    .chapter-content { padding: 20px 24px; line-height: 1.9; color: #2d2d2d; font-size: 1em; background: #fafafa; }
+    .chapter-content p { margin-bottom: 16px; text-indent: 2em; }
+    .reading-guide, .difficulty-section, .dialogue-section, .action-section, .visualization-section, .puzzle-section, .further-reading { line-height: 1.9; }
+    .guide-block, .diff-item, .dialogue-block, .action-item, .chart-block, .reading-item { margin-bottom: 28px; padding: 20px 24px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+    .guide-block h3, .dialogue-block h3, .action-item h3 { color: #00695c; margin-bottom: 12px; font-size: 1.05em; }
+    .wrong { background: #fff5f5; border-left: 4px solid #fc8181; padding: 10px 16px; margin-bottom: 10px; border-radius: 0 4px 4px 0; color: #742a2a; }
+    .correct { background: #f0fff4; border-left: 4px solid #68d391; padding: 10px 16px; border-radius: 0 4px 4px 0; color: #1a4731; }
+    .chart-container { position: relative; }
+    .chart-block h3 { color: #00695c; margin-bottom: 8px; }
+    .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
+    .theory-tree { text-align: center; padding: 20px 0; }
+    .theory-node { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 0.9em; margin: 6px; }
+    .theory-node.root { background: #00695c; color: white; font-weight: bold; }
+    .theory-node.branch { background: #2d3748; color: white; }
+    .theory-node.current { background: #00695c; color: white; font-weight: bold; }
+    .theory-node.related { background: #e2e8f0; color: #333; }
+    .puzzle-intro, .puzzle-position, .puzzle-connection, .puzzle-modern { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+    .puzzle-position h3, .puzzle-connection h3, .puzzle-modern h3 { color: #00695c; margin-bottom: 12px; }
+    .further-reading .reading-item h3 { color: #00695c; margin-bottom: 8px; font-size: 1em; }
+    .puzzle-timeline { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+    .puzzle-timeline h3 { color: #00695c; margin-bottom: 16px; }
+    .timeline-dot-active { background: #00897b; border: 3px solid #00695c; box-shadow: 0 0 8px rgba(0,137,123,0.4); }
+    .timeline-here { color: #00897b; }
+    .puzzle-links { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+    .puzzle-links h3 { color: #00695c; margin-bottom: 8px; }
+    .conn-card { border-left: 4px solid #00695c; }
+    .conn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+    .conn-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: white; border-radius: 8px; border: 1px solid #e8e8e8; text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.15s; }
+    a.conn-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; margin-top: 2px; }
+
+    /* Dark Mode */
+    body.dark-mode .article-header { background: linear-gradient(135deg, #001a19 0%, #002a27 100%); }
+    body.dark-mode .tab-nav { background: #2a2a2a; border-color: #444; }
+    body.dark-mode .tab-btn:hover { background: #3a3a3a; color: #00897b; }
+    body.dark-mode .tab-content { background: #1a1a1a; }
+    body.dark-mode .text-intro { background: linear-gradient(135deg, #1a2a27, #203030); }
+    body.dark-mode .chapter { border-color: #444; }
+    body.dark-mode .chapter-content { background: #222; }
+    body.dark-mode .chapter-content p { color: #e0e0e0; }
+    body.dark-mode .guide-block, body.dark-mode .diff-item, body.dark-mode .dialogue-block, body.dark-mode .action-item, body.dark-mode .chart-block, body.dark-mode .reading-item, body.dark-mode .puzzle-intro, body.dark-mode .puzzle-position, body.dark-mode .puzzle-connection, body.dark-mode .puzzle-modern, body.dark-mode .puzzle-timeline, body.dark-mode .puzzle-links { background: #2a2a2a; border-color: #444; }
+    body.dark-mode .guide-block h3, body.dark-mode .dialogue-block h3, body.dark-mode .action-item h3, body.dark-mode .chart-block h3, body.dark-mode .puzzle-position h3, body.dark-mode .puzzle-connection h3, body.dark-mode .puzzle-modern h3, body.dark-mode .puzzle-timeline h3, body.dark-mode .puzzle-links h3 { color: #26a69a; }
+    body.dark-mode .wrong { background: #2d1a1a; color: #ef5350; }
+    body.dark-mode .correct { background: #1a2a1a; color: #66bb6a; }
+    body.dark-mode .theory-node.related { background: #333; color: #e0e0e0; }
+    body.dark-mode .timeline-dot { background: #555; border-color: #666; }
+    body.dark-mode .timeline-item::after { background: #444; }
+    body.dark-mode .conn-card { background: #2a2a2a; border-color: #444; }
+    body.dark-mode .conn-title { color: #e0e0e0; }
+
+    @media (max-width: 600px) { .article-header h1 { font-size: 1.8em; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .chapter-content { padding: 14px 16px; } .conn-grid { grid-template-columns: 1fr; } }
+</style>
 
     <script>
         function switchTab(tabId, btn) {

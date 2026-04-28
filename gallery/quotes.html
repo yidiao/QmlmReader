@@ -51,7 +51,7 @@
         /* 语录网格 */
         .quotes-detail-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
             gap: 1.5rem;
         }
 
@@ -61,12 +61,18 @@
             border-radius: 12px;
             box-shadow: var(--shadow);
             border-left: 5px solid var(--primary-color);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, border-left-color 0.2s;
+            cursor: pointer;
+            position: relative;
         }
 
         .quote-detail-card:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-hover);
+        }
+        
+        .quote-detail-card:hover {
+            border-left-color: #8b0000;
         }
 
         .quote-detail-card.marx { border-left-color: #8b0000; }
@@ -74,6 +80,17 @@
         .quote-detail-card.lenin { border-left-color: #d4a017; }
         .quote-detail-card.stalin { border-left-color: #744210; }
         .quote-detail-card.mao { border-left-color: #c41e3a; }
+
+        /* 点击提示图标 */
+        .quote-click-hint {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            color: #bbb;
+            font-size: 0.75rem;
+            transition: color 0.2s;
+        }
+        .quote-detail-card:hover .quote-click-hint { color: var(--primary-color); }
 
         .quote-detail-card blockquote {
             margin: 0;
@@ -110,6 +127,126 @@
             margin-top: 0.75rem;
         }
 
+        /* ===== 弹出卡片（Modal）样式 ===== */
+        .quote-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.25s ease;
+        }
+        
+        .quote-modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .quote-modal {
+            background: white;
+            max-width: 620px;
+            width: 92%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #999;
+            line-height: 1;
+            z-index: 10;
+            padding: 4px 8px;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        .modal-close-btn:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-quote-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #1a1a1a;
+            font-style: italic;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-source {
+            color: #888;
+            font-size: 0.95rem;
+        }
+
+        .modal-body {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary-color, #c41e3a);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .modal-section-content {
+            font-size: 0.98rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .modal-warning-box {
+            background: #fff8e6;
+            border-left: 4px solid #f59e0b;
+            padding: 0.85rem 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.93rem;
+            color: #78350f;
+            line-height: 1.7;
+        }
+
         body.dark-mode .category-btn {
             background: #3a3a3a;
             border-color: #555;
@@ -128,10 +265,32 @@
             color: #aaa;
         }
 
+        body.dark-mode .quote-modal {
+            background: #2a2a2a;
+            color: #ddd;
+        }
+        body.dark-mode .modal-header {
+            border-bottom-color: #444;
+        }
+        body.dark-mode .modal-quote-text {
+            color: #eee;
+        }
+        body.dark-mode .modal-source {
+            color: #888;
+        }
+        body.dark-mode .modal-section-content {
+            color: #ccc;
+        }
+        body.dark-mode .modal-warning-box {
+            background: #3d3000;
+            border-left-color: #f59e0b;
+            color: #fbbf24;
+        }
+
         @media (max-width: 768px) {
-            .quotes-detail-grid {
-                grid-template-columns: 1fr;
-            }
+            .quotes-detail-grid { grid-template-columns: 1fr; }
+            .quote-modal { width: 96%; max-height: 85vh; }
+            .modal-header, .modal-body { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -164,6 +323,7 @@
         <section class="page-header">
             <h1>💬 经典语录</h1>
             <p>导师箴言 · 革命智慧 · 精神火炬</p>
+            <p style="margin-top:0.6rem;font-size:0.9rem;opacity:0.75;">💡 点击任意语录查看历史背景与含义简析，避免断章取义</p>
         </section>
 
         <div class="gallery-container">
@@ -171,22 +331,27 @@
 
             <div class="quotes-categories">
                 <button class="category-btn active" data-filter="all">全部</button>
-                <button class="category-btn" data-filter="marx">马克思/恩格斯</button>
+                <button class="category-btn" data-filter="marx">马克思 / 恩格斯</button>
                 <button class="category-btn" data-filter="lenin">列宁</button>
                 <button class="category-btn" data-filter="stalin">斯大林</button>
                 <button class="category-btn" data-filter="mao">毛泽东</button>
             </div>
 
             <div class="quotes-detail-grid" id="quotesGrid">
-                <div class="quote-detail-card marx" data-category="marx">
+
+                <!-- ==================== 马克思 / 恩格斯 ==================== -->
+
+                <div class="quote-detail-card marx" data-category="marx" onclick="openQuote('marx-1')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"一个幽灵，共产主义的幽灵，在欧洲游荡。"</p>
-                        <cite>马克思、恩格斯《共产党宣言》</cite>
+                        <cite>马克思、恩格斯《共产党宣言》（1848）</cite>
                     </blockquote>
                     <span class="quote-tag">阶级斗争</span>
                 </div>
 
-                <div class="quote-detail-card marx" data-category="marx">
+                <div class="quote-detail-card marx" data-category="marx" onclick="openQuote('marx-2')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"工人没有祖国。"</p>
                         <cite>马克思、恩格斯《共产党宣言》</cite>
@@ -194,7 +359,8 @@
                     <span class="quote-tag">国际主义</span>
                 </div>
 
-                <div class="quote-detail-card marx" data-category="marx">
+                <div class="quote-detail-card marx" data-category="marx" onclick="openQuote('marx-3')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"全世界无产者，联合起来！"</p>
                         <cite>马克思、恩格斯《共产党宣言》</cite>
@@ -202,95 +368,158 @@
                     <span class="quote-tag">团结</span>
                 </div>
 
-                <div class="quote-detail-card marx" data-category="marx">
+                <div class="quote-detail-card marx" data-category="marx" onclick="openQuote('marx-4')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"哲学家们只是用不同的方式解释世界，而问题在于改变世界。"</p>
-                        <cite>马克思《关于费尔巴哈的提纲》</cite>
+                        <cite>马克思《关于费尔巴哈的提纲》（1845）</cite>
                     </blockquote>
-                    <span class="quote-tag">实践</span>
+                    <span class="quote-tag">实践论</span>
                 </div>
 
-                <div class="quote-detail-card lenin" data-category="lenin">
+                <div class="quote-detail-card marx" data-category="marx" onclick="openQuote('marx-5')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"资本来到世间，从头到脚，每个毛孔都滴着血和肮脏的东西。"</p>
+                        <cite>马克思《资本论》第一卷（1867）</cite>
+                    </blockquote>
+                    <span class="quote-tag">政治经济学</span>
+                </div>
+
+                <!-- ==================== 列宁 ==================== -->
+
+                <div class="quote-detail-card lenin" data-category="lenin" onclick="openQuote('lenin-1')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"帝国主义是资本主义的最高阶段。"</p>
-                        <cite>列宁《帝国主义是资本主义的最高阶段》</cite>
+                        <cite>列宁《帝国主义是资本主义的最高阶段》（1916）</cite>
                     </blockquote>
-                    <span class="quote-tag">帝国主义</span>
+                    <span class="quote-tag">帝国主义论</span>
                 </div>
 
-                <div class="quote-detail-card lenin" data-category="lenin">
+                <div class="quote-detail-card lenin" data-category="lenin" onclick="openQuote('lenin-2')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"没有革命的理论，就不会有革命的运动。"</p>
-                        <cite>列宁《怎么办？》</cite>
+                        <cite>列宁《怎么办？》（1902）</cite>
                     </blockquote>
                     <span class="quote-tag">理论建设</span>
                 </div>
 
-                <div class="quote-detail-card lenin" data-category="lenin">
+                <div class="quote-detail-card lenin" data-category="lenin" onclick="openQuote('lenin-3')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"国家是阶级矛盾不可调和的产物。"</p>
-                        <cite>列宁《国家与革命》</cite>
+                        <cite>列宁《国家与革命》（1917）</cite>
                     </blockquote>
                     <span class="quote-tag">国家理论</span>
                 </div>
 
-                <div class="quote-detail-card stalin" data-category="stalin">
+                <div class="quote-detail-card lenin" data-category="lenin" onclick="openQuote('lenin-4')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
-                        <p>"落后就要挨打。"</p>
-                        <cite>斯大林</cite>
+                        <p>"无产阶级专政不是为了永远维持下去的，它只是为消灭阶级和过渡到无阶级社会所必需的过渡阶段。"</p>
+                        <cite>列宁《国家与革命》</cite>
+                    </blockquote>
+                    <span class="quote-tag">无产阶级专政</span>
+                </div>
+
+                <div class="quote-detail-card lenin" data-category="lenin" onclick="openQuote('lenin-5')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"共产主义就是苏维埃政权加全国电气化。"</p>
+                        <cite>列宁《全俄苏维埃第八次代表大会》（1920）</cite>
+                    </blockquote>
+                    <span class="quote-tag">社会主义建设</span>
+                </div>
+
+                <!-- ==================== 斯大林 ==================== -->
+
+                <div class="quote-detail-card stalin" data-category="stalin" onclick="openQuote('stalin-1')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"落后就要挨打。我们比先进国家落后五十年到一百年，我们必须在十年内跑完这段距离，或者我们就被人家打倒。"</p>
+                        <cite>斯大林（1931）</cite>
                     </blockquote>
                     <span class="quote-tag">工业化</span>
                 </div>
 
-                <div class="quote-detail-card mao" data-category="mao">
+                <div class="quote-detail-card stalin" data-category="stalin" onclick="openQuote('stalin-2')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"干部决定一切！"</p>
+                        <cite>斯大林《第一个五年计划总结》（1935）</cite>
+                    </blockquote>
+                    <span class="quote-tag">人才建设</span>
+                </div>
+
+                <div class="quote-detail-card stalin" data-category="stalin" onclick="openQuote('stalin-3')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"技术决定一切。没有技术就不可能有高速发展的工业。"</p>
+                        <cite>斯大林在接见红色教授学院学员时的讲话（1931）</cite>
+                    </blockquote>
+                    <span class="quote-tag">工业化</span>
+                </div>
+
+                <!-- ==================== 毛泽东 ==================== -->
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-1')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"枪杆子里出政权。"</p>
-                        <cite>毛泽东八七会议讲话</cite>
+                        <cite>毛泽东八七会议讲话（1927年8月7日）</cite>
                     </blockquote>
                     <span class="quote-tag">武装斗争</span>
                 </div>
 
-                <div class="quote-detail-card mao" data-category="mao">
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-2')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"为人民服务。"</p>
-                        <cite>毛泽东《为人民服务》</cite>
+                        <cite>毛泽东《为人民服务》（1944年9月8日）</cite>
                     </blockquote>
                     <span class="quote-tag">群众路线</span>
                 </div>
 
-                <div class="quote-detail-card mao" data-category="mao">
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-3')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"星星之火，可以燎原。"</p>
-                        <cite>毛泽东《星星之火，可以燎原》</cite>
+                        <cite>毛泽东《星星之火，可以燎原》（1930年1月5日）</cite>
                     </blockquote>
                     <span class="quote-tag">革命乐观主义</span>
                 </div>
 
-                <div class="quote-detail-card mao" data-category="mao">
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-4')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"一切反动派都是纸老虎。"</p>
-                        <cite>毛泽东与美国记者安娜·路易斯·斯特朗的谈话</cite>
+                        <cite>毛泽东与美国记者安娜·路易斯·斯特朗的谈话（1946年8月）</cite>
                     </blockquote>
                     <span class="quote-tag">战略思想</span>
                 </div>
 
-                <div class="quote-detail-card mao" data-category="mao">
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-5')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"没有调查，就没有发言权。"</p>
-                        <cite>毛泽东《反对本本主义》</cite>
+                        <cite>毛泽东《反对本本主义》（1930年5月）</cite>
                     </blockquote>
                     <span class="quote-tag">调查研究</span>
                 </div>
 
-                <div class="quote-detail-card mao" data-category="mao">
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-6')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"从群众中来，到群众中去。"</p>
-                        <cite>毛泽东《关于领导方法的若干问题》</cite>
+                        <cite>毛泽东《关于领导方法的若干问题》（1943年6月1日）</cite>
                     </blockquote>
                     <span class="quote-tag">群众路线</span>
                 </div>
 
-                <div class="quote-detail-card mao" data-category="mao">
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-7')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"战略上要藐视敌人，战术上要重视敌人。"</p>
                         <cite>毛泽东</cite>
@@ -298,16 +527,195 @@
                     <span class="quote-tag">战略战术</span>
                 </div>
 
-                <div class="quote-detail-card mao" data-category="mao">
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-8')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
                     <blockquote>
                         <p>"百花齐放，百家争鸣。"</p>
-                        <cite>毛泽东</cite>
+                        <cite>毛泽东（1956年）</cite>
                     </blockquote>
                     <span class="quote-tag">文化方针</span>
                 </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-9')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"领导我们事业的核心力量是中国共产党。指导我们思想的理论基础是马克思列宁主义。"</p>
+                        <cite>毛泽东中华人民共和国第一届全国人大开幕词（1954年9月15日）</cite>
+                    </blockquote>
+                    <span class="quote-tag">党的领导</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-10')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"没有一个人民的军队，便没有人民的一切。"</p>
+                        <cite>毛泽东《论联合政府》（1945年4月24日）</cite>
+                    </blockquote>
+                    <span class="quote-tag">人民军队</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-11')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"我们的原则是党指挥枪，而决不容许枪指挥党。"</p>
+                        <cite>毛泽东《战争和战略问题》（1938年11月6日）</cite>
+                    </blockquote>
+                    <span class="quote-tag">党指挥枪</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-12')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"我们不但要提出任务，而且要解决完成任务的方法问题。我们的任务是过河，但是没有桥或没有船就不能过。不解决方法问题，过河就是一句空话。不解决方法问题，任务也只是瞎说一顿。"</p>
+                        <cite>毛泽东《关心群众生活，注意工作方法》（1934年1月27日）</cite>
+                    </blockquote>
+                    <span class="quote-tag">工作方法</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-13')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"任何过程如果有多数矛盾存在的话，其中必定有一种是主要的……捉住了这个主要矛盾，一切问题就迎刃而解了。"</p>
+                        <cite>毛泽东《矛盾论》（1937年8月）</cite>
+                    </blockquote>
+                    <span class="quote-tag">唯物辩证法</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-14')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"人的正确思想是从哪里来的？只能从社会的生产斗争、阶级斗争和科学实验这三项实践中来。"</p>
+                        <cite>毛泽东《人的正确思想是从那里来的？》（1963年5月）</cite>
+                    </blockquote>
+                    <span class="quote-tag">认识论</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-15')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"战争的伟力之最深厚的根源，存在于民众之中。日本敢于欺负我们，主要的原因在于中国民众的无组织状态。"</p>
+                        <cite>毛泽东《论持久战》（1938年5月）</cite>
+                    </blockquote>
+                    <span class="quote-tag">人民战争</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-16')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"我们需要的是热烈而镇定的情绪，紧张而有秩序的工作。"</p>
+                        <cite>毛泽东《中国革命战争的战略问题》（1936年12月）</cite>
+                    </blockquote>
+                    <span class="quote-tag">工作作风</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-17')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"以马克思列宁主义的理论思想武装起来的中国共产党，在中国人民中产生了新的工作作风——理论和实践相结合的作风，和人民群众紧密地联系在一起的作风以及自我批评的作风。"</p>
+                        <cite>毛泽东《论联合政府》（1945年4月24日）</cite>
+                    </blockquote>
+                    <span class="quote-tag">三大作风</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-18')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"优势而无准备，不是真正的优势，也没有主动。懂得这一点，劣势而有准备之军，常可对敌举行不意的攻势，把优势者打败。"</p>
+                        <cite>毛泽东《论持久战》（1938年5月）</cite>
+                    </blockquote>
+                    <span class="quote-tag">军事辩证法</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-19')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"你要知道梨子的滋味，你就得变革梨子，亲口吃一吃。你要知道革命的理论和方法，你就得参加革命。一切真知都是从直接经验发源的。"</p>
+                        <cite>毛泽东《实践论》（1937年7月）</cite>
+                    </blockquote>
+                    <span class="quote-tag">实践论</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-20')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"不同质的矛盾，只有用不同的方法才能解决。……用不同的方法去解决不同的矛盾，这是马克思列宁主义者必须严格地遵守的一个原则。"</p>
+                        <cite>毛泽东《关于正确处理人民内部矛盾的问题》（1957年2月27日）</cite>
+                    </blockquote>
+                    <span class="quote-tag">矛盾特殊性</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-21')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"中国红军是一个执行革命的政治任务的武装集团。特别是现在，红军决不是单纯地打仗的，它除了打仗消灭敌人军事力量之外，还要负担宣传群众、组织群众、武装群众、帮助群众建立革命政权等项重大的任务。"</p>
+                        <cite>毛泽东《关于纠正党内的错误思想》（1929年12月）</cite>
+                    </blockquote>
+                    <span class="quote-tag">人民军队性质</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-22')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"马克思主义的哲学认为十分重要的问题，不在于懂得了客观世界的规律性，因而能够解释世界，而在于拿了这种对于客观规律性的认识去能动地改造世界。"</p>
+                        <cite>毛泽东《实践论》（1937年7月）</cite>
+                    </blockquote>
+                    <span class="quote-tag">改造世界</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-23')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"中国妇女是一种伟大的人力资源。必须发掘这种资源，为了建设一个伟大的社会主义国家而奋斗。"</p>
+                        <cite>毛泽东《发动妇女投入生产，解决了劳动力不足的困难》按语（1955年）</cite>
+                    </blockquote>
+                    <span class="quote-tag">妇女解放</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-24')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"读书是学习，使用也是学习，而且是更重要的学习。从战争学习战争——这是我们的主要方法。没有进学校机会的人仍然可以学习战争，就是从战争中学习。干起来再学习，干就是学习。"</p>
+                        <cite>毛泽东《中国革命战争的战略问题》（1936年12月）</cite>
+                    </blockquote>
+                    <span class="quote-tag">学习与实践</span>
+                </div>
+
+                <div class="quote-detail-card mao" data-category="mao" onclick="openQuote('mao-25')">
+                    <span class="quote-click-hint">点击查看简析 ▸</span>
+                    <blockquote>
+                        <p>"指导一个伟大的革命运动的政党，如果没有革命理论，没有历史知识，没有对于实际运动的深刻的了解，要取得胜利是不可能的。"</p>
+                        <cite>毛泽东《中国共产党在民族战争中的地位》（1938年10月）</cite>
+                    </blockquote>
+                    <span class="quote-tag">理论建设</span>
+                </div>
+
             </div>
         </div>
     </main>
+
+    <!-- 弹出卡片 Modal -->
+    <div class="quote-modal-overlay" id="quoteModal" onclick="closeModalOnOverlay(event)">
+        <div class="quote-modal" id="quoteModalContent">
+            <button class="modal-close-btn" onclick="closeQuote()">&times;</button>
+            <div class="modal-header">
+                <div class="modal-quote-text" id="modalText"></div>
+                <div class="modal-source" id="modalSource"></div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <div class="modal-section-title">📜 历史背景</div>
+                    <div class="modal-section-content" id="modalBackground"></div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-section-title">💡 含义简析</div>
+                    <div class="modal-section-content" id="modalMeaning"></div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-warning-box" id="modalWarning"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="site-footer">
         <div class="container">
@@ -318,16 +726,364 @@
 
     <script src="../js/main.js"></script>
     <script>
-        // 语录分类筛选
+        // ========== 语录数据库 ==========
+        const quotesData = {
+
+            // ============ 马/恩 ============
+            'marx-1': {
+                text: '"一个幽灵，共产主义的幽灵，在欧洲游荡。"',
+                source: '马克思、恩格斯《共产党宣言》（1848）',
+                background: '1847年底至1848年初，欧洲正处于大革命的前夜。马克思和恩格斯受共产主义者同盟委托起草纲领性文件。《共产党宣言》以这句充满诗意又令人不安的开篇，宣告了一个新的历史力量——共产主义运动——已经出现在欧洲政治舞台上。"幽灵"一词是当时资产阶级对共产主义运动的恐惧性称呼，马恩巧妙地将其转化为自己的语言，既承认被压迫者的存在令统治阶级恐惧，又暗示这种力量不可阻挡。',
+                meaning: '这句话的核心意涵是：共产主义并非凭空产生的幻想，而是资本主义内部矛盾的必然产物。它像"幽灵"一样无处不在，因为它代表了被剥削阶级的根本利益。马恩用这个比喻宣告：旧世界已经无法控制新力量的崛起。',
+                warning: ''
+            },
+            'marx-2': {
+                text: '"工人没有祖国。"',
+                source: '马克思、恩格斯《共产党宣言》（1848）',
+                background: '1848年的欧洲，民族主义正在兴起，各国资产阶级利用"爱国主义"煽动工人阶级互相敌视，转移阶级矛盾。马恩提出"工人没有祖国"，意在打破民族界限，强调无产阶级的国际联合。这并非否定民族文化或爱国情感本身，而是揭露资产阶级国家的本质——它是维护剥削阶级利益的工具。',
+                meaning: '在资本主义制度下，国家机器服务于资产阶级利益。工人阶级在经济上被剥削，政治上被压迫，所谓的"祖国"并不真正属于他们。只有推翻资本主义，工人才能拥有真正的家园。这句话是无产阶级国际主义的基石。',
+                warning: '⚠️ 常见误读：将此句理解为否定一切爱国情怀或民族文化。实际上，马恩反对的是资产阶级利用民族主义分裂工人运动的手段。'
+            },
+
+            'marx-3': {
+                text: '"全世界无产者，联合起来！"',
+                source: '马克思、恩格斯《共产党宣言》（1848）',
+                background: '这是《共产党宣言》的最后一句号召。当时各国工人在政治上是分散的、互相对立的。英国工人看不起法国工人，法国工人排斥德国工人……资产阶级乐见于此。马恩意识到，只有跨越国界的联合才能对抗同样已经全球化的资本力量。',
+                meaning: '资本早已跨国运作，工人阶级也必须跨国联合。这不是空洞的口号，而是基于经济现实的分析——资本的剥削是全球性的，反抗也必须是全球性的。这一口号成为后来第一国际、第二国际直至今天国际共产主义运动的共同旗帜。',
+                warning: ''
+            },
+
+            'marx-4': {
+                text: '"哲学家们只是用不同的方式解释世界，而问题在于改变世界。"',
+                source: '马克思《关于费尔巴哈的提纲》（1845）',
+                background: '1845年春，马克思流亡布鲁塞尔期间写下十一条提纲（生前未发表）。此前德国哲学界充斥着青年黑格尔派式的纯理论争论——哲学家们在书斋里争论意识的本质，却从不触及现实的社会变革。马克思在此划清了自己与以往一切唯心主义哲学的界限。',
+                meaning: '这是马克思主义哲学革命的宣言。传统哲学把"认识世界"当作最终目的；马克思主义则认为认识世界只是手段，目的是通过实践去改造世界。理论的价值在于指导行动，而不是自我封闭在概念游戏里。这就是"实践唯物主义"的本质。',
+                warning: '⚠️ 常见误读：将此理解为"不需要理论研究"。恰恰相反——没有正确的理论就无法有效地改变世界。马克思本人就是最博学的思想家之一。'
+            },
+
+            'marx-5': {
+                text: '"资本来到世间，从头到脚，每个毛孔都滴着血和肮脏的东西。"',
+                source: '马克思《资本论》第一卷（1867）',
+                background: '马克思写作《资本论》时引用了一位经济学家的话来描述原始积累的过程。他系统考察了英国圈地运动、殖民掠夺、奴隶贸易等历史事实，揭示了资本主义发展初期的暴力性质——农民被剥夺土地、美洲土著被屠杀、非洲人被贩卖为奴、亚洲被鸦片战争打开大门。',
+                meaning: '资本主义的"原始积累"绝非田园诗般和平渐进，而是充满了掠夺、暴力和血腥。今天的发达经济体往往选择性遗忘自己历史上的这些"原罪"。这句话提醒我们：资本的本质从未改变，只是表现形式变得更加隐蔽。',
+                warning: ''
+            },
+
+            // ============ 列宁 ============
+            'lenin-1': {
+                text: '"帝国主义是资本主义的最高阶段。"',
+                source: '列宁《帝国主义是资本主义的最高阶段》（1916）',
+                background: '19世纪末20世纪初，自由竞争资本主义发展为垄断资本主义。列宁在一战中流亡瑞士期间深入研究各国经济统计资料，发现资本主义已经发生了质变——银行资本与工业资本融合形成金融寡头，资本输出取代商品输出成为主要特征，列强瓜分世界的斗争导致帝国主义战争不可避免。',
+                meaning: '列宁的帝国主义论是对马克思主义政治经济学的重要发展。他指出了帝国主义五个基本特征（垄断、金融资本、资本输出、国际垄断同盟、领土瓜分完毕），并论证了帝国主义战争的根源在于资本主义经济发展的不平衡性。这为后来的十月革命提供了理论基础。',
+                warning: ''
+            },
+
+            'lenin-2': {
+                text: '"没有革命的理论，就不会有革命的运动。"',
+                source: '列宁《怎么办？》（1902）',
+                background: '19世纪末俄国社会民主工党内存在严重分歧。经济派认为工人运动可以自发产生社会主义意识，不需要革命理论的指导；孟什维克则主张走西欧议会道路。列宁在《怎么办？》中系统批判了这两种倾向，强调建立以革命理论武装起来的新型政党的必要性。',
+                meaning: '自发的工人运动只能产生工联主义意识（争取工资、改善条件），不可能自发产生科学的社会主义理论。科学社会主义需要知识分子从外部"灌输"给工人阶级。因此，建立一个以马克思主义理论武装的革命政党是革命成功的先决条件。',
+                warning: '⚠️ 常见误读：用来为"教条主义"辩护，认为只要背熟理论就万事大吉。列宁本人的实践恰恰相反——他最擅长根据实际情况灵活运用和发展理论。'
+            },
+
+            'lenin-3': {
+                text: '"国家是阶级矛盾不可调和的产物。"',
+                source: '列宁《国家与革命》（1917）',
+                background: '1917年二月革命后，俄国出现了两个政权并存的局面。资产阶级临时政府和工兵代表苏维埃同时存在。第二国际的机会主义者考茨基等人鼓吹"纯粹民主"、"超阶级国家"的理论。列宁在《国家与革命》中系统阐述了马克思主义国家学说，为国家权力的夺取做了理论准备。',
+                meaning: '国家不是超阶级的"公共权力"，而是统治阶级镇压被统治阶级的工具。当阶级矛盾可以被调和时，国家不需要存在；正是因为矛盾"不可调和"，才需要强制性的国家机器。无产阶级革命后建立的"无产阶级专政的国家"，同样是阶级压迫的工具——只不过这次是被压迫者对压迫者的统治。',
+                warning: '⚠️ 常见误读：用来为一切专制行为辩护。列宁明确指出，无产阶级专政是"过渡性的"，其目标是最终使国家消亡——包括无产阶级国家自身。'
+            },
+
+            'lenin-4': {
+                text: '"无产阶级专政不是为了永远维持下去的，它只是为消灭阶级和过渡到无阶级社会所必需的过渡阶段。"',
+                source: '列宁《国家与革命》（1917）',
+                background: '针对第二国际机会主义者对"专政"概念的歪曲，以及无政府主义者主张立即废除一切国家的观点。列宁从恩格斯的论述出发，阐明无产阶级国家的历史暂时性——它的存在目的恰恰是创造条件让自己消亡。',
+                meaning: '这是一个深刻的辩证法命题：无产阶级建立国家是为了最终消灭国家。无产阶级专政的任务是镇压剥削阶级的反抗、消除阶级差别、发展生产力，当这些目标实现后，国家作为阶级压迫工具就不再有存在的必要，人类将进入"自由人的联合体"。',
+                warning: ''
+            },
+
+            'lenin-5': {
+                text: '"共产主义就是苏维埃政权加全国电气化。"',
+                source: '列宁在全俄苏维埃第八次代表大会上的讲话（1920）',
+                background: '内战结束后，苏俄经济濒临崩溃。列宁深刻认识到，没有现代工业基础就不可能建成社会主义。他将电气化视为现代化的关键标志——就像今天人们说"互联网+"一样，电气化在当时代表了最先进的生产力水平。著名的俄罗斯国家电气化委员会（GOELRO）计划应运而生。',
+                meaning: '这句话形象地概括了社会主义建设的两大支柱：政治上坚持苏维埃政权（无产阶级专政），经济上实现现代化（电气化）。政治制度和物质基础缺一不可。列宁在这里强调了发展生产力的重要性，纠正了"战时共产主义"时期的极端做法，为新经济政策奠定了思想基础。',
+                warning: ''
+            },
+
+            // ============ 斯大林 ============
+            'stalin-1': {
+                text: '"落后就要挨打。我们比先进国家落后五十年到一百年，我们必须在十年内跑完这段距离，或者我们就被人家打倒。"',
+                source: '斯大林（1931年）',
+                background: '1931年是苏联一五计划的攻坚期。此时日本已侵占中国东北，法西斯势力在欧洲抬头，纳粹党在德国迅速崛起。苏联虽然在一五计划中取得了显著成就，但整体工业水平仍远落后于西方发达国家。斯大林多次在不同场合表达了对国家安全形势的紧迫感。',
+                meaning: '这句话道出了后发国家面临的结构性困境：在国际体系中，落后意味着被动挨打的危险。苏联选择了一条极端压缩时间的工业化道路——集中全国资源优先发展重工业。这条道路付出了巨大代价（农业集体化中的困难、消费品的短缺），但也确实在二战前夕建立了独立完整的工业体系。',
+                warning: '⚠️ 常见误读：将其简化为"弱肉食食"的社会达尔文主义辩护词。斯大林强调的是在帝国主义包围下，落后国家必须加速现代化才能生存，而非认可侵略有理。'
+            },
+
+            'stalin-2': {
+                text: '"干部决定一切！"',
+                source: '斯大林《第一个五年计划总结》（1935年）',
+                background: '苏联一五计划期间，大量新工厂投产，但极度缺乏能够操作和管理复杂设备的熟练技术人员和干部。此前斯大林曾说过"技术决定一切"，但到了1935年他意识到光有设备不行，还需要人来掌握技术。于是在克里姆林宫举行的红军学院学生毕业典礼上，他提出了"干部决定一切"的著名口号。',
+                meaning: '这是对之前"技术决定一切"的重要补充和发展。再先进的技术也需要人来掌握和使用。斯大林强调培养和使用干部的重要性——包括技术专家、管理者和各级领导者。这句话标志着苏联建设重心从单纯引进设备转向人才培养和组织能力建设。',
+                warning: '⚠️ 后来的历史表明，苏联在干部选拔机制上存在严重问题（个人崇拜、官僚化等），但这不等于这句话本身的正确性有问题。'
+            },
+
+            'stalin-3': {
+                text: '"技术决定一切。没有技术就不可能有高速发展的工业。"',
+                source: '斯大林在接见红色教授学院学员时的讲话（1931年）',
+                background: '苏联开始大规模工业化初期，面临的最大瓶颈之一是技术水平低下。旧沙俄时代的工业基础薄弱，加上内战的破坏，大量设备陈旧老化甚至完全损毁。同时，许多人对是否能在短时间内建立起现代化工业体系持怀疑态度。',
+                meaning: '在特定历史条件下强调技术的决定性作用。当时的核心任务是快速建立工业基础，而技术是实现这一目标的物质前提。这句话体现了唯物主义的立场——生产力的发展离不开技术进步。当然，斯大林后来自己也补充说仅有技术是不够的，还需要人来掌握技术（即后来的"干部决定一切"）。',
+                warning: ''
+            },
+
+            // ============ 毛泽东 ============
+            'mao-1': {
+                text: '"枪杆子里出政权。"',
+                source: '毛泽东八七会议讲话（1927年8月7日）',
+                background: '1927年4·12政变后，国民党大规模屠杀共产党员和革命群众，中共党员人数从近六万人骤减到一万多人。八七会议上，毛泽东在发言中总结了大革命失败的教训，指出过去我们只注重做群众运动而忽视军事工作的错误。这是中国共产党人在血的教训中得出的结论。',
+                meaning: '在中国半殖民地半封建的具体国情中，反动统治者掌握着强大的武装力量，没有任何形式的合法斗争空间。革命者如果放弃武装斗争，就只能任人宰割。"枪杆子里出政权"不是说武力万能，而是说在反动派的暴力面前，必须以革命的暴力对抗反革命的暴力。',
+                warning: '⚠️ 常见误读：用来为一切暴力行为辩护，或者曲解为"谁有枪谁说了算"。毛泽东始终强调军队必须在党的绝对领导下，武装斗争必须与群众路线相结合。'
+            },
+
+            'mao-2': {
+                text: '"为人民服务。"',
+                source: '毛泽东《为人民服务》（1944年9月8日）',
+                background: '1944年9月8日，中共中央警备团战士张思德在陕北安塞山中烧炭时因炭窑崩塌牺牲。毛泽东在张思德的追悼会上发表了这篇演讲，后以《为人民服务》为题收入毛选第三卷。这篇仅800多字的演讲成为中国共产党的根本宗旨的经典表述。',
+                meaning: '"为人民服务"这五个字概括了中国共产党的根本价值取向：党的全部工作和奋斗都是为了人民的利益。这与一切旧时代统治阶级的"牧民"思维截然不同——人民不是被管理的对象，而是服务的对象。这也是判断一切工作的根本标准：有利于人民的事就做，不利于人民的事就不做。',
+                warning: '⚠️ 在实际工作中曾被形式化为空洞口号。毛泽东的本意是要求每一个党员干部在实际行动中践行这一宗旨，而非仅仅把它挂在嘴边。'
+            },
+
+            'mao-3': {
+                text: '"星星之火，可以燎原。"',
+                source: '毛泽东《星星之火，可以燎原》（1930年1月5日）',
+                background: '1929年底至1930年初，红四军在赣南闽西开辟根据地时期，党内部分同志对革命前途产生了悲观情绪。林彪写信给毛泽东表达了"红旗到底能打多久"的疑问。毛泽东在复信中用"星星之火，可以燎原"的形象比喻回应了这种悲观论调。',
+                meaning: '这句话蕴含着深刻的革命乐观主义精神和战略眼光。表面上看，革命力量还很弱小（星星之火），但它代表着历史前进的方向，具有强大的生命力。反动派貌似强大，但内部矛盾重重，正在走向衰落。关键是要看清事物发展的趋势，不被暂时的强弱对比所迷惑。',
+                warning: ''
+            },
+
+            'mao-4': {
+                text: '"一切反动派都是纸老虎。"',
+                source: '毛泽东与美国记者安娜·路易斯·斯特朗的谈话（1946年8月）',
+                background: '1946年夏，蒋介石在美国支持下发动全面内战。当时国共力量对比极为悬殊：国民党军队430万人，解放军仅127万人；国民党控制全国绝大部分城市和交通线。国际上，美国是超级大国，刚刚在广岛长崎投下原子弹。在这种形势下，毛泽东提出了"纸老虎"论。',
+                meaning: '毛泽东运用对立统一规律分析帝国主义和反动派的两重性：从长远看（战略上），它们脱离人民、违背历史潮流，终将被淘汰——所以是"纸老虎"；但从当前看（战术上），它们仍有强大实力，会咬人会吃人——所以又是"真老虎"。要在战略上藐视敌人（树立必胜信心），同时在战术上重视敌人（认真对付每一个具体战斗）。',
+                warning: '⚠️ 常见误读：用来轻视一切对手，不做充分准备就盲目冒进。毛泽东反复强调"战术上要重视敌人"，正是为了避免这种倾向。'
+            },
+
+            'mao-5': {
+                text: '"没有调查，就没有发言权。"',
+                source: '毛泽东《反对本本主义》（1930年5月）',
+                background: '1930年前后，党内存在严重的教条主义倾向——一些人只知照搬马克思主义书本或苏联经验，不愿深入实际调查中国的具体情况。毛泽东在寻乌县做了大规模社会调查后写下此文，尖锐批评那种"下车伊始哇喇哇喇发议论"的主观主义作风。',
+                meaning: '正确的认识和决策只能来自对实际情况的系统调查。不了解具体情况就发表意见、制定政策，只能是瞎指挥。这不仅是一个方法论问题，更是一个对待人民群众的态度问题——调查就是向群众学习、向实际学习。这句话至今仍是反对官僚主义和形式主义的锐利武器。',
+                warning: ''
+            },
+
+            'mao-6': {
+                text: '"从群众中来，到群众中去。"',
+                source: '毛泽东《关于领导方法的若干问题》（1943年6月1日）',
+                background: '延安整风后期，毛泽东系统总结中国共产党的领导方法和工作经验。此前党内长期存在着两种错误倾向：一是命令主义（强迫群众执行上级指示），二是尾巴主义（盲目追随群众的眼前利益和落后意见）。毛泽东用"从群众中来，到群众中去"概括了正确的领导方法。',
+                meaning: '这是一个完整的工作循环："从群众中来"——深入群众，将群众分散的无系统的意见集中起来（经过研究，化为集中的系统的意见）；"到群众中去"——把形成的决策拿到群众中去宣传解释，化为群众的行动，并在实践中检验这些意见是否正确。这个过程循环往复，一次比一次更正确。',
+                warning: ''
+            },
+
+            'mao-7': {
+                text: '"战略上要藐视敌人，战术上要重视敌人。"',
+                source: '毛泽东',
+                background: '这一思想贯穿毛泽东整个革命生涯，在1946年与斯特朗谈话和1957年莫斯科会议讲话中有最系统的阐述。它是对中国革命经验的哲学总结，也是对马克思主义战略思想的创造性发展。',
+                meaning: '这是辩证法的精妙运用。战略上的藐视——看清敌人的本质是腐朽的、必然灭亡的，从而建立战胜困难的信心和勇气；战术上的重视——清醒认识到敌人在具体条件下仍具有破坏力，必须认真研究对策、做好充分准备。两者缺一不可：只藐视不重视是冒险主义，只重视不藐视是失败主义。',
+                warning: ''
+            },
+
+            'mao-8': {
+                text: '"百花齐放，百家争鸣。"',
+                source: '毛泽东（1956年）',
+                background: '1956年，社会主义改造基本完成，中国进入全面建设社会主义时期。如何处理科学和文化领域的问题？毛泽东借鉴中国古代"百花齐放"的艺术理念和"百家争鸣"的学术传统，提出了"双百方针"，旨在鼓励艺术创作自由和学术讨论活跃。',
+                meaning: '艺术问题上"百花齐放"，学术问题上"百家争鸣"。这是在社会主义条件下发展科学文化的基本方针。它承认不同学派和风格的存在价值，主张通过自由竞赛和讨论来辨别真伪优劣，而不是靠行政命令压制异己。',
+                warning: '⚠️ 历史上这一方针的执行经历了曲折。1957年后的"反右"运动中，一些真诚提意见的知识分子受到打击。这提醒我们：好的方针需要好的执行环境和保障机制。'
+            },
+
+            'mao-9': {
+                text: '"领导我们事业的核心力量是中国共产党。指导我们思想的理论基础是马克思列宁主义。"',
+                source: '毛泽东中华人民共和国第一届全国人大开幕词（1954年9月15日）',
+                background: '1954年9月15日，第一届全国人民代表大会第一次会议在北京召开，通过了新中国第一部宪法（五四宪法）。这是新中国成立后召开的首次全国人民代表大会，标志着人民代表大会制度的正式确立。毛泽东在开幕词中提出了这两句经典论断。',
+                meaning: '这两句话简洁有力地概括了新中国政治制度的两个根本原则：一是坚持中国共产党的领导核心地位，二是坚持以马克思列宁主义为指导思想。它们被写入五四宪法的序言，成为此后历次宪法修改都保留的基本表述。',
+                warning: ''
+            },
+
+            'mao-10': {
+                text: '"没有一个人民的军队，便没有人民的一切。"',
+                source: '毛泽东《论联合政府》（1945年4月24日）',
+                background: '1945年抗日战争即将胜利之际，中共七大在延安召开。毛泽东在政治报告《论联合政府》中系统阐述了中国共产党的政治纲领和政策主张。在谈到人民军队问题时，他回顾了人民军队在抗战中的作用，强调了武装力量的重要性。',
+                meaning: '在中国长期的革命斗争中，人民军队不仅是作战力量，还是革命的组织载体——军队帮助建立政权、开展土地改革、组织生产建设。没有这支武装力量作后盾，人民争取到的任何成果都可能得而复失。"人民的一切"包括生命安全、土地权利、政治权利等所有基本权益。',
+                warning: ''
+            },
+
+            'mao-11': {
+                text: '"我们的原则是党指挥枪，而决不容许枪指挥党。"',
+                source: '毛泽东《战争和战略问题》（1938年11月6日）',
+                background: '1938年，抗日战争进入相持阶段。王明回国后推行"一切经过统一战线"的右倾机会主义路线，实际上放弃了党对军队的领导权。毛泽东在六届六中全会上批判了这种错误倾向，明确提出"党指挥枪"的原则。',
+                meaning: '军队是完成政治任务的工具，必须置于党的绝对领导之下。这不同于军阀割据时代的"私人军队"模式，也区别于西方国家"军队国家化"（实为资产阶级政党控制）的模式。党指挥枪确保军队始终服务于人民的根本利益，防止军队蜕变为少数人谋取私利的工具。',
+                warning: ''
+            },
+
+            'mao-12': {
+                text: '"我们不但要提出任务，而且要解决完成任务的方法问题。我们的任务是过河，但是没有桥或没有船就不能过。不解决桥或船的问题，过河就是一句空话。不解决方法问题，任务也只是瞎说一顿。"',
+                source: '毛泽东《关心群众生活，注意工作方法》（1934年1月27日）',
+                background: '1934年1月，中华苏维埃第二次全国代表大会在瑞金召开。毛泽东在会上作了《关心群众生活，注意工作方法》的报告。当时中央苏区面临国民党第五次"围剿"，党内存在只顾下达任务而不关心执行方法的官僚主义作风。',
+                meaning: '这是一个极其重要的方法论原则：目标和手段不可分割。只喊口号不落实措施，目标就会落空。"过河"是目标，"桥和船"是方法——方法可以是多种多样的（造桥、找船、游泳等），但必须有切实可行的方法。这对今天的工作仍具有极强的现实意义。',
+                warning: ''
+            },
+
+            'mao-13': {
+                text: '"任何过程如果有多数矛盾存在的话，其中必定有一种是主要的……捉住了这个主要矛盾，一切问题就迎刃而解了。"',
+                source: '毛泽东《矛盾论》（1937年8月）',
+                background: '1937年，为了清算党内长期存在的主观主义特别是教条主义错误，毛泽东在延安抗日军政大学讲授哲学，写下了《实践论》《矛盾论》。这两篇文章奠定了中国共产党人哲学思想的基础。《矛盾论》系统阐述了马克思主义的对立统一规律。',
+                meaning: '这是矛盾分析法的方法论精髓。在复杂的事物发展中，各种矛盾的地位和作用是不平衡的。抓住主要矛盾就能带动全局，否则就会陷入"眉毛胡子一把抓"的困境。学会识别和抓住不同时期的主要矛盾，是领导干部最重要的能力之一。',
+                warning: '⚠️ 注意：主要矛盾是随时间变化的。某一时期的主要矛盾解决后，原来的次要矛盾可能上升为主要矛盾。不能僵化地把某个矛盾固定为"永远的"主要矛盾。'
+            },
+
+            'mao-14': {
+                text: '"人的正确思想是从哪里来的？只能从社会的生产斗争、阶级斗争和科学实验这三项实践中来。"',
+                source: '毛泽东《人的正确思想是从那里来的？》（1963年5月）',
+                background: '1963年，中国在经历三年困难时期后正在进行调整。毛泽东重新思考认识论问题，写了这篇文章，进一步发挥和发展了《实践论》中的认识论思想。文章特别增加了"科学实验"作为社会实践的一种基本形式。',
+                meaning: '这是对"知识来源"问题的彻底唯物主义回答。正确思想不是天上掉下来的（否定了客观唯心主义），也不是头脑里固有的（否定了主观唯心主义）。唯一的源泉是社会实践——人与自然交互的生产斗争、人与社会交互的阶级斗争、检验和发展知识的科学实验。这三者是统一的。',
+                warning: ''
+            },
+
+            'mao-15': {
+                text: '"战争的伟力之最深厚的根源，存在于民众之中。日本敢于欺负我们，主要的原因在于中国民众的无组织状态。"',
+                source: '毛泽东《论持久战》（1938年5月）',
+                background: '1938年5月，日军占领徐州，打通津浦线，正面战场节节败退。"亡国论"和"速胜论"两种错误思潮在社会上蔓延。毛泽东在延安抗日战争研究会发表演讲，系统分析中日双方的特点，论证了持久战的必然性和中国人民最终胜利的可能性。',
+                meaning: '这是人民战争思想的核心论断。战争的物质基础固然重要，但更重要的是人心的向背。一旦广大民众被动员组织起来，就会形成不可战胜的力量——正如毛泽东所说，把日本侵略者比作野牛冲入火阵，"我们一声唤也要把它吓一大跳"。动员民众的关键在于让他们认识到战争与自身利益的密切关联。',
+                warning: ''
+            },
+
+            'mao-16': {
+                text: '"我们需要的是热烈而镇定的情绪，紧张而有秩序的工作。"',
+                source: '毛泽东《中国革命战争的战略问题》（1936年12月）',
+                background: '1936年12月，红军长征刚结束不久，毛泽东在陕北的红军大学作系列讲演，总结第二次国内革命战争的经验教训。此前党内曾出现过面对敌人进攻时要么惊慌失措要么盲目冲动的两种极端情绪。',
+                meaning: '这是一条重要的心理和工作纪律准则。"热烈"是革命热情和积极性，"镇定"是冷静理性的头脑；"紧张"是高效紧迫的状态，"有秩序"是井然有条的计划安排。四个要素必须统一：有热情但不冲动，紧张但不慌乱，高效但不混乱。这在任何高压环境下都是宝贵的行为指南。',
+                warning: ''
+            },
+
+            'mao-17': {
+                text: '"以马克思列宁主义的理论思想武装起来的中国共产党，在中国人民中产生了新的工作作风——理论和实践相结合的作风，和人民群众紧密地联系在一起的作风以及自我批评的作风。"',
+                source: '毛泽东《论联合政府》（1945年4月24日）',
+                background: '1945年中共七大上，毛泽东作政治报告《论联合政府》，全面总结建党二十四年的历史经验，系统阐述新民主主义革命的理论纲领和政策。报告中专门有一节论述党的作风建设，概括了著名的三大作风。',
+                meaning: '三大优良作风是中国共产党区别于其他政党的显著标志：（1）理论和实践相结合——反对教条主义和经验主义；（2）密切联系群众——反对命令主义和官僚主义；（3）批评和自我批评——反对骄傲自满和无原则的一团和气。三者相互联系，构成了党的建设的完整体系。',
+                warning: ''
+            },
+
+            'mao-18': {
+                text: '"优势而无准备，不是真正的优势，也没有主动。懂得这一点，劣势而有准备之军，常可对敌举行不意的攻势，把优势者打败。"',
+                source: '毛泽东《论持久战》（1938年5月）',
+                background: '在《论持久战》中，毛泽东不仅分析了战争的全局进程，还详细探讨了战争中的主动权问题。许多人把"优势"简单理解为兵力多、装备好，忽视了主观能动性和准备工作的重要性。',
+                meaning: '优势和劣势是可以转化的。表面的优势如果没有充分的准备（情报、部署、后勤、士气等）支撑，随时可能丧失；相反，处于劣势的一方如果准备充分、抓住时机，完全可以变被动为主动。这体现了毛泽东军事思想中高度重视主观能动性的特点——人不是物质的奴隶，可以通过正确的策略改变力量对比。',
+                warning: ''
+            },
+
+            'mao-19': {
+                text: '"你要知道梨子的滋味，你就得变革梨子，亲口吃一吃。你要知道革命的理论和方法，你就得参加革命。一切真知都是从直接经验发源的。"',
+                source: '毛泽东《实践论》（1937年7月）',
+                background: '《实践论》是毛泽东哲学思想的代表作，写于1937年7月，旨在用马克思主义认识论批判党内的教条主义倾向。文中用大量生动的日常例子来说明抽象的认识论原理，"梨子的滋味"就是其中最著名的一个。',
+                meaning: '认识的唯一来源是实践。无论多么高深的理论知识，归根结底都来自于人们在改造世界的实践中获得的感觉经验。间接经验（书本知识）也是前人直接经验的总结。因此，要想真正理解任何东西，就必须亲身参与相关的实践活动。这是对"读死书、死读书"的最有力反驳。',
+                warning: ''
+            },
+
+            'mao-20': {
+                text: '"不同质的矛盾，只有用不同的方法才能解决。……用不同的方法去解决不同的矛盾，这是马克思列宁主义者必须严格地遵守的一个原则。"',
+                source: '毛泽东《关于正确处理人民内部矛盾的问题》（1957年2月27日）',
+                background: '1956年匈牙利事件和波兰波兹南事件发生后，如何区分和处理社会主义社会内部的矛盾成为一个重大理论和实践问题。毛泽东在最高国务会议上发表讲话，系统阐明了"敌我矛盾"与"人民内部矛盾"两类不同性质的矛盾及其各自的解决办法。',
+                meaning: '这是对矛盾特殊性原理的创造性应用。在社会主义社会中，多数矛盾属于人民内部矛盾（如工农之间、城乡之间、脑力劳动和体力劳动之间的矛盾），应该用民主的、说服教育的方法解决；只有极少数才是敌我矛盾，需要用专政的方法解决。混淆两类矛盾的性质和解决方法会导致严重的后果。',
+                warning: '⚠️ 可惜的是，这一重要区分在后来的反右扩大化和文革中被严重扭曲，许多人民内部矛盾被错误地当作敌我矛盾处理。这正是背离了毛泽东自己提出的这一原则的结果。'
+            },
+
+            'mao-21': {
+                text: '"中国红军是一个执行革命的政治任务的武装集团。特别是现在，红军决不是单纯地打仗的，它除了打仗消灭敌人军事力量之外，还要负担宣传群众、组织群众、武装群众、帮助群众建立革命政权等项重大的任务。"',
+                source: '毛泽东《关于纠正党内的错误思想》（1929年12月）',
+                background: '1929年古田会议前夕，红四军内部存在严重的非无产阶级思想倾向：有人主张红军只管打仗不管其他（单纯军事观点），有人不愿意做艰苦的群众工作，有人保留着旧军队的雇佣思想和流寇习气。毛泽东起草的古田会议决议系统地批判和纠正了这些错误思想。',
+                meaning: '这是人民军队性质和宗旨的经典表述。人民军队不同于旧式军队的地方就在于：它不是单纯的军事组织，而是一个集军事、政治、社会工作于一体的复合体。打仗只是手段之一，更根本的任务是通过群众工作建立和巩固革命政权。这一思想确立了人民军队"战斗队、工作队、生产队"三位一体的职能定位。',
+                warning: ''
+            },
+
+            'mao-22': {
+                text: '"马克思主义的哲学认为十分重要的问题，不在于懂得了客观世界的规律性，因而能够解释世界，而在于拿了这种对于客观规律性的认识去能动地改造世界。"',
+                source: '毛泽东《实践论》（1937年7月）',
+                background: '《实践论》开宗明义即指出马克思主义哲学与一切旧哲学的根本区别。旧哲学满足于"解释世界"——构建精致的体系来描述世界是怎样的；马克思主义哲学则强调"改造世界"——用对世界的真理性认识来指导变革现实的实践。',
+                meaning: '认识世界的目的全在于改造世界。解释世界只是第一步，而且这一步本身也是在改造世界的过程中完成的。更重要的是第二步——将获得的理性认识回到实践中去，指导新的实践，在实践中验证和发展认识。这就是认识过程的第二次飞跃（从精神到物质的飞跃），也是更为关键的一次飞跃。',
+                warning: ''
+            },
+
+            'mao-23': {
+                text: '"中国妇女是一种伟大的人力资源。必须发掘这种资源，为了建设一个伟大的社会主义国家而奋斗。"',
+                source: '毛泽东《发动妇女投入生产，解决了劳动力不足的困难》按语（1955年）',
+                background: '1955年农业合作化高潮中，许多合作社感到劳动力不足。毛泽东在审阅《中国农村的社会主义高潮》一书时，读到河北省邢台县关于妇女参加生产的材料，写下这段批语，高度评价妇女在生产建设中的重要作用。',
+                meaning: '这段话有两层意义：一层是务实的——在劳动力短缺的情况下，发动妇女参加农业生产是解决实际困难的有效途径；另一层更深远的——肯定妇女作为"伟大的人力资源"的社会价值，倡导男女同工同酬，推动妇女从家庭走向社会生产。这是马克思主义妇女解放思想在中国的具体体现。',
+                warning: ''
+            },
+
+            'mao-24': {
+                text: '"读书是学习，使用也是学习，而且是更重要的学习。从战争学习战争——这是我们的主要方法。没有进学校机会的人仍然可以学习战争，就是从战争中学习。干起来再学习，干就是学习。"',
+                source: '毛泽东《中国革命战争的战略问题》（1936年12月）',
+                background: '1936年12月，毛泽东在红军大学作讲演，系统总结十年内战的经验教训。当时红军中有些人迷信正规军校教育，看不起从实战中摸索出来的"土办法"。毛泽东则强调，在战争环境中，实践是最好的学校。',
+                meaning: '学习和应用的关系是辩证的：读书可以获得系统的理论知识，但在实践中运用知识、解决问题本身就是一种更高层次的学习。对于那些没有机会接受正规教育的人来说，"在做中学"不仅是可行的途径，而且在某些方面（如应对复杂多变的现实情况）甚至是更有效的途径。这绝不是否定理论学习的重要性，而是强调实践学习的独特价值。',
+                warning: ''
+            },
+
+            'mao-25': {
+                text: '"指导一个伟大的革命运动的政党，如果没有革命理论，没有历史知识，没有对于实际运动的深刻的了解，要取得胜利是不可能的。"',
+                source: '毛泽东《中国共产党在民族战争中的地位》（1938年10月）',
+                background: '1938年10月，中共六届六中全会在延安召开。这是党的历史上一次具有重要意义的会议，确定了毛泽东在全党的领导地位。毛泽东在会上作政治报告，专门论述了党的建设和学习问题，提出了"学习"的任务。',
+                meaning: '一个成熟的革命政党必须具备三个方面的素养：（1）革命理论——马克思主义的科学世界观和方法论；（2）历史知识——从本国和世界历史的经验教训中获得智慧；（3）对实际运动的深刻了解——把握当下斗争的特点和规律。三者缺一不可。有理论而无实践是教条主义，有实践而无理论是经验主义，二者都会导致革命的失败。',
+                warning: ''
+            }
+
+        };
+
+        // ========== Modal 功能 ==========
+        function openQuote(id) {
+            const q = quotesData[id];
+            if (!q) return;
+            
+            document.getElementById('modalText').textContent = q.text;
+            document.getElementById('modalSource').textContent = q.source;
+            document.getElementById('modalBackground').textContent = q.background;
+            document.getElementById('modalMeaning').textContent = q.meaning;
+            
+            const warnEl = document.getElementById('modalWarning');
+            if (q.warning) {
+                warnEl.innerHTML = '<strong>⚠️ 注意：</strong>' + q.warning;
+                warnEl.style.display = 'block';
+            } else {
+                warnEl.style.display = 'none';
+            }
+            
+            document.getElementById('quoteModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuote() {
+            document.getElementById('quoteModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeModalOnOverlay(e) {
+            if (e.target === document.getElementById('quoteModal')) {
+                closeQuote();
+            }
+        }
+
+        // ESC 键关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeQuote();
+        });
+
+        // ========== 分类筛选 ==========
         document.querySelectorAll('.category-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const filter = this.dataset.filter;
                 
-                // 更新按钮状态
                 document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 
-                // 筛选语录卡片
                 document.querySelectorAll('.quote-detail-card').forEach(card => {
                     if (filter === 'all' || card.dataset.category === filter) {
                         card.style.display = 'block';
@@ -338,7 +1094,7 @@
             });
         });
 
-        // 黑夜模式切换
+        // 黑夜模式
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
@@ -353,11 +1109,17 @@
             }
         }
 
-        // 页面加载时恢复黑夜模式设置
         if (localStorage.getItem('darkMode') === 'true') {
             document.body.classList.add('dark-mode');
         }
         updateDarkModeIcon();
+
+        // 从首页跳转过来时，自动打开对应语录的简析卡片
+        if (sessionStorage.getItem('openQuote')) {
+            const targetId = sessionStorage.getItem('openQuote');
+            sessionStorage.removeItem('openQuote');
+            setTimeout(function() { openQuote(targetId); }, 300);
+        }
     </script>
 </body>
 </html>

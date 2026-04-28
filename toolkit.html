@@ -5,6 +5,506 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>工具集 | 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== 工具集页面专用样式 ===== */
+
+        /* ====== 右侧悬停导航（可收起展开） ====== */
+        .side-float-nav {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            font-family: inherit;
+        }
+
+        /* 收起状态：只显示一个竖向标签 */
+        .sfn-toggle {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            background: linear-gradient(180deg, #c41e3a, #8b0000);
+            color: white;
+            padding: 0.85rem 0.4rem;
+            border-radius: 8px 0 0 8px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            box-shadow: -2px 2px 10px rgba(196,30,58,0.25);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            user-select: none;
+            line-height: 1.6;
+        }
+        .sfn-toggle:hover {
+            background: linear-gradient(180deg, #d42a44, #a00000);
+            padding-right: 0.6rem;
+        }
+
+        /* 展开后的导航面板 */
+        .sfn-panel {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(100%);
+            background: white;
+            border-radius: 12px 0 0 12px;
+            box-shadow: -4px 4px 20px rgba(0,0,0,0.15), -1px 1px 6px rgba(0,0,0,0.08);
+            padding: 0.7rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(.4,0,.2,1);
+            min-width: 150px;
+            border: 1px solid #f0e6e6;
+            border-right: none;
+        }
+        .side-float-nav.expanded .sfn-panel {
+            transform: translateY(-50%) translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .side-float-nav.expanded .sfn-toggle {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .sfn-panel a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1.2rem;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.87rem;
+            font-weight: 500;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+        .sfn-panel a:hover {
+            background: #c41e3a08;
+            color: #c41e3a;
+            padding-left: 1.5rem;
+        }
+        .sfn-panel a .sfn-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            background: #f5f0f0;
+            color: #c41e3a;
+            font-size: 0.72rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .sfn-panel a:hover .sfn-num {
+            background: #c41e3a;
+            color: white;
+        }
+
+        /* 分隔线 */
+        .sfn-divider {
+            height: 1px;
+            background: #f0e6e6;
+            margin: 0.3rem 0.8rem;
+        }
+
+        /* 返回顶部按钮 */
+        .sfn-back-top {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1.2rem;
+            color: #888 !important;
+            font-size: 0.82rem !important;
+        }
+        .sfn-back-top:hover { color: #d97706 !important; }
+
+        body.dark-mode .sfn-toggle {
+            background: linear-gradient(180deg, #a01528, #600000);
+        }
+        body.dark-mode .sfn-panel {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        body.dark-mode .sfn-panel a { color: #ddd; }
+        body.dark-mode .sfn-panel a:hover { background: #ffffff12; color: #ff6b6b; }
+        body.dark-mode .sfn-panel a .sfn-num { background: #3a2020; color: #ff6b6b; }
+        body.dark-mode .sfn-panel a:hover .sfn-num { background: #ff6b6b; color: #1a1a1a; }
+        body.dark-mode .sfn-divider { background: #383838; }
+
+        /* 板块标题 */
+        .part-header {
+            text-align: center;
+            margin-bottom: 1.8rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        .part-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #c41e3a, #ff6b6b);
+            border-radius: 2px;
+        }
+        .part-header h3 {
+            font-size: 1.65rem;
+            color: #c41e3a;
+            margin-bottom: 0.4rem;
+        }
+        .part-header p {
+            color: #777;
+            font-size: 0.95rem;
+        }
+        body.dark-mode .part-header h3 { color: #ff6b6b; }
+        body.dark-mode .part-header p { color: #aaa; }
+        body.dark-mode .toolkit-nav a {
+            background: #333; border-color: #555; color: #ff6b6b;
+        }
+        body.dark-mode .toolkit-nav a:hover {
+            background: #c41e3a; color: white;
+        }
+
+        /* 哲学基石卡片 */
+        .cornerstone-card {
+            background: linear-gradient(135deg, #c41e3a08, #fef3c730);
+            border-left: 4px solid #c41e3a;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+        .cornerstone-card h4 {
+            color: #c41e3a;
+            margin-bottom: 0.7rem;
+            font-size: 1.1rem;
+        }
+        .cornerstone-card p {
+            line-height: 1.85;
+            color: #444;
+            margin: 0;
+        }
+
+        /* 概念项 */
+        .concept-item {
+            padding: 1rem 0;
+            border-bottom: 1px dashed #eee;
+        }
+        .concept-item:last-child { border-bottom: none; }
+        .concept-item h5 {
+            color: #c41e3a;
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .concept-item p {
+            color: #555;
+            line-height: 1.75;
+            font-size: 0.93rem;
+        }
+        .concept-item ul {
+            margin-top: 0.4rem;
+            padding-left: 1.3rem;
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .concept-item ul li { margin-bottom: 0.15rem; }
+
+        /* 榜样人物卡片 */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .hero-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid #c41e3a;
+        }
+        .hero-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 28px rgba(196, 30, 58, 0.18);
+        }
+        .hero-card-header {
+            padding: 1.2rem 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, #c41e3a10, #fff5f5);
+            border-bottom: 1px solid #fde8e8;
+        }
+        .hero-avatar {
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c41e3a, #ff6b6b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .hero-info h4 {
+            color: #c41e3a;
+            margin: 0 0 0.15rem 0;
+            font-size: 1.05rem;
+        }
+        .hero-info span {
+            color: #888;
+            font-size: 0.82rem;
+        }
+        .hero-card-body {
+            padding: 1.2rem 1.3rem;
+        }
+        .hero-quote {
+            font-style: italic;
+            color: #666;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            padding: 0.7rem 1rem;
+            background: #fafafa;
+            border-left: 3px solid #d97706;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 1rem;
+        }
+        .hero-desc {
+            color: #444;
+            font-size: 0.91rem;
+            line-height: 1.8;
+        }
+        .hero-tag {
+            display: inline-block;
+            padding: 0.2rem 0.65rem;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-right: 0.35rem;
+            margin-top: 0.7rem;
+        }
+        body.dark-mode .hero-card { background: #2a2a2a; border-color: #ff6b6b; }
+        body.dark-mode .hero-card-header { background: #331818; border-color: #442222; }
+        body.dark-mode .hero-info h4 { color: #ff6b6b; }
+        body.dark-mode .hero-quote { background: #333; color: #ccc; border-color: #b7791f; }
+        body.dark-mode .hero-desc { color: #ddd; }
+
+        /* 学习路径时间线 */
+        .path-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            counter-reset: stage;
+        }
+        .path-stage {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .path-stage:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(196, 30, 58, 0.12);
+        }
+        .path-stage-num {
+            position: absolute;
+            top: -5px;
+            right: 12px;
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #c41e3a10;
+            line-height: 1;
+        }
+        .path-stage h4 {
+            color: #c41e3a;
+            font-size: 1.15rem;
+            margin-bottom: 0.3rem;
+        }
+        .stage-goal {
+            color: #888;
+            font-size: 0.87rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.7rem;
+            border-bottom: 1px dashed #eee;
+        }
+        .path-stage ul {
+            list-style: none;
+            padding: 0;
+        }
+        .path-stage ul li {
+            padding: 0.45rem 0;
+            border-bottom: 1px solid #f8f8f8;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+        .path-stage ul li:last-child { border-bottom: none; }
+        .path-stage ul li a {
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .path-stage ul li a:hover { text-decoration: underline; }
+        .path-stage ul li .sub-text {
+            color: #999;
+            font-size: 0.82rem;
+        }
+        .stage-hint {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.3rem 0.7rem;
+            background: #f0f8ff;
+            color: #1e40af;
+            border-radius: 15px;
+            font-size: 0.78rem;
+            font-weight: 500;
+        }
+        body.dark-mode .path-stage { background: #262626; }
+        body.dark-mode .path-stage h4 { color: #ff6b6b; }
+        body.dark-mode .stage-goal { color: #aaa; }
+        body.dark-mode .path-stage ul li { border-color: #383838; color: #ccc; }
+        body.dark-mode .path-stage ul li a { color: #ff6b6b; }
+        body.dark-mode .stage-hint { background: #1a2744; color: #60a5fa; }
+
+        /* 导读方法 - 重写版 */
+        .reading-approach {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .approach-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            border-top: 3px solid transparent;
+        }
+        .approach-card:nth-child(1) { border-top-color: #c41e3a; }
+        .approach-card:nth-child(2) { border-top-color: #d97706; }
+        .approach-card:nth-child(3) { border-top-color: #059669; }
+        .approach-card:nth-child(4) { border-top-color: #2563eb; }
+        .approach-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+        .approach-card h4 {
+            font-size: 1.05rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .approach-card p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 0.91rem;
+            margin: 0;
+        }
+        .approach-example {
+            margin-top: 0.8rem;
+            padding: 0.7rem 1rem;
+            background: #fafafa;
+            border-radius: 8px;
+            font-size: 0.86rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        .approach-example strong { color: #333; }
+        body.dark-mode .approach-card { background: #262626; }
+        body.dark-mode .approach-card p { color: #bbb; }
+        body.dark-mode .approach-example { background: #333; color: #999; }
+        body.dark-mode .approach-example strong { color: #ddd; }
+
+        /* 见微知著区域 */
+        .insight-banner {
+            background: linear-gradient(135deg, #c41e3a08, #fef3c725, #c41e3a08);
+            border: 2px solid #c41e3a20;
+            border-radius: 14px;
+            padding: 2rem;
+            text-align: center;
+        }
+        .insight-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+        .insight-banner h4 {
+            color: #c41e3a;
+            font-size: 1.2rem;
+            margin-bottom: 0.7rem;
+        }
+        .insight-banner p {
+            color: #555;
+            line-height: 1.8;
+            max-width: 650px;
+            margin: 0 auto 1.3rem;
+            font-size: 0.93rem;
+        }
+
+        /* 独立思考区域 */
+        .thinking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .thinking-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+        .thinking-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        .thinking-card .tc-icon {
+            font-size: 2rem;
+            margin-bottom: 0.7rem;
+            display: block;
+        }
+        .thinking-card h4 {
+            color: #333;
+            font-size: 1.05rem;
+            margin-bottom: 0.7rem;
+        }
+        .thinking-card p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 0.91rem;
+        }
+        .thinking-card .tc-list {
+            margin-top: 0.7rem;
+            padding-left: 1.2rem;
+            color: #555;
+            font-size: 0.89rem;
+            line-height: 1.8;
+        }
+        .thinking-card .tc-list li { margin-bottom: 0.3rem; }
+        .body-dark-mode .thinking-card,
+        body.dark-mode .thinking-card { background: #262626; }
+        body.dark-mode .thinking-card h4 { color: #eee; }
+        body.dark-mode .thinking-card p { color: #bbb; }
+        body.dark-mode .thinking-card .tc-list { color: #bbb; }
+
+        /* 未完待续标记 */
+        .wip-note {
+            text-align: center;
+            color: #d97706;
+            font-size: 0.84rem;
+            margin-top: 1rem;
+            padding-top: 0.8rem;
+            border-top: 1px dashed #fcd34d;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header">
@@ -34,250 +534,390 @@
     <main class="toolkit-page">
         <div class="container">
             <h2 class="section-title">理论学习工具集</h2>
-            <p class="section-desc">以模块化理论为手段，将马列毛原理理清，服务于更好地学习马克思主义哲学</p>
+            <p class="section-desc">从理论基石到实践应用，从经典阅读到独立思考——系统化的马克思主义学习路线图</p>
 
-            <!-- 哲学原理模块 -->
-            <section class="tool-section" id="philosophy">
-                <h3 class="tool-title">📚 哲学原理</h3>
-                <div class="tool-grid">
+            <!-- 右侧悬停导航（五大板块快速跳转） -->
+            <nav class="side-float-nav" id="sideNav">
+                <div class="sfn-toggle" onclick="toggleSideNav()" title="展开导航">☰ 快速导航</div>
+                <div class="sfn-panel">
+                    <a href="#part1"><span class="sfn-num">1</span> 哲学原理</a>
+                    <a href="#part2"><span class="sfn-num">2</span> 斗争策略</a>
+                    <a href="#part3"><span class="sfn-num">3</span> 学习与思考</a>
+                    <a href="#part4"><span class="sfn-num">4</span> 见微知著</a>
+                    <a href="#part5"><span class="sfn-num">5</span> 独立思考</a>
+                    <div class="sfn-divider"></div>
+                    <a href="#" class="sfn-back-top" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});toggleSideNav();">⬆ 返回顶部</a>
+                </div>
+            </nav>
+
+            <!-- ==================== 第一部分：哲学原理 ==================== -->
+            <section id="part1" style="margin-bottom:3.5rem;">
+                <div class="part-header">
+                    <h3>📐 一、哲学原理</h3>
+                    <p>从唯物辩证法的基石出发，理解马克思主义的世界观与方法论</p>
+                </div>
+
+                <!-- 哲学基石说明 -->
+                <div class="cornerstone-card">
+                    <h4>⛏️ 唯物辩证法：一切理论的基石</h4>
+                    <p>马克思主义哲学的核心是<strong style="color:#c41e3a;">辩证唯物主义</strong>和<strong style="color:#c41e3a;">历史唯物主义</strong>。它不是书斋里的抽象思辨，而是指导我们认识世界、改造世界的思想武器。毛泽东在《矛盾论》中把辩证法中国化了——用中国人能懂的语言讲了深刻的道理。<br>
+                    掌握了哲学原理，后面的政治经济学、科学社会主义才能融会贯通。</p>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr);gap:1.5rem;">
+                    <!-- 唯物辩证法 -->
                     <div class="tool-card-large">
-                        <h4>唯物辩证法</h4>
+                        <h4>⚖️ 唯物辩证法三大规律</h4>
                         <div class="concept-list">
                             <div class="concept-item">
-                                <h5>对立统一规律</h5>
-                                <p>矛盾是事物发展的根本动力。任何事物内部都包含相互对立又相互统一的两个方面。</p>
+                                <h5>🔄 对立统一规律（核心）</h5>
+                                <p><strong>矛盾是事物发展的根本动力。</strong>任何事物内部都包含相互对立又相互统一的两个方面。没有矛盾就没有世界。</p>
                                 <ul>
-                                    <li>矛盾的普遍性：矛盾存在于一切事物的发展过程中</li>
-                                    <li>矛盾的特殊性：不同事物的矛盾各有特点</li>
-                                    <li>主要矛盾与次要矛盾：抓住主要矛盾是关键</li>
-                                    <li>矛盾的主要方面与次要方面：决定事物的性质</li>
+                                    <li><strong>矛盾的普遍性：</strong>矛盾无处不在、无时不有</li>
+                                    <li><strong>矛盾的特殊性：</strong>不同事物的矛盾各有特点，要具体问题具体分析</li>
+                                    <li><strong>主要矛盾与次要矛盾：</strong>抓关键、抓重点（"牵牛鼻子"）</li>
+                                    <li><strong>矛盾的主要方面：</strong>决定事物的性质；可以转化</li>
                                 </ul>
                             </div>
                             <div class="concept-item">
-                                <h5>质量互变规律</h5>
-                                <p>事物的发展是量变到质变的过程。量变积累到一定程度引起质变，质变又为新的量变开辟道路。</p>
+                                <h5>📈 质量互变规律</h5>
+                                <p>事物的发展是量变到质变的过程。量变积累到一定程度引起质变，质变又为新的量变开辟道路。"不积跬步无以至千里"，说的就是这个道理。</p>
                             </div>
                             <div class="concept-item">
-                                <h5>否定之否定规律</h5>
-                                <p>事物的发展是螺旋式上升的。每一次否定都不是简单的抛弃，而是扬弃——既克服又保留。</p>
+                                <h5>🌀 否定之否定规律</h5>
+                                <p>事物的发展是螺旋式上升的。每一次否定都不是简单的抛弃，而是<strong>扬弃</strong>——既克服又保留。前进中有曲折，曲折中前进。</p>
                             </div>
                         </div>
                     </div>
 
+                    <!-- 认识论 -->
                     <div class="tool-card-large">
-                        <h4>认识论</h4>
+                        <h4>🧠 认识论：实践与认识的辩证关系</h4>
                         <div class="concept-list">
                             <div class="concept-item">
                                 <h5>实践是认识的基础</h5>
-                                <p>认识来源于实践，又服务于实践。实践是检验真理的唯一标准。</p>
+                                <p>认识来源于实践，又服务于实践。<strong>实践是检验真理的唯一标准。</strong></p>
                                 <ul>
-                                    <li>感性认识：对事物现象的直观把握</li>
-                                    <li>理性认识：对事物本质的抽象思维</li>
-                                    <li>从感性到理性的飞跃：去粗取精、去伪存真</li>
-                                    <li>从理性到实践的飞跃：理论指导行动</li>
+                                    <li><strong>感性认识 → 理性认识：</strong>从现象到本质（第一次飞跃）</li>
+                                    <li><strong>理性认识 → 实践：</strong>用理论指导行动（第二次飞跃）</li>
+                                    <li><strong>实践、认识、再实践、再认识：</strong>循环往复以至无穷</li>
                                 </ul>
                             </div>
                             <div class="concept-item">
-                                <h5>真理的客观性</h5>
-                                <p>真理是客观的，不以人的意志为转移。真理是具体的、历史的，不是抽象的、永恒的。</p>
+                                <h5>真理是客观的、具体的、历史的</h5>
+                                <p>真理不是抽象的教条，而是在特定历史条件下对客观事物的正确反映。真理是发展的——今天的认识可能被明天的实践所超越和修正。</p>
                             </div>
                         </div>
                     </div>
 
+                    <!-- 历史唯物主义 -->
                     <div class="tool-card-large">
-                        <h4>历史唯物主义</h4>
+                        <h4>🏛️ 历史唯物主义：社会发展的根本规律</h4>
                         <div class="concept-list">
                             <div class="concept-item">
-                                <h5>社会基本矛盾</h5>
-                                <p>生产力与生产关系的矛盾、经济基础与上层建筑的矛盾，是推动社会发展的根本动力。</p>
+                                <h5>⚙️ 社会基本矛盾</h5>
+                                <p>生产力与生产关系的矛盾、经济基础与上层建筑的矛盾，是推动人类社会发展的根本动力。</p>
                             </div>
                             <div class="concept-item">
-                                <h5>阶级斗争</h5>
-                                <p>阶级斗争是阶级社会发展的直接动力。阶级分析方法是理解社会历史的钥匙。</p>
+                                <h5>👥 人民群众是历史的创造者</h5>
+                                <p>历史不是少数英雄人物创造的，而是人民群众创造的。"人民，只有人民，才是创造世界历史的动力。"——毛泽东</p>
                             </div>
                             <div class="concept-item">
-                                <h5>人民群众是历史的创造者</h5>
-                                <p>历史是人民群众创造的，不是少数英雄人物创造的。</p>
+                                <h5>📊 阶级分析方法</h5>
+                                <p>在有阶级的社会里，阶级斗争是社会发展的直接动力。阶级分析是理解历史和社会现象的基本方法。</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <p class="wip-note">📖 更多哲学原理内容（如范畴体系、辩证思维方法等）持续完善中……</p>
             </section>
 
-            <!-- 斗争策略模块 -->
-            <section class="tool-section" id="strategy">
-                <h3 class="tool-title">⚔️ 斗争策略</h3>
-                <div class="tool-grid">
-                    <div class="tool-card-large">
-                        <h4>三大法宝</h4>
-                        <div class="concept-list">
-                            <div class="concept-item">
-                                <h5>统一战线</h5>
-                                <p>团结一切可以团结的力量，建立最广泛的革命统一战线。</p>
-                                <ul>
-                                    <li>分清敌友是革命的首要问题</li>
-                                    <li>又联合又斗争的策略</li>
-                                    <li>坚持独立自主原则</li>
-                                </ul>
+
+            <!-- ==================== 第二部分：斗争策略 ==================== -->
+            <section id="part2" style="margin-bottom:3.5rem;">
+                <div class="part-header">
+                    <h3>⚔️ 二、斗争策略</h3>
+                    <p>化理论为实际行动——革命导师们是如何把道理变成力量的？</p>
+                </div>
+
+                <div class="cornerstone-card" style="border-left-color:#d97706;background:linear-gradient(135deg,#fef3c715,#fff);">
+                    <h4>💡 从"知道"到"做到"</h4>
+                    <p>马克思主义从来不是坐而论道的学问。马克思说："哲学家们只是用不同的方式解释世界，而问题在于改变世界。"列宁说："没有革命的理论，就不会有革命的运动。"但有了理论之后呢？<strong>关键在于实践</strong>——在于如何在具体条件下灵活运用这些原理。下面通过几位榜样人物的生平，看看他们是怎么做的。</p>
+                </div>
+
+                <!-- 榜样人物 -->
+                <div class="hero-grid" style="margin-top:1.5rem;">
+                    <!-- 雷锋 -->
+                    <div class="hero-card">
+                        <div class="hero-card-header">
+                            <div class="hero-avatar">⭐</div>
+                            <div class="hero-info">
+                                <h4>雷锋</h4>
+                                <span>1940—1962 · 中国人民解放军战士</span>
                             </div>
-                            <div class="concept-item">
-                                <h5>武装斗争</h5>
-                                <p>枪杆子里出政权。革命的中心任务和最高形式是武装夺取政权。</p>
-                                <ul>
-                                    <li>党指挥枪的原则</li>
-                                    <li>人民战争思想</li>
-                                    <li>游击战与运动战相结合</li>
-                                </ul>
-                            </div>
-                            <div class="concept-item">
-                                <h5>党的建设</h5>
-                                <p>思想上建党、政治上建军、组织上巩固。</p>
-                                <ul>
-                                    <li>思想建设：用马克思主义武装全党</li>
-                                    <li>组织建设：民主集中制原则</li>
-                                    <li>作风建设：理论联系实际、密切联系群众、批评与自我批评</li>
-                                </ul>
-                            </div>
+                        </div>
+                        <div class="hero-card-body">
+                            <div class="hero-quote">"人的生命是有限的，可是为人民服务是无限的。我要把有限的生命，投入到无限的为人民服务之中去。"</div>
+                            <p class="hero-desc">雷锋同志短暂的一生，是把"为人民服务"这五个字刻进骨子里的22年。他不是在喊口号——他是真的在做。出差帮列车员打扫卫生、节假日去建筑工地义务劳动、把自己省下来的钱捐给有困难的人、把战友的脏衣服悄悄拿去洗……<strong>平凡中见伟大</strong>，这就是雷锋精神的实质。他用实际行动回答了一个根本问题：<strong>一个普通人在社会主义建设中应该怎样活着？</strong></p>
+                            <span class="hero-tag">全心全意为人民服务</span>
+                            <span class="hero-tag">螺丝钉精神</span>
+                            <span class="hero-tag">助人为乐</span>
                         </div>
                     </div>
 
-                    <div class="tool-card-large">
-                        <h4>战略战术</h4>
-                        <div class="concept-list">
-                            <div class="concept-item">
-                                <h5>持久战理论</h5>
-                                <p>面对强大敌人，通过战略防御、战略相持、战略反攻三个阶段，最终取得胜利。</p>
-                                <ul>
-                                    <li>保存自己，消灭敌人</li>
-                                    <li>集中优势兵力，各个歼灭敌人</li>
-                                    <li>不打无准备之仗，不打无把握之仗</li>
-                                </ul>
+                    <!-- 保尔·柯察金 -->
+                    <div class="hero-card">
+                        <div class="hero-card-header">
+                            <div class="hero-avatar">🔥</div>
+                            <div class="hero-info">
+                                <h4>保尔·柯察金</h4>
+                                <span>奥斯特洛夫斯基《钢铁是怎样炼成的》· 文学形象</span>
                             </div>
-                            <div class="concept-item">
-                                <h5>游击战十六字诀</h5>
-                                <p>敌进我退，敌驻我扰，敌疲我打，敌退我追。</p>
+                        </div>
+                        <div class="hero-card-body">
+                            <div class="hero-quote">"人最宝贵的是生命。生命属于人只有一次。人的一生应当这样度过：当他回首往事的时候，不会因为虚度年华而悔恨，也不会因为碌碌无为而羞耻……"</div>
+                            <p class="hero-desc">保尔虽是文学形象，却有着作者奥斯特洛夫斯基的真实血肉——他在前线负伤、在修筑铁路时患伤寒、最后双目失明全身瘫痪，仍以惊人毅力写出这部激励了全世界无数青年的作品。<strong>"钢铁是怎样炼成的？"——是在烈火和急剧冷却中炼成的。</strong>保尔告诉我们：革命的理想主义不是空想，而是面对苦难时依然选择坚持的勇气。</p>
+                            <span class="hero-tag">钢铁意志</span>
+                            <span class="hero-tag">理想主义</span>
+                            <span class="hero-tag">自我牺牲</span>
+                        </div>
+                    </div>
+
+                    <!-- 铁人王进喜 -->
+                    <div class="hero-card">
+                        <div class="hero-card-header">
+                            <div class="hero-avatar">🛢️</div>
+                            <div class="hero-info">
+                                <h4>铁人王进喜</h4>
+                                <span>1923—1970 · 大庆石油工人</span>
                             </div>
-                            <div class="concept-item">
-                                <h5>调查研究</h5>
-                                <p>没有调查就没有发言权。调查研究是制定正确策略的基础。</p>
+                        </div>
+                        <div class="hero-card-body">
+                            <div class="hero-quote">"有条件要上，没有条件创造条件也要上！""宁可少活二十年，拼命也要拿下大油田！"</div>
+                            <p class="hero-desc">1960年，王进喜带领1205钻井队来到大庆。没有吊车？他和工人们用人力把60多吨的钻机设备运到井场并安装起来。打井需要水？他带头用脸盆端水。地层发生井喷危险时，他毫不犹豫地跳进泥浆池，用身体搅拌水泥压住井喷——这就是著名的"<strong>跳泥浆池</strong>"。王进喜代表的是一种<strong>自力更生、艰苦奋斗</strong>的精神：国家缺油，我们就自己找油；没有条件，就创造条件。</p>
+                            <span class="hero-tag">自力更生</span>
+                            <span class="hero-tag">艰苦奋斗</span>
+                            <span class="hero-tag">铁人精神</span>
+                        </div>
+                    </div>
+
+                    <!-- 焦裕禄 -->
+                    <div class="hero-card">
+                        <div class="hero-card-header">
+                            <div class="hero-avatar">🌱</div>
+                            <div class="hero-info">
+                                <h4>焦裕禄</h4>
+                                <span>1922—1964 · 兰考县委书记</span>
                             </div>
+                        </div>
+                        <div class="hero-card-body">
+                            <div class="hero-quote">"吃别人嚼过的馍没味道。"（意思是必须亲自调查，掌握第一手材料）</div>
+                            <p class="hero-desc">焦裕禄在兰考工作只有一年多，却永远留在了人民心中。面对兰考的内涝、风沙、盐碱"三害"，他没有坐在办公室听汇报，而是<strong>亲自骑着自行车跑遍全县120多个大队</strong>，绘制出详细的风沙分布图。肝癌晚期他还用藤椅顶着肝部坚持工作，直到生命的最后一刻。他诠释了什么是真正的<strong>人民公仆</strong>——不是挂在嘴上的，是用命去实践的。</p>
+                            <span class="hero-tag">调查研究</span>
+                            <span class="hero-tag">人民公仆</span>
+                            <span class="hero-tag">鞠躬尽瘁</span>
                         </div>
                     </div>
                 </div>
+                <p class="wip-note">📖 更多榜样故事整理中（如白求恩、张思德、黄继光、邱少云等）</p>
             </section>
 
-            <!-- 经典导读模块 -->
-            <section class="tool-section" id="reading">
-                <h3 class="tool-title">📖 经典导读方法</h3>
-                <div class="tool-grid">
-                    <div class="tool-card-large">
-                        <h4>如何阅读经典著作</h4>
-                        <div class="reading-method">
-                            <div class="method-step">
-                                <span class="step-num">1</span>
-                                <div class="step-content">
-                                    <h5>了解背景</h5>
-                                    <p>阅读之前，先了解著作的写作背景、历史语境、针对的问题。这有助于理解作者为什么这样写。</p>
-                                </div>
-                            </div>
-                            <div class="method-step">
-                                <span class="step-num">2</span>
-                                <div class="step-content">
-                                    <h5>把握结构</h5>
-                                    <p>不要急于进入细节，先通读一遍，把握全文的论证结构和逻辑脉络。</p>
-                                </div>
-                            </div>
-                            <div class="method-step">
-                                <span class="step-num">3</span>
-                                <div class="step-content">
-                                    <h5>精读分析</h5>
-                                    <p>第二遍逐段精读，标注核心论点、关键概念、论证方法。</p>
-                                </div>
-                            </div>
-                            <div class="method-step">
-                                <span class="step-num">4</span>
-                                <div class="step-content">
-                                    <h5>批判思考</h5>
-                                    <p>思考：这个论断的依据是什么？有没有反例？对今天有什么启示？</p>
-                                </div>
-                            </div>
-                            <div class="method-step">
-                                <span class="step-num">5</span>
-                                <div class="step-content">
-                                    <h5>联系实际</h5>
-                                    <p>将理论联系实际，思考如何运用这些思想分析和解决现实问题。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="tool-card-large">
-                        <h4>论证结构分析模板</h4>
-                        <div class="template-box">
-                            <pre>
-【文章标题】
-
-一、写作背景
-- 针对什么问题？
-- 当时的主要错误倾向是什么？
-
-二、核心论点
-- 一句话概括：
-
-三、论证结构
-1. 开头：提出问题/批驳错误观点
-2. 主体：分层论证
-   - 第一层：...
-   - 第二层：...
-   - 第三层：...
-3. 结论：总结升华
-
-四、关键概念
-- 概念A：定义+内涵
-- 概念B：定义+内涵
-
-五、方法论价值
-- 可以提炼的思维工具：
-- 对当代的启示：
-                            </pre>
-                        </div>
-                    </div>
+            <!-- ==================== 第三部分：学习与思考 ==================== -->
+            <section id="part3" style="margin-bottom:3.5rem;">
+                <div class="part-header">
+                    <h3>📖 三、学习与思考</h3>
+                    <p>上篇：分阶段推荐阅读路径 · 下篇：如何真正读进去</p>
                 </div>
-            </section>
 
-            <!-- 学习路径模块 -->
-            <section class="tool-section" id="path">
-                <h3 class="tool-title">🎯 推荐学习路径</h3>
+                <!-- 上半：学习路径（重写版，带页面跳转链接） -->
+                <h4 style="font-size:1.15rem;color:#c41e3a;margin-bottom:1.2rem;text-align:center;">🗺️ 推荐阅读路径（按阶段递进）</h4>
+
                 <div class="path-timeline">
+                    <!-- 第零阶段：热身 -->
                     <div class="path-stage">
-                        <h4>第一阶段：入门</h4>
-                        <p class="stage-goal">建立马克思主义基本认知</p>
+                        <span class="path-stage-num">0</span>
+                        <h4>第〇阶段：热身入门</h4>
+                        <p class="stage-goal">先建立感性认知，了解马克思主义大致在说什么</p>
                         <ul>
-                            <li>《共产党宣言》</li>
-                            <li>《社会主义从空想到科学的发展》</li>
-                            <li>《实践论》《矛盾论》</li>
+                            <li><a href="articles/shi-jian-lun.html">《实践论》</a> <span class="sub-text">—— 认识与实践的关系</span></li>
+                            <li><a href="articles/mao-dun-lun.html">《矛盾论》</a> <span class="sub-text">—— 唯物辩证法的核心</span></li>
+                            <li><a href="gallery/quotes.html">经典语录库</a> <span class="sub-text">—— 快速感受导师语言风格</span></li>
+                        </ul>
+                        <span class="stage-hint">💡 建议：从这里开始，不要一上来就看大部头</span>
+                    </div>
+
+                    <!-- 第一阶段：基础 -->
+                    <div class="path-stage">
+                        <span class="path-stage-num">1</span>
+                        <h4>第一阶段：夯实基础</h4>
+                        <p class="stage-goal">建立马克思主义三个组成部分的基本框架</p>
+                        <ul>
+                            <li>《共产党宣言》 <span class="sub-text">—— 科学社会主义纲领性文献</span></li>
+                            <li>《社会主义从空想到科学的发展》 <span class="sub-text">—— 了解社会主义思想的来龙去脉</span></li>
+                            <li>《帝国主义是资本主义的最高阶段》（节选）<span class="sub-text">—— 理解现代资本主义的本质</span></li>
+                        </ul>
+                        <span class="stage-hint">💡 这三本都不长，适合精读</span>
+                    </div>
+
+                    <!-- 第二阶段：深化哲学 -->
+                    <div class="path-stage">
+                        <span class="path-stage-num">2</span>
+                        <h4>第二阶段：深化哲学</h4>
+                        <p class="stage-goal">深入理解辩证唯物主义和历史唯物主义</p>
+                        <ul>
+                            <li>《反杜林论》（节选）<span class="sub-text">—— 马克思主义的百科全书</span></li>
+                            <li>《唯物主义和经验批判主义》（节选）<span class="sub-text">—— 列宁捍卫辩证唯物主义</span></li>
+                            <li>《家庭、私有制和国家的起源》<span class="sub-text">—— 唯物史观的典范运用</span></li>
+                        </ul>
+                        <span class="stage-hint">⚠️ 这几本有一定难度，可配合导读资料</span>
+                    </div>
+
+                    <!-- 第三阶段：中国化 -->
+                    <div class="path-stage">
+                        <span class="path-stage-num">3</span>
+                        <h4>第三阶段：中国化实践</h4>
+                        <p class="stage-goal">学习马克思主义在中国的运用与发展</p>
+                        <ul>
+                            <li><a href="articles/lun-chi-jiu-zhan.html">《论持久战》</a> <span class="sub-text">—— 军事辩证法的杰作</span></li>
+                            <li><a href="articles/xin-min-zhu.html">《新民主主义论》</a> <span class="sub-text">—— 中国革命的总蓝图</span></li>
+                            <li>《论十大关系》《关于正确处理人民内部矛盾的问题》<span class="sub-text">—— 社会主义建设的探索</span></li>
+                        </ul>
+                        <span class="stage-hint">🇨🇳 重点体会：基本原理与中国实际的结合</span>
+                    </div>
+
+                    <!-- 第四阶段：拓展 -->
+                    <div class="path-stage">
+                        <span class="path-stage-num">4</span>
+                        <h4>第四阶段：拓展延伸</h4>
+                        <p class="stage-goal">开阔视野，建立完整的知识体系</p>
+                        <ul>
+                            <li>《怎么办？》《国家与革命》<span class="sub-text">—— 列宁建党学说与无产阶级专政理论</span></li>
+                            <li>《论列宁主义基础》《联共(布)党史简明教程》<span class="sub-text">—— 斯大林对列宁主义的系统阐述</span></li>
+                            <li>《资本论》（第一卷节选）<span class="sub-text">—— 剩余价值理论</span></li>
+                        </ul>
+                        <span class="stage-hint">📚 到这个阶段，你已经具备自学能力了</span>
+                    </div>
+                </div>
+
+                <!-- 下半：导读方法（完全重写，去补习班风） -->
+                <h4 style="font-size:1.15rem;color:#c41e3a;margin:2.5rem 0 1.2rem;text-align:center;border-top:1px solid #f0e6e6;padding-top:2rem;">🤔 怎样才算真正读懂了一篇文章？（不是做题，是对话）</h4>
+
+                <div class="reading-approach">
+                    <div class="approach-card">
+                        <h4>🎯 第一步：搞清楚——他在跟谁说话？</h4>
+                        <p>每篇经典著作都有明确的<strong>对话对象</strong>和<strong>针对性</strong>。《矛盾论》是针对党内教条主义者写的，《怎么办？》是针对俄国经济派写的。不知道这一点，就容易把具体论述当成抽象教条。</p>
+                        <div class="approach-example">
+                            <strong>举个例子：</strong>读到《论持久战》说"速胜论"不对，你得先知道当时国内有人认为抗战很快就能赢，也有人认为必败无疑。毛主席是同时反对这两种错误观点的。
+                        </div>
+                    </div>
+
+                    <div class="approach-card">
+                        <h4>🔍 第二步：看结构——他的论证逻辑是什么？</h4>
+                        <p>不要一上来就逐字逐句抠。先通读一遍，弄清楚作者的论证脉络：<strong>提出什么问题→怎么分析的→得出什么结论</strong>。把握住了骨架，细节才不会散掉。</p>
+                        <div class="approach-example">
+                            <strong>举个例子：</strong>《实践论》的结构很清晰：什么是实践 → 实践决定认识 → 认识的反作用 → 真理标准 → 总结。抓住了这条线，全文就不会迷失方向。
+                        </div>
+                    </div>
+
+                    <div class="approach-card">
+                        <h4>💬 第三步：问自己——我同意吗？为什么？</h4>
+                        <p>马克思主义从来不要求你盲从。读经典著作时，你可以而且应该<strong>质疑和思考</strong>：这个判断在今天还成立吗？有没有反例？如果换一个情境，结论会不会不同？<strong>批判性阅读 ≠ 不尊重经典</strong>，恰恰相反——这才是对经典的最好致敬。</p>
+                        <div class="approach-example">
+                            <strong>举个例子：</strong>《矛盾论》讲"主要矛盾决定事物性质"。那你可以想想：当前中国社会的主要矛盾是什么？和当年一样吗？这种思考过程本身就是对理论的深化。
+                        </div>
+                    </div>
+
+                    <div class="approach-card">
+                        <h4>🔗 第四步：联系当下——跟我有什么关系？</h4>
+                        <p>经典之所以是经典，是因为它提供的<strong>方法论</strong>具有超越时代的价值。读完一篇，问问自己：这篇文章的思维方法能不能用来分析今天的问题？哪怕只学到一种思维方式，也值了。</p>
+                        <div class="approach-example">
+                            <strong>举个例子：</strong>"没有调查就没有发言权"——这句话不只是说做研究的方法，也是一种生活态度：遇到事情不要急于表态，先去了解实际情况再下判断。
+                        </div>
+                    </div>
+                </div>
+                <p class="wip-note">📖 更多学习方法（笔记技巧、讨论方法、写作训练等）持续完善中</p>
+            </section>
+
+
+            <!-- ==================== 第四部分：见微知著 ==================== -->
+            <section id="part4" style="margin-bottom:3.5rem;">
+                <div class="part-header">
+                    <h3>🔍 四、见微知著</h3>
+                    <p>透过经典语录，窥见整篇著作的思想内核</p>
+                </div>
+
+                <div class="insight-banner">
+                    <div class="insight-icon">💬</div>
+                    <h4>一句话背后是一整套世界观</h4>
+                    <p>"一切反动派都是纸老虎"——这不只是一句鼓舞士气的话，它蕴含了对<strong>战略上藐视敌人、战术上重视敌人</strong>这一辩证思维的深刻把握。"没有调查，就没有发言权"——这不是简单的经验主义口号，而是对<strong>唯物主义认识论</strong>最通俗的表达。<br><br>经典语录就像一个个窗口，透过它们可以看到整座理论大厦的轮廓。每一条语录我们都标注了<strong>历史背景</strong>和<strong>含义简析</strong>，帮助你避免断章取义。</p>
+                    <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem;">
+                        <span style="background:#fff0f0;padding:0.35rem 0.85rem;border-radius:20px;font-size:0.82rem;color:#c41e3a;border:1px solid #fca5a5;">马/恩 5条</span>
+                        <span style="background:#fff8e6;padding:0.35rem 0.85rem;border-radius:20px;font-size:0.82rem;color:#b7791f;border:1px solid #f5d78e;">列宁 5条</span>
+                        <span style="background:#f5f0e6;padding:0.35rem 0.85rem;border-radius:20px;font-size:0.82rem;color:#744210;border:1px solid #d4a373;">斯大林 3条</span>
+                        <span style="background:#ffe6e6;padding:0.35rem 0.85rem;border-radius:20px;font-size:0.82rem;color:#c41e3a;border:1px solid #fc9494;">毛泽东 20条</span>
+                    </div>
+                    <a href="gallery/quotes.html" style="display:inline-block;background:#c41e3a;color:white;padding:0.7rem 2.2rem;border-radius:25px;text-decoration:none;font-weight:bold;transition:background 0.2s;font-size:0.95rem;">进入语录库，33条语录等你探索 →</a>
+                </div>
+            </section>
+
+
+            <!-- ==================== 第五部分：独立思考 ==================== -->
+            <section id="part5" style="margin-bottom:2rem;">
+                <div class="part-header">
+                    <h3>🧠 五、独立思考</h3>
+                    <p>学会辨别真伪，以正确的态度对待历史与现实</p>
+                </div>
+
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr);gap:1.5rem;">
+                    <!-- 明辨是非 -->
+                    <div class="thinking-card">
+                        <span class="tc-icon">🔎</span>
+                        <h4>如何分辨信息真假？</h4>
+                        <p>互联网时代，信息鱼龙混杂。看到一些"惊人爆料"或"历史揭秘"时，先别急着转发或站队，养成几个习惯：</p>
+                        <ul class="tc-list">
+                            <li><strong>查来源：</strong>原始出处是什么？是第一手资料还是二手转述？</li>
+                            <li><strong>看语境：</strong>原话是在什么场合、针对什么问题说的？是否被断章取义？</li>
+                            <li><strong>交叉验证：</strong>其他可靠来源是否有类似记载？</li>
+                            <li><strong>警惕情绪操控：</strong>那些让你愤怒或恐惧的内容尤其需要冷静审视</li>
                         </ul>
                     </div>
-                    <div class="path-stage">
-                        <h4>第二阶段：深化</h4>
-                        <p class="stage-goal">系统学习三个组成部分</p>
-                        <ul>
-                            <li>哲学：《唯物主义和经验批判主义》《反杜林论》</li>
-                            <li>政治经济学：《资本论》第一卷（节选）</li>
-                            <li>科学社会主义：《国家与革命》《帝国主义论》</li>
+
+                    <!-- 对待历史的态度 -->
+                    <div class="thinking-card">
+                        <span class="tc-icon">📜</span>
+                        <h4>以什么样的态度对待历史？</h4>
+                        <p>历史研究需要<strong>实事求是</strong>的态度。既不美化也不妖魔化，既承认成就也不回避问题：</p>
+                        <ul class="tc-list">
+                            <li><strong>放在具体历史条件下评价：</strong>不能用今天的标准苛求前人，也不能用"时代局限"替一切开脱</li>
+                            <li><strong>区分主流与支流：</strong>抓住历史的主流和大方向，不被个别事件或片面叙事所误导</li>
+                            <li><strong>尊重事实：</strong>基于史料说话，而不是预设立场后去找证据</li>
+                            <li><strong>理解复杂性与多面性：</strong>历史很少是非黑即白的</li>
                         </ul>
                     </div>
-                    <div class="path-stage">
-                        <h4>第三阶段：应用</h4>
-                        <p class="stage-goal">学习理论与实践结合</p>
-                        <ul>
-                            <li>《怎么办？》《进一步，退两步》</li>
-                            <li>《论持久战》《新民主主义论》</li>
-                            <li>《论十大关系》《关于正确处理人民内部矛盾的问题》</li>
+
+                    <!-- 联系实际解决问题 -->
+                    <div class="thinking-card">
+                        <span class="tc-icon">🌱</span>
+                        <h4>联系当下，解决实际问题</h4>
+                        <p>学习的最终目的是为了<strong>认识和改造世界</strong>。马克思主义不是博物馆里的陈列品：</p>
+                        <ul class="tc-list">
+                            <li><strong>分析现实问题的思维工具：</strong>用矛盾分析法看待社会现象，用历史唯物主义理解社会发展规律</li>
+                            <li><strong>树立正确的价值观：</strong>站在人民大众一边，关心劳动者权益和社会公平正义</li>
+                            <li><strong>保持清醒的头脑：</strong>在纷繁复杂的舆论环境中保持独立判断</li>
+                            <li><strong>从小事做起：</strong>不必等"大机会"——做好手头的工作、帮助身边的人，就是在践行</li>
                         </ul>
                     </div>
                 </div>
+
+                <p class="wip-note" style="margin-top:1.5rem;">📖 本板块内容将持续扩充，欢迎提出你想探讨的话题</p>
             </section>
+
+            <!-- 全局未完待续 -->
+            <div style="margin-top:3rem;padding:1.8rem;background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:12px;text-align:center;border:2px dashed #d97706;">
+                <p style="font-size:1.15em;color:#92400e;font-weight:bold;margin-bottom:0.4rem;">📖 未完待续 · 持续建设中</p>
+                <p style="color:#a16207;font-size:0.9rem;margin:0;line-height:1.7;">工具集各板块内容仍在持续完善与扩充中<br>更多案例、图表、互动功能等内容即将上线</p>
+            </div>
 
         </div>
     </main>
@@ -291,6 +931,18 @@
 
     <script src="js/main.js"></script>
     <script>
+        // ===== 右侧悬停导航 =====
+        function toggleSideNav() {
+            document.getElementById('sideNav').classList.toggle('expanded');
+        }
+        // 点击页面其他区域时自动收起
+        document.addEventListener('click', function(e) {
+            var nav = document.getElementById('sideNav');
+            if (nav && !nav.contains(e.target)) {
+                nav.classList.remove('expanded');
+            }
+        });
+
         // 黑夜模式切换
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');

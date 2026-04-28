@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>驳"人性论"的互联网第二春——后稀缺视野下的AI与未来社会 | 正名 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .article-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .article-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+        }
+        .article-header .subtitle {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            margin-top: 0.5rem;
+        }
+        .article-meta {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .article-content {
+            background: white;
+            border-radius: 8px;
+            padding: 3rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .article-content h2 {
+            color: #c41e3a;
+            border-bottom: 2px solid #c41e3a;
+            padding-bottom: 0.5rem;
+            margin: 2.5rem 0 1.5rem;
+            font-size: 1.5rem;
+        }
+        .article-content h3 {
+            color: #333;
+            margin: 2rem 0 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .article-content h4 {
+            color: #555;
+            margin: 1.5rem 0 0.8rem;
+            font-size: 1.05rem;
+            font-weight: bold;
+        }
+        .article-content p {
+            line-height: 1.9;
+            margin-bottom: 1.3rem;
+            color: #444;
+            text-align: justify;
+        }
+        .article-content strong {
+            color: #c41e3a;
+        }
+        .article-content blockquote {
+            background: #f9f9f9;
+            border-left: 4px solid #c41e3a;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #555;
+        }
+        .article-content ul, .article-content ol {
+            margin: 1rem 0 1.5rem 2rem;
+            color: #444;
+        }
+        .article-content li {
+            margin-bottom: 0.6rem;
+            line-height: 1.8;
+        }
+        .article-content .data-box {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .article-content .data-box p {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+            border: 1px solid #c41e3a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .highlight-box p {
+            margin-bottom: 0;
+            font-weight: bold;
+            color: #8b0000;
+        }
+        .toc-box {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+        .toc-box h4 {
+            color: #c41e3a;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .toc-box ul {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+        .toc-box li {
+            margin-bottom: 0.3rem;
+            color: #555;
+            font-size: 0.95rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .article-footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 0.9rem;
+            text-align: right !important;
+        }
+        .article-footer p {
+            text-align: right !important;
+            margin-bottom: 0.3rem;
+        }
+
+        /* 黑夜模式 */
+        body.dark-mode .article-content { background: #2a2a2a; }
+        body.dark-mode .article-content h2 { color: #ff6b6b; border-color: #ff6b6b; }
+        body.dark-mode .article-content h3 { color: #e0e0e0; }
+        body.dark-mode .article-content h4 { color: #ccc; }
+        body.dark-mode .article-content p { color: #ccc; }
+        body.dark-mode .article-content strong { color: #ff6b6b; }
+        body.dark-mode .article-content blockquote { background: #3a3a3a; border-color: #ff6b6b; color: #bbb; }
+        body.dark-mode .article-content ul,
+        body.dark-mode .article-content ol { color: #ccc; }
+        body.dark-mode .article-content .data-box { background: #333; border-color: #555; }
+        body.dark-mode .article-content .data-box p { color: #ccc; }
+        body.dark-mode .toc-box { background: #333; border-color: #555; }
+        body.dark-mode .toc-box li { color: #aaa; }
+        body.dark-mode .highlight-box { background: linear-gradient(135deg, #3a1a1a 0%, #4a1a1a 100%); border-color: #8b0000; }
+        body.dark-mode .highlight-box p { color: #ff9999; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../../index.html">首页</a>
+                <a href="../../articles.html">文章</a>
+                <a href="../../masters.html">导师</a>
+                <a href="../../toolkit.html">工具集</a>
+                <a href="../../gallery.html">文艺</a>
+                <a href="../../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../../international.html">🌍 国际共运</a>
+                <a href="../../rectify.html" class="active">正名</a>
+                <a href="../../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+    <div class="article-header">
+        <h1>驳"人性论"的互联网第二春</h1>
+        <div class="subtitle">——后稀缺视野下的AI与未来社会</div>
+        <div class="article-meta">话语正名 · 人性论批判 · 继续斗争</div>
+    </div>
+
+    <div class="article-container">
+        <article class="article-content">
+
+            <h2>引言：人性论的新衣与旧魂</h2>
+
+            <p>每隔几年，"人性论"就会换一件新衣，重新在舆论场上粉墨登场。从19世纪"社会达尔文主义"的"人天生自私"，到20世纪"理性人假设"的经济学神话，再到今天AI时代"算法比人更理性"的科技叙事——核心话术始终如一：人，天生就是自私、愚蠢、需要被管理的。</p>
+
+            <p>如果说上述论调在历史上曾经有过某种"知识上的一致性"（尽管本质上仍是资产阶级的意识形态辩护），那么今天它们在AI时代的复苏，则显得格外讽刺：当资本主义生产关系使得大量人类劳动面临被机器取代的前景时，精英们突然发现，把人定性为"无用的"（useless class）比把人定性为"愚蠢的"在逻辑上更为顺畅。于是，几十年来关于"人性自私"的叙事，悄然与"AI将取代人类"的焦虑合流，形成了一种新的、更具欺骗性的意识形态——<strong>后稀缺时代的"人性论2.0"。</strong></p>
+
+            <div class="highlight-box">
+                <p><strong>核心论点：</strong>"人性论"的每一次复苏，都不是纯粹的知识讨论，而是阶级利益的意识形态表达。今天，它与AI焦虑绑定，以"技术决定论"为外壳，以维护资本统治为内核——比它的前辈们更加精致，也更加危险。</p>
+            </div>
+
+            <div class="toc-box">
+                <h4>本文结构</h4>
+                <ul>
+                    <li><strong>一、生物学与社会科学：</strong>澄清一个根本性的概念混淆</li>
+                    <li><strong>二、历史证据：</strong>合作才是人类进化的主旋律</li>
+                    <li><strong>三、阶级视角：</strong>为什么资产阶级偏爱"人性自私"论</li>
+                    <li><strong>四、AI时代的变种：</strong>从"人性自私"到"人类无用"</li>
+                    <li><strong>五、马克思主义人性观：</strong>超越善恶二元对立</li>
+                    <li><strong>六、结论：</strong>后稀缺时代，人性论该退出历史舞台了</li>
+                </ul>
+            </div>
+
+            <h2>一、生物学与社会科学：澄清一个根本性的概念混淆</h2>
+
+            <p>"人性自私"论最常见的理论依据，是对生物学尤其是进化论的误用。论者常常援引"物竞天择""适者生存"等口号，将生物学规律直接推广为社会规律，仿佛自私、竞争是写在人类基因里的"本质"。</p>
+
+            <p>然而，这种推广本身就是对生物学的严重歪曲。</p>
+
+            <h3>1.1 生物学告诉我们的真相：合作与利他同样是进化的核心机制</h3>
+
+            <p>现代生物学研究表明，合作在进化中的作用丝毫不亚于竞争。蚂蚁、蜜蜂等社会性昆虫通过高度分工合作成为地球上最成功的生物类群之一；互利共生现象（如珊瑚与藻类、人体与肠道菌群）遍布整个生物圈；哺乳动物的亲代抚育、群体防御等利他行为同样是进化稳定的策略。</p>
+
+            <p>即便在"自私的基因"框架内，合作同样可以进化。石器时代的狩猎团队、游牧部落中的资源共享、农耕文明中的互助共同体——这些都不是"违反人性"的例外，而是人类在漫长进化史中发展出的核心生存策略。把"竞争"等同于"人性"，不过是选择性失明的产物。</p>
+
+            <div class="highlight-box">
+                <p><strong>一个常识性的追问：</strong>如果"人性自私"是基因决定的、不可改变的，那么人类如何解释无偿献血、慈善捐款、志愿者行动？为什么在没有任何物质回报的情况下，人们仍然选择帮助陌生人？——这些不是"人性"的例外，它们同样是人性的一部分，而且可能更接近人类进化的真实方向。</p>
+            </div>
+
+            <h3>1.2 从"是"到"应当"：休谟问题的基本常识</h3>
+
+            <p>18世纪哲学家休谟就已指出，从"是"（事实陈述）不能直接推导出"应当"（价值判断）。即便我们承认人类存在某些自私的倾向，这也并不意味着——我们"应该"鼓励这种自私，或者这种自私是"好的"。"是"与"应当"之间，横亘着人类的选择和判断。</p>
+
+            <p>"人性自私"论的本质错误在于：它将一个尚存争议的生物学描述，直接跳级为道德结论，为现有的不平等制度背书。这不是科学，这是科学的滥用。</p>
+
+            <div class="highlight-box">
+                <p><strong>一个辛辣的类比：</strong>同样援引生物学，我们可以论证人类有暴力倾向（确实有）、也有和平倾向（同样有）。但我们不会因此得出"战争是人性的一部分，所以应该允许战争"的结论。为什么？因为我们懂得——事实不能直接决定价值。那么，为什么在"人性自私"这个议题上，精英们却坚持要用生物学事实直接为社会不平等辩护呢？</p>
+            </div>
+
+            <h2>二、历史证据：合作才是人类进化的主旋律</h2>
+
+            <h3>2.1 原始共产主义：人类社会的起点</h3>
+
+            <p>人类学的大量证据表明，人类社会的初始形态并非"人人自私"、弱肉强食的丛林状态。狩猎采集社会的研究表明，在食物获取、分配和消费的全过程中，共享和合作是主导模式。猎人的肉要分给整个部落，老人和病人的食物有优先保障——这在生存资源极为有限的环境中，恰恰是理性策略的体现。</p>
+
+            <p>马尔萨斯陷阱（人口增长超过食物生产增长）在人类历史上大部分时期并不存在。狩猎采集社会的人们，平均每周工作时间远低于现代人，食物来源多样，营养状况良好，闲暇时间充裕。这与"生存竞争""人人自私"的刻板印象截然相反。</p>
+
+            <h3>2.2 合作不是软弱，竞争不是全部</h3>
+
+            <p>人类历史中确实存在竞争和冲突，但这并不能证明"竞争是人性"。"竞争"与"合作"是人类社会的两极，任何社会的实际形态，都是这两极之间动态平衡的结果，而非某一极的独占表达。</p>
+
+            <p>更重要的是，资本主义制度对"竞争"的崇拜，本身是一种历史特定的意识形态，而非客观规律。封建社会崇拜"等级秩序"，资本主义社会崇拜"自由竞争"，社会主义社会追求"各尽所能、按需分配"——每一种制度都声称自己反映了"人性"，但真正决定的，不是人性，而是生产关系。</p>
+
+            <div class="highlight-box">
+                <p><strong>一个现实观察：</strong>每当普通劳动者试图联合起来争取权益时，精英们就会跳出来说"你们在破坏竞争"；但当垄断资本集团联手操控市场、扼杀中小企业时，同一批精英却沉默不语。这说明——精英们热爱的从来不是"竞争"本身，而是有利于他们的"竞争"。</p>
+            </div>
+
+            <h2>三、阶级视角：为什么资产阶级偏爱"人性自私"论</h2>
+
+            <p>理解了"人性自私"论的知识谬误之后，更需要追问的是：这一论调为何能够在数百年间持续流行，并被不同的时代包装翻新？答案不在知识领域，而在阶级领域。</p>
+
+            <h3>3.1 为剥削辩护：无需改变制度，只需改变人性叙事</h3>
+
+            <p>"人性自私"论对资产阶级最直接的价值，在于为不平等提供了无需制度反思的解释：如果富人是凭"能力"致富，如果穷人是因"人性懒惰"而穷，那么财富分配的不均等就不是制度问题，而是"自然"结果。无需质疑私有制，无需质疑市场经济，无需质疑资本的权力——一切都已被"人性"这个万能挡箭牌预先赦免。</p>
+
+            <p>这正是"人性自私"论的政治功能：它将制度性的不公转化为个人性的失败，将结构性矛盾转化为道德性缺陷，将阶级问题转化为心理问题。</p>
+
+            <div class="highlight-box">
+                <p><strong>一个尖锐的追问：</strong>18世纪的英国工厂主用"人性自私"为雇佣童工辩护（"人有追求利润的自由"）；今天的企业CEO用同样的论调反对提高最低工资（"人有定价自己劳动的自由"）。两个时代，两种场景，同一个论据——这说明它不是"客观知识"，而是阶级斗争的意识形态武器。</p>
+            </div>
+
+            <h3>3.2 反对组织：原子化的个人最容易被管理</h3>
+
+            <p>"人性自私"论的另一个政治功能，是打击劳动者的组织意识。如果每个人都是"自私的个体"，那么联合行动就是不可能的——因为"谁会为别人牺牲自己的利益"呢？</p>
+
+            <p>然而，历史恰恰证明：正是集体行动，创造了人类历史上一次又一次的进步。八小时工作制不是资本家施舍的，而是工人运动的成果；周末双休不是市场自发产生的，而是劳动者组织的罢工换来的；种族平等的进步，同样来自被压迫群体的集体动员。</p>
+
+            <h2>四、AI时代的变种：从"人性自私"到"人类无用"</h2>
+
+            <h3>4.1 当"人性自私"遇到"AI将取代人类"</h3>
+
+            <p>21世纪20年代，AI技术的突破性进展引发了一场新的意识形态危机。如果说传统的"人性自私"论是要证明"普通人缺乏决策能力"（因此需要精英统治），那么AI时代的变种则更进一步——它要证明"人类整体缺乏存在价值"（因此需要由机器和资本来管理一切）。</p>
+
+            <p>赫拉利在《未来简史》中抛出的"无用阶级"概念，是这一叙事的代表。在他看来，随着AI的发展，大部分人类将成为"无用的"——不是因为制度问题，而是因为"人性"无法与机器竞争。这是一种升级版的人性论：不仅普通人愚蠢，就连人类整体也即将变得多余。</p>
+
+            <div class="highlight-box">
+                <p><strong>一个核心反驳：</strong>AI的"智能"与人脑的智能，是完全不同的事物。AI擅长的是模式识别、计算优化和大规模数据处理——这些恰恰是资本逻辑最需要的技能。但人类需要的，从来不只是这些——我们需要意义、需要情感、需要美、需要公平、需要尊严。这些恰恰是AI无法量化、无法替代的领域。"无用阶级"论的荒谬之处在于：它用AI擅长的东西定义了"有用"，然后宣布人类在这方面不如AI——这是循环论证，不是客观分析。</p>
+            </div>
+
+            <h3>4.2 后稀缺时代：人性论的历史终结</h3>
+
+            <p>真正值得追问的是：在AI和自动化技术高度发达的后稀缺时代，"人性自私"论是否还有存在的基础？</p>
+
+            <p>如果物质匮乏不再是人类生存的主要威胁——如果自动化生产已经足以满足全体人类的基本需要——那么基于"资源有限、必须竞争"的"人性自私"论，就失去了其存在的物质前提。在后稀缺社会中，"人性自私"不再是"自然规律"，而是一种人为维护的意识形态——维护的是稀缺的分配权力，而非稀缺的物质本身。</p>
+
+            <p>这正是"人性论2.0"最阴险之处：在物质已经足够丰富、但分配权力依然集中的时代，精英们继续用"人性自私"来阻止人们想象另一种可能——一种以合作而非竞争为基础的未来。</p>
+
+            <div class="highlight-box">
+                <p><strong>一个面向未来的论断：</strong>AI时代的真正问题，不是"人类是否有价值"，而是"谁控制AI"。如果AI被资本垄断，它当然会证明"人类无用"——因为它被设计来替代劳动者。但如果AI被全社会公有，它将成为解放人类的力量——承担重复劳动，让人可以专注于创造、关系和意义。在后稀缺时代，AI不是人性的试金石，而是阶级斗争的新战场。</p>
+            </div>
+
+            <h2>五、马克思主义人性观：超越善恶二元对立</h2>
+
+            <h3>5.1 人性不是抽象的，而是社会关系的总和</h3>
+
+            <p>马克思主义对"人性"问题的回答，既不同于"人性本善"的浪漫主义，也不同于"人性本恶"的悲观主义，而是一种历史唯物主义的人性观：<strong>人不是抽象的、先验的"人性"动物，而是社会关系的总和；人的本质不是某种固定的"属性"，而是由特定历史条件下的生产关系和社会结构所塑造的。</strong></p>
+
+            <p>这意味着：在一个以私有制、竞争和剥削为基本特征的社会中，人的行为确实会表现出自私、狭隘、短视等特征——但这是制度的产物，而非人的"本性"。改变制度，这些特征就会逐渐消失。</p>
+
+            <p>马克思在《关于费尔巴哈的提纲》中写道："人的本质不是单个人所固有的抽象物，在其现实性上，它是一切社会关系的总和。"这句话彻底颠覆了"人性自私"论的理论基础：人没有固定的、抽象的"本性"，人是什么，取决于他所处的社会关系。</p>
+
+            <h3>5.2 社会主义实践中人性的变化</h3>
+
+            <p>苏联和中国的社会主义建设实践，虽然经历了种种曲折，但确实展示了人性改变的可能性。在集体化过程中，在扫盲运动中，在公共卫生事业中，在普通人的日常互助中——我们看到了利他主义、合作精神、集体荣誉感的成长。不能说这些变化是彻底的、完美的，但它们证明了：人的行为不是由某种固定"本性"决定的，而是可以随着制度的改变而改变的。</p>
+
+            <p>反过来，资本主义社会的"人性自私"，同样不是证明"人性本恶"——它只是证明：在以利润最大化为目标、以竞争为基本逻辑的制度中，人会逐渐被塑造成自私的模样。这是制度塑造人的过程，而非"人性"的自然流露。</p>
+
+            <div class="highlight-box">
+                <p><strong>一个结论性的表述：</strong>"人性"从来不是一个固定的常量，而是一个可塑的变量。把它当常量来使用，恰恰是维护固定社会秩序（也就是维护特定阶级的利益）的意识形态需要。承认人性的可塑性，不是否认人的尊严——恰恰相反，它给了人类改变自己命运的希望。</p>
+            </div>
+
+            <h2>六、结论：后稀缺时代，人性论该退出历史舞台了</h2>
+
+            <p>"人性自私"论是人类思想史上最持久、也最危险的意识形态神话之一。它的持久，在于每一次社会危机都会给它注入新的"活力"；它的危险，在于它用一种看似客观的知识外衣，掩盖了赤裸裸的阶级利益。</p>
+
+            <p>今天，在AI技术高速发展、物质生产潜力远超人类实际需求的时代背景下，继续维护"人性自私"论，已经不仅是知识上的谬误，更是历史前进的绊脚石。当技术已经提供了"让每个人都能体面生活"的可能时，坚持"人性自私"、坚持竞争逻辑、坚持不平等分配，其目的只有一个：<strong>维护少数人对多数人的统治。</strong></p>
+
+            <p>驳斥"人性论"，不是为了证明"人性本善"这个同样片面的命题，而是为了揭示：人性的可塑性证明了改变世界的可能性。历史不是由"人性"决定的，而是由阶级斗争推动的。在后稀缺时代，我们需要的不再是"人性论"的辩护或批判，而是一场真正的社会变革——让技术的丰裕成果，不再被少数人所垄断。</p>
+
+            <p><strong>人性论的第二春，终将和它的前辈们一样，被历史的车轮碾过。</strong></p>
+
+            <div class="article-footer">
+                <p>潜狂 · 写于2026.4.27</p>
+                <p>以唯物史观破除意识形态神话</p>
+            </div>
+            <a href="../../rectify.html" class="back-link">← 返回正名页面</a>
+        </article>
+    </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

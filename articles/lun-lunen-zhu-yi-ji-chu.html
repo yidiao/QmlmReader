@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论列宁主义基础 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* ===== 统一渐变头部 - 政治理论类 ===== */
+        .article-header {
+            position: relative;
+            overflow: hidden;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+            background: linear-gradient(135deg, #0d1259 0%, #1a237e 50%, #3949ab 100%);
+        }
+
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3Ccircle cx='20' cy='80' r='25' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='0.5'/%3E%3Ccircle cx='80' cy='20' r='20' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 120px;
+            pointer-events: none;
+        }
+
+        .importance-badge {
+            display: inline-block;
+            background: rgba(255,215,0,0.9);
+            color: #1a237e;
+            padding: 6px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+            text-shadow: 2px 3px 6px rgba(0,0,0,0.4);
+            position: relative;
+            z-index: 1;
+            font-family: 'STSong', 'SimSun', serif;
+        }
+
+        .article-subtitle {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin: 0.5rem 0;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .article-meta span {
+            background: rgba(0,0,0,0.25);
+            padding: 5px 14px;
+            border-radius: 18px;
+            backdrop-filter: blur(4px);
+        }
+
+        .article-meta .author { font-weight: 600; }
+        .article-meta .category { color: rgba(255,215,0,0.9); }
+
+        /* ===== 返回导航 ===== */
+        .back-nav {
+            background: #f8f8f8;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 0;
+        }
+
+        .back-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #1a237e;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .back-nav a:hover { color: #3949ab; }
+
+        body.dark-mode .back-nav { background: #2a2a2a; border-color: #444; }
+        body.dark-mode .back-nav a { color: #7986cb; }
+
+        /* ===== Tab导航 ===== */
+        .tab-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            background: #f8f8f8;
+            padding: 1rem;
+            border-radius: 12px 12px 0 0;
+            border-bottom: 2px solid #e0e0e0;
+            position: sticky;
+            top: 70px;
+            z-index: 50;
+        }
+
+        body.dark-mode .tab-nav { background: #2a2a2a; border-color: #444; }
+
+        .tab-btn {
+            padding: 10px 16px;
+            border: none;
+            background: transparent;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            transition: all 0.25s;
+        }
+
+        .tab-btn:hover { background: #e8e8e8; color: #333; }
+        body.dark-mode .tab-btn:hover { background: #3a3a3a; color: #fff; }
+        .tab-btn.active { background: #1a237e; color: white; font-weight: 600; }
+
+        /* ===== Tab内容区 ===== */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 12px 12px;
+            min-height: 60vh;
+        }
+
+        body.dark-mode .tab-content { background: #1a1a1a; }
+        .tab-content.active { display: block; }
+
+        .tab-heading {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #1a237e;
+            color: #1a237e;
+            font-size: 1.3rem;
+        }
+
+        body.dark-mode .tab-heading { color: #7986cb; border-color: #7986cb; }
+
+        /* ===== 原文样式 ===== */
+        .original-text { line-height: 1.9; font-size: 1.05rem; }
+
+        .text-intro {
+            background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+            border-left: 4px solid #3949ab;
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.dark-mode .text-intro { background: linear-gradient(135deg, #1a1a2e, #252540); border-color: #3949ab; }
+
+        .chapter {
+            margin-bottom: 1.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        body.dark-mode .chapter { border-color: #444; }
+
+        .chapter-title {
+            background: linear-gradient(135deg, #1a237e, #3949ab);
+            color: white;
+            padding: 1rem 1.3rem;
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            user-select: none;
+        }
+
+        .chapter-title:hover { filter: brightness(1.1); }
+
+        .toggle-icon { font-size: 0.8rem; transition: transform 0.25s; }
+        .chapter.collapsed .toggle-icon { transform: rotate(-90deg); }
+
+        .chapter-content {
+            padding: 1.3rem;
+            background: #fafafa;
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+
+        body.dark-mode .chapter-content { background: #222; }
+        .chapter.collapsed .chapter-content { max-height: 0; padding: 0 1.3rem; }
+
+        .chapter-content p { text-indent: 2em; margin-bottom: 1em; text-align: justify; }
+        body.dark-mode .chapter-content p { color: #e0e0e0; }
+
+        .quote {
+            background: #f5f5f5;
+            border-left: 4px solid #1a237e;
+            padding: 1rem;
+            margin: 1.2rem 0;
+            font-style: italic;
+            border-radius: 0 6px 6px 0;
+        }
+
+        body.dark-mode .quote { background: #2a2a2a; }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+            border-left: 4px solid #3949ab;
+            padding: 1.2rem;
+            margin: 1.2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        body.dark-mode .highlight-box { background: linear-gradient(135deg, #1a1a2e, #252540); }
+
+        /* ===== 读法提示 ===== */
+        .reading-tip {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #eee;
+        }
+
+        .reading-tip h4 {
+            color: #1a237e;
+            margin-top: 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #1a237e;
+        }
+
+        body.dark-mode .reading-tip { background: #2a2a2a; border-color: #444; }
+        body.dark-mode .reading-tip h4 { color: #7986cb; border-color: #7986cb; }
+
+        /* ===== 难点解析 ===== */
+        .difficulty-item {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #eee;
+        }
+
+        .difficulty-item h4 { color: #d32f2f; margin-top: 0; }
+
+        body.dark-mode .difficulty-item { background: #2a2a2a; border-color: #444; }
+        body.dark-mode .difficulty-item h4 { color: #ef5350; }
+
+        /* ===== 对话空间 ===== */
+        .dialogue-item {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 12px;
+            padding: 1.3rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .dialogue-q { color: #2e7d32; font-weight: bold; margin-bottom: 0.6rem; }
+        .dialogue-a {
+            padding-left: 1.5rem;
+            border-left: 3px solid #2e7d32;
+            margin-top: 0.6rem;
+            color: #1565c0;
+        }
+
+        body.dark-mode .dialogue-item { background: linear-gradient(135deg, #1a2a1a, #1f2f1f); }
+        body.dark-mode .dialogue-q { color: #66bb6a; }
+        body.dark-mode .dialogue-a { border-color: #66bb6a; color: #90caf9; }
+
+        /* ===== 行动实验 ===== */
+        .action-item {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-radius: 10px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .action-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            background: #e65100;
+            color: white;
+        }
+
+        .action-item h4 { margin: 0 0 0.5rem; color: #e65100; }
+
+        body.dark-mode .action-item { background: linear-gradient(135deg, #2a2015, #352a1a); }
+        body.dark-mode .action-item h4 { color: #ffb74d; }
+
+        /* ===== 图表 ===== */
+        .chart-container {
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .chart-container h4 { text-align: center; margin: 0 0 15px; color: #333; }
+
+        body.dark-mode .chart-container { background: #2a2a2a; border-color: #444; }
+        body.dark-mode .chart-container h4 { color: #e0e0e0; }
+
+        /* ===== 理论拼图 ===== */
+        .puzzle-intro {
+            background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        body.dark-mode .puzzle-intro { background: linear-gradient(135deg, #1a1a2e, #252540); }
+
+        /* ===== 延伸阅读 ===== */
+        .further-item {
+            border-left: 3px solid #1a237e;
+            padding-left: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .further-item h4 { color: #1a237e; margin: 0 0 0.3rem; }
+        .further-item p { margin: 0; color: #666; font-size: 0.95rem; }
+
+        body.dark-mode .further-item { border-color: #7986cb; }
+        body.dark-mode .further-item h4 { color: #7986cb; }
+        body.dark-mode .further-item p { color: #aaa; }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .tab-nav { padding: 0.75rem; top: 60px; }
+            .tab-btn { padding: 8px 10px; font-size: 0.85rem; }
+            .article-header { padding: 2rem 1rem; }
+            .article-header h1 { font-size: 1.8rem; }
+            .article-meta { gap: 0.5rem; }
+            .article-meta span { padding: 4px 10px; font-size: 0.85rem; }
+            .tab-content { padding: 1.25rem; }
+            .chapter-content { padding: 1rem; }
+        }
+    </style>
+</head>
+<body data-category="politics">
+    <!-- 导航栏 -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html" class="active">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 返回按钮 -->
+    <div class="back-nav">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../articles.html"><span>←</span> 返回全部文章</a>
+        </div>
+    </div>
+
+    <!-- 文章头部 -->
+    <header class="article-header">
+        <div class="importance-badge">⭐⭐⭐⭐⭐ 核心必读 · 政治理论</div>
+        <h1>论列宁主义基础</h1>
+        <div class="article-subtitle">在斯维尔德洛夫大学的讲演</div>
+        <div class="article-meta">
+            <span class="author">斯大林</span>
+            <span class="date">1924年</span>
+            <span class="category">政治理论</span>
+            <span class="word-count">约25,000字</span>
+        </div>
+    </header>
+
+    <!-- Tab导航 -->
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
+        <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
+        <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
+        <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
+        <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
+        <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
+        <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
+        <button class="tab-btn" onclick="switchTab('further', this)">📚 延伸阅读</button>
+    </div>
+
+    <!-- 原文 -->
+    <div class="tab-content active" id="original">
+        <div class="original-text">
+            <div class="text-intro">
+                <p><strong>阅读提示：</strong>本文是斯大林1924年在斯维尔德洛夫大学的讲演，系统阐述了列宁主义的基本问题。全文约2.5万字，共十章。重点推荐：第一章（列宁主义的历史根源）、第五章（农民问题）、第九章（战略和策略）。点击章节标题可展开/折叠。</p>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    导言：什么是列宁主义
+                </h3>
+                <div class="chapter-content">
+                    <p>列宁主义的基础是个很大的题目。要详尽地论述这个题目就得写一整本书，甚至要写好几本书。因此，我的讲演自然就不能详尽地说明列宁主义，至多也只能简要地叙述列宁主义的基础。虽然如此，我认为做这样一个叙述来指出几个为顺利研究列宁主义所必需的基本出发点，还是有益处的。</p>
+                    <p>叙述列宁主义的基础并不是叙述列宁的世界观的基础。列宁的世界观和列宁主义的基础按范围来说并不是一回事。列宁是马克思主义者，他的世界观的基础当然也就是马克思主义。但是由此决不能得出结论说，叙述列宁主义应当从叙述马克思主义的基础开始。叙述列宁主义就是叙述列宁在他的著作中所加进马克思主义总宝库的、因而自然和列宁的名字分不开的那些特别的和新的贡献。我在我的讲演中只想从这个意义上来叙述列宁主义的基础。</p>
+                    <p>那么，列宁主义是什么呢？</p>
+                    <p>有些人说，列宁主义就是马克思主义在俄国环境的特殊条件下的应用。这个定义含有一部分真理，可是它远没有概括全部真理。列宁确实把马克思主义应用到俄国实际情况中，而且应用得十分巧妙。但是，如果列宁主义仅仅是马克思主义在俄国特殊环境中的应用，那么列宁主义就纯粹是一国的而且仅仅是一国的现象，纯粹是俄国的而且仅仅是俄国的现象了。可是我们知道，列宁主义是根源于整个国际发展过程的国际现象，而不仅仅是俄国的现象。正因为如此，我认为这个定义带有片面性。</p>
+                    <p>另一些人说，列宁主义是十九世纪四十年代的马克思主义的革命因素的复活，而和四十年代以后的马克思主义不同，据说四十年代以后的马克思主义已经变成温和而不革命的了。如果撇开这种把马克思的学说分为革命部分和温和部分的愚蠢庸俗的见解不说，那就必须承认，即使这个完全不充分、完全不能令人满意的定义也含有一部分真理。这一部分真理就在于列宁确实复活了第二国际机会主义者所埋没的马克思主义的革命内容。但这只是一部分真理。</p>
+                    <p><strong>关于列宁主义的全部真理是：</strong>列宁主义不仅复活了马克思主义，而且更进一步，在资本主义和无产阶级阶级斗争的新条件下向前发展了马克思主义。</p>
+                    <div class="highlight-box">
+                        <strong>核心定义：</strong>列宁主义是帝国主义和无产阶级革命时代的马克思主义。确切些说，列宁主义是无产阶级革命的理论和策略，特别是无产阶级专政的理论和策略。
+                    </div>
+                    <p>马克思和恩格斯是处在革命（我们指的是无产阶级革命）以前的时期，那时还没有发达的帝国主义，是训练无产者去进行革命的时期，那时无产阶级革命还不是必不可免的直接实践问题。而马克思和恩格斯的学生列宁却处在发达的帝国主义时期，无产阶级革命开展起来的时期，无产阶级革命已经在一个国家内获得了胜利、打破了资产阶级民主制、开辟了无产阶级民主制纪元即苏维埃纪元的时期。正因为如此，列宁主义是马克思主义的进一步的发展。</p>
+                    <p>人们通常都指出列宁主义具有非常战斗、非常革命的性质。这是完全正确的。可是，列宁主义所以具有这个特性，是由于以下两个原因：第一，列宁主义是从无产阶级革命中产生出来的，它不能不具有无产阶级革命的特色；第二，列宁主义是在和第二国际机会主义搏斗中成长和巩固起来的，而和这个机会主义作斗争，向来就是对资本主义进行胜利斗争所必需的先决条件。不要忘记，在马克思恩格斯两人和列宁之间隔着第二国际机会主义独占统治的整个时代，和这个机会主义作无情的斗争不能不是列宁主义的极重要的任务之一。</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    一、列宁主义的历史根源
+                </h3>
+                <div class="chapter-content">
+                    <p>列宁主义是在帝国主义条件下，即在资本主义的矛盾已经达到极点、无产阶级革命已经成为直接实践的问题、训练工人阶级去进行革命的旧时期已经达到尽头而转变为直接冲击资本主义的新时期的条件下成长和形成的。</p>
+                    <p>列宁把帝国主义叫做"垂死的资本主义"。为什么呢？因为帝国主义使资本主义的矛盾达到极端，达到顶点，接着就是革命的开始。在这些矛盾中，最重要的有下列三个。</p>
+                    <p><strong>第一个矛盾是劳动和资本之间的矛盾。</strong>帝国主义就是工业国里垄断性的托拉斯和辛迪加、银行和金融寡头拥有极大的势力。和这种极大的势力作斗争，工人阶级通常采用的手段，如工会和合作社、议会政党和议会斗争等等已经完全不够了。或者向资本屈服，依旧过着每况愈下的非人生活；或者拿起新的武器，——这就是帝国主义在千百万无产阶级群众面前提出的问题。帝国主义把工人阶级引向革命。</p>
+                    <p><strong>第二个矛盾是各金融集团之间以及帝国主义列强之间为争夺原料产地、争夺别国领土而发生的矛盾。</strong>帝国主义就是向原料产地输出资本，就是为独占这些原料产地而进行疯狂的斗争，就是为重新瓜分已经被瓜分完的世界而进行斗争。某些国家认为自己"阳光下的地盘"不够了，而另一些国家（那些被挤掉的国家）却没有力量用战争来重新瓜分。于是产生了某些文学家所描写的财政资本方面的"顶尖人物"和"国家要人"的那种"分赃"会议，那种和平解决的企图。这种和平解决又产生新的矛盾，产生新的战争。</p>
+                    <p><strong>第三个矛盾是极少数统治民族的人民和占人口大多数的殖民地人民之间的矛盾。</strong>帝国主义和对殖民地的扩张把人世的压迫扩展到地球上最遥远的角落。殖民地里亿万的被压迫人民在"文明"民族的资产阶级掩护下受着资本主义剥削。宗主国的资产阶级把一小撮统治民族的代表安置在殖民地，让那一小撮人去压榨千百万本地生产者，去吸他们的血。这样，帝国主义就加剧了民族矛盾，使压迫达到顶点，使民族解放运动向前发展，把殖民地人民卷入革命洪流。</p>
+                    <div class="quote">
+                        <p>帝国主义把工人阶级引向革命，帝国主义把殖民地人民卷入革命，帝国主义在自身中准备着社会主义革命胜利的条件。这就是说，帝国主义不仅使革命成了不可避免的实践问题，而且直接创造了社会主义革命胜利的基本条件。</p>
+                    </div>
+                    <p>马克思和恩格斯的时代是革命（资产阶级民主革命）以前的时期，是准备工人阶级去进行革命的时期。那时帝国主义还没有在西方达到充分发展的阶段，无产阶级革命的客观条件还没有成熟。列宁的时代，无产阶级革命的时代，却是在帝国主义充分发展的条件下，在资本主义总危机的基础上，无产阶级革命的直接实践问题已经提上日程的时代。马克思和恩格斯的理论，只是而且只能是无产阶级革命的理论；它只能在无产阶级革命已经在西方发展起来、在帝国主义环境中、在资本主义的矛盾已经达到极点的条件下，才获得充分的意义和全面的发挥。</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    二、Method of Leninism 列宁主义的方法
+                </h3>
+                <div class="chapter-content">
+                    <p>从列宁主义的方法的角度来看，列宁主义首先就是关于自己的阶级——无产阶级的科学，是关于无产阶级的斗争的科学，是关于无产阶级革命的科学，是关于无产阶级专政的科学的第三个特征。</p>
+                    <p>方法在理论科学中具有决定性的意义。正确的革命理论不是教条，而是进一步研究的出发点，是进一步发展所依据的事实。列宁的方法的出发点就是：理论是"进一步"——向前、向上运动——的出发点，而这种进一步运动是实践所决定的，是千百万群众的经验所决定的。</p>
+                    <p>在方法方面，列宁首先并且主要的是彻底揭露第二国际大多数领袖所特有的反革命的思辨哲学。他揭露了这些人把认识论变成对资本主义"永存"的信仰、把辩证法变成空谈的把戏。列宁在他的《唯物主义和经验批判主义》《论冒险主义》《论帝国主义和社会主义运动》等著作中，在反对经验批判主义者和第二国际的理论家的斗争中，恢复了被第二国际所破坏的辩证唯物论。</p>
+                    <div class="highlight-box">
+                        <strong>列宁的出发点：</strong>不是从抽象的理论原则出发，而是从具体的历史条件出发；不是从既有的真理出发，而是从革命实践的需要出发；不是从书本上的公式出发，而是从千百万群众的经验出发。
+                    </div>
+                    <p>列宁的方法的特征就是：具体地考察在某一特定时期的具体环境中的具体斗争形势，从而制定出具体的方针、口号和方法。这和第二国际的理论家们的方法根本不同，他们是从抽象的公式出发，从学理主义的公式出发，而这些学理主义的公式在历史发展的过程中早已被实际生活驳倒了。列宁的方法的特征就是：不是把理论的结论当作研究的终结，而是当作进一步研究的出发点；不是把马克思主义的个别原理当作不变的信条，而是当作进一步发展的指南。</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    三、理论是无产阶级解放的精神武器
+                </h3>
+                <div class="chapter-content">
+                    <p>革命理论是劳动群众的精神武装，是阶级胜利的精神武器。没有革命的理论，就不可能有被压迫阶级即历史上最革命的阶级的伟大的历史运动。革命的理论能使运动具有信心，使它具有确定的方向，使它具有团结性，使它走上正确的道路。马克思和恩格斯把工人运动和科学社会主义结合起来，把工人运动引向革命方向。他们证明了：资本主义的发展必然会导致社会主义的胜利，资产阶级的灭亡和无产阶级的胜利是同样不可避免的。他们的结论是用对社会发展规律的科学分析得出来的，因此是唯一科学的结论。</p>
+                    <p>有人以为马克思主义本身不需要进一步发展，不需要用新的经验和新的知识来丰富它，以为它已经达到了顶峰，这种想法是最大的错误。这种想法是第二国际大多数领袖和理论家们所特有的，他们把马克思主义变成了没有生命的、僵死的教条，变成了"神圣不可侵犯"的信条。他们忘记了：马克思主义不是死的教条，而是活生生的行动的指南；它不是终极的真理，而是进一步研究的出发点和工作的指针；它不是某种一成不变的东西，而是随着实践的发展而不断发展的学说。</p>
+                    <div class="quote">
+                        <p>列宁发展了马克思的学说，把马克思主义提高到了一个新的阶段。他用新的经验和新的知识丰富了马克思主义，他用帝国主义时代的新的条件来补充了马克思主义，他向前推进了马克思主义，把它提高到了在新的历史条件下指导无产阶级解放斗争的水平。</p>
+                    </div>
+                    <p>列宁在理论方面的功绩就是：他彻底揭露了第二国际的理论家们的机会主义实质，粉碎了他们的教条主义观点，恢复并发展了马克思学说中的革命内容，把马克思主义提高到了在帝国主义条件下和无产阶级革命时代指导无产阶级斗争的水平。</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    四、无产阶级专政
+                </h3>
+                <div class="chapter-content">
+                    <p>无产阶级专政是无产阶级革命的工具，是无产阶级的新的阶级的统治，它的目的在于消灭阶级，建设社会主义，创立共产主义。马克思和恩格斯早就说过，无产阶级应当夺取政权，建立自己的政治统治，建立自己的专政。马克思在《共产党宣言》中写道：</p>
+                    <div class="quote">
+                        <p>工人革命的第一步就是使无产阶级转化成统治阶级，争得民主。无产阶级将利用自己的政治统治，一步一步地夺取资产阶级的全部资本，把一切生产工具集中在国家即组织成为统治阶级的无产阶级手里。</p>
+                    </div>
+                    <p>恩格斯在《反杜林论》中发挥了这一思想，他写道：国家不是"被废除"的，而是"自行消亡"的。他说：</p>
+                    <div class="quote">
+                        <p>国家不是被"废除"的，它是自行消亡的。以生产者自由平等的联合体为基础的、按新方式来组织生产的社会，把全部国家机器放到它应当去的地方，即放到古物陈列馆去，同纺车和青铜斧陈列在一起。</p>
+                    </div>
+                    <p>第二国际的英雄们把马克思和恩格斯的这些天才思想埋没了，把它们弄得面目全非，把无产阶级专政变成了空洞的、模糊的、不可理解的东西。列宁恢复了被第二国际所歪曲的马克思学说，全面地展开了无产阶级专政的理论和策略。</p>
+                    <p><strong>列宁关于无产阶级专政的主要论点：</strong></p>
+                    <p>第一，无产阶级专政是阶级社会中民主的最高类型，是无产阶级民主，是绝大多数人享受民主而对少数剥削者实行镇压的民主，和资产阶级民主即少数剥削者享受民主而对绝大多数人民实行镇压的民主根本不同。</p>
+                    <p>第二，无产阶级专政是暴力革命的结果，是砸碎旧的国家机器、建立新的国家机器的结果。资产阶级国家不会"和平地"转变为无产阶级国家，无产阶级国家也不会"和平地"产生。</p>
+                    <p>第三，无产阶级专政不只是破坏旧制度，而且要建立新制度，建立社会主义的经济基础，组织社会主义的生产。</p>
+                    <p>第四，无产阶级专政是对敌人实行镇压、对人民实行民主的政权，它必须有无产阶级政党的领导，必须有工农联盟，必须有铁的纪律。</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    五、农民问题
+                </h3>
+                <div class="chapter-content">
+                    <p>农民问题在列宁主义中占着很重要的地位。马克思和恩格斯已经提出了农民问题，指出农民是革命的力量，但他们没有能在实践中充分地解决这个问题，因为在他们的时代，农民还没有充分地卷入革命运动。</p>
+                    <p>列宁在新的历史条件下发展了马克思主义的农民问题理论，解决了农民在无产阶级革命中的地位和作用问题。列宁的出发点是：农民是无产阶级的可靠的同盟军，是无产阶级革命取得胜利的决定性力量之一。</p>
+                    <div class="highlight-box">
+                        <strong>列宁对农民问题的基本观点：</strong>农民是无产阶级的天然的最可靠的同盟军；没有农民的支持，无产阶级革命就不能胜利；农民只有在无产阶级的领导下，才能从资本主义的锁链下解放出来。
+                    </div>
+                    <p><strong>列宁关于农民问题的几个重要论点：</strong></p>
+                    <p>第一，关于农民的分层问题。列宁指出了农民内部存在着不同的阶层：贫农、中农和富农。贫农是半无产者，是无产阶级最可靠的同盟军；中农是动摇的阶层，可以跟着无产阶级走，也可以跟着资产阶级走；富农是农村的资产阶级，是无产阶级革命的敌人。</p>
+                    <p>第二，关于土地革命问题。列宁认为，在资产阶级民主革命阶段，农民的基本要求是土地，因此必须进行土地革命。土地革命必须彻底消灭地主土地所有制，满足农民对土地的要求。只有这样，才能把千百万农民吸引到无产阶级革命方面来。</p>
+                    <p>第三，关于工农联盟问题。列宁认为，工农联盟是无产阶级革命胜利的基本条件。工农联盟必须建立在无产阶级对农民的领导权的基础上，建立在无产阶级政党的领导的基础上。</p>
+                    <p>第四，关于中农问题。列宁认为，中农是复杂的、动摇的阶层，他们既是劳动者又是小私有者。无产阶级对中农的政策应当是：善于说服教育，吸引他们参加社会主义建设，在保持无产阶级的领导地位的条件下，保护中农的利益。</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    六、党的领导作用
+                </h3>
+                <div class="chapter-content">
+                    <p>党的领导作用问题是列宁主义的一个根本问题。马克思和恩格斯已经提出了无产阶级政党的思想，指出党是无产阶级的先进的、有组织的部队，是无产阶级的最高形式。列宁在帝国主义条件下进一步发展了这一思想，创立了完整的无产阶级政党的学说。</p>
+                    <p><strong>列宁关于党的学说的主要内容：</strong></p>
+                    <p>第一，党是无产阶级的先锋队。党不是包括整个阶级的组织，而是阶级的先进部分，是阶级的先锋队。党应当比阶级更先进，比群众更有觉悟，比群众更了解革命运动的条件和任务。</p>
+                    <p>第二，党是无产阶级的有组织的部队。党不是个人的偶然凑合，而是有组织的整体。党应当有统一的意志、统一的行动、统一的纪律。党员必须参加党的一个组织，必须服从党的决议，必须遵守党的纪律。</p>
+                    <p>第三，党是无产阶级的最高形式。党应当领导无产阶级的一切组织：工会、合作社、青年团、妇女组织等等。党应当在这些组织中取得思想上的领导权，应当在这些组织中贯彻党的路线和政策。</p>
+                    <div class="quote">
+                        <p>党是无产阶级的指挥员和领导者。党是无产阶级手中的工具，阶级是无产阶级的军队。党必须领导无产阶级的一切斗争和一切组织，必须指导无产阶级的全部活动，使它们朝着一个方向——社会主义的方向。</p>
+                    </div>
+                    <p>第四，党必须有无产阶级民主集中制的组织原则。民主集中制就是：党的各级领导机关由选举产生；党的各级委员会向选举它们的组织和党员报告工作；少数服从多数；下级服从上级；全党服从中央。</p>
+                    <p>第五，党必须有无产阶级的铁的纪律。铁的纪律是无产阶级取得胜利的条件。党的纪律是建立在党员的自觉性上面的，是建立在民主集中制上面的，是建立在批评和自我批评上面的。</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    七、革命的mainland基础
+                </h3>
+                <div class="chapter-content">
+                    <p>革命的主观因素问题在列宁主义中占着很重要的地位。马克思和恩格斯已经指出，革命需要有客观条件和主观条件。客观条件是革命风暴来临的基础，主观条件是革命阶级和组织革命的力量。列宁在帝国主义条件下进一步发展了革命的主观因素学说。</p>
+                    <p><strong>列宁关于革命的主观因素的主要论点：</strong></p>
+                    <p>第一，主观因素不是消极的因素，而是积极的因素。革命的主观因素——革命阶级的觉悟性、组织性、积极性、决心、勇气和牺牲精神——能够加速或延缓客观条件的发展，能够促进或阻碍革命的爆发和胜利。</p>
+                    <p>第二，主观因素的成熟是革命胜利的必要条件。没有足够成熟的主观因素，即使有再好再成熟的客观条件，革命也不能胜利。正因为如此，无产阶级政党的重要任务就是提高无产阶级的觉悟性、组织性和积极性，把无产阶级组织成为一支有觉悟的队伍。</p>
+                    <p>第三，主观因素的成熟表现在无产阶级的政党、工会、合作社、青年团等组织的建立和发展上。无产阶级政党的存在和发展是无产阶级觉悟性和组织性的集中表现。党的路线、策略和组织形式必须适应无产阶级斗争的水平和条件。</p>
+                    <div class="quote">
+                        <p>没有布尔什维克党，没有党所领导的千百万工人和农民，就不可能取得社会主义革命的胜利。革命的胜利不是自然地到来的，而是通过无产阶级的组织性、觉悟性和战斗性，通过党的正确领导而取得的。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    八、民族问题和殖民地问题
+                </h3>
+                <div class="chapter-content">
+                    <p>民族问题和殖民地问题在列宁主义中占着很重要的地位。马克思和恩格斯已经提出了民族平等和民族自决的思想，但他们在帝国主义的条件下把这一问题提得更加尖锐、更加明确。列宁发展了马克思主义的民族问题理论，创立了关于民族问题和殖民地问题的完整学说。</p>
+                    <p><strong>列宁关于民族问题的主要论点：</strong></p>
+                    <p>第一，帝国主义时代民族压迫达到了顶点。帝国主义不仅压迫本国的无产阶级和劳动群众，而且压迫殖民地和附属国的亿万人民。帝国主义把民族矛盾发展到极限，把民族解放运动变成世界革命运动的一个组成部分。</p>
+                    <p>第二，民族问题是无产阶级革命总问题的一部分。民族解放运动是和帝国主义进行斗争的力量，是社会主义革命的同盟军。无产阶级必须支持被压迫民族的民族解放运动，把被压迫群众团结在自己的周围。</p>
+                    <p>第三，民族自决权是解决民族问题的一个原则。民族自决权就是被压迫民族有分离和成立独立国家的权利。无产阶级承认民族自决权，但同时又指出：分离还是联合，应当根据无产阶级的利益来决定，根据社会主义革命的利益来决定。</p>
+                    <div class="quote">
+                        <p>民族问题和殖民地问题没有任何原则的区别。帝国主义时代的一个特点就是殖民地的压迫达到了顶点，而民族问题在帝国主义时代具有了全世界的历史意义。</p>
+                    </div>
+                    <p>第四，无产阶级国际主义是解决民族问题的基本原则。无产阶级国际主义就是：压迫其他民族的民族是不能获得解放的；无产阶级的解放事业是国际性的事业；全世界无产者联合起来。</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    九、战略和策略
+                </h3>
+                <div class="chapter-content">
+                    <p>战略和策略问题是列宁主义的一个根本问题。战略是规定无产阶级在革命某一阶段上的主要打击方向，规定无产阶级在革命某一阶段应当团结一切革命力量去打击主要敌人的计划。策略是规定无产阶级在较短时期内的行动路线，是规定如何去实现战略任务的行动方针。</p>
+                    <p><strong>列宁关于战略和策略的主要论点：</strong></p>
+                    <p>第一，战略是无产阶级革命的指导原则，策略是实现战略的手段。战略是长期的、稳定的，策略是短期的、灵活的。策略必须服从战略，服务于战略。</p>
+                    <p>第二，战略的基本原则是：集中兵力打击主要的敌人。马克思写道，每一个运动都要分清主要敌人和非主要敌人，把主要打击力量集中在主要敌人身上。列宁发挥了这一思想，他指出，无产阶级政党必须善于分辨主要敌人和非主要敌人，善于分清敌友。</p>
+                    <p>第三，策略的基本原则是：机动灵活，善于利用机会。列宁写道：</p>
+                    <div class="quote">
+                        <p>革命策略不能只凭革命情绪。革命策略必须以对革命斗争条件的清醒估计为依据。策略必须随机应变，在一定条件下采取进攻，在另一条件下采取退却，在第三条件下实行暂时的妥协。</p>
+                    </div>
+                    <p>第四，战略和策略必须随着客观形势的变化而变化。革命形势不是静止的，而是不断发展变化的。党必须善于觉察这些变化，及时地改变自己的战略和策略。</p>
+                    <p>第五，无产阶级在革命中必须善于争取同盟军，善于利用敌人之间的矛盾。马克思和恩格斯的口号是：全世界无产者联合起来！列宁补充了新的口号：全世界被压迫民族联合起来！</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    十、工作作风
+                </h3>
+                <div class="chapter-content">
+                    <p>工作作风问题是列宁主义的一个组成部分。马克思和恩格斯不仅创立了革命理论，而且树立了革命工作作风的榜样。列宁进一步发展了这种作风，使之更加完善、更加系统。</p>
+                    <p><strong>列宁的工作作风的主要特点：</strong></p>
+                    <p>第一，革命的实际精神。列宁的工作作风的特点就是彻底反对空谈，反对书生气，反对脱离实际的倾向。列宁教导说：离开革命实践的理论是空洞的理论，没有革命理论指导的实践是盲目的实践。革命者必须把理论和实践结合起来，必须用革命理论来指导实践，用实践经验来丰富和发展革命理论。</p>
+                    <p>第二，革命的胆略和求实精神的结合。列宁既能高瞻远瞩，看到革命发展的基本方向，又能脚踏实地，注意革命斗争的具体条件和具体任务。他既反对脱离实际的冒险主义，又反对放弃原则的机会主义。</p>
+                    <p>第三，密切联系群众。列宁的工作作风的特点就是始终和群众保持密切联系。布尔什维克党不是脱离群众的宗派，而是深深扎根于群众之中。布尔什维克党是工人阶级和劳动群众的领袖、导师和组织者。</p>
+                    <p>第四，批评和自我批评。列宁把批评和自我批评当作推动革命事业前进的力量。他教导说：布尔什维克党不怕承认自己的错误，不怕在群众面前进行自我批评。只有布尔什维克党才能用批评和自我批评的方法来教育自己，才能纠正自己的错误，才能提高自己的战斗力。</p>
+                    <div class="highlight-box">
+                        <strong>结论：</strong>列宁主义的工作作风就是理论和实践的结合，革命胆略和求实精神的结合，密切联系群众和开展批评自我批评的结合。这种工作作风是布尔什维克党取得胜利的一个根本条件。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 读法提示 -->
+    <div class="tab-content" id="reading">
+        <h2 class="tab-heading">💡 如何阅读本文</h2>
+
+        <div class="reading-tip">
+            <h4>📌 历史背景</h4>
+            <p>本文是斯大林1924年4月在斯维尔德洛夫大学的讲演。1924年1月列宁逝世，苏联共产党和世界共产主义运动面临着一个重大问题：如何继承和发扬列宁主义？斯大林的这个讲演就是对这个问题的系统回答。</p>
+        </div>
+
+        <div class="reading-tip">
+            <h4>🎯 核心论点</h4>
+            <ul style="line-height:2;">
+                <li><strong>列宁主义定义：</strong>帝国主义和无产阶级革命时代的马克思主义</li>
+                <li><strong>历史根源：</strong>帝国主义三大矛盾（劳资、金融集团、压迫民族）</li>
+                <li><strong>方法特征：</strong>从具体的历史条件和实践需要出发</li>
+                <li><strong>核心内容：</strong>无产阶级专政、农民问题、党的领导、民族问题</li>
+            </ul>
+        </div>
+
+        <div class="reading-tip">
+            <h4>📖 阅读建议</h4>
+            <p><strong>本文的结构：</strong>导言 + 十章正文。导言回答"什么是列宁主义"，后九章从不同方面展开论述。</p>
+            <p><strong>重点章节：</strong></p>
+            <ul style="line-height:2;">
+                <li>导言：列宁主义的定义（必读）</li>
+                <li>第一章：帝国主义三大矛盾（理论基础）</li>
+                <li>第四章：无产阶级专政（核心问题）</li>
+                <li>第六章：党的领导作用（实践指导）</li>
+                <li>第九章：战略和策略（方法论）</li>
+            </ul>
+        </div>
+
+        <div class="reading-tip">
+            <h4>⚠️ 历史背景</h4>
+            <p>本文写于1924年，是斯大林对列宁主义的早期阐述。后来的历史发展证明了文中许多论断的正确性，但也有些具体判断需要结合后来的实践来理解。</p>
+        </div>
+    </div>
+
+    <!-- 难点解析 -->
+    <div class="tab-content" id="difficulty">
+        <h2 class="tab-heading">🔍 难点解析</h2>
+
+        <div class="difficulty-item">
+            <h4>❓ 如何理解"帝国主义是垂死的资本主义"？</h4>
+            <p><strong>解析：</strong>"垂死"不是说资本主义即将自行崩溃，而是说帝国主义使资本主义的矛盾发展到极点，使社会主义革命的客观条件成熟了。"垂死的资本主义"就是指资本主义已经到了它的最后阶段，社会主义革命的胜利已经是可以实现的实践问题了。</p>
+        </div>
+
+        <div class="difficulty-item">
+            <h4>❓ 帝国主义三大矛盾是什么关系？</h4>
+            <p><strong>解析：</strong>三大矛盾是相互联系、相互影响的。劳动和资本的矛盾是最基本的矛盾，它决定了其他两个矛盾的性质。金融集团之间的矛盾和民族矛盾都是在劳动和资本矛盾的基础上产生和发展起来的。三大矛盾汇合在一起，就把无产阶级革命和民族解放运动联结成世界革命的洪流。</p>
+        </div>
+
+        <div class="difficulty-item">
+            <h4>❓ 为什么说农民是无产阶级的"可靠的同盟军"？</h4>
+            <p><strong>解析：</strong>农民和无产阶级一样，都受着资本的剥削，都要求改变现状。但农民不是新的生产方式的代表，不能自己解放自己。农民只有跟着无产阶级走，在无产阶级的领导下，才能获得解放。因此，无产阶级必须而且能够把农民团结在自己的周围。</p>
+        </div>
+
+        <div class="difficulty-item">
+            <h4>❓ 党的领导作用体现在哪些方面？</h4>
+            <p><strong>解析：</strong>党的领导作用体现在：思想领导（用革命理论武装群众）、政治领导（制定正确的路线和政策）、组织领导（建立和领导各种群众组织）。党的领导是无产阶级革命胜利的根本保证。</p>
+        </div>
+    </div>
+
+    <!-- 对话空间 -->
+    <div class="tab-content" id="dialogue">
+        <h2 class="tab-heading">💬 对话空间</h2>
+
+        <div class="dialogue-item">
+            <div class="dialogue-q"><strong>问题一：</strong>斯大林的"帝国主义三大矛盾"理论和列宁的帝国主义理论是什么关系？</div>
+            <div class="dialogue-a"><strong>思考方向：</strong>对比列宁的《帝国主义是资本主义的最高阶段》。斯大林是如何继承和发展列宁的帝国主义理论的？有什么新的贡献？</div>
+        </div>
+
+        <div class="dialogue-item">
+            <div class="dialogue-q"><strong>问题二：</strong>"农民是无产阶级的可靠同盟军"这一论断在今天还有意义吗？</div>
+            <div class="dialogue-a"><strong>思考方向：</strong>当今社会的阶级结构发生了什么变化？"同盟军"的概念应当如何理解和运用？</div>
+        </div>
+
+        <div class="dialogue-item">
+            <div class="dialogue-q"><strong>问题三：</strong>党的领导作用的论述对今天的政党建设有什么启示？</div>
+            <div class="dialogue-a"><strong>思考方向：</strong>列宁主义关于党的建设的基本原则：先锋队理论、民主集中制、纪律等。这些原则的当代意义是什么？</div>
+        </div>
+
+        <div class="dialogue-item">
+            <div class="dialogue-q"><strong>问题四：</strong>如何理解"战略上藐视敌人，战术上重视敌人"？</div>
+            <div class="dialogue-a"><strong>思考方向：</strong>这是毛泽东对列宁主义战略策略思想的发展。结合第九章的内容，谈谈战略和策略的关系。</div>
+        </div>
+    </div>
+
+    <!-- 行动实验 -->
+    <div class="tab-content" id="action">
+        <h2 class="tab-heading">⚡ 行动实验</h2>
+
+        <div class="action-item">
+            <div class="action-num">1</div>
+            <div>
+                <h4>📊 绘制帝国主义矛盾图</h4>
+                <p>用图表展示帝国主义三大矛盾的关系，说明它们如何相互作用、最终导致社会主义革命的胜利。</p>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="action-num">2</div>
+            <div>
+                <h4>🔍 比较研究：马克思到列宁到斯大林</h4>
+                <p>对比马克思、列宁、斯大林对以下问题的论述：</p>
+                <ul>
+                    <li>国家的本质和作用</li>
+                    <li>无产阶级政党的性质</li>
+                    <li>农民问题</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="action-num">3</div>
+            <div>
+                <h4>💬 小组讨论：当代帝国主义特征</h4>
+                <p>运用本文的理论分析当代帝国主义的特征：</p>
+                <ul>
+                    <li>当代帝国主义有哪些新特点？</li>
+                    <li>帝国主义的基本矛盾是否依然存在？</li>
+                    <li>民族解放运动的新形式是什么？</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="action-num">4</div>
+            <div>
+                <h4>📝 理论联系实际</h4>
+                <p>选择一个当前的国际或国内问题，运用本文的理论框架进行分析，写一篇1500字的分析报告。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 一目了然 -->
+    <div class="tab-content" id="visual">
+        <h2 class="tab-heading">📊 一目了然</h2>
+
+        <div class="chart-container">
+            <h4>📋 列宁主义理论框架</h4>
+            <canvas id="frameworkChart" height="250"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h4>🔗 帝国主义三大矛盾关系图</h4>
+            <canvas id="contradictionChart" height="200"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h4>📚 十章内容重要性分布</h4>
+            <canvas id="chapterChart" height="180"></canvas>
+        </div>
+    </div>
+
+    <!-- 理论拼图 -->
+    <div class="tab-content" id="puzzle">
+        <h2 class="tab-heading">🧩 理论拼图</h2>
+
+        <div class="puzzle-intro">
+            <p><strong>本文的核心贡献：</strong>斯大林在本文中系统阐述了列宁主义的基本问题，为后来的社会主义国家建设提供了理论基础。本文是学习列宁主义的入门必读。</p>
+        </div>
+
+        <h3 style="color:#1a237e;margin:1.5rem 0 1rem;">🔗 理论传承</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem;">
+            <div style="background:#fff3e0;padding:1rem;border-radius:8px;">
+                <h4 style="color:#e65100;margin:0 0 0.5rem;">📗 理论来源</h4>
+                <p style="margin:0;font-size:0.9rem;color:#666;">马克思恩格斯学说 · 列宁帝国主义理论</p>
+            </div>
+            <div style="background:#e8eaf6;padding:1rem;border-radius:8px;">
+                <h4 style="color:#1a237e;margin:0 0 0.5rem;">📘 本文贡献</h4>
+                <p style="margin:0;font-size:0.9rem;color:#666;">系统化列宁主义 · 帝国主义矛盾分析</p>
+            </div>
+            <div style="background:#e8f5e9;padding:1rem;border-radius:8px;">
+                <h4 style="color:#2e7d32;margin:0 0 0.5rem;">📙 后续发展</h4>
+                <p style="margin:0;font-size:0.9rem;color:#666;">各国共产党 · 社会主义建设</p>
+            </div>
+        </div>
+
+        <h3 style="color:#1a237e;margin:1.5rem 0 1rem;">📚 关联文章</h3>
+        <div class="further-item">
+            <h4>📕 列宁《帝国主义是资本主义的最高阶段》</h4>
+            <p>帝国主义理论的奠基之作，理解本文第一章的必读文献。</p>
+        </div>
+        <div class="further-item">
+            <h4>📗 列宁《国家与革命》</h4>
+            <p>无产阶级专政理论的经典，系统学习第四章的必读。</p>
+        </div>
+        <div class="further-item">
+            <h4>📘 毛泽东《矛盾论》</h4>
+            <p>对立统一规律的中国化发展，理论传承的典范。</p>
+        </div>
+    </div>
+
+    <!-- 延伸阅读 -->
+    <div class="tab-content" id="further">
+        <h2 class="tab-heading">📚 延伸阅读</h2>
+
+        <div class="further-item">
+            <h4>📕 列宁《帝国主义是资本主义的最高阶段》</h4>
+            <p>系统分析帝国主义的经济实质和五大特征，是理解本文第一章的理论基础。</p>
+        </div>
+
+        <div class="further-item">
+            <h4>📗 列宁《国家与革命》</h4>
+            <p>系统阐述马克思主义国家学说和无产阶级专政理论，是第四章的必读文献。</p>
+        </div>
+
+        <div class="further-item">
+            <h4>📘 斯大林《论列宁主义的几个问题》</h4>
+            <p>本文的续篇，进一步阐明列宁主义的若干重要问题。</p>
+        </div>
+
+        <div class="further-item">
+            <h4>📙 毛泽东《实践论》《矛盾论》</h4>
+            <p>马克思主义哲学的中国化发展，与本文有密切的理论联系。</p>
+        </div>
+
+        <div style="background:#e8eaf6;padding:1.5rem;border-radius:8px;margin-top:1.5rem;">
+            <h4 style="color:#1a237e;margin-top:0;">🗺️ 学习路径</h4>
+            <p><strong>入门：</strong>本文 → 《帝国主义论》</p>
+            <p><strong>进阶：</strong>本文 → 《国家与革命》 → 《论几个问题》</p>
+            <p><strong>专题：</strong>农民问题 → 列宁《两种策略》 → 毛泽东农村调查</p>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (tabId === 'visual') setTimeout(initCharts, 100);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleChapter(titleEl) {
+            const chapter = titleEl.parentElement;
+            chapter.classList.toggle('collapsed');
+            const content = chapter.querySelector('.chapter-content');
+
+            if (chapter.classList.contains('collapsed')) {
+                content.style.maxHeight = '0';
+                content.style.padding = '0 1.3rem';
+            } else {
+                content.style.maxHeight = '5000px';
+                content.style.padding = '1.3rem';
+            }
+        }
+
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+            chartsInited = true;
+
+            // 列宁主义理论框架图
+            new Chart(document.getElementById('frameworkChart'), {
+                type: 'radar',
+                data: {
+                    labels: ['理论基础', '核心内容', '战略策略', '组织建设', '群众路线', '国际视野'],
+                    datasets: [{
+                        label: '列宁主义',
+                        data: [95, 90, 85, 90, 85, 80],
+                        borderColor: '#1a237e',
+                        backgroundColor: 'rgba(26,35,126,0.2)',
+                        pointBackgroundColor: '#1a237e',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: { r: { min: 0, max: 100 } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // 帝国主义矛盾图
+            new Chart(document.getElementById('contradictionChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['劳动vs资本', '金融集团之间', '压迫vs被压迫民族'],
+                    datasets: [{
+                        label: '矛盾激烈程度',
+                        data: [95, 80, 90],
+                        backgroundColor: ['#c41e3a', '#e65100', '#1a237e']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: { y: { min: 0, max: 100, title: { display: true, text: '矛盾程度' } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // 各章重要性
+            new Chart(document.getElementById('chapterChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['导言', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'],
+                    datasets: [{
+                        label: '重要性评分',
+                        data: [95, 90, 70, 75, 95, 85, 90, 70, 80, 85, 65],
+                        backgroundColor: ['#1a237e', '#3949ab', '#5c6bc0', '#7986cb', '#1a237e', '#3949ab', '#1a237e', '#5c6bc0', '#7986cb', '#3949ab', '#5c6bc0']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    indexAxis: 'y',
+                    scales: { x: { min: 0, max: 100 } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>共产党宣言 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html" class="active">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 返回按钮 -->
+    <div class="back-nav" style="background:#f8f8f8;border-bottom:1px solid #e0e0e0;padding:12px 0;">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../articles.html" style="display:inline-flex;align-items:center;gap:6px;color:#c41e3a;text-decoration:none;font-size:0.95rem;font-weight:500;">
+                <span style="font-size:1.1rem;">←</span> 返回全部文章
+            </a>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="article-detail">
+        <!-- 文章头部 - 政治理论深蓝渐变 -->
+        <header class="article-header" data-category="政治理论">
+            <div class="header-decoration"></div>
+            <div class="importance-badge">⭐⭐⭐⭐⭐ 核心必读</div>
+            <h1>共产党宣言</h1>
+            <div class="article-subtitle">全世界无产者，联合起来！</div>
+            <div class="article-meta">
+                <span class="author">马克思 恩格斯</span>
+                <span class="date">1848年2月</span>
+                <span class="category">政治理论 · 科学社会主义</span>
+                <span class="word-count">约18,000字</span>
+            </div>
+        </header>
+
+        <!-- 标签导航 -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
+            <button class="tab-btn" onclick="switchTab('further', this)">延伸阅读</button>
+        </div>
+
+        <!-- 原文 -->
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro">
+                    <p><strong>阅读提示：</strong>《共产党宣言》是科学社会主义的第一个纲领性文献，标志着马克思主义的公开问世。全文结构清晰：引言 + 四章正文。建议先读第一章（阶级斗争）和第二章（无产阶级专政），这是理解全书的核心。</p>
+                </div>
+
+                <!-- 引言 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        引言：一个幽灵，共产主义的幽灵，在欧洲游荡
+                    </h3>
+                    <div class="chapter-content">
+                        <p>一个幽灵，共产主义的幽灵，在欧洲游荡。为了对这个幽灵进行神圣的围剿，旧欧洲的一切势力，教皇和沙皇、梅特涅和基佐、法国的激进派和德国的警察，都联合起来了。</p>
+                        <p>有哪一个反对党不被它的当政的敌人骂为共产党呢？又有哪一个反对党不拿共产主义这个罪名去回敬更进步的反对党人和自己的敌人呢？</p>
+                        <p>从这一事实中可以得出两个结论：</p>
+                        <p>共产主义已经被欧洲的一切势力公认为一种势力；</p>
+                        <p>现在是共产党人向全世界公开说明自己的观点、自己的目的、自己的意图并且拿党自己的宣言来反驳关于共产主义幽灵的神话的时候了。</p>
+                        <p>为了这个目的，各国共产党人集会于伦敦，拟定了如下的宣言，用英文、法文、德文、意大利文、弗拉芒文和丹麦文公布于世。</p>
+                    </div>
+                </div>
+
+                <!-- 第一章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第一章 资产者和无产者
+                    </h3>
+                    <div class="chapter-content">
+                        <p>至今一切社会的历史都是阶级斗争的历史。</p>
+                        <p>自由民和奴隶、贵族和平民、领主和农奴、行会师傅和帮工，一句话，压迫者和被压迫者，始终处于相互对立的地位，进行不断的、有时隐蔽有时公开的斗争，而每一次斗争的结局都是整个社会受到革命改造或者斗争的各阶级同归于尽。</p>
+                        <p>在过去的各个历史时代，我们几乎到处都可以看到社会完全划分为各个不同的等级，看到社会地位分成多种多样的层次。在古罗马，有贵族、骑士、平民和奴隶；在中世纪，有封建主、臣仆、行会师傅、帮工和农奴，而且几乎在每一个阶级内部又有一些特殊的阶层。</p>
+                        <p>从封建社会的灭亡中产生出来的现代资产阶级社会并没有消灭阶级对立。它只是用新的阶级、新的压迫条件、新的斗争形式代替了旧的。</p>
+                        <p>但是，我们的时代，资产阶级时代，却有一个特点：它使阶级对立简单化了。整个社会日益分裂为两大敌对的阵营，分裂为两大相互直接对立的阶级：资产阶级和无产阶级。</p>
+                        <p><strong>资产阶级</strong>这个词在这里指的是资本主义社会的统治阶级，即占有社会生产资料并雇佣劳动力的阶级。资产阶级在历史上曾经起过非常革命的作用。</p>
+                        <p>资产阶级在它已经取得了统治的地方把一切封建的、宗法的和田园般的关系都破坏了。它无情地斩断了把人们束缚于天然尊长的形形色色的封建羁绊，它使人和人之间除了赤裸裸的利害关系，除了冷酷无情的"现金交易"，就再也没有任何别的联系了。它把宗教虔诚、骑士热忱、小市民伤感这些情感的神圣发作，淹没在利己主义打算的冰水之中。它把人的尊严变成了交换价值，用一种没有良心的贸易自由代替了无数特许的和自力挣得的自由。</p>
+                        <p>资产阶级撕下了罩在家庭关系上的温情脉脉的面纱，把这种关系变成了纯粹的金钱关系。</p>
+                        <p>资产阶级揭示了，在当时最激进的中世纪残余发挥作用的地方，反动派总是十分心济地自己去加速革命。资产阶级把医生、律师、教士、诗人和学者变成了它出钱招雇的雇佣劳动者。</p>
+                        <p>资产阶级日甚一日地消灭生产资料、财产和人口的分散状态。它使人口密集起来，使生产资料集中起来，使财产聚集在少数人的手里。由此必然产生的结果就是政治的集中。各自独立的、几乎只有同盟关系的、各有不同利益的、不同政府、不同法区和不同关税的地区，现在已经结合成为一个拥有统一的政府、统一的法律、统一的民族阶级利益和统一的关税的统一的民族。</p>
+                        <p><strong>资产阶级</strong>在现代代议制国家里夺得了独占的政治权力。现代的国家政权不过是管理整个资产阶级的共同事务的委员会。</p>
+                        <p>资产阶级在它的不到一百年的阶级统治中所创造的生产力，比过去一切世代创造的全部生产力还要多，还要大。自然力的征服，机器的采用，化学在工业和农业中的应用，轮船的行驶，铁路的通行，电报的使用，整个整个大陆的开垦，河川的通航，仿佛用法术从地下呼唤出来的大量人口，——过去哪一个世纪料想到在社会劳动里蕴藏有这样的生产力呢？</p>
+                        <p>由此我们可以看到，资产阶级赖以形成的生产资料和交换手段，是在封建社会里造成的。在这些生产资料和交换手段发展的一定阶段上，封建社会的生产和交换在其中进行的关系，封建的农业和工场手工业组织，一句话，封建的所有制关系，就不再适应已经发展的生产力了。这种关系已经在阻碍生产而不是促进生产了。它变成了束缚生产的桎梏。它必须被炸毁，而且已经被炸毁了。</p>
+                        <p>取而代之的是自由竞争以及与自由竞争相适应的社会制度和政治制度、资产阶级的经济统治和政治统治。</p>
+                        <p>现在，我们眼前又进行着类似的运动。资产阶级的生产关系和交换关系，资产阶级的所有制关系，这个曾经仿佛用法术创造了如此庞大的生产资料和交换手段的现代资产阶级社会，现在像一个巫师那样不能再支配自己用符咒呼唤出来的魔鬼了。几十年来的工业和商业的历史，只不过是现代生产力反抗现代生产关系、反抗作为资产阶级及其统治的存在条件的所有制关系的历史。要证明这一点，只要指出在周期性的重复中越来越危及整个资产阶级社会生存的商业危机就够了。</p>
+                        <p>在商业危机期间，总是有很大一部分本来就是已经形成的生产力被毁灭。在危机期间，发生一种在过去一切时代看来都好像是荒唐现象的社会瘟疫，即生产过剩的瘟疫。社会突然发现自己回到了一时的野蛮状态；仿佛是一次饥荒、一场普遍的毁灭性战争，使社会失去了全部生活资料；仿佛是工业和商业全被毁灭了。</p>
+                        <p>这是什么缘故呢？因为社会上文明过度，生活资料太多，工业和商业太发达。社会所拥有的生产力已经不能再促进资产阶级文明和资产阶级所有制关系的发展；相反，生产力已经强大到这种关系所不能适应的地步，它已经受到这种关系的阻碍；而它一着手克服这种障碍，就使整个资产阶级社会陷入混乱，就使资产阶级所有制的存在受到威胁。资产阶级的关系已经太狭窄了，再容纳不了它本身所造成的财富了。</p>
+                        <p>——用什么办法来克服这种危机呢？一方面不得不消灭大量生产力，另一方面夺取新的市场，更加彻底地利用旧的市场。这究竟是怎样的一种办法呢？这不过是资产阶级准备更全面更猛烈的危机的办法，不过是使防止危机的手段越来越少的办法。</p>
+                        <p>资产阶级用来推翻封建制度的武器，现在却对准资产阶级自己了。</p>
+                        <p>但是，资产阶级不仅锻造了置自身于死地的武器；同时它还造就了将运用这武器来反对它自己的人——现代的工人，即无产者。</p>
+                        <p><strong>无产阶级</strong>这个词在这里指的是被剥夺了生产资料、不得不靠出卖劳动力为生的雇佣劳动者阶级。他们是这个社会的最底层。</p>
+                        <p>随着工业的发展，无产阶级不仅人数增加了，而且它结合成更大的集体，它的力量日益增长，它越来越感觉到自己的力量。机器使劳动的差别越来越小，使工资几乎到处都降到同样低的水平。无产者的利益和生活状况越来越趋于一致。资产者彼此之间日益加剧的竞争以及由此引起的商业危机，使工人的工资越来越不稳定；机器的日益迅速的和继续不断的改良，使工人的整个生活地位越来越没有保障；单个工人和单个资产者之间的冲突越来越具有两个阶级之间的冲突的性质。</p>
+                        <p>工人有时也得到胜利，但这种胜利是暂时的。他们战斗中被联合在一个愈来愈大的同盟里。</p>
+                        <p>旧社会内部的所有冲突在许多方面都促进了无产阶级的发展。资产阶级处于不断的斗争中：最初是反对贵族，后来又反对其利益同工业进步相矛盾的一部分资产阶级；并且有时反对一切的或部分的外国资产阶级。</p>
+                        <p>所有这些阶级都是为自己时代的阶级所创造的那个时代的经济利益的承担者。</p>
+                        <p>中间等级，即小工业家、小商人、手工业者、农民，他们同资产阶级作斗争，都是为了维护他们中间的等级，使自己免于灭亡。他们不是革命的，而是保守的。不仅如此，他们甚至是反动的，因为他们力图使历史的车轮倒转。</p>
+                        <p>流氓无产阶级是旧社会最下层消极的腐化的一部分，他们在一些地方也被无产阶级革命吸引到运动中来，但是，由于他们的整个生活状况，他们更甘心于被人收买，去干反动的勾当。</p>
+                        <p>旧社会的丧钟已经敲响。资产阶级不仅锻造了置自身于死地的武器；它还锻造了运用这武器来反对它自己的人——现代工人，即无产者。</p>
+                        <p>在当前同资产阶级对立的一切阶级中，只有无产阶级是真正革命的阶级。其余的阶级都随着大工业的发展而日趋没落和灭亡，无产阶级却是大工业本身的产物。</p>
+                        <p>中间等级，即小工业家、小商人、手工业者、农民，他们同资产阶级作斗争，都是为了维护他们中间的等级，使自己免于灭亡。他们不是革命的，而是保守的。</p>
+                        <p>无产阶级（则完全不同，他们没有任何必须加以保护的东西，他们没有任何必须维护的东西，他们没有任何必须保卫的东西。他们没有任何必须保存的东西。他们没有任何民族可以失去。他们没有任何个人可以失去。他们已经失去的只是锁链。他们获得的将是整个世界。）</p>
+                        <p>共产主义已经不再需要保留任何特殊的性质去反对那个承认无产者是自己的一致、他们反对资产者的斗争具有特殊性的一切势力了。</p>
+                        <p>过去的一切运动都是少数人的或者为少数人谋利益的运动。无产阶级的运动是绝大多数人的、为绝大多数人谋利益的独立的运动。无产阶级，现今社会的最下层，如果不炸毁构成官方社会的整个上层，就不能抬起头来，挺起胸来。</p>
+                        <p>如果不就内容而就形式来说，无产阶级反对资产阶级的斗争首先是一国范围内的斗争。每一个国家的无产阶级当然首先应该打倒本国的资产阶级。</p>
+                        <p>在叙述无产阶级发展的最一般的阶段的时候，我们循序探讨了现存社会内部或多或少隐蔽着的国内战争，直到这个战争爆发为公开的革命，无产阶级用暴力推翻资产阶级而建立自己的统治。</p>
+                        <p>前面我们已经看到，资产阶级已经使旧的封建关系被资本主义关系所代替。现在我们要问：资本主义社会的前途是什么？它将走向何方？</p>
+                        <p>社会化生产和资本主义占有之间的矛盾表现为无产阶级和资产阶级的对立。</p>
+                        <p>我们已经看到，现代的机器已经发展到如此的程度，机器的应用已经使相当大的一部分劳动力被机器所取代，机器的应用已经使生产资料集中起来，机器的应用已经使财产聚集在少数人的手里。</p>
+                        <p>资本主义生产方式日益把大多数居民变为无产者，同时就造成一种在死亡的威胁下不得不自己起来革命的群众的反抗。</p>
+                        <p>生产力已经强大到这种关系所不能适应的地步，它已经受到这种关系的阻碍；而它一着手克服这种障碍，就使整个资产阶级社会陷入混乱，就使资产阶级所有制的存在受到威胁。</p>
+                        <p>资产阶级的关系已经太狭窄了，再容纳不了它本身所造成的财富了。</p>
+                        <p>——用什么办法来克服这种危机呢？一方面不得不消灭大量生产力，另一方面夺取新的市场，更加彻底地利用旧的市场。这究竟是怎样的一种办法呢？这不过是资产阶级准备更全面更猛烈的危机的办法，不过是使防止危机的手段越来越少的办法。</p>
+                    </div>
+                </div>
+
+                <!-- 第二章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第二章 无产者和共产党人
+                    </h3>
+                    <div class="chapter-content">
+                        <p>共产党人同全体无产者的关系是怎样的呢？</p>
+                        <p>共产党人不是同其他工人政党相对立的特殊政党。他们没有任何同整个无产阶级的利益不同的利益。他们不提出什么特殊的原则，用以塑造无产阶级的运动。</p>
+                        <p>共产党人的最近目的是和其他一切无产阶级政党的最近目的一样的：使无产阶级形成为阶级，推翻资产阶级的统治，由无产阶级夺取政权。</p>
+                        <p>共产党人的理论原理，决不是以这个或那个世界改革家所臆想或发现的思想或原则为根据的。</p>
+                        <p>这些原理不过是现存的阶级斗争、我们眼前的历史运动的真实关系的一般表述。废除先前存在的所有制关系，并不是共产主义所独具的特征。</p>
+                        <p>一切所有制关系都曾经受到过经常的更改和革命。例如，一切封建的所有制关系，在封建制度被推翻后不久就被资产阶级的所有制关系所代替。</p>
+                        <p>共产党人可以把自己的理论概括为一句话：消灭私有制。</p>
+                        <p>有人责备我们共产党人，说我们消灭个人挣得的、自己劳动得来的财产，要消灭构成个人的一切自由、活动和独立的基础的财产。</p>
+                        <p>好一个劳动得来的、自己挣得的、自己赚来的财产！你们说的是资产阶级政权以前的那种小资产阶级的、小农的财产吗？那种财产用不着我们去消灭，工业的发展已经把它消灭了，而且每天都在消灭它。</p>
+                        <p>那种财产的占有者同资产者之间并没有更更多的共同利益。劳动者已经变成赤贫无产者，他们的生活条件已经降到资产阶级政权所依据的条件以下。整个社会将日益分裂为两大敌对的阵营：资产者和无产者。</p>
+                        <p>或者，你们责备我们，说我们要消灭你们资产阶级挣得的、个人所有的财产的个性吗？说我们要消灭你们个人劳动挣得的财产吗？这种财产的占有者就是你们自己。劳动财产吗？</p>
+                        <p>消灭个性吗！当然会的！正是要消灭资产阶级的个性，要消灭资产阶级的独立活动和自由活动。</p>
+                        <p>你们责备我们，说我们要消灭你们个人挣得的、自己劳动得来的财产，要消灭构成个人的一切自由、活动和独立的基础的财产。</p>
+                        <p>好一个劳动得来的、自己挣得的、自己赚来的财产！你们说的是资产阶级政权以前的那种小资产阶级的、小农的财产吗？那种财产用不着我们去消灭，工业的发展已经把它消灭了，而且每天都在消灭它。</p>
+                        <p>那种财产的占有者同资产者之间并没有更多的共同利益。劳动者已经变成赤贫无产者，他们的生活条件已经降到资产阶级政权所依据的条件以下。整个社会将日益分裂为两大敌对的阵营：资产者和无产者。</p>
+                        <p>雇佣劳动的平均价格是最低限度的工资，即只要为维持工人的生活所必需的生活资料的数额。因此，无产者为了维持自身的生活，就不得不从事更多的劳动，因而就不得不将自己的妻子儿女出卖给资本家去受资本的剥削。</p>
+                        <p>资产阶级生存和统治的根本条件，是财富在私人手里的积累，是资本的形成和增殖。资本的生存条件是雇佣劳动。雇佣劳动完全是建立在工人的自相竞争之上的。</p>
+                        <p>因此，资产阶级无意间造成而又无力抵抗的工业进步，使工人通过结社而达到的革命联合代替了他们通过竞争而进行的分散。因此，随着大工业的发展，资产阶级赖以生产和占有产品的基础本身也就从它的脚下被挖掉了。</p>
+                        <p>资产阶级用来推翻封建制度的武器，现在却对准资产阶级自己了。</p>
+                        <p>但是，资产阶级不仅锻造了置自身于死地的武器；它还造就了将运用这武器来反对它自己的人——现代的工人，即无产者。</p>
+                        <p>现在，我们来看看雇佣劳动的平均价格是怎样决定的。</p>
+                        <p>雇佣劳动的平均价格是最低限度的工资，即只要为维持工人的生活所必需的生活资料的数额。因此，无产者为了维持自身的生活，就不得不从事更多的劳动，因而就不得不将自己的妻子儿女出卖给资本家去受资本的剥削。</p>
+                        <p>但是，共产党人的目的并不是要废除一般的所有制，而只是要废除资产阶级的所有制。不过 brothers，共产党人可以在这里理直气壮地向你们宣布：你们的占有将不再存在，你们的资本主义所有制将不再存在。</p>
+                        <p>有人反驳说，私有制一消灭，一切活动就会停止，懒惰之风就会兴起。</p>
+                        <p>这样说来，资产阶级社会早就应该由于懒惰而灭亡了，因为在这个社会里是劳者不获，获者不劳的。所有这些顾虑，都可以归结为这样一个结论：既然从私有制中不能产生消除社会灾难的途径，既然这种结论是为资产阶级利益服务的，那么它自然就会对那些在实际上还没有确信资产阶级所有制必然崩溃的人们起安慰的作用。</p>
+                        <p>你们一听到我们要消灭私有制，就惊慌起来。但是，在你们的现存社会里，私有财产对十分之九的成员来说已经被消灭了；这种私有制之所以存在，正是因为私有财产对十分之九的成员来说已经不存在。</p>
+                        <p>共产党人从来没有提出要废除一般的所有制，他们只是提出要废除资产阶级的所有制。现代的资产阶级私有制是建筑在阶级对立上面、建筑在一些人对另一些人的剥削上面的产品和生产资料的占有形式。</p>
+                        <p>因此，废除资产阶级所有制，消灭这种所有制就成为废除其他一切所有制的社会基础。</p>
+                        <p>共产党的理论原理归结为一句话：消灭私有制。</p>
+                        <p>当阶级差别已经消失而全部生产集中在联合起来的个人的手里的时候，公共权力就失去政治性质。原来意义上的政治权力，是一个阶级用以压迫另一个阶级的有组织的暴力。</p>
+                        <p>代替那存在着各种阶级以及阶级对立的资产阶级旧社会的，将是一个联合体，在那里，每个人的自由发展是一切人的自由发展的条件。</p>
+                    </div>
+                </div>
+
+                <!-- 第三章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第三章 社会主义和共产主义的文献
+                    </h3>
+                    <div class="chapter-content">
+                        <p>在考察无产阶级运动的对立面——那些各种各样的社会主义和共产主义文献时，我们必须区分：</p>
+                        <p><strong>一、反动的社会主义</strong></p>
+                        <p>（甲）封建的社会主义：法国和英国的贵族，按照他们的历史地位所负的使命，在纸上反对资产阶级，他们只是感到愤慨而已。但是，为了激起同情，贵族们不得不装出一副无所事事的样子，把自己的愤怒发泄在资产阶级身上。</p>
+                        <p>（乙）小资产阶级的社会主义：德国和法国的历史表明，旧式封建贵族已经被资产阶级所取代，但同时又产生了小资产阶级，这个阶级力图恢复旧式封建秩序。批判的空想的社会主义和共产主义在这里第一次被提了出来。</p>
+                        <p>（丙）英国的宪章派和法国的改革派，他们代表社会的下层，代表被剥削的群众。他们的要求比较彻底，但是还受资产阶级的偏见影响。</p>
+                        <p><strong>二、保守的或资产阶级的社会主义</strong></p>
+                        <p>资产阶级中有一部分人想把资产阶级社会改变成某种不同于现存状况的东西，以便保障资产阶级社会的生存。这一部分人包括：经济学家、博爱主义者、人道主义者、劳资协调派、改良派、慈善家、禁酒主义者等。</p>
+                        <p><strong>三、批判的空想的社会主义和共产主义</strong></p>
+                        <p>这种社会主义在工人阶级中曾经发生过影响，但它的致命缺陷在于它把希望寄托在少数天才人物身上，而不是依靠无产阶级的集体行动。它反对一切政治行动，特别是一切革命行动。</p>
+                    </div>
+                </div>
+
+                <!-- 第四章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第四章 共产党人对各国政党的态度
+                    </h3>
+                    <div class="chapter-content">
+                        <p>共产党人对各国政党的态度，可以概括为：支持一切反对现存社会制度的革命运动。</p>
+                        <p>在法国，共产党人支持社会主义民主党来反对资产阶级激进派。</p>
+                        <p>在瑞士，共产党人支持激进派，但同时要注意工人阶级和其他阶级的对立。</p>
+                        <p>在波兰，共产党人支持1846年克拉科夫起义中的民族民主派。</p>
+                        <p>在德国，只要资产阶级采取革命行动，共产党人就支持它。</p>
+                        <p>共产党人一分钟也不忘记教育工人尽可能明确地意识到资产阶级和无产阶级的敌对和对立。</p>
+                        <p>德国资产阶级革命一完成，德国无产阶级就立刻联合起来反对资产阶级。</p>
+                        <p>最后，共产党人在各国无产者的斗争中强调和坚持整个无产阶级的不分民族的共同利益。</p>
+                        <p>在无产阶级和资产阶级的斗争所经历的各个发展阶段上，共产党人始终代表整个运动的利益。</p>
+                        <p>共产党人到处支持一切反对现存的社会制度和政治制度的革命运动。</p>
+                        <p>共产党人公开宣布：他们的目的只有用暴力推翻全部现存的社会制度才能达到。</p>
+                        <p>让统治阶级在共产主义革命面前发抖吧。无产者在这个革命中失去的只是锁链。他们获得的将是整个世界。</p>
+                        <p><strong>全世界无产者，联合起来！</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 读法提示 -->
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2>怎么读这篇文章</h2>
+                <div class="guide-block">
+                    <h3>① 先抓住一个核心概念：阶级斗争</h3>
+                    <p>"至今一切社会的历史都是阶级斗争的历史。"这句话是整个《宣言》的出发点。马克思用这句话宣告了一种新的历史观：历史不是英雄人物的传记，不是思想的演进史，而是阶级斗争的历史。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>② 理解"两个必然"</h3>
+                    <p>《宣言》的核心结论是：资本主义必然灭亡，社会主义必然胜利。这"两个必然"是马克思对人类社会发展规律的科学认识，不是道德呼吁，不是理想憧憬，而是基于对资本主义内在矛盾的科学分析。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>③ 重点读第一章</h3>
+                    <p>第一章"资产者和无产者"是全书最长也是最核心的部分，论证了：</p>
+                    <ul>
+                        <li>资产阶级在历史上的革命作用</li>
+                        <li>资本主义的基本矛盾（生产社会化与生产资料私人占有）</li>
+                        <li>无产阶级的产生和壮大</li>
+                        <li>无产阶级的历史使命</li>
+                    </ul>
+                </div>
+                <div class="guide-block">
+                    <h3>④ 注意区分"资产阶级"和"资本主义"</h3>
+                    <p>马克思批判的是资本主义制度，不是个体的资产阶级分子。他在第一章肯定了资产阶级在历史上的革命作用，指出"资产阶级在它的不到一百年的阶级统治中所创造的生产力，比过去一切世代创造的全部生产力还要多，还要大"。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 难点解析 -->
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2>容易读错的地方</h2>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：《宣言》只是宣传品，没有学术价值</div>
+                    <div class="correct">✅ 正解：《宣言》是科学社会主义的奠基之作，包含了对资本主义生产方式的深刻分析。它的"两个必然"结论不是空洞的口号，而是建立在对生产力与生产关系矛盾运动的科学分析之上的。</div>
+                </div>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：马克思主张消灭一切私有财产</div>
+                    <div class="correct">✅ 正解：马克思区分了"资产阶级的所有制"和"个人劳动所得的财产"。他批判的是资本主义私有制——即少数人占有生产资料、剥削雇佣劳动的制度——而不是个人消费品。原文明确说："共产主义并不剥夺任何人占有社会产品的权力，它只是剥夺利用这种占有去奴役他人劳动的权力。"</div>
+                </div>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：《宣言》主张立即实现共产主义</div>
+                    <div class="correct">✅ 正解：《宣言》区分了无产阶级革命的最近目标（夺取政权）和最终目标（消灭阶级差别，建立共产主义社会）。它指出了一个过渡时期——在这个时期，无产阶级需要建立自己的政治统治，即无产阶级专政。</div>
+                </div>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读："全世界无产者，联合起来！"只是一句口号</div>
+                    <div class="correct">✅ 正解：这句话体现了马克思主义的国际主义原则。马克思指出，无产阶级的解放是国际性的事业，单个国家的无产阶级不可能单独完成消灭资本主义的历史任务。"工人没有祖国"，但这不意味着否认民族差别，而是要求各国无产阶级超越民族局限性，在国际联合中实现解放。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对话空间 -->
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2>这篇文章在回应谁？又在问谁？</h2>
+
+                <div class="dialogue-block">
+                    <h3>它在回应的问题</h3>
+                    <ul>
+                        <li>封建残余势力：马克思回应了他们对共产主义的恐惧和攻击</li>
+                        <li>资产阶级：马克思分析了资本主义的内在矛盾，指出其历史暂时性</li>
+                        <li>早期社会主义流派：马克思批判了封建社会主义、小资产阶级社会主义、空想社会主义的错误</li>
+                        <li>工人阶级：马克思指出了无产阶级的历史地位和历史使命</li>
+                    </ul>
+                </div>
+
+                <div class="dialogue-block">
+                    <h3>它在问每一个读者</h3>
+                    <ul>
+                        <li>你站在哪个阶级一边？你的利益与哪个阶级一致？</li>
+                        <li>你能看清你所处社会的基本矛盾吗？</li>
+                        <li>你是否意识到历史发展的规律？</li>
+                        <li>你准备为改造世界做些什么？</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行动实验 -->
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2>读完之后可以做什么</h2>
+
+                <div class="action-item">
+                    <h3>实验一：分析你所处的社会阶层</h3>
+                    <p>用《宣言》的阶级分析方法，分析你周围的社会结构：</p>
+                    <ul>
+                        <li>哪些人占有生产资料？哪些人靠出卖劳动力为生？</li>
+                        <li>不同阶层之间的利益关系是怎样的？</li>
+                        <li>社会的主要矛盾是什么？</li>
+                    </ul>
+                </div>
+
+                <div class="action-item">
+                    <h3>实验二：观察资本主义的当代表现</h3>
+                    <p>《宣言》写作170多年后的今天，资本主义发生了很多变化，但基本矛盾依然存在：</p>
+                    <ul>
+                        <li>2008年金融危机、2020年疫情危机：生产过剩与有效需求不足的矛盾</li>
+                        <li>贫富分化加剧：资产阶级与无产阶级的对立</li>
+                        <li>全球南北差距：国际范围的阶级分化</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 一目了然 -->
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2>一目了然</h2>
+
+                <div class="chart-block">
+                    <h3>《共产党宣言》核心论点</h3>
+                    <p class="chart-desc">四个核心论点的逻辑关系</p>
+                    <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:20px 0;">
+                        <div style="background:#c41e3a;color:white;padding:20px;border-radius:8px;text-align:center;min-width:200px;">
+                            <strong>历史观</strong><br>
+                            <small>阶级斗争是历史动力</small>
+                        </div>
+                        <div style="font-size:2em;color:#999;">→</div>
+                        <div style="background:#c41e3a;color:white;padding:20px;border-radius:8px;text-align:center;min-width:200px;">
+                            <strong>现状分析</strong><br>
+                            <small>资本主义的基本矛盾</small>
+                        </div>
+                        <div style="font-size:2em;color:#999;">→</div>
+                        <div style="background:#c41e3a;color:white;padding:20px;border-radius:8px;text-align:center;min-width:200px;">
+                            <strong>历史结论</strong><br>
+                            <small>两个必然</small>
+                        </div>
+                        <div style="font-size:2em;color:#999;">→</div>
+                        <div style="background:#c41e3a;color:white;padding:20px;border-radius:8px;text-align:center;min-width:200px;">
+                            <strong>行动指南</strong><br>
+                            <small>无产阶级革命</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>资产阶级的历史作用</h3>
+                    <p class="chart-desc">马克思对资产阶级的历史评价</p>
+                    <div style="background:#f9f9f9;padding:20px;border-radius:8px;margin:10px 0;">
+                        <p style="margin:0;line-height:1.8;"><strong>肯定：</strong>资产阶级在历史上起过非常革命的作用。它破坏了封建关系，创造了巨大的生产力，开拓了世界市场。</p>
+                    </div>
+                    <div style="background:#fff0f0;padding:20px;border-radius:8px;margin:10px 0;">
+                        <p style="margin:0;line-height:1.8;"><strong>批判：</strong>但资产阶级关系已经太狭窄了，再容纳不了它本身所造成的财富了。它锻造了置自身于死地的武器。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 理论拼图 -->
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2>在马哲体系中的位置</h2>
+                <div class="puzzle-map">
+                    <div class="puzzle-intro">
+                        <p>《共产党宣言》是马克思主义公开问世的标志。它综合了马克思主义哲学（唯物史观）、政治经济学（剩余价值理论的萌芽）和科学社会主义的基本原理。</p>
+                    </div>
+                    <div class="puzzle-position">
+                        <h3>《共产党宣言》在马哲体系中的坐标</h3>
+                        <div class="theory-tree">
+                            <div class="theory-node root">马克思主义</div>
+                            <div class="theory-branches">
+                                <div class="theory-branch">
+                                    <div class="theory-node branch">哲学基础</div>
+                                    <div class="theory-sub">
+                                        <div class="theory-node related">唯物史观<br><small>《德意志意识形态》</small></div>
+                                    </div>
+                                </div>
+                                <div class="theory-branch">
+                                    <div class="theory-node branch">政治经济学</div>
+                                    <div class="theory-sub">
+                                        <div class="theory-node related">剩余价值理论<br><small>《资本论》</small></div>
+                                    </div>
+                                </div>
+                                <div class="theory-branch">
+                                    <div class="theory-node current">科学社会主义<br><small>《宣言》的核心</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="puzzle-connection">
+                        <h3>与其他经典的联结</h3>
+                        <ul>
+                            <li>→ 《资本论》：将《宣言》中的初步分析发展为完整的政治经济学体系</li>
+                            <li>→ 《法兰西内战》：总结巴黎公社经验，发展无产阶级专政理论</li>
+                            <li>→ 列宁《国家与革命》：在帝国主义时代继承和发展《宣言》的基本思想</li>
+                            <li>→ 毛泽东《新民主主义论》：将《宣言》思想与中国实际结合</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 延伸阅读 -->
+        <div class="tab-content" id="further">
+            <div class="further-reading">
+                <h2>延伸阅读</h2>
+                <div class="reading-item">
+                    <h3>如果《宣言》让你思考阶级分析方法</h3>
+                    <p>→ 读恩格斯《家庭、私有制和国家的起源》——深入理解阶级和国家的起源</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果《宣言》让你想了解资本主义经济运行</h3>
+                    <p>→ 读《资本论》第一卷——系统分析剩余价值的生产过程</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果《宣言》让你想了解列宁的继承发展</h3>
+                    <p>→ 读《国家与革命》——马克思主义国家学说的系统阐述</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果《宣言》让你思考中国特色社会主义</h3>
+                    <p>→ 读毛泽东《新民主主义论》——马克思主义中国化的经典著作</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        /* ===== 政治理论深蓝渐变头部 ===== */
+        .article-detail {
+            max-width: 900px;
+            margin: 80px auto 60px;
+            padding: 0 20px;
+        }
+
+        .article-header {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-bottom: 2px solid #1a237e;
+            color: white;
+            background: linear-gradient(135deg, #0d1259 0%, #1a237e 50%, #3949ab 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3Ccircle cx='20' cy='80' r='25' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='0.5'/%3E%3Ccircle cx='80' cy='20' r='20' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 120px;
+            pointer-events: none;
+        }
+
+        .article-header > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .importance-badge {
+            display: inline-block;
+            background: rgba(255,215,0,0.9);
+            color: #1a237e;
+            padding: 6px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+            text-shadow: 2px 3px 6px rgba(0,0,0,0.4);
+            font-family: 'STSong', 'SimSun', serif;
+        }
+
+        .article-subtitle {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin: 0.5rem 0;
+            font-style: italic;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .article-meta span {
+            background: rgba(0,0,0,0.25);
+            padding: 5px 14px;
+            border-radius: 18px;
+            backdrop-filter: blur(4px);
+        }
+
+        .article-meta .author { font-weight: 600; }
+        .article-meta .category { color: rgba(255,215,0,0.9); }
+
+        .tab-nav { 
+            display: flex; 
+            gap: 4px; 
+            margin: 30px 0 0; 
+            border-bottom: 2px solid #e2e8f0; 
+            overflow-x: auto; 
+            background: #f8f8f8;
+            padding: 1rem;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 18px;
+            cursor: pointer;
+            color: #666;
+            font-size: 0.95em;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            transition: all 0.2s;
+            border-radius: 8px;
+        }
+
+        .tab-btn:hover { background: #e8e8e8; color: #1a237e; }
+        .tab-btn.active { background: #1a237e; color: white; font-weight: 600; }
+
+        .tab-content {
+            display: none;
+            padding: 30px 0;
+            background: white;
+            border-radius: 0 0 12px 12px;
+        }
+        .tab-content.active { display: block; }
+
+        /* 原文样式 */
+        .text-intro {
+            background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+            border-left: 4px solid #3949ab;
+            padding: 14px 20px;
+            margin-bottom: 24px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .chapter {
+            margin-bottom: 16px;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .chapter-title {
+            background: linear-gradient(135deg, #1a237e, #3949ab);
+            padding: 14px 20px;
+            margin: 0;
+            cursor: pointer;
+            font-size: 1.05em;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            user-select: none;
+            transition: filter 0.2s;
+        }
+
+        .chapter-title:hover { filter: brightness(1.1); }
+
+        .toggle-icon {
+            font-size: 0.8em;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .chapter-title.collapsed .toggle-icon { transform: rotate(-90deg); }
+
+        .chapter-content {
+            padding: 20px 24px;
+            line-height: 1.9;
+            color: #2d2d2d;
+            font-size: 1em;
+            background: #fafafa;
+        }
+
+        .chapter-content p {
+            margin-bottom: 16px;
+            text-indent: 2em;
+        }
+
+        /* 通用栏目样式 */
+        .reading-guide, .difficulty-section, .dialogue-section,
+        .action-section, .visualization-section, .puzzle-section, .further-reading {
+            line-height: 1.9;
+        }
+
+        .guide-block, .diff-item, .dialogue-block, .action-item,
+        .chart-block, .reading-item {
+            margin-bottom: 28px;
+            padding: 20px 24px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .guide-block h3, .dialogue-block h3, .action-item h3 {
+            color: #1a237e;
+            margin-bottom: 12px;
+            font-size: 1.05em;
+        }
+
+        .wrong {
+            background: #fff5f5;
+            border-left: 4px solid #fc8181;
+            padding: 10px 16px;
+            margin-bottom: 10px;
+            border-radius: 0 4px 4px 0;
+            color: #742a2a;
+        }
+
+        .correct {
+            background: #f0fff4;
+            border-left: 4px solid #68d391;
+            padding: 10px 16px;
+            border-radius: 0 4px 4px 0;
+            color: #1a4731;
+        }
+
+        .chart-block h3 { color: #1a237e; margin-bottom: 8px; }
+        .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
+
+        /* 理论树 */
+        .theory-tree {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .theory-node {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            margin: 6px;
+        }
+        .theory-node.root { background: #1a237e; color: white; font-weight: bold; }
+        .theory-node.branch { background: #2d3748; color: white; }
+        .theory-node.current { background: #1a237e; color: white; font-weight: bold; }
+        .theory-node.related { background: #e2e8f0; color: #333; }
+        .theory-branches { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 12px; }
+        .theory-branch { text-align: center; }
+        .theory-sub { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
+
+        .further-reading .reading-item h3 { color: #1a237e; margin-bottom: 8px; font-size: 1em; }
+
+        /* ===== Dark Mode ===== */
+        body.dark-mode .article-header {
+            background: linear-gradient(135deg, #0a0a15 0%, #0d0d20 100%);
+        }
+        body.dark-mode .tab-nav {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        body.dark-mode .tab-btn:hover {
+            background: #3a3a3a;
+            color: #3949ab;
+        }
+        body.dark-mode .tab-content {
+            background: #1a1a1a;
+        }
+        body.dark-mode .text-intro {
+            background: linear-gradient(135deg, #1a1a2e, #252540);
+        }
+        body.dark-mode .chapter {
+            border-color: #444;
+        }
+        body.dark-mode .chapter-content {
+            background: #222;
+        }
+        body.dark-mode .chapter-content p {
+            color: #e0e0e0;
+        }
+        body.dark-mode .guide-block, body.dark-mode .diff-item, body.dark-mode .dialogue-block, 
+        body.dark-mode .action-item, body.dark-mode .chart-block, body.dark-mode .reading-item {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        body.dark-mode .guide-block h3, body.dark-mode .dialogue-block h3, body.dark-mode .action-item h3,
+        body.dark-mode .chart-block h3 {
+            color: #7986cb;
+        }
+        body.dark-mode .wrong {
+            background: #2d1a1a;
+            color: #ef5350;
+        }
+        body.dark-mode .correct {
+            background: #1a2a1a;
+            color: #66bb6a;
+        }
+        body.dark-mode .theory-node.related {
+            background: #333;
+            color: #e0e0e0;
+        }
+    </style>
+
+    <script>
+        // 标签切换
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (btn) btn.classList.add('active');
+        }
+
+        // 章节折叠
+        function toggleChapter(titleEl) {
+            const content = titleEl.nextElementSibling;
+            titleEl.classList.toggle('collapsed');
+            content.style.display = titleEl.classList.contains('collapsed') ? 'none' : 'block';
+        }
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>

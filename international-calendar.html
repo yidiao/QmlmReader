@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国际共运日历 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #8b0000 0%, #c41e3a 50%, #dc143c 100%);
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffd700' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; position: relative; }
+        .page-header p { font-size: 1rem; opacity: 0.9; position: relative; }
+        
+        /* 主布局 */
+        .calendar-layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+        
+        /* 左侧月份列表 */
+        .month-sidebar {
+            width: 90px;
+            flex-shrink: 0;
+        }
+        .month-sidebar h3 {
+            color: #c41e3a;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .month-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .month-list-item {
+            padding: 10px 6px;
+            border: 1px solid #e8c36a;
+            background: linear-gradient(135deg, #fffef5 0%, #fff8dc 100%);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            color: #8b0000;
+        }
+        .month-list-item:hover {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+            border-color: #ffd700;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+            color: #8b0000;
+        }
+        .month-list-item.active {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            border-color: #c41e3a;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.5);
+        }
+        
+        /* 右侧日历区域 */
+        .calendar-content {
+            flex: 1;
+        }
+        .filter-section {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .filter-chip {
+            padding: 0.5rem 1.2rem;
+            border: 2px solid #e8c36a;
+            background: linear-gradient(135deg, #fffef5 0%, #fff8dc 100%);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            color: #8b0000;
+        }
+        .filter-chip:hover {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+            border-color: #ffd700;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
+        }
+        .filter-chip.active {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            border-color: #c41e3a;
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(196, 30, 58, 0.4);
+        }
+        
+        /* 日历网格 */
+        .calendar-grid {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 2px solid #e8c36a;
+        }
+        .weekday-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: linear-gradient(135deg, #8b0000 0%, #c41e3a 100%);
+        }
+        .weekday {
+            padding: 0.8rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #ffd700;
+            letter-spacing: 1px;
+        }
+        .weekday:first-child, .weekday:last-child { color: #ffb347; }
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: #fdfcf0;
+        }
+        .day-cell {
+            min-height: 90px;
+            padding: 0.5rem;
+            border: 1px solid #f0e6c8;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .day-cell:hover {
+            background: linear-gradient(135deg, #fffef5 0%, #fff8dc 100%);
+            box-shadow: inset 0 0 0 2px rgba(196, 30, 58, 0.3);
+        }
+        .day-cell.empty {
+            background: #fdfcf5;
+            cursor: default;
+        }
+        .day-cell.empty:hover {
+            background: #fdfcf5;
+            box-shadow: none;
+        }
+        .day-cell.has-event {
+            background: linear-gradient(180deg, #fff9f0 0%, #fff 80%);
+        }
+        .day-cell.has-event::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ffd700, #ffb347, #c41e3a);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .day-cell.has-event:hover::after {
+            opacity: 1;
+        }
+        .day-cell.selected {
+            box-shadow: inset 0 0 0 3px #c41e3a;
+            background: #fff8f0;
+        }
+        .day-number {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+            color: #8b0000;
+        }
+        .day-cell:first-child .day-number, .day-cell:last-child .day-number {
+            color: #c41e3a;
+        }
+        .event-preview {
+            font-size: 0.7rem;
+            color: #666;
+            line-height: 1.3;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            flex: 1;
+        }
+        .event-preview-year {
+            font-size: 0.6rem;
+            color: #c41e3a;
+            font-weight: 600;
+        }
+        
+        /* 日期弹窗 */
+        .day-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            max-width: 520px;
+            width: 90%;
+            z-index: 2000;
+            box-shadow: 0 25px 80px rgba(139, 0, 0, 0.3);
+            border: 2px solid #ffd700;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .day-popup.active {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(139, 0, 0, 0.5);
+            z-index: 1999;
+            backdrop-filter: blur(4px);
+        }
+        .popup-overlay.active { display: block; }
+        .popup-header {
+            background: linear-gradient(135deg, #8b0000 0%, #c41e3a 50%, #dc143c 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-radius: 18px 18px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .popup-header h3 { margin: 0; font-size: 1.3rem; font-weight: 600; }
+        .popup-close {
+            background: rgba(255, 215, 0, 0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .popup-close:hover {
+            background: rgba(255, 215, 0, 0.4);
+            transform: rotate(90deg);
+        }
+        .popup-body {
+            padding: 1.5rem 2rem 2rem;
+            max-height: 450px;
+            overflow-y: auto;
+        }
+        .popup-event {
+            display: flex;
+            gap: 1rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid #f0e6c8;
+            transition: background 0.2s;
+        }
+        .popup-event:last-child { border-bottom: none; }
+        .popup-event:hover {
+            background: #fffef5;
+            margin: 0 -1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border-radius: 10px;
+        }
+        .popup-event-year {
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffd700, #ffb347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.2rem;
+            min-width: 55px;
+        }
+        .popup-event-nature {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .popup-event-nature.positive { background: linear-gradient(135deg, #228b22, #32cd32); }
+        .popup-event-nature.negative { background: linear-gradient(135deg, #8b0000, #c41e3a); }
+        .popup-event-nature.neutral { background: linear-gradient(135deg, #ffd700, #ffb347); }
+        .popup-event-content { flex: 1; }
+        .popup-event-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+            color: #8b0000;
+        }
+        .popup-event-desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        .popup-empty {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #999;
+        }
+        .popup-empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        /* 深色模式 */
+        body.dark-mode .calendar-grid { background: #1e1e2e; border-color: #444; }
+        body.dark-mode .day-cell { background: #252536; border-color: #333; }
+        body.dark-mode .day-cell.empty { background: #1a1a28; }
+        body.dark-mode .weekday-header { background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); }
+        body.dark-mode .days-grid { background: #1a1a28; }
+        body.dark-mode .month-list-item { background: #252536; border-color: #444; color: #ffd700; }
+        body.dark-mode .month-list-item:hover { background: #333; }
+        body.dark-mode .month-list-item.active { background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); color: white; }
+        body.dark-mode .filter-chip { background: #252536; border-color: #444; color: #ffd700; }
+        body.dark-mode .filter-chip:hover { background: #333; }
+        body.dark-mode .filter-chip.active { background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%); color: white; }
+        
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            .calendar-layout { flex-direction: column; padding: 1rem; }
+            .month-sidebar { width: 100%; }
+            .month-sidebar h3 { text-align: left; }
+            .month-list { grid-template-columns: repeat(4, 1fr); }
+            .day-cell { min-height: 75px; padding: 0.3rem; }
+            .day-number { font-size: 0.9rem; }
+        }
+        @media (max-width: 500px) {
+            .month-list { grid-template-columns: repeat(3, 1fr); }
+            .day-cell { min-height: 65px; }
+            .popup-body { padding: 1rem 1.2rem 1.5rem; }
+            .popup-header { padding: 1rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">首页</a>
+                <a href="articles.html">文章</a>
+                <a href="masters.html">导师</a>
+                <a href="toolkit.html">工具集</a>
+                <a href="gallery.html">文艺</a>
+                <a href="puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="international.html" class="active">🌍 国际共运</a>
+                <a href="rectify.html">正名</a>
+                <a href="about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>☭ 国际共运日历</h1>
+            <p>国际共产主义运动历史上的今天 | 1848-1991</p>
+        </section>
+
+        <div class="calendar-layout">
+            <!-- 左侧：月份列表 -->
+            <div class="month-sidebar">
+                <h3>选择月份</h3>
+                <div class="month-list" id="monthList"></div>
+            </div>
+            
+            <!-- 右侧：日历内容 -->
+            <div class="calendar-content">
+                <div class="filter-section">
+                    <button class="filter-chip active" data-filter="all">全部</button>
+                    <button class="filter-chip" data-filter="revolution">革命事件</button>
+                    <button class="filter-chip" data-filter="war">战争军事</button>
+                    <button class="filter-chip" data-filter="political">政治事件</button>
+                    <button class="filter-chip" data-filter="person">人物</button>
+                </div>
+
+                <div class="calendar-grid">
+                    <div class="weekday-header">
+                        <div class="weekday">周日</div>
+                        <div class="weekday">周一</div>
+                        <div class="weekday">周二</div>
+                        <div class="weekday">周三</div>
+                        <div class="weekday">周四</div>
+                        <div class="weekday">周五</div>
+                        <div class="weekday">周六</div>
+                    </div>
+                    <div class="days-grid" id="daysGrid"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 日期弹窗 -->
+        <div class="popup-overlay" id="popupOverlay" onclick="closeDayPopup()"></div>
+        <div class="day-popup" id="dayPopup">
+            <div class="popup-header">
+                <h3 id="popupTitle">日期事件</h3>
+                <button class="popup-close" onclick="closeDayPopup()">×</button>
+            </div>
+            <div class="popup-body" id="popupBody"></div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="data/history-events.js"></script>
+    <script>
+        const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+        
+        let currentMonth = new Date().getMonth() + 1;
+        let currentYear = new Date().getFullYear();
+        let currentFilter = 'all';
+
+        function initMonthList() {
+            const list = document.getElementById('monthList');
+            list.innerHTML = monthNames.map((m, i) => 
+                `<div class="month-list-item${i+1 === currentMonth ? ' active' : ''}" data-month="${i+1}">${m}</div>`
+            ).join('');
+            list.querySelectorAll('.month-list-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    currentMonth = parseInt(item.dataset.month);
+                    updateMonthDisplay();
+                    renderCalendar();
+                });
+            });
+        }
+
+        function updateMonthDisplay() {
+            document.querySelectorAll('.month-list-item').forEach(item => {
+                item.classList.toggle('active', parseInt(item.dataset.month) === currentMonth);
+            });
+        }
+
+        function renderCalendar() {
+            const grid = document.getElementById('daysGrid');
+            const firstDay = new Date(currentYear, currentMonth - 1, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+            const today = new Date();
+            
+            let html = '';
+            for (let i = 0; i < firstDay; i++) {
+                html += '<div class="day-cell empty"></div>';
+            }
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayEvents = getEventsForDay(day);
+                const hasEvent = dayEvents.length > 0;
+                const isToday = today.getDate() === day && today.getMonth() + 1 === currentMonth && today.getFullYear() === currentYear;
+                
+                let previewHtml = '';
+                if (dayEvents.length > 0) {
+                    // 显示当天最著名的一个事件（取第一条）
+                    const topEvent = dayEvents[0];
+                    previewHtml = `
+                        <div class="event-preview-year">${topEvent.year}年</div>
+                        <div class="event-preview">${topEvent.title}</div>
+                    `;
+                }
+                
+                html += `
+                    <div class="day-cell${hasEvent ? ' has-event' : ''}" 
+                         data-day="${day}" onclick="showDayPopup(${day})">
+                        <div class="day-number"${isToday ? ' style="color:#ffd700;font-weight:bold;text-shadow:0 0 10px rgba(255,215,0,0.5);"' : ''}>${day}</div>
+                        ${previewHtml}
+                    </div>
+                `;
+            }
+            
+            grid.innerHTML = html;
+        }
+
+        function getEventsForDay(day) {
+            const events = historyData[currentMonth] || [];
+            return events.filter(e => {
+                // 从 "1月1日" 格式中提取月份和日期
+                const match = e.date.match(/(\d+)月(\d+)日/);
+                if (!match) return false;
+                const eventMonth = parseInt(match[1]);
+                const eventDay = parseInt(match[2]);
+                // 确保月份匹配且日期匹配
+                if (eventMonth !== currentMonth) return false;
+                if (eventDay !== day) return false;
+                if (currentFilter !== 'all' && e.category !== currentFilter) return false;
+                return true;
+            });
+        }
+
+        function showDayPopup(day) {
+            const events = getEventsForDay(day);
+            const popup = document.getElementById('dayPopup');
+            const overlay = document.getElementById('popupOverlay');
+            const title = document.getElementById('popupTitle');
+            const body = document.getElementById('popupBody');
+            
+            title.textContent = `${currentMonth}月${day}日`;
+            
+            if (events.length === 0) {
+                body.innerHTML = '<div class="popup-empty"><div class="popup-empty-icon">📭</div>这一天没有记录</div>';
+            } else {
+                body.innerHTML = events.map(e => `
+                    <div class="popup-event">
+                        <div class="popup-event-year">${e.year}年</div>
+                        <div class="popup-event-nature ${e.nature}"></div>
+                        <div class="popup-event-content">
+                            <div class="popup-event-title">${e.title}</div>
+                            <div class="popup-event-desc">${e.desc || ''}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            popup.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        function closeDayPopup() {
+            document.getElementById('dayPopup').classList.remove('active');
+            document.getElementById('popupOverlay').classList.remove('active');
+        }
+
+        // 事件筛选
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                currentFilter = chip.dataset.filter;
+                document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                renderCalendar();
+            });
+        });
+
+        // 初始化
+        initMonthList();
+        updateMonthDisplay();
+        renderCalendar();
+    </script>
+</body>
+</html>

@@ -73,9 +73,8 @@
                         <p class="music-desc">中华人民共和国国歌</p>
                     </div>
                 </div>
+                
             </section>
-
-            <!-- 推荐视频 -->
             <section class="gallery-section" id="videos">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
                     <h3 class="gallery-title" style="margin:0;"> 推荐视频</h3>
@@ -118,6 +117,7 @@
                         <a href="https://www.bilibili.com/video/BV16bByBREDk" target="_blank" class="video-link">b站观看 →</a>
                     </div>
                 </div>
+                
             </section>
 
             <!-- 宣传海报 -->
@@ -148,31 +148,41 @@
                         <p class="poster-desc">（待整理）</p>
                     </div>
                 </div>
+               
             </section>
 
             <!-- 经典语录 -->
             <section class="gallery-section" id="quotes">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-                    <h3 class="gallery-title" style="margin:0;"> 经典语录</h3>
-                    <a href="gallery/quotes.html" style="color:var(--primary-color);font-size:0.9rem;font-weight:500;">查看全部 →</a>
+                    <h3 class="gallery-title" style="margin:0;"> 💬 经典语录</h3>
+                    <a href="gallery/quotes.html" style="color:var(--primary-color);font-size:0.9rem;font-weight:500;">查看全部（33条，含历史简析）→</a>
                 </div>
+                <p style="color:#888;font-size:0.88rem;margin-bottom:1rem;">点击任意语录查看完整历史背景与含义简析，避免断章取义</p>
                 <div class="quotes-grid">
-                    <blockquote class="quote-card">
-                        <p>"一个幽灵，共产主义的幽灵，在欧洲游荡。"</p>
-                        <cite>—— 马克思、恩格斯《共产党宣言》</cite>
-                    </blockquote>
-                    <blockquote class="quote-card">
-                        <p>"工人没有祖国。"</p>
-                        <cite>—— 马克思、恩格斯《共产党宣言》</cite>
-                    </blockquote>
-                    <blockquote class="quote-card">
-                        <p>"帝国主义是资本主义的最高阶段。"</p>
-                        <cite>—— 列宁</cite>
-                    </blockquote>
-                    <blockquote class="quote-card">
-                        <p>"为人民服务。"</p>
-                        <cite>—— 毛泽东</cite>
-                    </blockquote>
+                    <a href="gallery/quotes.html" onclick="sessionStorage.setItem('openQuote','mao-4')" class="quote-card" style="text-decoration:none;color:inherit;display:block;">
+                        <p>"一切反动派都是纸老虎。"</p>
+                        <cite>—— 毛泽东（1946）</cite>
+                    </a>
+                    <a href="gallery/quotes.html" onclick="sessionStorage.setItem('openQuote','mao-12')" class="quote-card" style="text-decoration:none;color:inherit;display:block;">
+                        <p>"不解决桥或船的问题，过河就是一句空话。"</p>
+                        <cite>—— 毛泽东《关心群众生活》</cite>
+                    </a>
+                    <a href="gallery/quotes.html" onclick="sessionStorage.setItem('openQuote','marx-4')" class="quote-card" style="text-decoration:none;color:inherit;display:block;">
+                        <p>"问题在于改变世界。"</p>
+                        <cite>—— 马克思《关于费尔巴哈的提纲》</cite>
+                    </a>
+                    <a href="gallery/quotes.html" onclick="sessionStorage.setItem('openQuote','lenin-2')" class="quote-card" style="text-decoration:none;color:inherit;display:block;">
+                        <p>"没有革命的理论，就不会有革命的运动。"</p>
+                        <cite>—— 列宁《怎么办？》</cite>
+                    </a>
+                    <a href="gallery/quotes.html" onclick="sessionStorage.setItem('openQuote','stalin-1')" class="quote-card" style="text-decoration:none;color:inherit;display:block;">
+                        <p>"落后就要挨打。"</p>
+                        <cite>—— 斯大林</cite>
+                    </a>
+                    <a href="gallery/quotes.html" onclick="sessionStorage.setItem('openQuote','mao-5')" class="quote-card" style="text-decoration:none;color:inherit;display:block;">
+                        <p>"没有调查，就没有发言权。"</p>
+                        <cite>—— 毛泽东《反对本本主义》</cite>
+                    </a>
                 </div>
             </section>
         </div>

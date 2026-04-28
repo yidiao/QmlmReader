@@ -276,7 +276,7 @@
         <div class="puzzle-header">
             <div>
                 <h1>☭ 马哲理论拼图</h1>
-                <p>每一篇文章都是一块拼图——点击查看它在马哲体系中的位置与贡献</p>
+                <p>从《共产党宣言》到《实践论》——点击查看马克思主义发展脉络中的每一块拼图</p>
             </div>
             <div class="puzzle-controls">
                 <button class="ctrl-btn" onclick="zoomIn()">＋ 放大</button>
@@ -349,6 +349,83 @@
                     <line x1="120" y1="700" x2="2100" y2="700" stroke="rgba(0,0,0,0.06)" stroke-width="1" stroke-dasharray="4,8"/>
                     <line x1="120" y1="900" x2="2100" y2="900" stroke="rgba(0,0,0,0.06)" stroke-width="1" stroke-dasharray="4,8"/>
                     <line x1="120" y1="950" x2="2100" y2="950" stroke="rgba(0,0,0,0.06)" stroke-width="1" stroke-dasharray="4,8"/>
+
+                    <!-- ===== 马克思主义源头区域（左侧） ===== -->
+                    <!-- 区域标签 -->
+                    <text x="180" y="80" text-anchor="middle" font-size="13" fill="#8b0000" opacity="0.7" font-family="-apple-system, sans-serif" font-weight="500">马克思主义源头</text>
+                    <text x="180" y="98" text-anchor="middle" font-size="10" fill="#999" opacity="0.7" font-family="-apple-system, sans-serif">理论根基</text>
+
+                    <!-- 马克思恩格斯时间轴（左侧独立区域） -->
+                    <line x1="180" y1="120" x2="180" y2="1280" stroke="#8b0000" stroke-width="1.5" opacity="0.35"/>
+                    <circle cx="180" cy="180" r="3" fill="#8b0000" opacity="0.5"/>
+                    <text x="168" y="184" text-anchor="end" font-size="10" fill="#999" font-family="-apple-system, sans-serif">1848</text>
+                    <circle cx="180" cy="380" r="3" fill="#8b0000" opacity="0.5"/>
+                    <text x="168" y="384" text-anchor="end" font-size="10" fill="#999" font-family="-apple-system, sans-serif">1867</text>
+                    <circle cx="180" cy="500" r="3" fill="#8b0000" opacity="0.5"/>
+                    <text x="168" y="504" text-anchor="end" font-size="10" fill="#999" font-family="-apple-system, sans-serif">1875</text>
+                    <circle cx="180" cy="700" r="3" fill="#d4a017" opacity="0.5"/>
+                    <text x="168" y="704" text-anchor="end" font-size="10" fill="#999" font-family="-apple-system, sans-serif">1902</text>
+                    <circle cx="180" cy="880" r="3" fill="#d4a017" opacity="0.5"/>
+                    <text x="168" y="884" text-anchor="end" font-size="10" fill="#999" font-family="-apple-system, sans-serif">1916</text>
+                    <circle cx="180" cy="1060" r="3" fill="#d4a017" opacity="0.5"/>
+                    <text x="168" y="1064" text-anchor="end" font-size="10" fill="#999" font-family="-apple-system, sans-serif">1917</text>
+
+                    <!-- 马克思恩格斯节点连线（修复：所有终点指向实际存在的节点） -->
+                    <path d="M180,180 Q220,260 260,460" fill="none" stroke="#8b0000" stroke-width="1.8" opacity="0.45" />
+                    <path d="M180,180 Q230,340 260,580" fill="none" stroke="#8b0000" stroke-width="1.8" opacity="0.45" />
+                    <path d="M180,180 Q380,250 780,220" fill="none" stroke="#8b0000" stroke-width="1.5" opacity="0.35" stroke-dasharray="6,4"/>
+                    <path d="M180,380 Q220,420 260,460" fill="none" stroke="#8b0000" stroke-width="1.5" opacity="0.35" />
+                    <path d="M180,700 Q350,680 700,600" fill="none" stroke="#d4a017" stroke-width="1.5" opacity="0.35" stroke-dasharray="6,4"/>
+                    <path d="M180,880 Q620,700 1440,300" fill="none" stroke="#d4a017" stroke-width="1.5" opacity="0.35" stroke-dasharray="6,4"/>
+                    <path d="M180,1060 Q700,900 1500,600" fill="none" stroke="#d4a017" stroke-width="1.5" opacity="0.35" stroke-dasharray="6,4"/>
+
+                    <!-- ===== 马克思恩格斯节点 ===== -->
+                    <g class="node-group" onclick="showCard('gongchandanyan')" transform="translate(180,180)">
+                        <circle class="node-circle" r="44" fill="#8b0000" opacity="0.92"/>
+                        <circle class="node-ring" r="48" fill="none" stroke="#8b0000" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">共产党宣言</text>
+                        <text class="node-label-sub" y="10">1848</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('zibenlun')" transform="translate(180,380)">
+                        <circle class="node-circle" r="40" fill="#8b0000" opacity="0.88"/>
+                        <text class="node-label" y="-4">资本论（第一卷）</text>
+                        <text class="node-label-sub" y="10">1867</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('gedagangling')" transform="translate(180,500)">
+                        <circle class="node-circle" r="34" fill="#8b0000" opacity="0.82"/>
+                        <text class="node-label" y="-4">哥达纲领批判</text>
+                        <text class="node-label-sub" y="10">1875</text>
+                        <text class="star-badge" y="28">★★★</text>
+                    </g>
+
+                    <!-- ===== 列宁节点 ===== -->
+                    <g class="node-group" onclick="showCard('zenmeban')" transform="translate(180,700)">
+                        <circle class="node-circle" r="40" fill="#d4a017" opacity="0.88"/>
+                        <circle class="node-ring" r="44" fill="none" stroke="#d4a017" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">怎么办？</text>
+                        <text class="node-label-sub" y="10">1902</text>
+                        <text class="star-badge" y="28">★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('diguo')" transform="translate(180,880)">
+                        <circle class="node-circle" r="44" fill="#d4a017" opacity="0.92"/>
+                        <circle class="node-ring" r="48" fill="none" stroke="#d4a017" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">帝国主义论</text>
+                        <text class="node-label-sub" y="10">1916</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
+
+                    <g class="node-group" onclick="showCard('guojiayugeming')" transform="translate(180,1060)">
+                        <circle class="node-circle" r="44" fill="#d4a017" opacity="0.92"/>
+                        <circle class="node-ring" r="48" fill="none" stroke="#d4a017" stroke-width="2" opacity="0.45"/>
+                        <text class="node-label" y="-8">国家与革命</text>
+                        <text class="node-label-sub" y="10">1917</text>
+                        <text class="star-badge" y="28">★★★★★</text>
+                    </g>
 
                     <!-- ===== 关联连线（贝塞尔曲线） ===== -->
                     <path d="M260,460 Q246,520 260,580" fill="none" stroke="#c41e3a" stroke-width="2.0" opacity="0.5" />
@@ -649,6 +726,7 @@
             <!-- 图例 -->
             <div class="legend">
                 <h4>图例</h4>
+                <div class="legend-item"><div class="legend-dot" style="background:#8b0000"></div> 马克思主义源头</div>
                 <div class="legend-item"><div class="legend-dot" style="background:#c41e3a"></div> 哲学基础</div>
                 <div class="legend-item"><div class="legend-dot" style="background:#3182ce"></div> 军事战略</div>
                 <div class="legend-item"><div class="legend-dot" style="background:#38a169"></div> 党的建设</div>
@@ -1057,6 +1135,68 @@
                 position: '将党内矛盾理论推向极端化的文献，是理解文革起源的关键文本。',
                 link: 'javascript:alert("🚧 正在施工，敬请期待！")',
                 stars: '★★'
+            },
+
+            // ===== 马克思恩格斯列宁文章数据 =====
+            gongchandanyan: {
+                title: '共产党宣言',
+                meta: '马克思恩格斯 · 1848年 · 科学社会主义奠基之作',
+                badge: '马克思主义源头',
+                badgeColor: '#8b0000',
+                desc: '科学社会主义的第一个纲领性文件。"一个幽灵，共产主义的幽灵，在欧洲游荡"——开篇即宣告了旧世界的掘墓人和新世界的创造者的历史使命。系统论述了阶级斗争学说、资本主义必然灭亡和共产主义必然胜利的历史规律。',
+                position: '整个马克思主义理论体系的源头。它确立了"阶级斗争是历史发展的直接动力"这一核心命题，是理解后来一切社会主义理论和实践的出发点。与《实践论》《矛盾论》构成"理论→方法→应用"的完整链条。',
+                link: 'articles/gongchan-dan-yuan.html',
+                stars: '★★★★★'
+            },
+            zibenlun: {
+                title: '资本论（第一卷）',
+                meta: '马克思 · 1867年 · 政治经济学奠基之作',
+                badge: '马克思主义源头',
+                badgeColor: '#8b0000',
+                desc: '马克思主义政治经济学的巅峰之作。通过对资本主义生产方式的深入分析，揭示了剩余价值的秘密，论证了资本主义必然灭亡的历史趋势。是马克思花费毕生心血完成的煌煌巨著。',
+                position: '《共产党宣言》中阶级斗争理论的经济学证明。它揭示了资本家剥削工人的具体机制（剩余价值），为无产阶级革命提供了科学的政治经济学依据。',
+                link: 'javascript:alert("🚧 正在施工，敬请期待！")',
+                stars: '★★★★★'
+            },
+            gedagangling: {
+                title: '哥达纲领批判',
+                meta: '马克思 · 1875年 · 共产主义发展阶段理论',
+                badge: '马克思主义源头',
+                badgeColor: '#8b0000',
+                desc: '批判拉萨尔主义的纲领草案，系统阐述共产主义社会两个阶段的理论——社会主义（共产主义第一阶段）和共产主义高级阶段，以及从资本主义到共产主义的过渡时期。',
+                position: '提出了共产主义发展的"两阶段"框架，为后来的社会主义建设理论奠定了基础。马克思关于"按劳分配"与"按需分配"的区分，至今仍是理解社会主义与共产主义区别的关键。',
+                link: 'javascript:alert("🚧 正在施工，敬请期待！")',
+                stars: '★★★'
+            },
+            zenmeban: {
+                title: '怎么办？',
+                meta: '列宁 · 1902年 · 建党理论奠基之作',
+                badge: '马克思主义源头',
+                badgeColor: '#d4a017',
+                desc: '系统阐述新型无产阶级政党学说，批判经济派的自发论，提出"灌输论"——社会主义意识只能从外面灌输进去，工人运动本身只能产生工联主义意识。奠定了布尔什维克党的思想基础。',
+                position: '将马克思主义与中国实际相结合的建党思想提供了理论范本。毛泽东的"思想建党"原则，与列宁的"灌输论"一脉相承。《矛盾论》中关于主观能动性的论述，正是对"自发论"与"灌输论"辩证综合的中国化表达。',
+                link: 'articles/lenin/zen-me-ban.html',
+                stars: '★★★★'
+            },
+            diguo: {
+                title: '帝国主义是资本主义的最高阶段',
+                meta: '列宁 · 1916年 · 帝国主义理论',
+                badge: '马克思主义源头',
+                badgeColor: '#d4a017',
+                desc: '系统分析帝国主义的五大特征：生产和资本集中、金融资本统治、资本输出、国际垄断同盟、列强瓜分世界。提出"帝国主义是资本主义的垄断阶段，也是垂死的阶段"的著名论断。',
+                position: '《共产党宣言》"资本主义必然灭亡"论断在帝国主义时代的深化。毛泽东"三个世界"理论的源头，为被压迫民族解放运动提供了理论依据。《矛盾论》中关于"主要矛盾与次要矛盾"的转化分析，在帝国主义时代的世界格局分析中得到了完美体现。',
+                link: 'javascript:alert("🚧 正在施工，敬请期待！")',
+                stars: '★★★★★'
+            },
+            guojiayugeming: {
+                title: '国家与革命',
+                meta: '列宁 · 1917年 · 国家与无产阶级专政理论',
+                badge: '马克思主义源头',
+                badgeColor: '#d4a017',
+                desc: '系统阐述马克思主义国家学说，论证国家的阶级本质，分析从资本主义到共产主义的过渡时期国家的性质。提出"打碎资产阶级国家机器"的著名论断，论述无产阶级专政的必要性。',
+                position: '为十月革命和一切无产阶级革命提供了国家学说的理论准备。《论人民民主专政》正是这一理论的中国化应用——毛泽东根据中国国情，创造性地提出"人民民主专政"的国家形式。',
+                link: 'javascript:alert("🚧 正在施工，敬请期待！")',
+                stars: '★★★★★'
             }
         };
 

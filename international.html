@@ -468,6 +468,10 @@
                     <div class="stat-number">4</div>
                     <div class="stat-label">大洲覆盖</div>
                 </div>
+                <div class="stat-item">
+                    <a href="international-calendar.html" style="display:block;text-decoration:none;color:#c41e3a;font-weight:bold;">📅 日历</a>
+                    <div class="stat-label">历史上的今天</div>
+                </div>
             </div>
 
             <!-- 年代筛选 -->
@@ -488,90 +492,90 @@
                         <radialGradient id="gradRed" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff4444" /><stop offset="100%" stop-color="#dc2626" /></radialGradient>
                         <radialGradient id="gradGold" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffd700" /><stop offset="100%" stop-color="#fbbf24" /></radialGradient>
                     </defs>
-                    
+
                     <!-- 海洋背景 -->
                     <rect width="1200" height="650" fill="#0d2b3e" />
-                    
+
                     <!-- 欧洲西部（英法德意等） -->
                     <path filter="url(#blurMap)" id="region-europe-west" class="region" data-region="europe-west" data-type="parliament"
                           d="M480,170 L520,150 L560,145 L590,155 L600,185 L590,215 L560,235 L520,240 L490,225 L475,200 L470,180 L480,170Z"
                           fill="url(#gradGold)" opacity="0.75" />
-                    
+
                     <!-- 欧洲东部/苏联 -->
                     <path filter="url(#blurMap)" id="region-ussr" class="region" data-region="ussr" data-type="violent"
                           d="M600,140 L680,120 L780,115 L880,125 L950,150 L960,190 L940,230 L880,250 L800,255 L720,245 L650,230 L610,210 L595,180 L600,140Z"
                           fill="url(#gradRed)" opacity="0.9" />
-                    
+
                     <!-- 东亚大陆 -->
                     <path filter="url(#blurMap)" id="region-eastasia" class="region" data-region="eastasia" data-type="violent"
                           d="M900,200 L960,180 L1020,190 L1070,220 L1085,260 L1070,300 L1030,320 L980,325 L935,315 L905,285 L895,250 L895,220 L900,200Z"
                           fill="url(#gradRed)" opacity="0.95" />
-                    
+
                     <!-- 朝鲜半岛 -->
                     <path filter="url(#blurMap)" id="region-korea" class="region" data-region="korea" data-type="violent"
                           d="M1055,175 L1075,170 L1090,195 L1085,225 L1070,230 L1055,215 L1045,195 L1055,175Z"
                           fill="url(#gradRed)" opacity="0.9" />
-                    
+
                     <!-- 日本 -->
                     <path filter="url(#blurMap)" id="region-japan" class="region" data-region="japan" data-type="parliament"
                           d="M1105,165 L1125,160 L1140,180 L1145,210 L1135,240 L1120,245 L1110,230 L1100,200 L1105,165Z"
                           fill="url(#gradGold)" opacity="0.7" />
-                    
+
                     <!-- 台湾岛 -->
                     <path filter="url(#blurMap)" id="region-taiwan" class="region" data-region="taiwan" data-type="none"
                           d="M1085,285 L1100,280 L1110,295 L1105,315 L1090,320 L1080,305 L1080,290 L1085,285Z"
                           fill="#eab308" opacity="0.5" />
-                    
+
                     <!-- 中南半岛 -->
                     <path filter="url(#blurMap)" id="region-indochina" class="region" data-region="indochina" data-type="violent"
                           d="M995,310 L1025,300 L1055,315 L1065,345 L1050,375 L1025,385 L1000,375 L985,350 L985,325 L995,310Z"
                           fill="url(#gradRed)" opacity="0.9" />
-                    
+
                     <!-- 印度次大陆 -->
                     <path filter="url(#blurMap)" id="region-india" class="region" data-region="india" data-type="parliament"
                           d="M845,300 L885,285 L925,300 L935,340 L925,380 L895,400 L865,390 L845,360 L830,330 L845,300Z"
                           fill="url(#gradGold)" opacity="0.75" />
-                    
+
                     <!-- 蒙古/中亚 -->
                     <path filter="url(#blurMap)" id="region-centrasia" class="region" data-region="centrasia" data-type="none"
                           d="M800,200 L860,185 L920,195 L935,230 L915,255 L870,260 L820,250 L795,230 L795,210 L800,200Z"
                           fill="#eab308" opacity="0.45" />
-                    
+
                     <!-- 中东/西亚 -->
                     <path filter="url(#blurMap)" id="region-mideast" class="region" data-region="mideast" data-type="guerrilla"
                           d="M700,260 L760,245 L820,260 L835,300 L815,335 L775,350 L735,340 L710,310 L700,280 L700,260Z"
                           fill="#f97316" opacity="0.65" />
-                    
+
                     <!-- 非洲大陆 -->
                     <path filter="url(#blurMap)" id="region-africa" class="region" data-region="africa" data-type="guerrilla"
                           d="M560,300 L620,270 L680,275 L730,300 L745,360 L725,420 L680,460 L620,465 L570,445 L545,400 L540,350 L560,300Z"
                           fill="#f97316" opacity="0.7" />
-                    
+
                     <!-- 北美洲 -->
                     <path filter="url(#blurMap)" id="region-namerica" class="region" data-region="namerica" data-type="parliament"
                           d="M100,80 L190,50 L290,45 L370,65 L405,105 L395,150 L360,185 L295,205 L220,200 L155,180 L115,145 L95,110 L100,80Z"
                           fill="url(#gradGold)" opacity="0.75" />
-                    
+
                     <!-- 中美洲 -->
                     <path filter="url(#blurMap)" id="region-central" class="region" data-region="central" data-type="guerrilla"
                           d="M300,195 L340,185 L360,205 L350,235 L320,245 L290,235 L285,215 L300,195Z"
                           fill="#f97316" opacity="0.7" />
-                    
+
                     <!-- 加勒比/古巴 -->
                     <path filter="url(#blurMap)" id="region-caribbean" class="region" data-region="caribbean" data-type="violent"
                           d="M355,220 L385,210 L405,230 L395,260 L365,270 L340,260 L335,240 L355,220Z"
                           fill="url(#gradRed)" opacity="0.9" />
-                    
+
                     <!-- 南美洲 -->
                     <path filter="url(#blurMap)" id="region-samerica" class="region" data-region="samerica" data-type="violent"
                           d="M330,270 L390,250 L450,260 L485,305 L495,370 L465,430 L410,465 L350,460 L315,420 L305,365 L310,315 L330,270Z"
                           fill="url(#gradRed)" opacity="0.85" />
-                    
+
                     <!-- 澳大利亚 -->
                     <path filter="url(#blurMap)" id="region-oceania" class="region" data-region="oceania" data-type="parliament"
                           d="M920,430 L980,410 L1030,420 L1050,455 L1030,490 L980,500 L935,490 L915,460 L920,430Z"
                           fill="url(#gradGold)" opacity="0.65" />
-                    
+
                     <!-- 标注文字 -->
                     <text x="540" y="190" fill="#ffd" font-size="11" opacity="0.7">西欧</text>
                     <text x="720" y="170" fill="#ffd" font-size="10" opacity="0.7">苏联</text>
@@ -583,7 +587,7 @@
                     <text x="380" y="360" fill="#ffd" font-size="10" opacity="0.7">南美</text>
                     <text x="370" y="240" fill="#ffd" font-size="9" opacity="0.8">古巴</text>
                 </svg>
-                
+
                 <div class="legend">
                     <div class="legend-item"><div class="legend-color red"></div><span>暴力革命/社会主义政权</span></div>
                     <div class="legend-item"><div class="legend-color gold"></div><span>议会斗争/左翼执政</span></div>
@@ -603,6 +607,7 @@
                 <div class="timeline" id="detailedTimeline"></div>
             </div>
         </div>
+        <p style="text-align:center;color:#d97706;font-size:0.85rem;margin-top:0.8rem;padding-top:0.5rem;border-top:1px dashed #fcd34d;">——未完待续——</p>
     </main>
 
     <footer class="site-footer">

@@ -82,6 +82,50 @@
             line-height: 1.7;
         }
         
+        .article-header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            margin-top: 0.5rem;
+        }
+        .article-content h4 {
+            color: #555;
+            margin: 1.5rem 0 0.8rem;
+            font-size: 1.05rem;
+            font-weight: bold;
+        }
+        .article-content .data-box {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .article-content .data-box p {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        .toc-box {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+        }
+        .toc-box h4 {
+            color: #c41e3a;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .toc-box ul {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+        .toc-box li {
+            margin-bottom: 0.3rem;
+            color: #555;
+            font-size: 0.95rem;
+        }
         .highlight-box {
             background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
             border: 1px solid #c41e3a;
@@ -89,12 +133,36 @@
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
-        
+        .highlight-box p {
+            margin-bottom: 0;
+            font-weight: bold;
+            color: #8b0000;
+        }
         .highlight-box h4 {
             color: #c41e3a;
             margin-bottom: 0.8rem;
         }
-        
+        .article-footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+        .article-footer p {
+            text-align: right;
+            margin-bottom: 0.3rem;
+        }
+        /* 黑夜模式补充 */
+        body.dark-mode .article-content h4 { color: #ccc; }
+        body.dark-mode .article-content .data-box { background: #333; border-color: #555; }
+        body.dark-mode .article-content .data-box p { color: #ccc; }
+        body.dark-mode .toc-box { background: #333; border-color: #555; }
+        body.dark-mode .toc-box li { color: #aaa; }
+        body.dark-mode .highlight-box { background: linear-gradient(135deg, #3a1a1a 0%, #4a1a1a 100%); border-color: #8b0000; }
+        body.dark-mode .highlight-box p { color: #ff9999; }
+        body.dark-mode .highlight-box h4 { color: #ff6b6b; }
         .back-link {
             display: inline-block;
             margin-top: 2rem;
@@ -181,10 +249,11 @@
 
     <main>
         <!-- 文章头部 -->
-        <section class="article-header">
+        <div class="article-header">
             <h1>苏联攻打芬兰是侵略？过当防卫！</h1>
-            <p class="article-meta">正名系列 · 军事行动 | 1939年苏芬战争的历史真相</p>
-        </section>
+            <div class="subtitle">——还原苏芬冬季战争的历史真相与战略逻辑</div>
+            <div class="article-meta">正名系列 · 军事行动 | 1939年苏芬战争</div>
+        </div>
 
         <!-- 文章内容 -->
         <div class="article-container">
@@ -196,7 +265,7 @@
                 <h2>一、历史背景：芬兰白卫军的反苏本质</h2>
                 
                 <h3>1.1 芬兰内战的记忆</h3>
-                <p>要理解1939年的苏芬关系，必须回溯到1918年的芬兰内战。当时，芬兰工人阶级在布尔什维克革命的影响下发动起义，建立了芬兰社会主义工人共和国。然而，在德国帝国主义的支持下，以曼纳海姆为首的白卫军残酷镇压了工人革命，数万名工人阶级战士被杀害或关进集中营。</p>
+                <p>要理解1939年的苏芬关系，必须回溯到1918年的芬兰内战。我们都知道，沙俄一崩溃，俄国、乌克兰、波兰、芬兰、白俄罗斯等多地爆发吃鸡大赛，有的实现了苏维埃政权，有的激起民族复国主义坚决反对革命，而有的最后却让白匪反动派上台。当时，芬兰工人阶级在布尔什维克革命的影响下发动起义，建立了芬兰社会主义工人共和国。然而，在德国帝国主义的支持下，以曼纳海姆为首的白卫军残酷镇压了工人革命，数万名工人阶级战士被杀害或关进集中营。</p>
                 <p>这场内战给苏芬关系留下了深刻的伤痕。获胜的白卫军政权对苏联怀有深刻的敌意，将苏联视为工人革命的策源地和芬兰"国家独立"的最大威胁。曼纳海姆本人就是沙皇俄国的将军，他的政治立场本质上是反动的、反苏的。</p>
 
                 <h3>1.2 曼纳海姆防线：针对苏联的军事准备</h3>
@@ -226,7 +295,7 @@
                 <p>从国际法角度看，苏联的军事行动确实构成了对芬兰主权的侵犯。但是，我们必须看到，这场战争不是苏联主动挑起的扩张战争，而是在外交手段穷尽后的<strong>被迫之举</strong>。苏联面临的是生死存亡的安全威胁，而不是对领土的贪婪欲望。</p>
 
                 <h3>3.2 战争的性质：过当防卫而非侵略</h3>
-                <p>用现代法律术语来说，苏联对芬兰的军事行动更接近于<strong>"过当防卫"</strong>而非"侵略"。芬兰白卫军政权的反苏立场、曼纳海姆防线对列宁格勒的威胁、芬兰与纳粹德国的勾结，这些都构成了对苏联安全的现实威胁。苏联的反应虽然超出了国际法允许的"比例原则"，但其防卫动机是真实的、合理的。</p>
+                <p>用现代法律术语来说，苏联对芬兰的军事行动更接近于<strong>"过当防卫"</strong>而非"侵略"。拿打得不如苏芬战争的俄乌战争为例，俄国在舆论上也是宣称为了防止北约进一步东扩掐自己命脉不得不先发制人谋求战略空间，结果打得稀里糊涂。芬兰白卫军政权的反苏立场、曼纳海姆防线对列宁格勒的威胁、芬兰与纳粹德国的勾结，这些都构成了对苏联安全的现实威胁。苏联的反应虽然超出了国际法允许的"比例原则"，但其防卫动机是真实的、合理的。</p>
                 <p>相比之下，同时期德国对波兰、英法对德国的战争，才是真正的侵略战争。西方列强对苏联的指责，是典型的"双重标准"：他们可以为了"保卫波兰"对德宣战，却不允许苏联为了保卫列宁格勒对芬兰采取军事行动。</p>
 
                 <h2>四、战争的结果与影响</h2>
@@ -243,7 +312,7 @@
                 
                 <div class="highlight-box">
                     <h4>谬论一："苏联是为了吞并芬兰"</h4>
-                    <p><strong>事实：</strong>苏联从未提出吞并芬兰的要求。苏联的目标仅限于改善列宁格勒的安全态势，通过领土交换获得战略缓冲区。如果苏联真想吞并芬兰，完全可以在1944年红军反攻时占领整个芬兰，但苏联并没有这样做。</p>
+                    <p><strong>事实：</strong>苏联从未提出吞并芬兰的要求。事实上，苏联一直在寻求战略安全：波兰短视得无可救药，英法愚蠢地绥靖、一昧拱火，逼苏德达成表面上的互不侵犯。到了1939年的紧要关头了，苏联的目标仍然仅限于改善列宁格勒的安全态势，通过领土交换获得战略缓冲区。如果苏联真想吞并芬兰，完全可以在1944年红军反攻时占领整个芬兰，但苏联并没有这样做。</p>
                 </div>
 
                 <div class="highlight-box">
@@ -253,12 +322,12 @@
 
                 <div class="highlight-box">
                     <h4>谬论三："苏联的伤亡证明其军事无能"</h4>
-                    <p><strong>事实：</strong>苏军在冬季战争中的伤亡确实较大，这主要是由于芬军依托曼纳海姆防线进行防御、苏军准备不足、指挥失误等原因造成的。但这并不能改变战争的性质。战争的正义性不取决于伤亡数字，而取决于战争的目的和背景。</p>
+                    <p><strong>事实：</strong>苏军在冬季战争中的伤亡确实较大，这主要是由于芬军依托曼纳海姆防线进行防御、苏军准备不足、指挥失误等原因造成的。苏联刚经过铁木辛哥军改，好容易从图哈切夫斯基睁眼说瞎话的军事理论中跳出来，而芬兰却拥有德国法西斯的装备支持。但苏联巨大伤亡的惨胜并不能改变战争的性质。战争的正义性不取决于伤亡数字，而取决于战争的目的和背景。</p>
                 </div>
 
                 <div class="highlight-box">
                     <h4>谬论四："苏联被开除出国联证明其侵略性质"</h4>
-                    <p><strong>事实：</strong>国际联盟是帝国主义列强的工具，其决议反映的是西方国家的政治立场，而非客观公正的法律判断。国联对苏联的谴责是典型的"双重标准"：它对意大利侵略埃塞俄比亚、日本侵略中国、德国侵略波兰都无所作为，却唯独对苏联大加挞伐。</p>
+                    <p><strong>事实：</strong>国际联盟本质是以美国总统伍德罗·威尔逊为首的帝国主义列强的工具，其决议反映的是西方国家的政治立场，而非客观公正的法律判断。国联对苏联的谴责是典型的"双重标准"：它对意大利侵略埃塞俄比亚、日本侵略中国、德国侵略波兰都无所作为，却唯独对苏联大加挞伐。换句话说，苏联加入国联不是苏联的荣幸，而是国联的荣幸</p>
                 </div>
 
                 <h2>六、结论：还原历史真相</h2>
@@ -266,15 +335,21 @@
                 <p>真实的历史是：苏联面对芬兰白卫军政权的反苏挑衅和列宁格勒的安全威胁，在外交手段穷尽后，采取了军事行动。这场战争虽然造成了双方人员的伤亡和芬兰领土的丧失，但从战略上看，它实现了保卫列宁格勒的目标，为后来苏联战胜纳粹德国创造了条件。从这一意义上说，苏芬战争是苏联在特殊历史条件下的<strong>过当防卫</strong>，而不是无缘无故的侵略。</p>
                 <p>还原这一历史真相，不是为了美化战争，而是为了抵制西方资产阶级史学对社会主义历史的歪曲，为了用唯物史观正确理解20世纪的历史进程。正如列宁所说：<strong>"战争是政治的继续。"</strong>只有理解了苏芬战争背后的政治逻辑，我们才能对这一历史事件作出公正的评价。</p>
 
+                <div class="article-footer">
+                    <p>潜狂 · 写于2026.4.17</p>
+                    <p>以斗争求和平，则和平存</p>
+                </div>
                 <a href="../rectify.html" class="back-link">← 返回正名页面</a>
             </article>
         </div>
     </main>
 
+
+            
     <footer class="site-footer">
         <div class="container">
             <p>青年马列毛主义驿站 | Qmlm Reader</p>
-            <p class="footer-note">理论学习 · 斗争精神 · 青年担当</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
         </div>
     </footer>
 

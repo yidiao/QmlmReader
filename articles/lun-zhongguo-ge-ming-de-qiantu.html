@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论中国革命的前途 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* 与论列宁主义基础相同的样式 */
+        .article-header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></svg>');
+            background-size: 80px;
+        }
+        .importance-badge {
+            display: inline-block;
+            background: rgba(255,215,0,0.9);
+            color: #1a237e;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        .article-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0.5rem 0;
+            position: relative;
+            z-index: 1;
+        }
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+        .article-meta span {
+            background: rgba(0,0,0,0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+        }
+        .tab-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            background: #f8f8f8;
+            padding: 1rem;
+            border-bottom: 2px solid #e0e0e0;
+            position: sticky;
+            top: 60px;
+            z-index: 50;
+        }
+        .tab-btn {
+            padding: 10px 18px;
+            border: none;
+            background: transparent;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { background: #e8e8e8; color: #1a237e; }
+        .tab-btn.active { background: #1a237e; color: white; font-weight: 600; }
+        .tab-content { display: none; max-width: 900px; margin: 0 auto; padding: 2rem; background: white; min-height: 60vh; }
+        .tab-content.active { display: block; }
+        .original-text { line-height: 1.9; font-size: 1.05rem; }
+        .text-intro { background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-left: 4px solid #1976d2; padding: 1.2rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; }
+        .chapter { margin-bottom: 1.5rem; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; }
+        .chapter-title { background: linear-gradient(135deg, #1a237e, #283593); color: white; padding: 1rem 1.2rem; margin: 0; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; user-select: none; }
+        .chapter-title:hover { background: linear-gradient(135deg, #283593, #3949ab); }
+        .toggle-icon { font-size: 0.8rem; transition: transform 0.2s; }
+        .chapter.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .chapter-content { padding: 1.2rem; background: #fafafa; max-height: 2000px; overflow: hidden; transition: max-height 0.3s ease; }
+        .chapter.collapsed .chapter-content { max-height: 0; padding: 0 1.2rem; }
+        .chapter-content p { text-indent: 2em; margin-bottom: 1em; text-align: justify; }
+        .note { background: #fff3e0; border-left: 3px solid #ff9800; padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.9rem; color: #e65100; }
+        .quote { background: #f5f5f5; border-left: 4px solid #1a237e; padding: 1rem; margin: 1rem 0; font-style: italic; }
+        .reading-tip, .difficulty-item { background: #f9f9f9; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .reading-tip h4, .difficulty-item h4 { color: #1a237e; margin-top: 0; border-bottom: 2px solid #1a237e; padding-bottom: 0.5rem; }
+        .dialogue-item { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; }
+        .dialogue-q { color: #2e7d32; font-weight: bold; margin-bottom: 0.5rem; }
+        .dialogue-a { color: #1565c0; padding-left: 1.5rem; border-left: 3px solid #1565c0; margin-top: 0.5rem; }
+        .action-item { background: linear-gradient(135deg, #fff3e0, #ffe0b2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; display: flex; gap: 1rem; align-items: flex-start; }
+        .action-num { background: #e65100; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+        .further-item { border-left: 3px solid #1a237e; padding-left: 1rem; margin-bottom: 1rem; }
+        .further-item h4 { color: #1a237e; margin: 0 0 0.3rem; }
+        .further-item p { margin: 0; color: #666; font-size: 0.95rem; }
+        .chart-container { background: #fafafa; border: 1px solid #eee; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .chart-container h4 { color: #333; margin: 0 0 15px; text-align: center; }
+        .highlight-box { background: linear-gradient(135deg, #fff8e1, #ffecb3); border-left: 4px solid #ffc107; padding: 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+        .warning-box { background: #ffebee; border-left: 4px solid #d32f2f; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
+        body.dark-mode .tab-nav { background: #2a2a2a; border-color: #444; }
+        body.dark-mode .tab-content { background: #1a1a1a; }
+        body.dark-mode .chapter { border-color: #444; }
+        body.dark-mode .chapter-content { background: #222; }
+        body.dark-mode .reading-tip, body.dark-mode .difficulty-item { background: #2a2a2a; }
+        body.dark-mode .reading-tip h4, body.dark-mode .difficulty-item h4 { color: #7986cb; border-color: #7986cb; }
+        @media (max-width: 768px) {
+            .tab-nav { padding: 0.5rem; }
+            .tab-btn { padding: 8px 10px; font-size: 0.85rem; }
+            .article-header h1 { font-size: 1.8rem; }
+            .tab-content { padding: 1rem; }
+        }
+    </style>
+</head>
+<body data-category="politics">
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="../articles.html" class="active">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="back-nav" style="background:#f8f8f8;border-bottom:1px solid #e0e0e0;padding:12px 0;">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../articles.html" style="display:inline-flex;align-items:center;gap:6px;color:#1a237e;text-decoration:none;font-size:0.95rem;font-weight:500;">
+                <span style="font-size:1.1rem;">←</span> 返回全部文章
+            </a>
+        </div>
+    </div>
+
+    <header class="article-header">
+        <div class="importance-badge">⭐⭐⭐⭐⭐ 核心必读 · 中国革命</div>
+        <h1>论中国革命的前途</h1>
+        <div class="article-subtitle">共产国际执行委员会中国委员会会议上的演说</div>
+        <div class="article-meta">
+            <span class="author">斯大林</span>
+            <span class="date">1926年11月30日</span>
+            <span class="category">中国革命 · 国际共运</span>
+            <span class="word-count">约8,000字</span>
+        </div>
+    </header>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
+        <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
+        <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
+        <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
+        <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
+        <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
+        <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
+        <button class="tab-btn" onclick="switchTab('further', this)">📚 延伸阅读</button>
+    </div>
+
+    <!-- 原文 -->
+    <div class="tab-content active" id="original">
+        <div class="original-text">
+            <div class="text-intro">
+                <p><strong>阅读提示：</strong>本文是斯大林1926年11月30日在共产国际执行委员会中国委员会会议上的演说，系统分析了中国革命的特点、性质和前途。对于理解中国革命史具有特殊价值。点击章节标题可展开。</p>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    一、中国革命的性质
+                </h3>
+                <div class="chapter-content">
+                    <p>列宁说过，中国人在最近期间将有自己的1905年。某些同志把这句话了解为在中国人那里一定会一模一样地重演我们俄国1905年所发生过的事情。同志们，这是不对的。列宁根本不是说中国革命将是俄国1905年革命的翻版。列宁只是说中国人将有自己的一九〇五年。</p>
+                    <p><strong>这些特点是什么呢？</strong></p>
+                    <p><strong>第一个特点</strong>是中国革命既是资产阶级民主革命，又是把自己的锋芒指向外国帝国主义在中国的统治的民族解放革命。</p>
+                    <p>这就是它首先和一九〇五年俄国革命不同的地方。因为帝国主义在中国的统治不仅表现在它的军事威力上，而且首先表现在中国工业的命脉即铁路、工厂、矿山、银行等都处在外国帝国主义者支配或控制之下。</p>
+                    <div class="quote">
+                        <p>和外国帝国主义及其中国走狗作斗争的问题不能不在中国革命中发生重大作用。这就使中国革命和世界各国无产者反对帝国主义的革命直接连接起来。</p>
+                    </div>
+                    <p><strong>第二个特点</strong>是中国大民族资产阶级极端软弱，它比一九〇五年时期的俄国资产阶级软弱得多。</p>
+                    <p>既然工业的命脉集中在外国帝国主义者手里，中国大民族资产阶级就不会不软弱和落后。由此应该得出结论，<strong>中国革命的倡导者和领导者，中国农民的领袖，必不可免地要由中国无产阶级及其政党来担任。</strong></p>
+                    <p><strong>第三个特点</strong>是在中国旁边有苏联存在着并且发展着，它的革命经验和它的帮助必然使中国无产阶级易于进行反对帝国主义和反对中国中世纪封建残余的斗争。</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    二、帝国主义和帝国主义对中国的干涉
+                </h3>
+                <div class="chapter-content">
+                    <p>干涉决不限于军队入境，而军队入境也决不是干涉的主要特点。</p>
+                    <p>在资本主义国家现今革命运动的条件下，帝国主义在现今的条件下进行干涉，偏重于采取在附属国内组织内战的办法，采取资助反革命势力反对革命的办法，采取在精神上和财政上支持其中国走狗反对革命的办法。</p>
+                    <div class="quote">
+                        <p>假他人之手进行干涉，——这是现在帝国主义干涉的主要特点。</p>
+                    </div>
+                    <p>因此，帝国主义对中国的干涉是毫无疑问的事实，中国革命也正是把自己的锋芒指向这一事实。</p>
+                    <div class="warning-box">
+                        <strong>⚠️ 重要提醒：</strong>必须善于区别帝国主义者（包括日、美帝国主义者）的政策的本质和它的伪装。列宁常说：革命者很难被棍棒和拳头制服，可是，他们有时却很容易被亲善制服。
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    三、中国的革命军队
+                </h3>
+                <div class="chapter-content">
+                    <p><strong>在中国，和旧政府的军队对抗的，不是没有武装的人民，而是以革命军队为代表的武装的人民。</strong></p>
+                    <p>在中国，是武装的革命反对武装的反革命。这是中国革命的特点之一和优点之一。中国革命军队的特殊意义正在这里。</p>
+                    <p><strong>中国共产党人的任务：</strong></p>
+                    <p>第一，<strong>加强军队中的政治工作</strong>，竭力使军队成为中国革命思想的真正的和模范的体现者。</p>
+                    <p>第二，<strong>深入研究军事</strong>。中国革命者应当学好军事，以便逐渐前进并在革命军队中担任某些领导职务。</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    四、中国未来政权的性质
+                </h3>
+                <div class="chapter-content">
+                    <p>中国未来的革命政权，就其性质来说，<strong>大体上将类似我们在一九〇五年所说的那种政权，即无产阶级和农民民主专政之类的政权</strong>，然而有一个差别，这主要将是反帝国主义的政权。</p>
+                    <div class="highlight-box">
+                        <strong>核心论断：</strong>这将是中国走向非资本主义发展，或者更确切些说，走向社会主义发展的过渡政权。
+                    </div>
+                    <p><strong>有利于革命发展的三种情况：</strong></p>
+                    <ul style="line-height:2;">
+                        <li>中国革命是民族解放革命，它将把自己的锋芒指向帝国主义及其在中国的走狗</li>
+                        <li>中国的大民族资产阶级是软弱的，这使无产阶级的领导权易于实现</li>
+                        <li>中国革命将在可能利用苏联胜利了的革命的经验和帮助的情况下发展起来</li>
+                    </ul>
+                    <div class="quote">
+                        <p>中国共产党人应当留在国民党内，并且在那里加紧自己的工作。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    五、中国的农民问题
+                </h3>
+                <div class="chapter-content">
+                    <p><strong>把中国农民卷入革命愈迅速愈彻底，中国反帝国主义的战线就愈有力愈强大。</strong></p>
+                    <p>不论中国共产党或国民党都应当立即从言论转到行动，提出立刻就满足农民最切身要求的问题。</p>
+                    <p><strong>引导农民参加革命的三条道路：</strong></p>
+                    <p><strong>第一条道路</strong>：成立农民委员会以及中国革命者加入这种委员会来影响农民。</p>
+                    <p><strong>第二条道路</strong>：通过新的人民革命政权的机关来影响农民。</p>
+                    <p><strong>第三条道路</strong>：通过革命军队来影响农民。</p>
+                    <div class="highlight-box">
+                        <strong>土地问题：</strong>归根到底应该引导到土地国有化。无论如何我们不能誓死拒绝土地国有化这样的口号。
+                    </div>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    六、中国的无产阶级和无产阶级领导权
+                </h3>
+                <div class="chapter-content">
+                    <p>中国共产党人首先应当面向无产阶级，并使中国解放运动的活动者都面向革命。</p>
+                    <div class="warning-box">
+                        <strong>⚠️ 重要批评：</strong>有些同志认为工人为改善他们的物质生活状况和举行罢工是不应该的，劝告工人不要罢工。这是很大的错误。这是极严重地低估了中国无产阶级的作用和比重。
+                    </div>
+                    <p>如果中国共产党人不利用目前有利的形势，帮助工人，就不能正确地实行无产阶级的领导权。</p>
+                </div>
+            </div>
+
+            <div class="chapter">
+                <h3 class="chapter-title" onclick="toggleChapter(this)">
+                    <span class="toggle-icon">▼</span>
+                    七、几个结论
+                </h3>
+                <div class="chapter-content">
+                    <p><strong>中国共产党现在不能只限于要求废除不平等条约了。</strong>现在甚至连张学良这样的反革命者也赞成这个要求了。显然，中国共产党应当更进一步。</p>
+                    <p><strong>必须在自己面前提出铁路国有的问题作为远景。</strong></p>
+                    <p><strong>必须注意到把最重要的工厂收归国有的远景。</strong></p>
+                    <p><strong>最后还应该做到为农民没收地主的土地，并使土地国有。</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 读法提示 -->
+    <div class="tab-content" id="reading">
+        <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">💡 如何阅读本文</h2>
+
+        <div class="reading-tip">
+            <h4>📌 历史背景</h4>
+            <p>本文写于1926年11月30日，正值中国大革命时期。广东革命政府正在北伐，全国革命形势高涨。斯大林在共产国际执委会上发表这篇演说，指导中国革命。</p>
+        </div>
+
+        <div class="reading-tip">
+            <h4>🎯 核心论点</h4>
+            <ul style="line-height:2;">
+                <li><strong>革命性质：</strong>中国革命是资产阶级民主革命 + 民族解放革命</li>
+                <li><strong>革命特点：</strong>无产阶级领导权、农民同盟军、武装革命</li>
+                <li><strong>政权前途：</strong>走向非资本主义发展道路</li>
+                <li><strong>农民问题：</strong>满足农民切身要求是革命胜利的必要条件</li>
+            </ul>
+        </div>
+
+        <div class="reading-tip">
+            <h4>📖 阅读建议</h4>
+            <p><strong>本文的特殊价值：</strong>这是外国革命导师专门论述中国革命的最重要文献之一。毛泽东后来对中国革命的理论贡献，可以在这里找到思想的源头。</p>
+            <p><strong>联系实际：</strong>阅读本文时，可以对比毛泽东的《湖南农民运动考察报告》《新民主主义论》等著作，看斯大林的观点如何被继承和发展。</p>
+        </div>
+
+        <div class="reading-tip">
+            <h4>⚠️ 历史局限</h4>
+            <p>本文写于1926年，对某些问题的判断带有历史局限性。如对国民党的估计、对农民苏维埃问题的判断等，在后来的实践中有所调整。建议结合中国革命的实际进程来理解。</p>
+        </div>
+    </div>
+
+    <!-- 难点解析 -->
+    <div class="tab-content" id="difficulty">
+        <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">🔍 难点解析</h2>
+
+        <div class="difficulty-item">
+            <h4>❓ 为什么说中国革命"有自己的1905年"？</h4>
+            <p><strong>解析：</strong>1905年俄国革命是无产阶级领导的资产阶级民主革命。中国革命与俄国1905年革命的相同点是：都是资产阶级民主革命，都面临封建主义和帝国主义的压迫。</p>
+            <p>但中国革命有自己的特点：帝国主义在中国的统治更深、中国资产阶级更软弱、有苏联的存在和帮助。</p>
+        </div>
+
+        <div class="difficulty-item">
+            <h4>❓ "武装的革命反对武装的反革命"是什么意思？</h4>
+            <p><strong>解析：</strong>这是斯大林对中国革命特点的经典概括。</p>
+            <ul style="line-height:2;">
+                <li>俄国革命开始时，人民是起义者，后来争取军队</li>
+                <li>中国革命一开始就有革命军队（黄埔军校、北伐军）</li>
+                <li>这是中国革命的特点，也是优点</li>
+            </ul>
+        </div>
+
+        <div class="difficulty-item">
+            <h4>❓ "走向非资本主义发展道路"如何理解？</h4>
+            <p><strong>解析：</strong>这是本文最核心的论断。</p>
+            <ul style="line-height:2;">
+                <li>不是走欧美式的资本主义道路</li>
+                <li>不是马上建立社会主义</li>
+                <li>是无产阶级领导下的非资本主义前途</li>
+                <li>最终走向社会主义</li>
+            </ul>
+            <p>这与毛泽东后来提出的"新民主主义革命"理论是一致的。</p>
+        </div>
+
+        <div class="difficulty-item">
+            <h4>❓ 为什么要强调无产阶级领导权？</h4>
+            <p><strong>解析：</strong>由于中国资产阶级的软弱性，无产阶级必须掌握革命的领导权。这是保证革命走向非资本主义道路的根本保证。</p>
+        </div>
+    </div>
+
+    <!-- 对话空间 -->
+    <div class="tab-content" id="dialogue">
+        <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">💬 对话空间</h2>
+
+        <div class="dialogue-item">
+            <div class="dialogue-q">🤔 <strong>问题一：</strong>斯大林的这些分析和后来毛泽东的革命理论有什么关系？</div>
+            <div class="dialogue-a">
+                <strong>思考方向：</strong>对比《新民主主义论》中关于革命性质、领导权、农民问题、统一战线的论述。思考理论传承与发展的关系。
+            </div>
+        </div>
+
+        <div class="dialogue-item">
+            <div class="dialogue-q">🤔 <strong>问题二：</strong>"武装的革命反对武装的反革命"这一论断对今天有什么启示？</div>
+            <div class="dialogue-a">
+                <strong>思考方向：</strong>这一论断揭示了半殖民地半封建国家革命的基本规律。在今天理解国家建设、军队建设等方面仍有意义。
+            </div>
+        </div>
+
+        <div class="dialogue-item">
+            <div class="dialogue-q">🤔 <strong>问题三：</strong>斯大林对农民问题的重视与毛泽东有何异同？</div>
+            <div class="dialogue-a">
+                <strong>思考方向：</strong>毛泽东比斯大林更深入地发动农民，更彻底地解决土地问题。这种差异反映了什么？
+            </div>
+        </div>
+
+        <div class="dialogue-item">
+            <div class="dialogue-q">🤔 <strong>问题四：</strong>如何理解"帝国主义干涉"的隐蔽形式？</div>
+            <div class="dialogue-a">
+                <strong>思考方向：</strong>斯大林指出帝国主义"假他人之手"进行干涉。今天这种形式有什么新表现？对识别当代帝国主义干涉有何帮助？
+            </div>
+        </div>
+    </div>
+
+    <!-- 行动实验 -->
+    <div class="tab-content" id="action">
+        <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">⚡ 行动实验</h2>
+
+        <div class="action-item">
+            <div class="action-num">1</div>
+            <div>
+                <h4 style="margin:0 0 0.5rem;color:#e65100;">📊 时序对比研究</h4>
+                <p style="margin:0;">将本文（1926年）与毛泽东著作对比：</p>
+                <ul style="margin:0.5rem 0 0;">
+                    <li>《湖南农民运动考察报告》（1927年）</li>
+                    <li>《中国的红色政权为什么能够存在？》（1928年）</li>
+                    <li>《新民主主义论》（1940年）</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="action-num">2</div>
+            <div>
+                <h4 style="margin:0 0 0.5rem;color:#e65100;">🗺️ 绘制理论关系图</h4>
+                <p style="margin:0;">用思维导图展示：</p>
+                <ul style="margin:0.5rem 0 0;">
+                    <li>中国革命三大特点</li>
+                    <li>三大特点如何保证非资本主义前途</li>
+                    <li>各阶级在革命中的地位和作用</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="action-num">3</div>
+            <div>
+                <h4 style="margin:0 0 0.5rem;color:#e65100;">📝 政策分析练习</h4>
+                <p style="margin:0;">用本文理论分析：</p>
+                <ul style="margin:0.5rem 0 0;">
+                    <li>当前农民问题的主要表现</li>
+                    <li>如何借鉴斯大林的"三条道路"</li>
+                    <li>无产阶级领导权如何实现</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="action-num">4</div>
+            <div>
+                <h4 style="margin:0 0 0.5rem;color:#e65100;">💬 讨论提纲</h4>
+                <p style="margin:0;">组织小组讨论：</p>
+                <ul style="margin:0.5rem 0 0;">
+                    <li>斯大林1926年的预言哪些实现了？</li>
+                    <li>哪些判断有偏差？为什么？</li>
+                    <li>理论如何与时俱进？</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 一目了然 -->
+    <div class="tab-content" id="visual">
+        <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">📊 一目了然</h2>
+
+        <div class="chart-container">
+            <h4>📋 中国革命三大特点</h4>
+            <canvas id="featuresChart" height="200"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h4>🏛️ 政权性质演变</h4>
+            <canvas id="regimeChart" height="180"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h4>👥 各阶级地位分析</h4>
+            <canvas id="classChart" height="220"></canvas>
+        </div>
+    </div>
+
+    <!-- 理论拼图 -->
+    <div class="tab-content" id="puzzle">
+        <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">🧩 理论拼图</h2>
+
+        <div style="background:linear-gradient(135deg,#1a237e,#283593);color:white;padding:2rem;border-radius:12px;margin-bottom:1.5rem;">
+            <h3 style="margin-top:0;color:#ffd700;">📍 本文的核心贡献</h3>
+            <p>斯大林首次系统阐述了关于中国革命的基本理论，为后来的中国革命实践和毛泽东思想提供了重要理论基础。</p>
+        </div>
+
+        <h3 style="color:#333;margin-top:2rem;">🔗 理论传承</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+            <div style="background:#e8f5e9;padding:1rem;border-radius:8px;">
+                <h4 style="margin:0 0 0.5rem;color:#2e7d32;">📗 理论来源</h4>
+                <p style="margin:0;font-size:0.9rem;color:#666;">列宁主义 · 民族殖民地理论 · 农民问题</p>
+            </div>
+            <div style="background:#fff3e0;padding:1rem;border-radius:8px;">
+                <h4 style="margin:0 0 0.5rem;color:#e65100;">📘 本文创新</h4>
+                <p style="margin:0;font-size:0.9rem;color:#666;">中国革命特殊性 · 非资本主义道路</p>
+            </div>
+            <div style="background:#fce4ec;padding:1rem;border-radius:8px;">
+                <h4 style="margin:0 0 0.5rem;color:#c2185b;">📙 后续发展</h4>
+                <p style="margin:0;font-size:0.9rem;color:#666;">毛泽东新民主主义论</p>
+            </div>
+        </div>
+
+        <h3 style="color:#333;margin-top:2rem;">📚 关联文章</h3>
+        <div class="further-item">
+            <h4>📕 毛泽东《中国社会各阶级的分析》</h4>
+            <p>系统分析中国各阶级的地位，是对斯大林理论的重要继承和发展。</p>
+        </div>
+        <div class="further-item">
+            <h4>📗 毛泽东《湖南农民运动考察报告》</h4>
+            <p>对农民问题的深入实践调查，丰富了斯大林关于农民革命的理论。</p>
+        </div>
+        <div class="further-item">
+            <h4>📘 毛泽东《新民主主义论》</h4>
+            <p>系统提出新民主主义革命理论，标志着马克思主义中国化的成熟。</p>
+        </div>
+    </div>
+
+    <!-- 延伸阅读 -->
+    <div class="tab-content" id="further">
+        <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">📚 延伸阅读</h2>
+
+        <div class="further-item">
+            <h4>📕 毛泽东《中国的红色政权为什么能够存在？》</h4>
+            <p>分析中国革命的特殊规律，回答了在帝国主义间接统治下的、经济落后的半殖民地国家如何进行革命的问题。</p>
+        </div>
+
+        <div class="further-item">
+            <h4>📗 毛泽东《中国革命和中国共产党》</h4>
+            <p>系统阐述了中国革命的历史特点、对象、任务、动力和性质。</p>
+        </div>
+
+        <div class="further-item">
+            <h4>📘 毛泽东《新民主主义论》</h4>
+            <p>马克思主义中国化的里程碑式著作，系统阐述了新民主主义革命的理论。</p>
+        </div>
+
+        <div class="further-item">
+            <h4>📙 斯大林《论列宁主义基础》</h4>
+            <p>本文的理论基础，系统阐述列宁主义的基本问题。</p>
+        </div>
+
+        <div style="background:#e8f5e9;padding:1.5rem;border-radius:8px;margin-top:1.5rem;">
+            <h4 style="color:#2e7d32;margin-top:0;">🗺️ 学习路径</h4>
+            <p><strong>入门：</strong>本文 →《湖南农民运动考察报告》</p>
+            <p><strong>进阶：</strong>本文 →《中国的红色政权》 →《新民主主义论》</p>
+            <p><strong>专题：</strong>农民问题 →《湖南农民运动考察报告》 → 土地革命</p>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (tabId === 'visual') setTimeout(initCharts, 100);
+        }
+
+        function toggleChapter(title) {
+            title.parentElement.classList.toggle('collapsed');
+        }
+
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+            chartsInited = true;
+
+            // 三大特点
+            new Chart(document.getElementById('featuresChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['资产阶级民主革命', '民族解放革命', '无产阶级领导'],
+                    datasets: [{label: '重要性', data: [95, 95, 90], backgroundColor: ['#1a237e', '#3949ab', '#5c6bc0']}]
+                },
+                options: {responsive: true, scales: {y: {min: 0, max: 100}}, plugins: {legend: {display: false}}}
+            });
+
+            // 政权演变
+            new Chart(document.getElementById('regimeChart'), {
+                type: 'line',
+                data: {
+                    labels: ['1926', '1927', '1930s', '1940', '1949'],
+                    datasets: [{label: '革命程度', data: [40, 55, 70, 85, 100], borderColor: '#1a237e', tension: 0.3, fill: true}]
+                },
+                options: {responsive: true, scales: {y: {display: false}}}
+            });
+
+            // 阶级分析
+            new Chart(document.getElementById('classChart'), {
+                type: 'radar',
+                data: {
+                    labels: ['革命性', '组织性', '觉悟程度', '人数规模', '领导能力'],
+                    datasets: [
+                        {label: '无产阶级', data: [95, 90, 85, 10, 95], borderColor: '#c41e3a', backgroundColor: 'rgba(196,30,58,0.2)'},
+                        {label: '农民', data: [80, 60, 50, 70, 30], borderColor: '#4caf50', backgroundColor: 'rgba(76,175,80,0.2)'},
+                        {label: '资产阶级', data: [30, 50, 40, 20, 20], borderColor: '#2196f3', backgroundColor: 'rgba(33,150,243,0.2)'}
+                    ]
+                },
+                options: {responsive: true, scales: {r: {min: 0, max: 100}}}
+            });
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
+        }
+        if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+    </script>
+</body>
+</html>
