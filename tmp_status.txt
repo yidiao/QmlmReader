@@ -1,45 +1,44 @@
+ M about.html
  M articles.html
- D articles/lenin/zen-me-ban.html
- M articles/lun-chi-jiu-zhan.html
- M articles/mao-dun-lun.html
- M articles/nong-min-yun-dong.html
- M articles/ren-min-nei-bu-mao-dun.html
- M articles/shi-jian-lun.html
- M articles/wen-yi-zuo-tan.html
- M articles/xin-min-zhu.html
- M articles/xue-xi-shi-ju.html
- M articles/you-ji-zhan.html
- M articles/zhan-lue-wen-ti.html
- M articles/zhan-zheng-zhan-lue.html
- M css/style.css
+ M articles/lun-lunen-zhu-yi-ji-chu.html
+ M articles/lun-zhongguo-ge-ming-de-qiantu.html
+ M data/history-events.js
  M gallery.html
  M gallery/music.html
- M gallery/propaganda.html
  M gallery/quotes.html
- M gallery/soviet.html
  M gallery/videos.html
+ D images/icons/music-note.jpg
+ D "images/icons/\344\270\211\347\211\210\344\271\211\345\213\207\345\206\233\350\277\233\350\241\214\346\233\262.jpg"
+ D "images/icons/\344\270\234\346\226\271\347\272\242.jpg"
+ D "images/icons/\344\270\234\346\226\271\347\272\242\350\210\236\345\217\260\345\211\247.jpg"
+ D "images/icons/\344\277\204\347\275\227\346\226\257\345\243\253\345\205\265\344\271\213\346\255\214.jpg"
+ D "images/icons/\345\210\227\345\256\201\345\234\2501918.jpg"
+ D "images/icons/\345\210\227\345\256\201\345\234\250\345\215\201\346\234\210.jpg"
+ D "images/icons/\345\210\227\345\256\201\350\257\273\344\271\246.jpg"
+ D "images/icons/\345\215\216\346\262\231\346\233\262.jpg"
+ D "images/icons/\345\222\261\344\273\254\345\267\245\344\272\272\346\234\211\345\212\233\351\207\217.jpg"
+ D "images/icons/\345\233\275\351\231\205\346\255\214.jpg"
+ D "images/icons/\345\235\246\345\235\246\350\215\241\350\215\241.jpg"
+ D "images/icons/\345\244\247\345\206\263\346\210\230.jpg"
+ D "images/icons/\345\244\251\344\272\256\345\211\215\350\257\264\345\206\215\350\247\201\357\274\210\344\277\204\350\257\255\357\274\211.jpg"
+ D "images/icons/\346\210\221\344\273\254\350\265\260\345\234\250\345\244\247\350\267\257\344\270\212.jpg"
+ D "images/icons/\346\234\200\347\276\216\345\245\275\347\232\204\345\211\215\351\200\224.jpg"
+ D "images/icons/\346\255\214\345\224\261\347\245\226\345\233\275.jpg"
+ D "images/icons/\347\211\242\344\270\215\345\217\257\347\240\264\347\232\204\350\201\224\347\233\237.jpg"
+ D "images/icons/\347\244\276\344\274\232\344\270\273\344\271\211\345\245\275.jpg"
+ D "images/icons/\350\203\234\345\210\251\346\227\245.jpg"
+ D "images/icons/\351\233\206\344\275\223\345\214\226\346\255\243\345\220\215.jpg"
+ D "images/icons/\351\233\267\351\224\213.jpg"
  M index.html
- M international.html
- M masters.html
+ M masters/engels.html
  M masters/lenin.html
+ M masters/mao.html
  M masters/marx.html
+ M masters/stalin.html
  M puzzle.html
  M rectify.html
- M rectify/finland-war.html
  M tmp_status.txt
  M toolkit.html
-?? articles/_template.html
-?? articles/gongchan-dan-yuan.html
-?? articles/guo-jia-yu-ge-ming.html
-?? articles/lun-lunen-zhu-yi-ji-chu.html
-?? articles/lun-zhongguo-ge-ming-de-qiantu.html
-?? articles/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html
-?? articles/zen-me-ban.html
-?? data/history-events.js
-?? international-calendar.html
-?? js/search.js
-?? rectify/gorky-lenin.html
-?? rectify/myths/
-?? rectify/soviet-afghanistan.html
-?? rectify/soviet-agriculture.html
-?? rectify/stalin-era.html
+?? images/icons/character/
+?? images/icons/music/
+?? images/icons/video/

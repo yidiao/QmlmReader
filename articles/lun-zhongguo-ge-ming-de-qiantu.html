@@ -179,18 +179,18 @@
     </header>
 
     <div class="tab-nav">
-        <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
-        <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
-        <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
-        <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
-        <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
-        <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
-        <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
-        <button class="tab-btn" onclick="switchTab('further', this)">📚 延伸阅读</button>
+        <button class="tab-btn active" data-tab="original" onclick="switchTab('original', this)">📖 原文</button>
+        <button class="tab-btn" data-tab="reading" onclick="switchTab('reading', this)">💡 读法提示</button>
+        <button class="tab-btn" data-tab="difficulty" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
+        <button class="tab-btn" data-tab="dialogue" onclick="switchTab('dialogue', this)">💬 对话空间</button>
+        <button class="tab-btn" data-tab="action" onclick="switchTab('action', this)">⚡ 行动实验</button>
+        <button class="tab-btn" data-tab="visual" onclick="switchTab('visual', this)">📊 一目了然</button>
+        <button class="tab-btn" data-tab="puzzle" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
+        <button class="tab-btn" data-tab="further" onclick="switchTab('further', this)">📚 延伸阅读</button>
     </div>
 
     <!-- 原文 -->
-    <div class="tab-content active" id="original">
+    <div class="tab-content" data-tab="original" id="original">
         <div class="original-text">
             <div class="text-intro">
                 <p><strong>阅读提示：</strong>本文是斯大林1926年11月30日在共产国际执行委员会中国委员会会议上的演说，系统分析了中国革命的特点、性质和前途。对于理解中国革命史具有特殊价值。点击章节标题可展开。</p>
@@ -317,7 +317,7 @@
     </div>
 
     <!-- 读法提示 -->
-    <div class="tab-content" id="reading">
+    <div class="tab-content" data-tab="reading" id="reading">
         <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">💡 如何阅读本文</h2>
 
         <div class="reading-tip">
@@ -348,7 +348,7 @@
     </div>
 
     <!-- 难点解析 -->
-    <div class="tab-content" id="difficulty">
+    <div class="tab-content" data-tab="difficulty" id="difficulty">
         <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">🔍 难点解析</h2>
 
         <div class="difficulty-item">
@@ -386,7 +386,7 @@
     </div>
 
     <!-- 对话空间 -->
-    <div class="tab-content" id="dialogue">
+    <div class="tab-content" data-tab="dialogue" id="dialogue">
         <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">💬 对话空间</h2>
 
         <div class="dialogue-item">
@@ -419,7 +419,7 @@
     </div>
 
     <!-- 行动实验 -->
-    <div class="tab-content" id="action">
+    <div class="tab-content" data-tab="action" id="action">
         <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">⚡ 行动实验</h2>
 
         <div class="action-item">
@@ -476,7 +476,7 @@
     </div>
 
     <!-- 一目了然 -->
-    <div class="tab-content" id="visual">
+    <div class="tab-content" data-tab="visual" id="visual">
         <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">📊 一目了然</h2>
 
         <div class="chart-container">
@@ -496,7 +496,7 @@
     </div>
 
     <!-- 理论拼图 -->
-    <div class="tab-content" id="puzzle">
+    <div class="tab-content" data-tab="puzzle" id="puzzle">
         <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">🧩 理论拼图</h2>
 
         <div style="background:linear-gradient(135deg,#1a237e,#283593);color:white;padding:2rem;border-radius:12px;margin-bottom:1.5rem;">
@@ -536,7 +536,7 @@
     </div>
 
     <!-- 延伸阅读 -->
-    <div class="tab-content" id="further">
+    <div class="tab-content" data-tab="further" id="further">
         <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">📚 延伸阅读</h2>
 
         <div class="further-item">
