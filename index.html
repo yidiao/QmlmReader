@@ -538,6 +538,136 @@
                     <a href="puzzle.html" style="display:inline-block;background:#c53030;color:white;padding:12px 32px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:1em;transition:background 0.2s;" onmouseover="this.style.background='#e53e3e'" onmouseout="this.style.background='#c53030'">进入理论拼图 →</a>
                 </div>
             </section>
+
+            <!-- 有趣的文艺的 -->
+            <section class="fun-culture-section" style="margin-top:48px;">
+                <h3 class="section-title">🎨 有趣的文艺的</h3>
+                <p style="text-align:center;color:var(--text-light);margin-bottom:1.5rem;">每次刷新随机推荐，发现更多宝藏</p>
+                <div id="funCultureGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;">
+                </div>
+                <div style="text-align:center;margin-top:1.2rem;">
+                    <a href="gallery.html" style="display:inline-block;color:#c41e3a;text-decoration:none;font-weight:600;font-size:0.95rem;">查看全部文艺内容 →</a>
+                </div>
+            </section>
+
+            <script>
+            (function() {
+                var musicData = [
+                    ["国际歌","images/icons/music/国际歌.jpg","gallery/music.html","革命歌曲","我们要让歌声传遍全球！"],
+                    ["东方红","images/icons/music/东方红.jpg","gallery/music.html","革命歌曲","中国人民对领袖的深情颂歌"],
+                    ["华沙曲","images/icons/music/华沙曲.jpg","gallery/music.html","革命歌曲","1905年俄国革命的经典旋律"],
+                    ["义勇军进行曲","images/icons/music/三版义勇军进行曲.jpg","gallery/music.html","革命歌曲","中华民族的斗争精神"],
+                    ["牢不可破的联盟","images/icons/music/牢不可破的联盟.jpg","gallery/music.html","苏联歌曲","苏维埃共和国联盟的国歌"],
+                    ["歌唱祖国","images/icons/music/歌唱祖国.jpg","gallery/music.html","革命歌曲","五星红旗迎风飘扬~"],
+                    ["胜利日","images/icons/music/胜利日.jpg","gallery/music.html","苏联歌曲","伟大卫国战争胜利纪念日之歌"],
+                    ["我们走在大路上","images/icons/music/我们走在大路上.jpg","gallery/music.html","革命歌曲","意气风发斗志昂扬"],
+                    ["打靶归来","images/icons/music/打靶归来.jpg","gallery/music.html","革命歌曲","日落西山红霞飞~"],
+                    ["咱们工人有力量","images/icons/music/咱们工人有力量.jpg","gallery/music.html","革命歌曲","劳动阶级的力量之歌"],
+                    ["社会主义好","images/icons/music/社会主义好.jpg","gallery/music.html","革命歌曲","社会主义国家人民地位高"],
+                    ["俄罗斯士兵之歌","images/icons/music/俄罗斯士兵之歌.jpg","gallery/music.html","苏联歌曲","俄罗斯大地的苍凉与壮美"],
+                    ["最美好的前途","images/icons/music/最美好的前途.jpg","gallery/music.html","苏联歌曲","从多瑙河到黑龙江畔"],
+                    ["天亮前说再见\uFF08俄语\uFF09","images/icons/music/天亮前说再见\uFF08俄语\uFF09.jpg","gallery/music.html","俄语翻唱","多么贴切保尔柯察金同志"]
+                ];
+                var videoData = [
+                    ["大型音乐舞蹈史诗\u300A东方红\u300B","images/icons/video/东方红舞台剧.jpg","gallery/videos.html","经典影视","1964年国庆献礼，波澜壮阔的革命史诗"],
+                    ["电影\u300A列宁在十月\u300B","images/icons/video/列宁在十月.jpg","gallery/videos.html","经典影视","十月革命的艺术再现"],
+                    ["电影\u300A列宁在1918\u300B","images/icons/video/列宁在1918.jpg","gallery/videos.html","经典影视","保卫革命成果的殊死斗争"],
+                    ["\u300A大决战\u300B系列","images/icons/video/大决战.jpg","gallery/videos.html","经典影视","解放战争三大战役全景呈现"],
+                    ["\u3010白噪音\u3011跟列宁一起学习","images/icons/video/列宁读书.jpg","gallery/videos.html","趣味视频","沉浸式学习氛围，列宁陪你读书"],
+                    ["\u3010补档\u3011坦坦荡荡","images/icons/video/坦坦荡荡.jpg","gallery/videos.html","趣味视频","理直气壮，坦坦荡荡"],
+                    ["\u3010雷锋\u3011\u201C光阴啊...\u201D","images/icons/video/雷锋.jpg","gallery/videos.html","趣味视频","关于雷锋，让人泪目的剪辑"],
+                    ["社会的本质是弱肉强食？放屁","images/icons/video/弱肉强食.jpg","gallery/videos.html","视频","一个有力的回击"],
+                    ["社会主义苏式美学海报","images/icons/video/苏式美学.jpg","gallery/videos.html","趣味视频","苏式美学海报展示"],
+                    ["麦子在垄上熟几十个暑和寒","images/icons/video/\u201C麦子在垄上熟几十个暑和寒\u201D.jpg","gallery/videos.html","趣味视频","结伴井冈山"],
+                    ["柏林大墙东","images/icons/video/柏林大墙东.jpg","gallery/videos.html","趣味视频","历史的必然..."],
+                    ["讲集体化还耍春秋笔法？", "images/icons/video/集体化正名.jpg", "gallery/videos.html","正名视频","为集体化正名"]
+                ];
+                var posterData = [
+                    ["开国大典","assets/posters/V01-\u7B2C\u4E00\u8F91/046_\u5E74\u4EE3\u4E0D\u8BE6_\u5F00\u56FD\u5927\u5178_\u8463\u5E0C\u6587.jpg","gallery/propaganda.html","\u5BA3\u4F20\u753B \u00B7 \u8463\u5E0C\u6587","\u4E2D\u534E\u4EBA\u6C11\u5171\u548C\u56FD\u6210\u7ACB\u7684\u6C38\u6052\u77AC\u95F4"],
+                    ["中国人民伟大领袖毛主席","assets/posters/V01-\u7B2C\u4E00\u8F91/001_\u5E74\u4EE3\u4E0D\u8BE6_\u4E2D\u56FD\u4EBA\u6C11\u4F1F\u5927\u9886\u8896\u6BDB\u4E3B\u5E2D_\u4FA0\u540D.jpg","gallery/propaganda.html","\u5BA3\u4F20\u753B","\u4EBA\u6C11\u5FC3\u4E2D\u7684\u7EA2\u592A\u9633"],
+                    ["全世界人民大团结","assets/posters/V01-\u7B2C\u4E00\u8F91/060_\u5E74\u4EE3\u4E0D\u8BE6_\u5168\u4E16\u754C\u4EBA\u6C11\u56E2\u7ED3\u8D77\u6765\u6253\u5012\u7F8E\u5E1D\u6253\u5012\u82CF\u4FEE\u6253\u5012\u5404\u56FD\u53CD\u52A8\u6D3E_\u4FA0\u540D.jpg","gallery/propaganda.html","\u5BA3\u4F20\u753B","\u56E2\u7ED3\u5C31\u662F\u529B\u91CF"],
+                    ["学习雷锋好榜样","assets/posters/V02-\u7B2C\u4E8C\u8F91/029_1965_\u5B66\u4E60\u96F7\u950B\u597D\u699C\u6837_\u8D3A\u53CB\u76F4.jpg","gallery/propaganda.html","\u5BA3\u4F20\u753B \u00B7 \u8D3E\u53CB\u76F4","\u96F7\u950B\u7CBE\u795E\u6C38\u653E\u5149\u8292"],
+                    ["继承革命传统做红色接班人","assets/posters/V02-\u7B2C\u4E8C\u8F91/013_1964_\u7EE7\u627F\u9769\u547D\u4F20\u7EDF\u505A\u7EA2\u8272\u63A5\u73ED\u4EBA_\u676D\u9E23\u65F6.jpg","gallery/propaganda.html","\u5BA3\u4F20\u753B \u00B7 \u676D\u9E23\u65F6","\u7EA2\u8272\u8840\u8109\u4EE3\u4EE3\u76F8\u4F20"],
+                    ["我们是共产主义接班人","assets/posters/V02-\u7B2C\u4E8C\u8F91/039_1965_\u6211\u4EEC\u662F\u5171\u4EA7\u4E3B\u4E49\u63A5\u73ED\u4EBA_\u674E\u4E2D\u8D35.jpg","gallery/propaganda.html","\u5BA3\u4F20\u753B \u00B7 \u674E\u4E2D\u8D35","\u65F6\u523B\u51C6\u5907\u7740"],
+                    ["雄关漫道真如铁","assets/posters/V02-\u7B2C\u4E8C\u8F91/052_1965_\u96C4\u5173\u6F2B\u9053\u771F\u5982\u94C1\u800C\u4ECA\u8FC8\u6B65\u4ECE\u5934\u8D8A_\u5F6D\u5F6C.jpg","gallery/propaganda.html","\u5BA3\u4F20\u753B \u00B7 \u5F6D\u5F6C","\u957F\u5F81\u7CBE\u795E\u7684\u827A\u672F\u8868\u8FBE"],
+                    ["延安新春","assets/posters/V01-\u7B2C\u4E00\u8F91/064_\u5E74\u4EE3\u4E0D\u8BE6_\u5EF6\u5B89\u65B0\u6625_\u9655\u897F\u7701\u7F8E\u672F\u521B\u4F5C\u7EC4.jpg","gallery/propaganda.html","\u5BA3\u4F20\u753B \u00B7 \u9655\u897F\u7701\u7F8E\u672F\u521B\u4F5C\u7EC4","\u9769\u547D\u5723\u5730\u7684\u8282\u65E5\u6C14\u6C1B"]
+                ];
+
+                function shuffle(arr) {
+                    var a = arr.slice();
+                    for (var i = a.length - 1; i > 0; i--) {
+                        var j = Math.floor(Math.random() * (i + 1));
+                        var t = a[i]; a[i] = a[j]; a[j] = t;
+                    }
+                    return a;
+                }
+
+                var sel = [];
+                shuffle(musicData).slice(0, 2).forEach(function(r) { sel.push({title:r[0],img:r[1],href:r[2],meta:r[3],desc:r[4],icon:"\uD83C\uDFB5"}); });
+                shuffle(videoData).slice(0, 2).forEach(function(r) { sel.push({title:r[0],img:r[1],href:r[2],meta:r[3],desc:r[4],icon:"\uD83C\uDFAC"}); });
+                shuffle(posterData).slice(0, 1).forEach(function(r) { sel.push({title:r[0],img:r[1],href:r[2],meta:r[3],desc:r[4],icon:"\uD83D\uDDBC\uFE0F"}); });
+                shuffle(sel);
+
+                var grid = document.getElementById("funCultureGrid");
+                sel.forEach(function(item) {
+                    var card = document.createElement("article");
+                    card.className = "featured-card";
+                    card.style.cursor = "pointer";
+                    card.onclick = function() { window.location.href = item.href; };
+
+                    var topRow = document.createElement("div");
+                    topRow.style.cssText = "display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;";
+
+                    var imgWrap = document.createElement("div");
+                    imgWrap.style.cssText = "position:relative;width:64px;height:64px;flex-shrink:0;";
+
+                    var img = document.createElement("img");
+                    img.src = item.img;
+                    img.alt = item.title;
+                    img.style.cssText = "width:64px;height:64px;border-radius:10px;object-fit:cover;box-shadow:0 2px 8px rgba(0,0,0,0.12);";
+                    img.onerror = function() { this.style.display = "none"; this.parentNode.querySelector(".fc-fallback").style.display = "flex"; };
+
+                    var fallback = document.createElement("div");
+                    fallback.className = "fc-fallback";
+                    fallback.style.cssText = "width:64px;height:64px;border-radius:10px;display:none;align-items:center;justify-content:center;font-size:1.8rem;background:linear-gradient(135deg,#c41e3a,#8b0000);color:white;position:absolute;top:0;left:0;";
+                    fallback.textContent = item.icon;
+
+                    imgWrap.appendChild(img);
+                    imgWrap.appendChild(fallback);
+
+                    var info = document.createElement("div");
+                    info.style.cssText = "flex:1;min-width:0;";
+
+                    var h4 = document.createElement("h4");
+                    h4.style.cssText = "margin:0;font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;";
+
+                    var link = document.createElement("a");
+                    link.href = item.href;
+                    link.style.cssText = "color:var(--text-color);text-decoration:none;";
+                    link.textContent = item.title;
+
+                    h4.appendChild(link);
+
+                    var meta = document.createElement("span");
+                    meta.style.cssText = "font-size:0.82rem;color:var(--text-light);";
+                    meta.textContent = item.meta;
+
+                    info.appendChild(h4);
+                    info.appendChild(meta);
+
+                    topRow.appendChild(imgWrap);
+                    topRow.appendChild(info);
+
+                    var desc = document.createElement("p");
+                    desc.style.cssText = "color:var(--text-light);font-size:0.92rem;margin:0;";
+                    desc.textContent = item.desc;
+
+                    card.appendChild(topRow);
+                    card.appendChild(desc);
+                    grid.appendChild(card);
+                });
+            })();
+            </script>
         </div>
         <p style="text-align:center;color:#d97706;font-size:0.85rem;margin-top:0.8rem;padding-top:0.5rem;border-top:1px dashed #fcd34d;">——未完待续——</p>
     </main>
