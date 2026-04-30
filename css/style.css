@@ -338,6 +338,19 @@ body {
 }
 
 /* 工具预览 */
+
+/* ===== 返回按钮 ===== */
+.back-nav { background: #fafafa; border-bottom: 1px solid #e8e8e8; padding: 0.75rem 0; }
+body.dark-mode .back-nav { background: #1a1a1a; border-color: #333; }
+.back-link {
+    display: inline-flex; align-items: center; gap: 6px; color: #c41e3a;
+    text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 8px;
+    transition: all 0.2s; border: 2px solid #c41e3a;
+}
+.back-link:hover { background: #c41e3a; color: white; }
+body.dark-mode .back-link { color: #e57373; border-color: #e57373; }
+body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
+
 .tools-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

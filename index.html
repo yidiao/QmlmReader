@@ -357,8 +357,8 @@
     <main class="home-page">
         <div class="container">
             <section class="hero">
-                <h2>学习他 · 成为他 · 然后超越他</h2>
-                <p>在这里阅读马克思、恩格斯、列宁、斯大林、毛泽东等革命导师的经典著作，深入理解马克思主义理论的精髓。</p>
+                <h2>全世界无产者，联合起来</h2>
+                <p>希望能为各位提供马克思、恩格斯、列宁、斯大林、毛泽东等革命导师的经典著作，帮助深入理解马克思主义理论的精髓。</p>
                 <div class="hero-actions">
                     <a href="articles.html" class="btn-primary">开始阅读</a>
                     <a href="masters.html" class="btn-secondary">了解导师</a>
@@ -384,27 +384,51 @@
 
             <section class="featured-section">
                 <h3 class="section-title">五星必读</h3>
-                <div class="featured-grid">
-                    <article class="featured-card">
-                        <span class="priority-badge">五星</span>
-                        <h4><a href="articles/lun-chi-jiu-zhan.html">论持久战</a></h4>
-                        <p class="meta">毛泽东 · 1938年5月 · 军事战略</p>
-                        <p class="desc">面对强大的对手，如何在时间维度上规划斗争节奏</p>
-                    </article>
-                    <article class="featured-card">
-                        <span class="priority-badge">五星</span>
-                        <h4><a href="articles/shi-jian-lun.html">实践论</a></h4>
-                        <p class="meta">毛泽东 · 1937年7月 · 哲学基础</p>
-                        <p class="desc">认识与实践的辩证关系，知与行的统一</p>
-                    </article>
-                    <article class="featured-card">
-                        <span class="priority-badge">五星</span>
-                        <h4><a href="articles/mao-dun-lun.html">矛盾论</a></h4>
-                        <p class="meta">毛泽东 · 1937年8月 · 哲学基础</p>
-                        <p class="desc">唯物辩证法的核心，分析矛盾的主次与性质</p>
-                    </article>
+                <h4>点击标题跳转</h4>
+                <div class="featured-grid" id="wuXingGrid">
+                    <!-- 随机加载中... -->
+                    <div style="text-align:center;color:#999;grid-column:1/-1;padding:40px;">
+                        随机加载中...
+                    </div>
                 </div>
             </section>
+
+            <script>
+                // 五星必读文章数据
+                const wuXingArticles = [
+                    { title: "论持久战", href: "articles/lun-chi-jiu-zhan.html", meta: "毛泽东 · 1938年5月 · 军事战略", desc: "面对强大的对手，如何在时间维度上规划斗争节奏" },
+                    { title: "实践论", href: "articles/shi-jian-lun.html", meta: "毛泽东 · 1937年7月 · 哲学基础", desc: "认识与实践的辩证关系，知与行的统一" },
+                    { title: "矛盾论", href: "articles/mao-dun-lun.html", meta: "毛泽东 · 1937年8月 · 哲学基础", desc: "唯物辩证法的核心，分析矛盾的主次与性质" },
+                    { title: "共产党宣言", href: "articles/gongchan-dan-yuan.html", meta: "马克思恩格斯 · 1848年 · 政治理论", desc: "全世界无产者，联合起来！" },
+                    { title: "国家与革命", href: "articles/guo-jia-yu-ge-ming.html", meta: "列宁 · 1917年 · 政治理论", desc: "国家是阶级统治的工具，无产阶级必须打碎旧的国家机器" },
+                    { title: "怎么办？", href: "articles/zen-me-ban.html", meta: "列宁 · 1901年 · 党的建设", desc: "系统批判经济主义，阐述建立新型无产阶级政党的必要性" },
+                    { title: "唯物主义和经验批判主义", href: "articles/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html", meta: "列宁 · 1908年 · 哲学基础", desc: "批判马赫主义，阐述辩证唯物主义认识论" }
+                ];
+
+                // Fisher-Yates 洗牌算法
+                function shuffle(array) {
+                    const arr = [...array];
+                    for (let i = arr.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [arr[i], arr[j]] = [arr[j], arr[i]];
+                    }
+                    return arr;
+                }
+
+                // 随机选择3篇
+                const selected = shuffle(wuXingArticles).slice(0, 3);
+
+                // 生成HTML
+                const grid = document.getElementById('wuXingGrid');
+                grid.innerHTML = selected.map(article => `
+                    <article class="featured-card">
+                        <span class="priority-badge">五星</span>
+                        <h4><a href="${article.href}">${article.title}</a></h4>
+                        <p class="meta">${article.meta}</p>
+                        <p class="desc">${article.desc}</p>
+                    </article>
+                `).join('');
+            </script>
 
             <section class="masters-preview">
                 <h3 class="section-title">革命导师</h3>
@@ -445,7 +469,7 @@
                                  style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
                         </div>
                         <h4>列宁</h4>
-                        <p>帝国主义时代马克思主义者</p>
+                        <p>马克思主义捍卫和开拓者</p>
                         <a href="masters/lenin.html">查看著作 →</a>
                     </div>
                     <div class="master-card">
@@ -462,22 +486,32 @@
             </section>
 
             <section class="toolkit-preview">
-                <h3 class="section-title">理论学习工具</h3>
+                <h3 class="section-title">工具集</h3>
                 <div class="tools-grid">
                     <div class="tool-card">
-                        <h4>📚 哲学原理</h4>
+                        <h4>📐 哲学原理</h4>
                         <p>唯物辩证法、认识论、历史唯物主义核心概念</p>
-                        <a href="toolkit.html#philosophy">进入学习 →</a>
+                        <a href="toolkit.html#part1">进入学习 →</a>
                     </div>
                     <div class="tool-card">
                         <h4>⚔️ 斗争策略</h4>
-                        <p>统一战线、武装斗争、党的建设三大法宝</p>
-                        <a href="toolkit.html#strategy">进入学习 →</a>
+                        <p>化理论为实际行动——革命导师们是如何把道理变成力量的？</p>
+                        <a href="toolkit.html#part2">进入学习 →</a>
                     </div>
                     <div class="tool-card">
-                        <h4>📖 经典导读</h4>
-                        <p>重要著作的论证结构和学习方法</p>
-                        <a href="toolkit.html#reading">进入学习 →</a>
+                        <h4>📖 学习与思考</h4>
+                        <p>分阶段推荐阅读路径，以及如何真正把书读进去</p>
+                        <a href="toolkit.html#part3">进入学习 →</a>
+                    </div>
+                    <div class="tool-card">
+                        <h4>🔍 见微知著</h4>
+                        <p>透过经典语录，窥见整篇著作的思想内核</p>
+                        <a href="toolkit.html#part4">进入学习 →</a>
+                    </div>
+                    <div class="tool-card">
+                        <h4>🧠 独立思考</h4>
+                        <p>学会辨别真伪，以正确的态度对待历史与现实</p>
+                        <a href="toolkit.html#part5">进入学习 →</a>
                     </div>
                 </div>
             </section>

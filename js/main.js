@@ -1,20 +1,32 @@
 // 标签切换功能
 document.addEventListener('DOMContentLoaded', function() {
-    // 标签切换
+    // 标签切换 - 支持两种模式：
+    // 1. data-tab 属性 + data-tab 选择器（articles.html等页面）
+    // 2. id 属性 + onclick="switchTab(...)"（文章详情页）
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
     tabBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+            // 如果按钮使用 onclick="switchTab(...)"，则不处理，让onclick处理
+            // 只有使用 data-tab 属性的按钮才由这里处理
             const tabId = this.dataset.tab;
-
+            
+            if (!tabId) {
+                // 没有 data-tab 属性，交给 onclick="switchTab(...)" 处理
+                return;
+            }
+            
             // 移除所有活动状态
             tabBtns.forEach(b => b.classList.remove('active'));
             tabContents.forEach(c => c.classList.remove('active'));
 
             // 添加当前活动状态
             this.classList.add('active');
-            document.querySelector(`.tab-content[data-tab="${tabId}"]`).classList.add('active');
+            
+            // 使用 data-tab 属性选择器
+            const target = document.querySelector(`.tab-content[data-tab="${tabId}"]`);
+            if (target) target.classList.add('active');
         });
     });
 });
