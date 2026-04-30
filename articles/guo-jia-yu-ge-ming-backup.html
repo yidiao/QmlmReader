@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国家与革命 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="javascript:history.back()" class="active">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 返回按钮 -->
+    <div class="back-nav">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="javascript:history.back()" class="back-link">
+                <span>←</span> 返回上一页
+            </a>
+        </div>
+    </div>
+
+    <main class="article-detail">
+        <!-- 文章头部 - 政治理论深蓝渐变 -->
+        <header class="article-header" data-category="政治理论">
+            <div class="header-decoration"></div>
+            <div class="importance-badge">⭐⭐⭐⭐⭐ 核心必读</div>
+            <h1>国家与革命</h1>
+            <div class="article-subtitle">马克思主义关于国家的学说与无产阶级在革命中的任务</div>
+            <div class="article-meta">
+                <span class="author">列宁</span>
+                <span class="date">1917年8—9月</span>
+                <span class="category">政治理论 · 国家学说</span>
+                <span class="word-count">约50,000字</span>
+            </div>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
+            <button class="tab-btn" onclick="switchTab('further', this)">延伸阅读</button>
+        </div>
+
+        <!-- 原文 -->
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro">
+                    <p><strong>阅读提示：</strong>本文写于1917年8-9月，正值十月革命前夕。全文共6章，约5万字。重点推荐：第一章（国家是阶级矛盾不可调和的产物）和第五章（国家消亡与共产主义）。点击章节标题可展开/折叠。</p>
+                </div>
+
+                <!-- 序言 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        序言
+                    </h3>
+                    <div class="chapter-content">
+                        <p>国家问题，现在无论在理论方面或在政治实践方面，都具有特别重大的意义。帝国主义战争大大加速和加剧了垄断资本主义变为国家垄断资本主义的过程。国家同势力极大的资本家同盟日益密切地溶合在一起，它对劳动群众的骇人听闻的压迫愈来愈骇人听闻了。</p>
+                        <p>在各先进国家变成了工人的军事苦役监狱。旷日持久的战争造成的空前惨祸和灾难，使群众生活痛苦不堪，使他们更加愤慨。国际无产阶级革命正在显著地发展。这个革命对国家的态度问题，已经具有实践的意义了。</p>
+                        <p>我们要考察一下马克思和恩格斯的国家学说，特别详细地谈谈这个学说被人忘记或遭到机会主义歪曲的那些方面。其次，我们要专门分析一下歪曲这个学说的主要代表人物，即第二国际的最著名领袖卡尔·考茨基。</p>
+                    </div>
+                </div>
+
+                <!-- 第一章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        一、阶级社会的产生和发展（重点章节）
+                    </h3>
+                    <div class="chapter-content">
+                        <h4>1. 国家是阶级矛盾不可调和的产物</h4>
+                        <p>恩格斯在总结他所作的历史的分析时说："国家决不是从外部强加于社会的一种力量。国家也不像黑格尔所断言的是伦理观念的现实……勿宁说，国家是社会在一定发展阶段上的产物；国家是表示：这个社会陷入了不可解决的自我矛盾，分裂为不可调和的对立面而又无力摆脱这些对立面。"</p>
+                        <p><strong>国家是阶级矛盾不可调和的产物和表现。</strong>在阶级矛盾客观上不能调和的地方、时候和条件下，便产生国家。反过来说，国家的存在证明阶级矛盾不可调和。</p>
+                        <p>对马克思主义的歪曲正是从这最重要的和根本的一点上开始的：一方面，资产阶级思想家把国家说成是阶级调和的机关；另一方面，"考茨基主义"虽然承认国家是阶级统治的机关，却忽视了被压迫阶级要求得解放，非进行暴力革命不可，非消灭国家政权不可。</p>
+
+                        <h4>2. 特殊的武装队伍、监狱等等</h4>
+                        <p>恩格斯指出，国家与旧的氏族组织不同的地方：第一，它按地区来划分它的国民；第二，它建立了公共权力，这种公共权力不再同自己组织为武装力量的居民直接符合了。这种公共权力主要是什么呢？主要是拥有监狱等等的特殊的武装队伍。</p>
+                        <p>常备军和警察是国家政权的主要强力工具。每次大革命在破坏国家机构的时候，我们都看到赤裸裸的阶级斗争，我们清楚地看到，统治阶级是如何力图恢复替它服务的特殊武装队伍。</p>
+
+                        <h4>3. 国家是剥削被压迫阶级的工具</h4>
+                        <p>"国家照例是最强大的、在经济上占统治地位的阶级的国家，这个阶级借助于国家而在政治上也成为占统治地位的阶级，因而获得了镇压和剥削被压迫阶级的新手段。"</p>
+                        <p>在民主共和国内，"财富是间接地但也是更可靠地运用它的权力的"，它所采用的第一个方法是"直接收买官吏"（美国），第二个方法是"政府和交易所结成联盟"（法国和美国）。</p>
+
+                        <h4>4. 国家"自行消亡"和暴力革命</h4>
+                        <p>恩格斯说："国家并不是从来就有的。曾经有过不需要国家、而且根本不知国家和国家权力为何物的社会……阶级不可避免地要消失，正如它们从前不可避免地产生一样。随着阶级的消失，国家也不可避免地要消失。"</p>
+                        <p><strong>资产阶级国家不是"自行消亡"的，而是由无产阶级在革命中来"消灭"的。</strong>在这个革命以后，自行消亡的是无产阶级的国家或半国家。</p>
+                        <p>暴力革命的作用："暴力，用马克思的话说，是每一个孕育着新社会的旧社会的助产婆，它是社会运动借以为自己开辟道路并摧毁僵化的垂死的政治形式的工具。"</p>
+                    </div>
+                </div>
+
+                <!-- 第二章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        二、国家与革命（一八四五至一八九一年的理论）
+                    </h3>
+                    <div class="chapter-content">
+                        <h4>1. 革命的前夜</h4>
+                        <p>马克思在《哲学的贫困》中写道："工人阶级在发展进程中中将创造一个消除了阶级和阶级对立的联合体来代替旧的资产阶级社会：从此再不会有任何原来意义的政权了。"</p>
+                        <p>在《共产党宣言》中，马克思写道："工人革命的第一步就是使无产阶级转化成统治阶级，争得民主。无产阶级将利用自己的政治统治，一步一步地夺取资产阶级的全部资本，把一切生产工具集中在国家即组织成为统治阶级的无产阶级手里。"</p>
+                        <p><strong>马克思主义关于国家问题最卓越的思想："国家即组织成为统治阶级的无产阶级。"</strong></p>
+
+                        <h4>2. 革命的总结</h4>
+                        <p>马克思在《路易·波拿巴的雾月十八日》中写道："这个行政权力有庞大的官僚和军事组织，有复杂而巧妙的国家机器……这个俨如密网一般缠住法国社会全身并堵塞其一切毛孔的可怕的寄生机体，是在专制君主制时代产生的，同时这个寄生机体又加速了封建制度的崩溃。"</p>
+                        <p><strong>过去一切革命都是使国家机器更加完备，而这个机器是必须打碎，必须摧毁的。</strong>这个结论是马克思主义国家学说中主要的基本的东西。</p>
+
+                        <h4>3. 1852年马克思对问题的提法</h4>
+                        <p>马克思在1852年写道："……我所加上的新内容就是证明了下列几点：（1）阶级的存在仅仅同生产发展的一定历史阶段相联系；（2）阶级斗争必然要导致无产阶级专政；（3）这个专政不过是达到消灭一切阶级和进入无阶级社会的过渡……"</p>
+                    </div>
+                </div>
+
+                <!-- 第三章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        三、1848年革命和1851年经验的总结
+                    </h3>
+                    <div class="chapter-content">
+                        <p>马克思在1850年写道："革命向前进展，爆炸力和破坏力不断增长，人民群众的首创精神不断发挥"，"议会专门为了在敌人面前赢得时间而开会，结果却给敌人造成有利的机会"等等。</p>
+                        <p>一切革命都是这样：使国家机器更加完备，把它摧毁。"这无论在布隆基（引者按：路易·勃朗）或在大多数革命的历史家或政论家那里都可以看到完全是同样的想法。"</p>
+                        <p>关于改造旧的国家机器的任务，马克思总结了1848-1851年的经验：第一，"一切变革都是使这个机器更加完备，而不是把它摧毁"——这是资产阶级和小资产阶级所做的事情；第二，无产阶级要把这个机器打碎、摧毁。</p>
+                        <p>打碎旧的国家机器是欧洲一切大革命人民斗争的总结。马克思在1871年4月给库格曼的信中写道："……如果你读了我的《雾月十八日》的最后一章，你就会看到，我认为法国革命的下一次尝试不是像以前那样由较小的官僚或由资产阶级的正统派和自由派去建立新的代议机关，而是应该彻底打碎旧的国家机器。"</p>
+                    </div>
+                </div>
+
+                <!-- 第四章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        四、1852年马克思对问题的补充
+                    </h3>
+                    <div class="chapter-content">
+                        <p>马克思在1852年确认的阶级斗争学说要点："（1）阶级的存在仅仅同生产发展的一定历史阶段相联系；（2）阶级斗争必然要导致无产阶级专政；（3）这个专政不过是达到消灭一切阶级和进入无阶级社会的过渡……"</p>
+                        <p>马克思的理论把严格的和高度的科学性同革命性结合起来。科学性要求对每一特殊历史情况进行具体的分析；革命性要求立场坚定，行动果断。</p>
+                        <p>考茨基主义：仅仅在形式上同机会主义不同，在实际上却沿着同一条道路滑下去。"实际上，考茨基写的所有东西都浸透了一种思想：既然布尔什维克在准备和进行社会革命方面有了成就，那就必须把马克思的革命理论加以"温和"和"谨慎"地解释，使其适合于"民主主义"的一般概念。</p>
+                    </div>
+                </div>
+
+                <!-- 第五章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        五、国家消亡与共产主义（重点章节）
+                    </h3>
+                    <div class="chapter-content">
+                        <h4>1. 从资本主义到共产主义的过渡</h4>
+                        <p>马克思在《哥达纲领批判》中说："在资本主义社会和共产主义社会之间，有一个从前者变为后者的革命转变时期。同这个时期相适应的也有一个政治上的过渡时期，这个时期的国家只能是无产阶级的革命专政。"</p>
+                        <p><strong>无产阶级专政：</strong>不与任何人分掌而直接依靠群众武装力量的政权。只有使无产阶级转化成统治阶级，从而能把资产阶级必然要进行的拼死反抗镇压下去，并组织一切被剥削劳动群众去建立新的经济结构，才能推翻资产阶级。</p>
+
+                        <h4>2. 共产主义社会的高级阶段</h4>
+                        <p>"在共产主义社会高级阶段，在迫使个人奴隶般地服从分工的情形已经消失，从而脑力劳动和体力劳动的对立也随之消失之后；在劳动已经不仅仅是谋生的手段，而且本身成了生活的第一需要之后；在随着个人的全面发展，他们的生产力也增长起来，而集体财富的一切源泉都充分涌流之后，——只有在那个时候，才能完全超出资产阶级法权的狭隘眼界，社会才能在自己的旗帜上写上：各尽所能，按需分配！"</p>
+                        <p><strong>三个条件：</strong>（1）迫使个人奴隶般地服从分工的情形已经消失；（2）劳动已经不仅仅是谋生的手段，而且本身成了生活的第一需要；（3）个人全面发展，生产力充分增长，集体财富充分涌流。</p>
+
+                        <h4>3. 共产主义社会两个阶段的分配</h4>
+                        <p>在共产主义社会第一阶段（社会主义），"这里确实有"资产阶级法权"……因为这里通行的是调节商品交换（它是同一等价物的交换）的同一原则"。</p>
+                        <p>在社会主义社会，消费品分配"通行的就是调节商品交换的同一原则"，即等价交换原则。这是"资产阶级法权"的残余，还不能完全超出资产阶级法权的狭隘眼界。</p>
+                    </div>
+                </div>
+
+                <!-- 第六章 -->
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        六、机会主义对国家问题的歪曲
+                    </h3>
+                    <div class="chapter-content">
+                        <p>考茨基的"纯粹民主"论：抽象地提出"民主"问题，把它看作超阶级的和绝对的东西。这是机会主义的惯用手法：用"纯粹民主"来欺骗群众，回避资产阶级民主的阶级性质。</p>
+                        <p>恩格斯论国家的意义：国家是阶级统治的机关，是剥削被压迫阶级的工具。资产阶级民主是剥削者对被剥削者实施压迫的特殊组织。</p>
+                        <p>恩格斯论国家的消亡：马克思和恩格斯在国家"自行消亡"前面加上"自行"二字，是为了表示过程的性质——这是社会主义革命以后的事情，而不是革命的开始。</p>
+                        <p>马克思在《法兰西内战》中总结巴黎公社经验时指出，公社是一个"终于发现的能使劳动在经济上获得解放的政治形式"。</p>
+                        <p><strong>公社的实质：</strong>（1）废除常备军，代之以武装的人民；（2）一切公职人员由选举产生，对选民负责，随时可以撤换；（3）取消官吏的一切特权；（4）把资产阶级国家机器打碎，用新的真正民主的国家政权来代替。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 读法提示 -->
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2>怎么读这篇文章</h2>
+                <div class="guide-block">
+                    <h3>① 先抓住一个核心：国家是什么</h3>
+                    <p>"国家是阶级矛盾不可调和的产物。"这句话是整个《国家与革命》的出发点。列宁用恩格斯的论述系统地论证了这个观点：国家不是"从外面强加于社会的力量"，而是社会在一定发展阶段上的产物。</p>
+                    <p>理解这一点，就能理解为什么国家不是永恒的，为什么国家最终会消亡。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>② 理解"打碎旧国家机器"的革命原则</h3>
+                    <p>马克思在总结1848-1851年革命经验时得出了一个重要结论：<strong>过去一切革命都是使国家机器更加完备，而这个机器是必须打碎、必须摧毁的。</strong></p>
+                    <p>这是马克思主义国家学说中最重要、最基本的东西，却被第二国际的机会主义者完全歪曲了。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>③ 重点读第五章：无产阶级专政与共产主义</h3>
+                    <p>这一章是全文的高潮，讨论了：</p>
+                    <ul>
+                        <li>从资本主义到共产主义的过渡时期，只能是无产阶级专政</li>
+                        <li>共产主义社会两个阶段及其分配方式</li>
+                        <li>"资产阶级法权"的残余及其历史命运</li>
+                    </ul>
+                </div>
+                <div class="guide-block">
+                    <h3>④ 理解列宁批判考茨基的意义</h3>
+                    <p>列宁在第六章详细批判了考茨基的"纯粹民主"论。这不是学术争论，而是关系到革命成败的根本问题：要不要打碎旧国家机器？要不要无产阶级专政？</p>
+                    <p>读这一章时，要注意区分：什么是真正的马克思主义，什么是打着马克思主义旗号的机会主义。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>⑤ 结合十月革命的实际来读</h3>
+                    <p>本文写于1917年8-9月，十月革命前夕。列宁写作本文的目的，就是为即将到来的革命提供理论指导。读完之后，再看十月革命的历史进程，会有更深的理解。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 难点解析 -->
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2>容易读错的地方</h2>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：国家是阶级调和的机关</div>
+                    <div class="correct">✅ 正解：国家是阶级矛盾不可调和的产物和表现。恩格斯明确说："国家是表示：这个社会陷入了不可理解的自我矛盾，分裂为不可调和的对立面而又无力摆脱这些对立面。"如果阶级可以调和，国家就不会产生。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：国家"自行消亡"意味着不需要革命</div>
+                    <div class="correct">✅ 正解：资产阶级国家不是"自行消亡"的，而是由无产阶级在革命中来"消灭"的。只有在社会主义革命以后，无产阶级国家才会"自行消亡"。机会主义把"自行消亡"论当作回避革命、否定革命的借口。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：无产阶级专政就是"一党专政"或"独裁"</div>
+                    <div class="correct">✅ 正解：无产阶级专政是无产阶级领导的、以工农联盟为基础的人民民主，是对极少数剥削者实行民主，对广大人民群众实行专政。它与资产阶级专政的本质区别在于：它不是少数剥削者对多数劳动人民的统治，而是多数劳动人民对少数剥削者的统治。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：共产主义就是"各尽所能，按需分配"</div>
+                    <div class="correct">✅ 正解：这只是共产主义高级阶段的特征。达到这个阶段需要三个条件：分工消失（特别是脑力劳动和体力劳动的对立消失）；劳动成为生活的第一需要；个人全面发展，生产力充分增长。社会主义阶段（共产主义第一阶段）通行的仍然是"按劳分配"原则，还保留着"资产阶级法权"的残余。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：考茨基是马克思主义的忠实继承者</div>
+                    <div class="correct">✅ 正解：列宁在本文中系统批判了考茨基的机会主义观点。考茨基的"纯粹民主"论、用折衷主义代替辩证法、回避打碎旧国家机器的问题——这些都是对马克思主义的篡改。1917年革命验证了列宁批判的正确性。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对话空间 -->
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2>这篇文章在回应谁？又在问谁？</h2>
+                <div class="dialogue-block">
+                    <h3>它在回应的问题</h3>
+                    <ul>
+                        <li>机会主义者：他们对马克思国家学说的歪曲，特别是考茨基的"纯粹民主"论</li>
+                        <li>无政府主义者：他们对国家问题的简单化理解，不懂得打碎旧国家机器的必要性</li>
+                        <li>小资产阶级民主派：他们把国家看作阶级调和的工具，期待通过"民主"道路实现社会主义</li>
+                        <li>沙文主义者：他们在帝国主义战争中背叛了无产阶级国际主义</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在问每一个读者</h3>
+                    <ul>
+                        <li>你所在社会的国家机器，是哪个阶级的统治工具？</li>
+                        <li>面对这个国家机器，你是期待通过"合法途径"改良它，还是准备打碎它？</li>
+                        <li>在当前的阶级斗争中，你站在哪一边？被统治者还是统治者？</li>
+                        <li>你如何理解无产阶级专政？它是"民主"还是"独裁"？</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在等你的回应</h3>
+                    <p>找一个你关注的社会问题，试着用国家学说的观点分析：</p>
+                    <ol>
+                        <li>这个问题背后有什么样的阶级矛盾？</li>
+                        <li>现存的国家机器在这个问题上站在哪一边？</li>
+                        <li>解决这个问题，需要改良这个国家机器，还是需要打碎它？</li>
+                    </ol>
+                    <p>然后思考：你的分析和列宁的论述有什么联系？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行动实验 -->
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2>读完之后可以做什么</h2>
+                <div class="action-item">
+                    <h3>实验一：分析你所在国家的国家机器</h3>
+                    <p>用《国家与革命》的观点分析你所在国家的国家机器：</p>
+                    <ul>
+                        <li>这个国家机器的主要组成部分是什么？（军队、警察、法院、监狱、官僚机构）</li>
+                        <li>这些机构主要维护哪个阶级的利益？</li>
+                        <li>它们是如何产生的？是否经过革命打碎了旧的国家机器？</li>
+                    </ul>
+                </div>
+                <div class="action-item">
+                    <h3>实验二：观察"资产阶级法权"的当代表现</h3>
+                    <p>列宁指出，社会主义阶段还保留着"资产阶级法权"的残余。观察当代社会的例子：</p>
+                    <ul>
+                        <li>按劳分配如何体现"等价交换"原则？</li>
+                        <li>哪些"形式上的平等"实际上掩盖着实质上的不平等？</li>
+                        <li>这些不平等如何影响阶级结构？</li>
+                    </ul>
+                </div>
+                <div class="action-item">
+                    <h3>实验三：理解"打碎旧国家机器"原则的当代意义</h3>
+                    <p>这个原则在今天仍然有效吗？考虑：</p>
+                    <ul>
+                        <li>当代国家机器（军队、警察、司法等）的阶级性质</li>
+                        <li>改良和革命的关系：什么时候需要改良，什么时候需要革命？</li>
+                        <li>如何理解列宁所说的"不与任何人分掌"的无产阶级专政？</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 一目了然 -->
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2>一目了然</h2>
+
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量《国家与革命》的文章"性格"</p>
+                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                    <div class="chart-legend">
+                        <span style="color:#c41e3a">●《国家与革命》</span>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>论证节奏曲线</h3>
+                    <p class="chart-desc">展示文章各章节的论证强度——从批判旧学到建立新说，从理论到实践</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="argumentCurve"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>国家类型演进图</h3>
+                    <p class="chart-desc">从剥削阶级国家到无产阶级专政，再到国家消亡——人类政治文明的辩证发展</p>
+                    <div style="display:flex;justify-content:center;align-items:center;gap:15px;flex-wrap:wrap;margin:20px 0;">
+                        <div style="background:#8b4513;color:white;padding:15px 20px;border-radius:8px;text-align:center;min-width:120px;">
+                            <strong>奴隶制国家</strong><br>
+                            <small>剥削的开始</small>
+                        </div>
+                        <div style="font-size:1.5em;color:#999;">→</div>
+                        <div style="background:#654321;color:white;padding:15px 20px;border-radius:8px;text-align:center;min-width:120px;">
+                            <strong>封建国家</strong><br>
+                            <small>等级制剥削</small>
+                        </div>
+                        <div style="font-size:1.5em;color:#999;">→</div>
+                        <div style="background:#1a1a1a;color:white;padding:15px 20px;border-radius:8px;text-align:center;min-width:120px;">
+                            <strong>资产阶级国家</strong><br>
+                            <small>资本剥削</small>
+                        </div>
+                        <div style="font-size:1.5em;color:#c41e3a;font-weight:bold;">→</div>
+                        <div style="background:#c41e3a;color:white;padding:15px 20px;border-radius:8px;text-align:center;min-width:120px;">
+                            <strong>无产阶级专政</strong><br>
+                            <small>过渡时期</small>
+                        </div>
+                        <div style="font-size:1.5em;color:#38a169;font-weight:bold;">→</div>
+                        <div style="background:#38a169;color:white;padding:15px 20px;border-radius:8px;text-align:center;min-width:120px;">
+                            <strong>国家消亡</strong><br>
+                            <small>共产主义</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>马克思主义国家学说核心命题</h3>
+                    <p class="chart-desc">列宁在本文中捍卫和发展的六个核心命题</p>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;margin:15px 0;">
+                        <div style="background:#fff5f5;padding:15px;border-radius:8px;border-left:4px solid #c41e3a;">
+                            <strong>① 国家是阶级矛盾不可调和的产物</strong><br>
+                            <small>恩格斯：国家是社会在一定发展阶段上的产物，是阶级矛盾不可调和的表现。</small>
+                        </div>
+                        <div style="background:#fff5f5;padding:15px;border-radius:8px;border-left:4px solid #c41e3a;">
+                            <strong>② 国家是剥削被压迫阶级的工具</strong><br>
+                            <small>国家照例是最强大的、在经济上占统治地位的阶级的国家。</small>
+                        </div>
+                        <div style="background:#fff5f5;padding:15px;border-radius:8px;border-left:4px solid #c41e3a;">
+                            <strong>③ 必须打碎旧国家机器</strong><br>
+                            <small>过去一切革命都是使国家机器更加完备，而必须打碎、必须摧毁。</small>
+                        </div>
+                        <div style="background:#fff5f5;padding:15px;border-radius:8px;border-left:4px solid #c41e3a;">
+                            <strong>④ 无产阶级必须打碎资产阶级国家</strong><br>
+                            <small>资产阶级国家由无产阶级国家代替，不能通过"自行消亡"。</small>
+                        </div>
+                        <div style="background:#fff5f5;padding:15px;border-radius:8px;border-left:4px solid #c41e3a;">
+                            <strong>⑤ 无产阶级专政是过渡时期的国家</strong><br>
+                            <small>这个专政不过是达到消灭一切阶级和进入无阶级社会的过渡。</small>
+                        </div>
+                        <div style="background:#fff5f5;padding:15px;border-radius:8px;border-left:4px solid #c41e3a;">
+                            <strong>⑥ 国家最终将自行消亡</strong><br>
+                            <small>当阶级消失时，国家也不可避免地要消失。</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>资产阶级民主 vs 无产阶级民主</h3>
+                    <p class="chart-desc">两种民主的本质区别——形式上的平等掩盖着实质上的不平等</p>
+                    <div class="chart-container" style="max-width:600px;margin:0 auto;">
+                        <canvas id="democracyChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>共产主义两阶段对比</h3>
+                    <p class="chart-desc">社会主义阶段与共产主义高级阶段的根本区别</p>
+                    <div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin:20px 0;">
+                        <div style="flex:1;min-width:280px;background:#f0fff4;padding:20px;border-radius:8px;border:2px solid #68d391;">
+                            <h4 style="color:#276749;margin:0 0 10px;">社会主义（第一阶段）</h4>
+                            <ul style="margin:0;padding-left:20px;color:#333;line-height:1.8;">
+                                <li>分配原则：<strong>按劳分配</strong></li>
+                                <li>存在"资产阶级法权"残余</li>
+                                <li>形式平等掩盖实质不平等</li>
+                                <li>阶级斗争仍在一定范围内存在</li>
+                                <li>国家尚未消亡（无产阶级专政）</li>
+                            </ul>
+                        </div>
+                        <div style="flex:1;min-width:280px;background:#e6fffa;padding:20px;border-radius:8px;border:2px solid #38b2ac;">
+                            <h4 style="color:#2c7a7b;margin:0 0 10px;">共产主义（高级阶段）</h4>
+                            <ul style="margin:0;padding-left:20px;color:#333;line-height:1.8;">
+                                <li>分配原则：<strong>按需分配</strong></li>
+                                <li>超越"资产阶级法权"狭隘眼界</li>
+                                <li>实质上的完全平等</li>
+                                <li>阶级对立消失</li>
+                                <li>国家完全消亡</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 理论拼图 -->
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2>在马哲体系中的位置</h2>
+                
+                <!-- 核心概念演进图 -->
+                <div class="puzzle-timeline">
+                    <h3>📍 核心命题的演进脉络</h3>
+                    <div class="timeline-track" style="display:flex;gap:0;overflow-x:auto;padding-bottom:10px;">
+                        <div class="timeline-item" style="min-width:120px;flex:0 0 auto;">
+                            <div class="timeline-dot" style="background:#d4a017;border-color:#b8860b;"></div>
+                            <div class="timeline-year">1848</div>
+                            <div class="timeline-label" style="font-size:0.75em;">《共产党宣言》</div>
+                            <div style="font-size:0.65em;color:#888;margin-top:4px;">国家=阶级统治机关</div>
+                        </div>
+                        <div class="timeline-item" style="min-width:120px;flex:0 0 auto;">
+                            <div class="timeline-dot" style="background:#d4a017;border-color:#b8860b;"></div>
+                            <div class="timeline-year">1850-71</div>
+                            <div class="timeline-label" style="font-size:0.75em;">《法兰西内战》</div>
+                            <div style="font-size:0.65em;color:#888;margin-top:4px;">打碎旧国家机器</div>
+                        </div>
+                        <div class="timeline-item" style="min-width:120px;flex:0 0 auto;">
+                            <div class="timeline-dot" style="background:#d4a017;border-color:#b8860b;"></div>
+                            <div class="timeline-year">1875</div>
+                            <div class="timeline-label" style="font-size:0.75em;">《哥达纲领批判》</div>
+                            <div style="font-size:0.65em;color:#888;margin-top:4px;">共产主义两阶段</div>
+                        </div>
+                        <div class="timeline-item" style="min-width:120px;flex:0 0 auto;">
+                            <div class="timeline-dot-active"></div>
+                            <div class="timeline-year">1917</div>
+                            <div class="timeline-label" style="font-size:0.75em;">《国家与革命》</div>
+                            <div class="timeline-here">★ 当前位置</div>
+                        </div>
+                        <div class="timeline-item" style="min-width:120px;flex:0 0 auto;">
+                            <div class="timeline-dot" style="background:#38a169;border-color:#2d7a4f;"></div>
+                            <div class="timeline-year">1949</div>
+                            <div class="timeline-label" style="font-size:0.75em;">《论人民民主专政》</div>
+                            <div style="font-size:0.65em;color:#888;margin-top:4px;">中国化应用</div>
+                        </div>
+                        <div class="timeline-item" style="min-width:120px;flex:0 0 auto;">
+                            <div class="timeline-dot" style="background:#38a169;border-color:#2d7a4f;"></div>
+                            <div class="timeline-year">1957</div>
+                            <div class="timeline-label" style="font-size:0.75em;">《人民内部矛盾》</div>
+                            <div style="font-size:0.65em;color:#888;margin-top:4px;">专政理论发展</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 理论联结网络 -->
+                <div class="puzzle-connection">
+                    <h3>🔗 与其他经典的深层联结</h3>
+                    <div class="conn-grid">
+                        <a href="gongchan-dan-yuan.html" class="conn-card">
+                            <div class="conn-dir">📖 理论源头</div>
+                            <div class="conn-title">《共产党宣言》(1848)</div>
+                            <div class="conn-relation">"国家是阶级统治的机关"——这句话是《国家与革命》全部论证的出发点。《国家与革命》第一章直接引用了《宣言》中的这句话，并在此基础上展开了系统的国家学说。</div>
+                        </a>
+                        <a href="#" class="conn-card conn-wip" style="opacity:0.7;">
+                            <div class="conn-dir">📖 经验来源</div>
+                            <div class="conn-title">《法兰西内战》(1871)</div>
+                            <div class="conn-relation">巴黎公社是"终于发现的能使劳动在经济上获得解放的政治形式"。《国家与革命》第五章系统总结了公社的四大措施：废除常备军、选举撤换、低薪、粉碎旧官僚机器。</div>
+                        </a>
+                        <a href="#" class="conn-card conn-wip" style="opacity:0.7;">
+                            <div class="conn-dir">📖 阶段划分</div>
+                            <div class="conn-title">《哥达纲领批判》(1875)</div>
+                            <div class="conn-relation">提出"共产主义两个阶段"理论。《国家与革命》第五章直接引用了这段话，论述无产阶级专政的历史使命和共产主义高级阶段的"按需分配"。</div>
+                        </a>
+                        <a href="xin-min-zhu.html" class="conn-card">
+                            <div class="conn-dir">📖 中国实践</div>
+                            <div class="conn-title">《新民主主义论》(1940)</div>
+                            <div class="conn-relation">毛泽东将列宁的国家学说具体化为"人民民主专政"的国家形式，认为中国革命必须分两步走：先建立新民主主义，再过渡到社会主义。</div>
+                        </a>
+                        <a href="ren-min-nei-bu-mao-dun.html" class="conn-card">
+                            <div class="conn-dir">📖 理论发展</div>
+                            <div class="conn-title">《关于正确处理人民内部矛盾》(1957)</div>
+                            <div class="conn-relation">在社会主义建设时期发展了无产阶级专政理论，区分"人民内部矛盾"与"敌我矛盾"，将《国家与革命》的国家消亡理论与中国的具体实践相结合。</div>
+                        </a>
+                        <a href="shijian-lun.html" class="conn-card">
+                            <div class="conn-dir">📖 哲学基础</div>
+                            <div class="conn-title">《实践论》(1937)</div>
+                            <div class="conn-relation">从认识论角度为《国家与革命》提供方法论支撑——理论来源于实践，革命理论必须在革命实践中检验和发展。</div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 核心命题对比表 -->
+                <div class="puzzle-position" style="background:#f8f8f8;">
+                    <h3>⚔️ 机会主义 vs 马克思主义的根本分歧</h3>
+                    <table style="width:100%;border-collapse:collapse;font-size:0.9em;margin-top:12px;">
+                        <tr style="background:#c41e3a;color:white;">
+                            <th style="padding:8px 12px;text-align:left;">问题</th>
+                            <th style="padding:8px 12px;text-align:left;">机会主义观点</th>
+                            <th style="padding:8px 12px;text-align:left;">马克思主义观点</th>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:600;">国家本质</td>
+                            <td style="padding:8px 12px;border-bottom:1px solid #eee;color:#888;">阶级调和的机关</td>
+                            <td style="padding:8px 12px;border-bottom:1px solid #eee;color:#c41e3a;">阶级矛盾不可调和的产物</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:600;">国家消亡</td>
+                            <td style="padding:8px 12px;border-bottom:1px solid #eee;color:#888;">资产阶级国家可以"和平长入"</td>
+                            <td style="padding:8px 12px;border-bottom:1px solid #eee;color:#c41e3a;">资产阶级国家只能被暴力革命打碎</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:600;">无产阶级专政</td>
+                            <td style="padding:8px 12px;border-bottom:1px solid #eee;color:#888;">可以不要/淡化</td>
+                            <td style="padding:8px 12px;border-bottom:1px solid #eee;color:#c41e3a;">从资本主义到共产主义的过渡</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px 12px;font-weight:600;">民主</td>
+                            <td style="padding:8px 12px;color:#888;">"纯粹民主"</td>
+                            <td style="padding:8px 12px;color:#c41e3a;">阶级性民主，无产阶级民主</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top:12px;font-size:0.85em;color:#666;">← 《国家与革命》的主要任务就是系统批判机会主义的这些错误观点</p>
+                </div>
+
+                <!-- 理论地图 -->
+                <div class="puzzle-intro">
+                    <h3>🗺️ 国家学说的"理论地图"</h3>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+                        <div style="padding:12px;background:#fff5f5;border-radius:8px;border-left:4px solid #c41e3a;">
+                            <div style="font-weight:600;color:#c41e3a;margin-bottom:6px;">《国家与革命》回答的核心问题</div>
+                            <ul style="margin:0;padding-left:16px;font-size:0.85em;color:#555;">
+                                <li>什么是国家？</li>
+                                <li>国家是怎么来的？</li>
+                                <li>无产阶级革命后要建立什么样的国家？</li>
+                                <li>国家什么时候消亡？</li>
+                            </ul>
+                        </div>
+                        <div style="padding:12px;background:#f0fff4;border-radius:8px;border-left:4px solid #38a169;">
+                            <div style="font-weight:600;color:#38a169;margin-bottom:6px;">中国革命的回答</div>
+                            <ul style="margin:0;padding-left:16px;font-size:0.85em;color:#555;">
+                                <li>人民民主专政</li>
+                                <li>对人民民主，对敌人专政</li>
+                                <li>团结一切可以团结的力量</li>
+                                <li>最终实现共产主义</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>💡 为什么现在还要读《国家与革命》？</h3>
+                    <p>在当代，"纯粹民主""普世价值""议会道路"等论调仍然有广泛影响。读懂《国家与革命》，你就能：
+                    </p>
+                    <ul style="margin-top:8px;">
+                        <li>看穿西方"宪政民主"的阶级本质</li>
+                        <li>理解为什么社会主义国家必须坚持无产阶级专政</li>
+                        <li>识别各种改头换面的机会主义观点</li>
+                    </ul>
+                    <p style="margin-top:12px;"><strong>它解决的真实问题：</strong>1917年革命前夕，第二国际的机会主义者用"纯粹民主""和平长入社会主义"等论调麻痹无产阶级。列宁写《国家与革命》，就是为了在理论上揭露这种机会主义的错误。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 延伸阅读 -->
+        <div class="tab-content" id="further">
+            <div class="further-reading">
+                <h2>延伸阅读</h2>
+                <div class="reading-item">
+                    <h3>如果《国家与革命》让你想了解国家的起源</h3>
+                    <p>→ 读恩格斯《家庭、私有制和国家的起源》——深入理解国家如何从原始社会中产生</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果《国家与革命》让你想了解巴黎公社的经验</h3>
+                    <p>→ 读马克思《法兰西内战》——总结巴黎公社经验，提出打碎旧国家机器的原则</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果《国家与革命》让你想了解无产阶级专政的具体形式</h3>
+                    <p>→ 读《法兰西内战》——公社是"终于发现的能使劳动在经济上获得解放的政治形式"</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果《国家与革命》让你想了解共产主义两个阶段的分配</h3>
+                    <p>→ 读马克思《哥达纲领批判》——详细论述社会主义阶段的"资产阶级法权"问题</p>
+                </div>
+                <div class="reading-item">
+                    <h3>如果《国家与革命》让你想了解列宁如何将理论运用于实践</h3>
+                    <p>→ 读《国家与革命》第二版序言和结尾部分——看看列宁如何在十月革命后反思本文</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <style>
+        /* ===== 政治理论深蓝渐变头部 ===== */
+        .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
+        
+        .article-header {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-bottom: 2px solid #1a237e;
+            color: white;
+            background: linear-gradient(135deg, #0d1259 0%, #1a237e 50%, #3949ab 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3Ccircle cx='20' cy='80' r='25' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='0.5'/%3E%3Ccircle cx='80' cy='20' r='20' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 120px;
+            pointer-events: none;
+        }
+
+        .article-header > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .importance-badge {
+            display: inline-block;
+            background: rgba(255,215,0,0.9);
+            color: #1a237e;
+            padding: 6px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+            text-shadow: 2px 3px 6px rgba(0,0,0,0.4);
+            font-family: 'STSong', 'SimSun', serif;
+        }
+
+        .article-subtitle {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin: 0.5rem 0;
+            font-style: italic;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .article-meta span {
+            background: rgba(0,0,0,0.25);
+            padding: 5px 14px;
+            border-radius: 18px;
+            backdrop-filter: blur(4px);
+        }
+
+        .article-meta .author { font-weight: 600; }
+        .article-meta .category { color: rgba(255,215,0,0.9); }
+
+        .tab-nav { 
+            display: flex; 
+            gap: 4px; 
+            margin: 30px 0 0; 
+            border-bottom: 2px solid #e2e8f0; 
+            overflow-x: auto; 
+            background: #f8f8f8;
+            padding: 1rem;
+            border-radius: 12px 12px 0 0;
+        }
+        .tab-btn { background: none; border: none; padding: 10px 18px; cursor: pointer; color: #666; font-size: 0.95em; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; border-radius: 8px; }
+        .tab-btn:hover { background: #e8e8e8; color: #1a237e; }
+        .tab-btn.active { background: #1a237e; color: white; font-weight: 600; }
+        .tab-content { display: none; padding: 30px 0; background: white; border-radius: 0 0 12px 12px; }
+        .tab-content.active { display: block; }
+        
+        .text-intro { background: linear-gradient(135deg, #e8eaf6, #c5cae9); border-left: 4px solid #3949ab; padding: 14px 20px; margin-bottom: 24px; border-radius: 0 6px 6px 0; }
+        .chapter { margin-bottom: 16px; border: 1px solid #e8e8e8; border-radius: 8px; overflow: hidden; }
+        .chapter-title { background: linear-gradient(135deg, #1a237e, #3949ab); padding: 14px 20px; margin: 0; cursor: pointer; font-size: 1.05em; color: white; display: flex; align-items: center; gap: 10px; user-select: none; transition: filter 0.2s; }
+        .chapter-title:hover { filter: brightness(1.1); }
+        .toggle-icon { font-size: 0.8em; transition: transform 0.2s; flex-shrink: 0; }
+        .chapter-title.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .chapter-content { padding: 20px 24px; line-height: 1.9; color: #2d2d2d; font-size: 1em; background: #fafafa; }
+        .chapter-content p { margin-bottom: 16px; text-indent: 2em; }
+        .chapter-content h4 { color: #1a237e; margin: 20px 0 10px; font-size: 1em; }
+        
+        .reading-guide, .difficulty-section, .dialogue-section, .action-section, .visualization-section, .puzzle-section, .further-reading { line-height: 1.9; }
+        .guide-block, .diff-item, .dialogue-block, .action-item, .chart-block, .reading-item { margin-bottom: 28px; padding: 20px 24px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .guide-block h3, .dialogue-block h3, .action-item h3 { color: #1a237e; margin-bottom: 12px; font-size: 1.05em; }
+        .wrong { background: #fff5f5; border-left: 4px solid #fc8181; padding: 10px 16px; margin-bottom: 10px; border-radius: 0 4px 4px 0; color: #742a2a; }
+        .correct { background: #f0fff4; border-left: 4px solid #68d391; padding: 10px 16px; border-radius: 0 4px 4px 0; color: #1a4731; }
+        .chart-container { position: relative; }
+        .chart-block h3 { color: #1a237e; margin-bottom: 8px; }
+        .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
+        .chart-legend { text-align: center; margin-top: 10px; font-size: 0.9em; }
+        .chart-legend span { margin: 0 10px; }
+        .theory-tree { text-align: center; padding: 20px 0; }
+        .theory-node { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 0.9em; margin: 6px; }
+        .theory-node.root { background: #1a237e; color: white; font-weight: bold; }
+        .theory-node.branch { background: #2d3748; color: white; }
+        .theory-node.current { background: #1a237e; color: white; font-weight: bold; }
+        .theory-node.related { background: #e2e8f0; color: #333; }
+        .theory-branches { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 12px; }
+        .theory-branch { text-align: center; }
+        .theory-sub { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
+        .puzzle-intro, .puzzle-position, .puzzle-connection, .puzzle-modern { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-position h3, .puzzle-connection h3, .puzzle-modern h3 { color: #1a237e; margin-bottom: 12px; }
+        .further-reading .reading-item h3 { color: #1a237e; margin-bottom: 8px; font-size: 1em; }
+
+        /* 理论拼图增强样式 */
+        .puzzle-timeline { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-timeline h3 { color: #1a237e; margin-bottom: 16px; }
+        .timeline-track { display: flex; gap: 0; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
+        .timeline-item { display: flex; flex-direction: column; align-items: center; min-width: 76px; position: relative; flex: 1; }
+        .timeline-item::after { content: ''; position: absolute; top: 9px; left: 50%; width: 100%; height: 2px; background: #ddd; z-index: 0; }
+        .timeline-item:last-child::after { display: none; }
+        .timeline-dot { width: 18px; height: 18px; border-radius: 50%; background: #ddd; border: 2px solid #bbb; z-index: 1; position: relative; }
+        .timeline-dot-active { width: 22px; height: 22px; border-radius: 50%; background: #3949ab; border: 3px solid #1a237e; z-index: 1; position: relative; box-shadow: 0 0 8px rgba(57,73,171,0.4); }
+        .timeline-year { font-size: 0.75em; color: #555; margin-top: 6px; font-weight: 500; }
+        .timeline-label { font-size: 0.68em; color: #888; text-align: center; margin-top: 2px; line-height: 1.3; }
+        .timeline-here { font-size: 0.7em; color: #3949ab; font-weight: bold; margin-top: 2px; white-space: nowrap; }
+        .timeline-item.active .timeline-year { color: #3949ab; font-weight: bold; }
+
+        .puzzle-links { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-links h3 { color: #1a237e; margin-bottom: 8px; }
+        .puzzle-links-note { color: #888; font-size: 0.85em; margin-bottom: 16px; line-height: 1.6; }
+        .conn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+        .conn-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: white; border-radius: 8px; border: 1px solid #e8e8e8; border-left: 4px solid #1a237e; text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.15s; }
+        a.conn-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .conn-wip { opacity: 0.5; cursor: default; }
+        .conn-dir { font-size: 1.1em; font-weight: bold; line-height: 1; }
+        .conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; margin-top: 2px; }
+        .conn-label { font-size: 0.76em; color: #888; }
+        .conn-relation { font-size: 0.82em; color: #555; line-height: 1.5; margin-top: 3px; border-top: 1px solid #f0f0f0; padding-top: 4px; }
+
+        /* ===== Dark Mode ===== */
+        body.dark-mode .article-header {
+            background: linear-gradient(135deg, #0a0a15 0%, #0d0d20 100%);
+        }
+        body.dark-mode .tab-nav {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        body.dark-mode .tab-btn:hover {
+            background: #3a3a3a;
+            color: #3949ab;
+        }
+        body.dark-mode .tab-content {
+            background: #1a1a1a;
+        }
+        body.dark-mode .text-intro {
+            background: linear-gradient(135deg, #1a1a2e, #252540);
+        }
+        body.dark-mode .chapter {
+            border-color: #444;
+        }
+        body.dark-mode .chapter-content {
+            background: #222;
+        }
+        body.dark-mode .chapter-content p {
+            color: #e0e0e0;
+        }
+        body.dark-mode .guide-block, body.dark-mode .diff-item, body.dark-mode .dialogue-block, 
+        body.dark-mode .action-item, body.dark-mode .chart-block, body.dark-mode .reading-item,
+        body.dark-mode .puzzle-intro, body.dark-mode .puzzle-position, body.dark-mode .puzzle-connection,
+        body.dark-mode .puzzle-modern, body.dark-mode .puzzle-timeline, body.dark-mode .puzzle-links {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        body.dark-mode .guide-block h3, body.dark-mode .dialogue-block h3, body.dark-mode .action-item h3,
+        body.dark-mode .chart-block h3, body.dark-mode .puzzle-position h3, body.dark-mode .puzzle-connection h3,
+        body.dark-mode .puzzle-modern h3, body.dark-mode .puzzle-timeline h3, body.dark-mode .puzzle-links h3 {
+            color: #7986cb;
+        }
+        body.dark-mode .wrong {
+            background: #2d1a1a;
+            color: #ef5350;
+        }
+        body.dark-mode .correct {
+            background: #1a2a1a;
+            color: #66bb6a;
+        }
+        body.dark-mode .theory-node.related {
+            background: #333;
+            color: #e0e0e0;
+        }
+        body.dark-mode .timeline-dot {
+            background: #555;
+            border-color: #666;
+        }
+        body.dark-mode .timeline-item::after {
+            background: #444;
+        }
+        body.dark-mode .conn-card {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+        body.dark-mode .conn-title {
+            color: #e0e0e0;
+        }
+
+        @media (max-width: 600px) { .article-header h1 { font-size: 1.8em; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .chapter-content { padding: 14px 16px; } }
+    </style>
+
+    <script>
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (btn) btn.classList.add('active');
+            if (tabId === 'visual') setTimeout(initCharts, 100);
+        }
+
+        function toggleChapter(titleEl) {
+            const content = titleEl.nextElementSibling;
+            titleEl.classList.toggle('collapsed');
+            content.style.display = titleEl.classList.contains('collapsed') ? 'none' : 'block';
+        }
+
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+            chartsInited = true;
+
+            // 雷达图：国家与革命单篇文章
+            const radarCtx = document.getElementById('radarChart').getContext('2d');
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['理论深度', '现实针对性', '战斗性', '实践指导性', '体系完整性', '历史意义'],
+                    datasets: [{
+                        label: '国家与革命',
+                        data: [9, 10, 10, 8, 9, 10],
+                        borderColor: '#c41e3a',
+                        backgroundColor: 'rgba(196,30,58,0.15)',
+                        pointBackgroundColor: '#c41e3a',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: { min: 0, max: 10, ticks: { stepSize: 2, font: { size: 10 } }, pointLabels: { font: { size: 12 } } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            // 论证节奏曲线
+            const argCtx = document.getElementById('argumentCurve').getContext('2d');
+            new Chart(argCtx, {
+                type: 'line',
+                data: {
+                    labels: ['序言\n背景', '第一章\n国家起源★', '第二章\n理论回顾', '第三章\n1848经验', '第四章\n补充发展', '第五章\n专政与共产★', '第六章\n批判考茨基★'],
+                    datasets: [{
+                        label: '论证强度',
+                        data: [6, 9.5, 8, 8.5, 7.5, 9.5, 9],
+                        borderColor: '#c41e3a',
+                        backgroundColor: 'rgba(196,30,58,0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 6,
+                        borderWidth: 2.5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { min: 0, max: 10, title: { display: true, text: '论证强度' } }
+                    }
+                }
+            });
+
+            // 资产阶级民主 vs 无产阶级民主
+            const demoCtx = document.getElementById('democracyChart').getContext('2d');
+            new Chart(demoCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['人民参与程度', '阶级性明确', '对剥削者的态度', '实质平等', '国家性质', '历史进步性'],
+                    datasets: [
+                        {
+                            label: '资产阶级民主',
+                            data: [4, 2, 3, 3, 2, 5],
+                            backgroundColor: 'rgba(107,114,128,0.7)',
+                            borderColor: '#6b7280',
+                            borderWidth: 2
+                        },
+                        {
+                            label: '无产阶级民主',
+                            data: [9, 10, 10, 8, 10, 10],
+                            backgroundColor: 'rgba(196,30,58,0.7)',
+                            borderColor: '#c41e3a',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'top' } },
+                    scales: {
+                        y: { min: 0, max: 10, title: { display: true, text: '评分 (0-10)' } }
+                    }
+                }
+            });
+        }
+
+        // 黑夜模式切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) {
+                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            }
+        }
+
+        // 页面加载时恢复黑夜模式设置
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+        updateDarkModeIcon();
+    </script>
+</body>
+</html>
