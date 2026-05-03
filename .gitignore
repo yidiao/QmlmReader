@@ -34,5 +34,5 @@ tmp/
 temp/
 
 # Large binary files (too big for GitHub, serve via external storage)
-downloads/posters/*.zip
-downloads/posters/chinese-*.zip
+# 只忽略苏联海报zip，中文海报zip需要上传
+downloads/posters/soviet-*.zip
