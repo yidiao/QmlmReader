@@ -1,0 +1,185 @@
+{
+  "articles": [
+    {
+      "slug": "gongchan-dan-yuan",
+      "title": "共产党宣言（马克思·恩格斯）",
+      "pdf": "downloads/articles/gongchan-dan-yuan.pdf",
+      "txt": "data/gongchan-dan-yuan.txt"
+    },
+    {
+      "slug": "zen-me-ban",
+      "title": "怎么办？（列宁）",
+      "pdf": null,
+      "txt": "data/zen-me-ban.txt"
+    },
+    {
+      "slug": "guo-jia-yu-ge-ming",
+      "title": "国家与革命（列宁）",
+      "pdf": null,
+      "txt": "data/guo-jia-yu-ge-ming.txt"
+    },
+    {
+      "slug": "wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi",
+      "title": "唯物主义和经验批判主义（列宁）",
+      "pdf": null,
+      "txt": "data/wei-wu-zhu-yi.txt"
+    },
+    {
+      "slug": "lun-lunen-zhu-yi-ji-chu",
+      "title": "论列宁主义基础（斯大林）",
+      "pdf": "downloads/articles/lun-lunen-zhu-yi-ji-chu.pdf",
+      "txt": "data/lun-lunen-zhu-yi-ji-chu.txt"
+    },
+    {
+      "slug": "lun-zhongguo-ge-ming-de-qiantu",
+      "title": "论中国革命的前途（斯大林）",
+      "pdf": "downloads/articles/lun-zhongguo-ge-ming-de-qiantu.pdf",
+      "txt": "data/lun-zhongguo-ge-ming-de-qiantu.txt"
+    },
+    {
+      "slug": "lun-lunen",
+      "title": "论列宁（斯大林）",
+      "pdf": "downloads/articles/lun-lunen.pdf",
+      "txt": "data/lun-lunen.txt"
+    },
+    {
+      "slug": "lun-lunen-zhu-yi-jige-wenti",
+      "title": "论列宁主义的几个问题（斯大林）",
+      "pdf": "downloads/articles/lun-lunen-zhu-yi-jige-wenti.pdf",
+      "txt": "data/lun-lunen-zhu-yi-jige-wenti.txt"
+    },
+    {
+      "slug": "dao-lunen",
+      "title": "悼列宁（斯大林）",
+      "pdf": "downloads/articles/dao-lunen.pdf",
+      "txt": "data/dao-lunen.txt"
+    },
+    {
+      "slug": "shiyue-geming-celue",
+      "title": "十月革命和俄国共产党人的策略（斯大林）",
+      "pdf": "downloads/articles/shiyue-geming-celue.pdf",
+      "txt": "data/shiyue-geming-celue.txt"
+    },
+    {
+      "slug": "shiyue-geming-guoji",
+      "title": "十月革命的国际性质（斯大林）",
+      "pdf": "downloads/articles/shiyue-geming-guoji.pdf",
+      "txt": "data/shiyue-geming-guoji.txt"
+    },
+    {
+      "slug": "shiyue-geming-minzu",
+      "title": "十月革命和民族问题（斯大林）",
+      "pdf": "downloads/articles/shiyue-geming-minzu.pdf",
+      "txt": "data/shiyue-geming-minzu.txt"
+    },
+    {
+      "slug": "makesi-zhuyi-minzu",
+      "title": "马克思主义和民族问题（斯大林）",
+      "pdf": "downloads/articles/makesi-zhuyi-minzu.pdf",
+      "txt": "data/makesi-zhuyi-minzu.txt"
+    },
+    {
+      "slug": "lun-chi-jiu-zhan",
+      "title": "论持久战（毛泽东）",
+      "pdf": null,
+      "txt": "data/lun-chi-jiu-zhan.txt"
+    },
+    {
+      "slug": "shi-jian-lun",
+      "title": "实践论（毛泽东）",
+      "pdf": null,
+      "txt": "data/shi-jian-lun.txt"
+    },
+    {
+      "slug": "mao-dun-lun",
+      "title": "矛盾论（毛泽东）",
+      "pdf": null,
+      "txt": "data/mao-dun-lun.txt"
+    },
+    {
+      "slug": "zhan-lue-wen-ti",
+      "title": "中国革命战争的战略问题（毛泽东）",
+      "pdf": null,
+      "txt": "data/zhan-lue-wen-ti.txt"
+    },
+    {
+      "slug": "you-ji-zhan",
+      "title": "抗日游击战争的战略问题（毛泽东）",
+      "pdf": null,
+      "txt": "data/you-ji-zhan.txt"
+    },
+    {
+      "slug": "zhan-zheng-zhan-lue",
+      "title": "战争和战略问题（毛泽东）",
+      "pdf": null,
+      "txt": "data/zhan-zheng-zhan-lue.txt"
+    },
+    {
+      "slug": "xin-min-zhu",
+      "title": "新民主主义论（毛泽东）",
+      "pdf": null,
+      "txt": "data/xin-min-zhu.txt"
+    },
+    {
+      "slug": "wen-yi-zuo-tan",
+      "title": "在延安文艺座谈会上的讲话（毛泽东）",
+      "pdf": null,
+      "txt": "data/wen-yi-zuo-tan.txt"
+    },
+    {
+      "slug": "xue-xi-shi-ju",
+      "title": "学习和时局（毛泽东）",
+      "pdf": null,
+      "txt": "data/xue-xi-shi-ju.txt"
+    },
+    {
+      "slug": "ren-min-nei-bu-mao-dun",
+      "title": "关于正确处理人民内部矛盾的问题（毛泽东）",
+      "pdf": null,
+      "txt": "data/ren-min-nei-bu-mao-dun.txt"
+    },
+    {
+      "slug": "nong-min-yun-dong",
+      "title": "湖南农民运动考察报告（毛泽东）",
+      "pdf": null,
+      "txt": "data/nong-min-yun-dong.txt"
+    }
+  ],
+  "rectify": [
+    {
+      "slug": "rectify-stalin-era",
+      "title": "历史的审判台：苏联七十年兴亡再思考",
+      "txt": "data/rectify-stalin-era.txt"
+    },
+    {
+      "slug": "rectify-gorky-Lenin",
+      "title": "高尔基与列宁决裂真相",
+      "txt": "data/rectify-gorky-Lenin.txt"
+    },
+    {
+      "slug": "rectify-finland-war",
+      "title": "苏联攻打芬兰是侵略？过当防卫！",
+      "txt": "data/rectify-finland-war.txt"
+    },
+    {
+      "slug": "rectify-soviet-afghanistan",
+      "title": "苏联\"入侵\"阿富汗真实逻辑",
+      "txt": "data/rectify-soviet-afghanistan.txt"
+    },
+    {
+      "slug": "rectify-soviet-agriculture",
+      "title": "苏联农业社会主义探索",
+      "txt": "data/rectify-soviet-agriculture.txt"
+    },
+    {
+      "slug": "rectify-wisdom-of-elites",
+      "title": "驳精英统治的当代翻版",
+      "txt": "data/rectify-wisdom-of-elites.txt"
+    },
+    {
+      "slug": "rectify-human-nature",
+      "title": "驳人性论互联网第二春",
+      "txt": "data/rectify-human-nature.txt"
+    }
+  ]
+}

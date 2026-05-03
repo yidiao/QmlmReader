@@ -132,6 +132,54 @@
             .tab-content { padding: 1rem; }
         }
     </style>
+<style>
+
+    /* ⬇ 下载原文浮动按钮 */
+    .download-fab {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--party-primary, #c41e3a);
+        color: white;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        font-size: 22px;
+        z-index: 1000;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .download-fab:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
+    .download-menu {
+        position: fixed;
+        bottom: 96px;
+        right: 30px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        padding: 1rem 1.2rem;
+        min-width: 180px;
+        display: none;
+        z-index: 1001;
+    }
+    body.dark-mode .download-menu { background: #2a2a2a; color: white; }
+    .download-menu.show { display: block; }
+    .download-menu h4 { margin: 0 0 0.6rem 0; font-size: 0.95rem; }
+    body.dark-mode .download-menu h4 { color: #ccc; }
+    .dl-link {
+        display: block; padding: 7px 10px; margin: 4px 0;
+        background: #f5f5f5; border-radius: 6px;
+        text-decoration: none; color: #333; font-size: 0.9rem;
+        transition: all 0.2s;
+    }
+    body.dark-mode .dl-link { background: #3a3a3a; color: #eee; }
+    .dl-link:hover { background: var(--party-primary, #c41e3a); color: white; }
+</style>
 </head>
 <body data-category="politics">
     <header class="site-header">
@@ -143,6 +191,11 @@
                     <span class="logo-sub">Qmlm Reader</span>
                 </div>
             </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <nav class="main-nav">
                 <a href="../index.html">首页</a>
                 <a href="javascript:history.back()" class="active">文章</a>
@@ -634,5 +687,44 @@
         }
         if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
     </script>
+
+<button class="download-fab" id="downloadFab" title="下载原文">⬇</button>
+<div class="download-menu" id="downloadMenu">
+    <h4>📥 下载原文</h4>
+    <div id="downloadLinks"></div>
+</div>
+
+
+<script>
+(function(){
+    const fab = document.getElementById("downloadFab");
+    const menu = document.getElementById("downloadMenu");
+    const linksDiv = document.getElementById("downloadLinks");
+
+    // 直接写入下载链接（不依赖 fetch）
+    if (linksDiv.children.length === 0) {
+        linksDiv.innerHTML = "<a class=\"dl-link\" href=\"../downloads/articles/lun-zhongguo-ge-ming-de-qiantu.pdf\" download=\"lun-zhongguo-ge-ming-de-qiantu.pdf\">\ud83d\udcc4 \u4e0b\u8f7d PDF</a><a class=\"dl-link\" href=\"../data/lun-zhongguo-ge-ming-de-qiantu.txt\" download=\"lun-zhongguo-ge-ming-de-qiantu.txt\">\ud83d\udcdd \u4e0b\u8f7d TXT</a>";
+    }
+
+    fab.addEventListener("click", () => {
+        if (menu.classList.contains("show")) {
+            menu.classList.remove("show");
+            return;
+        }
+        menu.classList.add("show");
+    });
+
+    document.addEventListener("click", e => {
+        if (!fab.contains(e.target) && !menu.contains(e.target)) {
+            menu.classList.remove("show");
+        }
+    });
+})();
+</script>
+
+
+
+
+
 </body>
 </html>

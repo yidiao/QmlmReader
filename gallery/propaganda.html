@@ -173,6 +173,47 @@
         body.dark-mode .search-box { background: #2a2a2a; color: #e0e0e0; border-color: #444; }
         body.dark-mode .result-count { color: #777; }
         body.dark-mode .stat-label { color: #aaa; }
+
+        /* 下载区块 */
+        .download-section {
+            background: white; border-radius: 12px; padding: 1.5rem;
+            margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        body.dark-mode .download-section { background: #2a2a2a; }
+        .download-section-title {
+            margin: 0 0 1rem 0; font-size: 1.2rem; color: #c41e3a;
+            border-bottom: 2px solid #c41e3a; padding-bottom: 0.5rem;
+        }
+        body.dark-mode .download-section-title { color: #ff6b6b; border-color: #ff6b6b; }
+        .download-tabs {
+            display: flex; gap: 0.5rem; margin-bottom: 1rem;
+        }
+        .download-tab {
+            padding: 0.5rem 1.2rem; border: 2px solid #e0e0e0; background: white;
+            color: #666; border-radius: 20px; cursor: pointer; font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .download-tab:hover { border-color: #c41e3a; color: #c41e3a; }
+        .download-tab.active { background: #c41e3a; border-color: #c41e3a; color: white; }
+        body.dark-mode .download-tab { background: #2a2a2a; border-color: #444; color: #ccc; }
+        body.dark-mode .download-tab.active { background: #c41e3a; border-color: #c41e3a; color: white; }
+        .download-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 0.8rem;
+        }
+        .dl-card {
+            display: flex; align-items: center; gap: 0.8rem;
+            background: #f9f9f9; border-radius: 8px; padding: 0.8rem 1rem;
+            text-decoration: none; color: #333; transition: all 0.2s;
+            border: 1px solid #eee;
+        }
+        .dl-card:hover { background: #c41e3a; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(196,30,58,0.3); }
+        body.dark-mode .dl-card { background: #3a3a3a; border-color: #444; color: #e0e0e0; }
+        body.dark-mode .dl-card:hover { background: #c41e3a; color: white; }
+        .dl-card-icon { font-size: 1.8rem; flex-shrink: 0; }
+        .dl-card-info { flex: 1; min-width: 0; }
+        .dl-card-label { font-size: 0.9rem; font-weight: 600; line-height: 1.3; }
+        .dl-card-size { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
     </style>
 </head>
 <body>
@@ -185,6 +226,11 @@
                     <span class="logo-sub">Qmlm Reader</span>
                 </div>
             </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <nav class="main-nav">
                 <a href="../index.html">首页</a>
                 <a href="../articles.html">文章</a>
@@ -223,6 +269,18 @@
                 <div class="stat-item">
                     <div class="stat-number">1950—1988</div>
                     <div class="stat-label">年代跨度</div>
+                </div>
+            </div>
+
+            <!-- 宣传画合集下载 -->
+            <div class="download-section">
+                <h3 class="download-section-title">📦 宣传画合集下载</h3>
+                <div class="download-tabs">
+                    <button class="download-tab active" data-tab="china">🇨🇳 中国宣传画</button>
+                    <button class="download-tab" data-tab="soviet">☭ 苏联宣传画</button>
+                </div>
+                <div class="download-grid" id="downloadGrid">
+                    <!-- JS动态填充 -->
                 </div>
             </div>
 
@@ -626,6 +684,52 @@
     // 初始化
     initLazyLoader();
     applyFilter();
+
+    // ============================================================
+    //  宣传画下载区块
+    // ============================================================
+    const POSTER_DATA = [
+        { label: '中国宣传画·第一辑', size: '425 MB', count: '100张', file: '../downloads/posters/chinese-posters-V01.zip', cat: 'china' },
+        { label: '中国宣传画·第二辑', size: '596 MB', count: '514张', file: '../downloads/posters/chinese-posters-V02.zip', cat: 'china' },
+        { label: '中国宣传画·第三辑（里斯本博物馆藏）', size: '117 MB', count: '46张', file: '../downloads/posters/chinese-posters-V03.zip', cat: 'china' },
+        { label: '苏联·共青团', size: '1.1 MB', count: '', file: '../downloads/posters/soviet-posters-共青团.zip', cat: 'soviet' },
+        { label: '苏联·其他', size: '3.7 MB', count: '', file: '../downloads/posters/soviet-posters-其他.zip', cat: 'soviet' },
+        { label: '苏联·十月革命', size: '4.2 MB', count: '', file: '../downloads/posters/soviet-posters-十月革命.zip', cat: 'soviet' },
+        { label: '苏联·卫国战争', size: '22 MB', count: '', file: '../downloads/posters/soviet-posters-卫国战争.zip', cat: 'soviet' },
+        { label: '苏联·反帝国际主义', size: '2.8 MB', count: '', file: '../downloads/posters/soviet-posters-反帝国际主义.zip', cat: 'soviet' },
+        { label: '苏联·和平建设', size: '5.1 MB', count: '', file: '../downloads/posters/soviet-posters-和平建设.zip', cat: 'soviet' },
+        { label: '苏联·国内战争', size: '4.5 MB', count: '', file: '../downloads/posters/soviet-posters-国内战争.zip', cat: 'soviet' },
+        { label: '苏联·太空探索', size: '6.0 MB', count: '', file: '../downloads/posters/soviet-posters-太空探索.zip', cat: 'soviet' },
+        { label: '苏联·社会主义', size: '5.3 MB', count: '', file: '../downloads/posters/soviet-posters-社会主义.zip', cat: 'soviet' },
+        { label: '苏联·社会宣传', size: '7.1 MB', count: '', file: '../downloads/posters/soviet-posters-社会宣传.zip', cat: 'soviet' },
+        { label: '苏联·领袖人物', size: '3.2 MB', count: '', file: '../downloads/posters/soviet-posters-领袖人物.zip', cat: 'soviet' }
+    ];
+
+    let currentDlTab = 'china';
+
+    function renderDownloads() {
+        const grid = document.getElementById('downloadGrid');
+        const items = POSTER_DATA.filter(d => d.cat === currentDlTab);
+        grid.innerHTML = items.map(d =>
+            '<a class="dl-card" href="' + d.file + '" download>' +
+            '<span class="dl-card-icon">' + (d.cat === 'china' ? '🗜️' : '🗜️') + '</span>' +
+            '<span class="dl-card-info">' +
+            '<span class="dl-card-label">' + d.label + (d.count ? '（' + d.count + '）' : '') + '</span>' +
+            '<span class="dl-card-size">' + d.size + '</span>' +
+            '</span></a>'
+        ).join('');
+    }
+
+    document.querySelectorAll('.download-tab').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.download-tab').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentDlTab = this.dataset.tab;
+            renderDownloads();
+        });
+    });
+
+    renderDownloads();
     </script>
 </body>
 </html>

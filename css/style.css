@@ -1097,26 +1097,176 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
     margin-top: 0.5rem;
 }
 
-/* 响应式设计 */
+/* ==================== 汉堡菜单按钮 ==================== */
+.hamburger-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.hamburger-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    margin: 4px 0;
+    transition: all 0.3s;
+}
+
+.hamburger-btn.open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+.hamburger-btn.open span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-btn.open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ==================== 响应式设计 ==================== */
 @media (max-width: 768px) {
+    /* --- 头部导航 --- */
     .site-header .container {
-        flex-direction: column;
-        gap: 1rem;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
     }
 
-    .main-nav {
-        flex-wrap: wrap;
+    .hamburger-btn {
+        display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        min-width: 36px;
+    }
+
+    /* logo 文字稍微缩小 */
+    .logo-text h1 {
+        font-size: 1rem;
+    }
+    .logo-sub {
+        display: none;
+    }
+    .logo-icon {
+        font-size: 1.5rem;
+    }
+
+    /* 导航默认隐藏，汉堡展开时显示 */
+    .main-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(139,0,0,0.97);
+        backdrop-filter: blur(4px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        z-index: 999;
+        padding: 60px 20px 40px;
+        overflow-y: auto;
+    }
+
+    .main-nav.open {
+        display: flex;
+    }
+
+    /* 全屏菜单关闭按钮 */
+    .main-nav::before {
+        content: '✕';
+        position: fixed;
+        top: 18px;
+        right: 20px;
+        font-size: 1.4rem;
+        color: white;
+        cursor: pointer;
+        z-index: 1001;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.15);
+    }
+
+    .main-nav a,
+    .main-nav button {
+        width: 100%;
+        text-align: center;
+        padding: 14px 20px;
+        font-size: 1.1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-radius: 0;
+    }
+
+    .main-nav a:last-of-type {
+        border-bottom: none;
+    }
+
+    .dark-mode-toggle {
+        margin-top: 16px;
+        border: 1px solid rgba(255,255,255,0.3) !important;
+        padding: 10px 20px !important;
+        font-size: 1rem !important;
+        border-radius: 8px !important;
+    }
+
+    /* --- Hero 区域 --- */
+    .hero {
+        padding: 2rem 0 1.5rem;
     }
 
     .hero h2 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
     }
 
     .hero-actions {
         flex-direction: column;
+        gap: 0.6rem;
+        align-items: center;
     }
 
+    .btn-primary, .btn-secondary {
+        width: 80%;
+        max-width: 280px;
+        text-align: center;
+        padding: 0.65rem 1.2rem;
+    }
+
+    /* --- 区块标题 --- */
+    .section-title {
+        font-size: 1.3rem;
+        margin: 1.5rem 0 1rem;
+    }
+
+    /* --- 搜索区 --- */
+    .search-section {
+        padding: 0.8rem 0;
+    }
+
+    /* --- 卡片网格 --- */
     .master-header {
         flex-direction: column;
         text-align: center;
@@ -1134,13 +1284,70 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
         grid-template-columns: 1fr;
     }
 
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .masters-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+
     .article-meta {
         flex-direction: column;
         gap: 0.5rem;
     }
 
+    /* --- Tab 导航优化：横向滚动 --- */
     .tab-nav {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        gap: 0;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 0;
+    }
+
+    .tab-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab-btn {
+        padding: 0.6rem 0.9rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* --- 文章详情页 --- */
+    .article-body {
+        padding: 1rem;
+    }
+
+    .article-header h1 {
+        font-size: 1.4rem;
+    }
+
+    /* --- 页脚 --- */
+    .site-footer {
+        padding: 1.2rem 0;
+        margin-top: 1.5rem;
+    }
+
+    /* --- 过滤栏 --- */
+    .filter-bar {
+        gap: 0.4rem;
+    }
+
+    .filter-btn {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    /* --- 内边距压缩 --- */
+    .container {
+        padding: 0 12px;
     }
 }
 

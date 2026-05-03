@@ -153,3 +153,46 @@ function applyFilters() {
         card.style.display = show ? 'block' : 'none';
     });
 }
+
+// ==================== 汉堡菜单 ====================
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger-btn');
+    const nav = document.querySelector('.main-nav');
+    if (!hamburger || !nav) return;
+
+    // 点击汉堡按钮切换菜单
+    hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isOpen = nav.classList.toggle('open');
+        hamburger.classList.toggle('open', isOpen);
+        // 菜单打开时禁止背景滚动
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // 点击菜单内链接后自动关闭
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function() {
+            nav.classList.remove('open');
+            hamburger.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // 点击遮罩（菜单外区域）关闭
+    document.addEventListener('click', function(e) {
+        if (nav.classList.contains('open') && !nav.contains(e.target) && e.target !== hamburger) {
+            nav.classList.remove('open');
+            hamburger.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // ESC 键关闭菜单
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+            nav.classList.remove('open');
+            hamburger.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
+});
