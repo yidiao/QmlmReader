@@ -273,33 +273,14 @@
             </div>
 
             <!-- 打包下载全部 -->
-            <div class="download-section" id="downloadSection">
-                <h3 class="download-section-title">📦 打包下载全部图片</h3>
-                <p style="font-size:0.85rem;color:#888;margin-bottom:1rem;">浏览器将逐个获取图片并在本地打包成 ZIP，不依赖服务器端压缩文件。</p>
-                <div style="display:flex;gap:0.8rem;flex-wrap:wrap;">
-                    <button class="dl-card" onclick="downloadVolume('V01')" style="cursor:pointer;">
-                        <span class="dl-card-icon">📁</span>
-                        <span class="dl-card-info">
-                            <span class="dl-card-label">第一辑（100张）</span>
-                            <span class="dl-card-size">约 425 MB</span>
-                        </span>
-                    </button>
-                    <button class="dl-card" onclick="downloadVolume('V02')" style="cursor:pointer;">
-                        <span class="dl-card-icon">📁</span>
-                        <span class="dl-card-info">
-                            <span class="dl-card-label">第二辑（514张）</span>
-                            <span class="dl-card-size">约 596 MB</span>
-                        </span>
-                    </button>
-                    <button class="dl-card" onclick="downloadVolume('V03')" style="cursor:pointer;">
-                        <span class="dl-card-icon">📁</span>
-                        <span class="dl-card-info">
-                            <span class="dl-card-label">第三辑（46张）</span>
-                            <span class="dl-card-size">约 117 MB</span>
-                        </span>
-                    </button>
-                </div>
+        <div class="download-section" id="downloadSection">
+            <h3 class="download-section-title">📦 打包下载全部图片</h3>
+            <div class="download-tabs">
+                <button class="download-tab active" data-tab="china">中国宣传画</button>
+                <button class="download-tab" data-tab="soviet">苏联宣传画</button>
             </div>
+            <div class="download-grid" id="downloadGrid"></div>
+        </div>
 
             <!-- 筛选栏 -->
             <div class="filter-bar">
