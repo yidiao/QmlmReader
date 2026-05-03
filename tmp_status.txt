@@ -1,0 +1,2 @@
+ M gallery/propaganda.html
+?? tmp_status.txt
