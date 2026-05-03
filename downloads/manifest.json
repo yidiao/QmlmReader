@@ -9,19 +9,19 @@
     {
       "slug": "zen-me-ban",
       "title": "怎么办？（列宁）",
-      "pdf": null,
+      "pdf": "downloads/articles/zen-me-ban.pdf",
       "txt": "data/zen-me-ban.txt"
     },
     {
       "slug": "guo-jia-yu-ge-ming",
       "title": "国家与革命（列宁）",
-      "pdf": null,
+      "pdf": "downloads/articles/guo-jia-yu-ge-ming.pdf",
       "txt": "data/guo-jia-yu-ge-ming.txt"
     },
     {
       "slug": "wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi",
       "title": "唯物主义和经验批判主义（列宁）",
-      "pdf": null,
+      "pdf": "downloads/articles/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.pdf",
       "txt": "data/wei-wu-zhu-yi.txt"
     },
     {
@@ -81,67 +81,67 @@
     {
       "slug": "lun-chi-jiu-zhan",
       "title": "论持久战（毛泽东）",
-      "pdf": null,
+      "pdf": "downloads/articles/lun-chi-jiu-zhan.pdf",
       "txt": "data/lun-chi-jiu-zhan.txt"
     },
     {
       "slug": "shi-jian-lun",
       "title": "实践论（毛泽东）",
-      "pdf": null,
+      "pdf": "downloads/articles/shi-jian-lun.pdf",
       "txt": "data/shi-jian-lun.txt"
     },
     {
       "slug": "mao-dun-lun",
       "title": "矛盾论（毛泽东）",
-      "pdf": null,
+      "pdf": "downloads/articles/mao-dun-lun.pdf",
       "txt": "data/mao-dun-lun.txt"
     },
     {
       "slug": "zhan-lue-wen-ti",
       "title": "中国革命战争的战略问题（毛泽东）",
-      "pdf": null,
+      "pdf": "downloads/articles/zhan-lue-wen-ti.pdf",
       "txt": "data/zhan-lue-wen-ti.txt"
     },
     {
       "slug": "you-ji-zhan",
       "title": "抗日游击战争的战略问题（毛泽东）",
-      "pdf": null,
+      "pdf": "downloads/articles/you-ji-zhan.pdf",
       "txt": "data/you-ji-zhan.txt"
     },
     {
       "slug": "zhan-zheng-zhan-lue",
       "title": "战争和战略问题（毛泽东）",
-      "pdf": null,
+      "pdf": "downloads/articles/zhan-zheng-zhan-lue.pdf",
       "txt": "data/zhan-zheng-zhan-lue.txt"
     },
     {
       "slug": "xin-min-zhu",
       "title": "新民主主义论（毛泽东）",
-      "pdf": null,
+      "pdf": "downloads/articles/xin-min-zhu.pdf",
       "txt": "data/xin-min-zhu.txt"
     },
     {
       "slug": "wen-yi-zuo-tan",
       "title": "在延安文艺座谈会上的讲话（毛泽东）",
-      "pdf": null,
+      "pdf": "downloads/articles/wen-yi-zuo-tan.pdf",
       "txt": "data/wen-yi-zuo-tan.txt"
     },
     {
       "slug": "xue-xi-shi-ju",
       "title": "学习和时局（毛泽东）",
-      "pdf": null,
+      "pdf": "downloads/articles/xue-xi-shi-ju.pdf",
       "txt": "data/xue-xi-shi-ju.txt"
     },
     {
       "slug": "ren-min-nei-bu-mao-dun",
       "title": "关于正确处理人民内部矛盾的问题（毛泽东）",
-      "pdf": null,
+      "pdf": "downloads/articles/ren-min-nei-bu-mao-dun.pdf",
       "txt": "data/ren-min-nei-bu-mao-dun.txt"
     },
     {
       "slug": "nong-min-yun-dong",
       "title": "湖南农民运动考察报告（毛泽东）",
-      "pdf": null,
+      "pdf": "downloads/articles/nong-min-yun-dong.pdf",
       "txt": "data/nong-min-yun-dong.txt"
     }
   ],
@@ -149,36 +149,43 @@
     {
       "slug": "rectify-stalin-era",
       "title": "历史的审判台：苏联七十年兴亡再思考",
+      "pdf": "downloads/rectify/rectify-stalin-era.pdf",
       "txt": "data/rectify-stalin-era.txt"
     },
     {
-      "slug": "rectify-gorky-Lenin",
+      "slug": "rectify-gorky-lenin",
       "title": "高尔基与列宁决裂真相",
-      "txt": "data/rectify-gorky-Lenin.txt"
+      "pdf": "downloads/rectify/rectify-gorky-lenin.pdf",
+      "txt": "data/rectify-gorky-lenin.txt"
     },
     {
       "slug": "rectify-finland-war",
       "title": "苏联攻打芬兰是侵略？过当防卫！",
+      "pdf": "downloads/rectify/rectify-finland-war.pdf",
       "txt": "data/rectify-finland-war.txt"
     },
     {
       "slug": "rectify-soviet-afghanistan",
-      "title": "苏联\"入侵\"阿富汗真实逻辑",
+      "title": "苏联入侵阿富汗真实逻辑",
+      "pdf": "downloads/rectify/rectify-soviet-afghanistan.pdf",
       "txt": "data/rectify-soviet-afghanistan.txt"
     },
     {
       "slug": "rectify-soviet-agriculture",
       "title": "苏联农业社会主义探索",
+      "pdf": "downloads/rectify/rectify-soviet-agriculture.pdf",
       "txt": "data/rectify-soviet-agriculture.txt"
     },
     {
       "slug": "rectify-wisdom-of-elites",
       "title": "驳精英统治的当代翻版",
+      "pdf": "downloads/rectify/rectify-wisdom-of-elites.pdf",
       "txt": "data/rectify-wisdom-of-elites.txt"
     },
     {
       "slug": "rectify-human-nature",
       "title": "驳人性论互联网第二春",
+      "pdf": "downloads/rectify/rectify-human-nature.pdf",
       "txt": "data/rectify-human-nature.txt"
     }
   ]
