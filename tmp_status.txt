@@ -1,2 +1,1 @@
- M gallery/propaganda.html
-?? tmp_status.txt
+ M tmp_status.txt
