@@ -36,7 +36,7 @@
         /* 板块导航 */
         .section-nav {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             margin-bottom: 3rem;
         }
@@ -114,7 +114,7 @@
         /* 文章卡片 */
         .article-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
         
@@ -293,7 +293,19 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-    </style>
+
+        
+        /* 窄屏：2列 */
+        @media (max-width: 768px) {
+            .section-nav {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .article-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        </style>
 </head>
 <body>
     <header class="site-header">

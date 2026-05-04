@@ -1,35 +1,6 @@
- M .gitignore
- M downloads/articles/gongchan-dan-yuan.pdf
- M downloads/articles/guo-jia-yu-ge-ming.pdf
- M downloads/articles/lun-chi-jiu-zhan.pdf
- M downloads/articles/lun-lunen-zhu-yi-ji-chu.pdf
- M downloads/articles/lun-zhongguo-ge-ming-de-qiantu.pdf
- M downloads/articles/mao-dun-lun.pdf
- M downloads/articles/nong-min-yun-dong.pdf
- M downloads/articles/ren-min-nei-bu-mao-dun.pdf
- M downloads/articles/shi-jian-lun.pdf
- M downloads/articles/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.pdf
- M downloads/articles/wen-yi-zuo-tan.pdf
- M downloads/articles/xin-min-zhu.pdf
- M downloads/articles/xue-xi-shi-ju.pdf
- M downloads/articles/you-ji-zhan.pdf
- M downloads/articles/zen-me-ban.pdf
- M downloads/articles/zhan-lue-wen-ti.pdf
- M downloads/articles/zhan-zheng-zhan-lue.pdf
- M downloads/rectify/rectify-finland-war.pdf
- M downloads/rectify/rectify-gorky-lenin.pdf
- M downloads/rectify/rectify-human-nature.pdf
- M downloads/rectify/rectify-soviet-afghanistan.pdf
- M downloads/rectify/rectify-soviet-agriculture.pdf
- M downloads/rectify/rectify-stalin-era.pdf
- M downloads/rectify/rectify-wisdom-of-elites.pdf
- M gallery/videos.html
- M rectify/economy/soviet-agriculture.html
- M rectify/leaders/gorky-lenin.html
- M rectify/leaders/stalin-era.html
- M rectify/military/finland-war.html
- M rectify/military/soviet-afghanistan.html
- M rectify/myths/human-nature.html
- M rectify/myths/wisdom-of-elites.html
+ M css/style.css
+ M rectify.html
  M tmp_status.txt
-?? html_to_pdf.py
+?? add_important.py
+?? add_wide_screen.py
+?? update_rectify_grid.py

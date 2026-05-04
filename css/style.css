@@ -1273,23 +1273,23 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
     }
 
     .master-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
     }
 
     .tool-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 
     .article-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 
     .featured-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 
     .masters-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 0.8rem;
     }
 
@@ -1348,6 +1348,45 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
     /* --- 内边距压缩 --- */
     .container {
         padding: 0 12px;
+    }
+}
+
+/* ==================== 宽屏：3列 ==================== */
+@media (min-width: 769px) {
+    .featured-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .masters-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .tool-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .article-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .music-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .video-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .poster-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .quotes-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
     }
 }
 
