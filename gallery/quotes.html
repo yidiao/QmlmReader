@@ -292,6 +292,20 @@
             .quote-modal { width: 96%; max-height: 85vh; }
             .modal-header, .modal-body { padding: 1.5rem; }
         }
+
+    @media (max-width: 768px) {
+        .quotes-categories {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.5rem;
+        }
+        .quotes-detail-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.8rem;
+        }
+        .quote-detail-card {
+            padding: 0.8rem;
+        }
+    }
     </style>
 </head>
 <body>

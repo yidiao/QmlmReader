@@ -1,6 +1,11 @@
  M css/style.css
+ M gallery/music.html
+ M gallery/quotes.html
+ M gallery/videos.html
+ M international-calendar.html
+ M international.html
+ M masters.html
+ M puzzle.html
  M rectify.html
  M tmp_status.txt
-?? add_important.py
-?? add_wide_screen.py
-?? update_rectify_grid.py
+ M toolkit.html

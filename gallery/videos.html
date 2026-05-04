@@ -263,6 +263,24 @@
             border-color: #555;
             color: #888;
         }
+
+    @media (max-width: 768px) {
+        .music-detail-grid,
+        .video-detail-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.8rem;
+        }
+        .music-detail-card,
+        .video-detail-card {
+            padding: 0.8rem;
+        }
+        .music-detail-icon,
+        .video-detail-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 1.8rem;
+        }
+    }
     </style>
 </head>
 <body>

@@ -1276,8 +1276,26 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
         grid-template-columns: 1fr !important;
     }
 
-    .tool-grid {
+    .tool-grid,
+    .tools-grid {
         grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* 有趣的文艺：覆盖 inline style */
+    #funCultureGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    /* 有趣的文艺的：标题超两行省略 */
+    #funCultureGrid h4 {
+        white-space: normal !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        max-height: 2.4em !important;
+        line-height: 1.2em !important;
     }
 
     .article-grid {
@@ -1348,6 +1366,23 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
     /* --- 内边距压缩 --- */
     .container {
         padding: 0 12px;
+    }
+
+    /* --- 卡片描述文字：超2行省略 --- */
+    .featured-card .desc,
+    .article-desc,
+    .article-card .summary,
+    .tool-card p,
+    .music-desc,
+    .video-desc,
+    .poster-desc {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /* 两行约等于3em，加一点余量 */
+        max-height: 3.2em;
     }
 }
 

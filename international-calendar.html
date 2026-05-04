@@ -52,7 +52,7 @@
         }
         .month-list {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 8px;
         }
         .month-list-item {
@@ -356,7 +356,7 @@
             .calendar-layout { flex-direction: column; padding: 1rem; }
             .month-sidebar { width: 100%; }
             .month-sidebar h3 { text-align: left; }
-            .month-list { grid-template-columns: repeat(4, 1fr); }
+            .month-list { grid-template-columns: repeat(3, 1fr); }
             .day-cell { min-height: 75px; padding: 0.3rem; }
             .day-number { font-size: 0.9rem; }
         }
@@ -365,6 +365,76 @@
             .day-cell { min-height: 65px; }
             .popup-body { padding: 1rem 1.2rem 1.5rem; }
             .popup-header { padding: 1rem 1.2rem; }
+        }
+        /* ===== 手机端深度优化 ===== */
+        @media (max-width: 480px) {
+            /* 日历格紧凑化 */
+            .day-cell {
+                min-height: 52px;
+                padding: 0.2rem 0.15rem;
+            }
+            .day-number {
+                font-size: 0.78rem;
+                margin-bottom: 0.1rem;
+            }
+            .event-preview {
+                font-size: 0.58rem;
+                -webkit-line-clamp: 1;
+                line-height: 1.2;
+            }
+            .event-preview-year {
+                font-size: 0.55rem;
+            }
+            .weekday {
+                padding: 0.4rem 0.1rem;
+                font-size: 0.72rem;
+                letter-spacing: 0;
+            }
+
+            /* 弹窗：全屏显示 */
+            .day-popup {
+                top: auto;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                transform: none !important;
+                width: 100%;
+                max-width: 100%;
+                border-radius: 20px 20px 0 0;
+                max-height: 75vh;
+                overflow: hidden;
+            }
+            .day-popup.active {
+                transform: none !important;
+            }
+            .popup-body {
+                max-height: 55vh;
+                padding: 0.8rem 1rem 1.5rem;
+            }
+            .popup-header {
+                padding: 0.8rem 1rem;
+                border-radius: 18px 18px 0 0;
+            }
+            .popup-header h3 { font-size: 1rem; }
+
+            /* 筛选栏横向滚动 */
+            .filter-section {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 0.5rem;
+                scrollbar-width: none;
+            }
+            .filter-section::-webkit-scrollbar { display: none; }
+            .filter-chip { white-space: nowrap; }
+
+            /* 月份列表更紧凑 */
+            .month-list { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+            .month-list-item { padding: 7px 4px; font-size: 0.78rem; }
+
+            /* 页面标题紧凑 */
+            .page-header { padding: 1.2rem 0; }
+            .page-header h1 { font-size: 1.3rem; }
+            .page-header p { font-size: 0.85rem; }
         }
     </style>
 </head>

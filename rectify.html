@@ -304,6 +304,16 @@
             .article-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            /* 手机端：摘要超2行省略 */
+            .article-card .summary {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-height: 3.2em;
+            }
         }
         </style>
 </head>

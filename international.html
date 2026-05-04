@@ -419,6 +419,33 @@
         body.dark-mode .detailed-timeline {
             border-color: #444;
         }
+        
+        /* 手机端适配 */
+        @media (max-width: 768px) {
+            /* 时期分类：两个一行 */
+            .era-filter {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.5rem !important;
+                justify-items: stretch !important;
+            }
+            
+            .era-btn {
+                padding: 0.5rem 0.8rem !important;
+                font-size: 0.85rem !important;
+                text-align: center !important;
+            }
+            
+            /* 运动历史详览：正文超两行省略 */
+            .timeline-content p {
+                display: -webkit-box !important;
+                -webkit-line-clamp: 2 !important;
+                -webkit-box-orient: vertical !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                max-height: 3.2em !important;
+            }
+        }
     </style>
 </head>
 <body>
