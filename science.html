@@ -892,6 +892,42 @@
     document.body.style.overflow = 'hidden';
 }
 
+        // 锚点自动跳转（从 toolkit 的热词点击过来）
+function handleAnchor() {
+    const hash = window.location.hash.slice(1); // 去掉 #
+    if (!hash) return;
+    
+    // 根据前缀决定打开哪个标签页
+    if (hash.startsWith('figure-')) {
+        // 切换到人物思想标签页
+        document.querySelector('.science-tab[data-tab="figures"]').click();
+        setTimeout(() => {
+            const card = document.querySelector(`.science-card[onclick*="${hash}"]`);
+            if (card) card.click();
+        }, 100);
+    } else if (hash.startsWith('movement-')) {
+        document.querySelector('.science-tab[data-tab="movements"]').click();
+        setTimeout(() => {
+            const card = document.querySelector(`.science-card[onclick*="${hash}"]`);
+            if (card) card.click();
+        }, 100);
+    } else if (hash.startsWith('term-')) {
+        document.querySelector('.science-tab[data-tab="terms"]').click();
+        setTimeout(() => {
+            const card = document.querySelector(`.science-card[onclick*="${hash}"]`);
+            if (card) card.click();
+        }, 100);
+    } else if (hash.startsWith('text-')) {
+        document.querySelector('.science-tab[data-tab="texts"]').click();
+        setTimeout(() => {
+            const card = document.querySelector(`.science-card[onclick*="${hash}"]`);
+            if (card) card.click();
+        }, 100);
+    }
+}
+
+// 页面加载时执行
+window.addEventListener('load', handleAnchor);
 
         function closeModal() {
             document.getElementById('modalOverlay').classList.remove('active');

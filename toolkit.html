@@ -636,6 +636,26 @@ body.dark-mode .science-card p {
     color: #d97706;
     text-decoration: none;
 }
+
+/* 延伸阅读链接样式 */
+.ext-link {
+    font-size: 0.75rem;
+    color: #c41e3a;
+    text-decoration: none;
+    padding: 0.2rem 0.5rem;
+    border-radius: 15px;
+    transition: all 0.2s;
+}
+.ext-link:hover {
+    background: #c41e3a;
+    color: white;
+}
+body.dark-mode .ext-link:hover {
+    background: #ff6b6b;
+    color: #1a1a1a;
+}
+
+
     </style>
 </head>
 <body>
@@ -688,88 +708,192 @@ body.dark-mode .science-card p {
             </nav>
 
             <!-- ==================== 第一部分：哲学原理 ==================== -->
-            <section id="part1" style="margin-bottom:3.5rem;">
-                <div class="part-header">
-                    <h3>📐 一、哲学原理</h3>
-                    <p>从唯物辩证法的基石出发，理解马克思主义的世界观与方法论</p>
-                </div>
+<section id="part1" style="margin-bottom:3.5rem;">
+    <div class="part-header">
+        <h3>📐 一、哲学原理</h3>
+        <p>辩证唯物主义 · 历史唯物主义 · 政治经济学 · 科学社会主义</p>
+    </div>
 
-                <!-- 哲学基石说明 -->
-                <div class="cornerstone-card">
-                    <h4>⛏️ 唯物辩证法：一切理论的基石</h4>
-                    <p>
-                        马克思主义哲学的核心是<strong style="color:#c41e3a;">辩证唯物主义</strong>和<strong style="color:#c41e3a;">历史唯物主义</strong>。它不是书斋里的抽象思辨，而是指导我们认识世界、改造世界的思想武器。毛泽东在《矛盾论》中把辩证法中国化了——用中国人能懂的语言讲了深刻的道理。<br>
-                        掌握了哲学原理，后面的政治经济学、科学社会主义才能融会贯通。
-                    </p>
-                </div>
+    <!-- 哲学基石说明 -->
+    <div class="cornerstone-card">
+        <h4>⛏️ 马克思主义的三个组成部分</h4>
+        <p>马克思主义由<strong style="color:#c41e3a;">马克思主义哲学</strong>、<strong style="color:#c41e3a;">马克思主义政治经济学</strong>和<strong style="color:#c41e3a;">科学社会主义</strong>三大部分组成。哲学是其世界观和方法论基础，政治经济学是其理论论证，科学社会主义是其核心归宿。三者相互联系、不可分割。</p>
+    </div>
 
-                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;">
-                    <!-- 唯物辩证法 -->
-                    <div class="tool-card-large">
-                        <h4>⚖️ 唯物辩证法三大规律</h4>
-                        <div class="concept-list">
-                            <div class="concept-item">
-                                <h5>🔄 对立统一规律（核心）</h5>
-                                <p><strong>矛盾是事物发展的根本动力。</strong>任何事物内部都包含相互对立又相互统一的两个方面。没有矛盾就没有世界。</p>
-                                <ul>
-                                    <li><strong>矛盾的普遍性：</strong>矛盾无处不在、无时不有</li>
-                                    <li><strong>矛盾的特殊性：</strong>不同事物的矛盾各有特点，要具体问题具体分析</li>
-                                    <li><strong>主要矛盾与次要矛盾：</strong>抓关键、抓重点（"牵牛鼻子"）</li>
-                                    <li><strong>矛盾的主要方面：</strong>决定事物的性质；可以转化</li>
-                                </ul>
-                            </div>
-                            <div class="concept-item">
-                                <h5>📈 质量互变规律</h5>
-                                <p>事物的发展是量变到质变的过程。量变积累到一定程度引起质变，质变又为新的量变开辟道路。"不积跬步无以至千里"，说的就是这个道理。</p>
-                            </div>
-                            <div class="concept-item">
-                                <h5>🌀 否定之否定规律</h5>
-                                <p>事物的发展是螺旋式上升的。每一次否定都不是简单的抛弃，而是<strong>扬弃</strong>——既克服又保留。前进中有曲折，曲折中前进。</p>
-                            </div>
-                        </div>
-                    </div>
+    <!-- 快速索引条 -->
+    <div style="background: #fff8e6; border-radius: 16px; padding: 1rem 1.5rem; margin: 1.5rem 0; border: 1px solid #fde68a;">
+        <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 0.6rem;">
+            <span style="font-size: 1.1rem;">🔍</span>
+            <span style="font-weight: 600; color: #b45309;">快速查找：</span>
+            <input type="text" id="conceptSearchInput" placeholder="输入概念名称..." style="padding: 0.4rem 1rem; border-radius: 30px; border: 1px solid #fde68a; width: 220px; background: white;">
+            <button id="clearSearchBtn" style="background: none; border: none; color: #999; cursor: pointer; font-size: 0.8rem;">✖ 清除</button>
+        </div>
+        <div class="hot-tags" style="display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;">
+            <span style="font-size: 0.7rem; color: #92400e;">🔥 热门：</span>
+            <span class="hot-tag" data-keyword="对立统一">对立统一</span>
+            <span class="hot-tag" data-keyword="实践">实践</span>
+            <span class="hot-tag" data-keyword="剩余价值">剩余价值</span>
+            <span class="hot-tag" data-keyword="历史唯物主义">历史唯物主义</span>
+            <span class="hot-tag" data-keyword="科学社会主义">科学社会主义</span>
+            <span class="hot-tag" data-keyword="无产阶级专政">无产阶级专政</span>
+        </div>
+    </div>
 
-                    <!-- 认识论 -->
-                    <div class="tool-card-large">
-                        <h4>🧠 认识论：实践与认识的辩证关系</h4>
-                        <div class="concept-list">
-                            <div class="concept-item">
-                                <h5>实践是认识的基础</h5>
-                                <p>认识来源于实践，又服务于实践。<strong>实践是检验真理的唯一标准。</strong></p>
-                                <ul>
-                                    <li><strong>感性认识 → 理性认识：</strong>从现象到本质（第一次飞跃）</li>
-                                    <li><strong>理性认识 → 实践：</strong>用理论指导行动（第二次飞跃）</li>
-                                    <li><strong>实践、认识、再实践、再认识：</strong>循环往复以至无穷</li>
-                                </ul>
-                            </div>
-                            <div class="concept-item">
-                                <h5>真理是客观的、具体的、历史的</h5>
-                                <p>真理不是抽象的教条，而是在特定历史条件下对客观事物的正确反映。真理是发展的——今天的认识可能被明天的实践所超越和修正。</p>
-                            </div>
-                        </div>
-                    </div>
+    <!-- 三大板块网格 -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:1.5rem;">
 
-                    <!-- 历史唯物主义 -->
-                    <div class="tool-card-large">
-                        <h4>🏛️ 历史唯物主义：社会发展的根本规律</h4>
-                        <div class="concept-list">
-                            <div class="concept-item">
-                                <h5>⚙️ 社会基本矛盾</h5>
-                                <p>生产力与生产关系的矛盾、经济基础与上层建筑的矛盾，是推动人类社会发展的根本动力。</p>
-                            </div>
-                            <div class="concept-item">
-                                <h5>👥 人民群众是历史的创造者</h5>
-                                <p>历史不是少数英雄人物创造的，而是人民群众创造的。"人民，只有人民，才是创造世界历史的动力。"——毛泽东</p>
-                            </div>
-                            <div class="concept-item">
-                                <h5>📊 阶级分析方法</h5>
-                                <p>在有阶级的社会里，阶级斗争是社会发展的直接动力。阶级分析是理解历史和社会现象的基本方法。</p>
-                            </div>
-                        </div>
+        <!-- ========== 板块一：辩证唯物主义 ========== -->
+        <div class="tool-card-large">
+            <h4>⚖️ 一、辩证唯物主义</h4>
+            <div class="concept-list">
+                <div class="concept-item" data-concept="对立统一 矛盾 矛盾普遍性 矛盾特殊性 主要矛盾 矛盾的主要方面">
+                    <h5>🔄 对立统一规律（矛盾规律）</h5>
+                    <p><strong>矛盾是事物发展的根本动力。</strong>任何事物内部都包含相互对立又相互统一的两个方面。这一规律揭示了事物发展的源泉和动力。</p>
+                    <ul>
+                        <li><strong>矛盾的普遍性：</strong>矛盾无处不在、无时不有</li>
+                        <li><strong>矛盾的特殊性：</strong>不同事物的矛盾各有特点，要具体问题具体分析 → <a href="science.html#term-specificity" style="color:#d97706; font-size:0.7rem;">[科普]</a></li>
+                        <li><strong>主要矛盾与次要矛盾：</strong>抓关键、抓重点（"牵牛鼻子"）</li>
+                        <li><strong>矛盾的主要方面：</strong>决定事物的性质；矛盾双方在一定条件下转化</li>
+                    </ul>
+                    <div style="margin-top: 0.6rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="articles/mao-dun-lun.html" class="ext-link">📖 精读《矛盾论》</a>
+                        <a href="articles.html?filter=5&author=mao&type=philosophy" class="ext-link">📚 相关文章</a>
                     </div>
                 </div>
-                <p class="wip-note">📖 更多哲学原理内容（如范畴体系、辩证思维方法等）持续完善中……</p>
-            </section>
+                <div class="concept-item" data-concept="质量互变 量变 质变 度">
+                    <h5>📈 质量互变规律</h5>
+                    <p>事物的发展是量变到质变的过程。量变积累到一定程度引起质变，质变又为新的量变开辟道路。"不积跬步无以至千里"。</p>
+                    <div style="margin-top:0.4rem;"><a href="articles.html?filter=4&type=philosophy" class="ext-link" style="font-size:0.75rem;">📖 相关阅读 →</a></div>
+                </div>
+                <div class="concept-item" data-concept="否定之否定 螺旋上升 扬弃">
+                    <h5>🌀 否定之否定规律</h5>
+                    <p>事物的发展是螺旋式上升的。每一次否定都不是简单的抛弃，而是<strong>扬弃</strong>——既克服又保留。前进中有曲折，曲折中前进。</p>
+                </div>
+                <div class="concept-item" data-concept="认识论 感性认识 理性认识 实践 真理">
+                    <h5>🧠 认识论：实践与认识的辩证关系</h5>
+                    <p>认识来源于实践，又服务于实践。<strong>实践是检验真理的唯一标准。</strong>认识的辩证过程：感性认识→理性认识→回到实践（两次飞跃）。</p>
+                    <div style="margin-top: 0.6rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="articles/shi-jian-lun.html" class="ext-link">📖 精读《实践论》</a>
+                        <a href="science.html#term-practice" class="ext-link">📚 术语科普：实践→</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== 板块二：历史唯物主义 ========== -->
+        <div class="tool-card-large">
+            <h4>🏛️ 二、历史唯物主义</h4>
+            <div class="concept-list">
+                <div class="concept-item" data-concept="社会存在 社会意识 社会基本矛盾 生产力 生产关系 经济基础 上层建筑">
+                    <h5>⚙️ 社会基本矛盾</h5>
+                    <p><strong>生产力与生产关系的矛盾、经济基础与上层建筑的矛盾</strong>，是推动人类社会发展的根本动力。</p>
+                    <ul>
+                        <li><strong>生产力决定生产关系，生产关系反作用于生产力</strong></li>
+                        <li><strong>经济基础决定上层建筑，上层建筑反作用于经济基础</strong> → <a href="science.html#term-base-superstructure" style="color:#d97706; font-size:0.7rem;">[科普]</a></li>
+                    </ul>
+                </div>
+                <div class="concept-item" data-concept="人民群众 历史创造者 英雄史观">
+                    <h5>👥 人民群众是历史的创造者</h5>
+                    <p>历史不是少数英雄人物创造的，而是人民群众创造的。"人民，只有人民，才是创造世界历史的动力。"——毛泽东</p>
+                </div>
+                <div class="concept-item" data-concept="阶级 阶级斗争 阶级分析">
+                    <h5>📊 阶级分析方法</h5>
+                    <p>在有阶级的社会里，阶级斗争是社会发展的直接动力。阶级分析是理解历史和社会现象的基本方法。</p>
+                    <div style="margin-top:0.4rem;"><a href="articles/nong-min-yun-dong.html" class="ext-link" style="font-size:0.75rem;">📖 延伸阅读：《湖南农民运动考察报告》→</a></div>
+                </div>
+                <div class="concept-item" data-concept="社会形态 五种社会形态 亚细亚生产方式">
+                    <h5>📜 社会形态理论</h5>
+                    <p>人类社会依次经历：原始社会→奴隶社会→封建社会→资本主义社会→共产主义社会（社会主义是其第一阶段）。这是对社会发展规律的概括。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== 板块三：政治经济学 ========== -->
+        <div class="tool-card-large">
+            <h4>💰 三、政治经济学（新增）</h4>
+            <div class="concept-list">
+                <div class="concept-item" data-concept="商品 价值 使用价值 交换价值 劳动二重性">
+                    <h5>📦 商品与劳动二重性</h5>
+                    <p>商品具有<strong>使用价值</strong>和<strong>价值</strong>二因素。生产商品的劳动具有<strong>具体劳动</strong>（创造使用价值）和<strong>抽象劳动</strong>（创造价值）二重性。这是理解政治经济学的枢纽。</p>
+                    <div style="margin-top:0.4rem;"><a href="science.html#term-commodity" class="ext-link" style="font-size:0.75rem;">📚 术语科普：商品→</a></div>
+                </div>
+                <div class="concept-item" data-concept="剩余价值 剥削 绝对剩余价值 相对剩余价值">
+                    <h5>💰 剩余价值理论</h5>
+                    <p>马克思政治经济学的核心。劳动力成为商品后，工人创造的价值超过劳动力价值的部分被资本家无偿占有。<strong>剩余价值是资本主义剥削的秘密</strong>，也是资本积累的源泉。</p>
+                    <div style="margin-top: 0.6rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="articles/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html" class="ext-link">📖 精读《帝国主义论》</a>
+                        <a href="science.html#term-surplus-value" class="ext-link">📚 术语科普：剩余价值→</a>
+                    </div>
+                </div>
+                <div class="concept-item" data-concept="资本积累 资本原始积累 资本有机构成">
+                    <h5>📈 资本积累与资本原始积累</h5>
+                    <p>资本家把剩余价值转化为资本，就是资本积累。资本原始积累是资本主义生产方式确立前，通过暴力剥夺小生产者形成资本的过程。</p>
+                </div>
+                <div class="concept-item" data-concept="帝国主义 垄断 金融资本 资本输出">
+                    <h5>🌍 帝国主义论</h5>
+                    <p>帝国主义是资本主义的<strong>垄断阶段</strong>。列宁概括了帝国主义的五大基本特征，指出帝国主义是<strong>垂死的、过渡的资本主义</strong>。</p>
+                    <div style="margin-top:0.4rem;"><a href="articles/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html" class="ext-link" style="font-size:0.75rem;">📖 精读《帝国主义是资本主义的最高阶段》→</a></div>
+                </div>
+                <div class="concept-item" data-concept="经济危机 生产过剩 资本主义基本矛盾">
+                    <h5>📉 资本主义经济危机</h5>
+                    <p>生产社会化与生产资料资本主义私有制之间的矛盾，是资本主义的基本矛盾。这一矛盾必然导致<strong>生产相对过剩的经济危机</strong>周期性地爆发。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== 板块四：科学社会主义 ========== -->
+        <div class="tool-card-large">
+            <h4>⭐ 四、科学社会主义（新增）</h4>
+            <div class="concept-list">
+                <div class="concept-item" data-concept="科学社会主义 空想社会主义 三大空想家">
+                    <h5>📖 从空想到科学的发展</h5>
+                    <p>圣西门、傅立叶、欧文是<strong>空想社会主义</strong>的代表人物，他们批判资本主义但不了解其规律。马克思、恩格斯用唯物史观和剩余价值学说使社会主义变成了科学。</p>
+                    <div style="margin-top:0.4rem;"><a href="articles/gongchan-dan-yuan.html" class="ext-link" style="font-size:0.75rem;">📖 精读《共产党宣言》→</a></div>
+                </div>
+                <div class="concept-item" data-concept="无产阶级历史使命 资产阶级掘墓人">
+                    <h5>⚔️ 无产阶级的历史使命</h5>
+                    <p>无产阶级是资本主义的掘墓人，其历史使命是推翻资本主义、建立社会主义并最终实现共产主义。《共产党宣言》指出："无产者在这个革命中失去的只是锁链，获得的将是整个世界。"</p>
+                </div>
+                <div class="concept-item" data-concept="无产阶级专政 过渡时期">
+                    <h5>⚙️ 无产阶级专政</h5>
+                    <p>从资本主义到共产主义的过渡时期，必须实行无产阶级专政。它不是对人民的专政，而是对少数剥削者的专政，对广大人民实行最广泛的民主。</p>
+                    <div style="margin-top:0.4rem;"><a href="articles/guo-jia-yu-ge-ming.html" class="ext-link" style="font-size:0.75rem;">📖 精读《国家与革命》→</a></div>
+                </div>
+                <div class="concept-item" data-concept="共产主义 两个阶段 各尽所能 按劳分配 按需分配">
+                    <h5>🌅 共产主义社会两个阶段</h5>
+                    <p>共产主义第一阶段（社会主义）实行"各尽所能、按劳分配"；高级阶段（共产主义）实行"各尽所能、按需分配"。从社会主义到共产主义需要生产力的高度发展。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== 板块五：马克思主义中国化 ========== -->
+        <div class="tool-card-large">
+            <h4>🇨🇳 五、马克思主义中国化</h4>
+            <div class="concept-list">
+                <div class="concept-item" data-concept="马克思主义中国化 毛泽东思想 实事求是 群众路线 独立自主">
+                    <h5>📖 毛泽东思想的活的灵魂</h5>
+                    <p><strong>实事求是、群众路线、独立自主</strong>是毛泽东思想的核心精髓，是马克思主义中国化的第一次历史性飞跃。</p>
+                    <div style="margin-top: 0.6rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                        <a href="articles/shi-jian-lun.html" class="ext-link">📖 精读《实践论》</a>
+                        <a href="articles/xin-min-zhu.html" class="ext-link">📖 精读《新民主主义论》</a>
+                    </div>
+                </div>
+                <div class="concept-item" data-concept="新民主主义革命 两步走 农村包围城市">
+                    <h5>🔴 新民主主义革命理论</h5>
+                    <p>毛泽东提出的关于殖民地半殖民地国家革命的完整理论。革命分两步走：新民主主义革命（第一步）→社会主义革命（第二步）。</p>
+                    <div style="margin-top:0.4rem;"><a href="articles/xin-min-zhu.html" class="ext-link" style="font-size:0.75rem;">📖 精读《新民主主义论》→</a></div>
+                </div>
+                <div class="concept-item" data-concept="统一战线 武装斗争 党的建设">
+                    <h5>⚔️ 中国革命三大法宝</h5>
+                    <p>毛泽东总结中国革命经验，提出<strong>统一战线、武装斗争、党的建设</strong>是中国革命的三大法宝。</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <p class="wip-note">📖 更多哲学原理内容（如范畴体系、辩证思维方法、苏联哲学史等）持续完善中……</p>
+</section>
 
 
             <!-- ==================== 第二部分：斗争策略 ==================== -->
@@ -1181,16 +1305,17 @@ body.dark-mode .science-card p {
                         </div>  
 
                         <!-- 热门词条预览 -->
-                        <div style="border-top: 1px solid #fde68a; padding-top: 1rem; margin-top: 0.5rem;">
-                            <p style="font-size:0.75rem; color:#b45309; margin-bottom:0.5rem;">🔥 热门词条</p>
-                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                                <a href="science-terms.html#surplus-value" style="background: rgba(196,30,58,0.1); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; color: #c41e3a; text-decoration: none;">剩余价值</a>
-                                <a href="science-terms.html#alienation" style="background: rgba(196,30,58,0.1); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; color: #c41e3a; text-decoration: none;">异化</a>
-                                <a href="science-terms.html#dictatorship" style="background: rgba(196,30,58,0.1); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; color: #c41e3a; text-decoration: none;">无产阶级专政</a>
-                                <a href="science-movements.html#paris-commune" style="background: rgba(217,119,6,0.1); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; color: #d97706; text-decoration: none;">巴黎公社</a>
-                                <a href="science-figures.html#gramsci" style="background: rgba(196,30,58,0.1); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; color: #c41e3a; text-decoration: none;">葛兰西</a>
-                            </div>
-                        </div>
+<div style="border-top: 1px solid #fde68a; padding-top: 1rem; margin-top: 0.5rem;">
+    <p style="font-size:0.75rem; color:#b45309; margin-bottom:0.5rem;">🔥 热门词条</p>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <a href="science.html#term-surplus-value" style="background: rgba(196,30,58,0.1); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; color: #c41e3a; text-decoration: none;">剩余价值</a>
+        <a href="science.html#term-alienation" style="background: rgba(196,30,58,0.1); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; color: #c41e3a; text-decoration: none;">异化</a>
+        <a href="science.html#term-dictatorship-proletariat" style="background: rgba(196,30,58,0.1); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; color: #c41e3a; text-decoration: none;">无产阶级专政</a>
+        <a href="science.html#movement-paris-commune" style="background: rgba(217,119,6,0.1); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; color: #d97706; text-decoration: none;">巴黎公社</a>
+        <a href="science.html#figure-gramsci" style="background: rgba(196,30,58,0.1); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; color: #c41e3a; text-decoration: none;">葛兰西</a>
+        <a href="science.html#text-manifesto" style="background: rgba(124,58,237,0.1); padding: 0.2rem 0.8rem; border-radius: 20px; font-size: 0.7rem; color: #7c3aed; text-decoration: none;">共产党宣言</a>
+    </div>
+</div>
                     </div>
                 </div>
             </section>
@@ -1330,6 +1455,40 @@ document.querySelectorAll('.science-tab').forEach(tab => {
         btn.textContent = '展开全文 ▼';
     }
 }
+
+
+// 哲学原理搜索筛选
+const searchInput = document.getElementById('conceptSearchInput');
+const clearBtn = document.getElementById('clearSearchBtn');
+const conceptItems = document.querySelectorAll('#part1 .concept-item');
+
+function filterConcepts() {
+    const keyword = searchInput.value.trim().toLowerCase();
+    conceptItems.forEach(item => {
+        const conceptData = item.getAttribute('data-concept') || '';
+        const titleText = item.querySelector('h5')?.innerText.toLowerCase() || '';
+        const matches = keyword === '' || conceptData.toLowerCase().includes(keyword) || titleText.includes(keyword);
+        item.style.display = matches ? 'block' : 'none';
+    });
+}
+
+if (searchInput) {
+    searchInput.addEventListener('input', filterConcepts);
+}
+if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        filterConcepts();
+    });
+}
+
+// 热词点击
+document.querySelectorAll('.hot-tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+        searchInput.value = tag.dataset.keyword || tag.innerText;
+        filterConcepts();
+    });
+});
     </script>
 </body>
 </html>
