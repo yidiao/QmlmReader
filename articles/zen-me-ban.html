@@ -141,14 +141,29 @@
         .article-header h1 { font-size: 1.8rem; }
         .tab-content { padding: 1.25rem; }
     }
-</style>
+    .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+        body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
+
+        /* ===== 结构分析样式 ===== */
+        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+        .structure-analysis h4 { color: #6a1b9a; margin-bottom: 12px; font-size: 1em; }
+        body.dark-mode .structure-analysis h4 { color: #8e24aa; }
+        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+        body.dark-mode .analysis-item { border-color: #444; }
+        .analysis-label { font-weight: 600; color: #6a1b9a; font-size: 0.92em; display: block; margin-bottom: 4px; }
+        body.dark-mode .analysis-label { color: #8e24aa; }
+        .analysis-label.highlight { color: #8e24aa; font-size: 0.96em; }
+        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+        body.dark-mode .analysis-item p { color: #ccc; }
+    </style>
 <style>
 
     /* ⬇ 下载原文浮动按钮 */
     .download-fab {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -168,7 +183,7 @@
     .download-menu {
         position: fixed;
         bottom: 96px;
-        right: 30px;
+        left: 30px;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -230,6 +245,7 @@
                 <span class="date">1901年秋—1902年2月</span>
                 <span class="category">党的建设</span>
                 <span class="word-count">约14万字</span>
+                <span class="length-tag">📖 长篇</span>
             </div>
         </header>
 
@@ -884,6 +900,34 @@
                     <canvas id="compareChart"></canvas>
                 </div>
             </div>
+
+            <div class="structure-analysis">
+                <h4>📊 论证结构解析</h4>
+                <div class="analysis-item">
+                    <span class="analysis-label">批评与信仰 (6分)</span>
+                    <p>开篇对《工人事业》杂志的批评派和"自由批评"思潮进行批判，论战铺陈，节奏平稳。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label highlight">经济主义错误 (9分)★</span>
+                    <p>系统批判经济主义的政治尾巴主义，揭示其对工人运动的危害，论证尖锐有力。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">政治鼓动 (7分)</span>
+                    <p>阐述政治鼓动与经济鼓动的关系，提出"全俄政治报纸"的构想，理论推进中段。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label highlight">组织纲领 (10分)★</span>
+                    <p>全文理论高潮：提出"职业革命家组织"理论，论述先锋队与自发运动的关系，这是列宁建党思想的核心。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">全俄报纸 (8分)</span>
+                    <p>详细阐述《火星报》的组织功能，把理论落实到实践方案，论证层次分明。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">结论 (5分)</span>
+                    <p>总结全文论点，重申建立统一集中的革命组织的紧迫性，节奏回落收束。</p>
+                </div>
+            </div>
         </div>
         <div class="tab-content" id="puzzle">
             <h2 class="tab-heading">🧩 理论拼图</h2>
@@ -954,6 +998,71 @@
             const isDark = document.body.classList.contains('dark-mode');
             localStorage.setItem('darkMode', isDark ? 'true' : 'false');
         }
+
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+            chartsInited = true;
+
+            const c = { primary: '#6a1b9a', secondary: '#8e24aa' };
+
+            // 雷达图
+            const radarCtx = document.getElementById('radarChart');
+            if (radarCtx) {
+                new Chart(radarCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论深度', '实践指导', '历史价值', '思想独创', '语言表达', '现实关联'],
+                        datasets: [{ label: '文章特征', data: [9, 10, 10, 9, 8, 7], backgroundColor: c.primary + '40', borderColor: c.primary, borderWidth: 2, pointBackgroundColor: c.primary }]
+                    },
+                    options: { responsive: true, scales: { r: { beginAtZero: true, max: 10 } } }
+                });
+            }
+
+            // 论证节奏曲线
+            const argCtx = document.getElementById('argumentCurve');
+            if (argCtx) {
+                new Chart(argCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['批评与信仰','经济主义错误','政治鼓动','组织纲领','全俄报纸','结论'],
+                        datasets: [{
+                            data: [6,9,7,10,8,5],
+                            borderColor: c.primary,
+                            backgroundColor: c.primary + '20',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            borderWidth: 2.5,
+                            pointBackgroundColor: [c.secondary, c.primary, c.secondary, c.primary, c.secondary, c.secondary]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.y + '分' } } },
+                        scales: { y: { min: 0, max: 10, title: { display: true, text: '论证强度' } }, x: { title: { display: true, text: '文章结构' } } }
+                    }
+                });
+            }
+
+            // 难度与价值
+            const cmpCtx = document.getElementById('compareChart');
+            if (cmpCtx) {
+                new Chart(cmpCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['理论深度', '语言难度', '实践价值', '思想独创'],
+                        datasets: [
+                            { label: '难度', data: [8, 7, 9, 9], backgroundColor: c.primary + '80' },
+                            { label: '价值', data: [9, 8, 10, 9], backgroundColor: c.secondary + '80' }
+                        ]
+                    },
+                    options: { responsive: true, scales: { y: { min: 0, max: 10 } } }
+                });
+            }
+        }
+
         if (localStorage.getItem('darkMode') === 'true') {
             document.body.classList.add('dark-mode');
         }

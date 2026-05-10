@@ -374,6 +374,99 @@
         body.dark-mode .chart-container {
             background: #3a3a3a;
         }
+
+        /* 思想发展节点（纵向穿插在生平时间轴中） */
+        .thought-milestone {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        .thought-milestone::before {
+            content: '';
+            position: absolute;
+            left: -1.65rem;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            background: #8b0000;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #8b0000, 0 0 8px rgba(139,0,0,0.3);
+        }
+        .thought-milestone-year {
+            font-weight: bold;
+            color: #8b0000;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .thought-milestone-card {
+            background: linear-gradient(135deg, #fff5f5, #fef2f2);
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid #8b0000;
+            box-shadow: 0 2px 8px rgba(139,0,0,0.08);
+        }
+        .thought-milestone-card h4 {
+            color: #8b0000;
+            margin: 0 0 6px 0;
+            font-size: 1rem;
+        }
+        .thought-milestone-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .thought-milestone-tag {
+            display: inline-block;
+            background: #8b0000;
+            color: white;
+            font-size: 0.72rem;
+            padding: 1px 8px;
+            border-radius: 10px;
+            margin-right: 6px;
+            font-weight: 500;
+        }
+        body.dark-mode .thought-milestone-card {
+            background: linear-gradient(135deg, #2d1a1a, #3a2020);
+            border-left-color: #ff6b6b;
+        }
+        body.dark-mode .thought-milestone-card h4 { color: #ff6b6b; }
+        body.dark-mode .thought-milestone-card p { color: #ccc; }
+        body.dark-mode .thought-milestone-tag { background: #ff6b6b; color: #1a1a1a; }
+        body.dark-mode .thought-milestone-year { color: #ff6b6b; }
+        body.dark-mode .thought-milestone::before {
+            background: #ff6b6b;
+            box-shadow: 0 0 0 3px #ff6b6b, 0 0 8px rgba(255,107,107,0.3);
+        }
+        /* 返回顶部按钮 */
+        .back-to-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 1.2rem;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, #8b0000, #a52a2a);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139,0,0,0.35);
+        }
+        .dark-mode .back-to-top {
+            background: linear-gradient(135deg, #ff6b6b, #e53e3e);
+            color: #1a1a2e;
+        }
+        /* 移动端：堆叠显示 */
+        @media (max-width: 768px) {
+            .thought-milestone-card { padding: 0.8rem; }
+        }
     </style>
 </head>
 <body>
@@ -473,6 +566,17 @@
                             <p>与燕妮结婚，迁居巴黎。创办《德法年鉴》，发表《论犹太人问题》《〈黑格尔法哲学批判〉导言》，完成从唯心主义向唯物主义、从革命民主主义向共产主义的转变。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1843年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">思想转折</span>
+                            <h4>《黑格尔法哲学批判》——转向唯物主义</h4>
+                            <p>批判黑格尔的国家哲学，提出市民社会决定国家的唯物主义观点，标志着从唯心主义向唯物主义的根本转变。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1844年</div>
                         <div class="timeline-content">
@@ -480,6 +584,37 @@
                             <p>8月在巴黎与恩格斯会面，从此开始长达40年的伟大友谊和合作。合著《神圣家族》《德意志意识形态》。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1844年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">思想突破</span>
+                            <h4>《1844年经济学哲学手稿》——异化劳动理论</h4>
+                            <p>论述异化劳动理论，提出共产主义是私有财产的积极扬弃，是马克思主义形成过程中的重要著作。</p>
+                        </div>
+                    </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1845年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">世界观萌芽</span>
+                            <h4>《关于费尔巴哈的提纲》——实践观确立</h4>
+                            <p>十一条提纲，批判旧唯物主义的直观性，提出实践观点，被恩格斯称为"包含着新世界观的天才萌芽的第一个文件"。</p>
+                        </div>
+                    </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1845-1846年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">思想成熟</span>
+                            <h4>《德意志意识形态》——唯物史观系统阐述</h4>
+                            <p>与恩格斯合著，系统阐述唯物史观，提出生产力与生产关系、经济基础与上层建筑的矛盾运动规律，标志马克思主义哲学的形成。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1847年</div>
                         <div class="timeline-content">
@@ -494,6 +629,17 @@
                             <p>2月《共产党宣言》在伦敦发表，标志着马克思主义的公开问世。同年欧洲革命爆发，马克思回到德国参加革命。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1848年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">公开问世</span>
+                            <h4>《共产党宣言》——马克思主义诞生</h4>
+                            <p>科学社会主义的第一个纲领性文件，论述阶级斗争理论、资本主义必然灭亡和社会主义必然胜利的规律、无产阶级的历史使命。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1849年</div>
                         <div class="timeline-content">
@@ -522,6 +668,17 @@
                             <p>《资本论》第一卷在汉堡出版，系统阐述剩余价值理论，揭示资本主义剥削的秘密。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1867年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">理论完成</span>
+                            <h4>《资本论》第一卷——政治经济学理论完成</h4>
+                            <p>马克思主义政治经济学的奠基之作，系统阐述劳动价值论和剩余价值理论，揭示资本主义产生、发展、灭亡的规律。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1871年</div>
                         <div class="timeline-content">
@@ -622,6 +779,7 @@
                         <p>批判拉萨尔主义，阐述共产主义社会发展两阶段理论，提出过渡时期实行无产阶级专政的思想。</p>
                     </div>
                 </div>
+
             </div>
 
             <!-- 理论贡献 -->
@@ -672,14 +830,14 @@
                             <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#e8192c;"></div><span>毛泽东（鲜红）</span></div>
                         </div>
                     </div>
-                    
+
                     <!-- 思想转变历程 -->
                     <div class="chart-container">
                         <h3>思想转变历程</h3>
                         <p class="chart-desc">从唯心主义到唯物主义、从革命民主主义到共产主义的转变过程</p>
                         <canvas id="marxTransformChart" style="max-height:280px;"></canvas>
                     </div>
-                    
+
                     <!-- 著作领域分布 -->
                     <div class="chart-container">
                         <h3>著作领域分布</h3>
@@ -694,20 +852,21 @@
                 <h2>历史地位</h2>
                 <h3>千年第一思想家</h3>
                 <p>1999年，英国广播公司（BBC）评选"千年思想家"，马克思位居榜首。2005年，德国评选"最伟大的德国人"，马克思名列第三。马克思的思想深刻影响了人类历史进程，改变了世界格局。</p>
-                
+
                 <h3>马克思主义的创始人</h3>
                 <p>马克思与恩格斯共同创立了马克思主义，实现了人类思想史上的伟大革命。马克思主义是科学的世界观和方法论，是工人阶级和劳动人民认识世界、改造世界的强大思想武器。马克思主义包括哲学、政治经济学、科学社会主义三个组成部分，是一个完整的科学体系。</p>
-                
+
                 <h3>国际工人运动的精神领袖</h3>
                 <p>马克思是第一国际的灵魂，指导了19世纪欧洲工人运动的发展。他的思想培育了各国无产阶级政党，推动了国际共产主义运动的兴起。从19世纪末到20世纪，马克思主义成为世界各国工人阶级政党的指导思想。</p>
-                
+
                 <h3>对20世纪世界历史的影响</h3>
                 <p>以马克思主义为指导的社会主义革命在俄国、中国等一系列国家取得胜利，建立了社会主义政权，形成了与资本主义阵营对峙的社会主义阵营。马克思主义成为20世纪最具影响力的社会思潮之一。</p>
-                
+
                 <h3>当代意义</h3>
                 <p>尽管20世纪末苏联解体、东欧剧变使世界社会主义运动遭受挫折，但马克思主义并未过时。2008年国际金融危机后，《资本论》重新成为畅销书，马克思对资本主义的批判性分析重新引起关注。马克思主义关于人类解放、社会公正、人与自然和谐发展的思想，对于解决当代全球性问题仍具有重要价值。</p>
             </div>
         </div>
+        <a href="#" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">&#8593; 返回顶部</a>
     </main>
 
     <footer class="site-footer">

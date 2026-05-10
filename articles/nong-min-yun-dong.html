@@ -12,7 +12,7 @@
     .download-fab {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -32,7 +32,7 @@
     .download-menu {
         position: fixed;
         bottom: 96px;
-        right: 30px;
+        left: 30px;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -53,6 +53,8 @@
     }
     body.dark-mode .dl-link { background: #3a3a3a; color: #eee; }
     .dl-link:hover { background: var(--party-primary, #c41e3a); color: white; }
+    .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+    body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
 </style>
 </head>
 <body data-category="politics">
@@ -242,6 +244,19 @@
             .tab-content { padding:1.25rem; }
             .chapter-content { padding:1rem; }
         }
+
+        /* 结构分析样式 */
+        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+        .structure-analysis h4 { color: #1a237e; margin-bottom: 12px; font-size: 1em; }
+        body.dark-mode .structure-analysis h4 { color: #3949ab; }
+        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+        body.dark-mode .analysis-item { border-color: #444; }
+        .analysis-label { font-weight: 600; color: #1a237e; font-size: 0.92em; display: block; margin-bottom: 4px; }
+        body.dark-mode .analysis-label { color: #3949ab; }
+        .analysis-label.highlight { color: #3949ab; font-size: 0.96em; }
+        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+        body.dark-mode .analysis-item p { color: #ccc; }
     </style>
     <header class="site-header">
         <div class="container">
@@ -290,6 +305,7 @@
                 <span class="date">1927年3月</span>
                 <span class="category">政治理论 · 农民问题</span>
                 <span class="word-count">约18,000字</span>
+                <span class="length-tag">📄 中篇</span>
             </div>
         </header>
 
@@ -582,6 +598,29 @@
                     <div class="chart-container" style="max-width:700px;margin:0 auto;">
                         <canvas id="argumentCurve"></canvas>
                     </div>
+                    <div class="structure-analysis" style="margin-top:20px;">
+                        <h4>📊 论证结构解析</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label">考察背景 (7分)</span>
+                            <p>说明考察的时间、地点和方法，指出农民运动遭到污蔑的现状。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">农民问题重要性 (9分★)</span>
+                            <p>论证高峰。批驳"糟得很"论调，阐明农民运动"好得很"的本质。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">各阶级分析 (6分)</span>
+                            <p>分析富农、中农、贫农的不同态度，论证贫农是革命先锋。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">错误思想批判 (8分)</span>
+                            <p>批驳各种对农民运动的错误认识，进一步巩固论证。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">结论 (5分)</span>
+                            <p>总结十四件大事的意义，号召支持农民运动。</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="chart-block">
@@ -684,7 +723,12 @@
         .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
         .article-header { text-align: center; padding: 40px 0 30px; border-bottom: 2px solid #c53030; }
         .importance-badge { display: inline-block; background: #c53030; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.85em; margin-bottom: 16px; }
-        .article-header h1 { font-size: 2.4em; color: #1a1a1a; margin: 12px 0; font-family: 'STSong', 'SimSun', serif; }
+        .article-header h1 {
+            font-size: 2.4em;
+            color: white;
+            margin: 12px 0;
+            font-family: 'STSong', 'SimSun', serif;
+        }
         .article-subtitle { color: #555; font-size: 1.05em; margin-bottom: 12px; font-style: italic; }
         .article-meta { display: flex; justify-content: center; gap: 20px; color: #666; font-size: 0.9em; flex-wrap: wrap; }
         .tab-nav { display: flex; gap: 4px; margin: 30px 0 0; border-bottom: 2px solid #e2e8f0; overflow-x: auto; padding-bottom: 0; }
@@ -810,13 +854,14 @@
             new Chart(document.getElementById('argumentCurve').getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: ['问题提出\n农民问题严重', '组织起来', '打倒土豪劣绅\n一切权力归农会★', '十四件大事\n（政治1-7）', '十四件大事\n（经济8-11）', '十四件大事\n（文化12-14）'],
+                    labels: ['考察背景', '重要性★', '阶级分析', '错误批判★', '结论'],
                     datasets: [{
                         label: '论证强度',
-                        data: [7, 5, 8, 9, 7, 6],
-                        borderColor: '#e53e3e',
-                        backgroundColor: 'rgba(229,62,62,0.08)',
-                        fill: true, tension: 0.4, pointRadius: 6, borderWidth: 2.5
+                        data: [7, 9, 6, 8, 5],
+                        borderColor: '#1a237e',
+                        backgroundColor: 'rgba(26,35,126,0.1)',
+                        fill: true, tension: 0.35, pointRadius: 7, pointHoverRadius: 9, borderWidth: 2.5,
+                        pointBackgroundColor: ['#999', '#1a237e', '#999', '#3949ab', '#999']
                     }]
                 },
                 options: {

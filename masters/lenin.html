@@ -371,8 +371,99 @@
             margin-bottom: 16px;
         }
         
+        /* 思想发展节点（纵向穿插在生平时间轴中） */
+        .thought-milestone {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        .thought-milestone::before {
+            content: '';
+            position: absolute;
+            left: -1.65rem;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            background: #d4a017;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #d4a017, 0 0 8px rgba(212,160,23,0.3);
+        }
+        .thought-milestone-year {
+            font-weight: bold;
+            color: #d4a017;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .thought-milestone-card {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid #d4a017;
+            box-shadow: 0 2px 8px rgba(212,160,23,0.08);
+        }
+        .thought-milestone-card h4 {
+            color: #b7791f;
+            margin: 0 0 6px 0;
+            font-size: 1rem;
+        }
+        .thought-milestone-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .thought-milestone-tag {
+            display: inline-block;
+            background: #d4a017;
+            color: white;
+            font-size: 0.72rem;
+            padding: 1px 8px;
+            border-radius: 10px;
+            margin-right: 6px;
+            font-weight: 500;
+        }
+        body.dark-mode .thought-milestone-card {
+            background: linear-gradient(135deg, #2a2510, #302a15);
+            border-left-color: #fbbf24;
+        }
+        body.dark-mode .thought-milestone-card h4 { color: #fbbf24; }
+        body.dark-mode .thought-milestone-card p { color: #ccc; }
+        body.dark-mode .thought-milestone-tag { background: #fbbf24; color: #1a1a1a; }
+        body.dark-mode .thought-milestone-year { color: #fbbf24; }
+        body.dark-mode .thought-milestone::before {
+            background: #fbbf24;
+            box-shadow: 0 0 0 3px #fbbf24, 0 0 8px rgba(251,191,36,0.3);
+        }
+        @media (max-width: 768px) {
+            .thought-milestone-card { padding: 0.8rem; }
+        }
         body.dark-mode .chart-container {
             background: #3a3a3a;
+        }
+        /* 返回顶部按钮 */
+        .back-to-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 1.2rem;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, #d4a017, #b8860b);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212,160,23,0.35);
+        }
+        .dark-mode .back-to-top {
+            background: linear-gradient(135deg, #fbbf24, #d4a017);
+            color: #1a1a2e;
         }
     </style>
 </head>
@@ -466,6 +557,17 @@
                             <p>移居圣彼得堡，开始系统研究马克思著作，成为职业革命家。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1894年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">思想奠基</span>
+                            <h4>《什么是"人民之友"以及他们如何攻击社会民主主义者？》</h4>
+                            <p>批判民粹主义，首次运用唯物史观分析俄国社会，提出工农联盟思想和无产阶级历史使命，标志列宁主义萌芽。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1895年</div>
                         <div class="timeline-content">
@@ -480,6 +582,17 @@
                             <p>因革命活动被流放西伯利亚三年，期间完成《俄国资本主义的发展》等重要著作。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1899年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">理论突破</span>
+                            <h4>《俄国资本主义的发展》——俄国马克思主义奠基</h4>
+                            <p>运用马克思主义政治经济学分析俄国社会经济结构，论证俄国资本主义发展规律，为俄国革命奠定理论基础。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1900年</div>
                         <div class="timeline-content">
@@ -494,6 +607,17 @@
                             <p>系统阐述建党思想，批判经济派，提出"灌输论"和先锋队政党理论。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1902年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">建党理论</span>
+                            <h4>《怎么办？》——先锋队政党理论</h4>
+                            <p>提出无产阶级先锋队政党的建党学说，强调"灌输论"——社会主义意识必须从外面灌输给工人运动，批判经济派的自发论。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1903年</div>
                         <div class="timeline-content">
@@ -508,6 +632,17 @@
                             <p>俄国爆发第一次资产阶级民主革命，列宁提出"无产阶级和农民的革命民主专政"口号。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1909年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">哲学捍卫</span>
+                            <h4>《唯物主义和经验批判主义》——认识论奠基</h4>
+                            <p>批判马赫主义的主观唯心主义，捍卫和发展马克思主义哲学，系统阐述辩证唯物主义认识论，提出"物质是标志客观实在的哲学范畴"的经典定义。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1912年</div>
                         <div class="timeline-content">
@@ -522,6 +657,17 @@
                             <p>第一次世界大战爆发，列宁提出"变帝国主义战争为国内战争"的革命口号。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1916年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">理论创新</span>
+                            <h4>《帝国主义是资本主义的最高阶段》——帝国主义理论</h4>
+                            <p>揭示帝国主义的经济实质是垄断资本主义，分析其五大特征，提出帝国主义是无产阶级革命前夜的论断，为一国胜利论奠定理论基础。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1917年4月</div>
                         <div class="timeline-content">
@@ -529,6 +675,17 @@
                             <p>从瑞士返回俄国，发表《四月提纲》，提出从资产阶级民主革命过渡到社会主义革命的路线。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1917年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">国家学说</span>
+                            <h4>《国家与革命》——无产阶级专政理论</h4>
+                            <p>系统阐述马克思主义国家学说，提出"打碎资产阶级国家机器"的著名论断，论述无产阶级专政的必要性和苏维埃政权形式。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1917年11月7日</div>
                         <div class="timeline-content">
@@ -543,6 +700,17 @@
                             <p>领导苏维埃政权粉碎外国武装干涉和白匪叛乱，实行"战时共产主义"政策。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1920年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">策略理论</span>
+                            <h4>《共产主义运动中的"左派"幼稚病》——策略灵活性</h4>
+                            <p>总结俄国革命经验，批判"左"倾教条主义，论述无产阶级政党策略的灵活性和原则性的统一，对各国共产党有重要指导意义。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1921年</div>
                         <div class="timeline-content">
@@ -550,6 +718,17 @@
                             <p>领导实行新经济政策（NEP），用粮食税代替余粮收集制，恢复国民经济。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1921-1923年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">晚年思考</span>
+                            <h4>新经济政策理论——社会主义建设道路探索</h4>
+                            <p>提出在小农经济占优势的国家建设社会主义必须利用商品货币关系，通过国家资本主义过渡到社会主义，是对传统社会主义理论的重大突破。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1922年</div>
                         <div class="timeline-content">
@@ -620,6 +799,7 @@
                         <a href="../articles/zuo-pai-you-diao-bing.html">阅读全文 →</a>
                     </div>
                 </div>
+
             </div>
 
             <!-- 理论贡献 -->
@@ -702,17 +882,18 @@
                 <h2>历史地位</h2>
                 <h3>世界历史意义</h3>
                 <p>列宁是20世纪最具影响力的革命家之一。他领导的十月革命开创了人类历史新纪元，建立了世界上第一个社会主义国家，使社会主义从理论变为现实。这一事件深刻改变了20世纪世界历史进程，推动了殖民地半殖民地民族解放运动的高涨，形成了社会主义阵营与资本主义阵营对峙的世界格局。</p>
-                
+
                 <h3>马克思主义发展史地位</h3>
                 <p>列宁主义是帝国主义和无产阶级革命时代的马克思主义。列宁在新的历史条件下，运用马克思主义基本原理分析帝国主义时代的矛盾，创造性地解决了社会主义革命在一国首先胜利、无产阶级专政的形式、新型无产阶级政党建设等一系列重大理论和实践问题，丰富和发展了马克思主义。</p>
-                
+
                 <h3>对后世的影响</h3>
                 <p>列宁的思想和实践对20世纪世界社会主义运动产生了深远影响。从俄国到中国，从东欧到亚洲、拉丁美洲，许多国家的共产党都以列宁主义为指导思想。列宁关于帝国主义、无产阶级专政、党的建设等理论，至今仍是马克思主义研究的重要课题。</p>
-                
+
                 <h3>当代价值</h3>
                 <p>列宁对垄断资本主义的分析、对帝国主义本质的揭示，对于理解当代全球化背景下的国际矛盾仍具启发意义。他关于党的建设的思想、关于理论与实际相结合的方法论，对于今天的左翼运动仍有参考价值。同时，对列宁主义的历史经验和教训进行科学总结，也是马克思主义发展史研究的重要内容。</p>
             </div>
         </div>
+        <a href="#" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">&#8593; 返回顶部</a>
     </main>
 
     <footer class="site-footer">

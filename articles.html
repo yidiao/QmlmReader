@@ -6,46 +6,550 @@
     <title>文章列表 | 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .card-wip-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ff9800;
+        /* ========== 文章页面专用样式 ========== */
+        
+        /* 页面整体背景（不覆盖导航栏） */
+        .articles-page {
+            background: linear-gradient(135deg, #f5f0e8 0%, #ede5d8 100%);
+            min-height: calc(100vh - 200px);
+        }
+        
+        body.dark-mode .articles-page {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        /* 页面主容器 */
+        .articles-page .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        /* 顶部标题区 */
+        .page-hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 2rem 1rem;
+            background: rgba(255,255,255,0.5);
+            border-radius: 32px;
+            backdrop-filter: blur(4px);
+        }
+        
+        body.dark-mode .page-hero {
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .page-hero h1 {
+            font-size: 2.2rem;
+            color: #c41e3a;
+            margin-bottom: 0.5rem;
+        }
+        
+        body.dark-mode .page-hero h1 {
+            color: #ff6b6b;
+        }
+        
+        .page-hero p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        body.dark-mode .page-hero p {
+            color: #aaa;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+        }
+        
+        .hero-stat {
+            background: rgba(196,30,58,0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #c41e3a;
+        }
+        
+        body.dark-mode .hero-stat {
+            background: rgba(255,107,107,0.15);
+            color: #ff8a8a;
+        }
+        
+        /* 筛选栏美化 */
+        .filter-bar {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 60px;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        body.dark-mode .filter-bar {
+            background: #2a2a2a;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1.2rem;
+            border: none;
+            background: #f0f0f0;
+            color: #555;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        body.dark-mode .filter-btn {
+            background: #3a3a3a;
+            color: #ccc;
+        }
+        
+        .filter-btn:hover {
+            background: #c41e3a;
             color: white;
-            font-size: 0.7em;
-            padding: 2px 8px;
-            border-radius: 3px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            z-index: 2;
+            transform: translateY(-2px);
         }
-        .article-card.wip {
+        
+        .filter-btn.active {
+            background: #c41e3a;
+            color: white;
+            box-shadow: 0 2px 8px rgba(196,30,58,0.4);
+        }
+        
+        /* 文章卡片网格 */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* 卡片样式升级 */
+        .article-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             position: relative;
+            border: 1px solid rgba(0,0,0,0.03);
         }
-        .article-card.wip .article-title a {
+        
+        body.dark-mode .article-card {
+            background: #2a2a2a;
+            border-color: #3a3a3a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .article-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.12);
+        }
+        
+        /* 卡片顶部装饰条 */
+        .card-stripe {
+            height: 4px;
+            background: linear-gradient(90deg, #c41e3a, #e6697c, #c41e3a);
+        }
+        
+        body.dark-mode .card-stripe {
+            background: linear-gradient(90deg, #ff6b6b, #ff9e9e, #ff6b6b);
+        }
+        
+        /* 卡片头部 */
+        .card-header {
+            padding: 1rem 1.2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .priority-badge {
+            background: #c41e3a;
+            color: white;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .priority-badge[style*="background: #666"] {
+            background: #6b7280 !important;
+        }
+        
+        .article-date {
+            font-size: 0.7rem;
+            color: #999;
+        }
+        
+        body.dark-mode .article-date {
             color: #888;
         }
+        
+        /* 卡片标题 */
+        .article-title {
+            padding: 0.5rem 1.2rem 0;
+            margin: 0;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+        
+        .article-title a {
+            color: #1f2937;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .article-title a:hover {
+            color: #c41e3a;
+        }
+        
+        body.dark-mode .article-title a {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .article-title a:hover {
+            color: #ff8a8a;
+        }
+        
+        /* 作者 */
+        .article-author {
+            padding: 0 1.2rem;
+            margin: 0.2rem 0;
+            font-size: 0.8rem;
+            color: #c41e3a;
+            font-weight: 500;
+        }
+        
+        body.dark-mode .article-author {
+            color: #ff8a8a;
+        }
+        
+        /* 描述 */
+        .article-desc {
+            padding: 0 1.2rem;
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        body.dark-mode .article-desc {
+            color: #aaa;
+        }
+        
+        /* 卡片底部 */
+        .card-footer {
+            padding: 0.8rem 1.2rem 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 0.5rem;
+        }
+        
+        body.dark-mode .card-footer {
+            border-top-color: #3a3a3a;
+        }
+        
+        .article-category {
+            font-size: 0.7rem;
+            background: #f0f0f0;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            color: #666;
+        }
+        
+        body.dark-mode .article-category {
+            background: #3a3a3a;
+            color: #aaa;
+        }
+        
+        .read-more {
+            font-size: 0.8rem;
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .read-more:hover {
+            transform: translateX(4px);
+            display: inline-block;
+        }
+        
+        body.dark-mode .read-more {
+            color: #ff8a8a;
+        }
+        
+        /* 施工中卡片特殊样式 */
+        .article-card.wip {
+            opacity: 0.8;
+        }
+        
         .article-card.wip .read-more {
             color: #999 !important;
             cursor: default;
             pointer-events: none;
         }
-        .article-card.wip .read-more:hover {
+        
+        .card-wip-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ff9800;
+            color: white;
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        /* ========== 拓展阅读模块 ========== */
+        .expand-section {
+            margin: 3rem 0 2rem;
+            border-radius: 24px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        body.dark-mode .expand-section {
+            background: #252530;
+        }
+        
+        .expand-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #fef9e6, #fff5e0);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        body.dark-mode .expand-header {
+            background: linear-gradient(135deg, #2a2a1a, #2a2515);
+        }
+        
+        .expand-header:hover {
+            background: linear-gradient(135deg, #fef3c7, #ffefc0);
+        }
+        
+        body.dark-mode .expand-header:hover {
+            background: linear-gradient(135deg, #3a3a25, #3a3520);
+        }
+        
+        .expand-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .expand-title-icon {
+            font-size: 1.8rem;
+        }
+        
+        .expand-title h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #d97706;
+        }
+        
+        body.dark-mode .expand-title h3 {
+            color: #fbbf24;
+        }
+        
+        .expand-title p {
+            margin: 4px 0 0;
+            font-size: 0.75rem;
+            color: #b45309;
+        }
+        
+        .expand-toggle {
+            font-size: 1.2rem;
+            color: #d97706;
+            transition: transform 0.3s;
+        }
+        
+        .expand-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+        
+        .expand-body.open {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        .expand-content {
+            padding: 1.5rem;
+        }
+        
+        .critique-notice {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        body.dark-mode .critique-notice {
+            background: #3a2a1a;
+        }
+        
+        .critique-icon {
+            font-size: 1.5rem;
+        }
+        
+        .critique-text {
+            flex: 1;
+        }
+        
+        .critique-text strong {
+            color: #d97706;
+        }
+        
+        .critique-text p {
+            margin: 4px 0 0;
+            font-size: 0.8rem;
+            color: #78350f;
+        }
+        
+        body.dark-mode .critique-text p {
+            color: #fde68a;
+        }
+        
+        /* 拓展文章卡片（更紧凑的样式） */
+        .expand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .expand-card {
+            background: #fafafa;
+            border-radius: 16px;
+            padding: 1rem;
+            transition: all 0.2s;
+            border: 1px solid #eee;
+        }
+        
+        body.dark-mode .expand-card {
+            background: #333;
+            border-color: #444;
+        }
+        
+        .expand-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+        }
+        
+        .expand-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .critique-badge {
+            background: #f59e0b;
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        .expand-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0 0 0.3rem;
+        }
+        
+        .expand-card-title a {
+            color: #333;
             text-decoration: none;
         }
-        .article-card.wip::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(
-                -45deg,
-                transparent,
-                transparent 8px,
-                rgba(255,152,0,0.04) 8px,
-                rgba(255,152,0,0.04) 16px
-            );
-            border-radius: inherit;
-            pointer-events: none;
+        
+        body.dark-mode .expand-card-title a {
+            color: #e0e0e0;
+        }
+        
+        .expand-card-author {
+            font-size: 0.75rem;
+            color: #c41e3a;
+            margin-bottom: 0.5rem;
+        }
+        
+        .expand-card-desc {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        body.dark-mode .expand-card-desc {
+            color: #aaa;
+        }
+        
+        /* 未完待续装饰 */
+        .to-be-continued {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 20px;
+            text-align: center;
+            border: 2px dashed #d97706;
+        }
+        
+        body.dark-mode .to-be-continued {
+            background: linear-gradient(135deg, #2a2a1a, #2a2515);
+            border-color: #fbbf24;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .articles-page .container {
+                padding: 1rem;
+            }
+            .filter-bar {
+                padding: 0.8rem 1rem;
+                border-radius: 30px;
+            }
+            .filter-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.75rem;
+            }
+            .article-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .hero-stats {
+                gap: 1rem;
+            }
+            .hero-stat {
+                font-size: 0.7rem;
+            }
         }
     </style>
 </head>
@@ -81,17 +585,26 @@
 
     <main class="articles-page">
         <div class="container">
-            <h2 class="section-title">全部文章</h2>
+            <!-- 头部标题区 -->
+            <div class="page-hero">
+                <h1>📚 经典著作</h1>
+                <p>革命导师的思想结晶 · 马克思主义的理论宝库</p>
+                <div class="hero-stats">
+                    <span class="hero-stat">📖 已收录 30+ 篇</span>
+                    <span class="hero-stat">⭐ 五星必读 20+ 篇</span>
+                    <span class="hero-stat">🚧 持续更新中</span>
+                </div>
+            </div>
             
+            <!-- 筛选栏 -->
             <div class="filter-bar">
-                <button class="filter-btn active" data-filter="all">全部</button>
-                <button class="filter-btn" data-filter="5">五星必读</button>
-                <button class="filter-btn" data-filter="4">四星重点</button>
-                <button class="filter-btn" data-filter="3">三星推荐</button>
-                <button class="filter-btn" data-filter="marx">马恩</button>
-                <button class="filter-btn" data-filter="lenin">列宁</button>
-                <button class="filter-btn" data-filter="stalin">斯大林</button>
-                <button class="filter-btn" data-filter="mao">毛泽东</button>
+                <button class="filter-btn active" data-filter="all">📌 全部</button>
+                <button class="filter-btn" data-filter="5">⭐ 五星必读</button>
+                <button class="filter-btn" data-filter="4">✨ 四星重点</button>
+                <button class="filter-btn" data-filter="marx">📖 马恩</button>
+                <button class="filter-btn" data-filter="lenin">🔴 列宁</button>
+                <button class="filter-btn" data-filter="stalin">⭐ 斯大林</button>
+                <button class="filter-btn" data-filter="mao">🌾 毛泽东</button>
             </div>
 
             <div class="article-grid">
@@ -289,18 +802,19 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5 wip" data-priority="5" data-author="lenin">
-                    <span class="card-wip-badge">🚧 施工中</span>
+                <article class="article-card priority-5" data-priority="5" data-author="lenin">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1916年</span>
                     </div>
-                    <h4 class="article-title">帝国主义是资本主义的最高阶段</h4>
+                    <h4 class="article-title">
+                        <a href="articles/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html">帝国主义是资本主义的最高阶段</a>
+                    </h4>
                     <p class="article-author">列宁</p>
-                    <p class="article-desc">分析帝国主义的本质、特征和历史地位。</p>
+                    <p class="article-desc">分析帝国主义的本质、特征和历史地位，揭示垄断资本主义的发展规律。</p>
                     <div class="card-footer">
                         <span class="article-category">政治经济学</span>
-                        <span class="read-more">🚧 正在施工</span>
+                        <a href="articles/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html" class="read-more">阅读全文 →</a>
                     </div>
                 </article>
 
@@ -349,6 +863,102 @@
                     <div class="card-footer">
                         <span class="article-category">政治理论 · 党建基础</span>
                         <a href="articles/gongchan-dan-yuan.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="marx">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1875年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/ge-da-gang-ling.html">哥达纲领批判</a>
+                    </h4>
+                    <p class="article-author">马克思</p>
+                    <p class="article-desc">批判拉萨尔主义，阐述共产主义社会发展阶段和分配原则。科学社会主义重要文献。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治理论 · 科学社会主义</span>
+                        <a href="articles/ge-da-gang-ling.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-4" data-priority="4" data-author="marx">
+                    <div class="card-header">
+                        <span class="priority-badge" style="background: #666;">四星</span>
+                        <span class="article-date">1844年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/1844-nian-jing-ji-xue-zhe-xue-shou-gao.html">1844年经济学哲学手稿</a>
+                    </h4>
+                    <p class="article-author">马克思</p>
+                    <p class="article-desc">青年马克思探索异化劳动与共产主义的哲学手稿，揭示资本主义条件下人的异化与解放之路。</p>
+                    <div class="card-footer">
+                        <span class="article-category">哲学基础 · 异化理论</span>
+                        <a href="articles/1844-nian-jing-ji-xue-zhe-xue-shou-gao.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-4" data-priority="4" data-author="marx">
+                    <div class="card-header">
+                        <span class="priority-badge" style="background: #666;">四星</span>
+                        <span class="article-date">1845年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/guan-yu-fei-er-ba-ha-de-ti-gang.html">关于费尔巴哈的提纲</a>
+                    </h4>
+                    <p class="article-author">马克思</p>
+                    <p class="article-desc">十一条提纲宣告新世界观诞生，"哲学家们只是用不同的方式解释世界，问题在于改变世界。"</p>
+                    <div class="card-footer">
+                        <span class="article-category">哲学基础 · 实践唯物主义</span>
+                        <a href="articles/guan-yu-fei-er-ba-ha-de-ti-gang.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-4" data-priority="4" data-author="marx">
+                    <div class="card-header">
+                        <span class="priority-badge" style="background: #666;">四星</span>
+                        <span class="article-date">1845-1846年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/de-yi-zhi-yi-xing-tai.html">德意志意识形态（费尔巴哈章）</a>
+                    </h4>
+                    <p class="article-author">马克思 · 恩格斯</p>
+                    <p class="article-desc">首次系统阐述历史唯物主义基本原理，批判费尔巴哈、鲍威尔和施蒂纳的唯心史观。</p>
+                    <div class="card-footer">
+                        <span class="article-category">哲学基础 · 历史唯物主义</span>
+                        <a href="articles/de-yi-zhi-yi-xing-tai.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="marx">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1878年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/fan-du-lin-lun.html">反杜林论（社会主义编）</a>
+                    </h4>
+                    <p class="article-author">恩格斯</p>
+                    <p class="article-desc">全面阐述马克思主义三个组成部分，"马克思主义的百科全书"。</p>
+                    <div class="card-footer">
+                        <span class="article-category">哲学基础 · 政治理论</span>
+                        <a href="articles/fan-du-lin-lun.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="marx">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1884年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html">家庭、私有制和国家的起源</a>
+                    </h4>
+                    <p class="article-author">恩格斯</p>
+                    <p class="article-desc">运用唯物史观分析家庭、私有制和国家的起源与发展，揭示阶级社会的历史暂时性。</p>
+                    <div class="card-footer">
+                        <span class="article-category">政治理论 · 历史唯物主义</span>
+                        <a href="articles/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html" class="read-more">阅读全文 →</a>
                     </div>
                 </article>
 
@@ -539,26 +1149,99 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4 wip" data-priority="4" data-author="mao">
-                    <span class="card-wip-badge">🚧 施工中</span>
+                <article class="article-card priority-4" data-priority="4" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
                         <span class="article-date">1956年4月</span>
                     </div>
-                    <h4 class="article-title">论十大关系</h4>
+                    <h4 class="article-title">
+                        <a href="articles/lun-shi-da-guan-xi.html">论十大关系</a>
+                    </h4>
                     <p class="article-author">毛泽东</p>
-                    <p class="article-desc">探索适合中国国情的社会主义建设道路。</p>
+                    <p class="article-desc">探索适合中国国情的社会主义建设道路，阐述重轻农、沿海内地等十大关系。</p>
                     <div class="card-footer">
                         <span class="article-category">政治理论</span>
-                        <span class="read-more">🚧 正在施工</span>
+                        <a href="articles/lun-shi-da-guan-xi.html" class="read-more">阅读全文 →</a>
                     </div>
                 </article>
             </div>
 
-            <!-- 未完待续 - 更多文章待收录 -->
-            <div style="margin-top:2.5rem;padding:1.8rem;background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:12px;text-align:center;border:2px dashed #d97706;">
-                <p style="font-size:1.1em;color:#92400e;font-weight:bold;margin-bottom:0.4rem;">📖 未完待续</p>
-                <p style="color:#a16207;font-size:0.9rem;margin:0;line-height:1.6;">更多经典著作正在整理收录中，包括恩格斯《反杜林论》《自然辩证法》、列宁《帝国主义》《左派幼稚病》等</p>
+            <!-- ========= 拓展阅读模块 ========= -->
+            <div class="expand-section" id="expandSection">
+                <div class="expand-header" onclick="toggleExpand()">
+                    <div class="expand-title">
+                        <span class="expand-title-icon">⚠️</span>
+                        <div>
+                            <h3>拓展阅读 · 批判性视角</h3>
+                            <p>其他思想家的文章 | 需理性分析 · 批判阅读</p>
+                        </div>
+                    </div>
+                    <span class="expand-toggle" id="expandToggleIcon">▼</span>
+                </div>
+                <div class="expand-body" id="expandBody">
+                    <div class="expand-content">
+                        <div class="critique-notice">
+                            <span class="critique-icon">🔍</span>
+                            <div class="critique-text">
+                                <strong>阅读提示</strong>
+                                <p>以下文章来自非马恩列斯毛的其他作者。其中部分观点可能与马列毛主义存在分歧，请读者运用马克思主义立场、观点、方法进行批判性分析，独立思考，取其精华，去其糟粕。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="expand-grid">
+                            <!-- 拓展文章卡片 1 -->
+                            <div class="expand-card">
+                                <div class="expand-card-header">
+                                    <span class="critique-badge">⚡ 需批判阅读</span>
+                                    <span class="article-date">1963年</span>
+                                </div>
+                                <h4 class="expand-card-title"><a href="#">《新阶级》—— 吉拉斯</a></h4>
+                                <p class="expand-card-author">密洛凡·吉拉斯 | 前南共领导人</p>
+                                <p class="expand-card-desc">分析社会主义国家官僚阶层的形成。作者后来脱离社会主义道路，需警惕其反共倾向，但书中对官僚异化的观察可作为反面教材。</p>
+                            </div>
+                            
+                            <div class="expand-card">
+                                <div class="expand-card-header">
+                                    <span class="critique-badge">⚠️ 辩证看待</span>
+                                    <span class="article-date">1978年</span>
+                                </div>
+                                <h4 class="expand-card-title"><a href="#">《合法性危机》—— 哈贝马斯</a></h4>
+                                <p class="expand-card-author">尤尔根·哈贝马斯 | 法兰克福学派</p>
+                                <p class="expand-card-desc">分析晚期资本主义国家的合法性危机。西方马克思主义视角，部分方法论可借鉴，但整体框架与历史唯物主义有根本差异。</p>
+                            </div>
+                            
+                            <div class="expand-card">
+                                <div class="expand-card-header">
+                                    <span class="critique-badge">⚡ 需批判阅读</span>
+                                    <span class="article-date">1949年</span>
+                                </div>
+                                <h4 class="expand-card-title"><a href="#">《一九八四》—— 奥威尔</a></h4>
+                                <p class="expand-card-author">乔治·奥威尔 | 英国作家</p>
+                                <p class="expand-card-desc">反乌托邦经典，常被用于攻击社会主义。需认清其冷战语境，同时反思其中对官僚主义、个人崇拜的警示意义。</p>
+                            </div>
+                            
+                            <div class="expand-card">
+                                <div class="expand-card-header">
+                                    <span class="critique-badge">🔍 参考阅读</span>
+                                    <span class="article-date">1921年</span>
+                                </div>
+                                <h4 class="expand-card-title"><a href="#">《历史与阶级意识》—— 卢卡奇</a></h4>
+                                <p class="expand-card-author">格奥尔格·卢卡奇 | 匈牙利哲学家</p>
+                                <p class="expand-card-desc">西方马克思主义奠基之作，提出“物化”理论。对马克思主义哲学有重要发展，但部分观点偏离列宁主义。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="to-be-continued" style="margin-top:1.5rem; padding:1rem;">
+                            <p style="margin:0; font-size:0.85rem;">📌 更多拓展书目持续整理中 · 欢迎推荐书目及批判性分析角度</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 未完待续 -->
+            <div class="to-be-continued">
+                <p style="font-size:1.1em;font-weight:bold;margin-bottom:0.4rem;">📖 未完待续</p>
+                <p style="font-size:0.9rem;margin:0;line-height:1.6;">更多经典著作正在整理收录中，包括列宁《共产主义运动中的"左派"幼稚病》、斯大林《论列宁》《论列宁主义的几个问题》等</p>
             </div>
         </div>
     </main>
@@ -577,11 +1260,9 @@
             btn.addEventListener('click', function() {
                 const filter = this.dataset.filter;
                 
-                // 切换按钮状态
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 
-                // 筛选文章
                 document.querySelectorAll('.article-card').forEach(card => {
                     if (filter === 'all') {
                         card.style.display = 'block';
@@ -593,6 +1274,14 @@
                 });
             });
         });
+
+        // 拓展阅读折叠/展开
+        function toggleExpand() {
+            const body = document.getElementById('expandBody');
+            const icon = document.getElementById('expandToggleIcon');
+            body.classList.toggle('open');
+            icon.style.transform = body.classList.contains('open') ? 'rotate(0deg)' : 'rotate(-90deg)';
+        }
 
         // 黑夜模式切换
         function toggleDarkMode() {
@@ -609,11 +1298,31 @@
             }
         }
 
-        // 页面加载时恢复黑夜模式设置
         if (localStorage.getItem('darkMode') === 'true') {
             document.body.classList.add('dark-mode');
         }
         updateDarkModeIcon();
+        
+        // 汉堡菜单功能
+        (function(){
+            document.addEventListener('DOMContentLoaded', function(){
+                var h = document.querySelector('.hamburger-btn'), n = document.querySelector('.main-nav');
+                if(!h || !n) return;
+                h.addEventListener('click', function(e){
+                    e.stopPropagation();
+                    var o = n.classList.toggle('open');
+                    h.classList.toggle('open', o);
+                    document.body.style.overflow = o ? 'hidden' : '';
+                });
+                document.addEventListener('click', function(e){
+                    if(n.classList.contains('open') && !n.contains(e.target) && e.target !== h){
+                        n.classList.remove('open');
+                        h.classList.remove('open');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+        })();
     </script>
 </body>
 </html>

@@ -310,6 +310,73 @@
             margin-bottom: 16px;
         }
         
+        /* 思想发展节点（纵向穿插在生平时间轴中） */
+        .thought-milestone {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        .thought-milestone::before {
+            content: '';
+            position: absolute;
+            left: -1.65rem;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            background: #744210;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #744210, 0 0 8px rgba(116,66,16,0.3);
+        }
+        .thought-milestone-year {
+            font-weight: bold;
+            color: #744210;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .thought-milestone-card {
+            background: linear-gradient(135deg, #fffaf0, #fef3c7);
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid #744210;
+            box-shadow: 0 2px 8px rgba(116,66,16,0.08);
+        }
+        .thought-milestone-card h4 {
+            color: #744210;
+            margin: 0 0 6px 0;
+            font-size: 1rem;
+        }
+        .thought-milestone-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .thought-milestone-tag {
+            display: inline-block;
+            background: #744210;
+            color: white;
+            font-size: 0.72rem;
+            padding: 1px 8px;
+            border-radius: 10px;
+            margin-right: 6px;
+            font-weight: 500;
+        }
+        body.dark-mode .thought-milestone-card {
+            background: linear-gradient(135deg, #2a2010, #302515);
+            border-left-color: #d69e2e;
+        }
+        body.dark-mode .thought-milestone-card h4 { color: #d69e2e; }
+        body.dark-mode .thought-milestone-card p { color: #ccc; }
+        body.dark-mode .thought-milestone-tag { background: #d69e2e; color: #1a1a1a; }
+        body.dark-mode .thought-milestone-year { color: #d69e2e; }
+        body.dark-mode .thought-milestone::before {
+            background: #d69e2e;
+            box-shadow: 0 0 0 3px #d69e2e, 0 0 8px rgba(214,158,46,0.3);
+        }
+        @media (max-width: 768px) {
+            .thought-milestone-card { padding: 0.8rem; }
+        }
         /* 黑夜模式 */
         body.dark-mode .tab-nav,
         body.dark-mode .tab-content {
@@ -354,6 +421,30 @@
         
         body.dark-mode .work-card h4 {
             color: #d69e2e;
+        }
+        /* 返回顶部按钮 */
+        .back-to-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 1.2rem;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, #744210, #975a16);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(116,66,16,0.35);
+        }
+        .dark-mode .back-to-top {
+            background: linear-gradient(135deg, #d69e2e, #b7791f);
+            color: #1a1a2e;
         }
     </style>
 </head>
@@ -440,6 +531,17 @@
                             <p>加入俄国社会民主工党，开始从事革命活动。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1913年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">理论奠基</span>
+                            <h4>《马克思主义和民族问题》——民族理论奠基</h4>
+                            <p>系统阐述马克思主义民族理论的奠基之作，批驳奥地利马克思主义"文化民族"论，提出民族的科学定义：共同语言、共同地域、共同经济生活、共同心理素质。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1903年</div>
                         <div class="timeline-content">
@@ -475,6 +577,27 @@
                             <p>1月21日列宁逝世，斯大林在悼词中宣誓继承列宁事业。随后与托洛茨基、季诺维也夫等人展开路线斗争。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1924年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">理论体系化</span>
+                            <h4>《论列宁主义基础》——列宁主义系统阐述</h4>
+                            <p>系统阐述列宁主义的基本原理——帝国主义时代、无产阶级专政、革命策略和党的学说，使列宁主义成为体系化的理论，是斯大林最重要的理论代表作。</p>
+                        </div>
+                    </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1926年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">理论发展</span>
+                            <h4>《论列宁主义的几个问题》——一国建成社会主义</h4>
+                            <p>针对党内争论，进一步批驳托洛茨基主义，系统回答列宁主义的根本问题，论证一国建成社会主义的可能性。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1928-1937年</div>
                         <div class="timeline-content">
@@ -482,6 +605,17 @@
                             <p>实施五年计划，推动苏联从农业国向工业国转变。建立重工业体系，为后来的反法西斯战争奠定物质基础。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1938年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">哲学体系化</span>
+                            <h4>《联共（布）党史简明教程》第四章——马克思主义哲学体系</h4>
+                            <p>系统阐述辩证唯物主义和历史唯物主义，提出"马克思主义哲学是辩证唯物主义和历史唯物主义"的经典表述，成为各国共产党学习哲学的基本教材。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1941-1945年</div>
                         <div class="timeline-content">
@@ -496,6 +630,27 @@
                             <p>参加雅尔塔会议，参与确定战后世界格局，苏联成为超级大国。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1950年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">理论拓展</span>
+                            <h4>《马克思主义和语言学问题》——语言与上层建筑</h4>
+                            <p>论述语言与上层建筑的区别，讨论语言发展的规律，在语言学界产生重要影响，展示了对具体学科问题的马克思主义分析方法。</p>
+                        </div>
+                    </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1952年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">晚年思考</span>
+                            <h4>《苏联社会主义经济问题》——社会主义经济规律</h4>
+                            <p>探讨社会主义政治经济学问题，论述社会主义经济规律，承认价值规律在社会主义条件下的作用，是斯大林晚年的重要理论著作。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1953年</div>
                         <div class="timeline-content">
@@ -623,6 +778,7 @@
                         <p>提出"落后就要挨打"的著名论断，强调加快工业化步伐的紧迫性。</p>
                     </div>
                 </div>
+
             </div>
 
             <!-- 理论贡献 -->
@@ -697,17 +853,18 @@
                 <h2>历史地位</h2>
                 <h3>苏联社会主义建设</h3>
                 <p>斯大林领导苏联实现了从农业国到工业国的历史性转变。通过三个五年计划，苏联建立了完整的工业体系，工业产值跃居世界第二。这一成就不仅改变了苏联的面貌，也为后来的反法西斯战争胜利奠定了物质基础。苏联的工业化模式对后来的社会主义国家产生了深远影响。</p>
-                
+
                 <h3>反法西斯战争的胜利</h3>
                 <p>作为苏联最高统帅，斯大林领导苏联人民取得了伟大卫国战争的胜利。苏联红军从莫斯科保卫战到斯大林格勒战役，再到攻克柏林，为打败法西斯德国作出了决定性贡献。这场胜利不仅拯救了苏联，也改变了世界历史进程。</p>
-                
+
                 <h3>马克思主义发展史地位</h3>
                 <p>斯大林是列宁主义的主要阐释者和传播者。他的著作使列宁主义成为体系化的理论，对20世纪国际共产主义运动产生了广泛影响。同时，他对马克思主义哲学的系统阐述，对后来的马克思主义研究也有重要影响。</p>
-                
+
                 <h3>历史评价</h3>
                 <p>斯大林是一个复杂的历史人物。他领导苏联取得了工业化建设和反法西斯战争的巨大成就，但也存在严重的错误和问题。对斯大林的评价需要坚持历史唯物主义的方法，既要看到他的历史贡献，也要正视他的历史错误，从中吸取经验教训。（然而，就像笔者在【正名】里写的一样，有些事情不是你想做就能做成的，客观规律不以人的意志而转移。历史的可悲之处就在于，大多数情况下你就那么几个选择。）</p>
             </div>
         </div>
+        <a href="#" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">&#8593; 返回顶部</a>
     </main>
 
     <footer class="site-footer">

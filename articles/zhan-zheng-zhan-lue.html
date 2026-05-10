@@ -12,7 +12,7 @@
     .download-fab {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -32,7 +32,7 @@
     .download-menu {
         position: fixed;
         bottom: 96px;
-        right: 30px;
+        left: 30px;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -108,6 +108,7 @@
                 <span class="date">1938年11月</span>
                 <span class="category">军事战略 · 战争观</span>
                 <span class="word-count">约8,000字</span>
+                <span class="length-tag">📝 短篇</span>
             </div>
         </header>
 
@@ -370,6 +371,14 @@
                     <div class="chart-container" style="max-width:700px;margin:0 auto;">
                         <canvas id="argumentCurve"></canvas>
                     </div>
+                    <div class="structure-analysis">
+                        <h4>📊 论证结构解析</h4>
+                        <div class="analysis-item"><span class="analysis-label">问题提出 (7分)</span><p>开篇提出"什么是战争"的根本问题，从战争本质切入，节奏平稳。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">两种前途 (9分)</span><p>批判亡国论与速胜论两种错误观点，论证力度显著提升。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">持久战三阶段 (6分)</span><p>详细阐述战略防御、相持、反攻三个阶段，内容充实但论证节奏相对平稳。</p></div>
+                        <div class="analysis-item"><span class="analysis-label highlight">能动性问题 (10分)★</span><p>论述战争中主观能动性的决定性作用，"兵无常势，水无常形"，全文最高峰。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">结论 (5分)</span><p>总结战争规律与胜利信心，收束简洁。</p></div>
+                    </div>
                 </div>
 
                 <!-- 中国革命战争形式演变 -->
@@ -606,6 +615,21 @@
     body.dark-mode .conn-title { color: #e0e0e0; }
 
     @media (max-width: 600px) { .article-header h1 { font-size: 1.8em; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .chapter-content { padding: 14px 16px; } .conn-grid { grid-template-columns: 1fr; } }
+    /* ===== 长度标签 ===== */
+    .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+    body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
+    /* ===== 结构分析样式 - 军事战略类 ===== */
+    .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+    body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+    .structure-analysis h4 { color: #1b5e20; margin-bottom: 12px; font-size: 1em; }
+    body.dark-mode .structure-analysis h4 { color: #388e3c; }
+    .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+    body.dark-mode .analysis-item { border-color: #444; }
+    .analysis-label { font-weight: 600; color: #1b5e20; font-size: 0.92em; display: block; margin-bottom: 4px; }
+    body.dark-mode .analysis-label { color: #388e3c; }
+    .analysis-label.highlight { color: #388e3c; font-size: 0.96em; }
+    .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+    body.dark-mode .analysis-item p { color: #ccc; }
 </style>
 
     <script>

@@ -84,32 +84,63 @@
         .legend-color.orange { background: #f97316; }
         .legend-color.yellow { background: #eab308; }
         
-        /* 统计栏 */
-        .stats-bar {
-            background: #f9f9f9;
-            padding: 1.5rem;
-            border-radius: 16px;
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: #c41e3a;
-        }
-        
-        .stat-label {
-            color: #666;
-            font-size: 0.9rem;
-        }
+        /* 统计栏 - 电脑端第一行3个，第二行4个 */
+.stats-bar {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* 底层用4列网格 */
+    gap: 1rem;
+    justify-items: center;
+    align-items: center;
+}
+
+/* 电脑端也是上三下四 */
+.stat-item:nth-child(1) { grid-column: 1 / 2; grid-row: 1; }
+.stat-item:nth-child(2) { grid-column: 2 / 3; grid-row: 1; }
+.stat-item:nth-child(3) { grid-column: 3 / 4; grid-row: 1; }
+.stat-item:nth-child(4) { grid-column: 1 / 2; grid-row: 2; }
+.stat-item:nth-child(5) { grid-column: 2 / 3; grid-row: 2; }
+.stat-item:nth-child(6) { grid-column: 3 / 4; grid-row: 2; }
+.stat-item:nth-child(7) { grid-column: 4 / 5; grid-row: 2; }
+
+.stat-item {
+    text-align: center;
+    width: 100%;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #c41e3a;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.stat-item a {
+    display: block;
+    text-decoration: none;
+    color: #c41e3a;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* 手机端同样上三下四（适配小屏） */
+@media (max-width: 768px) {
+    .stats-bar {
+        gap: 0.8rem !important;
+        padding: 1rem !important;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem !important;
+    }
+}
         
         /* 年代筛选 */
         .era-filter {
@@ -488,23 +519,35 @@
         <div class="main-layout">
             <!-- 统计信息 -->
             <div class="stats-bar">
-                <div class="stat-item">
-                    <div class="stat-number">20+</div>
-                    <div class="stat-label">社会主义国家</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">109</div>
-                    <div class="stat-label">年历史</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">4</div>
-                    <div class="stat-label">大洲覆盖</div>
-                </div>
-                <div class="stat-item">
-                    <a href="international-calendar.html" style="display:block;text-decoration:none;color:#c41e3a;font-weight:bold;">📅 日历</a>
-                    <div class="stat-label">历史上的今天</div>
-                </div>
-            </div>
+    <div class="stat-item">
+        <div class="stat-number">20+</div>
+        <div class="stat-label">社会主义国家</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">109</div>
+        <div class="stat-label">年历史</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">4</div>
+        <div class="stat-label">大洲覆盖</div>
+    </div>
+    <div class="stat-item">
+        <a href="international-calendar.html">📅 日历</a>
+        <div class="stat-label">历史上的今天</div>
+    </div>
+    <div class="stat-item">
+        <a href="international-column.html">📰 专栏</a>
+        <div class="stat-label">深度分析</div>
+    </div>
+    <div class="stat-item">
+        <a href="international-current.html">⚡ 时事</a>
+        <div class="stat-label">最新动态</div>
+    </div>
+    <div class="stat-item">
+        <a href="international-memorial.html">🕯️ 纪念</a>
+        <div class="stat-label">为了忘却的纪念</div>
+    </div>
+</div>
 
             <!-- 年代筛选 -->
             <div class="era-filter">

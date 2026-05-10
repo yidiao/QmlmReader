@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专栏 | 国际共运 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #6a0000 100%);
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .page-header p { opacity: 0.9; }
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 400px;
+        }
+        
+        /* 国家专题卡片 */
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+        }
+        
+        .country-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .country-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+        }
+        
+        .country-header {
+            background: linear-gradient(135deg, #2c3e4e 0%, #1a2a3a 100%);
+            color: white;
+            padding: 1.2rem;
+            position: relative;
+        }
+        
+        .country-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .country-period {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .country-flag {
+            position: absolute;
+            right: 1.2rem;
+            top: 1rem;
+            font-size: 2rem;
+        }
+        
+        .country-stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 0.8rem 1.2rem;
+            background: #f8f8f8;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stat-badge {
+            text-align: center;
+        }
+        
+        .stat-badge .number {
+            font-weight: bold;
+            color: #c41e3a;
+        }
+        
+        .country-content {
+            padding: 1.2rem;
+        }
+        
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #c41e3a;
+            margin: 0.8rem 0 0.5rem 0;
+            border-left: 3px solid #c41e3a;
+            padding-left: 0.6rem;
+        }
+        
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        
+        .achievement-list, .mistake-list {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #555;
+            padding-left: 1.2rem;
+        }
+        
+        .achievement-list li { color: #2d6a4f; margin-bottom: 0.3rem; }
+        .mistake-list li { color: #c41e3a; margin-bottom: 0.3rem; }
+        
+        .reflection-text {
+            font-size: 0.85rem;
+            color: #666;
+            background: #fef9e6;
+            padding: 0.8rem;
+            border-radius: 10px;
+            margin-top: 0.8rem;
+            border-left: 3px solid #e6a017;
+        }
+        
+        .read-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .read-link:hover { text-decoration: underline; }
+        
+        .legacy-placeholder {
+            text-align: center;
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 16px;
+            color: #666;
+            margin-top: 2rem;
+        }
+        .legacy-placeholder-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .legacy-placeholder h3 { color: #c41e3a; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        
+        /* 黑夜模式 */
+        body.dark-mode .country-card { background: #2a2a2a; border-color: #3a3a3a; }
+        body.dark-mode .country-stats { background: #333; border-color: #444; }
+        body.dark-mode .achievement-list li { color: #74c69d; }
+        body.dark-mode .mistake-list li { color: #ff8a8a; }
+        body.dark-mode .reflection-text { background: #3a3520; color: #ccc; }
+        body.dark-mode .legacy-placeholder { background: #2a2a2a; }
+    </style>
+</head>
+<body>
+    <header class="site-header"><div class="container"><div class="logo"><span class="logo-icon">☭</span><div class="logo-text"><h1>青年马列毛主义驿站</h1><span class="logo-sub">Qmlm Reader</span></div></div><button class="hamburger-btn" id="hamburgerBtn"><span></span><span></span><span></span></button><nav class="main-nav"><a href="index.html">首页</a><a href="articles.html">文章</a><a href="masters.html">导师</a><a href="toolkit.html">工具集</a><a href="gallery.html">文艺</a><a href="puzzle.html">🧩 理论拼图</a><a href="international.html" class="active">🌍 国际共运</a><a href="rectify.html">正名</a><a href="about.html">关于</a><button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button></nav></div></header>
+    <main>
+        <section class="page-header"><h1>📖 国际共运专栏</h1><p>梳理历史脉络 · 分析成败得失 · 总结经验教训</p></section>
+        <div class="content-wrapper">
+            
+            <div class="country-grid">
+                
+                <!-- 柬埔寨 · 红色高棉 -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">🇰🇭 柬埔寨 · 红色高棉</div>
+                        <div class="country-period">1975 - 1979 | 民主柬埔寨</div>
+                        <div class="country-flag">🇰🇭</div>
+                    </div>
+                    <div class="country-stats">
+                        <div class="stat-badge"><span class="number">✓ 抗美救国</span></div>
+                        <div class="stat-badge"><span class="number">✗ 极端政策</span></div>
+                        <div class="stat-badge"><span class="number">? 争议评价</span></div>
+                    </div>
+                    <div class="country-content">
+                        <div class="section-title">📌 历史成就</div>
+                        <ul class="achievement-list">
+                            <li>1975年击败美国支持的朗诺政权，实现国家独立</li>
+                            <li>清除城市买办阶级和殖民残余势力</li>
+                            <li>推行全民免费医疗和基础教育</li>
+                        </ul>
+                        <div class="section-title">⚠️ 严重失误</div>
+                        <ul class="mistake-list">
+                            <li>极端农业集体化导致粮食危机和人道灾难</li>
+                            <li>对知识分子和旧政权人员的过度清洗</li>
+                            <li>关闭城市、废除货币、取消商品经济的激进试验</li>
+                            <li>脱离柬埔寨实际的生产关系改造</li>
+                        </ul>
+                        <div class="reflection-text">
+                            💡 <strong>经验教训</strong>：革命不能超越生产力发展阶段；阶级分析须结合具体国情；群众路线不能沦为领袖个人意志。红色高棉的悲剧提醒我们：没有调查就没有发言权，政策必须从实际出发。
+                        </div>
+                        <a href="#" class="read-link">👉 深入阅读：红色高棉的兴衰与反思 →</a>
+                    </div>
+                </div>
+                
+                <!-- 阿尔巴尼亚 · 霍查时期 -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">🇦🇱 阿尔巴尼亚 · 霍查时期</div>
+                        <div class="country-period">1944 - 1985 | 社会主义阿尔巴尼亚</div>
+                        <div class="country-flag">🇦🇱</div>
+                    </div>
+                    <div class="country-stats">
+                        <div class="stat-badge"><span class="number">✓ 独立自主</span></div>
+                        <div class="stat-badge"><span class="number">✗ 自我封闭</span></div>
+                        <div class="stat-badge"><span class="number">? 破碎外交</span></div>
+                    </div>
+                    <div class="country-content">
+                        <div class="section-title">📌 历史成就</div>
+                        <ul class="achievement-list">
+                            <li>二战中领导反法西斯游击战争，实现民族解放</li>
+                            <li>坚决抵制苏联霸权主义和美帝国主义的压力</li>
+                            <li>全民识字率从解放前的5%提高到90%以上</li>
+                            <li>消灭了天花、疟疾等地方病</li>
+                        </ul>
+                        <div class="section-title">⚠️ 严重失误</div>
+                        <ul class="mistake-list">
+                            <li>先后与南斯拉夫、苏联、中国交恶，陷入外交孤立</li>
+                            <li>修建数十万地堡，国民经济军事化过度</li>
+                            <li>取消一切宗教，引发社会矛盾和抵抗</li>
+                            <li>闭关锁国导致经济发展严重滞后</li>
+                        </ul>
+                        <div class="reflection-text">
+                            💡 <strong>经验教训</strong>：独立自主不等于自我封闭；反对霸权不等于与世界为敌；社会主义需要开放学习和吸收先进经验。
+                        </div>
+                        <a href="#" class="read-link">👉 深入阅读：“山鹰之国”的兴衰启示 →</a>
+                    </div>
+                </div>
+                
+                <!-- 南斯拉夫 · 自治社会主义 -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="country-name">🇾🇺 南斯拉夫 · 自治社会主义</div>
+                        <div class="country-period">1948 - 1992 | 铁托时期</div>
+                        <div class="country-flag">🇾🇺</div>
+                    </div>
+                    <div class="country-stats">
+                        <div class="stat-badge"><span class="number">✓ 经济繁荣</span></div>
+                        <div class="stat-badge"><span class="number">✗ 民族矛盾</span></div>
+                        <div class="stat-badge"><span class="number">? 联邦解体</span></div>
+                    </div>
+                    <div class="country-content">
+                        <div class="section-title">📌 历史成就</div>
+                        <ul class="achievement-list">
+                            <li>走出一条独立于苏联模式的“自治社会主义”道路</li>
+                            <li>经济繁荣，人民生活水平在社会主义国家中最高</li>
+                            <li>不结盟运动的创始国之一，国际影响力显著</li>
+                            <li>工人自治制度是社会主义民主的独特实验</li>
+                        </ul>
+                        <div class="section-title">⚠️ 严重失误</div>
+                        <ul class="mistake-list">
+                            <li>长期压制民族自决诉求，民族矛盾积累</li>
+                            <li>联邦制流于形式，缺乏中央权威</li>
+                            <li>经济权力过度下放导致地方保护主义和通货膨胀</li>
+                            <li>铁托逝世后缺乏制度化的权力交接机制</li>
+                        </ul>
+                        <div class="reflection-text">
+                            💡 <strong>经验教训</strong>：民族问题必须早解决、真解决；中央与地方权力需要科学配置；社会主义制度设计必须考虑国家统一与稳定的前提。
+                        </div>
+                        <a href="#" class="read-link">👉 深入阅读：南斯拉夫解体前的最后一课 →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 未来专题预告 -->
+            <div class="legacy-placeholder">
+                <div class="legacy-placeholder-icon">🌍</div>
+                <h3>更多专题筹备中</h3>
+                <p>📌 朝鲜 · 主体思想的形成与实践<br>
+                📌 罗马尼亚 · 齐奥塞斯库时期的个人崇拜与民生失衡<br>
+                📌 缅甸 · 奈温的“缅甸式社会主义”失败原因<br>
+                📌 埃塞俄比亚 · 门格斯图时期的土改与干渴<br>
+                —— 欢迎提供选题建议 ——</p>
+            </div>
+        </div>
+    </main>
+    <footer class="site-footer"><div class="container"><p>青年马列毛主义驿站 | Qmlm Reader</p><p class="footer-note">学习他 · 成为他 · 然后超越他</p></div></footer>
+    <script src="js/main.js"></script>
+    <script>
+        function toggleDarkMode(){
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
+            document.querySelector('.dark-mode-toggle').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+        if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+        (function(){
+            document.addEventListener('DOMContentLoaded', function(){
+                var h = document.querySelector('.hamburger-btn'), n = document.querySelector('.main-nav');
+                if(!h || !n) return;
+                h.addEventListener('click', function(e){
+                    e.stopPropagation();
+                    var o = n.classList.toggle('open');
+                    h.classList.toggle('open', o);
+                    document.body.style.overflow = o ? 'hidden' : '';
+                });
+                n.querySelectorAll('a').forEach(function(l){
+                    l.addEventListener('click', function(){
+                        n.classList.remove('open');
+                        h.classList.remove('open');
+                        document.body.style.overflow = '';
+                    });
+                });
+                document.addEventListener('click', function(e){
+                    if(n.classList.contains('open') && !n.contains(e.target) && e.target !== h){
+                        n.classList.remove('open');
+                        h.classList.remove('open');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

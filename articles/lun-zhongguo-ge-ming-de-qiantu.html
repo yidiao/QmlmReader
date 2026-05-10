@@ -117,6 +117,19 @@
         .further-item p { margin: 0; color: #666; font-size: 0.95rem; }
         .chart-container { background: #fafafa; border: 1px solid #eee; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
         .chart-container h4 { color: #333; margin: 0 0 15px; text-align: center; }
+
+        /* 结构分析样式 */
+        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+        .structure-analysis h4 { color: #1a237e; margin-bottom: 12px; font-size: 1em; text-align: left; }
+        body.dark-mode .structure-analysis h4 { color: #3949ab; }
+        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+        body.dark-mode .analysis-item { border-color: #444; }
+        .analysis-label { font-weight: 600; color: #1a237e; font-size: 0.92em; display: block; margin-bottom: 4px; }
+        body.dark-mode .analysis-label { color: #3949ab; }
+        .analysis-label.highlight { color: #3949ab; font-size: 0.96em; }
+        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+        body.dark-mode .analysis-item p { color: #ccc; }
         .highlight-box { background: linear-gradient(135deg, #fff8e1, #ffecb3); border-left: 4px solid #ffc107; padding: 1.2rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
         .warning-box { background: #ffebee; border-left: 4px solid #d32f2f; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
         body.dark-mode .tab-nav { background: #2a2a2a; border-color: #444; }
@@ -138,7 +151,7 @@
     .download-fab {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -158,7 +171,7 @@
     .download-menu {
         position: fixed;
         bottom: 96px;
-        right: 30px;
+        left: 30px;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -179,6 +192,8 @@
     }
     body.dark-mode .dl-link { background: #3a3a3a; color: #eee; }
     .dl-link:hover { background: var(--party-primary, #c41e3a); color: white; }
+    .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+    body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
 </style>
 </head>
 <body data-category="politics">
@@ -228,6 +243,7 @@
             <span class="date">1926年11月30日</span>
             <span class="category">中国革命 · 国际共运</span>
             <span class="word-count">约8,000字</span>
+            <span class="length-tag">📄 中篇</span>
         </div>
     </header>
 
@@ -533,6 +549,35 @@
         <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">📊 一目了然</h2>
 
         <div class="chart-container">
+            <h4>📈 论证节奏曲线</h4>
+            <p style="color:#666;font-size:0.9rem;margin-bottom:1rem;">本文论证强度分布：从革命形势分析到前途展望</p>
+            <canvas id="argumentChart" height="200"></canvas>
+            <div class="structure-analysis" style="margin-top:20px;">
+                <h4>📊 论证结构解析</h4>
+                <div class="analysis-item">
+                    <span class="analysis-label">革命形势 (6分)</span>
+                    <p>分析中国革命的国际国内背景，指出中国革命已成为世界革命的一部分。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">两种前途 (8分)</span>
+                    <p>深入分析中国革命可能走向的两种不同道路：资本主义道路与社会主义道路。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label highlight">我们的方针 (9分★)</span>
+                    <p>论证高峰。提出中国革命的非资本主义发展道路，阐明无产阶级领导权的必要性。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">具体路径 (5分)</span>
+                    <p>论述实现革命目标的具体策略和方法，节奏相对平缓。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">结论 (4分)</span>
+                    <p>总结全文要点，号召坚持正确路线，论证收尾。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
             <h4>📋 中国革命三大特点</h4>
             <canvas id="featuresChart" height="200"></canvas>
         </div>
@@ -645,6 +690,46 @@
         function initCharts() {
             if (chartsInited) return;
             chartsInited = true;
+
+            // 论证节奏曲线
+            new Chart(document.getElementById('argumentChart'), {
+                type: 'line',
+                data: {
+                    labels: ['革命形势', '两种前途', '我们的方针', '具体路径', '结论'],
+                    datasets: [{
+                        label: '论证强度',
+                        data: [6, 8, 9, 5, 4],
+                        borderColor: '#1a237e',
+                        backgroundColor: 'rgba(26, 35, 126, 0.1)',
+                        fill: true,
+                        tension: 0.35,
+                        pointRadius: 7,
+                        pointHoverRadius: 9,
+                        borderWidth: 2.5,
+                        pointBackgroundColor: ['#999', '#999', '#1a237e', '#999', '#999']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return '论证强度: ' + context.parsed.y + '分';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 10,
+                            title: { display: true, text: '论证强度' }
+                        }
+                    }
+                }
+            });
 
             // 三大特点
             new Chart(document.getElementById('featuresChart'), {

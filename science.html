@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>术语科普 | 工具集 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #6a0000 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .page-header p {
+                opacity: 0.9;
+                font-size: 0.9rem;
+            }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 500px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .back-link:hover {
+                text-decoration: underline;
+            }
+
+        /* 标签页样式 */
+        .science-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #f0e6e6;
+            padding-bottom: 0.5rem;
+        }
+
+        .science-tab {
+            background: none;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: all 0.2s;
+        }
+
+            .science-tab:hover {
+                background: #fef3c7;
+                color: #d97706;
+            }
+
+            .science-tab.active {
+                background: #c41e3a;
+                color: white;
+            }
+
+        body.dark-mode .science-tab {
+            color: #aaa;
+        }
+
+            body.dark-mode .science-tab:hover {
+                background: #4a3a1a;
+                color: #fbbf24;
+            }
+
+            body.dark-mode .science-tab.active {
+                background: #ff6b6b;
+                color: #1a1a1a;
+            }
+
+        /* 内容卡片网格 */
+        .science-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .science-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            cursor: pointer;
+        }
+
+            .science-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 28px rgba(196,30,58,0.15);
+            }
+            /* 不同分类的卡片顶部颜色 */
+            .science-card.figures {
+                border-top: 4px solid #c41e3a;
+            }
+
+            .science-card.movements {
+                border-top: 4px solid #d97706;
+            }
+
+            .science-card.terms {
+                border-top: 4px solid #059669;
+            }
+
+            .science-card.texts {
+                border-top: 4px solid #7c3aed;
+            }
+
+        .science-card-header {
+            padding: 1rem 1.2rem 0.5rem;
+            background: linear-gradient(135deg, #fafafa, #fff);
+            border-bottom: 1px solid #f0e6e6;
+        }
+
+        body.dark-mode .science-card-header {
+            background: #333;
+            border-color: #444;
+        }
+
+        .science-card-header h3 {
+            margin: 0;
+            font-size: 1.15rem;
+        }
+
+        .science-card.figures .science-card-header h3 {
+            color: #c41e3a;
+        }
+
+        .science-card.movements .science-card-header h3 {
+            color: #d97706;
+        }
+
+        .science-card.terms .science-card-header h3 {
+            color: #059669;
+        }
+
+        .science-card.texts .science-card-header h3 {
+            color: #7c3aed;
+        }
+
+        .science-card-header .sub {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+
+        .science-card-body {
+            padding: 1rem 1.2rem 1.2rem;
+        }
+
+            .science-card-body p {
+                color: #555;
+                font-size: 0.85rem;
+                line-height: 1.7;
+                margin: 0 0 0.8rem 0;
+            }
+
+        body.dark-mode .science-card-body p {
+            color: #ccc;
+        }
+
+        .tag-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.8rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        body.dark-mode .tag {
+            background: #4a3a1a;
+            color: #fbbf24;
+        }
+
+        .read-link {
+            color: #c41e3a;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+            .read-link:hover {
+                text-decoration: underline;
+            }
+
+        .science-content {
+            display: none;
+        }
+
+            .science-content.active {
+                display: block;
+            }
+
+        /* ========== 浮窗弹窗样式 ========== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.25s ease;
+        }
+
+            .modal-overlay.active {
+                display: flex;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal {
+            background: white;
+            max-width: 700px;
+            width: 92%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #999;
+            line-height: 1;
+            z-index: 10;
+            padding: 4px 8px;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+            .modal-close:hover {
+                background: #f0f0f0;
+                color: #333;
+            }
+
+        body.dark-mode .modal-close:hover {
+            background: #444;
+            color: #eee;
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+            .modal-header h2 {
+                margin: 0 0 0.3rem 0;
+                font-size: 1.5rem;
+                color: #c41e3a;
+            }
+
+        .modal-sub {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .modal-body {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #c41e3a;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .modal-section-content {
+            font-size: 0.98rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .modal-warning {
+            background: #fff8e6;
+            border-left: 4px solid #f59e0b;
+            padding: 0.85rem 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.93rem;
+            color: #78350f;
+            line-height: 1.7;
+        }
+
+        body.dark-mode .modal {
+            background: #2a2a2a;
+            color: #ddd;
+        }
+
+        body.dark-mode .modal-header {
+            border-bottom-color: #444;
+        }
+
+            body.dark-mode .modal-header h2 {
+                color: #ff6b6b;
+            }
+
+        body.dark-mode .modal-sub {
+            color: #aaa;
+        }
+
+        body.dark-mode .modal-section-content {
+            color: #ccc;
+        }
+
+        body.dark-mode .modal-warning {
+            background: #3d3000;
+            border-left-color: #f59e0b;
+            color: #fbbf24;
+        }
+
+        @media (max-width: 768px) {
+            .science-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                width: 96%;
+                max-height: 85vh;
+            }
+
+            .modal-header, .modal-body {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header"><div class="container"><div class="logo"><span class="logo-icon">☭</span><div class="logo-text"><h1>青年马列毛主义驿站</h1><span class="logo-sub">Qmlm Reader</span></div></div><button class="hamburger-btn" id="hamburgerBtn"><span></span><span></span><span></span></button><nav class="main-nav"><a href="index.html">首页</a><a href="articles.html">文章</a><a href="masters.html">导师</a><a href="toolkit.html" class="active">工具集</a><a href="gallery.html">文艺</a><a href="puzzle.html">🧩 理论拼图</a><a href="international.html">🌍 国际共运</a><a href="rectify.html">正名</a><a href="about.html">关于</a><button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button></nav></div></header>
+
+    <main>
+        <section class="page-header">
+            <h1>📚 术语科普 · 知识库</h1>
+            <p>人物思想 · 历史运动 · 名词概念 · 文本背景</p>
+        </section>
+        <div class="content-wrapper">
+            <a href="toolkit.html#part4" class="back-link">← 返回工具集</a>
+
+            <!-- 标签页 -->
+            <div class="science-tabs">
+                <button class="science-tab active" data-tab="figures">👤 人物思想</button>
+                <button class="science-tab" data-tab="movements">📅 历史运动</button>
+                <button class="science-tab" data-tab="terms">📖 名词概念</button>
+                <button class="science-tab" data-tab="texts">📚 文本背景</button>
+            </div>
+
+            <!-- ==================== 人物思想 ==================== -->
+            <div class="science-content active" id="tab-figures">
+                <div class="science-grid">
+                    <div class="science-card figures" onclick="openModal('figure-gramsci')">
+                        <div class="science-card-header"><h3>葛兰西</h3><div class="sub">Antonio Gramsci · 1891-1937</div></div>
+                        <div class="science-card-body"><div class="tag-group"><span class="tag">文化霸权</span><span class="tag">阵地战</span><span class="tag">有机知识分子</span></div><p>意大利马克思主义理论家，提出"文化霸权"理论，强调统治阶级通过文化和意识形态塑造社会共识。</p><span class="read-link">点击查看详情 →</span></div>
+                    </div>
+                    <div class="science-card figures" onclick="openModal('figure-lukacs')">
+                        <div class="science-card-header"><h3>卢卡奇</h3><div class="sub">György Lukács · 1885-1971</div></div>
+                        <div class="science-card-body"><div class="tag-group"><span class="tag">物化</span><span class="tag">总体性</span><span class="tag">阶级意识</span></div><p>匈牙利哲学家，西方马克思主义奠基人，代表作《历史与阶级意识》，批判资本主义社会的异化关系。</p><span class="read-link">点击查看详情 →</span></div>
+                    </div>
+                    <div class="science-card figures" onclick="openModal('figure-althusser')">
+                        <div class="science-card-header"><h3>阿尔都塞</h3><div class="sub">Louis Althusser · 1918-1990</div></div>
+                        <div class="science-card-body"><div class="tag-group"><span class="tag">意识形态国家机器</span><span class="tag">质询</span><span class="tag">断裂认识论</span></div><p>法国结构主义马克思主义者，提出"意识形态国家机器"概念，论述意识形态如何塑造主体。</p><span class="read-link">点击查看详情 →</span></div>
+                    </div>
+                    <div class="science-card figures" onclick="openModal('figure-trotsky')">
+                        <div class="science-card-header"><h3>托洛茨基</h3><div class="sub">Leon Trotsky · 1879-1940</div></div>
+                        <div class="science-card-body"><div class="tag-group"><span class="tag">不断革命论</span><span class="tag">第四国际</span><span class="tag">不平衡发展</span></div><p>十月革命领导人之一，提出"不断革命论"，主张落后国家的革命必须直接转变为社会主义革命。</p><span class="read-link">点击查看详情 →</span></div>
+                    </div>
+                    <div class="science-card figures" onclick="openModal('figure-luxemburg')">
+                        <div class="science-card-header"><h3>罗莎·卢森堡</h3><div class="sub">Rosa Luxemburg · 1871-1919</div></div>
+                        <div class="science-card-body"><div class="tag-group"><span class="tag">群众罢工</span><span class="tag">资本积累论</span><span class="tag">自发革命</span></div><p>德国共产党创始人，代表作《资本积累论》，1919年与李卜克内西一同遇害。</p><span class="read-link">点击查看详情 →</span></div>
+                    </div>
+                    <div class="science-card figures" onclick="openModal('figure-bukharin')">
+                        <div class="science-card-header"><h3>布哈林</h3><div class="sub">Nikolai Bukharin · 1888-1938</div></div>
+                        <div class="science-card-body"><div class="tag-group"><span class="tag">均衡论</span><span class="tag">过渡时期经济学</span></div><p>苏联理论家，著有《过渡时期经济学》，在新经济政策时期主张温和的农业政策。</p><span class="read-link">点击查看详情 →</span></div>
+                    </div>
+                    <div class="science-card figures" onclick="openModal('figure-marcuse')">
+                        <div class="science-card-header"><h3>马尔库塞</h3><div class="sub">Herbert Marcuse · 1898-1979</div></div>
+                        <div class="science-card-body"><div class="tag-group"><span class="tag">单向度的人</span><span class="tag">大拒绝</span><span class="tag">爱欲与文明</span></div><p>德裔美国哲学家，法兰克福学派代表人物，批判发达工业社会对人的"单向度"塑造。</p><span class="read-link">点击查看详情 →</span></div>
+                    </div>
+                    <div class="science-card figures" onclick="openModal('figure-benjamin')">
+                        <div class="science-card-header"><h3>本雅明</h3><div class="sub">Walter Benjamin · 1892-1940</div></div>
+                        <div class="science-card-body"><div class="tag-group"><span class="tag">历史天使</span><span class="tag">灵韵</span><span class="tag">弥赛亚时间</span></div><p>德国犹太思想家，法兰克福学派外围成员，将马克思主义与弥赛亚主义结合。</p><span class="read-link">点击查看详情 →</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== 历史运动（待后续补充） ==================== -->
+            <div class="science-content" id="tab-movements">
+    <div class="science-grid">
+        <div class="science-card movements" onclick="openModal('movement-1848')">
+            <div class="science-card-header"><h3>1848年欧洲革命</h3><div class="sub">革命之春 · 1848</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">民主革命</span><span class="tag">马克思主义诞生</span></div><p>波及全欧洲的民主革命浪潮。《共产党宣言》在革命前夕发表。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card movements" onclick="openModal('movement-paris-commune')">
+            <div class="science-card-header"><h3>巴黎公社</h3><div class="sub">1871年 · 第一个无产阶级政权</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">无产阶级专政</span><span class="tag">群众武装</span></div><p>人类历史上第一个无产阶级政权，存在72天。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card movements" onclick="openModal('movement-1905')">
+            <div class="science-card-header"><h3>1905年俄国革命</h3><div class="sub">十月革命的预演</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">苏维埃诞生</span><span class="tag">武装起义</span></div><p>俄国第一次资产阶级民主革命，苏维埃在这一时期诞生。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card movements" onclick="openModal('movement-spain-civil-war')">
+            <div class="science-card-header"><h3>西班牙内战</h3><div class="sub">1936-1939 · 国际纵队</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">国际主义</span><span class="tag">反法西斯</span></div><p>国际纵队由54国志愿者组成，支援西班牙共和国。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card movements" onclick="openModal('movement-german-november')">
+            <div class="science-card-header"><h3>德国十一月革命</h3><div class="sub">1918-1919 · 斯巴达克团</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">李卜克内西</span><span class="tag">卢森堡</span></div><p>推翻德意志帝国，李卜克内西和卢森堡领导起义。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card movements" onclick="openModal('movement-hungary-1919')">
+            <div class="science-card-header"><h3>匈牙利苏维埃共和国</h3><div class="sub">1919年 · 库恩·贝拉</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">苏维埃政权</span><span class="tag">列宁关注</span></div><p>一战后在东欧建立的苏维埃政权，存在133天。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card movements" onclick="openModal('movement-eastern-bloc')">
+            <div class="science-card-header"><h3>东欧剧变与苏联解体</h3><div class="sub">1989-1991 · 历史转折</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">苏东剧变</span><span class="tag">经验教训</span></div><p>东欧各国政权更迭，苏联解体，冷战结束。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+    </div>
+</div>
+
+            <!-- ==================== 名词概念（待后续补充） ==================== -->
+            <div class="science-content" id="tab-terms">
+    <div class="science-grid">
+        <div class="science-card terms" onclick="openModal('term-surplus-value')">
+            <div class="science-card-header"><h3>剩余价值</h3><div class="sub">Surplus Value</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">政治经济学</span><span class="tag">剥削</span></div><p>工人创造价值超过劳动力价值的部分，被资本家无偿占有。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card terms" onclick="openModal('term-alienation')">
+            <div class="science-card-header"><h3>异化</h3><div class="sub">Alienation</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">哲学</span><span class="tag">1844年手稿</span></div><p>劳动者与劳动产品、劳动过程、类本质相分离的状态。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card terms" onclick="openModal('term-dictatorship-proletariat')">
+            <div class="science-card-header"><h3>无产阶级专政</h3><div class="sub">Dictatorship of the Proletariat</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">国家学说</span><span class="tag">过渡时期</span></div><p>从资本主义到共产主义的过渡时期的政治形式。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card terms" onclick="openModal('term-soviet')">
+            <div class="science-card-header"><h3>苏维埃</h3><div class="sub">Soviet</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">工农兵代表会议</span><span class="tag">政权形式</span></div><p>工农兵直接选举产生的代表机构，苏联的权力机关。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card terms" onclick="openModal('term-democratic-centralism')">
+            <div class="science-card-header"><h3>民主集中制</h3><div class="sub">Democratic Centralism</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">组织原则</span><span class="tag">列宁建党</span></div><p>共产党的根本组织原则：民主基础上的集中，集中指导下的民主。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card terms" onclick="openModal('term-hegemony')">
+            <div class="science-card-header"><h3>文化霸权</h3><div class="sub">Cultural Hegemony</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">葛兰西</span><span class="tag">意识形态</span></div><p>统治阶级通过文化和意识形态塑造社会共识，赢得被统治阶级的"同意"。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card terms" onclick="openModal('term-reification')">
+            <div class="science-card-header"><h3>物化</h3><div class="sub">Reification</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">卢卡奇</span><span class="tag">西方马克思主义</span></div><p>人与人的关系被物与物的关系掩盖，人沦为被动的客体。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card terms" onclick="openModal('term-isa')">
+            <div class="science-card-header"><h3>意识形态国家机器</h3><div class="sub">ISA</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">阿尔都塞</span><span class="tag">意识形态</span></div><p>学校、家庭、教会、媒体等通过意识形态塑造使人"自愿"服从统治。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card terms" onclick="openModal('term-uninterrupted-revolution')">
+            <div class="science-card-header"><h3>不断革命论</h3><div class="sub">Permanent Revolution</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">托洛茨基</span><span class="tag">革命理论</span></div><p>落后国家的无产阶级不能停留于民主革命阶段，必须不断过渡到社会主义革命。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+    </div>
+</div>
+
+            <!-- ==================== 文本背景（待后续补充） ==================== -->
+            <div class="science-content" id="tab-texts">
+    <div class="science-grid">
+        <div class="science-card texts" onclick="openModal('text-manifesto')">
+            <div class="science-card-header"><h3>《共产党宣言》</h3><div class="sub">1848年 · 马克思主义诞生</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">马恩</span><span class="tag">科学社会主义</span></div><p>"全世界无产者，联合起来！"标志着马克思主义的诞生。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card texts" onclick="openModal('text-capital')">
+            <div class="science-card-header"><h3>《资本论》</h3><div class="sub">1867-1894年 · "工人阶级的圣经"</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">马克思</span><span class="tag">政治经济学</span></div><p>揭示资本主义经济运动规律，剩余价值理论的系统阐述。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card texts" onclick="openModal('text-anti-during')">
+            <div class="science-card-header"><h3>《反杜林论》</h3><div class="sub">1878年 · 马克思主义百科全书</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">恩格斯</span><span class="tag">哲学</span><span class="tag">政治经济学</span><span class="tag">科学社会主义</span></div><p>系统阐述马克思主义三个组成部分。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card texts" onclick="openModal('text-what-is-to-be-done')">
+            <div class="science-card-header"><h3>《怎么办？》</h3><div class="sub">1902年 · 列宁建党学说</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">列宁</span><span class="tag">组织理论</span><span class="tag">灌输论</span></div><p>"没有革命的理论，就不会有革命的运动。"</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card texts" onclick="openModal('text-state-and-revolution')">
+            <div class="science-card-header"><h3>《国家与革命》</h3><div class="sub">1917年 · 国家学说</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">列宁</span><span class="tag">无产阶级专政</span></div><p>系统阐述马克思主义国家学说和无产阶级专政理论。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card texts" onclick="openModal('text-practice-contradiction')">
+            <div class="science-card-header"><h3>《实践论》《矛盾论》</h3><div class="sub">1937年 · 毛泽东哲学思想</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">毛泽东</span><span class="tag">认识论</span><span class="tag">辩证法</span></div><p>马克思主义哲学中国化的典范，党的思想路线的哲学基础。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card texts" onclick="openModal('text-gramsci-prison')">
+            <div class="science-card-header"><h3>《狱中札记》</h3><div class="sub">1929-1935年 · 葛兰西</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">文化霸权</span><span class="tag">西方马克思主义</span></div><p>狱中思考：为什么西欧革命失败了？</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+        <div class="science-card texts" onclick="openModal('text-history-class')">
+            <div class="science-card-header"><h3>《历史与阶级意识》</h3><div class="sub">1923年 · 卢卡奇</div></div>
+            <div class="science-card-body"><div class="tag-group"><span class="tag">物化</span><span class="tag">总体性</span><span class="tag">西方马克思主义</span></div><p>西方马克思主义的开山之作。</p><span class="read-link">点击查看详情 →</span></div>
+        </div>
+    </div>
+</div>
+        </div>
+    </main>
+
+    <!-- 浮窗弹窗 -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+        <div class="modal" id="modal">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <div class="modal-sub" id="modalSub"></div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <div class="modal-section-title">📜 人物生平</div>
+                    <div class="modal-section-content" id="modalBio"></div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-section-title">💡 核心思想</div>
+                    <div class="modal-section-content" id="modalThought"></div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-section-title">📚 代表著作</div>
+                    <div class="modal-section-content" id="modalWorks"></div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-warning" id="modalWarning"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer"><div class="container"><p>青年马列毛主义驿站 | Qmlm Reader</p><p class="footer-note">学习他 · 成为他 · 然后超越他</p></div></footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // ========== 人物数据 ==========
+        const figuresData = {
+            'figure-gramsci': {
+                name: '葛兰西',
+                sub: 'Antonio Gramsci · 1891-1937 · 意大利共产党创始人',
+                bio: '葛兰西出生于意大利撒丁岛的一个贫困家庭，因健康问题脊椎畸形。1913年加入意大利社会党，1919年与陶里亚蒂等人创办《新秩序》周刊。1921年参与创立意大利共产党。1926年被法西斯政权逮捕，在狱中写下《狱中札记》，1937年因病去世。',
+                thought: '1️⃣ 文化霸权：统治阶级不仅通过暴力（政治霸权）统治，更通过文化和意识形态塑造社会共识，使被统治阶级自愿接受其统治。2️⃣ 阵地战：与列宁的"运动战"（直接夺取政权）相对，在西方发达资本主义国家，革命应先在市民社会（学校、教会、媒体等）中逐步夺取意识形态领导权。3️⃣ 有机知识分子：与传统知识分子（看似中立实则服务统治阶级）相对，有机知识分子直接表达特定阶级的利益，承担组织、教育和领导功能。',
+                works: '《狱中札记》、《现代君主论》、《知识分子与文化组织》、《新秩序周刊》文章汇编',
+                warning: '⚠️ 常见误解：将"文化霸权"简单理解为"洗脑"或"宣传"。葛兰西强调的是被压迫阶级如何主动参与并反抗这种霸权，而非单向操控。'
+            },
+            'figure-lukacs': {
+                name: '卢卡奇',
+                sub: 'György Lukács · 1885-1971 · 匈牙利哲学家',
+                bio: '卢卡奇生于布达佩斯一个犹太银行家家庭。1918年加入匈牙利共产党，曾任匈牙利苏维埃共和国教育人民委员。苏联时期受到批判，后成为布达佩斯大学教授。《历史与阶级意识》是他最著名的作品，开创了西方马克思主义传统。',
+                thought: '1️⃣ 物化：资本主义社会中，人与人的关系被物与物的关系掩盖，工人变成商品，劳动变成可量化的抽象劳动，人沦为被动的客体。2️⃣ 总体性：马克思主义不是对个别事实的实证分析，而是把握社会整体的辩证方法。放弃总体性就会陷入资产阶级的"事实拜物教"。3️⃣ 阶级意识：工人阶级要成为"历史主客体同一"的阶级，必须认识到自身在历史进程中的使命。',
+                works: '《历史与阶级意识》、《青年黑格尔》、《理性的毁灭》、《审美特性》',
+                warning: ''
+            },
+            'figure-althusser': {
+                name: '阿尔都塞',
+                sub: 'Louis Althusser · 1918-1990 · 法国哲学家',
+                bio: '阿尔都塞生于阿尔及利亚，二战期间被德军俘虏。1948年加入法国共产党，后在巴黎高等师范学院任教。他试图对马克思主义进行"科学主义"解读，反对人道主义倾向。1980年因精神问题杀害妻子，后多年住院。',
+                thought: '1️⃣ 意识形态国家机器：区分镇压性国家机器（军队、警察、监狱）和意识形态国家机器（学校、家庭、教会、媒体、工会）。后者通过"质询"（hailing）将个体召唤为主体。2️⃣ 断裂认识论：马克思思想存在一个"认识论断裂"——早期著作（《1844年手稿》）人道主义倾向，后期成熟著作（《资本论》）是真正的科学。3️⃣ 多元决定：历史不是单一经济因素决定的，而是由多种矛盾（经济、政治、意识形态等）相互作用的"多元决定"过程。',
+                works: '《保卫马克思》、《读〈资本论〉》、《列宁与哲学》、《意识形态与意识形态国家机器》',
+                warning: '⚠️ 批评：阿尔都塞的"结构主义马克思主义"被指责为"理论主义"，过度强调理论的自主性，轻视群众实践和历史主体的能动性。'
+            },
+            'figure-trotsky': {
+                name: '托洛茨基',
+                sub: 'Leon Trotsky · 1879-1940 · 苏联革命家',
+                bio: '托洛茨基出身犹太农民家庭。1905年领导彼得格勒苏维埃，是十月革命的主要领导人之一。斯大林上台后，他于1927年被开除出党，后流亡海外。1938年在墨西哥建立第四国际。1940年在墨西哥城被斯大林特工用冰斧刺杀。',
+                thought: '1️⃣ 不断革命论：在落后国家，资产阶级民主革命的领导权必须掌握在无产阶级手中，并且不能停留在民主革命阶段，而应"不断"地过渡到社会主义革命。2️⃣ 不平衡与综合发展论：落后国家利用发达国家已有的技术成果，可以"跳跃式"发展，但也必须忍受最残酷的剥削形式。3️⃣ 第四国际：认为第三国际（共产国际）已经堕落，必须建立新的国际工人组织。',
+                works: '《俄国革命史》、《不断革命论》、《被背叛的革命》、《斯大林评传》',
+                warning: '⚠️ 批判：托洛茨基在理论上与列宁并无根本对立，但其"不断革命论"在1920年代被斯大林派指责为"托洛茨基主义"而遭到否定。'
+            },
+            'figure-luxemburg': {
+                name: '罗莎·卢森堡',
+                sub: 'Rosa Luxemburg · 1871-1919 · 德国革命家',
+                bio: '卢森堡生于波兰犹太家庭，1897年获苏黎世大学法学博士学位。她和李卜克内西共同创立德国共产党。1919年1月领导柏林起义失败，被"自由军团"捕获后惨遭杀害，尸体被扔进柏林兰德维尔运河。',
+                thought: '1️⃣ 资本积累论：资本主义的生存依赖于将剩余价值投向非资本主义领域（殖民地、农民经济等），当这些领域被耗尽时，资本主义必然崩溃。2️⃣ 群众罢工论：批评列宁的"极端集中主义"，主张大规模群众罢工的自发性。她认为工人群众的革命意识是在行动中自我产生的，不需要职业革命家组织的"灌输"。',
+                works: '《资本积累论》、《群众罢工、党和工会》、《尤尼乌斯小册子》',
+                warning: '⚠️ 与列宁的论战：卢森堡批评列宁的建党原则可能导致党内"寡头化"，但后来的历史似乎证明了她的某些担忧不无道理。'
+            },
+            'figure-bukharin': {
+                name: '布哈林',
+                sub: 'Nikolai Bukharin · 1888-1938 · 苏联理论家',
+                bio: '布哈林1906年加入俄国社会民主工党（布尔什维克）。他是列宁最亲密的战友之一，被誉为"党的宠儿"，《真理报》主编。新经济政策时期主张对农民采取温和政策。1928年在政治斗争中败给斯大林，1938年被处决。',
+                thought: '1️⃣ 过渡时期经济学：研究从资本主义到社会主义转变过程中的经济规律。2️⃣ 均衡论：用"均衡"概念分析社会矛盾，反对托洛茨基的"不断革命论"和斯大林的"阶级斗争尖锐化"论。3️⃣ 和平长入社会主义：主张在无产阶级专政条件下，阶级矛盾会逐渐缓和，通过改良方式过渡到社会主义。',
+                works: '《过渡时期经济学》、《历史唯物主义理论》、《帝国主义与世界经济》、《一个社会主义者的政治遗嘱》',
+                warning: ''
+            },
+            'figure-marcuse': {
+                name: '马尔库塞',
+                sub: 'Herbert Marcuse · 1898-1979 · 哲学家',
+                bio: '马尔库塞生于柏林犹太家庭。曾在弗莱堡大学师从海德格尔，后加入法兰克福社会研究所。二战期间为美国情报机构工作。1960年代成为新左派和青年反抗运动的精神导师，被誉为"新左派之父"。',
+                thought: '1️⃣ 单向度的人：发达工业社会通过技术理性和消费主义消解了否定性思维，使人丧失了反抗能力，成为"单向度"的存在。2️⃣ 大拒绝：对现存秩序的彻底拒绝，不是具体的改良或革命，而是对整个压迫性文明的否定。3️⃣ 爱欲与文明：吸收弗洛伊德理论，认为在非压抑性文明中，劳动可以成为游戏，爱欲得到解放。',
+                works: '《理性与革命》、《爱欲与文明》、《单向度的人》、《审美之维》',
+                warning: '⚠️ 批判：马尔库塞的理论过于抽象和精英主义，他寄望于边缘群体（学生、少数族裔、第三世界）的革命潜力，而认为西方工人阶级已经"整合"进资本主义。'
+            },
+            'figure-benjamin': {
+                name: '本雅明',
+                sub: 'Walter Benjamin · 1892-1940 · 思想家',
+                bio: '本雅明生于柏林犹太富商家庭。他的学术生涯坎坷，未能获得教职。1940年为躲避纳粹，试图经西班牙逃往美国，在法西边境小镇波尔特沃自杀。他的思想和友谊（与阿多诺、肖勒姆等）深刻影响了20世纪文化批评。',
+                thought: '1️⃣ 历史天使：天使脸朝向过去，却被风暴（进步）吹向未来——历史是一个灾难的堆积，而不是线性进步。2️⃣ 灵韵：传统艺术品的"此时此地"的特有气质，在机械复制时代（摄影、电影）中消逝。3️⃣ 弥赛亚时间：与空洞的均质时间（"同质的虚空时间"）相对的历史时间观——每个瞬间都可能是"弥赛亚的入口"。',
+                works: '《机械复制时代的艺术作品》、《历史哲学论纲》、《单向街》、《巴黎拱廊街》（未完成）',
+                warning: ''
+            }
+        };
+
+        // ========== 历史运动数据 ==========
+        const movementsData = {
+    'movement-1848': {
+        name: '1848年欧洲革命',
+        sub: '革命之春 · 法国·德国·奥地利·匈牙利',
+        bio: '1848年，一场波澜壮阔的民主革命浪潮席卷欧洲。2月，法国巴黎爆发革命推翻七月王朝；3月，维也纳起义迫使梅特涅下台；柏林爆发街垒战；匈牙利、意大利、波兰等地也燃起革命烈火。这是欧洲历史上规模最大的资产阶级民主革命。',
+        thought: '1️⃣ 历史意义：标志着工业无产阶级作为独立政治力量登上历史舞台（法国六月起义）。马克思、恩格斯积极参与这场革命并总结经验。\n2️⃣ 革命局限：由于资产阶级背叛和无产阶级不成熟，革命最终失败，但沉重打击了封建专制制度。\n3️⃣ 理论总结：马克思在《1848年至1850年的法兰西阶级斗争》和《路易·波拿巴的雾月十八日》中深刻分析了革命的经验教训。',
+        works: '《共产党宣言》（1848年2月发表于伦敦）、《1848年至1850年的法兰西阶级斗争》、《路易·波拿巴的雾月十八日》',
+        warning: '⚠️ 常见误读：1848年革命是欧洲范围的资产阶级革命，不同国家的革命性质和发展阶段不同，不能一概而论。'
+    },
+    'movement-paris-commune': {
+        name: '巴黎公社',
+        sub: 'La Commune de Paris · 1871年3月18日-5月28日',
+        bio: '1871年3月18日，巴黎人民起义推翻梯也尔政府，建立了人类历史上第一个无产阶级政权。公社实行了民主选举、公职人员的低薪制和随时可罢免制、政教分离、工人合作社等措施。5月21-28日"流血周"，公社战士在街垒战中牺牲，约3万人被杀害。',
+        thought: '1️⃣ 历史地位：马克思高度评价为"无产阶级专政的第一次伟大尝试"。公社证明了工人阶级有能力管理国家。\n2️⃣ 经验教训：马克思在《法兰西内战》中总结：无产阶级不能简单地掌握现成的国家机器，必须把它打碎；必须建立真正的民主制度防止国家由社会公仆变成社会主人。\n3️⃣ 精神遗产：巴黎公社的原则是永存的，它激励了后来的十月革命和全世界社会主义运动。',
+        works: '马克思《法兰西内战》、列宁《国家与革命》中对公社的论述',
+        warning: '⚠️ 公社存在时间短（72天），许多措施是临时的、不成熟的。不要将公社理想化为完美的社会主义社会。'
+    },
+    'movement-1905': {
+        name: '1905年俄国革命',
+        sub: '十月革命的预演 · 1905年1月-1907年6月',
+        bio: '以1905年1月9日"流血星期日"为开端，沙皇军队向请愿工人开枪，引发全国性革命浪潮。10月爆发全俄政治罢工，12月莫斯科武装起义。革命持续到1907年被镇压。是列宁所称的"十月革命的总演习"。',
+        thought: '1️⃣ 历史意义：虽然失败，但沉重打击了沙皇专制制度，锻炼了工人阶级和农民。苏维埃（工农代表会议）在这一时期诞生。\n2️⃣ 经验教训：列宁在《社会民主党在民主革命中的两种策略》中总结了革命规律：无产阶级必须争得革命领导权，工农联盟是革命胜利的保证。\n3️⃣ 策略问题：布尔什维克与孟什维克的路线分歧在这一时期明朗化——前者主张将资产阶级民主革命进行到底，后者主张依附资产阶级。',
+        works: '列宁《社会民主党在民主革命中的两种策略》、《关于1905年革命的报告》',
+        warning: ''
+    },
+    'movement-spain-civil-war': {
+        name: '西班牙内战',
+        sub: '1936-1939 · 国际纵队与国际反法西斯斗争',
+        bio: '1936年7月，佛朗哥在德、意法西斯支持下发动叛乱，进攻西班牙共和国政府。来自54个国家的约4万名志愿者组成国际纵队支援共和国。海明威、奥威尔、聂鲁达等亲历并记录。1939年共和国失败，佛朗哥建立独裁统治。',
+        thought: '1️⃣ 历史意义：二战前国际反法西斯斗争的重要战场，也是各种左翼力量（共产党、社会党、无政府主义者）联合斗争的尝试。\n2️⃣ 经验教训：斯大林对西班牙共和国的干预（解散无政府主义者武装、打击托派）削弱了共和国的抵抗力量；英法"不干涉"政策实际上有利于佛朗哥。\n3️⃣ 精神遗产：国际纵队战士们的国际主义精神——"西班牙将成为全体进步人类的坟地，也将成为全体进步人类的摇篮"。',
+        works: '海明威《丧钟为谁而鸣》、奥威尔《向加泰罗尼亚致敬》、聂鲁达《西班牙在我心中》',
+        warning: '⚠️ 西班牙内战中各左翼派别存在严重内部矛盾，不能简单归咎于某一方。共和国失败的根本原因是法西斯势力强大且国际援助不足。'
+    },
+    'movement-german-november': {
+        name: '德国十一月革命',
+        sub: '1918-1919 · 德意志的1918',
+        bio: '1918年11月初，基尔水兵起义引爆全国革命。11月9日，柏林起义推翻霍亨索伦王朝，德皇威廉二世退位。社会民主党宣布成立"自由德意志共和国"，同时李卜克内西宣布成立"自由社会主义共和国"。1919年1月，李卜克内西和卢森堡领导斯巴达克团起义，被镇压后遇害。',
+        thought: '1️⃣ 历史意义：推翻了德意志帝国封建专制，建立了德国历史上第一个共和国（魏玛共和国）。\n2️⃣ 革命局限：社会民主党右翼（艾伯特、谢德曼）与旧军官、容克地主勾结，镇压了工人起义，革命被"半途而废"。\n3️⃣ 经验教训：证明了列宁关于"革命需要成熟的领导和正确的策略"的论断。没有像布尔什维克那样建立一个真正革命的政治组织，是革命失败的重要原因。',
+        works: '罗莎·卢森堡《论俄国革命》、《群众罢工、党和工会》',
+        warning: ''
+    },
+    'movement-hungary-1919': {
+        name: '匈牙利苏维埃共和国',
+        sub: '1919年3月21日-8月1日 · 133天的革命政权',
+        bio: '1919年3月21日，匈牙利发生革命，以库恩·贝拉为首的共产党和社会民主党合并为匈牙利苏维埃党，宣布成立匈牙利苏维埃共和国。实行银行、工业、交通国有化，土地改革等措施。4月罗马尼亚军队入侵，8月1日苏维埃政府辞职，革命失败。',
+        thought: '1️⃣ 历史意义：无产阶级在第一次世界大战后建立政权的又一次尝试。列宁给予高度关注和支持。\n2️⃣ 失败原因：帝国主义武装干涉（罗马尼亚、捷克斯洛伐克、法国）；社会民主党右翼的背叛；革命政权的策略失误（过激的国有化政策、排斥农民）。\n3️⃣ 经验教训：工农联盟的重要性——当农民被资产阶级民族主义煽动时，无产阶级革命就失去了最广泛的群众基础。',
+        works: '列宁《向匈牙利工人致敬》、卢卡奇（曾任苏维埃共和国教育人民委员）的相关论述',
+        warning: ''
+    },
+    'movement-eastern-bloc': {
+        name: '东欧剧变与苏联解体',
+        sub: '1989-1991 · 社会主义阵营的重大转折',
+        bio: '1989年，波兰团结工会在大选中获胜，东欧各国共产党相继失去执政地位：匈牙利（1989.10）、东德（柏林墙倒塌，1989.11）、捷克斯洛伐克（天鹅绒革命，1989.12）、罗马尼亚（齐奥塞斯库被枪决，1989.12）、保加利亚（1990.2）。1991年12月，苏联正式解体，冷战结束。',
+        thought: '1️⃣ 根本原因：经济体制长期僵化，人民生活水平停滞甚至下降；政治体制缺乏民主监督，官僚特权阶层脱离群众；戈尔巴乔夫改革的错误方向。\n2️⃣ 教训总结：社会主义必须不断改革，不能固守僵化模式；必须坚持共产党的领导，不能放弃执政地位；必须正确处理改革、发展、稳定的关系。\n3️⃣ 历史反思：剧变并不代表社会主义的"终结"（福山的"历史终结论"已被现实否定），而是要求各国探索符合本国国情的社会主义道路。中国等社会主义国家保留了制度并取得发展成就，证明了社会主义的韧性。',
+        works: '邓小平《在武昌、深圳、珠海、上海等地的谈话要点》、江泽民《关于坚持和发展中国特色社会主义》',
+        warning: '⚠️ 剧变的成因非常复杂，既有外部渗透因素（西方和平演变战略），也有内部问题（体制僵化、腐败、民族矛盾等）。不应简单归因于单一因素。'
+    }
+};
+
+        // ========== 名词概念数据 ==========
+        const termsData = {
+    'term-surplus-value': {
+        name: '剩余价值',
+        sub: 'Surplus Value · 马克思政治经济学的核心概念',
+        bio: '剩余价值理论由马克思在《资本论》中系统阐述，是马克思主义政治经济学的基石。马克思之前，古典政治经济学家已经注意到剩余价值现象，但无法科学解释其来源。马克思区分了劳动力与劳动，揭示了剩余价值的真正来源。',
+        thought: '1️⃣ 定义：工人在生产过程中创造的价值超过其劳动力价值的部分，被资本家无偿占有。劳动力成为商品是剩余价值生产的前提。\n2️⃣ 绝对剩余价值：通过延长工作日（延长劳动时间）获得的剩余价值。\n3️⃣ 相对剩余价值：通过提高劳动生产率（缩短必要劳动时间）获得的剩余价值。\n4️⃣ 意义：剩余价值是资本主义剥削的秘密，也是资本积累的根本源泉。资本的无限扩张欲望导致生产过剩危机，揭示了资本主义的必然灭亡趋势。',
+        works: '马克思《资本论》第一卷第三至七篇',
+        warning: '⚠️ 注意区分：剩余价值不是利润——利润是剩余价值的转化形式；剩余价值率不等于利润率（利润率总是小于剩余价值率）。'
+    },
+    'term-alienation': {
+        name: '异化',
+        sub: 'Alienation · 马克思早期哲学核心概念',
+        bio: '异化概念源于黑格尔（"异化"作为精神外化），费尔巴哈将其用于宗教批判（上帝是人的本质的异化）。马克思在《1844年经济学哲学手稿》中首次系统论述异化劳动理论，奠定了其人道主义批判的基础。',
+        thought: '1️⃣ 劳动产品的异化：工人生产的财富越多，自己越贫穷——产品成为统治工人的异己力量。\n2️⃣ 劳动活动的异化：劳动不是自愿的、自由的，而是被迫的、强制的——工人在劳动中感到的不是肯定自己，而是否定自己。\n3️⃣ 人的类本质的异化：自由自觉的活动（类本质）被贬低为谋生的手段。\n4️⃣ 人与人的异化：工人与资本家的对立，人沦为互相利用的工具。\n马克思认为，消除异化的途径是废除私有制、实现共产主义。',
+        works: '马克思《1844年经济学哲学手稿》（"异化劳动"部分）',
+        warning: '⚠️ 注意：异化不等于"不爽"或"不满意"，它是一个特定的哲学—经济学范畴，有严格的定义。'
+    },
+    'term-dictatorship-proletariat': {
+        name: '无产阶级专政',
+        sub: 'Dictatorship of the Proletariat · 马克思主义国家学说核心',
+        bio: '马克思在《哥达纲领批判》中提出："在资本主义社会和共产主义社会之间，有一个从前者变为后者的革命转变时期。同这个时期相适应的也有一个政治上的过渡时期，这个时期的国家只能是无产阶级的革命专政。"列宁在《国家与革命》中系统阐发了这一理论。',
+        thought: '1️⃣ 必要性：资产阶级不会自动退出历史舞台，必须用暴力打碎旧的国家机器，建立无产阶级政权。\n2️⃣ 实质：无产阶级（通过共产党）对国家权力的领导，镇压剥削阶级的反抗，组织社会主义建设。\n3️⃣ 民主与专政的统一：对少数剥削者实行专政，对广大人民实行最广泛的民主。列宁指出："无产阶级专政是新型的民主（对无产阶级和一般穷人是民主）和新型的专政（对资产阶级是专政）的结合。"\n4️⃣ 历史任务：消灭阶级、发展生产力、创造条件使国家自行消亡。',
+        works: '马克思《哥达纲领批判》、列宁《国家与革命》',
+        warning: '⚠️ 常见歪曲：资产阶级把"无产阶级专政"曲解为"少数人对多数人的暴政"。实际上，无产阶级专政恰恰是防止少数统治者压迫大多数人的工具，是"多数人对少数人的专政"。'
+    },
+    'term-soviet': {
+        name: '苏维埃',
+        sub: 'Soviet · 工农兵代表会议',
+        bio: '"苏维埃"是俄语"Совет"的音译，意为"会议"或"代表会议"。1905年俄国革命中第一次出现苏维埃（彼得格勒苏维埃）。1917年二月革命后，全国各地普遍建立苏维埃。1917年十月革命后，苏维埃成为苏联的权力机关。',
+        thought: '1️⃣ 起源：1905年革命中，工人罢工时自发组织的代表会议，后来扩展到士兵和农民。\n2️⃣ 性质：工农兵直接选举产生的代表机构，既是权力机关，也是革命组织。列宁称之为"无产阶级民主的体现"。\n3️⃣ 与议会的区别：议会是"清谈馆"，苏维埃是"工作机构"——代表由选民直接选举并可随时罢免，立法与行政合一，没有职业政客。\n4️⃣ 历史演变：十月革命后，苏维埃成为苏联各级政权组织形式（从村苏维埃到苏联最高苏维埃）。1936年宪法后，苏维埃制度发生了变化。',
+        works: '列宁《苏维埃政权的当前任务》、斯大林《论苏联宪法草案》',
+        warning: '⚠️ 斯大林时期苏维埃制度一定程度上形式化，代表多由上级指定而非真正民主选举。这背离了列宁的苏维埃民主设想。'
+    },
+    'term-democratic-centralism': {
+        name: '民主集中制',
+        sub: 'Democratic Centralism · 共产党的组织原则',
+        bio: '民主集中制由列宁在《怎么办？》中初步提出，1905年正式写入俄国社会民主工党党章。基本原则：党内事务由全体党员参与（民主），一经决议必须服从（集中）。这一原则成为后来各国共产党的组织制度。',
+        thought: '1️⃣ 民主：党内各级领导机关由选举产生；党内事务公开讨论；党员享有批评权和建议权；少数服从多数。\n2️⃣ 集中：个人服从组织，下级服从上级，全党服从中央；一经形成决议，全党必须执行。\n3️⃣ 两者统一：没有民主就没有正确的集中，没有集中就无法形成统一行动。毛泽东概括为："在民主基础上的集中，在集中指导下的民主。"\n4️⃣ 与官僚主义的区别：民主集中制反对"议而不决"和"个人专断"两种倾向，在实际操作中容易被扭曲为形式主义或长官意志。',
+        works: '列宁《进一步，退两步》、《共产主义运动中的"左派"幼稚病》；毛泽东《党委会的工作方法》',
+        warning: '⚠️ 实践中，民主集中制容易被扭曲：要么民主流于形式（"一言堂"），要么集中被架空（无政府主义）。保持两者的辩证平衡是共产党建设的永恒课题。'
+    },
+    'term-hegemony': {
+        name: '文化霸权',
+        sub: 'Cultural Hegemony · 葛兰西的核心概念',
+        bio: '葛兰西在狱中思考：为什么西方发达资本主义国家的革命迟迟没有发生？为什么工人阶级有时会支持资产阶级？他的答案是——资产阶级不仅通过暴力统治，更重要的是通过文化和意识形态赢得了被统治阶级的"同意"。',
+        thought: '1️⃣ 定义：统治阶级通过教育和媒体等"市民社会"机构，把自己的价值观和世界观塑造为全社会"常识"，使被统治阶级自愿接受其统治。\n2️⃣ 与强制的关系：东方（沙俄）靠强制（政治霸权），西方（发达资本主义）靠同意（文化霸权）。\n3️⃣ 阵地战：与列宁的"运动战"相对，在西方革命应先在市民社会中逐步夺取意识形态领导权，然后才能夺取国家权力。\n4️⃣ 有机知识分子：每个阶级都必须培养自己的"有机知识分子"，承担领导、教育和组织的功能，与资产阶级的传统知识分子作斗争。',
+        works: '葛兰西《狱中札记》、《现代君主论》',
+        warning: '⚠️ 常见歪曲：将"文化霸权"简化为"洗脑"或"宣传"。葛兰西强调的是被压迫阶级如何主动参与反抗霸权的斗争，不是单方面操控。'
+    },
+    'term-reification': {
+        name: '物化',
+        sub: 'Reification · 卢卡奇的核心概念',
+        bio: '卢卡奇在《历史与阶级意识》（1923）中提出物化概念，是对马克思"商品拜物教"理论的深化。该书后来受到苏联官方批判，但影响深远。',
+        thought: '1️⃣ 定义：资本主义社会中，人与人的关系被物与物的关系掩盖，人变成被动的客体。工人变成商品，劳动变成可量化的抽象劳动。\n2️⃣ 物化的普遍化：不仅发生在经济领域，还渗透到法律、官僚体系、媒体甚至人的意识结构中。\n3️⃣ 资产阶级科学：实证主义只看到孤立的"事实"，不能把握社会"总体"，本身就是物化意识的体现。\n4️⃣ 克服物化：依靠无产阶级的"阶级意识"——当无产阶级认识到自己既是历史的主体也是客体时，就能打破物化结构。',
+        works: '卢卡奇《历史与阶级意识》（第一篇"物化与无产阶级意识"）',
+        warning: '⚠️ 卢卡奇的物化理论后来被指责为"黑格尔主义的马克思主义"，过分强调意识的作用。'
+    },
+    'term-isa': {
+        name: '意识形态国家机器',
+        sub: 'ISA · Ideological State Apparatuses · 阿尔都塞概念',
+        bio: '阿尔都塞在1970年文章《意识形态与意识形态国家机器》中提出此概念。他区分了镇压性国家机器和意识形态国家机器，解释了为什么资本主义制度能够持续运转。',
+        thought: '1️⃣ 镇压性国家机器（RSA）：军队、警察、监狱、法庭——通过暴力镇压维持统治。\n2️⃣ 意识形态国家机器（ISA）：学校、家庭、教会、媒体、工会、政党——通过意识形态塑造使人"自愿"服从。\n3️⃣ ISA的特点：多元、分散、私有（部分属于私人领域，如教会、媒体）；主要功能是再生产生产关系。\n4️⃣ 质询（Interpellation）：意识形态把个体"召唤"为主体——你以为你是自由独立的个体，其实你已经被意识形态塑造。',
+        works: '阿尔都塞《意识形态与意识形态国家机器》（收录于《列宁与哲学》）',
+        warning: '⚠️ 阿尔都塞的观点被批评为"结构主义决定论"，忽略了人的主体能动性。'
+    },
+    'term-uninterrupted-revolution': {
+        name: '不断革命论',
+        sub: 'Permanent Revolution · 托洛茨基的核心理论',
+        bio: '托洛茨基于1905年革命期间提出不断革命理论，1906年在《结果与展望》中系统阐述。该理论在1920年代与斯大林"一国建成社会主义"路线激烈对立，成为托派的标志性理论。',
+        thought: '1️⃣ 核心命题：在落后国家，资产阶级软弱无能，资产阶级民主革命的领导权必然落入无产阶级手中——且无产阶级不能停留在民主革命阶段，必须"不断"过渡到社会主义革命。\n2️⃣ 工农联盟：无产阶级革命必须与农民革命相结合（这是列宁也同意的）。\n3️⃣ 国际性：社会主义革命必须突破一国框架。一国建成社会主义不可能，因为资本主义是世界性的。\n4️⃣ 政治革命（托洛茨基后期概念）：斯大林主义国家已经不是无产阶级专政，需要用"政治革命"推翻官僚阶层。',
+        works: '托洛茨基《结果与展望》、《不断革命论》、《俄国革命史》',
+        warning: '⚠️ 斯大林时期不断革命论被当作"托洛茨基主义"批判。1920年代苏联的经济实力能否支撑"不断革命"存在争议。'
+    }
+};
+
+        // ========== 文本背景数据 ==========
+        const textsData = {
+    'text-manifesto': {
+        name: '《共产党宣言》',
+        sub: 'The Communist Manifesto · 1848年2月',
+        bio: '1847年底，共产主义者同盟委托马克思和恩格斯起草纲领性文件。1848年2月，德文版《共产党宣言》在伦敦出版。这是马克思主义的出生证，也是国际共产主义运动第一个纲领性文献。',
+        thought: '1️⃣ 写作背景：工业革命在欧洲推进，无产阶级与资产阶级矛盾加剧；各种社会主义思潮（空想社会主义、小资产阶级社会主义、封建社会主义）泛滥；共产主义者同盟迫切需要统一的理论纲领。\n2️⃣ 核心内容：历史唯物主义的基本原理（至今一切社会的历史都是阶级斗争的历史）；资产阶级的历史作用和内在矛盾；无产阶级的历史使命；批判各种错误思潮；共产党人的性质、目的和策略原则。\n3️⃣ 结构：四章＋七篇序言。序言（1872-1893）中马恩根据形势发展对某些观点做了补充和修正，体现了与时俱进的精神。\n4️⃣ 历史意义：标志着马克思主义的诞生。列宁说这部著作"以天才的透彻而鲜明的语言描述了新的世界观"。',
+        works: '马克思、恩格斯《共产党宣言》（人民出版社）',
+        warning: '⚠️ 注意：《宣言》中某些具体策略论断（如"工人没有祖国"）不能在一切条件下照搬。马恩在1872年德文版序言明确指出："第二章末尾提出的那些革命措施根本没有特别的意义……这个纲领现在有些地方已经过时了。"'
+    },
+    'text-capital': {
+        name: '《资本论》',
+        sub: 'Das Kapital · 1867-1894年',
+        bio: '马克思毕生心血的结晶。第一卷1867年在汉堡出版。马克思去世后，恩格斯整理出版第二卷（1885）和第三卷（1894）。《资本论》计划共四卷——第四卷《剩余价值理论》由考茨基整理出版。',
+        thought: '1️⃣ 写作背景：马克思在1840年代就开始研究政治经济学，在伦敦大英博物馆阅读大量文献。1857-1858年写下《政治经济学批判大纲》（草稿）。1860年代系统写作，第一卷1867年问世。\n2️⃣ 核心内容：第一卷——资本的生产过程（剩余价值的生产）；第二卷——资本的流通过程；第三卷——资本主义生产的总过程。\n3️⃣ 方法论：唯物辩证法在政治经济学中的运用——从抽象上升到具体。以商品为起点，推导出价值、货币、资本、剩余价值等一系列范畴。\n4️⃣ 历史意义：被誉为"工人阶级的圣经"。揭示了资本主义经济运动的规律，论证了资本主义必然灭亡、社会主义必然胜利的历史趋势。',
+        works: '马克思《资本论》第一、二、三卷（人民出版社）',
+        warning: '⚠️ 列宁指出，在马克思之后，对《资本论》的解读分为"革命的马克思主义"和"改良的马克思主义"两条路线。第二国际修正主义者（伯恩施坦等人）试图阉割《资本论》的革命结论。'
+    },
+    'text-anti-during': {
+        name: '《反杜林论》',
+        sub: 'Anti-Dühring · 1878年',
+        bio: '杜林（Eugen Dühring）是柏林大学讲师，在1870年代提出一套"社会主义"体系，试图取代马克思主义。为了捍卫马克思主义的纯洁性，恩格斯应李卜克内西请求在《前进报》上发表系列文章批驳杜林，1878年结集出版。',
+        thought: '1️⃣ 写作背景：杜林的"体系"在德国社会民主党内产生了不良影响（伯恩施坦等人推崇杜林）。若不批判，马克思主义可能被歪曲替代。恩格斯称这是"被迫参加的毫无风趣的论战"。\n2️⃣ 结构：哲学编——批判杜林的唯心主义先验论，阐述辩证唯物主义；政治经济学编——批判杜林的庸俗经济学，阐述剩余价值理论；社会主义编——批判杜林的"小资产阶级社会主义"，阐述科学社会主义原理。\n3️⃣ 地位：恩格斯本人说"本书所阐述的世界观，绝大部分是由马克思确立和阐发的，只有极小的部分是属于我的"。列宁评价为"马克思主义的百科全书"。\n4️⃣ 影响：培养了几代马克思主义者的理论素养。使马克思主义三个组成部分——哲学、政治经济学、科学社会主义得到系统阐述。',
+        works: '恩格斯《反杜林论》（人民出版社）',
+        warning: '⚠️ 阅读建议：初学者不必从头到尾通读所有论战部分。可以先读"引论"和社会主义编，哲学编和政治经济学编中的理论正面阐述部分是重点，对杜林的具体批驳可以跳过。'
+    },
+    'text-what-is-to-be-done': {
+        name: '《怎么办？》',
+        sub: 'What Is to Be Done? · 1902年',
+        bio: '19世纪末，俄国社会民主党内"经济派"盛行，他们崇拜工人运动的自发性，认为不需要专门的理论斗争。列宁流亡慕尼黑期间写成此书，系统批判经济派，阐述了新型无产阶级政党学说。',
+        thought: '1️⃣ 写作背景：经济派主张"为改善经济状况而斗争"，认为政治斗争是资产阶级自由派的事。这种思想如果蔓延，党就会变成改良主义的工会组织。\n2️⃣ 核心观点："没有革命的理论，就不会有革命的运动。"自发的工人运动只能产生工联主义意识，科学社会主义需要从外部"灌输"。\n3️⃣ 建党原则：建立集中统一的职业革命家组织，思想上的坚定性、组织上的严密性、行动上的一致性。\n4️⃣ 历史影响：奠定了布尔什维克党的思想基础和组织原则。列宁构建的政党模型，是后来所有共产党组织的范本。',
+        works: '列宁《怎么办？》（《列宁选集》第一卷）',
+        warning: '⚠️ 卢森堡批评此书可能导致党内"极端集中主义"，后来斯大林时期的高度集权一定程度上印证了这种担忧。今天阅读需要结合当时沙皇专制统治的特定历史条件。'
+    },
+    'text-state-and-revolution': {
+        name: '《国家与革命》',
+        sub: 'State and Revolution · 1917年',
+        bio: '1917年二月革命后，列宁从瑞士回到俄国。在流亡期间，他系统研究马克思主义国家学说。为了批判第二国际机会主义对国家的歪曲，也为即将到来的革命做理论准备，列宁在八月（俄历）写成此书。十月革命后正式出版。',
+        thought: '1️⃣ 写作背景：第二国际理论家（考茨基等）鼓吹"纯粹民主"，把国家说成超阶级的"公共权力"。列宁指出这是对马克思主义的背叛。\n2️⃣ 核心观点：国家是阶级矛盾不可调和的产物——资产阶级国家必须打碎，无产阶级专政是过渡阶段的国家形式。\n3️⃣ 重要论述：共产主义社会的两个阶段（社会主义和共产主义）——"各尽所能、按劳分配"到"各尽所能、按需分配"。\n4️⃣ 地位：马克思主义国家学说最系统的阐述。列宁最重要的理论著作之一，十月革命的行动指南。',
+        works: '列宁《国家与革命》（《列宁选集》第三卷）',
+        warning: '⚠️ 建国之后苏联的演变表明：如何防止无产阶级国家蜕变为官僚特权阶层，是一个没有解决的难题。列宁晚年对此已有觉察（如《宁肯少些，但要好些》）。'
+    },
+    'text-practice-contradiction': {
+        name: '《实践论》《矛盾论》',
+        sub: '"Two Essays" · 1937年',
+        bio: '1937年，为了清算党内长期存在的主观主义特别是教条主义错误，毛泽东在延安抗日军政大学讲授哲学，写下了《实践论》和《矛盾论》。这两篇文章奠定了中国共产党人哲学思想的基础。',
+        thought: '1️⃣ 写作背景：王明等"留苏派"言必称希腊（马列），照搬外国经验，脱离了中国的实际。毛泽东用哲学武器清算教条主义，从思想路线的高度解决问题。\n2️⃣ 《实践论》：认识来源于实践——感性认识→理性认识→回到实践（两次飞跃）。批判"唯理论"（无实践的空头理论家）和"经验论"（拘泥于感性经验不能上升到理论）。\n3️⃣ 《矛盾论》：对立统一规律是辩证法的实质。矛盾普遍性、特殊性、主要矛盾、矛盾的主要方面。批判形而上学的"同一"观点和教条主义的"照搬"方法。\n4️⃣ 历史意义："两论"标志着毛泽东哲学思想的成熟，是马克思主义哲学中国化的典范，也是中国共产党实事求是思想路线的哲学基础。',
+        works: '毛泽东《实践论》《矛盾论》（《毛泽东选集》第一卷）',
+        warning: '⚠️ 注意："两论"是对中国革命经验的哲学总结，不是书斋里的纯粹哲学著作。阅读时必须结合当时的历史语境，而非当成放之四海而皆准的教条。'
+    },
+    'text-gramsci-prison': {
+        name: '《狱中札记》',
+        sub: 'Prison Notebooks · 1929-1935年',
+        bio: '葛兰西1926年被墨索里尼法西斯政权逮捕，被判20年徒刑。在狱中他坚持写作，留下32本笔记，共2848页，涉及哲学、政治、历史、文化等广泛领域。1937年获释前病逝。二战后札记整理出版，产生世界性影响。',
+        thought: '1️⃣ 写作背景：在法西斯监狱中，葛兰西不能直接讨论政治，因此采用了隐晦的语言和表面学术化的形式。他思考的核心问题是：为什么西欧革命失败了？\n2️⃣ 核心概念：文化霸权、阵地战、有机知识分子、"绝对历史主义"、对克罗齐的批判、对经济决定论的批判。\n3️⃣ 西方与东方的区别：东方（沙俄）靠强制（政治霸权），西方发达资本主义国家靠同意（文化霸权）。革命策略必须因地制宜。\n4️⃣ 影响：《狱中札记》是二十世纪马克思主义最重要的原创性贡献之一，对文化研究、政治学、教育哲学等领域产生了深远影响。',
+        works: '葛兰西《狱中札记》（中译本由中国社会科学出版社出版）',
+        warning: '⚠️ 阅读难度大：《狱中札记》是笔记体的零散文本，不是系统著作。需要注意区分葛兰西的成熟观点与探索性的笔记。'
+    },
+    'text-history-class': {
+        name: '《历史与阶级意识》',
+        sub: 'History and Class Consciousness · 1923年',
+        bio: '卢卡奇流亡维也纳期间写成这部文集，1923年出版。这是西方马克思主义的开山之作，出版后引起巨大争议。1920年代受到共产国际批判，卢卡奇后来多次作出自我批评，但其影响经久不衰。',
+        thought: '1️⃣ 核心概念：物化——对马克思商品拜物教理论的深化，批判资本主义社会中的异化现象。\n2️⃣ 总体性辩证法：马克思主义不是对个别事实的实证分析，而是一种把握社会总体的方法。放弃总体性就会陷入资产阶级科学的"事实拜物教"。\n3️⃣ 无产阶级的阶级意识：只有无产阶级同时作为历史的"主体"和"客体"，才能打破物化结构、认识总体。\n4️⃣ 批判第二国际：谴责考茨基等人的"反映论"——把马克思主义变成经济决定论，消弭革命的能动性。\n5️⃣ 对列宁的辩护：卢卡奇认为列宁的"策略性"思维是辩证法的实践运用，驳斥对列宁的机械主义指责。',
+        works: '卢卡奇《历史与阶级意识》（中译本由商务印书馆出版）',
+        warning: '⚠️ 卢卡奇后来多次自我批评，认为此书过分强调"意识"而忽视了客观经济基础，有"黑格尔主义的马克思主义"之嫌。苏联官方长期将此书列为禁书。'
+    }
+};
+        // 浮窗功能
+        function openModal(id) {
+    let data = figuresData[id] || movementsData[id] || termsData[id] || textsData[id];
+    if (!data) return;
+    
+    document.getElementById('modalTitle').textContent = data.name;
+    document.getElementById('modalSub').textContent = data.sub;
+    document.getElementById('modalBio').innerHTML = data.bio.replace(/\n/g, '<br>');
+    document.getElementById('modalThought').innerHTML = data.thought.replace(/\n/g, '<br>');
+    document.getElementById('modalWorks').textContent = data.works;
+    
+    const warnEl = document.getElementById('modalWarning');
+    if (data.warning) {
+        warnEl.innerHTML = '<strong>⚠️ 批判性提醒：</strong><br>' + data.warning;
+        warnEl.style.display = 'block';
+    } else {
+        warnEl.style.display = 'none';
+    }
+    
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeModalOnOverlay(e) {
+            if (e.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // ESC键关闭
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // 标签页切换
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+
+        if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+
+        document.querySelectorAll('.science-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.science-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.science-content').forEach(c => c.classList.remove('active'));
+                const tabId = this.dataset.tab;
+                document.getElementById(`tab-${tabId}`).classList.add('active');
+            });
+        });
+
+        // 汉堡菜单
+        (function () {
+            document.addEventListener('DOMContentLoaded', function () {
+                var h = document.querySelector('.hamburger-btn'), n = document.querySelector('.main-nav');
+                if (!h || !n) return;
+                h.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    var o = n.classList.toggle('open');
+                    h.classList.toggle('open', o);
+                    document.body.style.overflow = o ? 'hidden' : '';
+                });
+                document.addEventListener('click', function (e) {
+                    if (n.classList.contains('open') && !n.contains(e.target) && e.target !== h) {
+                        n.classList.remove('open');
+                        h.classList.remove('open');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

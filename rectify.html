@@ -36,7 +36,7 @@
         /* 板块导航 */
         .section-nav {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 1rem;
             margin-bottom: 3rem;
         }
@@ -114,9 +114,15 @@
         /* 文章卡片 */
         .article-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
         }
+        /* 当屏幕宽度大于1200像素时，变为4列 */
+@media (min-width: 1200px) {
+    .article-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
         
         .article-card {
             background: #f9f9f9;
@@ -288,20 +294,9 @@
             color: #888;
         }
         
-        @media (max-width: 768px) {
-            .section-nav {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        
         /* 窄屏：2列 */
         @media (max-width: 768px) {
             .section-nav {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .article-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
@@ -472,7 +467,17 @@
                             <a href="#">阅读全文 →</a>
                         </div>
                     </div>
+                    <div class="article-card">
+                        <h4>【占位符】斯大林要求中共划江而治？谣言！</h4>
+                        <p class="summary">还原1949年解放军渡江前后斯大林与中共的真实电报往来，用一手史料驳斥"斯大林阻止解放台湾""划江而治是苏联授意"等流行谣言，揭示其政治目的。</p>
+                        <div class="meta">
+                            <span>待撰写</span>
+                            <a href="#">阅读全文 →</a>
+                        </div>
+                    </div>
                 </div>
+
+                
                 
                 <div class="placeholder-box">
                     <div class="icon">📝</div>
@@ -625,14 +630,7 @@
                         </div>
                     </div>
 
-                    <div class="article-card">
-                        <h4>【占位符】斯大林要求中共划江而治？谣言！</h4>
-                        <p class="summary">还原1949年解放军渡江前后斯大林与中共的真实电报往来，用一手史料驳斥"斯大林阻止解放台湾""划江而治是苏联授意"等流行谣言，揭示其政治目的。</p>
-                        <div class="meta">
-                            <span>待撰写</span>
-                            <a href="#">阅读全文 →</a>
-                        </div>
-                    </div>
+                    
 
                     <div class="article-card">
                         <h4>【占位符】"左派都是失败者"——阶级心理学的反攻</h4>

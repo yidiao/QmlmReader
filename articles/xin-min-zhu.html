@@ -12,7 +12,7 @@
     .download-fab {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -32,7 +32,7 @@
     .download-menu {
         position: fixed;
         bottom: 96px;
-        right: 30px;
+        left: 30px;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -105,6 +105,7 @@
                 <span class="date">1940年1月</span>
                 <span class="category">政治理论 · 革命道路</span>
                 <span class="word-count">约29,000字</span>
+                <span class="length-tag">📄 中篇</span>
             </div>
         </header>
 
@@ -572,6 +573,34 @@
                         <canvas id="compareChart"></canvas>
                     </div>
                 </div>
+
+                <div class="structure-analysis" style="margin-top:30px;">
+                    <h4>📊 论证结构解析</h4>
+                    <div class="analysis-item">
+                        <span class="analysis-label">中国向何处去 (6分)</span>
+                        <p>以"中国向何处去"的时代之问开篇，提出新民主主义革命的命题，引出全文核心议题。</p>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="analysis-label">历史特点 (7分)</span>
+                        <p>分析中国革命的历史特点与世界背景，论证中国革命是世界革命的一部分，视野开阔。</p>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="analysis-label highlight">政治纲领 (9分)★</span>
+                        <p>提出新民主主义政治纲领——各革命阶级联合专政，这是全文第一个理论制高点。</p>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="analysis-label">经济与文化 (7分)</span>
+                        <p>阐述新民主主义的经济政策和文化方针，三位一体的制度设计逐步成型。</p>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="analysis-label">驳论交锋 (7分)</span>
+                        <p>对资产阶级专政论、左倾空谈、顽固派逐一驳斥，论战精彩但节奏略缓。</p>
+                    </div>
+                    <div class="analysis-item">
+                        <span class="analysis-label highlight">文化方向 (9分)★</span>
+                        <p>提出"民族的科学的大众的文化"纲领，这是全文的第二个高潮，也是最后的理论升华。</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -729,6 +758,21 @@
 
         .article-meta .author { font-weight: 600; }
         .article-meta .category { color: rgba(255,215,0,0.9); }
+        .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+        body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
+
+        /* ===== 结构分析样式 ===== */
+        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+        .structure-analysis h4 { color: #1a237e; margin-bottom: 12px; font-size: 1em; }
+        body.dark-mode .structure-analysis h4 { color: #3949ab; }
+        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+        body.dark-mode .analysis-item { border-color: #444; }
+        .analysis-label { font-weight: 600; color: #1a237e; font-size: 0.92em; display: block; margin-bottom: 4px; }
+        body.dark-mode .analysis-label { color: #3949ab; }
+        .analysis-label.highlight { color: #3949ab; font-size: 0.96em; }
+        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+        body.dark-mode .analysis-item p { color: #ccc; }
 
         .tab-nav { display: flex; gap: 4px; margin: 30px 0 0; border-bottom: 2px solid #e2e8f0; overflow-x: auto; background: #f8f8f8; padding: 1rem; border-radius: 12px 12px 0 0; }
         .tab-btn { background: none; border: none; padding: 10px 18px; cursor: pointer; color: #666; font-size: 0.95em; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; border-radius: 8px; }

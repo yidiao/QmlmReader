@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1844年经济学哲学手稿 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="main-nav">
+                <a href="../index.html">首页</a>
+                <a href="javascript:history.back()" class="active">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 返回按钮 -->
+    <div class="back-nav">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="javascript:history.back()" class="back-link"><span>←</span> 返回上一页</a>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="article-detail">
+        <!-- 文章头部 -->
+        <header class="article-header" data-category="哲学基础">
+            <div class="header-decoration"></div>
+            <div class="importance-badge">⭐⭐⭐⭐ 经典必读</div>
+            <h1>1844年经济学哲学手稿</h1>
+            <div class="article-subtitle">马克思早期经济学与哲学批判的交汇之作</div>
+            <div class="article-meta">
+                <span class="author">马克思</span>
+                <span class="date">1844年（未完成）</span>
+                <span class="category">哲学基础 · 政治经济学批判</span>
+                <span class="word-count">约35,000字</span>
+                <span class="length-tag">📖 长篇</span>
+            </div>
+        </header>
+
+        <!-- Tab导航 -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
+            <button class="tab-btn" onclick="switchTab('further', this)">📚 延伸阅读</button>
+        </div>
+
+        <!-- 原文 -->
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro">
+                    <p><strong>阅读提示：</strong>本文约3.5万字，是马克思1844年在巴黎写作的经济学哲学笔记，生前未全部发表。手稿包含三大部分：异化劳动、私有财产的运动、共产主义。全文尚在数字化整理中，敬请期待。</p>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第一笔记本：异化劳动与私有财产
+                    </h3>
+                    <div class="chapter-content">
+                        <p style="color:#999;text-align:center;padding:40px 0;">📖 正文正在数字化整理中，即将上线...</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第二笔记本：私有财产与劳动
+                    </h3>
+                    <div class="chapter-content">
+                        <p style="color:#999;text-align:center;padding:40px 0;">📖 正文正在数字化整理中，即将上线...</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第三笔记本：共产主义 滨努基昂劳动 黑格尔哲学
+                    </h3>
+                    <div class="chapter-content">
+                        <p style="color:#999;text-align:center;padding:40px 0;">📖 正文正在数字化整理中，即将上线...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 读法提示 -->
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2>📖 怎么读这篇文章</h2>
+
+                <div class="guide-block">
+                    <h3>① 先了解手稿的特殊性质</h3>
+                    <p>这部手稿不是完成的作品，而是马克思1844年在巴黎研读国民经济学家（斯密、李嘉图、萨伊）时写下的笔记。很多段落是片段式的，某些论点重复出现，甚至前后矛盾。读的时候不要强求它像《资本论》那样严整，要把它当作思想正在发生剧烈转变的“化石”来读。</p>
+                </div>
+
+                <div class="guide-block">
+                    <h3>② “异化劳动”是全文的入口，但不是出口</h3>
+                    <p>很多人读《手稿》就记住了“异化”这个概念。但马克思写下异化理论，不是为了停留在“工人很痛苦”这个层面，而是为了追问：这种异化从哪里来？如何消灭它？——于是引出私有财产的批判，引出共产主义。读第一章时，问自己：马克思从“异化”推导出的结论是什么？</p>
+                </div>
+
+                <div class="guide-block">
+                    <h3>③ 注意手稿的思想史位置</h3>
+                    <p>这时候的马克思还深受费尔巴哈人本主义影响（“类本质”“人的复归”等语言）。后来成熟马克思主义（《德意志意识形态》《资本论》）的核心范畴（生产力、生产关系、剩余价值）在这里还没出现。读的时候不要用成熟马克思的标准去苛求这部“青年马克思”，而是观察——他是如何从哲学批判走向政治经济学批判的？转折点在哪里？</p>
+                </div>
+
+                <div class="guide-block">
+                    <h3>④ 第三笔记本中对黑格尔的批判是理解“辩证法的秘密”的关键</h3>
+                    <p>很多人跳过了这部分，觉得黑格尔太晦涩。但马克思之所以能超越费尔巴哈，恰恰是因为他“拯救了黑格尔辩证法的合理内核”。读这部分时，不需要完全弄懂黑格尔，只需要抓住马克思说的：黑格尔的伟大在于把人的自我产生看作一个过程，但错误在于把劳动理解为抽象的精神活动。这为后来《资本论》中的“劳动二重性”埋下了伏笔。</p>
+                </div>
+
+                <div class="guide-block">
+                    <h3>⑤ 读完问自己：这部“不成熟”的手稿为什么在20世纪重新被发现？</h3>
+                    <p>1932年手稿首次全文出版后，引发了持续几十年的争论。西方法兰克福学派用它来批判技术理性；苏联官方曾长期压制它（因为不符合正统马克思主义）。为什么一部青年时期的作品会引起如此激烈的反应？因为它提出了一个成熟马克思不太直接回答的问题：在资本主义中，“人”究竟丧失了什么？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 难点解析 -->
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2>🔍 容易读错的地方</h2>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：异化劳动就是“工作不开心”或“加班”</div>
+                    <div class="correct">✅ 正解：马克思的异化劳动有严格的四重规定：工人与劳动产品相异化（产品不属于劳动者）、与劳动活动相异化（劳动是被迫的、痛苦的）、与类本质相异化（劳动不再是人的自由活动）、人与人相异化（资本与劳动的对立）。这不仅是“不爽”，而是资本主义生产方式的根本结构。</div>
+                </div>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：《手稿》的共产主义就是“大家平分财产”</div>
+                    <div class="correct">✅ 正解：马克思反对粗陋的共产主义（把私有财产普遍化，让所有人都成为私有者）。他说的共产主义是“私有财产的积极扬弃”——不是剥夺个人财产，而是消除私有财产所造成的人的自我异化。共产主义不是财富的平均分配，而是人对自己本质的真正占有。</div>
+                </div>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：马克思在这里已经是历史唯物主义者了</div>
+                    <div class="correct">✅ 正解：手稿的核心出发点是“人的本质”和“异化”，这是哲学人本主义的框架。成熟的历史唯物主义是从“生产力与生产关系的矛盾”出发分析社会。中间的转折发生在1845年，标志是《关于费尔巴哈的提纲》和《德意志意识形态》。不要把手稿的观点直接等同于成熟马克思主义。</div>
+                </div>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：“类本质”只是费尔巴哈式的空话</div>
+                    <div class="correct">✅ 正解：马克思用“类”这个词确实受了费尔巴哈影响，但他赋予了它实质内容——人的类本质是“自由的有意识的生命活动”，即劳动。动物和生命活动同一，人则能把自己的生命活动变成自己意志和意识的对象。这为后来《资本论》中区分“劳动一般”和“雇佣劳动”提供了哲学基础。</div>
+                </div>
+
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：手稿被苏联压制是因为它“不成熟”</div>
+                    <div class="correct">✅ 正解：表面原因是手稿不符合恩格斯在《反杜林论》中确立的“三大组成部分”框架；深层原因是手稿对人的强调、对异化的批判，在斯大林时期被认为带有“人道主义”修正主义倾向。1932年出版后，苏联理论界长期将其边缘化。直到1956年苏共二十大后，情况才有所变化。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对话空间 -->
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2>💬 对话空间</h2>
+
+                <div class="dialogue-block">
+                    <h3>🎯 这篇文章在回应谁？</h3>
+                    <ul>
+                        <li><strong>古典国民经济学家（斯密、李嘉图、萨伊）：</strong>他们讨论劳动是财富的源泉，却从未追问这种“劳动”本身的性质——工人为什么被迫劳动？劳动为什么成为商品？马克思的经济学批判从这里开始。</li>
+                        <li><strong>蒲鲁东（间接）：</strong>蒲鲁东在《什么是所有权》中宣布“财产就是盗窃”，但他的解决方式是“公平”。马克思认为这种批判停留在道德层面，没有深入到生产关系的分析。</li>
+                        <li><strong>费尔巴哈：</strong>费尔巴哈批判了宗教异化，但没有看到经济领域的异化。马克思将费尔巴哈的“异化”从宗教批判扩展到经济批判，完成了一次理论飞跃。</li>
+                        <li><strong>黑格尔：</strong>黑格尔的辩证法把人的自我产生看作一个过程，但他的劳动是抽象的、精神的活动。马克思要“拯救”黑格尔辩证法的合理内核，同时颠倒过来——劳动首先是物质生产活动。</li>
+                    </ul>
+                </div>
+
+                <div class="dialogue-block">
+                    <h3>🤔 它在问每一个读者</h3>
+                    <ul>
+                        <li><strong>你的工作，是你生命活动的实现，还是对你生命的否定？</strong> 你是“在工作”还是“被工作”？</li>
+                        <li><strong>你买到一个产品的时候，是否想过这个产品在谁的手中、以什么方式生产出来的？</strong> 马克思说：我们看到的只是商品，看不见它背后那个被迫劳动的人。</li>
+                        <li><strong>“人的复归”——你觉得自己现在是“完整的”吗？还是被撕裂成了多个角色（生产者、消费者、家庭成员……）？</strong></li>
+                        <li><strong>如果共产主义不仅是财产制度的变化，更是“人的本质的真正占有”——那这对你的生活意味着什么？</strong></li>
+                    </ul>
+                </div>
+
+                <div class="dialogue-block">
+                    <h3>💡 它在提醒读者注意什么？</h3>
+                    <ul>
+                        <li><strong>不要把私有财产仅仅看作“财富分配不公”。</strong> 马克思对私有财产的批判，本质是对资本主义生产方式中“人如何被生产出来”这一问题的追问。</li>
+                        <li><strong>不要跳过黑格尔批判那一节。</strong> 虽然难读，但它是理解马克思如何超越费尔巴哈、走向历史唯物主义的关键通道。</li>
+                        <li><strong>区分“青年马克思”和“成熟马克思”。</strong> 这不是说青年马克思不重要，而是说如果不加区分地用手稿中的概念去解释《资本论》，会错过马克思主义思想发展的逻辑。</li>
+                    </ul>
+                </div>
+
+                <div class="dialogue-block">
+                    <h3>📢 它在等你的回应</h3>
+                    <p>写一段300字左右的文字，描述你在工作或学习中的“异化”体验——你感觉到自己与劳动产品分离了吗？你感觉到劳动是被迫的吗？你感觉到人与人之间变成了一种工具性的关系吗？不要用哲学的术语，就用平常的话来说。写完之后，再回头看马克思对异化劳动的四个规定，你的叙述对应了哪几条？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行动实验 -->
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2>⚡ 行动实验</h2>
+
+                <div class="action-item">
+                    <h3>实验一：异化劳动观察日记</h3>
+                    <p><strong>目标：</strong>在日常生活中识别异化的四种表现。</p>
+                    <p><strong>步骤：</strong></p>
+                    <ul>
+                        <li>用一周时间，每天记录一个让你感到“不是我自己”的工作或生活场景。</li>
+                        <li>对照马克思的异化劳动四重规定，给每个场景归类（产品异化/活动异化/类本质异化/关系异化）。</li>
+                        <li>分析：哪种异化在当代最突出？为什么？</li>
+                    </ul>
+                </div>
+
+                <div class="action-item">
+                    <h3>实验二：从“异化”到“私有财产”的推理游戏</h3>
+                    <p><strong>目标：</strong>重新走一遍马克思的推理链条。</p>
+                    <p><strong>步骤：</strong></p>
+                    <ul>
+                        <li>闭上眼睛，想象你是一个一无所有的劳动者，每天在工厂里劳动8小时，生产出的产品全部属于老板。</li>
+                        <li>问自己：为什么劳动的产品不属于劳动的人？——这个追问会让你理解“异化劳动导致私有财产”的论证。</li>
+                        <li>再反过来问：如果私有财产消失了，异化劳动就会自动消失吗？为什么？</li>
+                    </ul>
+                </div>
+
+                <div class="action-item">
+                    <h3>实验三：对比阅读——手稿与《德意志意识形态》</h3>
+                    <p><strong>目标：</strong>观察马克思思想转变的关键节点。</p>
+                    <p><strong>步骤：</strong></p>
+                    <ul>
+                        <li>摘出手稿中一句话：“共产主义是私有财产的积极扬弃，是人的本质的复归。”</li>
+                        <li>摘出《德意志意识形态》中一句话：“共产主义对我们来说不是应当确立的状况，不是现实应当与之相适应的理想。我们所称为共产主义的是那种消灭现存状况的现实的运动。”</li>
+                        <li>比较两种表述的区别：前者从“人的本质”出发，后者从“现实的运动”出发——这就是从人本主义到历史唯物主义的转变。</li>
+                    </ul>
+                </div>
+
+                <div class="action-item">
+                    <h3>实验四：用异化分析一个当代现象</h3>
+                    <p><strong>目标：</strong>检验“异化”概念的分析效力。</p>
+                    <p><strong>选题建议：</strong></p>
+                    <ul>
+                        <li>消费异化：我们购买商品是为了使用，还是为了填补内心的空洞？</li>
+                        <li>数字异化：你在社交媒体上“产出”的内容，归谁所有？算法如何反过来支配你？</li>
+                        <li>教育异化：学生是为了求知而学习，还是为了文凭而“内卷”？</li>
+                        <li>关系异化：社交变成了“人脉管理”，朋友变成了“资源”——人还是目的吗？</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 一目了然 -->
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2>📊 一目了然</h2>
+
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量《1844年经济学哲学手稿》的文章“性格”</p>
+                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>📈 异化劳动四重结构</h3>
+                    <p class="chart-desc">马克思对异化劳动的层层递进分析</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="alienationChart"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4>📝 论证结构解析（对应笔记本）</h4>
+                        <div class="analysis-item"><span class="analysis-label">笔记本Ⅰ：工资·利润·地租 (6分)</span><p>从国民经济学的起点出发，揭示工人、资本家、土地所有者之间的对立。批判性铺垫，节奏平缓。</p></div>
+                        <div class="analysis-item"><span class="analysis-label highlight">★ 笔记本Ⅰ：异化劳动 (10分)★</span><p>全文理论高峰。提出“异化劳动四重规定”，从哲学高度揭示资本主义生产关系的本质。这是马克思主义理论史上第一次系统提出异化概念。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">笔记本Ⅱ：私有财产与劳动 (7分)</span><p>追问异化劳动的根源，发现私有财产是异化劳动的结果，也是其条件。论证异化劳动与私有财产的辩证关系。</p></div>
+                        <div class="analysis-item"><span class="analysis-label highlight">笔记本Ⅲ：共产主义 (9分)★</span><p>提出“私有财产的积极扬弃”和“人的本质的复归”，从哲学上论证共产主义的历史必然性。与《共产党宣言》的科学社会主义形成对照。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">笔记本Ⅲ：黑格尔批判 (8分)</span><p>对黑格尔辩证法的批判性改造。马克思指出黑格尔的伟大在于把人的自我产生看作过程，但批判其劳动的抽象性。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">笔记本Ⅲ：自然人化 (6分)</span><p>结语：自然界在人的实践活动中成为“人的无机的身体”。马克思的实践唯物主义思想在此萌芽。</p></div>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+    <h3>📈 论证节奏曲线</h3>
+    <p class="chart-desc">展示文章各部分的“论证强度”——哪里是论证核心，哪里是过渡铺垫。本文化整条曲线有高有低，不皆是高潮。</p>
+    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+        <canvas id="argumentCurve"></canvas>
+    </div>
+    <div class="structure-analysis">
+        <h4>📝 论证结构解析（对应曲线各波段）</h4>
+        <div class="analysis-item">
+            <span class="analysis-label">笔记本Ⅰ：工资·利润·地租 (6分)</span>
+            <p>从国民经济学的起点出发，揭示工人、资本家、土地所有者之间的对立。批判性铺垫，节奏平缓。</p>
+        </div>
+        <div class="analysis-item">
+            <span class="analysis-label highlight">★ 笔记本Ⅰ：异化劳动 (10分) ★</span>
+            <p>全文理论高峰。提出“异化劳动四重规定”，从哲学高度揭示资本主义生产关系的本质。这是马克思主义理论史上第一次系统提出异化概念。</p>
+        </div>
+        <div class="analysis-item">
+            <span class="analysis-label">笔记本Ⅱ：私有财产与劳动 (7分)</span>
+            <p>追问异化劳动的根源，发现私有财产是异化劳动的结果，也是其条件。论证异化劳动与私有财产的辩证关系。</p>
+        </div>
+        <div class="analysis-item">
+            <span class="analysis-label highlight">笔记本Ⅲ：共产主义 (9分) ★</span>
+            <p>提出“私有财产的积极扬弃”和“人的本质的复归”，从哲学上论证共产主义的历史必然性。与《共产党宣言》的科学社会主义形成对照。</p>
+        </div>
+        <div class="analysis-item">
+            <span class="analysis-label">笔记本Ⅲ：黑格尔批判 (8分)</span>
+            <p>对黑格尔辩证法的批判性改造。马克思指出黑格尔的伟大在于把人的自我产生看作过程，但批判其劳动的抽象性。</p>
+        </div>
+        <div class="analysis-item">
+            <span class="analysis-label">笔记本Ⅲ：自然人化 (6分)</span>
+            <p>结语：自然界在人的实践活动中成为“人的无机的身体”。马克思的实践唯物主义思想在此萌芽。</p>
+        </div>
+    </div>
+</div>
+
+                <div class="chart-block">
+                    <h3>从手稿到《资本论》的思想演变</h3>
+                    <p class="chart-desc">关键范畴的变化——从哲学批判到科学分析</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="evolutionChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>思想坐标：手稿在马克思主义史上的位置</h3>
+                    <p class="chart-desc">从黑格尔到《资本论》的思想转折点</p>
+                    <div class="chart-container" style="max-width:600px;margin:0 auto;">
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 理论拼图 -->
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2>🧩 理论拼图</h2>
+
+                <div class="puzzle-intro">
+                    <p><strong>在马哲体系中的位置：</strong>《1844年经济学哲学手稿》是马克思主义形成史上的“黑匣子”。1932年首次全文出版后，它彻底改写了人们对马克思主义起源的理解。手稿展示了马克思如何从哲学批判走向政治经济学批判，如何从费尔巴哈的人本主义转向历史唯物主义。它既不是成熟的马克思主义，也不是可有可无的早期习作，而是马克思思想发生剧烈转变的“活化石”。</p>
+                </div>
+
+                <div class="puzzle-position">
+                    <h3>《1844年手稿》在马克思思想发展中的坐标</h3>
+                    <div class="theory-tree">
+                        <div class="theory-node root">马克思思想发展</div>
+                        <div class="theory-branches">
+                            <div class="theory-branch">
+                                <div class="theory-node branch">前期（1843-1844）</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">《黑格尔法哲学批判》<br><small>哲学批判起步</small></div>
+                                    <div class="theory-node current">《1844年手稿》<br><small>异化劳动 · 哲学人本主义</small></div>
+                                    <div class="theory-node related">《神圣家族》<br><small>清算青年黑格尔派</small></div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">转折（1845）</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">《关于费尔巴哈的提纲》<br><small>新世界观萌芽</small></div>
+                                    <div class="theory-node related">《德意志意识形态》<br><small>历史唯物主义形成</small></div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">成熟期（1845年以后）</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">《共产党宣言》<br><small>科学社会主义</small></div>
+                                    <div class="theory-node related">《资本论》<br><small>政治经济学批判体系</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puzzle-timeline">
+                    <h3>在思想发展时间轴上的位置</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1841</div><div class="timeline-label">博士论文</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1843</div><div class="timeline-label">《黑格尔法哲学批判》</div></div>
+                        <div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1844</div><div class="timeline-label">《1844年手稿》</div><div class="timeline-here">◀ 本文</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1845</div><div class="timeline-label">《关于费尔巴哈的提纲》</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1845-46</div><div class="timeline-label">《德意志意识形态》</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1848</div><div class="timeline-label">《共产党宣言》</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1867</div><div class="timeline-label">《资本论》第1卷</div></div>
+                    </div>
+                    <p style="margin-top:12px;font-size:0.85em;color:#666;"><strong>历史位置：</strong>手稿是马克思思想的十字路口——左边是黑格尔和费尔巴哈，右边是历史唯物主义和《资本论》。写于1844年巴黎，正值马克思从“哲学批判”向“政治经济学批判”转变的关键时期。</p>
+                </div>
+
+                <div class="puzzle-links">
+                    <h3>文章联结网络</h3>
+                    <p class="puzzle-links-note">点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（→ 输出影响 · ← 理论来源 · ↔ 相互支撑）</p>
+                    <div class="conn-grid">
+                        <a href="on-jewish-question.html" class="conn-card" style="border-left-color:#2b6cb0;">
+                            <span class="conn-dir" style="color:#276749;">←</span>
+                            <span class="conn-title">《论犹太人问题》</span>
+                            <span class="conn-label">政治哲学</span>
+                            <span class="conn-relation">理论前奏：从政治解放到人的解放</span>
+                        </a>
+                        <a href="hegel-fa-lu-zhe-xue.html" class="conn-card" style="border-left-color:#2b6cb0;">
+                            <span class="conn-dir" style="color:#276749;">←</span>
+                            <span class="conn-title">《黑格尔法哲学批判》</span>
+                            <span class="conn-label">哲学批判</span>
+                            <span class="conn-relation">哲学方法：对黑格尔辩证法的第一次批判</span>
+                        </a>
+                        <a href="de-yi-shi-xing-tai.html" class="conn-card" style="border-left-color:#c41e3a;">
+                            <span class="conn-dir" style="color:#276749;">→</span>
+                            <span class="conn-title">《德意志意识形态》</span>
+                            <span class="conn-label">哲学·历史唯物主义</span>
+                            <span class="conn-relation">思想飞跃：从人本主义异化论到历史唯物主义</span>
+                        </a>
+                        <a href="zi-ben-lun.html" class="conn-card" style="border-left-color:#c41e3a;">
+                            <span class="conn-dir" style="color:#276749;">→</span>
+                            <span class="conn-title">《资本论》</span>
+                            <span class="conn-label">政治经济学</span>
+                            <span class="conn-relation">理论发展：异化理论发展为剩余价值理论</span>
+                        </a>
+                        <a href="fei-er-ba-ha.html" class="conn-card" style="border-left-color:#2b6cb0;">
+                            <span class="conn-dir" style="color:#2b6cb0;">←</span>
+                            <span class="conn-title">费尔巴哈《基督教的本质》</span>
+                            <span class="conn-label">哲学·人本主义</span>
+                            <span class="conn-relation">理论来源：类本质、异化的概念来源</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>它解决的真实问题</h3>
+                    <p><strong>历史背景：</strong>1844年，马克思在巴黎流亡。他刚刚完成了《德法年鉴》的工作，与卢格决裂，开始系统研读国民经济学家著作。当时的社会主义思潮主要有三种：粗陋的共产主义（平均主义）、蒲鲁东的小资产阶级社会主义、德国“真正的社会主义”。马克思需要对这些思潮作出批判性回应，同时为自己找到新的理论基础。</p>
+                    <p><strong>这部手稿在马克思生前未发表：</strong>——为什么？可能是因为马克思后来觉得其中的用语（“类本质”“人的复归”）带有费尔巴哈痕迹，不够“科学”。但恰恰是这部“被放弃”的手稿，成了20世纪马克思主义争论的焦点之一。</p>
+                    <p><strong>现实意义：</strong>当资本主义进入消费社会、数字时代，<strong>“异化”概念重新获得了分析效力</strong>。消费者被商品异化、劳动者被算法异化、社交被平台异化——马克思1844年提出的问题，在今天依然在问：人为什么在创造越来越多的财富的同时，却越来越不像自己？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 延伸阅读 -->
+        <div class="tab-content" id="further">
+            <div class="further-reading">
+                <h2>📚 延伸阅读</h2>
+
+                <div class="reading-item">
+                    <h3>如果你对“异化”概念感兴趣</h3>
+                    <p>→ 读《关于费尔巴哈的提纲》——马克思在哪里超越了费尔巴哈？异化论如何被突破？</p>
+                </div>
+
+                <div class="reading-item">
+                    <h3>如果你想看马克思思想发展的完整脉络</h3>
+                    <p>→ 读《德意志意识形态》——从“异化”到“分工”，从“人的复归”到“消灭现存状况的现实的运动”</p>
+                </div>
+
+                <div class="reading-item">
+                    <h3>如果你对“异化”概念在当代的运用感兴趣</h3>
+                    <p>→ 读卢卡奇《历史与阶级意识》（“物化”概念）——西方马克思主义如何重新激活异化论</p>
+                    <p>→ 读马尔库塞《单向度的人》——发达的工业社会是否消灭了异化？还是制造了更深的异化？</p>
+                </div>
+
+                <div class="reading-item">
+                    <h3>如果你想看手稿与成熟马克思的对比</h3>
+                    <p>→ 读《资本论》第一卷第一篇（商品与货币）——《资本论》如何用“商品拜物教”重新处理“异化”问题？</p>
+                </div>
+
+                <div class="reading-item">
+                    <h3>如果你想理解手稿中的黑格尔辩证法</h3>
+                    <p>→ 读马克思《资本论》第一卷第二版跋——马克思晚年怎样回顾他与黑格尔的关系：“我公开承认我是这位大思想家的学生”</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (btn) btn.classList.add('active');
+            if (tabId === 'visual') setTimeout(initCharts, 100);
+        }
+
+        function toggleChapter(titleEl) {
+            const content = titleEl.nextElementSibling;
+            titleEl.classList.toggle('collapsed');
+            content.style.display = titleEl.classList.contains('collapsed') ? 'none' : 'block';
+        }
+
+        let chartsInited = false;
+        function initCharts() {
+            if (chartsInited) return;
+
+            // 等待一小段时间确保 DOM 完全渲染
+            setTimeout(() => {
+                // 雷达图
+                const radarCtx = document.getElementById('radarChart');
+                if (radarCtx && !radarCtx._chart) {  // 检查是否已存在图表
+                    try {
+                        new Chart(radarCtx, {
+                            type: 'radar',
+                            data: {
+                                labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                                datasets: [{
+                                    label: '1844年手稿',
+                                    data: [9, 8, 9, 6, 9, 6],
+                                    borderColor: '#8b0000',
+                                    backgroundColor: 'rgba(139,0,0,0.15)',
+                                    pointBackgroundColor: '#8b0000',
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: { r: { min: 0, max: 10, ticks: { stepSize: 2, font: { size: 10 } }, pointLabels: { font: { size: 11 } } } },
+                                plugins: { legend: { display: false } }
+                            }
+                        });
+                        radarCtx._chart = true;  // 标记已创建
+                    } catch (e) { console.log('雷达图错误:', e); }
+                }
+
+                // 异化劳动四重结构
+                const alienCtx = document.getElementById('alienationChart');
+                if (alienCtx && !alienCtx._chart) {
+                    try {
+                        new Chart(alienCtx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['劳动产品异化', '劳动活动异化', '类本质异化', '人与人异化'],
+                                datasets: [{
+                                    label: '批判深度',
+                                    data: [8, 9, 10, 9],
+                                    backgroundColor: ['#8b0000', '#a52a2a', '#c41e3a', '#b22222'],
+                                    borderRadius: 6
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `深度: ${ctx.parsed.y}/10` } } },
+                                scales: { y: { min: 0, max: 10, title: { display: true, text: '在理论体系中的深度' } } }
+                            }
+                        });
+                        alienCtx._chart = true;
+                    } catch (e) { console.log('异化图错误:', e); }
+                }
+
+                // 思想演变
+                const evolveCtx = document.getElementById('evolutionChart');
+                if (evolveCtx && !evolveCtx._chart) {
+                    try {
+                        new Chart(evolveCtx, {
+                            type: 'line',
+                            data: {
+                                labels: ['1844手稿', '1845提纲', '德意志意识形态', '共产党宣言', '资本论'],
+                                datasets: [
+                                    { label: '人本主义色彩', data: [9, 6, 3, 2, 1], borderColor: '#c41e3a', backgroundColor: 'rgba(196,30,58,0.1)', fill: true, tension: 0.3, pointRadius: 6 },
+                                    { label: '历史唯物主义色彩', data: [2, 5, 9, 10, 10], borderColor: '#2b6cb0', backgroundColor: 'rgba(43,108,176,0.1)', fill: true, tension: 0.3, pointRadius: 6 }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                scales: { y: { min: 0, max: 10, title: { display: true, text: '理论特征强度' } } }
+                            }
+                        });
+                        evolveCtx._chart = true;
+                    } catch (e) { console.log('演变图错误:', e); }
+                }
+
+                // 时间轴图
+                const timelineCtx = document.getElementById('timelineChart');
+                if (timelineCtx && !timelineCtx._chart) {
+                    try {
+                        new Chart(timelineCtx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['黑格尔', '费尔巴哈', '1844手稿', '历史唯物主义', '资本论'],
+                                datasets: [{
+                                    label: '思想坐标（1=黑格尔左端，10=马克思右端）',
+                                    data: [1, 3, 5, 8, 9],
+                                    backgroundColor: ['#718096', '#a0aec0', '#c41e3a', '#2b6cb0', '#2b6cb0'],
+                                    borderRadius: 6
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `位置: ${ctx.parsed.y}/10` } } },
+                                scales: { y: { min: 0, max: 10, title: { display: true, text: '距离马克思成熟思想的位置' } } }
+                            }
+                        });
+                        timelineCtx._chart = true;
+                    } catch (e) { console.log('时间轴图错误:', e); }
+                }
+
+                    // 论证节奏曲线
+const argCtx = document.getElementById('argumentCurve');
+if (argCtx && !argCtx._chart) {
+    try {
+        new Chart(argCtx, {
+            type: 'line',
+            data: {
+                labels: ['笔记本Ⅰ\n工资·利润·地租', '笔记本Ⅰ\n异化劳动★', '笔记本Ⅱ\n私有财产与劳动', '笔记本Ⅲ\n共产主义★', '笔记本Ⅲ\n黑格尔批判', '笔记本Ⅲ\n自然人化'],
+                datasets: [{
+                    label: '论证强度',
+                    data: [6, 10, 7, 9, 8, 6],
+                    borderColor: '#e53e3e',
+                    backgroundColor: 'rgba(229,62,62,0.08)',
+                    fill: true,
+                    tension: 0.35,
+                    pointRadius: 7,
+                    pointHoverRadius: 9,
+                    borderWidth: 2.5,
+                    pointBackgroundColor: ['#718096', '#e53e3e', '#718096', '#c41e3a', '#718096', '#a0aec0']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) { return '论证强度：' + ctx.parsed.y + '/10'; }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0, max: 10,
+                        title: { display: true, text: '论证强度（低→高）', font: { size: 11 } }
+                    },
+                    x: {
+                        ticks: { font: { size: 10 } }
+                    }
+                }
+            }
+        });
+        argCtx._chart = true;
+    } catch(e) { console.log('论证节奏曲线错误:', e); }
+}
+
+                chartsInited = true;
+            }, 50);
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
+            updateDarkModeIcon();
+        }
+        function updateDarkModeIcon() {
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+        if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+        updateDarkModeIcon();
+    </script>
+
+    <style>
+        /* ===== 文章头部 — 哲学基础深红 ===== */
+        .article-header {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-bottom: 2px solid #8b0000;
+            color: white;
+            background: linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .article-header::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3C/svg%3E");
+                background-size: 120px;
+                pointer-events: none;
+            }
+
+            .article-header > * {
+                position: relative;
+                z-index: 1;
+            }
+
+        .importance-badge {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.9);
+            color: #8b0000;
+            padding: 6px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .article-header h1 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+            text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.4);
+            font-family: 'STSong', 'SimSun', serif;
+        }
+
+        .article-subtitle {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin: 0.5rem 0;
+            font-style: italic;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+            .article-meta span {
+                background: rgba(0, 0, 0, 0.25);
+                padding: 5px 14px;
+                border-radius: 18px;
+                backdrop-filter: blur(4px);
+            }
+
+            .article-meta .author {
+                font-weight: 600;
+            }
+
+            .article-meta .category {
+                color: rgba(255, 215, 0, 0.9);
+            }
+
+            .article-meta .length-tag {
+                background: rgba(255, 215, 0, 0.25);
+                color: rgba(255, 215, 0, 0.95);
+                border: 1px solid rgba(255, 215, 0, 0.5);
+                font-size: 0.8em;
+                padding: 3px 10px;
+                border-radius: 12px;
+            }
+
+        /* ===== Tab导航 ===== */
+        .tab-nav {
+            display: flex;
+            gap: 4px;
+            margin: 30px 0 0;
+            border-bottom: 2px solid #e2e8f0;
+            overflow-x: auto;
+            padding: 1rem;
+            background: #f8f8f8;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 18px;
+            cursor: pointer;
+            color: #666;
+            font-size: 0.95em;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            transition: all 0.2s;
+            border-radius: 8px;
+        }
+
+            .tab-btn:hover {
+                background: #e8e8e8;
+                color: #8b0000;
+            }
+
+            .tab-btn.active {
+                background: #8b0000;
+                color: white;
+                font-weight: 600;
+            }
+
+        .tab-content {
+            display: none;
+            padding: 30px 0;
+            background: white;
+            border-radius: 0 0 12px 12px;
+        }
+
+            .tab-content.active {
+                display: block;
+            }
+
+        .tab-heading {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #8b0000;
+            font-size: 1.3rem;
+            color: #8b0000;
+        }
+
+        /* ===== 原文样式 ===== */
+        .original-text {
+            line-height: 1.9;
+            font-size: 1.05rem;
+        }
+
+        .text-intro {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-left: 4px solid #ffc107;
+            padding: 14px 20px;
+            margin-bottom: 24px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .chapter {
+            margin-bottom: 16px;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .chapter-title {
+            background: linear-gradient(135deg, #8b0000, #c41e3a);
+            padding: 14px 20px;
+            margin: 0;
+            cursor: pointer;
+            font-size: 1.05em;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            user-select: none;
+            transition: filter 0.2s;
+        }
+
+            .chapter-title:hover {
+                filter: brightness(1.1);
+            }
+
+        .toggle-icon {
+            font-size: 0.8em;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .chapter-title.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .chapter-content {
+            padding: 20px 24px;
+            line-height: 1.9;
+            background: #fafafa;
+        }
+
+            .chapter-content p {
+                margin-bottom: 16px;
+                text-indent: 2em;
+            }
+
+        /* ===== 读法提示样式 ===== */
+        .reading-guide {
+            line-height: 1.9;
+        }
+
+        .guide-block {
+            margin-bottom: 28px;
+            padding: 20px 24px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+            .guide-block h3 {
+                color: #8b0000;
+                margin-bottom: 12px;
+                font-size: 1.05em;
+            }
+
+            .guide-block p {
+                margin: 0;
+                line-height: 1.8;
+                color: #333;
+            }
+
+        /* ===== 难点解析样式 ===== */
+        .difficulty-section {
+            line-height: 1.9;
+        }
+
+        .diff-item {
+            margin-bottom: 28px;
+            padding: 20px 24px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .wrong {
+            background: #fff5f5;
+            border-left: 4px solid #fc8181;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            border-radius: 0 4px 4px 0;
+            color: #742a2a;
+            line-height: 1.6;
+        }
+
+        .correct {
+            background: #f0fff4;
+            border-left: 4px solid #68d391;
+            padding: 12px 16px;
+            border-radius: 0 4px 4px 0;
+            color: #1a4731;
+            line-height: 1.6;
+        }
+
+        /* ===== 对话空间样式 ===== */
+        .dialogue-section {
+            line-height: 1.9;
+        }
+
+        .dialogue-block {
+            margin-bottom: 28px;
+            padding: 20px 24px;
+            background: #fafafa;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            transition: all 0.2s;
+        }
+
+            .dialogue-block h3 {
+                color: #8b0000;
+                margin-bottom: 12px;
+                font-size: 1.05em;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+                .dialogue-block h3::before {
+                    content: '';
+                    width: 4px;
+                    height: 18px;
+                    background: #8b0000;
+                    border-radius: 2px;
+                    display: inline-block;
+                }
+
+            .dialogue-block ul,
+            .dialogue-block ol {
+                margin: 12px 0 0 20px;
+                padding: 0;
+            }
+
+            .dialogue-block li {
+                margin: 10px 0;
+                line-height: 1.7;
+                color: #444;
+            }
+
+            .dialogue-block strong {
+                color: #8b0000;
+            }
+
+            .dialogue-block p {
+                margin: 12px 0 0;
+                padding: 12px 16px;
+                background: #f5f5f5;
+                border-radius: 8px;
+                color: #555;
+                line-height: 1.7;
+            }
+
+        /* ===== 行动实验样式 ===== */
+        .action-section {
+            line-height: 1.9;
+        }
+
+        .action-item {
+            margin-bottom: 28px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e8e8e8;
+            overflow: hidden;
+            transition: box-shadow 0.2s, transform 0.15s;
+        }
+
+            .action-item:hover {
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+                transform: translateY(-2px);
+            }
+
+            .action-item h3 {
+                margin: 0;
+                padding: 16px 24px;
+                background: linear-gradient(135deg, #8b0000, #a52a2a);
+                color: white;
+                font-size: 1.05em;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+                .action-item h3::before {
+                    content: '⚡';
+                    font-size: 1.1em;
+                    opacity: 0.9;
+                }
+
+            .action-item .action-content {
+                padding: 20px 24px;
+            }
+
+            .action-item p {
+                margin: 0 0 12px 0;
+                color: #555;
+                line-height: 1.7;
+            }
+
+            .action-item strong {
+                color: #8b0000;
+            }
+
+            .action-item ul,
+            .action-item ol {
+                margin: 12px 0 0 20px;
+                padding: 0;
+            }
+
+            .action-item li {
+                margin: 8px 0;
+                line-height: 1.7;
+                color: #555;
+            }
+
+        .action-tag {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            color: #8b0000;
+            margin-right: 8px;
+            font-weight: normal;
+        }
+
+        /* ===== 图表样式 ===== */
+        .chart-container {
+            position: relative;
+        }
+
+        .chart-block {
+            margin-bottom: 28px;
+            padding: 18px 22px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+            .chart-block h3 {
+                color: #8b0000;
+                margin-bottom: 8px;
+            }
+
+        .chart-desc {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 16px;
+        }
+
+        /* ===== 结构分析样式 ===== */
+        .structure-analysis {
+            margin-top: 20px;
+            padding: 16px 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #e8e8e8;
+        }
+
+            .structure-analysis h4 {
+                color: #8b0000;
+                margin-bottom: 12px;
+                font-size: 1em;
+            }
+
+        .analysis-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+            .analysis-item:last-child {
+                border-bottom: none;
+            }
+
+        .analysis-label {
+            font-weight: 600;
+            color: #8b0000;
+            font-size: 0.92em;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+            .analysis-label.highlight {
+                color: #c41e3a;
+                font-size: 0.96em;
+            }
+
+        .analysis-item p {
+            margin: 0;
+            font-size: 0.88em;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        /* ===== 理论拼图样式 ===== */
+        .puzzle-section {
+            line-height: 1.9;
+        }
+
+        .puzzle-intro,
+        .puzzle-position,
+        .puzzle-timeline,
+        .puzzle-links,
+        .puzzle-modern,
+        .puzzle-further {
+            margin-bottom: 28px;
+            padding: 20px 24px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+            .puzzle-intro p,
+            .puzzle-modern p {
+                margin: 0;
+                line-height: 1.8;
+            }
+
+            .puzzle-timeline p {
+                margin-top: 12px;
+                font-size: 0.85em;
+                color: #666;
+            }
+
+            .puzzle-position h3,
+            .puzzle-timeline h3,
+            .puzzle-links h3,
+            .puzzle-modern h3,
+            .puzzle-further h3 {
+                color: #8b0000;
+                margin-bottom: 16px;
+                font-size: 1.05em;
+            }
+
+        .theory-tree {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .theory-node {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            margin: 6px;
+        }
+
+            .theory-node.root {
+                background: #8b0000;
+                color: white;
+                font-weight: bold;
+            }
+
+            .theory-node.branch {
+                background: #2d3748;
+                color: white;
+            }
+
+            .theory-node.current {
+                background: #8b0000;
+                color: white;
+                font-weight: bold;
+            }
+
+            .theory-node.related {
+                background: #e2e8f0;
+                color: #333;
+            }
+
+        .theory-branches {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .theory-branch {
+            text-align: center;
+        }
+
+        .theory-sub {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* ===== 时间线样式 ===== */
+        .timeline-track {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            align-items: flex-start;
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 76px;
+            position: relative;
+            flex: 1;
+        }
+
+            .timeline-item::after {
+                content: '';
+                position: absolute;
+                top: 9px;
+                left: 50%;
+                width: 100%;
+                height: 2px;
+                background: #ddd;
+                z-index: 0;
+            }
+
+            .timeline-item:last-child::after {
+                display: none;
+            }
+
+        .timeline-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ddd;
+            border: 2px solid #bbb;
+            z-index: 1;
+            position: relative;
+        }
+
+        .timeline-dot-active {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #8b0000;
+            border: 3px solid #c41e3a;
+            z-index: 1;
+            position: relative;
+            box-shadow: 0 0 8px rgba(139, 0, 0, 0.4);
+        }
+
+        .timeline-year {
+            font-size: 0.75em;
+            color: #555;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        .timeline-label {
+            font-size: 0.68em;
+            color: #888;
+            text-align: center;
+            margin-top: 2px;
+            line-height: 1.3;
+        }
+
+        .timeline-here {
+            font-size: 0.7em;
+            color: #8b0000;
+            font-weight: bold;
+            margin-top: 2px;
+            white-space: nowrap;
+        }
+
+        .timeline-item.active .timeline-year {
+            color: #8b0000;
+            font-weight: bold;
+        }
+
+        /* ===== 联结网络样式 ===== */
+        .conn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .conn-card {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding: 12px 14px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e8e8e8;
+            border-left: 4px solid #8b0000;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s, transform 0.15s;
+        }
+
+            .conn-card:hover {
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+                transform: translateY(-2px);
+            }
+
+        .conn-dir {
+            font-size: 1.1em;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .conn-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 0.9em;
+            margin-top: 2px;
+        }
+
+        .conn-label {
+            font-size: 0.76em;
+            color: #888;
+        }
+
+        .conn-relation {
+            font-size: 0.82em;
+            color: #555;
+            line-height: 1.5;
+            margin-top: 3px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 4px;
+        }
+
+        .puzzle-links-note {
+            color: #888;
+            font-size: 0.85em;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .puzzle-further ul {
+            margin: 8px 0 0 20px;
+            line-height: 1.8;
+        }
+
+        .puzzle-further li {
+            margin: 6px 0;
+        }
+
+        /* ===== 延伸阅读样式 ===== */
+        .further-reading {
+            line-height: 1.9;
+        }
+
+        .reading-item {
+            margin-bottom: 20px;
+            padding: 18px 22px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+            .reading-item h3 {
+                color: #8b0000;
+                margin-bottom: 8px;
+                font-size: 1em;
+            }
+
+            .reading-item p {
+                margin: 0;
+                color: #666;
+                font-size: 0.95rem;
+            }
+
+        /* ===== 夜间模式 ===== */
+        body.dark-mode .tab-nav {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+
+        body.dark-mode .tab-btn:hover {
+            background: #3a3a3a;
+            color: #c41e3a;
+        }
+
+        body.dark-mode .tab-content {
+            background: #1a1a1a;
+        }
+
+        body.dark-mode .tab-heading {
+            color: #c41e3a;
+            border-color: #c41e3a;
+        }
+
+        body.dark-mode .text-intro {
+            background: linear-gradient(135deg, #2d2a1a, #3d3520);
+        }
+
+        body.dark-mode .chapter {
+            border-color: #444;
+        }
+
+        body.dark-mode .chapter-content {
+            background: #222;
+        }
+
+            body.dark-mode .chapter-content p {
+                color: #e0e0e0;
+            }
+
+        body.dark-mode .guide-block,
+        body.dark-mode .diff-item,
+        body.dark-mode .dialogue-block,
+        body.dark-mode .chart-block,
+        body.dark-mode .reading-item,
+        body.dark-mode .puzzle-intro,
+        body.dark-mode .puzzle-position,
+        body.dark-mode .puzzle-timeline,
+        body.dark-mode .puzzle-links,
+        body.dark-mode .puzzle-modern,
+        body.dark-mode .puzzle-further,
+        body.dark-mode .structure-analysis {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+
+            body.dark-mode .guide-block h3,
+            body.dark-mode .diff-item h4,
+            body.dark-mode .dialogue-block h3,
+            body.dark-mode .chart-block h3,
+            body.dark-mode .puzzle-position h3,
+            body.dark-mode .puzzle-timeline h3,
+            body.dark-mode .puzzle-links h3,
+            body.dark-mode .puzzle-modern h3,
+            body.dark-mode .puzzle-further h3,
+            body.dark-mode .reading-item h3,
+            body.dark-mode .structure-analysis h4 {
+                color: #c41e3a;
+            }
+
+            body.dark-mode .guide-block p,
+            body.dark-mode .dialogue-block li,
+            body.dark-mode .dialogue-block p,
+            body.dark-mode .analysis-item p,
+            body.dark-mode .puzzle-intro p,
+            body.dark-mode .puzzle-modern p,
+            body.dark-mode .conn-relation {
+                color: #ccc;
+            }
+
+            body.dark-mode .dialogue-block p {
+                background: #333;
+            }
+
+        body.dark-mode .wrong {
+            background: #2d1a1a;
+            color: #ef5350;
+        }
+
+        body.dark-mode .correct {
+            background: #1a2a1a;
+            color: #66bb6a;
+        }
+
+        body.dark-mode .action-item {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+
+            body.dark-mode .action-item h3 {
+                background: linear-gradient(135deg, #6a0000, #8b0000);
+            }
+
+            body.dark-mode .action-item p,
+            body.dark-mode .action-item li {
+                color: #ccc;
+            }
+
+        body.dark-mode .action-tag {
+            background: #444;
+            color: #c41e3a;
+        }
+
+        body.dark-mode .theory-node.related {
+            background: #444;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .timeline-dot {
+            background: #555;
+            border-color: #666;
+        }
+
+        body.dark-mode .timeline-item::after {
+            background: #444;
+        }
+
+        body.dark-mode .conn-card {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+
+        body.dark-mode .conn-title {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .structure-analysis h4 {
+            color: #c41e3a;
+        }
+
+        body.dark-mode .analysis-label {
+            color: #c41e3a;
+        }
+
+        body.dark-mode .further-item {
+            border-color: #c41e3a;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 600px) {
+            .article-header {
+                padding: 2rem 1rem;
+            }
+
+                .article-header h1 {
+                    font-size: 1.8rem;
+                }
+
+            .tab-btn {
+                padding: 8px 12px;
+                font-size: 0.85em;
+            }
+
+            .chapter-content {
+                padding: 14px 16px;
+            }
+
+            .conn-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

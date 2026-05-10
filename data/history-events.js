@@ -454,7 +454,6 @@ const historyData = {
         { date: "8月23日", year: 1975, title: "老挝人民民主共和国成立", category: "revolution", nature: "positive", desc: "老挝人民革命党夺取政权，成立共和国。" },
         { date: "8月24日", year: 1944, title: "巴黎解放", category: "war", nature: "positive", desc: "盟军解放法国首都巴黎。" },
         { date: "8月25日", year: 1944, title: "戴高乐进入巴黎", category: "political", nature: "positive", desc: "戴高乐率自由法国军队进入巴黎。" },
-        { date: "8月26日", year: 1973, title: "第一颗人造卫星‘东方红一号’发射成功纪念", category: "cultural", nature: "positive", desc: "中国成为世界上第五个独立发射卫星的国家。" },
         { date: "8月27日", year: 1947, title: "刘邓大军进入大别山", category: "war", nature: "positive", desc: "刘伯承、邓小平率部胜利到达大别山，战略进攻开始。" },
         { date: "8月29日", year: 1944, title: "斯洛伐克民族起义爆发", category: "revolution", nature: "positive", desc: "斯洛伐克共产党领导的反法西斯武装起义。" },
         { date: "8月30日", year: 1963, title: "日共‘反美’示威", category: "revolution", nature: "positive", desc: "日本共产党领导民众抗议美军基地。" },

@@ -81,6 +81,8 @@
 
         .article-meta .author { font-weight: 600; }
         .article-meta .category { color: rgba(255,215,0,0.9); }
+        .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+        body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
 
         /* ===== 返回导航 ===== */
         .back-nav {
@@ -365,14 +367,26 @@
             .tab-content { padding: 1.25rem; }
             .chapter-content { padding: 1rem; }
         }
+        /* ===== 结构分析样式 ===== */
+        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+        .structure-analysis h4 { color: #1a237e; margin-bottom: 12px; font-size: 1em; }
+        body.dark-mode .structure-analysis h4 { color: #3949ab; }
+        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+        body.dark-mode .analysis-item { border-color: #444; }
+        .analysis-label { font-weight: 600; color: #1a237e; font-size: 0.92em; display: block; margin-bottom: 4px; }
+        body.dark-mode .analysis-label { color: #3949ab; }
+        .analysis-label.highlight { color: #3949ab; font-size: 0.96em; }
+        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+        body.dark-mode .analysis-item p { color: #ccc; }
     </style>
 <style>
 
     /* ⬇ 下载原文浮动按钮 */
-    .download-fab {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
+        .download-fab {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -389,10 +403,10 @@
         justify-content: center;
     }
     .download-fab:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
-    .download-menu {
-        position: fixed;
-        bottom: 96px;
-        right: 30px;
+        .download-menu {
+            position: fixed;
+            bottom: 96px;
+            left: 30px;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -463,6 +477,7 @@
             <span class="date">1924年</span>
             <span class="category">政治理论</span>
             <span class="word-count">约25,000字</span>
+            <span class="length-tag">📄 中篇</span>
         </div>
     </header>
 
@@ -842,6 +857,43 @@
             <h4>📚 十章内容重要性分布</h4>
             <canvas id="chapterChart" height="180"></canvas>
         </div>
+
+        <div class="chart-container">
+            <h4>📈 论证节奏曲线</h4>
+            <canvas id="rhythmChart" height="200"></canvas>
+        </div>
+
+        <div class="structure-analysis">
+            <h4>📊 论证结构解析</h4>
+            <div class="analysis-item">
+                <span class="analysis-label">定义与历史 (6分)</span>
+                <p>列宁主义的科学定义，回顾其历史背景与形成过程，为后续展开奠定基础，节奏平稳。</p>
+            </div>
+            <div class="analysis-item">
+                <span class="analysis-label">思想来源 (8分)</span>
+                <p>阐述列宁主义的理论来源——马克思主义三个来源与三个组成部分，思想脉络清晰。</p>
+            </div>
+            <div class="analysis-item">
+                <span class="analysis-label">列宁主义特征 (7分)</span>
+                <p>系统归纳列宁主义的时代特征，理论建构逐步推进，但尚在铺垫阶段。</p>
+            </div>
+            <div class="analysis-item">
+                <span class="analysis-label highlight">理论核心 (9分)★</span>
+                <p>深入阐释列宁主义与马克思主义的关系，这是全文的理论制高点，论证最为充分。</p>
+            </div>
+            <div class="analysis-item">
+                <span class="analysis-label highlight">战略与策略 (10分)★</span>
+                <p>将理论转化为行动指南，战略与策略的统一是列宁主义的实践精髓，论证达到最高潮。</p>
+            </div>
+            <div class="analysis-item">
+                <span class="analysis-label">组织问题 (8分)</span>
+                <p>论述新型无产阶级政党的组织原则，民主集中制是列宁主义组织理论的核心。</p>
+            </div>
+            <div class="analysis-item">
+                <span class="analysis-label">结论 (6分)</span>
+                <p>总结全文，强调学习列宁主义的现实意义，节奏趋于平缓收束。</p>
+            </div>
+        </div>
     </div>
 
     <!-- 理论拼图 -->
@@ -1006,6 +1058,30 @@
                     indexAxis: 'y',
                     scales: { x: { min: 0, max: 100 } },
                     plugins: { legend: { display: false } }
+                }
+            });
+
+            // 论证节奏曲线
+            new Chart(document.getElementById('rhythmChart'), {
+                type: 'line',
+                data: {
+                    labels: ['定义与历史','思想来源','列宁主义特征','理论核心','战略与策略','组织问题','结论'],
+                    datasets: [{
+                        data: [6,8,7,9,10,8,6],
+                        borderColor: '#1a237e',
+                        backgroundColor: 'rgba(26,35,126,0.15)',
+                        fill: true,
+                        tension: 0.35,
+                        pointRadius: 7,
+                        pointHoverRadius: 9,
+                        borderWidth: 2.5,
+                        pointBackgroundColor: ['#7986cb','#7986cb','#7986cb','#3949ab','#1a237e','#7986cb','#7986cb']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.y + '分' } } },
+                    scales: { y: { min: 0, max: 10, title: { display: true, text: '论证强度' } }, x: { title: { display: true, text: '文章结构' } } }
                 }
             });
         }

@@ -371,8 +371,99 @@
             margin-bottom: 16px;
         }
         
+        /* 思想发展节点（纵向穿插在生平时间轴中） */
+        .thought-milestone {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        .thought-milestone::before {
+            content: '';
+            position: absolute;
+            left: -1.65rem;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            background: #e8192c;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #e8192c, 0 0 8px rgba(232,25,44,0.3);
+        }
+        .thought-milestone-year {
+            font-weight: bold;
+            color: #e8192c;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .thought-milestone-card {
+            background: linear-gradient(135deg, #fff5f5, #fee2e2);
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid #e8192c;
+            box-shadow: 0 2px 8px rgba(232,25,44,0.08);
+        }
+        .thought-milestone-card h4 {
+            color: #c53030;
+            margin: 0 0 6px 0;
+            font-size: 1rem;
+        }
+        .thought-milestone-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .thought-milestone-tag {
+            display: inline-block;
+            background: #e8192c;
+            color: white;
+            font-size: 0.72rem;
+            padding: 1px 8px;
+            border-radius: 10px;
+            margin-right: 6px;
+            font-weight: 500;
+        }
+        body.dark-mode .thought-milestone-card {
+            background: linear-gradient(135deg, #2a1515, #301a1a);
+            border-left-color: #fc8181;
+        }
+        body.dark-mode .thought-milestone-card h4 { color: #fc8181; }
+        body.dark-mode .thought-milestone-card p { color: #ccc; }
+        body.dark-mode .thought-milestone-tag { background: #fc8181; color: #1a1a1a; }
+        body.dark-mode .thought-milestone-year { color: #fc8181; }
+        body.dark-mode .thought-milestone::before {
+            background: #fc8181;
+            box-shadow: 0 0 0 3px #fc8181, 0 0 8px rgba(252,129,129,0.3);
+        }
+        @media (max-width: 768px) {
+            .thought-milestone-card { padding: 0.8rem; }
+        }
         body.dark-mode .chart-container {
             background: #3a3a3a;
+        }
+        /* 返回顶部按钮 */
+        .back-to-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 1.2rem;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, #e8192c, #c41e3a);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(232,25,44,0.35);
+        }
+        .dark-mode .back-to-top {
+            background: linear-gradient(135deg, #fc8181, #e8192c);
+            color: #1a1a2e;
         }
     </style>
 </head>
@@ -473,6 +564,17 @@
                             <p>7月出席中国共产党第一次全国代表大会，参与创建中国共产党。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1925年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">阶级分析</span>
+                            <h4>《中国社会各阶级的分析》——革命首要问题</h4>
+                            <p>分析中国社会各阶级的经济地位和政治态度，明确"谁是我们的敌人、谁是我们的朋友"这一革命首要问题，提出无产阶级领导权思想。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1927年</div>
                         <div class="timeline-content">
@@ -480,6 +582,17 @@
                             <p>八七会议提出"枪杆子里出政权"著名论断，领导秋收起义，创建井冈山革命根据地，开辟农村包围城市、武装夺取政权的革命道路。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1928-1930年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">道路创新</span>
+                            <h4>农村包围城市——中国革命道路理论</h4>
+                            <p>在《中国的红色政权为什么能够存在？》《星星之火，可以燎原》等著作中，突破"城市中心论"，提出在农村建立革命根据地、以农村包围城市、武装夺取政权的革命道路理论。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1935年</div>
                         <div class="timeline-content">
@@ -494,6 +607,17 @@
                             <p>撰写《实践论》《矛盾论》，系统阐述马克思主义认识论和辩证法，为党的思想路线奠定哲学基础。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1937年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">哲学奠基</span>
+                            <h4>《实践论》《矛盾论》——毛泽东哲学思想</h4>
+                            <p>系统阐述马克思主义认识论（实践第一）和辩证法（矛盾普遍性与特殊性的辩证关系），提出"具体问题具体分析"的方法论，为毛泽东思想奠定哲学基础。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1938年</div>
                         <div class="timeline-content">
@@ -501,6 +625,17 @@
                             <p>系统阐述抗日战争的战略方针，批驳"亡国论"和"速胜论"，指明抗战胜利的正确道路。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1940年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">革命纲领</span>
+                            <h4>《新民主主义论》——中国革命两步走</h4>
+                            <p>系统阐述新民主主义革命理论，论述中国革命分两步走（新民主主义革命→社会主义革命），提出新民主主义的政治、经济、文化纲领。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1942-1945年</div>
                         <div class="timeline-content">
@@ -522,6 +657,17 @@
                             <p>10月1日在北京天安门宣告中华人民共和国成立，中国人民从此站起来了。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1949年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">国家学说</span>
+                            <h4>《论人民民主专政》——人民民主专政理论</h4>
+                            <p>阐述人民民主专政的理论，论述新中国政权的性质、任务和阶级基础，提出"对人民民主，对敌人专政"的根本原则。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1950-1953年</div>
                         <div class="timeline-content">
@@ -529,13 +675,27 @@
                             <p>作出"抗美援朝，保家卫国"战略决策，中国人民志愿军赴朝作战，维护国家主权和安全。</p>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1956年</div>
-                        <div class="timeline-content">
-                            <strong>《论十大关系》</strong>
-                            <p>发表《论十大关系》，提出探索适合中国国情的社会主义建设道路。</p>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1956年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">建设探索</span>
+                            <h4>《论十大关系》——中国社会主义建设道路</h4>
+                            <p>总结苏联经验教训，提出探索适合中国国情的社会主义建设道路，论述重工业与轻农业、沿海与内地、中央与地方等十对重大关系。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1957年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">矛盾学说</span>
+                            <h4>《关于正确处理人民内部矛盾的问题》——社会主义矛盾学说</h4>
+                            <p>创立社会主义社会矛盾学说，区分敌我矛盾和人民内部矛盾两类不同性质的矛盾，提出正确处理人民内部矛盾是社会主义国家政治生活的主题。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1966-1976年</div>
                         <div class="timeline-content">
@@ -566,6 +726,7 @@
                         <h4>《湖南农民运动考察报告》</h4>
                         <p class="year">1927年</p>
                         <p>热情歌颂农民运动的伟大作用，批驳对农民运动的种种污蔑，提出建立农民政权和农民武装的思想。</p>
+                        <a href="../articles/nong-min-yun-dong.html">阅读全文 →</a>
                     </div>
                     <div class="work-card">
                         <h4>《中国的红色政权为什么能够存在？》</h4>
@@ -626,6 +787,7 @@
                         <p>创立社会主义社会矛盾学说，区分敌我矛盾和人民内部矛盾，提出正确处理人民内部矛盾是社会主义国家政治生活主题。</p>
                     </div>
                 </div>
+
             </div>
 
             <!-- 理论贡献 -->
@@ -688,14 +850,14 @@
                             <div class="radar-legend-item"><div class="radar-legend-dot" style="background:#e8192c;"></div><span>毛泽东（鲜红）</span></div>
                         </div>
                     </div>
-                    
+
                     <!-- 革命历程曲线 -->
                     <div class="chart-container">
                         <h3>革命活动历程</h3>
                         <p class="chart-desc">从建党到建国各时期的革命实践强度变化</p>
                         <canvas id="maoRevolutionChart" style="max-height:280px;"></canvas>
                     </div>
-                    
+
                     <!-- 理论贡献领域 -->
                     <div class="chart-container">
                         <h3>理论贡献领域分布</h3>
@@ -710,20 +872,21 @@
                 <h2>历史地位</h2>
                 <h3>中国革命的伟大领袖</h3>
                 <p>毛泽东是领导中国人民彻底改变自己命运和国家面貌的一代伟人。他领导中国共产党和中国人民经过长期艰苦卓绝的斗争，推翻了帝国主义、封建主义、官僚资本主义三座大山，建立了中华人民共和国，实现了民族独立和人民解放。这一伟大历史功绩永载史册。</p>
-                
+
                 <h3>毛泽东思想的创立者</h3>
                 <p>毛泽东思想是马克思列宁主义在中国的创造性运用和发展，是被实践证明了的关于中国革命和建设的正确理论原则和经验总结。它实现了马克思主义中国化的第一次历史性飞跃，为中国革命和建设提供了科学理论指导。</p>
-                
+
                 <h3>世界社会主义运动的重要人物</h3>
                 <p>中国革命的胜利极大地改变了世界政治格局，壮大了社会主义力量，鼓舞了殖民地半殖民地人民的民族解放运动。毛泽东思想对国际共产主义运动和世界被压迫民族的解放斗争产生了深远影响。</p>
-                
+
                 <h3>历史评价</h3>
                 <p>1981年《关于建国以来党的若干历史问题的决议》对毛泽东和毛泽东思想作出科学评价：毛泽东是伟大的马克思主义者，伟大的无产阶级革命家、战略家、理论家，是党的第一代中央领导集体的核心。他的功绩是第一位的，错误是第二位的。（错哪了我请问了，没有他老人家多次挽救，脆皮肠在红白歌会时期搁哪发财呢）毛泽东思想永远是中国共产党的指导思想。</p>
-                
+
                 <h3>当代意义</h3>
                 <p>毛泽东思想的立场、观点、方法，特别是实事求是、群众路线、独立自主的活的灵魂，至今仍具有重要的指导意义。对毛泽东晚年错误的科学总结（资本主义对马列主义的总结能量最大的就是逆练马列，创造法*斯主义），也为后来的改革开放提供了历史借鉴。学习和研究毛泽东思想，对于理解中国革命和建设的历史、把握马克思主义中国化的规律，具有重要价值。</p>
             </div>
         </div>
+        <a href="#" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">&#8593; 返回顶部</a>
     </main>
 
     <footer class="site-footer">

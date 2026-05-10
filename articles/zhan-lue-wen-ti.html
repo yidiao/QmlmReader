@@ -12,7 +12,7 @@
     .download-fab {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -32,7 +32,7 @@
     .download-menu {
         position: fixed;
         bottom: 96px;
-        right: 30px;
+        left: 30px;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -104,6 +104,7 @@
                 <span class="date">1936年12月</span>
                 <span class="category">军事战略 · 革命战争</span>
                 <span class="word-count">约42,000字</span>
+                <span class="length-tag">📖 长篇</span>
             </div>
         </header>
 
@@ -686,6 +687,14 @@
                     <div class="chart-container" style="max-width:800px;margin:0 auto;">
                         <canvas id="argumentCurve"></canvas>
                     </div>
+                    <div class="structure-analysis">
+                        <h4>📊 论证结构解析</h4>
+                        <div class="analysis-item"><span class="analysis-label">研究方法 (6分)</span><p>开篇阐明如何研究战争规律，提出从实际出发的方法论原则，节奏平稳奠基。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">中国战争特点 (8分)</span><p>分析中国革命战争的特殊性——敌强我弱、大国小农，论证层层深入。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">战略方针 (9分)</span><p>核心论点——积极防御战略的全面展开，"防御中的进攻"辩证法达到高潮。</p></div>
+                        <div class="analysis-item"><span class="analysis-label highlight">持久与速决★ (10分)</span><p>全书最高峰——持久战与速决战、内线与外线的精辟论述，逻辑最为严密。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">结论 (6分)</span><p>总结全文战略思想体系，收束有力。</p></div>
+                    </div>
                 </div>
                 <div class="chart-block">
                     <h3>围剿与反围剿的力量消长</h3>
@@ -923,6 +932,21 @@
     body.dark-mode .conn-title { color: #e0e0e0; }
 
     @media (max-width: 600px) { .article-header h1 { font-size: 1.8em; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .chapter-content { padding: 14px 16px; } .conn-grid { grid-template-columns: 1fr; } }
+    /* ===== 长度标签 ===== */
+    .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+    body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
+    /* ===== 结构分析样式 - 军事战略类 ===== */
+    .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+    body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+    .structure-analysis h4 { color: #1b5e20; margin-bottom: 12px; font-size: 1em; }
+    body.dark-mode .structure-analysis h4 { color: #388e3c; }
+    .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+    body.dark-mode .analysis-item { border-color: #444; }
+    .analysis-label { font-weight: 600; color: #1b5e20; font-size: 0.92em; display: block; margin-bottom: 4px; }
+    body.dark-mode .analysis-label { color: #388e3c; }
+    .analysis-label.highlight { color: #388e3c; font-size: 0.96em; }
+    .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+    body.dark-mode .analysis-item p { color: #ccc; }
 </style>
 
     <script>

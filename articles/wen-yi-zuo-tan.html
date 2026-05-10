@@ -12,11 +12,11 @@
     .download-fab {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
-        background: var(--party-primary, #c41e3a);
+        background: #00695c; /* 主题色：青绿色 */
         color: white;
         border: none;
         cursor: pointer;
@@ -28,15 +28,22 @@
         align-items: center;
         justify-content: center;
     }
-    .download-fab:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
+
+        .download-fab:hover {
+            transform: scale(1.1);
+            background: #00897b; /* hover 用稍浅色 */
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+
+    .dl-link:hover {
+        background: #00695c;
+        color: white;
+    }
     .download-menu {
         position: fixed;
         bottom: 96px;
-        right: 30px;
+        left: 30px;
         background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        padding: 1rem 1.2rem;
         min-width: 180px;
         display: none;
         z-index: 1001;
@@ -72,7 +79,7 @@
             </button>
             <nav class="main-nav">
                 <a href="../index.html">首页</a>
-                <a href="javascript:history.back()" class="active">文章</a>
+                <a href="../articles.html" class="active">文章</a>
                 <a href="../masters.html">导师</a>
                 <a href="../toolkit.html">工具集</a>
                 <a href="../gallery.html">文艺</a>
@@ -104,6 +111,7 @@
                 <span class="date">1942年5月</span>
                 <span class="category">思想文化 · 文艺理论</span>
                 <span class="word-count">约19,000字</span>
+                <span class="length-tag">📝 短篇</span>
             </div>
         </header>
 
@@ -356,6 +364,14 @@
                     <div class="chart-container" style="max-width:700px;margin:0 auto;">
                         <canvas id="argumentCurve"></canvas>
                     </div>
+                    <div class="structure-analysis">
+                        <h4>📊 论证结构解析</h4>
+                        <div class="analysis-item"><span class="analysis-label">为什么座谈 (6分)</span><p>开篇提出文艺工作面临的根本问题，引出"为谁服务"的核心议题，节奏平稳铺垫。</p></div>
+                        <div class="analysis-item"><span class="analysis-label highlight">为谁服务 (9分)</span><p>全文核心论点——工农兵方向的确立，论证力度达到第一个高峰，旗帜鲜明地回答了立场问题。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">怎样服务 (8分)</span><p>深入阐述普及与提高的辩证关系，从方法论层面展开，论证扎实有力。</p></div>
+                        <div class="analysis-item"><span class="analysis-label highlight">文艺界现状 (10分)★</span><p>批判各种错误思想（超阶级人性论、脱离群众等），火力全开，论证强度达到最高点。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">结论 (5分)</span><p>号召文艺工作者与工农结合，总结全文，节奏收束。</p></div>
+                    </div>
                 </div>
                 <div class="chart-block">
                     <h3>普及与提高的辩证关系</h3>
@@ -585,6 +601,21 @@
     body.dark-mode .conn-title { color: #e0e0e0; }
 
     @media (max-width: 600px) { .article-header h1 { font-size: 1.8em; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .chapter-content { padding: 14px 16px; } .conn-grid { grid-template-columns: 1fr; } }
+    /* ===== 长度标签 ===== */
+    .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+    body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
+    /* ===== 结构分析样式 - 思想文化类 ===== */
+    .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+    body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+    .structure-analysis h4 { color: #00695c; margin-bottom: 12px; font-size: 1em; }
+    body.dark-mode .structure-analysis h4 { color: #00897b; }
+    .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+    body.dark-mode .analysis-item { border-color: #444; }
+    .analysis-label { font-weight: 600; color: #00695c; font-size: 0.92em; display: block; margin-bottom: 4px; }
+    body.dark-mode .analysis-label { color: #00897b; }
+    .analysis-label.highlight { color: #00897b; font-size: 0.96em; }
+    .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+    body.dark-mode .analysis-item p { color: #ccc; }
 </style>
 
     <script>
@@ -615,8 +646,8 @@
             new Chart(document.getElementById('argumentCurve').getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: ['引言\n三个问题', '为什么人\n服务★', '如何服务\n普及与提高', '党的文艺\n工作关系', '统一战线\n问题', '文艺批评\n两个标准'],
-                    datasets: [{ label: '论证强度', data: [7, 9.5, 9, 7, 6, 8], borderColor: '#e53e3e', backgroundColor: 'rgba(229,62,62,0.08)', fill: true, tension: 0.4, pointRadius: 6, borderWidth: 2.5 }]
+                    labels: ['为什么座谈', '为谁服务★', '怎样服务★', '文艺界现状', '结论'],
+                    datasets: [{ label: '论证强度', data: [6, 9, 8, 10, 5], borderColor: '#00695c', backgroundColor: 'rgba(0,105,92,0.1)', fill: true, tension: 0.35, pointRadius: 7, pointHoverRadius: 9, borderWidth: 2.5, pointBackgroundColor: ['#999','#00695c','#999','#00897b','#999'] }]
                 },
                 options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 10 } } }
             });

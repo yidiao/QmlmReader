@@ -11,12 +11,11 @@
         body {
             margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #f5f5f5;
+            background:  #e8ecef;
             color: #333;
         }
 
         .puzzle-page {
-            padding-top: 80px;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -24,7 +23,7 @@
 
         .puzzle-header {
             padding: 16px 24px;
-            background: white;
+            background: c0c1c3;
             border-bottom: 2px solid #c41e3a;
             display: flex;
             align-items: center;
@@ -52,7 +51,7 @@
         }
 
         .ctrl-btn {
-            background: white;
+            background: c0c1c3;
             border: 1px solid #c41e3a;
             color: #c41e3a;
             padding: 6px 14px;
@@ -61,14 +60,14 @@
             font-size: 0.85em;
             transition: all 0.2s;
         }
-        .ctrl-btn:hover { background: #c41e3a; color: white; }
+        .ctrl-btn:hover { background: #c41e3a; color: c0c1c3; }
 
         .puzzle-container {
             flex: 1;
             position: relative;
             overflow: hidden;
             cursor: grab;
-            background: white;
+            background: #c0c1c3;
         }
 
         .puzzle-container:active { cursor: grabbing; }
@@ -315,6 +314,86 @@
                 font-size: 0.72em;
             }
         }
+/* ========== 黑夜模式背景色深度优化 ========== */
+/* 白天模式：略灰（更明显的灰色） */
+body {
+    background: #dce3e8 !important;   /* 更明显的柔和灰色，原 #f5f5f5 太白了 */
+}
+
+/* 黑夜模式：深黑但不刺眼 */
+body.dark-mode {
+    background: #0a0d12 !important;   /* 极深灰黑，不是纯黑 #000，保留一点质感 */
+}
+
+/* 拼图容器背景（中间那块大区域） */
+.puzzle-container {
+    background: #ffffff;   /* 白天保持白色 */
+}
+
+body.dark-mode .puzzle-container {
+    background: #0f1117 !important;   /* 深色背景，与外围协调 */
+}
+
+/* 顶部 header 区域 */
+.puzzle-header {
+    background: white;
+    transition: background 0.2s;
+}
+
+body.dark-mode .puzzle-header {
+    background: #141822 !important;   /* 深色 header */
+    border-bottom-color: #8b2c2c;
+}
+
+body.dark-mode .puzzle-header h1 {
+    color: #e05a5a;   /* 标题红色在黑夜模式下稍微柔和 */
+}
+
+body.dark-mode .puzzle-header p {
+    color: #9aa3b8;
+}
+
+/* 控制按钮黑夜模式适配 */
+body.dark-mode .ctrl-btn {
+    background: #1e2432;
+    border-color: #8b2c2c;
+    color: #e05a5a;
+}
+
+body.dark-mode .ctrl-btn:hover {
+    background: #8b2c2c;
+    color: white;
+}
+
+/* 图例面板黑夜模式 */
+body.dark-mode .legend {
+    background: rgba(20, 24, 34, 0.95);
+    border-color: #2a2f3f;
+    color: #ddd;
+}
+
+body.dark-mode .legend h4 {
+    color: #e0e0e0;
+}
+
+/* 提示框黑夜模式 */
+body.dark-mode .tip-box {
+    background: rgba(20, 24, 34, 0.95);
+    border-color: #8b2c2c;
+    color: #bbb;
+}
+
+/* 筛选按钮黑夜模式 */
+body.dark-mode .filter-btn {
+    background: #252c3d;
+    border-color: #3a4158;
+    color: #ccc;
+}
+
+body.dark-mode .filter-btn:hover {
+    border-color: #e05a5a;
+    color: #fff;
+}
     </style>
 </head>
 <body>

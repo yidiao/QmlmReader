@@ -70,6 +70,8 @@
         }
         .article-meta .author { font-weight: 600; }
         .article-meta .category { color: rgba(255,215,0,0.9); }
+        .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+        body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
 
         /* ===== 返回导航 ===== */
         .back-nav { background: #f8f8f8; border-bottom: 1px solid #e0e0e0; padding: 12px 0; }
@@ -194,14 +196,25 @@
             .tab-content { padding:1.25rem; }
             .chapter-content { padding:1rem; }
         }
+        /* ===== 结构分析样式 ===== */
+        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+        .structure-analysis h4 { color: #8b0000; margin-bottom: 12px; font-size: 1em; }
+        body.dark-mode .structure-analysis h4 { color: #c41e3a; }
+        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+        body.dark-mode .analysis-item { border-color: #444; }
+        .analysis-label { font-weight: 600; color: #8b0000; font-size: 0.92em; display: block; margin-bottom: 4px; }
+        body.dark-mode .analysis-label { color: #c41e3a; }
+        .analysis-label.highlight { color: #c41e3a; font-size: 0.96em; }
+        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+        body.dark-mode .analysis-item p { color: #ccc; }
     </style>
-<style>
-
-    /* ⬇ 下载原文浮动按钮 */
+    <style>
+        /* ===== 下载按钮 - 左下角 ===== */
     .download-fab {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -218,10 +231,10 @@
         justify-content: center;
     }
     .download-fab:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
-    .download-menu {
+        .download-menu {
         position: fixed;
         bottom: 96px;
-        right: 30px;
+        left: 30px;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -294,6 +307,7 @@
                 <span class="date">1937年8月</span>
                 <span class="category">哲学基础 · 辩证法</span>
                 <span class="word-count">约28,000字</span>
+                <span class="length-tag">📄 中篇</span>
             </div>
         </header>
 
@@ -560,9 +574,40 @@
 
                 <div class="chart-block">
                     <h3>论证节奏曲线</h3>
-                    <p class="chart-desc">展示文章各章节的论证强度——哪里是最核心的推进，哪里是积累铺垫</p>
+                    <p class="chart-desc">展示文章各章节的论证强度——有高有低，清晰标注核心推进段落与过渡铺垫段落。</p>
                     <div class="chart-container" style="max-width:700px;margin:0 auto;">
                         <canvas id="argumentCurve"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4>📝 结构分析（对应曲线各波段）</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label">两种宇宙观（破）（5/10）</span>
+                            <p>低起。从批判形而上学宇宙观切入，但毛泽东此时在"破"而非"立"，节奏有意压低。他要先把对立面讲清楚，读者才明白为什么要提出矛盾特殊性。注意这段的"陪衬"作用——它看起来是铺垫，实为全文论证的前提。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">矛盾的普遍性（7/10）</span>
+                            <p>稳步上升。用恩格斯、列宁语录建立权威，然后一句一句铺开"矛盾存在于一切过程中"。这部分强度适中，因为毛泽东自己也说这是"已经弄清楚了"的问题——重点不在这里，重点是下一章的特殊性。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">★ 矛盾的特殊性★（9.5/10）</span>
+                            <p>第一个高峰，也是全文最实用的部分。毛泽东连续用中国革命的具体案例（统一战线、武装斗争、党的建设）说明"不同质的矛盾要用不同质的方法解决"。这里没有任何抽象思辨，全部是拿来就能用的分析框架。强度极高，因为你知道读完这章你就多了一个分析工具。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">★ 主要矛盾与主要矛盾方面★（10/10）</span>
+                            <p>全文最高点。这一章回答了"复杂局面中，我该抓什么？"这个每个人都有的问题。毛泽东说"捉住了这个主要矛盾，一切问题就迎刃而解了"——这句话不是修辞，是方法论。强度最高，因为这里直接决定了读者的行动选择。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">矛盾诸方面的同一性与斗争性（5/10）</span>
+                            <p>明显低谷。这一章进入较抽象的哲学讨论（同一性有两层含义、斗争性是绝对的等）。很多读者在这里"掉了链子"。毛泽东自己也知道这部分比较难，所以他用了大量"反过来想"式的比喻（没有生就没有死，等等）来帮助理解。低谷是有意的——他在用节奏帮你消化前面的高密度内容。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">对抗在矛盾中的地位（6/10）</span>
+                            <p>从低谷小幅回升。这一章区分"对抗性矛盾"和"非对抗性矛盾"，是全文最具实践指导意义的章节之一。强度不高，但内容极为关键——它告诉你不同性质的矛盾要用不同方式处理。毛泽东故意用较平缓的节奏来讲这个，因为他在防止你"过度革命化"（什么都用对抗解决）。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">结论（4/10）</span>
+                            <p>最低点，但这是"总结式低调"。毛泽东把全文要点压缩成几段话，没有新的论证推进。强度最低，但意境最宽——他把矛盾法则从"一篇文章"变成"观察任何事物的方式"。像音乐结尾的尾音，不是因为没话说了，而是说完了。</p>
+                        </div>
                     </div>
                 </div>
 
@@ -713,7 +758,7 @@
                 }
             });
 
-            // 论证节奏曲线
+            // 论证节奏曲线 —— 有高有低
             const argCtx = document.getElementById('argumentCurve').getContext('2d');
             new Chart(argCtx, {
                 type: 'line',
@@ -721,20 +766,25 @@
                     labels: ['两种宇宙观\n（破）', '矛盾的\n普遍性', '矛盾的\n特殊性★', '主要矛盾\n与主次方面★', '同一性\n与斗争性', '对抗在矛盾\n中的地位', '结论'],
                     datasets: [{
                         label: '论证强度',
-                        data: [7, 7.5, 9, 9.5, 8.5, 7.5, 8],
+                        data: [5, 7, 9.5, 10, 5, 6, 4],
                         borderColor: '#38a169',
-                        backgroundColor: 'rgba(56,161,105,0.1)',
+                        backgroundColor: 'rgba(56,161,105,0.08)',
                         fill: true,
-                        tension: 0.4,
-                        pointRadius: 6,
-                        borderWidth: 2.5
+                        tension: 0.35,
+                        pointRadius: 7,
+                        pointHoverRadius: 9,
+                        borderWidth: 2.5,
+                        pointBackgroundColor: ['#718096','#718096','#38a169','#c41e3a','#718096','#718096','#a0aec0']
                     }]
                 },
                 options: {
                     responsive: true,
-                    plugins: { legend: { display: false } },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: ctx => '论证强度：' + ctx.parsed.y + '/10' } }
+                    },
                     scales: {
-                        y: { min: 0, max: 10, title: { display: true, text: '论证强度' } }
+                        y: { min: 0, max: 10, title: { display: true, text: '论证强度（低→高）', font: { size: 12 } } }
                     }
                 }
             });

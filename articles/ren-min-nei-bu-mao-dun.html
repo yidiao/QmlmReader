@@ -12,7 +12,7 @@
     .download-fab {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -32,7 +32,7 @@
     .download-menu {
         position: fixed;
         bottom: 96px;
-        right: 30px;
+        left: 30px;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -104,6 +104,7 @@
                 <span class="date">1957年2月27日</span>
                 <span class="category">政治理论 · 社会主义建设</span>
                 <span class="word-count">约24,000字</span>
+                <span class="length-tag">📄 中篇</span>
             </div>
         </header>
 
@@ -471,6 +472,14 @@
                     <div class="chart-container" style="max-width:700px;margin:0 auto;">
                         <canvas id="leapChart"></canvas>
                     </div>
+                    <div class="structure-analysis">
+                        <h4>📊 论证结构解析</h4>
+                        <div class="analysis-item"><span class="analysis-label">问题提出 (6分)</span><p>开篇指出社会主义社会仍然存在矛盾，提出"两类矛盾"的区分框架，节奏平稳。</p></div>
+                        <div class="analysis-item"><span class="analysis-label highlight">两类矛盾★ (9分)</span><p>核心论点——敌我矛盾与人民内部矛盾的精辟划分，论证达到第一个高峰。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">处理方法 (8分)</span><p>详细阐述"团结—批评—团结"的公式，方法论层面深入展开。</p></div>
+                        <div class="analysis-item"><span class="analysis-label highlight">民主集中制★ (10分)</span><p>论述民主与集中的辩证统一、百花齐放百家争鸣，全文论证最高峰。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">结论 (5分)</span><p>号召正确处理矛盾、团结一致建设社会主义，收束有力。</p></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -699,6 +708,21 @@
     body.dark-mode .conn-title { color: #e0e0e0; }
 
     @media (max-width: 600px) { .article-header h1 { font-size: 1.8em; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .chapter-content { padding: 14px 16px; } .conn-grid { grid-template-columns: 1fr; } }
+    /* ===== 长度标签 ===== */
+    .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+    body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
+    /* ===== 结构分析样式 - 政治理论类 ===== */
+    .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+    body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+    .structure-analysis h4 { color: #1a237e; margin-bottom: 12px; font-size: 1em; }
+    body.dark-mode .structure-analysis h4 { color: #3949ab; }
+    .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+    body.dark-mode .analysis-item { border-color: #444; }
+    .analysis-label { font-weight: 600; color: #1a237e; font-size: 0.92em; display: block; margin-bottom: 4px; }
+    body.dark-mode .analysis-label { color: #3949ab; }
+    .analysis-label.highlight { color: #3949ab; font-size: 0.96em; }
+    .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+    body.dark-mode .analysis-item p { color: #ccc; }
 </style>
 
     <script>

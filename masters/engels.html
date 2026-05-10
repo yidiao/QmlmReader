@@ -310,6 +310,73 @@
             margin-bottom: 16px;
         }
         
+        /* 思想发展节点（纵向穿插在生平时间轴中） */
+        .thought-milestone {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        .thought-milestone::before {
+            content: '';
+            position: absolute;
+            left: -1.65rem;
+            top: 0.5rem;
+            width: 14px;
+            height: 14px;
+            background: #4a5568;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #4a5568, 0 0 8px rgba(74,85,104,0.3);
+        }
+        .thought-milestone-year {
+            font-weight: bold;
+            color: #4a5568;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .thought-milestone-card {
+            background: linear-gradient(135deg, #f0f4f8, #edf2f7);
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            border-left: 4px solid #4a5568;
+            box-shadow: 0 2px 8px rgba(74,85,104,0.08);
+        }
+        .thought-milestone-card h4 {
+            color: #4a5568;
+            margin: 0 0 6px 0;
+            font-size: 1rem;
+        }
+        .thought-milestone-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .thought-milestone-tag {
+            display: inline-block;
+            background: #4a5568;
+            color: white;
+            font-size: 0.72rem;
+            padding: 1px 8px;
+            border-radius: 10px;
+            margin-right: 6px;
+            font-weight: 500;
+        }
+        body.dark-mode .thought-milestone-card {
+            background: linear-gradient(135deg, #1a2a2a, #202a2a);
+            border-left-color: #a0aec0;
+        }
+        body.dark-mode .thought-milestone-card h4 { color: #a0aec0; }
+        body.dark-mode .thought-milestone-card p { color: #ccc; }
+        body.dark-mode .thought-milestone-tag { background: #a0aec0; color: #1a1a1a; }
+        body.dark-mode .thought-milestone-year { color: #a0aec0; }
+        body.dark-mode .thought-milestone::before {
+            background: #a0aec0;
+            box-shadow: 0 0 0 3px #a0aec0, 0 0 8px rgba(160,174,192,0.3);
+        }
+        @media (max-width: 768px) {
+            .thought-milestone-card { padding: 0.8rem; }
+        }
         /* 黑夜模式 */
         body.dark-mode .tab-nav,
         body.dark-mode .tab-content {
@@ -354,6 +421,30 @@
         
         body.dark-mode .work-card h4 {
             color: #a0aec0;
+        }
+        /* 返回顶部按钮 */
+        .back-to-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 1.2rem;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, #4a5568, #718096);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74,85,104,0.35);
+        }
+        .dark-mode .back-to-top {
+            background: linear-gradient(135deg, #a0aec0, #718096);
+            color: #1a1a2e;
         }
     </style>
 </head>
@@ -440,6 +531,17 @@
                             <p>在柏林服兵役期间旁听大学课程，接触青年黑格尔派。11月前往曼彻斯特经商途中与马克思初次会面。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1844年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">思想转向</span>
+                            <h4>《英国工人阶级状况》——转向唯物主义和共产主义</h4>
+                            <p>通过亲身调查曼彻斯特工人生活状况，从经验事实出发揭示资本主义剥削本质，完成了从唯心主义向唯物主义、从革命民主主义向共产主义的转变。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1844年</div>
                         <div class="timeline-content">
@@ -482,6 +584,17 @@
                             <p>被迫在曼彻斯特家族企业工作近20年，以经济收入支持马克思的研究和写作。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1873-1886年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">理论创新</span>
+                            <h4>《自然辩证法》——辩证法扩展到自然科学</h4>
+                            <p>开创性地研究自然界中的辩证法问题，将辩证法从社会历史领域扩展到自然科学领域，丰富了唯物辩证法的内容。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1871年</div>
                         <div class="timeline-content">
@@ -489,13 +602,17 @@
                             <p>热情支持巴黎公社革命，与马克思共同撰写《法兰西内战》。</p>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1876-1878年</div>
-                        <div class="timeline-content">
-                            <strong>《反杜林论》</strong>
-                            <p>系统批判杜林的小资产阶级社会主义，全面阐述马克思主义的三个组成部分。</p>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1876-1878年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">理论体系化</span>
+                            <h4>《反杜林论》——马克思主义的系统阐述</h4>
+                            <p>系统批判杜林的小资产阶级社会主义，全面阐述马克思主义的哲学、政治经济学和科学社会主义三个组成部分，被称为"马克思主义的百科全书"。</p>
                         </div>
                     </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1883年</div>
                         <div class="timeline-content">
@@ -503,13 +620,27 @@
                             <p>3月14日马克思逝世，恩格斯承担起整理和出版马克思遗著的重任。</p>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1884年</div>
-                        <div class="timeline-content">
-                            <strong>《家庭、私有制和国家的起源》</strong>
-                            <p>运用历史唯物主义研究原始社会，揭示私有制和国家的起源。</p>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1884年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">理论开拓</span>
+                            <h4>《家庭、私有制和国家的起源》——国家起源理论</h4>
+                            <p>运用历史唯物主义研究原始社会，揭示私有制、阶级和国家产生的历史过程，提出国家将随着阶级的消亡而消亡的论断。</p>
                         </div>
                     </div>
+
+                    <!-- 思想里程碑 -->
+                    <div class="thought-milestone">
+                        <div class="thought-milestone-year">1886年</div>
+                        <div class="thought-milestone-card">
+                            <span class="thought-milestone-tag">哲学总结</span>
+                            <h4>《路德维希·费尔巴哈和德国古典哲学的终结》——哲学基本问题</h4>
+                            <p>系统阐述马克思主义哲学与德国古典哲学的关系，首次明确提出哲学基本问题（思维与存在的关系问题），论述唯物辩证法的基本思想。</p>
+                        </div>
+                    </div>
+
                     <div class="timeline-item">
                         <div class="timeline-year">1885-1894年</div>
                         <div class="timeline-content">
@@ -656,17 +787,19 @@
                 <h2>历史地位</h2>
                 <h3>与马克思的伟大友谊</h3>
                 <p>恩格斯与马克思的友谊是人类历史上最伟大的思想合作之一。从1844年巴黎会面到1883年马克思逝世，两人在近40年的合作中共同创立了马克思主义。恩格斯不仅在理论上与马克思并肩作战，更在经济上无私支持马克思完成《资本论》的写作。马克思逝世后，恩格斯放下自己的研究，花费近12年时间整理出版《资本论》第二、三卷，完成了战友的未竟事业。</p>
-                
+
                 <h3>马克思主义发展史上的地位</h3>
                 <p>恩格斯是马克思主义的共同创始人，也是马克思主义理论的系统阐述者和传播者。他的著作使马克思主义理论更加清晰、完整和易于理解，对马克思主义在工人运动中的传播起到了关键作用。他晚年对历史唯物主义的补充和发展，丰富了马克思主义的理论宝库。</p>
-                
+
                 <h3>国际工人运动的领导者</h3>
                 <p>恩格斯是第二国际的实际缔造者和精神领袖。在马克思逝世后的12年间，他独立指导各国工人政党的建设和斗争，培养了大批工人运动领袖，为19世纪末国际工人运动的发展作出了不可磨灭的贡献。</p>
-                
+
                 <h3>当代价值</h3>
                 <p>恩格斯对马克思主义哲学的系统阐述、对自然辩证法的研究、对国家起源的分析，至今仍是马克思主义研究的重要内容。他与马克思的合作模式——理论创新与实践斗争相结合、学术研究与革命活动相统一——为后来的马克思主义者树立了榜样。</p>
             </div>
         </div>
+
+        <a href="#" class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">&#8593; 返回顶部</a>
     </main>
 
     <footer class="site-footer">

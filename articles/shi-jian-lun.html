@@ -8,11 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 
-    /* ⬇ 下载原文浮动按钮 */
+    /* ⬇ 下载原文浮动按钮 - 左下角 */
     .download-fab {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -32,7 +32,7 @@
     .download-menu {
         position: fixed;
         bottom: 96px;
-        right: 30px;
+        left: 30px;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -108,6 +108,7 @@
                 <span class="date">1937年7月</span>
                 <span class="category">哲学基础 · 认识论</span>
                 <span class="word-count">约11,000字</span>
+                <span class="length-tag">📄 中篇</span>
             </div>
         </header>
 
@@ -380,9 +381,40 @@
                 <!-- 论证节奏曲线 -->
                 <div class="chart-block">
                     <h3>论证节奏曲线</h3>
-                    <p class="chart-desc">展示文章各部分的"论证强度"——哪里是论证核心，哪里是过渡铺垫</p>
+                    <p class="chart-desc">展示文章各部分的"论证强度"——哪里是论证核心，哪里是过渡铺垫。本文化整条曲线有高有低，不皆是高潮。</p>
                     <div class="chart-container" style="max-width:700px;margin:0 auto;">
                         <canvas id="argumentCurve"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4>📝 结构分析（对应曲线各波段）</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label">开篇 · 认识来源于实践（6/10）</span>
+                            <p>平缓起步。从马克思以前唯物论的缺陷切入，建立"认识依赖实践"的基本命题。这是铺陈阶段，强度中等——毛泽东还在"把球带向前场"。注意他对"唯心论""唯理论"的批评已暗藏，但尚未发力。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">感性认识阶段（7/10）</span>
+                            <p>强度上升。用"考察团到延安"的生活化比喻，把抽象认识论讲得具体可感。这是论证的"吸力"阶段——读者开始觉得"哦，原来是这么回事"。但请注意：此时还没有到达核心。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">★ 第一飞跃 · 感性→理性（9/10）★</span>
+                            <p>第一个高峰。毛泽东集中论证：为什么感性认识不够？为什么必须上升到理性认识？这里出现了全文最密集的逻辑推进——"去粗取精、去伪存真、由此及彼、由表及里"。这是第一个认识飞跃的完整论证，强度极高。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">理性认识阶段展开（6/10）</span>
+                            <p>节奏回落。详细阐释理性认识如何形成、感性如何"不能随便跳到理性"。这是一个"深呼吸"段落，为下一个更高的飞跃积蓄力量。毛泽东在此故意放缓节奏，让读者消化第一个飞跃。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">★ 第二飞跃 · 理性→实践 ★（10/10）</span>
+                            <p>全文最高峰，也是毛泽东最着力的地方。他说"如果只到理性认识为止，那还只说到问题的一半"——这是在放信号弹。紧接着引用列宁"没有革命的理论，就不会有革命的运动"，把论证推向顶点。这一段的强度是刻意的：他要让你记住"第二飞跃更重要"。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">实践检验真理（7/10）</span>
+                            <p>从高峰自然下滑，但保持相当强度。用自然科学和马列主义本身被实践检验的例子，证明"真理的标准只能是社会的实践"。这段既是论证的延伸，也是向结论的过渡。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">循环往复无穷发展（5/10）</span>
+                            <p>最低点，但这是刻意的"哲学式结尾"。毛泽东说认识运动"又没有完成"——这句话把整篇文章从"一次性结论"变成"开放性过程"。强度降低，但意境拉高。就像音乐结尾的渐弱——不是因为没话说了，而是因为话已经说完了。</p>
+                        </div>
                     </div>
                 </div>
 
@@ -560,6 +592,8 @@
 
         .article-meta .author { font-weight: 600; }
         .article-meta .category { color: rgba(255,215,0,0.9); }
+        .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+        .article-meta .length-tag.long { background: rgba(255,165,0,0.25); color: #ffa500; border-color: rgba(255,165,0,0.5); }
 
         /* ===== Tab导航 ===== */
         .tab-nav {
@@ -698,6 +732,20 @@
         .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
         .chart-legend { text-align: center; margin-top: 10px; font-size: 0.9em; }
         .chart-legend span { margin: 0 10px; }
+
+        /* 结构分析样式 */
+        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+        .structure-analysis h4 { color: #8b0000; margin-bottom: 12px; font-size: 1em; }
+        body.dark-mode .structure-analysis h4 { color: #c41e3a; }
+        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+        body.dark-mode .analysis-item { border-color: #444; }
+        .analysis-item:last-child { border-bottom: none; }
+        .analysis-label { font-weight: 600; color: #8b0000; font-size: 0.92em; display: block; margin-bottom: 4px; }
+        body.dark-mode .analysis-label { color: #c41e3a; }
+        .analysis-label.highlight { color: #c41e3a; font-size: 0.96em; }
+        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+        body.dark-mode .analysis-item p { color: #ccc; }
 
         /* ===== 理论树 ===== */
         .theory-tree {
@@ -917,34 +965,39 @@
                 }
             });
 
-            // 论证节奏曲线
+            // 论证节奏曲线 —— 有高有低
             const argCtx = document.getElementById('argumentCurve').getContext('2d');
             new Chart(argCtx, {
                 type: 'line',
                 data: {
-                    labels: ['开篇\n实践基础', '感性认识\n阶段', '第一飞跃\n（感→理）', '理性认识\n阶段', '第二飞跃\n（理→践）★', '实践检验\n真理', '循环往复\n无穷发展'],
+                    labels: ['开篇\n实践基础', '感性认识\n阶段', '第一飞跃\n（感→理）★', '理性认识\n展开', '第二飞跃\n（理→践）★', '实践\n检验真理', '循环往复\n无穷发展'],
                     datasets: [{
                         label: '论证强度',
-                        data: [6, 7, 8.5, 7.5, 9.5, 8, 8.5],
+                        data: [6, 7, 9, 6, 10, 7, 5],
                         borderColor: '#e53e3e',
                         backgroundColor: 'rgba(229,62,62,0.08)',
                         fill: true,
-                        tension: 0.4,
-                        pointRadius: 6,
-                        pointHoverRadius: 8,
-                        borderWidth: 2.5
+                        tension: 0.35,
+                        pointRadius: 7,
+                        pointHoverRadius: 9,
+                        borderWidth: 2.5,
+                        pointBackgroundColor: ['#718096','#718096','#e53e3e','#718096','#c41e3a','#718096','#a0aec0']
                     }]
                 },
                 options: {
                     responsive: true,
                     plugins: {
                         legend: { display: false },
-                        annotation: {}
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) { return '论证强度：' + ctx.parsed.y + '/10'; }
+                            }
+                        }
                     },
                     scales: {
                         y: {
                             min: 0, max: 10,
-                            title: { display: true, text: '论证强度' }
+                            title: { display: true, text: '论证强度（低→高）', font: { size: 12 } }
                         },
                         x: {
                             ticks: { font: { size: 11 } }

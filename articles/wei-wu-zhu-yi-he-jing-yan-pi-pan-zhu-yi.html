@@ -148,6 +148,21 @@
             .article-header h1 { font-size: 1.8rem; }
             .tab-content { padding: 1.25rem; }
         }
+        .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
+        body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
+
+        /* ===== 结构分析样式 ===== */
+        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
+        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
+        .structure-analysis h4 { color: #8b0000; margin-bottom: 12px; font-size: 1em; }
+        body.dark-mode .structure-analysis h4 { color: #c41e3a; }
+        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+        body.dark-mode .analysis-item { border-color: #444; }
+        .analysis-label { font-weight: 600; color: #8b0000; font-size: 0.92em; display: block; margin-bottom: 4px; }
+        body.dark-mode .analysis-label { color: #c41e3a; }
+        .analysis-label.highlight { color: #c41e3a; font-size: 0.96em; }
+        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
+        body.dark-mode .analysis-item p { color: #ccc; }
     </style>
 <style>
 
@@ -155,7 +170,7 @@
     .download-fab {
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        left: 30px;
         width: 56px;
         height: 56px;
         border-radius: 50%;
@@ -175,7 +190,7 @@
     .download-menu {
         position: fixed;
         bottom: 96px;
-        right: 30px;
+        left: 30px;
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -250,6 +265,7 @@
                 <span class="date">1908年2—10月</span>
                 <span class="category">哲学基础</span>
                 <span class="word-count">约24万字</span>
+                <span class="length-tag">📖 长篇</span>
             </div>
         </header>
 
@@ -1627,6 +1643,39 @@
                     <canvas id="radarChart"></canvas>
                 </div>
             </div>
+
+            <div class="chart-container">
+                <h4>📈 论证节奏曲线</h4>
+                <canvas id="rhythmChart" height="200"></canvas>
+            </div>
+
+            <div class="structure-analysis">
+                <h4>📊 论证结构解析</h4>
+                <div class="analysis-item">
+                    <span class="analysis-label">引子 (5分)</span>
+                    <p>列宁写作背景与论战对象介绍，认识论基本问题提出，节奏平缓开局。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">认识论前提 (8分)</span>
+                    <p>系统阐述唯物主义认识论，批判马赫主义的唯心前提，理论张力逐步上升。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">批判展开 (9分)</span>
+                    <p>对马赫、阿芬那留斯等人的经验批判主义进行系统批判，论证有力。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label highlight">物理学危机 (10分)★</span>
+                    <p>深入分析19世纪末物理学危机的哲学意义，揭示"物质消失"论的错误，这是全文的论证高潮。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">哲学党派性 (7分)</span>
+                    <p>阐明哲学上的党性原则，唯物主义与唯心主义的根本对立，理论立场鲜明。</p>
+                </div>
+                <div class="analysis-item">
+                    <span class="analysis-label">总结 (5分)</span>
+                    <p>总结全文核心观点，强调唯物主义认识论的真理性和马赫主义的反动性，节奏趋于平缓收束。</p>
+                </div>
+            </div>
         </div>
 
         <div class="tab-content" id="puzzle">
@@ -1697,6 +1746,33 @@
                         datasets: [{ label: '文章特征', data: [9, 6, 9, 8, 7, 6], backgroundColor: c.primary + '40', borderColor: c.primary, borderWidth: 2, pointBackgroundColor: c.primary }]
                     },
                     options: { responsive: true, scales: { r: { beginAtZero: true, max: 10 } } }
+                });
+            }
+
+            // 论证节奏曲线
+            const rhythmCtx = document.getElementById('rhythmChart');
+            if (rhythmCtx) {
+                new Chart(rhythmCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['引子','认识论前提','批判展开','物理学危机','哲学党派性','总结'],
+                        datasets: [{
+                            data: [5,8,9,10,7,5],
+                            borderColor: c.primary,
+                            backgroundColor: c.primary + '20',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            borderWidth: 2.5,
+                            pointBackgroundColor: [c.secondary, c.secondary, c.secondary, c.primary, c.secondary, c.secondary]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.parsed.y + '分' } } },
+                        scales: { y: { min: 0, max: 10, title: { display: true, text: '论证强度' } }, x: { title: { display: true, text: '文章结构' } } }
+                    }
                 });
             }
         }
