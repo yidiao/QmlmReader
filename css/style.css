@@ -1109,6 +1109,11 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
     flex-shrink: 0;
 }
 
+/* 桌面端默认隐藏移动端关闭按钮 */
+.nav-close-btn {
+    display: none;
+}
+
 .hamburger-btn:hover {
     background: rgba(255,255,255,0.1);
 }
@@ -1186,23 +1191,27 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
         display: flex;
     }
 
-    /* 全屏菜单关闭按钮 */
-    .main-nav::before {
-        content: '✕';
+    /* 全屏菜单关闭按钮（真实按钮，可点击） */
+    .main-nav .nav-close-btn {
         position: fixed;
         top: 18px;
         right: 20px;
         font-size: 1.4rem;
         color: white;
-        cursor: pointer;
-        z-index: 1001;
+        background: rgba(255,255,255,0.15);
+        border: none;
         width: 36px;
         height: 36px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        background: rgba(255,255,255,0.15);
+        cursor: pointer;
+        z-index: 1001;
+        transition: background 0.2s;
+    }
+    .main-nav .nav-close-btn:hover {
+        background: rgba(255,255,255,0.3);
     }
 
     .main-nav a,
@@ -1388,6 +1397,21 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
 
 /* ==================== 宽屏：3列 ==================== */
 @media (min-width: 769px) {
+    /* 强制隐藏汉堡按钮，并重置 open 状态防止叉号残留 */
+    .hamburger-btn,
+    .hamburger-btn.open {
+        display: none !important;
+    }
+
+    /* 桌面端隐藏移动端菜单的关闭按钮（X）*/
+    .nav-close-btn {
+        display: none !important;
+    }
+
+    .main-nav {
+        display: flex !important;
+    }
+
     .featured-grid {
         grid-template-columns: repeat(3, 1fr) !important;
     }

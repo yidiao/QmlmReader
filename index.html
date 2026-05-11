@@ -705,6 +705,7 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                 <span></span>
             </button>
             <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
                 <a href="index.html" class="active">首页</a>
                 <a href="articles.html">文章</a>
                 <a href="masters.html">导师</a>
@@ -743,7 +744,7 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
     <div class="search-section">
         <div class="container">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="搜索文章、作者、关键词..." autocomplete="off">
+                <input type="text" id="searchInput" placeholder="搜索文章、作者、关键词...（现已支持文章外关键词搜索）" autocomplete="off">
                 <button onclick="performSearch()">搜索</button>
                 <div class="search-results" id="searchResults"></div>
             </div>

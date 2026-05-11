@@ -26,6 +26,17 @@ const articleIndex = [
     { title: '论中国革命的前途', file: 'articles/lun-zhongguo-ge-ming-de-qiantu.html', author: '斯大林', authorKey: 'stalin', year: '1926', priority: '5', category: '政治理论', keywords: ['中国革命', '农民问题', '无产阶级领导权', '非资本主义道路'] },
     // 四星
     { title: '湖南农民运动考察报告', file: 'articles/nong-min-yun-dong.html', author: '毛泽东', authorKey: 'mao', year: '1927', priority: '4', category: '政治理论', keywords: ['农民运动', '阶级分析', '农村'] },
+    // 五星 - 马克思恩格斯（补充）
+    { title: '德意志意识形态', file: 'articles/de-yi-zhi-yi-xing-tai.html', author: '马克思 · 恩格斯', authorKey: 'marx', year: '1845', priority: '5', category: '哲学基础', keywords: ['历史唯物主义', '意识形态', '费尔巴哈', '生产力', '交往形式'] },
+    { title: '关于费尔巴哈的提纲', file: 'articles/guan-yu-fei-er-ba-ha-de-ti-gang.html', author: '马克思', authorKey: 'marx', year: '1845', priority: '5', category: '哲学基础', keywords: ['费尔巴哈', '实践', '唯物主义', '提纲', '十一条'] },
+    { title: '1844年经济学哲学手稿', file: 'articles/1844-nian-jing-ji-xue-zhe-xue-shou-gao.html', author: '马克思', authorKey: 'marx', year: '1844', priority: '4', category: '哲学基础', keywords: ['异化劳动', '手稿', '经济学', '哲学', '共产主义'] },
+    { title: '哥达纲领批判', file: 'articles/ge-da-gang-ling.html', author: '马克思', authorKey: 'marx', year: '1875', priority: '5', category: '政治理论', keywords: ['哥达纲领', '科学社会主义', '按劳分配', '共产主义两个阶段'] },
+    { title: '反杜林论', file: 'articles/fan-du-lin-lun.html', author: '恩格斯', authorKey: 'engels', year: '1878', priority: '5', category: '哲学基础', keywords: ['杜林', '马克思主义哲学', '政治经济学', '科学社会主义', '百科全书'] },
+    { title: '家庭、私有制和国家的起源', file: 'articles/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html', author: '恩格斯', authorKey: 'engels', year: '1884', priority: '4', category: '政治理论', keywords: ['家庭', '私有制', '国家', '起源', '摩尔根'] },
+    // 五星 - 列宁（补充）
+    { title: '帝国主义是资本主义的最高阶段', file: 'articles/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html', author: '列宁', authorKey: 'lenin', year: '1916', priority: '5', category: '政治经济学', keywords: ['帝国主义', '垄断资本主义', '列宁', '资本主义发展', '殖民'] },
+    // 四星 - 毛泽东（补充）
+    { title: '论十大关系', file: 'articles/lun-shi-da-guan-xi.html', author: '毛泽东', authorKey: 'mao', year: '1956', priority: '4', category: '政治理论', keywords: ['十大关系', '社会主义建设', '中国', '1956', '工业化'] },
 ];
 
 // ------ 2. 文艺视频索引 ------

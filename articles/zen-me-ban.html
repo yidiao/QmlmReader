@@ -88,7 +88,7 @@
     .toggle-icon { font-size: 0.8rem; transition: transform 0.25s; flex-shrink: 0; }
     .chapter.collapsed .toggle-icon { transform: rotate(-90deg); }
     .chapter-content {
-        padding: 1.3rem; background: #fafafa; max-height: 5000px; overflow: hidden;
+        padding: 1.3rem; background: #fafafa;  overflow: hidden;
         transition: max-height 0.4s ease, padding 0.3s ease;
     }
     body.dark-mode .chapter-content { background: #222; }
@@ -134,28 +134,6 @@
     .site-footer { background: #2a2a2a; color: #aaa; padding: 2rem 0; text-align: center; margin-top: 3rem; }
     .footer-note { color: #ffd700; margin-top: 0.5rem; font-size: 0.9rem; }
 
-    @media(max-width:768px) {
-        .tab-nav { padding: 0.75rem; top: 60px; }
-        .tab-btn { padding: 8px 12px; font-size: 0.85em; }
-        .article-header { padding: 2rem 1rem; }
-        .article-header h1 { font-size: 1.8rem; }
-        .tab-content { padding: 1.25rem; }
-    }
-    .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
-        body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
-
-        /* ===== 结构分析样式 ===== */
-        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
-        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
-        .structure-analysis h4 { color: #6a1b9a; margin-bottom: 12px; font-size: 1em; }
-        body.dark-mode .structure-analysis h4 { color: #8e24aa; }
-        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
-        body.dark-mode .analysis-item { border-color: #444; }
-        .analysis-label { font-weight: 600; color: #6a1b9a; font-size: 0.92em; display: block; margin-bottom: 4px; }
-        body.dark-mode .analysis-label { color: #8e24aa; }
-        .analysis-label.highlight { color: #8e24aa; font-size: 0.96em; }
-        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
-        body.dark-mode .analysis-item p { color: #ccc; }
     </style>
 <style>
 
@@ -208,19 +186,32 @@
 </head>
 <body data-category="党的建设">
 
-    <header class="site-header" style="background:#2a0a3a;padding:1rem 0;">
-        <div class="container" style="max-width:1200px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;">
-            <div style="display:flex;align-items:center;gap:10px;color:white;">
-                <span style="font-size:1.5rem;">☭</span>
-                <span style="font-weight:bold;">青年马列毛主义驿站</span>
+        <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
             </div>
-            <nav style="display:flex;gap:20px;">
-                <a href="../index.html" style="color:#ccc;text-decoration:none;">首页</a>
-                <a href="javascript:history.back()" style="color:white;text-decoration:none;font-weight:bold;">文章</a>
-                <a href="../masters.html" style="color:#ccc;text-decoration:none;">导师</a>
-                <a href="../toolkit.html" style="color:#ccc;text-decoration:none;">工具集</a>
-                <a href="../gallery.html" style="color:#ccc;text-decoration:none;">文艺</a>
-                <a href="../puzzle.html" style="color:#ffd700;text-decoration:none;">🧩 理论拼图</a>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+                <a href="../index.html">首页</a>
+                <a href="../articles.html">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
             </nav>
         </div>
     </header>
@@ -969,6 +960,52 @@
     <script src="../js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+
+        // 汉堡菜单控制
+(function() {
+    const hamburger = document.getElementById('hamburgerBtn');
+    const nav = document.getElementById('mainNav');
+    const overlay = document.getElementById('navOverlay');
+    
+    if (!hamburger || !nav) return;
+    
+    function openMenu() {
+        nav.classList.add('open');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeMenu() {
+        nav.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (nav.classList.contains('open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+    
+    overlay.addEventListener('click', closeMenu);
+    
+    // 点击菜单内链接后关闭
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+    
+    // ESC 键关闭
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && nav.classList.contains('open')) {
+            closeMenu();
+        }
+    });
+})();
+
+
         function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -977,7 +1014,6 @@
             if (tabId === 'visual') {
                 setTimeout(initCharts, 100);
             }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleChapter(titleEl) {
@@ -988,7 +1024,7 @@
                 content.style.maxHeight = '0';
                 content.style.padding = '0 1.2rem';
             } else {
-                content.style.maxHeight = '5000px';
+                content.style.maxHeight = '1000000px';
                 content.style.padding = '1.2rem';
             }
         }

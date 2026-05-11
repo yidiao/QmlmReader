@@ -366,45 +366,10 @@
         }
 
         /* 响应式 */
-        @media (max-width: 768px) {
-            .tool-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .tool-body {
-                padding: 24px;
-            }
-            .experimental-hero {
-                padding: 32px 24px;
-            }
-            .experimental-hero h1 {
-                font-size: 1.6rem;
-            }
-            .main-nav {
-                margin-top: 12px;
-                justify-content: center;
-            }
-        }
-
-        /* 面包屑 */
-        .breadcrumb {
-            margin: 20px 0;
-            font-size: 0.85rem;
-        }
-        .breadcrumb a {
-            color: #c41e3a;
-            text-decoration: none;
-        }
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-        body.dark-mode .breadcrumb a {
-            color: #ff8a8a;
-        }
-    </style>
+        </style>
 </head>
 <body>
-    <header class="site-header">
+        <header class="site-header">
         <div class="container">
             <div class="logo">
                 <span class="logo-icon">☭</span>
@@ -413,13 +378,19 @@
                     <span class="logo-sub">Qmlm Reader</span>
                 </div>
             </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
                 <a href="index.html">首页</a>
                 <a href="articles.html">文章</a>
                 <a href="masters.html">导师</a>
                 <a href="toolkit.html">工具集</a>
                 <a href="gallery.html">文艺</a>
-                <a href="puzzle.html">🧩 理论拼图</a>
+                <a href="puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
                 <a href="international.html">🌍 国际共运</a>
                 <a href="rectify.html">正名</a>
                 <a href="about.html">关于</a>
@@ -634,5 +605,6 @@
             }
         }
     </script>
+    <script src="js/main.js"></script>
 </body>
 </html>

@@ -169,6 +169,17 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
+    // 点击菜单内关闭按钮（X）关闭菜单
+    const closeBtn = nav.querySelector('.nav-close-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            nav.classList.remove('open');
+            hamburger.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    }
+
     // 点击菜单内链接后自动关闭
     nav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function() {
@@ -190,6 +201,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // ESC 键关闭菜单
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && nav.classList.contains('open')) {
+            nav.classList.remove('open');
+            hamburger.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // 窗口调整大小时，如果从移动端切换到桌面端，强制关闭菜单
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 769) {
             nav.classList.remove('open');
             hamburger.classList.remove('open');
             document.body.style.overflow = '';

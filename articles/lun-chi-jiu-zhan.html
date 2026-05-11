@@ -6,54 +6,7 @@
     <title>论持久战 - 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
 
-    /* ⬇ 下载原文浮动按钮 */
-    .download-fab {
-        position: fixed;
-        bottom: 30px;
-        left: 30px;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        background: var(--party-primary, #1b5e20);
-        color: white;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        font-size: 22px;
-        z-index: 1000;
-        transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .download-fab:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
-    .download-menu {
-        position: fixed;
-        bottom: 96px;
-        left: 30px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        padding: 1rem 1.2rem;
-        min-width: 180px;
-        display: none;
-        z-index: 1001;
-    }
-    body.dark-mode .download-menu { background: #2a2a2a; color: white; }
-    .download-menu.show { display: block; }
-    .download-menu h4 { margin: 0 0 0.6rem 0; font-size: 0.95rem; }
-    body.dark-mode .download-menu h4 { color: #ccc; }
-    .dl-link {
-        display: block; padding: 7px 10px; margin: 4px 0;
-        background: #f5f5f5; border-radius: 6px;
-        text-decoration: none; color: #333; font-size: 0.9rem;
-        transition: all 0.2s;
-    }
-    body.dark-mode .dl-link { background: #3a3a3a; color: #eee; }
-    .dl-link:hover { background: var(--party-primary, #c41e3a); color: white; }
-</style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -72,8 +25,9 @@
                 <span></span>
             </button>
             <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
                 <a href="../index.html">首页</a>
-                <a href="javascript:history.back()" class="active">文章</a>
+                <a href="../articles.html" class="active">文章</a>
                 <a href="../masters.html">导师</a>
                 <a href="../toolkit.html">工具集</a>
                 <a href="../gallery.html">文艺</a>
@@ -687,41 +641,38 @@
 
     </main>
 
-    <style>
-        /* ===== 军事战略深绿渐变头部 ===== */
-        .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
-        
-        .article-header {
-            text-align: center;
-            padding: 3rem 2rem;
-            border-bottom: 2px solid #1b5e20;
-            color: white;
-            background: linear-gradient(135deg, #0a2910 0%, #1b5e20 50%, #388e3c 100%);
-            position: relative;
-            overflow: hidden;
+
+    <style>        /* ==================== 变量定义 ==================== */
+        :root {
+            --military-primary: #1b5e20;
+            --military-secondary: #388e3c;
+            --military-gradient: linear-gradient(135deg, #0a2910 0%, #1b5e20 100%);
+            --gold: rgba(255,215,0,0.9);
         }
 
+        /* ==================== 文章头部 ==================== */
+        .article-header {
+            position: relative;
+            overflow: hidden;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+            background: var(--military-gradient);
+        }
         .article-header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3Ccircle cx='20' cy='80' r='25' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='0.5'/%3E%3Ccircle cx='80' cy='20' r='20' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='0.5'/%3E%3C/svg%3E");
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3C/svg%3E");
             background-size: 120px;
             pointer-events: none;
         }
-
-        .article-header > * {
-            position: relative;
-            z-index: 1;
-        }
+        .article-header > * { position: relative; z-index: 1; }
 
         .importance-badge {
             display: inline-block;
-            background: rgba(255,215,0,0.9);
-            color: #1b5e20;
+            background: var(--gold);
+            color: #1a1a1a;
             padding: 6px 20px;
             border-radius: 25px;
             font-size: 0.9rem;
@@ -729,21 +680,18 @@
             margin-bottom: 1rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
-
         .article-header h1 {
             font-size: 2.5rem;
             margin: 0.5rem 0;
             text-shadow: 2px 3px 6px rgba(0,0,0,0.4);
             font-family: 'STSong', 'SimSun', serif;
         }
-
         .article-subtitle {
             font-size: 1.15rem;
             opacity: 0.9;
             margin: 0.5rem 0;
             font-style: italic;
         }
-
         .article-meta {
             display: flex;
             justify-content: center;
@@ -752,118 +700,494 @@
             margin-top: 1.2rem;
             font-size: 0.95rem;
         }
-
         .article-meta span {
             background: rgba(0,0,0,0.25);
             padding: 5px 14px;
             border-radius: 18px;
             backdrop-filter: blur(4px);
         }
-
         .article-meta .author { font-weight: 600; }
-        .article-meta .category { color: rgba(255,215,0,0.9); }
+        .article-meta .category { color: var(--gold); }
+        .article-meta .length-tag {
+            background: rgba(255,215,0,0.25);
+            color: var(--gold);
+            border: 1px solid rgba(255,215,0,0.5);
+        }
 
-        .tab-nav { 
-            display: flex; 
-            gap: 4px; 
-            margin: 30px 0 0; 
-            border-bottom: 2px solid #e2e8f0; 
-            overflow-x: auto; 
+        /* ==================== 返回导航 ==================== */
+        .back-nav {
+            background: #f8f8f8;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 0;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--military-primary);
+        }
+
+        /* ==================== 主布局 ==================== */
+        .article-detail {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==================== Tab导航 ==================== */
+        .tab-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
             background: #f8f8f8;
             padding: 1rem;
             border-radius: 12px 12px 0 0;
+            border-bottom: 2px solid #e0e0e0;
+            position: sticky;
+            top: 70px;
+            z-index: 50;
         }
-        .tab-btn { background: none; border: none; padding: 10px 18px; cursor: pointer; color: #666; font-size: 0.95em; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; border-radius: 8px; }
-        .tab-btn:hover { background: #e8e8e8; color: #1b5e20; }
-        .tab-btn.active { background: #1b5e20; color: white; font-weight: 600; }
-        .tab-content { display: none; padding: 30px 0; background: white; border-radius: 0 0 12px 12px; }
+        .tab-btn {
+            padding: 10px 16px;
+            border: none;
+            background: transparent;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            transition: all 0.25s;
+        }
+        .tab-btn:hover {
+            background: #e8e8e8;
+            color: #333;
+        }
+        .tab-btn.active {
+            color: white;
+            font-weight: 600;
+            background: var(--military-primary);
+        }
+
+        /* ==================== Tab内容区 ==================== */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 12px 12px;
+            min-height: 60vh;
+        }
         .tab-content.active { display: block; }
-        
-        .text-intro { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-left: 4px solid #388e3c; padding: 14px 20px; margin-bottom: 24px; border-radius: 0 6px 6px 0; }
-        .chapter { margin-bottom: 16px; border: 1px solid #e8e8e8; border-radius: 8px; overflow: hidden; }
-        .chapter-title { background: linear-gradient(135deg, #1b5e20, #388e3c); padding: 14px 20px; margin: 0; cursor: pointer; font-size: 1.05em; color: white; display: flex; align-items: center; gap: 10px; user-select: none; transition: filter 0.2s; }
-        .chapter-title:hover { filter: brightness(1.1); }
-        .toggle-icon { font-size: 0.8em; transition: transform 0.2s; flex-shrink: 0; }
-        .chapter-title.collapsed .toggle-icon { transform: rotate(-90deg); }
-        .chapter-content { padding: 20px 24px; line-height: 1.9; color: #2d2d2d; font-size: 1em; background: #fafafa; }
-        .chapter-content p { margin-bottom: 16px; text-indent: 2em; }
-        
-        .reading-guide, .difficulty-section, .dialogue-section, .action-section, .visualization-section, .puzzle-section, .further-reading { line-height: 1.9; }
-        .guide-block, .diff-item, .dialogue-block, .action-item, .chart-block, .reading-item { margin-bottom: 28px; padding: 20px 24px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .guide-block h3, .dialogue-block h3, .action-item h3 { color: #1b5e20; margin-bottom: 12px; font-size: 1.05em; }
-        .wrong { background: #fff5f5; border-left: 4px solid #fc8181; padding: 10px 16px; margin-bottom: 10px; border-radius: 0 4px 4px 0; color: #742a2a; }
-        .correct { background: #f0fff4; border-left: 4px solid #68d391; padding: 10px 16px; border-radius: 0 4px 4px 0; color: #1a4731; }
-        .chart-container { position: relative; }
-        .chart-block h3 { color: #1b5e20; margin-bottom: 8px; }
-        .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
-        .chart-legend { text-align: center; margin-top: 10px; font-size: 0.9em; }
-        .chart-legend span { margin: 0 10px; }
-        .theory-tree { text-align: center; padding: 20px 0; }
-        .theory-node { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 0.9em; margin: 6px; }
-        .theory-node.root { background: #1b5e20; color: white; font-weight: bold; }
-        .theory-node.branch { background: #2d3748; color: white; }
-        .theory-node.current { background: #1b5e20; color: white; font-weight: bold; }
-        .theory-node.related { background: #e2e8f0; color: #333; }
-        .theory-branches { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 12px; }
-        .theory-branch { text-align: center; }
-        .theory-sub { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
-        .puzzle-intro, .puzzle-position, .puzzle-connection, .puzzle-modern { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .puzzle-position h3, .puzzle-connection h3, .puzzle-modern h3 { color: #1b5e20; margin-bottom: 12px; }
-        .further-reading .reading-item h3 { color: #1b5e20; margin-bottom: 8px; font-size: 1em; }
-        
-        .navbar { position: fixed; top: 0; left: 0; right: 0; background: #1a1a1a; padding: 0 24px; display: flex; align-items: center; height: 60px; z-index: 1000; gap: 16px; }
-        .nav-brand a { color: #e53e3e; font-weight: bold; font-size: 1.1em; text-decoration: none; }
-        .nav-search { flex: 1; display: flex; gap: 6px; max-width: 300px; }
-        .nav-search input { flex: 1; padding: 5px 10px; border-radius: 4px; border: none; font-size: 0.85em; }
-        .nav-search button { background: #e53e3e; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
-        .nav-menu { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; }
-        .nav-menu li a { color: #ccc; text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 0.9em; }
-        .nav-menu li a:hover, .nav-menu li a.active { color: white; background: #c53030; }
-        
-        /* 理论拼图增强样式 */
-        .puzzle-timeline { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .puzzle-timeline h3 { color: #1b5e20; margin-bottom: 16px; }
-        .timeline-track { display: flex; gap: 0; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
-        .timeline-item { display: flex; flex-direction: column; align-items: center; min-width: 76px; position: relative; flex: 1; }
-        .timeline-item::after { content: ''; position: absolute; top: 9px; left: 50%; width: 100%; height: 2px; background: #ddd; z-index: 0; }
-        .timeline-item:last-child::after { display: none; }
-        .timeline-dot { width: 18px; height: 18px; border-radius: 50%; background: #ddd; border: 2px solid #bbb; z-index: 1; position: relative; }
-        .timeline-dot-active { width: 22px; height: 22px; border-radius: 50%; background: #388e3c; border: 3px solid #1b5e20; z-index: 1; position: relative; box-shadow: 0 0 8px rgba(56,142,60,0.4); }
-        .timeline-year { font-size: 0.75em; color: #555; margin-top: 6px; font-weight: 500; }
-        .timeline-label { font-size: 0.68em; color: #888; text-align: center; margin-top: 2px; line-height: 1.3; }
-        .timeline-here { font-size: 0.7em; color: #388e3c; font-weight: bold; margin-top: 2px; white-space: nowrap; }
-        .timeline-item.active .timeline-year { color: #388e3c; font-weight: bold; }
 
-        .puzzle-links { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .puzzle-links h3 { color: #1b5e20; margin-bottom: 8px; }
-        .puzzle-links-note { color: #888; font-size: 0.85em; margin-bottom: 16px; line-height: 1.6; }
-        .conn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
-        .conn-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: white; border-radius: 8px; border: 1px solid #e8e8e8; border-left: 4px solid #1b5e20; text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.15s; }
-        a.conn-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
-        .conn-wip { opacity: 0.5; cursor: default; }
-        .conn-dir { font-size: 1.1em; font-weight: bold; line-height: 1; }
-        .conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; margin-top: 2px; }
-        .conn-label { font-size: 0.76em; color: #888; }
-        .conn-relation { font-size: 0.82em; color: #555; line-height: 1.5; margin-top: 3px; border-top: 1px solid #f0f0f0; padding-top: 4px; }
-        .conn-wip-badge { display: inline-block; background: #fed7aa; color: #c05621; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; margin-top: 4px; }
-
-        /* ===== Dark Mode ===== */
-        body.dark-mode .article-header {
-            background: linear-gradient(135deg, #0a1a0a 0%, #0d2010 100%);
+        /* ==================== 原文样式 ==================== */
+        .original-text { line-height: 1.9; font-size: 1.05rem; }
+        .text-intro {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-left: 4px solid #ffc107;
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
         }
+        .chapter {
+            margin-bottom: 1.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .chapter-title {
+            padding: 1rem 1.3rem;
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: white;
+            background: linear-gradient(135deg, var(--military-primary), var(--military-secondary));
+        }
+        .chapter-title:hover { filter: brightness(1.1); }
+        .toggle-icon {
+            font-size: 0.8rem;
+            transition: transform 0.25s;
+        }
+        .chapter.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .chapter-content {
+            padding: 1.3rem;
+            background: #fafafa;
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .chapter.collapsed .chapter-content {
+            max-height: 0;
+            padding: 0 1.3rem;
+        }
+        .chapter-content p {
+            text-indent: 2em;
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        /* ==================== 精读通用卡片（美化版） ==================== */
+        .reading-guide, .difficulty-analysis, .dialogue-space,
+        .action-experiment, .visual-section, .puzzle-section, .further-reading {
+            line-height: 1.9;
+        }
+
+        /* 卡片通用样式 - 毛玻璃/柔和阴影效果 */
+        .guide-section, .difficulty-list, .dialogue-section,
+        .experiment-list, .puzzle-map, .reading-list,
+        .guide-block, .diff-item, .dialogue-item, .action-item,
+        .chart-block, .reading-item, .difficulty-item,
+        .puzzle-intro, .puzzle-position, .puzzle-connection, 
+        .puzzle-modern, .puzzle-timeline, .puzzle-links {
+            margin-bottom: 28px;
+            padding: 24px 28px;
+            background: #ffffff;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+        .guide-section:hover, .dialogue-item:hover, .experiment-list .experiment-item:hover,
+        .puzzle-intro:hover, .reading-item:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* 卡片内部标题 */
+        .guide-section h4, .difficulty-list h4, .dialogue-item h4,
+        .experiment-item h4, .reading-item h4,
+        .puzzle-position h3, .puzzle-connection h3, .puzzle-modern h3,
+        .puzzle-timeline h3, .puzzle-links h3,
+        .guide-block h3, .dialogue-block h3, .action-item h3,
+        .chart-block h3 {
+            color: var(--military-primary);
+            margin-bottom: 16px;
+            margin-top: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-left: 4px solid var(--military-primary);
+            padding-left: 14px;
+        }
+
+        /* 读法提示的 guide-section 特殊处理 */
+        .guide-section {
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+        .guide-section:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        .guide-section h4 {
+            margin-bottom: 16px;
+        }
+        .guide-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .guide-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 16px 20px;
+            background: #fafafa;
+            border-radius: 16px;
+            transition: all 0.2s;
+        }
+        .guide-item:hover {
+            background: #f5f5f5;
+            transform: translateX(4px);
+        }
+        .guide-num {
+            width: 32px;
+            height: 32px;
+            background: var(--military-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .guide-item p {
+            margin: 0;
+            flex: 1;
+        }
+        .guide-item strong {
+            color: var(--military-primary);
+        }
+
+        /* 难点解析的 difficulty-item */
+        .difficulty-item {
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+        .difficulty-wrong, .difficulty-right {
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+        .difficulty-wrong {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+        }
+        .difficulty-right {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+        }
+        .difficulty-icon {
+            font-size: 1.1rem;
+            margin-right: 8px;
+        }
+        .difficulty-wrong p, .difficulty-right p {
+            margin: 0;
+            display: inline;
+        }
+
+        /* 对话空间样式 */
+        .dialogue-item ul {
+            padding-left: 1.5rem;
+            margin: 8px 0 0;
+        }
+        .dialogue-item li {
+            margin: 8px 0;
+        }
+
+        /* 行动实验样式 */
+        .experiment-list .experiment-item {
+            padding: 20px 24px;
+            background: #fafafa;
+            border-radius: 16px;
+        }
+        .experiment-item h4 {
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+        .experiment-item ul {
+            padding-left: 1.5rem;
+            margin: 8px 0 0;
+        }
+        .experiment-item li {
+            margin: 6px 0;
+        }
+
+        /* 理论拼图样式 */
+        .puzzle-map {
+            padding: 20px;
+        }
+        .puzzle-center {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .puzzle-piece {
+            display: inline-block;
+            background: var(--military-primary);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        .puzzle-piece h4 {
+            margin: 0 0 8px;
+            color: white;
+            border-left: none;
+            padding-left: 0;
+        }
+        .puzzle-piece p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .puzzle-connections {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .puzzle-connection {
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+        }
+        .puzzle-related {
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 12px;
+        }
+        .puzzle-related h5 {
+            margin: 0 0 6px;
+            color: var(--military-primary);
+        }
+        .puzzle-related a {
+            text-decoration: none;
+            color: var(--military-primary);
+            font-weight: 500;
+        }
+        .puzzle-related p {
+            margin: 6px 0 0;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .puzzle-insight {
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 16px;
+        }
+        .puzzle-insight h4 {
+            color: var(--military-primary);
+            margin-top: 0;
+        }
+        .puzzle-insight ul {
+            padding-left: 1.5rem;
+        }
+
+        /* 时间轴 */
+        .timeline-track {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 76px;
+            position: relative;
+            flex: 1;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 9px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #ddd;
+            z-index: 0;
+        }
+        .timeline-item:last-child::after { display: none; }
+        .timeline-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ddd;
+            border: 2px solid #bbb;
+            z-index: 1;
+            position: relative;
+        }
+        .timeline-dot-active {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--military-primary);
+            border: 3px solid #1b5e20;
+            z-index: 1;
+            position: relative;
+        }
+        .timeline-year { font-size: 0.75em; color: #555; margin-top: 6px; font-weight: 500; }
+        .timeline-label { font-size: 0.68em; color: #888; text-align: center; margin-top: 2px; }
+        .timeline-here { font-size: 0.7em; color: var(--military-primary); font-weight: bold; margin-top: 2px; }
+        .timeline-item.active .timeline-year { color: var(--military-primary); font-weight: bold; }
+
+        /* 联结卡片网格 */
+        .conn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .conn-card {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 12px 14px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e8e8e8;
+            border-left: 4px solid var(--military-primary);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+        .conn-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .conn-dir { font-size: 1.1em; font-weight: bold; }
+        .conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; }
+        .conn-label { font-size: 0.76em; color: #888; }
+        .conn-relation { font-size: 0.82em; color: #555; margin-top: 4px; padding-top: 4px; border-top: 1px solid #f0f0f0; }
+
+        /* 图表容器 */
+        .chart-container {
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* 结构分析 */
+        .structure-analysis {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f9f9f9;
+            border-radius: 12px;
+        }
+        .analysis-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .analysis-item:last-child {
+            border-bottom: none;
+        }
+        .analysis-label {
+            font-weight: 600;
+            color: var(--military-primary);
+            display: block;
+            margin-bottom: 4px;
+        }
+        .analysis-label.highlight {
+            color: #c41e3a;
+        }
+        .analysis-item p {
+            margin: 0;
+            font-size: 0.88em;
+            color: #555;
+        }
+
+        /* ==================== 暗黑模式 ==================== */
+        body.dark-mode .back-nav,
         body.dark-mode .tab-nav {
             background: #2a2a2a;
             border-color: #444;
         }
         body.dark-mode .tab-btn:hover {
             background: #3a3a3a;
-            color: #388e3c;
+            color: #fff;
         }
-        body.dark-mode .tab-content {
+        body.dark-mode .tab-content,
+        body.dark-mode .chapter-nav {
             background: #1a1a1a;
         }
         body.dark-mode .text-intro {
-            background: linear-gradient(135deg, #1a2a1a, #203020);
+            background: linear-gradient(135deg, #2d2a1a, #3d3520);
         }
         body.dark-mode .chapter {
             border-color: #444;
@@ -874,29 +1198,41 @@
         body.dark-mode .chapter-content p {
             color: #e0e0e0;
         }
-        body.dark-mode .guide-block, body.dark-mode .diff-item, body.dark-mode .dialogue-block, 
-        body.dark-mode .action-item, body.dark-mode .chart-block, body.dark-mode .reading-item,
-        body.dark-mode .puzzle-intro, body.dark-mode .puzzle-position, body.dark-mode .puzzle-connection,
-        body.dark-mode .puzzle-modern, body.dark-mode .puzzle-timeline, body.dark-mode .puzzle-links {
+        body.dark-mode .guide-item,
+        body.dark-mode .experiment-list .experiment-item,
+        body.dark-mode .puzzle-related,
+        body.dark-mode .conn-card,
+        body.dark-mode .chart-container,
+        body.dark-mode .structure-analysis,
+        body.dark-mode .puzzle-timeline,
+        body.dark-mode .puzzle-links,
+        body.dark-mode .guide-section,
+        body.dark-mode .difficulty-item,
+        body.dark-mode .dialogue-item,
+        body.dark-mode .puzzle-map,
+        body.dark-mode .reading-list .reading-item {
             background: #2a2a2a;
             border-color: #444;
         }
-        body.dark-mode .guide-block h3, body.dark-mode .dialogue-block h3, body.dark-mode .action-item h3,
-        body.dark-mode .chart-block h3, body.dark-mode .puzzle-position h3, body.dark-mode .puzzle-connection h3,
-        body.dark-mode .puzzle-modern h3, body.dark-mode .puzzle-timeline h3, body.dark-mode .puzzle-links h3 {
-            color: #66bb6a;
-        }
-        body.dark-mode .wrong {
-            background: #2d1a1a;
-            color: #ef5350;
-        }
-        body.dark-mode .correct {
-            background: #1a2a1a;
-            color: #66bb6a;
-        }
-        body.dark-mode .theory-node.related {
+        body.dark-mode .guide-item:hover {
             background: #333;
-            color: #e0e0e0;
+        }
+        body.dark-mode .guide-section h4,
+        body.dark-mode .difficulty-list h4,
+        body.dark-mode .dialogue-item h4,
+        body.dark-mode .experiment-item h4 {
+            color: var(--military-secondary);
+        }
+        body.dark-mode .difficulty-wrong {
+            background: #2d1a1a;
+            color: #f87171;
+        }
+        body.dark-mode .difficulty-right {
+            background: #1a2d1a;
+            color: #86efac;
+        }
+        body.dark-mode .puzzle-insight {
+            background: linear-gradient(135deg, #1a2a1a, #1f2f1f);
         }
         body.dark-mode .timeline-dot {
             background: #555;
@@ -905,31 +1241,38 @@
         body.dark-mode .timeline-item::after {
             background: #444;
         }
-        body.dark-mode .conn-card {
-            background: #2a2a2a;
-            border-color: #444;
-        }
         body.dark-mode .conn-title {
             color: #e0e0e0;
         }
+        body.dark-mode .conn-relation {
+            border-color: #444;
+            color: #aaa;
+        }
+        body.dark-mode .analysis-item {
+            border-color: #444;
+        }
+        body.dark-mode .analysis-item p {
+            color: #bbb;
+        }
 
-        @media (max-width: 600px) { .article-header h1 { font-size: 1.8em; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .chapter-content { padding: 14px 16px; } .conn-grid { grid-template-columns: 1fr; } }
-    /* ===== 长度标签 ===== */
-    .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
-    body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
-    /* ===== 结构分析样式 - 军事战略类 ===== */
-    .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
-    body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
-    .structure-analysis h4 { color: #1b5e20; margin-bottom: 12px; font-size: 1em; }
-    body.dark-mode .structure-analysis h4 { color: #388e3c; }
-    .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
-    body.dark-mode .analysis-item { border-color: #444; }
-    .analysis-label { font-weight: 600; color: #1b5e20; font-size: 0.92em; display: block; margin-bottom: 4px; }
-    body.dark-mode .analysis-label { color: #388e3c; }
-    .analysis-label.highlight { color: #388e3c; font-size: 0.96em; }
-    .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
-    body.dark-mode .analysis-item p { color: #ccc; }
-    </style>
+        /* ==================== 响应式 ==================== */
+        @media (max-width: 768px) {
+            .tab-nav { padding: 0.75rem; top: 60px; }
+            .tab-btn { padding: 8px 12px; font-size: 0.85rem; }
+            .article-header { padding: 2rem 1rem; }
+            .article-header h1 { font-size: 1.8rem; }
+            .tab-content { padding: 1.25rem; }
+            .guide-item { flex-direction: column; }
+            .guide-num { align-self: flex-start; }
+            .conn-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ==================== 打印 ==================== */
+        @media print {
+            .tab-nav, .back-nav, .dark-mode-toggle, .download-fab { display: none; }
+            .tab-content { display: block !important; padding: 0; }
+            .chapter-content { max-height: none !important; }
+        }</style>
 
     <script>
         function switchTab(tabId, btn) {
@@ -1187,5 +1530,6 @@
 
 
 
+    <script src="../js/main.js"></script>
 </body>
 </html>

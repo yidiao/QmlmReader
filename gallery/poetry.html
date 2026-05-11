@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>红色诗篇 · 诗人与作品 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .poetry-hero {
+            background: linear-gradient(135deg, #7a2e2e, #b13e3e);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        .poetry-hero h1 { margin: 0 0 0.25rem; font-size: 1.6rem; }
+        .poetry-hero p { margin: 0; font-size: 0.85rem; opacity: 0.9; }
+        .tab-bar {
+            display: flex;
+            gap: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 1.2rem;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 0;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--text-light);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            color: #c41e3a;
+            border-bottom-color: #c41e3a;
+        }
+        .poem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+        }
+        @media (min-width: 600px) {
+            .poem-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        .poem-card {
+            background: var(--card-bg);
+            border-radius: 0.75rem;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .poem-card:hover { transform: translateY(-2px); }
+        .poem-title { font-weight: bold; font-size: 0.95rem; margin-bottom: 0.2rem; color: var(--text-color); }
+        .poem-author { font-size: 0.7rem; color: #c41e3a; margin-bottom: 0.4rem; }
+        .poem-excerpt { font-size: 0.7rem; color: var(--text-light); line-height: 1.35; white-space: pre-line; }
+        .poet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+        .poet-card {
+            background: var(--card-bg);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .poet-card:hover { transform: translateY(-2px); background: var(--bg-secondary); }
+        .poet-name { font-weight: bold; font-size: 1.1rem; color: var(--text-color); }
+        .poet-life { font-size: 0.7rem; color: #c41e3a; margin: 0.2rem 0; }
+        .poet-bio { font-size: 0.75rem; color: var(--text-light); margin-top: 0.5rem; line-height: 1.4; }
+        .placeholder-note { font-size: 0.7rem; color: var(--text-light); text-align: center; margin-top: 1rem; padding: 0.5rem; background: var(--card-bg); border-radius: 0.5rem; }
+        .back-link { display: inline-block; margin-bottom: 1rem; color: var(--primary-color); text-decoration: none; font-size: 0.85rem; }
+        hr { margin: 1.5rem 0; border-color: var(--border-color); }
+
+        /* 浮窗样式 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            max-width: 90%;
+            width: 400px;
+            max-height: 80vh;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            position: relative;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .modal-close {
+            position: absolute;
+            top: 0.8rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            background: none;
+            border: none;
+        }
+        .modal-close:hover { color: #c41e3a; }
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            color: #c41e3a;
+        }
+        .modal-sub {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .modal-body {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+        .modal-body p { margin: 0 0 0.6rem; }
+        .click-hint {
+            font-size: 0.65rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+        <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+                <a href="../index.html">首页</a>
+                <a href="../articles.html">文章</a>
+                <a href="../masters.html">导师</a>
+                <a href="../toolkit.html">工具集</a>
+                <a href="../gallery.html">文艺</a>
+                <a href="../puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international.html">🌍 国际共运</a>
+                <a href="../rectify.html">正名</a>
+                <a href="../about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 1.2rem;">
+        <a href="../gallery.html" class="back-link">← 返回文艺首页</a>
+
+        <div class="poetry-hero">
+            <h1>📖 红色诗篇</h1>
+            <p>以笔为枪 · 以诗为旗 | 社会主义诗歌精选</p>
+        </div>
+
+        <!-- 标签切换栏 -->
+        <div class="tab-bar">
+            <button class="tab-btn active" id="tabPoemsBtn">📜 诗歌（按作品）</button>
+            <button class="tab-btn" id="tabPoetsBtn">👤 诗人（生平著作）</button>
+        </div>
+        <div class="click-hint">💡 点击卡片查看详情</div>
+
+        <!-- 诗歌面板 -->
+        <div id="poemsPanel">
+            <div class="poem-grid">
+                <!-- 毛泽东诗词（置顶） -->
+                <div class="poem-card" data-name="毛泽东" data-title="《沁园春·雪》" data-content="<strong>创作背景：</strong>1936年2月，毛泽东率红军东征，在陕北清涧县袁家沟写下此词。1945年重庆谈判时赠予柳亚子，轰动山城。<br><br><strong>全词节选：</strong><br>北国风光，千里冰封，万里雪飘。<br>望长城内外，惟余莽莽；大河上下，顿失滔滔。<br>山舞银蛇，原驰蜡象，欲与天公试比高。<br>须晴日，看红装素裹，分外妖娆。<br>江山如此多娇，引无数英雄竞折腰。<br>惜秦皇汉武，略输文采；唐宗宋祖，稍逊风骚。<br>一代天骄，成吉思汗，只识弯弓射大雕。<br>俱往矣，数风流人物，还看今朝。<br><br><strong>解读：</strong>这首词以壮阔的自然景象为背景，评点历史帝王，最终落脚于“今朝”的无产阶级革命者，展现了改天换地的豪情。">
+                    <div class="poem-title">《沁园春·雪》</div>
+                    <div class="poem-author">毛泽东</div>
+                    <div class="poem-excerpt">北国风光，千里冰封，万里雪飘。<br>江山如此多娇，引无数英雄竞折腰。<br>俱往矣，数风流人物，还看今朝。</div>
+                </div>
+                <div class="poem-card" data-name="毛泽东" data-title="《七律·长征》" data-content="<strong>创作背景：</strong>1935年10月，中央红军越过岷山，长征即将胜利结束。毛泽东回顾一年来的艰险历程，写下此诗。<br><br><strong>全诗：</strong><br>红军不怕远征难，万水千山只等闲。<br>五岭逶迤腾细浪，乌蒙磅礴走泥丸。<br>金沙水拍云崖暖，大渡桥横铁索寒。<br>更喜岷山千里雪，三军过后尽开颜。<br><br><strong>解读：</strong>高度概括了长征途中的艰难险阻，用“腾细浪”“走泥丸”将巨大困难渺小化，展现了革命英雄主义和乐观精神。">
+                    <div class="poem-title">《七律·长征》</div>
+                    <div class="poem-author">毛泽东</div>
+                    <div class="poem-excerpt">红军不怕远征难，万水千山只等闲。<br>更喜岷山千里雪，三军过后尽开颜。</div>
+                </div>
+                <div class="poem-card" data-name="毛泽东" data-title="《忆秦娥·娄山关》" data-content="<strong>创作背景：</strong>1935年2月，红军二渡赤水，再克娄山关，取得长征以来第一次重大胜利。毛泽东战后写下此词。<br><br><strong>全词：</strong><br>西风烈，长空雁叫霜晨月。<br>霜晨月，马蹄声碎，喇叭声咽。<br>雄关漫道真如铁，而今迈步从头越。<br>从头越，苍山如海，残阳如血。<br><br><strong>解读：</strong>上阕写战前肃杀气氛，下阕“雄关漫道真如铁，而今迈步从头越”成为千古名句，表达了跨越一切困难的决心。">
+                    <div class="poem-title">《忆秦娥·娄山关》</div>
+                    <div class="poem-author">毛泽东</div>
+                    <div class="poem-excerpt">雄关漫道真如铁，而今迈步从头越。<br>从头越，苍山如海，残阳如血。</div>
+                </div>
+                <div class="poem-card" data-name="毛泽东" data-title="《沁园春·长沙》" data-content="<strong>创作背景：</strong>1925年秋，毛泽东离开韶山前往广州主持农民运动讲习所，途经长沙，重游橘子洲，写下此词。<br><br><strong>全词节选：</strong><br>独立寒秋，湘江北去，橘子洲头。<br>看万山红遍，层林尽染；漫江碧透，百舸争流。<br>鹰击长空，鱼翔浅底，万类霜天竞自由。<br>怅寥廓，问苍茫大地，谁主沉浮？<br><br><strong>解读：</strong>青年毛泽东面对壮丽秋景，发出“谁主沉浮”的天问，展现了以天下为己任的使命感。">
+                    <div class="poem-title">《沁园春·长沙》</div>
+                    <div class="poem-author">毛泽东</div>
+                    <div class="poem-excerpt">问苍茫大地，谁主沉浮？<br>恰同学少年，风华正茂；书生意气，挥斥方遒。</div>
+                </div>
+                <!-- 郭沫若 -->
+                <div class="poem-card" data-name="郭沫若" data-title="《骆驼》" data-content="<strong>创作背景：</strong>写于1956年，社会主义建设高潮时期。骆驼象征坚韧不拔的革命者。<br><br><strong>全诗节选：</strong><br>骆驼，你沙漠的船，<br>你，有生命的山！<br>在黑暗中，你昂头天外，<br>导引着旅行者<br>走向黎明的地平线。<br><br><strong>解读：</strong>骆驼是革命理想的象征，穿越黑暗走向光明。">
+                    <div class="poem-title">《骆驼》</div>
+                    <div class="poem-author">郭沫若</div>
+                    <div class="poem-excerpt">骆驼，你沙漠的船，你，有生命的山！<br>在黑暗中，你昂头天外，导引着旅行者走向黎明的地平线。</div>
+                </div>
+                <div class="poem-card" data-name="郭沫若" data-title="《凤凰涅槃》" data-content="<strong>创作背景：</strong>1920年，五四运动之后，受西方浪漫主义和东方神话启发，呼唤旧世界的毁灭和新世界的诞生。<br><br><strong>全诗节选：</strong><br>我们新鲜，我们净朗，<br>我们华美，我们芬芳，<br>一切的一，芬芳。<br>一的一切，芬芳。<br><br><strong>解读：</strong>凤凰集香木自焚，再从死灰中更生，象征中国社会的彻底改造。">
+                    <div class="poem-title">《凤凰涅槃》</div>
+                    <div class="poem-author">郭沫若</div>
+                    <div class="poem-excerpt">我们新鲜，我们净朗，我们华美，我们芬芳，一切的一，芬芳。一的一切，芬芳。</div>
+                </div>
+                <!-- 贺敬之 -->
+                <div class="poem-card" data-name="贺敬之" data-title="《回延安》" data-content="<strong>创作背景：</strong>1956年，诗人阔别延安十年后重回故地，采用陕北民歌“信天游”形式写成。<br><br><strong>全诗节选：</strong><br>几回回梦里回延安，<br>双手搂定宝塔山。<br>千声万声呼唤你，<br>——母亲延安就在这里！<br><br><strong>解读：</strong>革命圣地延安被视为精神母亲，情感真挚热烈。">
+                    <div class="poem-title">《回延安》</div>
+                    <div class="poem-author">贺敬之</div>
+                    <div class="poem-excerpt">几回回梦里回延安，双手搂定宝塔山。千声万声呼唤你，——母亲延安就在这里！</div>
+                </div>
+                <div class="poem-card" data-name="贺敬之" data-title="《雷锋之歌》" data-content="<strong>创作背景：</strong>1963年，毛泽东发出“向雷锋同志学习”号召后，贺敬之写下这首长篇政治抒情诗。<br><br><strong>全诗节选：</strong><br>站起来，一个雷锋，<br>我们全都在喊。<br>什么，才是真正的青春？<br>什么，才是真正的生命？<br><br><strong>解读：</strong>通过雷锋的形象，探讨青春与生命的意义，回答了共产主义人生观。">
+                    <div class="poem-title">《雷锋之歌》</div>
+                    <div class="poem-author">贺敬之</div>
+                    <div class="poem-excerpt">站起来，一个雷锋，我们全都在喊。什么，才是真正的青春？什么，才是真正的生命？</div>
+                </div>
+                <!-- 后续原有内容省略，结构相同... -->
+                <div class="poem-card" data-name="郭小川" data-title="《甘蔗林——青纱帐》" data-content="<strong>创作背景：</strong>1962年，郭小川在河北感受南北方对比，将南方的甘蔗林与北方的青纱帐（高粱地）并置，象征和平年代与战争年代。<br><br><strong>解读：</strong>甘蔗林代表今天的幸福生活，青纱帐代表昔日的战斗岁月，二者通过革命精神连接。">
+                    <div class="poem-title">《甘蔗林——青纱帐》</div>
+                    <div class="poem-author">郭小川</div>
+                    <div class="poem-excerpt">南方的甘蔗林哪，南方的甘蔗林！你为什么这样香甜，又为什么那样严峻？北方的青纱帐啊，北方的青纱帐！你为什么那样遥远，又为什么这样亲近？</div>
+                </div>
+                <div class="poem-card" data-name="郭小川" data-title="《团泊洼的秋天》" data-content="<strong>创作背景：</strong>1975年，“文革”后期，郭小川被下放到天津静海团泊洼“五七干校”，写下这首充满战斗精神的诗。<br><br><strong>节选：</strong><br>战士自有战士的爱情：忠贞不渝，新美如画；<br>战士的歌声，可以休止一时，却永远不会沙哑。<br><br><strong>解读：</strong>在逆境中保持战士本色，是郭小川“战士诗人”称号的集中体现。">
+                    <div class="poem-title">《团泊洼的秋天》</div>
+                    <div class="poem-author">郭小川</div>
+                    <div class="poem-excerpt">战士自有战士的爱情：忠贞不渝，新美如画；战士的歌声，可以休止一时，却永远不会沙哑。</div>
+                </div>
+                <div class="poem-card" data-name="马雅可夫斯基" data-title="《好！》" data-content="<strong>创作背景：</strong>1927年，为纪念十月革命十周年而作。马雅可夫斯基以“楼梯诗”形式歌颂苏维埃政权。<br><br><strong>解读：</strong>“我赞美祖国的现在，我三倍赞美祖国的未来”成为苏联革命诗歌的名句。">
+                    <div class="poem-title">《好！》</div>
+                    <div class="poem-author">马雅可夫斯基</div>
+                    <div class="poem-excerpt">我赞美祖国的现在，我三倍赞美祖国的未来。</div>
+                </div>
+                <div class="poem-card" data-name="马雅可夫斯基" data-title="《列宁》" data-content="<strong>创作背景：</strong>1924年列宁逝世后，马雅可夫斯基写下这首3000行的长诗，被视为苏维埃诗歌的丰碑。<br><br><strong>解读：</strong>将列宁塑造成“最人道的人”，是时代的象征和革命的化身。">
+                    <div class="poem-title">《列宁》</div>
+                    <div class="poem-author">马雅可夫斯基</div>
+                    <div class="poem-excerpt">他活着——就是一切。他死了——但一切还保持着原样。不！事物不能没有他而存在。</div>
+                </div>
+                <div class="poem-card" data-name="聂鲁达" data-title="《漫歌》" data-content="<strong>创作背景：</strong>1938-1949年间创作，是聂鲁达最宏大的诗集，献给美洲大陆的历史与斗争。<br><br><strong>解读：</strong>将拉美地母与革命理想熔于一炉，是聂鲁达共产主义信仰的诗意表达。">
+                    <div class="poem-title">《漫歌》</div>
+                    <div class="poem-author">聂鲁达</div>
+                    <div class="poem-excerpt">石块垒着石块；人啊，你在哪里？难道你也是那破碎的、凝固的碎片？</div>
+                </div>
+                <div class="poem-card" data-name="勃洛克" data-title="《十二个》" data-content="<strong>创作背景：</strong>1918年初，十月革命后不久。勃洛克以象征主义手法写下这首争议巨大的长诗。<br><br><strong>解读：</strong>12名赤卫队员在暴风雪中行进，结尾基督突然出现。革命与宗教的诡异结合引发了无数讨论。">
+                    <div class="poem-title">《十二个》</div>
+                    <div class="poem-author">勃洛克</div>
+                    <div class="poem-excerpt">黑色的夜。白色的雪。十二个人在暴风雪中走着……前面是拿着血红旗帜的耶稣基督。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 诗人面板 -->
+        <div id="poetsPanel" style="display: none;">
+            <div class="poet-grid">
+                <div class="poet-card" data-name="毛泽东" data-life="1893-1976 · 中国" data-bio="<strong>身份：</strong>伟大的马克思主义者，无产阶级革命家、战略家、理论家，中国共产党、中国人民解放军和中华人民共和国的主要创始人。诗人、书法家。<br><br><strong>诗歌地位：</strong>毛泽东诗词是革命现实主义和革命浪漫主义结合的典范，气势磅礴，意境高远。《沁园春·雪》《七律·长征》《忆秦娥·娄山关》等皆为传世名篇。其诗词不仅是文学瑰宝，更是一部中国革命史的壮丽史诗。<br><br><strong>风格：</strong>雄浑豪放，想象奇崛，将古典诗词形式与革命内容完美融合。">
+                    <div class="poet-name">毛泽东</div>
+                    <div class="poet-life">1893-1976 · 中国</div>
+                    <div class="poet-bio">伟大的马克思主义者，革命家、战略家、理论家。诗词气势磅礴，是中国革命史的壮丽史诗。</div>
+                </div>
+                <div class="poet-card" data-name="郭沫若" data-life="1892-1978 · 中国" data-bio="<strong>身份：</strong>中国新诗的奠基人之一，历史学家、古文字学家、社会活动家。曾任政务院副总理、中国科学院院长。<br><br><strong>诗歌地位：</strong>诗集《女神》是中国现代新诗的奠基之作，开创了‘五四’新诗的一代诗风。后期创作了大量歌颂社会主义建设的诗篇。<br><br><strong>风格：</strong>豪放奔涌，想象飞腾，充满浪漫主义和爱国主义激情。">
+                    <div class="poet-name">郭沫若</div>
+                    <div class="poet-life">1892-1978 · 中国</div>
+                    <div class="poet-bio">新诗奠基人，代表作《女神》《骆驼》。诗风豪放，讴歌革命与建设。</div>
+                </div>
+                <div class="poet-card" data-name="贺敬之" data-life="1924- · 中国" data-bio="<strong>身份：</strong>诗人、剧作家。歌剧《白毛女》主要作者（获斯大林文学奖）。曾任文化部副部长。<br><br><strong>诗歌地位：</strong>政治抒情诗的代表人物。《回延安》《雷锋之歌》《放声歌唱》等影响了一代人。<br><br><strong>风格：</strong>将革命理想与浪漫主义结合，擅长阶梯式长诗，情感炽热，善于吸收民歌养分。">
+                    <div class="poet-name">贺敬之</div>
+                    <div class="poet-life">1924- · 中国</div>
+                    <div class="poet-bio">政治抒情诗巨匠，《回延安》《雷锋之歌》。将革命理想与浪漫主义结合。</div>
+                </div>
+                <div class="poet-card" data-name="郭小川" data-life="1919-1976 · 中国" data-bio="<strong>身份：</strong>‘战士诗人’。曾任中国作家协会党组副书记。<br><br><strong>诗歌地位：</strong>《甘蔗林——青纱帐》《团泊洼的秋天》《致青年公民》等是其代表作。在‘文革’逆境中仍坚持写作。<br><br><strong>风格：</strong>富有哲理与鼓动性，形式创新（如‘楼梯诗’、‘新辞赋体’），具有战士的犀利与激情。">
+                    <div class="poet-name">郭小川</div>
+                    <div class="poet-life">1919-1976 · 中国</div>
+                    <div class="poet-bio">“战士诗人”，代表作《甘蔗林——青纱帐》《团泊洼的秋天》。富有哲理与战斗激情。</div>
+                </div>
+                <div class="poet-card" data-name="马雅可夫斯基" data-life="1893-1930 · 苏联" data-bio="<strong>身份：</strong>苏联革命诗歌的旗帜，未来主义诗人。<br><br><strong>诗歌地位：</strong>开创‘楼梯诗’形式，代表作《好！》《列宁》《穿裤子的云》。他的诗歌直接服务于革命宣传，充满政治激情。<br><br><strong>风格：</strong>气势磅礴，节奏鲜明，语言粗犷有力。1930年自杀身亡，留下了‘爱情的小船撞在日常生活上’的绝笔。">
+                    <div class="poet-name">马雅可夫斯基</div>
+                    <div class="poet-life">1893-1930 · 苏联</div>
+                    <div class="poet-bio">未来主义诗人，“楼梯诗”开创者，《好！》《列宁》。激情澎湃，革命喉舌。</div>
+                </div>
+                <div class="poet-card" data-name="聂鲁达" data-life="1904-1973 · 智利" data-bio="<strong>身份：</strong>诺贝尔文学奖获得者（1971），智利共产党党员，外交家。<br><br><strong>诗歌地位：</strong>《漫歌》（又译《诗歌总集》）是其巅峰之作，被誉为‘拉美人民的诗篇’。<br><br><strong>风格：</strong>将拉美大地的山川草木与人民的苦难斗争熔于一炉，意象繁复，情感深沉，兼具超现实主义与政治激情。">
+                    <div class="poet-name">聂鲁达</div>
+                    <div class="poet-life">1904-1973 · 智利</div>
+                    <div class="poet-bio">诺贝尔奖得主，共产主义者，《漫歌》。将拉美大地与革命理想熔于一炉。</div>
+                </div>
+                <div class="poet-card" data-name="勃洛克" data-life="1880-1921 · 俄国" data-bio="<strong>身份：</strong>俄国白银时代象征主义诗歌的集大成者。<br><br><strong>诗歌地位：</strong>长诗《十二个》是十月革命后最有争议也最具冲击力的作品。高尔基称他‘美丽得惊人’。<br><br><strong>风格：</strong>不是体制内歌颂者，而是一个用象征主义手法记录革命狂喜与迷茫的天才，其复杂性远超一般‘社会主义诗人’。">
+                    <div class="poet-name">勃洛克</div>
+                    <div class="poet-life">1880-1921 · 俄国</div>
+                    <div class="poet-bio">象征主义大师，《十二个》。后期拥抱革命，以象征手法记录革命的狂喜与迷茫。</div>
+                </div>
+                <div class="poet-card" data-name="胡志明" data-life="1890-1969 · 越南" data-bio="<strong>身份：</strong>越南劳动党主席，越南民主共和国主席。<br><br><strong>诗歌地位：</strong>《狱中日记》是其被国民党监禁时用中文写成的旧体诗集，共133首。<br><br><strong>风格：</strong>简练质朴，言近旨远，既有革命者的坚韧，又有东方文人的雅致。">
+                    <div class="poet-name">胡志明</div>
+                    <div class="poet-life">1890-1969 · 越南</div>
+                    <div class="poet-bio">革命领袖，旧体诗人，《狱中日记》。中文写旧体诗，简练有风骨。</div>
+                </div>
+                <div class="poet-card" data-name="布莱希特" data-life="1898-1956 · 东德" data-bio="<strong>身份：</strong>德国戏剧家、诗人，马克思主义者。<br><br><strong>诗歌地位：</strong>《一个读工人的疑问》《三分钱歌剧》等将阶级视角注入文艺创作。<br><br><strong>风格：</strong>简洁、冷峻、极具思辨性。他的诗歌往往通过陌生化效果引发读者思考社会矛盾。">
+                    <div class="poet-name">布莱希特</div>
+                    <div class="poet-life">1898-1956 · 东德</div>
+                    <div class="poet-bio">戏剧家+马克思主义诗人，《一个读工人的疑问》，将阶级视角注入诗歌。</div>
+                </div>
+                <div class="poet-card" data-name="巴列霍" data-life="1892-1938 · 秘鲁" data-bio="<strong>身份：</strong>秘鲁诗人，有印第安血统，共产主义者。<br><br><strong>诗歌地位：</strong>《黑色的使者》《特里尔塞》是现代诗歌的杰作。<br><br><strong>风格</strong>融合了印第安文化、天主教神秘主义和马克思主义。语言撕裂、扭曲、充满痛感，书写了底层人民的苦难。">
+                    <div class="poet-name">巴列霍</div>
+                    <div class="poet-life">1892-1938 · 秘鲁</div>
+                    <div class="poet-bio">印第安血统+共产主义，《黑色的使者》。融合土著苦难与阶级斗争。</div>
+                </div>
+                <div class="poet-card" data-name="米沃什" data-life="1911-2004 · 波兰" data-bio="<strong>身份：</strong>诺贝尔文学奖得主（1980）。<br><br><strong>诗歌地位：</strong>早期左翼，1951年叛逃西方。代表作《被禁锢的头脑》《礼物》。<br><br><strong>风格：</strong>在社会主义体制下‘戴着镣铐跳舞’，充满反讽、怀疑与人性关怀。">
+                    <div class="poet-name">米沃什</div>
+                    <div class="poet-life">1911-2004 · 波兰</div>
+                    <div class="poet-bio">诺贝尔奖得主，早期左翼，后叛逃。《被禁锢的头脑》，用诗歌反思极权。</div>
+                </div>
+                <div class="poet-card" data-name="辛波斯卡" data-life="1923-2012 · 波兰" data-bio="<strong>身份：</strong>诺贝尔文学奖得主（1996）。<br><br><strong>诗歌地位：</strong>早期曾写作歌颂列宁、社会主义建设的‘应景诗’，后转向。<br><br><strong>风格：</strong>哲学思辨，举重若轻，常用日常细节揭示生存悖论。">
+                    <div class="poet-name">辛波斯卡</div>
+                    <div class="poet-life">1923-2012 · 波兰</div>
+                    <div class="poet-bio">诺贝尔奖得主，早期歌颂建设，后转向哲学性与怀疑。</div>
+                </div>
+                <div class="poet-card" data-name="奥登" data-life="1907-1973 · 英/美" data-bio="<strong>身份：</strong>英裔美国诗人，1930年代左翼。<br><br><strong>诗歌地位：</strong>《西班牙》《1939年9月1日》是其左翼时期的代表作。<br><br><strong>风格：</strong>关注战争、阶级与人性，技巧精湛。后转向基督教存在主义。">
+                    <div class="poet-name">奥登</div>
+                    <div class="poet-life">1907-1973 · 英/美</div>
+                    <div class="poet-bio">1930年代左翼，《西班牙》《1939年9月1日》，关注战争、阶级与人性。</div>
+                </div>
+            </div>
+            <div class="placeholder-note">📌 共收录13位诗人，点击卡片查看详细生平与著作。</div>
+        </div>
+
+        <hr>
+        <p style="text-align: center; color: var(--text-light); font-size: 0.7rem;">📝 点击任意诗歌或诗人卡片，查看完整解读与生平</p>
+    </main>
+
+    <!-- 浮窗模态框 -->
+    <div id="detailModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModalBtn">&times;</button>
+            <div class="modal-title" id="modalTitle"></div>
+            <div class="modal-sub" id="modalSub"></div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+        }
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            const btn = document.querySelector('.dark-mode-toggle');
+            if (btn) btn.textContent = '☀️';
+        }
+
+        // 标签切换
+        const tabPoems = document.getElementById('tabPoemsBtn');
+        const tabPoets = document.getElementById('tabPoetsBtn');
+        const poemsPanel = document.getElementById('poemsPanel');
+        const poetsPanel = document.getElementById('poetsPanel');
+
+        tabPoems.addEventListener('click', () => {
+            tabPoems.classList.add('active');
+            tabPoets.classList.remove('active');
+            poemsPanel.style.display = 'block';
+            poetsPanel.style.display = 'none';
+        });
+        tabPoets.addEventListener('click', () => {
+            tabPoets.classList.add('active');
+            tabPoems.classList.remove('active');
+            poemsPanel.style.display = 'none';
+            poetsPanel.style.display = 'block';
+        });
+
+        // 浮窗逻辑
+        const modal = document.getElementById('detailModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalSub = document.getElementById('modalSub');
+        const modalBody = document.getElementById('modalBody');
+        const closeBtn = document.getElementById('closeModalBtn');
+
+        function openModal(title, sub, content) {
+            modalTitle.innerHTML = title;
+            modalSub.innerHTML = sub;
+            modalBody.innerHTML = content;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        // 诗歌卡片点击
+        document.querySelectorAll('.poem-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const name = card.getAttribute('data-name') || '佚名';
+                const title = card.getAttribute('data-title') || card.querySelector('.poem-title')?.innerText || '诗篇';
+                const content = card.getAttribute('data-content') || '<p>暂无详细解读，敬请期待。</p>';
+                openModal(title, name, content);
+            });
+        });
+
+        // 诗人卡片点击
+        document.querySelectorAll('.poet-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const name = card.querySelector('.poet-name')?.innerText || '诗人';
+                const life = card.querySelector('.poet-life')?.innerText || '';
+                let bio = card.getAttribute('data-bio') || card.querySelector('.poet-bio')?.innerHTML || '<p>暂无详细介绍。</p>';
+                openModal(name, life, bio);
+            });
+        });
+
+        // 关闭浮窗
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    </script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,7 +1,100 @@
+ M about.html
+ M articles.html
+ M articles/1844-nian-jing-ji-xue-zhe-xue-shou-gao.html
+ M articles/_template.html
+ M articles/de-yi-zhi-yi-xing-tai.html
+ M articles/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html
+ M articles/fan-du-lin-lun.html
+ M articles/ge-da-gang-ling.html
+ M articles/gongchan-dan-yuan.html
+ M articles/guan-yu-fei-er-ba-ha-de-ti-gang.html
+ M articles/guo-jia-yu-ge-ming.html
+ M articles/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html
+ M articles/lun-chi-jiu-zhan.html
+ M articles/lun-lunen-zhu-yi-ji-chu.html
+ M articles/lun-shi-da-guan-xi.html
+ M articles/lun-zhongguo-ge-ming-de-qiantu.html
+ M articles/mao-dun-lun.html
+ M articles/nong-min-yun-dong.html
+ M articles/ren-min-nei-bu-mao-dun.html
+ M articles/shi-jian-lun.html
+ M articles/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html
+ M articles/wen-yi-zuo-tan.html
+ M articles/xin-min-zhu.html
+ M articles/xue-xi-shi-ju.html
+ M articles/you-ji-zhan.html
+ D articles/zen-me-ban-v2.html
+ M articles/zen-me-ban.html
+ M articles/zhan-lue-wen-ti.html
+ M articles/zhan-zheng-zhan-lue.html
+ M changelog-archive.html
+ M changelog-detail.html
+ M css/style.css
+ M data/1844-nian-jing-ji-xue-zhe-xue-shou-gao.txt
+ D data/articles_raw.json
+ D data/de-yi-zhi-yi-xing-tai.txt
+ D data/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.txt
+ D data/fan-du-lin-lun.txt
+ M data/ge-da-gang-ling.txt
+ D data/guan-yu-fei-er-ba-ha-de-ti-gang.txt
+ M data/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.txt
+ D data/maodun_raw.txt
+ D data/shijian_raw.txt
+ M data/updates.json
+ M experimental.html
+ M gallery.html
+ M gallery/music.html
+ M gallery/propaganda.html
+ M gallery/quotes.html
+ M gallery/soviet.html
+ M gallery/videos.html
+ D "index - 副本.html"
  M index.html
+ M international-calendar.html
+ M international-column.html
+ M international-current.html
  M international-memorial.html
+ M international.html
+ M js/main.js
  M js/search.js
+ M masters.html
+ M masters/engels.html
+ M masters/lenin.html
+ M masters/mao.html
+ M masters/marx.html
+ M masters/stalin.html
+ M message-board.html
+ M puzzle.html
+ M rectify.html
+ M rectify/economy/soviet-agriculture.html
+ M rectify/leaders/gorky-lenin.html
+ M rectify/leaders/stalin-era.html
+ M rectify/military/finland-war.html
+ M rectify/military/soviet-afghanistan.html
+ M rectify/myths/human-nature.html
+ M rectify/myths/wisdom-of-elites.html
  M science.html
  M tmp_status.txt
  M toolkit.html
-?? "index - 副本.html"
+?? articles/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.html
+?? articles/lun-wo-guo-ge-ming.html
+?? articles/ma-ke-si-zhu-yi-de-san-ge-lai-yuan.html
+?? beautify_original_tab.py
+?? check_nav_issues.py
+?? check_original_status.py
+?? css/style.css.bak
+?? data/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.txt
+?? debug_feuerbach.py
+?? fix_all_nav.py
+?? fix_missing_opening_tag.py
+?? gallery/poetry.html
+?? js/main.js.bak
+?? txt_to_html.py
+?? txt_to_html_v2.py
+?? txt_to_html_v3.py
+?? txt_to_html_v4.py
+?? txt_to_html_v5.py
+?? txt_to_html_v6.py
+?? txt_to_html_v7.py
+?? txt_to_html_v8.py
+?? txt_to_html_v9.py
