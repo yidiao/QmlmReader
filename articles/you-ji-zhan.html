@@ -824,44 +824,6 @@
         if (dmBtn) dmBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
     </script>
 
-<script>
-// 汉堡菜单
-(function() {
-    document.addEventListener('DOMContentLoaded', function() {
-        var hamburger = document.querySelector('.hamburger-btn');
-        var nav = document.querySelector('.main-nav');
-        if (!hamburger || !nav) return;
-        hamburger.addEventListener('click', function(e) {
-            e.stopPropagation();
-            var isOpen = nav.classList.toggle('open');
-            hamburger.classList.toggle('open', isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        });
-        nav.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                nav.classList.remove('open');
-                hamburger.classList.remove('open');
-                document.body.style.overflow = '';
-            });
-        });
-        document.addEventListener('click', function(e) {
-            if (nav.classList.contains('open') && !nav.contains(e.target) && e.target !== hamburger) {
-                nav.classList.remove('open');
-                hamburger.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-        });
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && nav.classList.contains('open')) {
-                nav.classList.remove('open');
-                hamburger.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-        });
-    });
-})();
-</script>
-
 <button class="download-fab" id="downloadFab" title="下载原文">⬇</button>
 <div class="download-menu" id="downloadMenu">
     <h4>📥 下载原文</h4>

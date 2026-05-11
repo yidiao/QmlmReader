@@ -1565,37 +1565,63 @@ body.dark-mode .filter-btn:hover {
     document.addEventListener('DOMContentLoaded', function() {
         var hamburger = document.querySelector('.hamburger-btn');
         var nav = document.querySelector('.main-nav');
+        var closeBtn = document.querySelector('.nav-close-btn');
+        
         if (!hamburger || !nav) return;
+        
+        // 打开菜单
+        function openMenu() {
+            nav.classList.add('open');
+            hamburger.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // 关闭菜单
+        function closeMenu() {
+            nav.classList.remove('open');
+            hamburger.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        
+        // 汉堡按钮点击
         hamburger.addEventListener('click', function(e) {
             e.stopPropagation();
-            var isOpen = nav.classList.toggle('open');
-            hamburger.classList.toggle('open', isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        });
-        nav.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                nav.classList.remove('open');
-                hamburger.classList.remove('open');
-                document.body.style.overflow = '';
-            });
-        });
-        document.addEventListener('click', function(e) {
-            if (nav.classList.contains('open') && !nav.contains(e.target) && e.target !== hamburger) {
-                nav.classList.remove('open');
-                hamburger.classList.remove('open');
-                document.body.style.overflow = '';
+            if (nav.classList.contains('open')) {
+                closeMenu();
+            } else {
+                openMenu();
             }
         });
+        
+        // 叉号按钮点击
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeMenu();
+            });
+        }
+        
+        // 点击导航链接后关闭菜单
+        nav.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                closeMenu();
+            });
+        });
+        
+        // 点击页面其他区域关闭菜单
+        document.addEventListener('click', function(e) {
+            if (nav.classList.contains('open') && !nav.contains(e.target) && e.target !== hamburger && e.target !== closeBtn) {
+                closeMenu();
+            }
+        });
+        
+        // ESC 键关闭菜单
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && nav.classList.contains('open')) {
-                nav.classList.remove('open');
-                hamburger.classList.remove('open');
-                document.body.style.overflow = '';
+                closeMenu();
             }
         });
     });
-})();
-</script>
-    <script src="js/main.js"></script>
+})();</script>
 </body>
 </html>

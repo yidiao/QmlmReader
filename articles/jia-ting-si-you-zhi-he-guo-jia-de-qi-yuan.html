@@ -622,300 +622,177 @@
     <footer class="site-footer"><div class="container"><p>青年马列毛主义驿站 | Qmlm Reader</p><p class="footer-note">学习他 · 成为他 · 然后超越他</p></div></footer>
     </body>
     <script src="../js/main.js"></script>
-    <script>// ========== 黑夜模式 ==========
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-    updateDarkModeIcon();
-}
+    
 
-function updateDarkModeIcon() {
-    const btn = document.querySelector('.dark-mode-toggle');
-    if (btn) {
-        btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-    }
-}
-
-if (localStorage.getItem('darkMode') === 'true') {
-    document.body.classList.add('dark-mode');
-}
-updateDarkModeIcon();
-
-// ========== Tab 切换 ==========
-function switchTab(tabId, btn) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    if (btn) btn.classList.add('active');
-    if (tabId === 'visual') setTimeout(initCharts, 100);
-}
-
-// ========== 大章折叠/展开 ==========
-function toggleChapterGroup(header) {
-    header.classList.toggle('collapsed');
-    const content = header.nextElementSibling;
-    if (content) {
-        content.style.display = header.classList.contains('collapsed') ? 'none' : 'block';
-    }
-}
-
-// ========== 子节折叠/展开 ==========
-function toggleSubChapter(header) {
-    header.classList.toggle('collapsed');
-    const content = header.nextElementSibling;
-    if (content) {
-        content.style.display = header.classList.contains('collapsed') ? 'none' : 'block';
-    }
-}
-
-// ========== 右侧目录功能 ==========
-function buildToc() {
-    const chapters = document.querySelectorAll('#original .chapter-group');
-    const tocList = document.getElementById('tocList');
-    if (!tocList) return;
-    tocList.innerHTML = '';
-    chapters.forEach((ch, idx) => {
-        const titleEl = ch.querySelector('.chapter-main-title');
-        if (!titleEl) return;
-        let titleText = titleEl.innerText.replace('▶', '').trim();
-        if (titleText.length > 28) titleText = titleText.slice(0, 25) + '...';
-        const item = document.createElement('div');
-        item.className = 'toc-item';
-        item.innerText = titleText;
-        item.onclick = () => {
-            ch.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            if (window.innerWidth <= 1100) closeToc();
-        };
-        tocList.appendChild(item);
-    });
-}
-
-function updateActiveTocItem() {
-    const chapters = document.querySelectorAll('#original .chapter-group');
-    const tocItems = document.querySelectorAll('.toc-item');
-    let activeIndex = -1;
-    chapters.forEach((ch, idx) => {
-        const rect = ch.getBoundingClientRect();
-        if (rect.top <= 200 && rect.bottom >= 100) {
-            activeIndex = idx;
-        }
-    });
-    tocItems.forEach((item, idx) => {
-        if (idx === activeIndex) item.classList.add('active');
-        else item.classList.remove('active');
-    });
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progressBar = document.getElementById('tocProgressBar');
-    if (progressBar) {
-        progressBar.style.width = (scrollTop / docHeight * 100) + '%';
-    }
-}
-
-function toggleToc() {
-    document.getElementById('tocSidebar')?.classList.toggle('open');
-}
-
-function closeToc() {
-    document.getElementById('tocSidebar')?.classList.remove('open');
-}
-
-// ========== 初始化所有章节为展开状态 ==========
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.chapter-group-content').forEach(el => el.style.display = 'block');
-    document.querySelectorAll('.chapter-sub-content').forEach(el => el.style.display = 'block');
-    buildToc();
-    updateActiveTocItem();
-});
-
-window.addEventListener('scroll', updateActiveTocItem);
-
-// ========== 汉堡菜单 ==========
-(function() {
-    const hamburger = document.querySelector('.hamburger-btn');
-    const nav = document.querySelector('.main-nav');
-    if (hamburger && nav) {
-        hamburger.addEventListener('click', function() {
-            nav.classList.toggle('open');
-        });
-    }
-})();
-
-// ========== 图表初始化 ==========
-let chartsInited = false;
-
-function initCharts() {
-    if (chartsInited) return;
-    chartsInited = true;
-
-    // 雷达图
-    const radarCtx = document.getElementById('radarChart');
-    if (radarCtx && typeof Chart !== 'undefined') {
-        new Chart(radarCtx, {
-            type: 'radar',
-            data: {
-                labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
-                datasets: [{
-                    label: '起源',
-                    data: [9, 8, 9, 7, 6, 8],
-                    borderColor: '#1a237e',
-                    backgroundColor: 'rgba(26,35,126,0.15)',
-                    pointBackgroundColor: '#1a237e'
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
-                plugins: { legend: { display: false } }
-            }
-        });
-    }
-
-    // 论证节奏曲线
-    const rhythmCtx = document.getElementById('rhythmChart');
-    if (rhythmCtx && typeof Chart !== 'undefined') {
-        new Chart(rhythmCtx, {
-            type: 'line',
-            data: {
-                labels: ['两种生产理论', '家庭演变', '私有制产生', '★国家产生★', '国家消亡'],
-                datasets: [{
-                    data: [7, 8, 8, 10, 9],
-                    borderColor: '#1a237e',
-                    backgroundColor: 'rgba(26,35,126,0.1)',
-                    fill: true,
-                    tension: 0.3,
-                    pointRadius: 6,
-                    pointBackgroundColor: '#3949ab'
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: { y: { min: 0, max: 10, title: { display: true, text: '论证强度' } } }
-            }
-        });
-    }
-
-    // 国家起源柱状图
-    const originCtx = document.getElementById('originChart');
-    if (originCtx && typeof Chart !== 'undefined') {
-        new Chart(originCtx, {
-            type: 'bar',
-            data: {
-                labels: ['雅典式', '罗马式', '德意志式'],
-                datasets: [
-                    { label: '典型性', data: [10, 8, 7], backgroundColor: '#1a237e', borderRadius: 6 },
-                    { label: '阶级对立程度', data: [9, 8, 6], backgroundColor: '#3949ab', borderRadius: 6 },
-                    { label: '历史影响', data: [8, 9, 7], backgroundColor: '#5c6bc0', borderRadius: 6 }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: { y: { min: 0, max: 10, title: { display: true, text: '强度' } } },
-                plugins: { legend: { position: 'top' } }
-            }
-        });
-    }
-
-    // 家庭演进折线图
-    const familyCtx = document.getElementById('familyChart');
-    if (familyCtx && typeof Chart !== 'undefined') {
-        new Chart(familyCtx, {
-            type: 'line',
-            data: {
-                labels: ['血缘家庭', '普那路亚家庭', '对偶家庭', '一夫一妻制'],
-                datasets: [
-                    { label: '私有制程度', data: [1, 2, 5, 9], borderColor: '#1a237e', fill: true, tension: 0.3 },
-                    { label: '妇女地位', data: [8, 7, 4, 2], borderColor: '#c41e3a', fill: true, tension: 0.3 }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: { y: { min: 0, max: 10, title: { display: true, text: '程度' } } },
-                plugins: { legend: { position: 'top' } }
-            }
-        });
-    }
-}
-
-// ========== 下载按钮 ==========
-(function() {
-    const fab = document.getElementById('downloadFab');
-    const menu = document.getElementById('downloadMenu');
-    if (fab && menu) {
-        fab.addEventListener('click', () => menu.classList.toggle('show'));
-        document.addEventListener('click', (e) => {
-            if (!fab.contains(e.target) && !menu.contains(e.target)) {
-                menu.classList.remove('show');
-            }
-        });
-    }
-})(); </script>
-    <style>/* ==================== 六类内容配色系统 ==================== */
+    <style>/* ===== 全局变量 ===== */
 :root {
-    /* 哲学基础 - 深红/暗红系 */
-    --philosophy-primary: #8b0000;
-    --philosophy-secondary: #c41e3a;
-    --philosophy-gradient: linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
-    --philosophy-light: #fff5f5;
-    --philosophy-dark: #2d0a0a;
-
-    /* 政治理论 - 深蓝/靛蓝系 */
-    --politics-primary: #1a237e;
-    --politics-secondary: #3949ab;
-    --politics-gradient: linear-gradient(135deg, #0d1259 0%, #1a237e 50%, #3949ab 100%);
-    --politics-light: #e8eaf6;
-    --politics-dark: #0a0a1a;
-
-    /* 军事战略 - 深绿/橄榄绿系 */
-    --military-primary: #1b5e20;
-    --military-secondary: #388e3c;
-    --military-gradient: linear-gradient(135deg, #0a2910 0%, #1b5e20 50%, #388e3c 100%);
-    --military-light: #e8f5e9;
-    --military-dark: #0a1a0a;
-
-    /* 政治经济学 - 琥珀/橙色系 */
-    --economics-primary: #e65100;
-    --economics-secondary: #ff8f00;
-    --economics-gradient: linear-gradient(135deg, #3d1c00 0%, #e65100 50%, #ff8f00 100%);
-    --economics-light: #fff3e0;
-    --economics-dark: #1a0d00;
-
-    /* 党的建设 - 紫色/紫罗兰系 */
-    --party-primary: #6a1b9a;
-    --party-secondary: #8e24aa;
-    --party-gradient: linear-gradient(135deg, #2a0a3a 0%, #6a1b9a 50%, #8e24aa 100%);
-    --party-light: #f3e5f5;
-    --party-dark: #1a0a2a;
-
-    /* 思想文化 - 青色/蓝绿色系 */
-    --culture-primary: #00695c;
-    --culture-secondary: #00897b;
-    --culture-gradient: linear-gradient(135deg, #002a27 0%, #00695c 50%, #00897b 100%);
-    --culture-light: #e0f2f1;
-    --culture-dark: #001a19;
-
-    /* 通用 */
-    --gold: rgba(255,215,0,0.9);
-    --gold-dark: #ffd700;
+    --primary: #1a237e;
+    --primary-light: #3949ab;
+    --primary-dark: #0d1b3e;
+    --accent: #c41e3a;
+    --gold: #ffd700;
+    --gray-50: #f7fafc;
+    --gray-100: #edf2f7;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e0;
+    --gray-400: #a0aec0;
+    --gray-600: #4a5568;
+    --gray-800: #1a202c;
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-/* ==================== 文章头部渐变 ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #fff;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background: #1a1a1a;
+    color: #e0e0e0;
+}
+
+/* ===== 站点头部 ===== */
+.site-header {
+    background: linear-gradient(135deg, #0d1b3e 0%, #1a237e 50%, #3949ab 100%);
+    color: white;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.site-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 1.8rem;
+}
+
+.logo-text h1 {
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.logo-sub {
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
+
+.main-nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--gold);
+    padding: 4px 8px;
+}
+
+.hamburger-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+    }
+    .hamburger-btn {
+        display: block;
+    }
+}
+
+/* ===== 返回导航 ===== */
+.back-nav {
+    background: #fafafa;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 0.75rem 0;
+}
+
+body.dark-mode .back-nav {
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 2px solid var(--primary);
+    transition: all 0.2s;
+}
+
+.back-link:hover {
+    background: var(--primary);
+    color: white;
+}
+
+body.dark-mode .back-link {
+    color: var(--primary-light);
+    border-color: var(--primary-light);
+}
+
+body.dark-mode .back-link:hover {
+    background: var(--primary-light);
+    color: white;
+}
+
+/* ===== 文章头部 ===== */
 .article-header {
     position: relative;
     overflow: hidden;
     padding: 3rem 2rem;
     text-align: center;
     color: white;
+    background: linear-gradient(135deg, #0d1b3e 0%, #1a237e 50%, #3949ab 100%);
 }
-.article-header[data-category="哲学基础"] { background: var(--philosophy-gradient); }
-.article-header[data-category="政治理论"] { background: var(--politics-gradient); }
-.article-header[data-category="军事战略"] { background: var(--military-gradient); }
-.article-header[data-category="政治经济学"] { background: var(--economics-gradient); }
-.article-header[data-category="党的建设"] { background: var(--party-gradient); }
-.article-header[data-category="思想文化"] { background: var(--culture-gradient); }
 
-/* 装饰背景 */
 .article-header::before {
     content: '';
     position: absolute;
@@ -924,29 +801,37 @@ function initCharts() {
     background-size: 120px;
     pointer-events: none;
 }
-.article-header > * { position: relative; z-index: 1; }
+
+.article-header > * {
+    position: relative;
+    z-index: 1;
+}
 
 .importance-badge {
     display: inline-block;
     background: var(--gold);
-    color: #1a1a1a;
+    color: var(--primary);
     padding: 6px 20px;
     border-radius: 25px;
     font-size: 0.9rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
+
 .article-header h1 {
     font-size: 2.5rem;
     margin: 0.5rem 0;
     font-family: 'STSong', 'SimSun', serif;
 }
+
 .article-subtitle {
     font-size: 1.15rem;
     opacity: 0.9;
     margin: 0.5rem 0;
     font-style: italic;
 }
+
 .article-meta {
     display: flex;
     justify-content: center;
@@ -955,54 +840,18 @@ function initCharts() {
     margin-top: 1.2rem;
     font-size: 0.95rem;
 }
+
 .article-meta span {
-    background: rgba(0,0,0,0.25);
+    background: rgba(0, 0, 0, 0.25);
     padding: 5px 14px;
     border-radius: 18px;
 }
-.article-meta .category { color: var(--gold); }
 
-/* ==================== 返回导航 ==================== */
-.back-nav {
-    background: #f8f8f8;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 12px 0;
-}
-body.dark-mode .back-nav {
-    background: #2a2a2a;
-    border-color: #444;
-}
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-}
-/* 返回链接颜色跟随分类 */
-.article-header[data-category="哲学基础"] ~ .back-nav .back-link,
-.article-header[data-category="哲学基础"] + .main ~ .back-nav .back-link { color: var(--philosophy-primary); }
-.article-header[data-category="政治理论"] ~ .back-nav .back-link { color: var(--politics-primary); }
-.article-header[data-category="军事战略"] ~ .back-nav .back-link { color: var(--military-primary); }
-.article-header[data-category="政治经济学"] ~ .back-nav .back-link { color: var(--economics-primary); }
-.article-header[data-category="党的建设"] ~ .back-nav .back-link { color: var(--party-primary); }
-.article-header[data-category="思想文化"] ~ .back-nav .back-link { color: var(--culture-primary); }
-
-/* ==================== 主容器 ==================== */
-.article-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    gap: 2rem;
-}
-.article-main {
-    flex: 1;
-    min-width: 0;
+.article-meta .category {
+    color: var(--gold);
 }
 
-/* ==================== Tab导航 ==================== */
+/* ===== Tab 导航 ===== */
 .tab-nav {
     display: flex;
     flex-wrap: wrap;
@@ -1016,10 +865,12 @@ body.dark-mode .back-nav {
     top: 70px;
     z-index: 50;
 }
+
 body.dark-mode .tab-nav {
     background: #2a2a2a;
     border-color: #444;
 }
+
 .tab-btn {
     padding: 10px 16px;
     border: none;
@@ -1030,27 +881,23 @@ body.dark-mode .tab-nav {
     border-radius: 8px;
     transition: all 0.25s;
 }
+
 .tab-btn:hover {
     background: #e8e8e8;
     color: #333;
 }
+
 body.dark-mode .tab-btn:hover {
     background: #3a3a3a;
     color: #fff;
 }
+
 .tab-btn.active {
     color: white;
     font-weight: 600;
+    background: var(--primary);
 }
-/* Tab按钮激活颜色跟随分类 */
-.article-header[data-category="哲学基础"] .tab-nav .tab-btn.active { background: var(--philosophy-primary); }
-.article-header[data-category="政治理论"] .tab-nav .tab-btn.active { background: var(--politics-primary); }
-.article-header[data-category="军事战略"] .tab-nav .tab-btn.active { background: var(--military-primary); }
-.article-header[data-category="政治经济学"] .tab-nav .tab-btn.active { background: var(--economics-primary); }
-.article-header[data-category="党的建设"] .tab-nav .tab-btn.active { background: var(--party-primary); }
-.article-header[data-category="思想文化"] .tab-nav .tab-btn.active { background: var(--culture-primary); }
 
-/* ==================== Tab内容区 ==================== */
 .tab-content {
     display: none;
     background: white;
@@ -1058,28 +905,16 @@ body.dark-mode .tab-btn:hover {
     border-radius: 0 0 12px 12px;
     min-height: 60vh;
 }
+
 body.dark-mode .tab-content {
     background: #1a1a1a;
 }
+
 .tab-content.active {
     display: block;
 }
-.tab-heading {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid;
-    font-size: 1.3rem;
-}
-/* 标题颜色跟随分类 */
-.article-header[data-category="哲学基础"] ~ .tab-nav ~ .tab-content .tab-heading { color: var(--philosophy-primary); border-color: var(--philosophy-primary); }
-.article-header[data-category="政治理论"] ~ .tab-nav ~ .tab-content .tab-heading { color: var(--politics-primary); border-color: var(--politics-primary); }
-.article-header[data-category="军事战略"] ~ .tab-nav ~ .tab-content .tab-heading { color: var(--military-primary); border-color: var(--military-primary); }
-.article-header[data-category="政治经济学"] ~ .tab-nav ~ .tab-content .tab-heading { color: var(--economics-primary); border-color: var(--economics-primary); }
-.article-header[data-category="党的建设"] ~ .tab-nav ~ .tab-content .tab-heading { color: var(--party-primary); border-color: var(--party-primary); }
-.article-header[data-category="思想文化"] ~ .tab-nav ~ .tab-content .tab-heading { color: var(--culture-primary); border-color: var(--culture-primary); }
 
-/* ==================== 原文样式 ==================== */
+/* ===== 原文样式 ===== */
 .text-intro {
     background: linear-gradient(135deg, #fff8e1, #ffecb3);
     border-left: 4px solid #ffc107;
@@ -1087,19 +922,23 @@ body.dark-mode .tab-content {
     margin-bottom: 2rem;
     border-radius: 0 8px 8px 0;
 }
+
 body.dark-mode .text-intro {
     background: linear-gradient(135deg, #2d2a1a, #3d3520);
 }
-.chapter {
+
+.chapter-group {
     margin-bottom: 1.5rem;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
     overflow: hidden;
 }
-body.dark-mode .chapter {
+
+body.dark-mode .chapter-group {
     border-color: #444;
 }
-.chapter-title {
+
+.chapter-main-title {
     padding: 1rem 1.3rem;
     margin: 0;
     cursor: pointer;
@@ -1107,174 +946,397 @@ body.dark-mode .chapter {
     align-items: center;
     gap: 10px;
     font-size: 1.1rem;
-    user-select: none;
+    font-weight: 600;
+    background: linear-gradient(135deg, #1a237e, #3949ab);
     color: white;
+    user-select: none;
 }
-/* 章节标题颜色跟随分类 */
-.article-header[data-category="哲学基础"] ~ .tab-nav ~ .tab-content .chapter .chapter-title { background: linear-gradient(135deg, var(--philosophy-primary), var(--philosophy-secondary)); }
-.article-header[data-category="政治理论"] ~ .tab-nav ~ .tab-content .chapter .chapter-title { background: linear-gradient(135deg, var(--politics-primary), var(--politics-secondary)); }
-.article-header[data-category="军事战略"] ~ .tab-nav ~ .tab-content .chapter .chapter-title { background: linear-gradient(135deg, var(--military-primary), var(--military-secondary)); }
-.article-header[data-category="政治经济学"] ~ .tab-nav ~ .tab-content .chapter .chapter-title { background: linear-gradient(135deg, var(--economics-primary), var(--economics-secondary)); }
-.article-header[data-category="党的建设"] ~ .tab-nav ~ .tab-content .chapter .chapter-title { background: linear-gradient(135deg, var(--party-primary), var(--party-secondary)); }
-.article-header[data-category="思想文化"] ~ .tab-nav ~ .tab-content .chapter .chapter-title { background: linear-gradient(135deg, var(--culture-primary), var(--culture-secondary)); }
 
-.chapter-title:hover { filter: brightness(1.05); }
-.toggle-icon { font-size: 0.8rem; transition: transform 0.25s; flex-shrink: 0; }
-.chapter.collapsed .toggle-icon { transform: rotate(-90deg); }
-.chapter-content {
+.chapter-main-title:hover {
+    filter: brightness(1.05);
+}
+
+.chapter-group-content {
     padding: 1.3rem;
     background: #fafafa;
-    max-height: 5000px;
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.3s ease;
+    line-height: 1.8;
 }
-body.dark-mode .chapter-content {
+
+body.dark-mode .chapter-group-content {
     background: #222;
 }
-.chapter.collapsed .chapter-content {
-    max-height: 0;
-    padding: 0 1.3rem;
-}
-.chapter-content p {
-    text-indent: 2em;
+
+.chapter-group-content p {
     margin-bottom: 1em;
+    text-indent: 2em;
     text-align: justify;
 }
-body.dark-mode .chapter-content p {
-    color: #e0e0e0;
+
+.chapter-sub {
+    margin: 1rem 0 0 1rem;
+    border-left: 3px solid var(--primary-light);
+    padding-left: 1rem;
 }
 
-/* ==================== 其他Tab通用样式 ==================== */
-.reading-tip, .difficulty-item, .dialogue-item, .action-item, .chart-container, .puzzle-intro, .further-item {
-    background: #fafafa;
-    border-radius: 10px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid #eee;
-}
-body.dark-mode .reading-tip,
-body.dark-mode .difficulty-item,
-body.dark-mode .dialogue-item,
-body.dark-mode .action-item,
-body.dark-mode .chart-container,
-body.dark-mode .puzzle-intro,
-body.dark-mode .further-item {
-    background: #2a2a2a;
-    border-color: #444;
-}
-.reading-tip h4, .difficulty-item h4, .action-item h4, .further-item h4 {
-    margin-top: 0;
-    margin-bottom: 0.8rem;
-}
-.difficulty-item h4 { color: #d32f2f; }
-body.dark-mode .difficulty-item h4 { color: #ef5350; }
-.dialogue-item {
-    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-}
-body.dark-mode .dialogue-item {
-    background: linear-gradient(135deg, #1a2a1a, #1f2f1f);
-}
-.dialogue-q { color: #2e7d32; font-weight: bold; margin-bottom: 0.6rem; }
-.dialogue-a { padding-left: 1.5rem; border-left: 3px solid #2e7d32; margin-top: 0.6rem; color: #1565c0; }
-.action-item {
-    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-}
-body.dark-mode .action-item {
-    background: linear-gradient(135deg, #2a2015, #352a1a);
-}
-.action-num {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+.chapter-sub-title {
+    padding: 0.5rem 0;
+    margin: 0;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: white;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--primary);
+    user-select: none;
 }
-.article-header[data-category="哲学基础"] ~ .tab-nav ~ .tab-content .action-num { background: var(--philosophy-primary); }
-.article-header[data-category="政治理论"] ~ .tab-nav ~ .tab-content .action-num { background: var(--politics-primary); }
-.article-header[data-category="军事战略"] ~ .tab-nav ~ .tab-content .action-num { background: var(--military-primary); }
-.article-header[data-category="政治经济学"] ~ .tab-nav ~ .tab-content .action-num { background: var(--economics-primary); }
-.article-header[data-category="党的建设"] ~ .tab-nav ~ .tab-content .action-num { background: var(--party-primary); }
-.article-header[data-category="思想文化"] ~ .tab-nav ~ .tab-content .action-num { background: var(--culture-primary); }
 
-.action-item h4 { margin: 0 0 0.5rem; color: #e65100; }
-.further-item { border-left: 3px solid; padding-left: 1rem; }
-.article-header[data-category="哲学基础"] ~ .tab-nav ~ .tab-content .further-item { border-color: var(--philosophy-primary); }
-.article-header[data-category="政治理论"] ~ .tab-nav ~ .tab-content .further-item { border-color: var(--politics-primary); }
-.further-item h4 { margin: 0 0 0.3rem; }
-.article-header[data-category="哲学基础"] ~ .tab-nav ~ .tab-content .further-item h4 { color: var(--philosophy-primary); }
+body.dark-mode .chapter-sub-title {
+    color: var(--primary-light);
+}
 
-/* ==================== 右侧章节导航 ==================== */
-.chapter-nav {
-    width: 220px;
-    flex-shrink: 0;
-    position: sticky;
-    top: 90px;
-    max-height: calc(100vh - 120px);
-    overflow-y: auto;
-    background: white;
-    border-radius: 12px;
+.toggle-icon,
+.toggle-icon-small {
+    font-size: 0.75rem;
+    transition: transform 0.2s;
+}
+
+.chapter-main-title.collapsed .toggle-icon,
+.chapter-sub-title.collapsed .toggle-icon-small {
+    transform: rotate(-90deg);
+}
+
+.chapter-sub-content {
+    padding: 0.5rem 0 0.5rem 1rem;
+}
+
+.chapter-sub-content h4 {
+    margin: 1rem 0 0.5rem;
+    color: var(--primary);
+}
+
+body.dark-mode .chapter-sub-content h4 {
+    color: var(--primary-light);
+}
+
+/* ===== 其他 Tab 公共样式 ===== */
+.reading-guide,
+.difficulty-section,
+.dialogue-section,
+.action-section,
+.visualization-section,
+.puzzle-section,
+.further-reading {
+    line-height: 1.8;
+}
+
+.guide-block,
+.diff-item,
+.dialogue-block,
+.action-item,
+.chart-block,
+.puzzle-intro,
+.puzzle-position,
+.puzzle-timeline,
+.puzzle-links,
+.puzzle-modern,
+.reading-item {
+    margin-bottom: 1.5rem;
     padding: 1.2rem;
-    border: 1px solid #e0e0e0;
+    background: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #eee;
 }
-body.dark-mode .chapter-nav {
+
+body.dark-mode .guide-block,
+body.dark-mode .diff-item,
+body.dark-mode .dialogue-block,
+body.dark-mode .action-item,
+body.dark-mode .chart-block,
+body.dark-mode .puzzle-intro,
+body.dark-mode .puzzle-position,
+body.dark-mode .puzzle-timeline,
+body.dark-mode .puzzle-links,
+body.dark-mode .puzzle-modern,
+body.dark-mode .reading-item {
     background: #2a2a2a;
     border-color: #444;
 }
-.chapter-nav-title {
-    font-weight: bold;
-    padding-bottom: 0.75rem;
-    margin-bottom: 0.75rem;
-    border-bottom: 2px solid #e0e0e0;
+
+.wrong {
+    background: #fff5f5;
+    border-left: 4px solid #fc8181;
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
 }
-.chapter-nav-list {
+
+.correct {
+    background: #f0fff4;
+    border-left: 4px solid #68d391;
+    padding: 0.8rem;
+}
+
+body.dark-mode .wrong {
+    background: #2d1a1a;
+    color: #ef5350;
+}
+
+body.dark-mode .correct {
+    background: #1a2a1a;
+    color: #66bb6a;
+}
+
+.chart-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* ===== 右侧目录 ===== */
+.toc-sidebar {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 280px;
+    height: calc(100vh - 60px);
+    background: white;
+    border-left: 1px solid #e0e0e0;
+    z-index: 100;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    transition: transform 0.3s ease;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.05);
+    transform: translateX(100%);
 }
-.chapter-nav-item {
-    padding: 8px 12px;
-    border-radius: 6px;
+
+body.dark-mode .toc-sidebar {
+    background: #1a1a1a;
+    border-color: #333;
+}
+
+.toc-sidebar.open {
+    transform: translateX(0);
+}
+
+.toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    background: #fafafa;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+body.dark-mode .toc-header {
+    background: #222;
+    border-color: #333;
+}
+
+.toc-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
     color: #666;
+    padding: 0 6px;
+    border-radius: 4px;
+}
+
+.toc-close:hover {
+    background: #e0e0e0;
+}
+
+body.dark-mode .toc-close:hover {
+    background: #3a3a3a;
+}
+
+.toc-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem 0;
+}
+
+.toc-item {
+    display: block;
+    padding: 0.6rem 1rem;
+    color: #555;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    border-left: 3px solid transparent;
     transition: all 0.2s;
     cursor: pointer;
 }
-.chapter-nav-item:hover {
-    background: #f0f0f0;
-    color: #333;
+
+.toc-item:hover {
+    background: #f5f5f5;
+    color: var(--primary);
 }
-.chapter-nav-item.active {
+
+.toc-item.active {
+    background: #e8eaf6;
+    border-left-color: var(--primary);
+    color: var(--primary);
+    font-weight: 500;
+}
+
+body.dark-mode .toc-item {
+    color: #ccc;
+}
+
+body.dark-mode .toc-item:hover {
+    background: #2a2a2a;
+    color: var(--primary-light);
+}
+
+body.dark-mode .toc-item.active {
+    background: #2a2a2a;
+    color: var(--primary-light);
+}
+
+.toc-progress {
+    height: 3px;
+    background: #e0e0e0;
+}
+
+.toc-progress-bar {
+    height: 100%;
+    background: var(--primary);
+    width: 0%;
+    transition: width 0.1s;
+}
+
+.toc-toggle {
+    display: flex;  /* 让电脑端也显示 */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--primary);
     color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    z-index: 101;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    gap: 6px;
 }
-.article-header[data-category="哲学基础"] ~ .article-main .chapter-nav .chapter-nav-item.active { background: var(--philosophy-primary); }
-.article-header[data-category="政治理论"] ~ .article-main .chapter-nav .chapter-nav-item.active { background: var(--politics-primary); }
 
-/* ==================== 响应式 ==================== */
-@media (max-width: 1024px) {
-    .chapter-nav { display: none; }
+.toc-toggle:hover {
+    background: var(--primary-light);
 }
+
+/* 手机端保持不变或调整位置 */
 @media (max-width: 768px) {
-    .tab-nav { padding: 0.75rem; top: 60px; }
-    .tab-btn { padding: 8px 12px; font-size: 0.85rem; }
-    .article-header { padding: 2rem 1rem; }
-    .article-header h1 { font-size: 1.8rem; }
-    .tab-content { padding: 1.25rem; }
-    .article-container { padding: 0 12px; }
+    .toc-toggle {
+        bottom: 20px;
+        right: 20px;
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
 }
 
-/* ==================== 打印样式 ==================== */
-@media print {
-     .tab-nav, .chapter-nav { display: none; }
-    .tab-content { display: block !important; }
-    .chapter-content { max-height: none !important; }
+/* ===== 下载按钮 ===== */
+.download-fab {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a237e, #303f9f);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-size: 1.5rem;
+    z-index: 1000;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-</style></style>
+
+.download-fab:hover {
+    transform: scale(1.1);
+}
+
+.download-menu {
+    position: fixed;
+    bottom: 96px;
+    left: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 12px 16px;
+    z-index: 999;
+    display: none;
+    min-width: 180px;
+}
+
+body.dark-mode .download-menu {
+    background: #2a2a2a;
+    border: 1px solid #444;
+}
+
+.download-menu.show {
+    display: block;
+}
+
+.dl-link {
+    display: block;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+body.dark-mode .dl-link {
+    color: #ccc;
+}
+
+.dl-link:hover {
+    background: #e8eaf6;
+    color: var(--primary);
+}
+
+/* ===== 页脚 ===== */
+.site-footer {
+    background: linear-gradient(135deg, #0d1b3e 0%, #1a237e 100%);
+    color: #e0e0e0;
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+body.dark-mode .site-footer {
+    background: #0a0a1a;
+}
+
+.footer-note {
+    color: var(--gold);
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    .article-header {
+        padding: 2rem 1rem;
+    }
+    .article-header h1 {
+        font-size: 1.8rem;
+    }
+    .tab-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    .tab-content {
+        padding: 1rem;
+    }
+}</style>
 
 </html>

@@ -850,6 +850,38 @@
                     </div>
                 </article>
 
+                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1913年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/ma-ke-si-zhu-yi-de-san-ge-lai-yuan.html">马克思主义的三个来源和三个组成部分</a>
+                    </h4>
+                    <p class="article-author">列宁</p>
+                    <p class="article-desc">系统阐述马克思主义的三大来源（德国古典哲学、英国古典经济学、法国空想社会主义）和三大组成部分，马克思主义入门必读。</p>
+                    <div class="card-footer">
+                        <span class="article-category">马克思主义理论 · 入门导读</span>
+                        <a href="articles/ma-ke-si-zhu-yi-de-san-ge-lai-yuan.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1923年1月</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/lun-wo-guo-ge-ming.html">论我国革命</a>
+                    </h4>
+                    <p class="article-author">列宁</p>
+                    <p class="article-desc">列宁晚年重要理论文献，驳斥苏汉诺夫"不具备革命条件"论，捍卫革命辩证法，反对把马克思主义变成死板教条。</p>
+                    <div class="card-footer">
+                        <span class="article-category">革命理论 · 方法论</span>
+                        <a href="articles/lun-wo-guo-ge-ming.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
                 <!-- 五星文章 - 马克思恩格斯 -->
                 <article class="article-card priority-5" data-priority="5" data-author="marx">
                     <div class="card-header">
@@ -880,6 +912,22 @@
                     <div class="card-footer">
                         <span class="article-category">政治理论 · 科学社会主义</span>
                         <a href="articles/ge-da-gang-ling.html" class="read-more">阅读全文 →</a>
+                    </div>
+                </article>
+
+                <article class="article-card priority-5" data-priority="5" data-author="marx">
+                    <div class="card-header">
+                        <span class="priority-badge">五星</span>
+                        <span class="article-date">1844年</span>
+                    </div>
+                    <h4 class="article-title">
+                        <a href="articles/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.html">黑格尔法哲学批判导言</a>
+                    </h4>
+                    <p class="article-author">马克思</p>
+                    <p class="article-desc">马克思思想转变的里程碑。从宗教批判走向政治批判，提出"批判的武器不能代替武器的批判"，呼唤无产阶级担负历史解放使命。</p>
+                    <div class="card-footer">
+                        <span class="article-category">哲学 · 革命理论</span>
+                        <a href="articles/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.html" class="read-more">阅读全文 →</a>
                     </div>
                 </article>
 
@@ -1304,26 +1352,6 @@
         }
         updateDarkModeIcon();
         
-        // 汉堡菜单功能
-        (function(){
-            document.addEventListener('DOMContentLoaded', function(){
-                var h = document.querySelector('.hamburger-btn'), n = document.querySelector('.main-nav');
-                if(!h || !n) return;
-                h.addEventListener('click', function(e){
-                    e.stopPropagation();
-                    var o = n.classList.toggle('open');
-                    h.classList.toggle('open', o);
-                    document.body.style.overflow = o ? 'hidden' : '';
-                });
-                document.addEventListener('click', function(e){
-                    if(n.classList.contains('open') && !n.contains(e.target) && e.target !== h){
-                        n.classList.remove('open');
-                        h.classList.remove('open');
-                        document.body.style.overflow = '';
-                    }
-                });
-            });
-        })();
-    </script>
+       </script>
 </body>
 </html>
