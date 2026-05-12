@@ -1,2 +1,3 @@
- M gallery/propaganda.html
+ M articles/gongchan-dan-yuan.html
+ M puzzle.html
  M tmp_status.txt
