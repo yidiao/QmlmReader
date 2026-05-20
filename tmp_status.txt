@@ -1,3 +1,5 @@
- M articles/gongchan-dan-yuan.html
- M puzzle.html
+ M rectify.html
  M tmp_status.txt
+?? rectify/leaders/pol-pot.html
+?? rectify/myths/power-illusion.html
+?? rectify/myths/young-october.html
