@@ -1,5 +1,6 @@
- M rectify.html
+ M changelog-detail.html
+ M data/history-events.js
+ M data/updates.json
+ M puzzle.html
  M tmp_status.txt
-?? rectify/leaders/pol-pot.html
-?? rectify/myths/power-illusion.html
-?? rectify/myths/young-october.html
+?? articles_gap_analysis.txt

@@ -481,621 +481,728 @@ body.dark-mode .filter-btn:hover {
                     <text x="1880" y="152" class="category-label" fill="#3182ce">军事战略</text>
                     <text x="2280" y="152" class="category-label" fill="#00695c">思想文化</text>
 
-                    <!-- Y轴时间刻度 (匹配节点实际Y坐标) -->
-                    <line x1="55" y1="150" x2="55" y2="1330" stroke="#bbb" stroke-width="1.2" opacity="0.4"/>
-                    <circle cx="55" cy="220" r="3" fill="#888" opacity="0.5"/>
-                    <text x="45" y="224" text-anchor="end" font-size="10" fill="#888">1848</text>
-                    <circle cx="55" cy="440" r="3" fill="#888" opacity="0.5"/>
-                    <text x="45" y="444" text-anchor="end" font-size="10" fill="#888">1902</text>
-                    <circle cx="55" cy="690" r="3" fill="#c41e3a" opacity="0.6"/>
-                    <text x="45" y="694" text-anchor="end" font-size="10" fill="#c41e3a">1937</text>
-                    <circle cx="55" cy="785" r="3" fill="#888" opacity="0.5"/>
-                    <text x="45" y="789" text-anchor="end" font-size="10" fill="#888">1939</text>
-                    <circle cx="55" cy="1095" r="3" fill="#888" opacity="0.5"/>
-                    <text x="45" y="1099" text-anchor="end" font-size="10" fill="#888">1957</text>
+                    <!-- Y轴时间刻度 (线性映射: Y=180+(year-1848)*10.5) -->
+                    <!-- SVG可用高度1500, 数据范围1844-1957, 间距~10.5px/年 -->
+                    <line x1="55" y1="155" x2="55" y2="1340" stroke="#bbb" stroke-width="1.2" opacity="0.4"/>
 
-                    <!-- ===== 哲学基础 疏密分布 ===== -->
-                    <!-- 密集区1: 马克思早期 1848-1875 -->
-                    <!-- 密集区2: 列宁时期 1902-1917 -->
-                    <!-- 密集区3: 毛泽东哲学双峰 1937 -->
-                    <!-- 稀疏区: 后期散落 1930-1957 -->
+                    <!-- === 第一期: 马克思早期思想形成 (1844-1848) === -->
+                    <circle cx="55" cy="159" r="2" fill="#888" opacity="0.5"/>
+                    <text x="45" y="163" text-anchor="end" font-size="8" fill="#888">1844</text>
+                    <!-- 1848 - 共产党宣言 -->
+                    <circle cx="55" cy="190" r="3" fill="#c41e3a" opacity="0.6"/>
+                    <text x="45" y="194" text-anchor="end" font-size="10" fill="#c41e3a">1848</text>
+                    <text x="30" y="180" text-anchor="end" font-size="6.5" fill="#888" opacity="0.6">(早期思想)</text>
 
-                    <!-- 哲学基础 曲线簇 (马克思早期 1848-1875) -->
-                    <!-- 水平连线: 共产党宣言(178,222) - 资本论(278,218) - 哥达纲领(378,218) -->
-                    <path d="M 178 222 C 230 220, 250 219, 278 218 C 325 217, 350 217, 378 218" class="line-internal" stroke="#c41e3a" opacity="0.15"/>
-                    <!-- 垂直连接: 共产党宣言(178,222) -> 没有调查(178,282) -->
-                    <path d="M 178 222 C 172 245, 180 265, 178 282" class="line-internal" stroke="#c41e3a" opacity="0.2"/>
+                    <!-- === 第二期: 马恩成熟期 (1867-1884) === -->
+                    <circle cx="55" cy="380" r="2" fill="#888" opacity="0.5"/>
+                    <text x="45" y="384" text-anchor="end" font-size="9" fill="#888">1867</text>
+                    <circle cx="55" cy="464" r="2.5" fill="#888" opacity="0.5"/>
+                    <text x="45" y="468" text-anchor="end" font-size="10" fill="#888">1875</text>
+                    <text x="30" y="430" text-anchor="end" font-size="6.5" fill="#888" opacity="0.6">(马恩成熟期)</text>
 
-                    <!-- 哲学基础 曲线簇 (列宁时期 1902-1917) -->
-                    <!-- 水平连线: 怎么办(182,442) - 帝国主义论(278,438) - 国家与革命(378,435) -->
-                    <path d="M 182 442 C 220 440, 250 439, 278 438 C 325 436, 350 435, 378 435" class="line-internal" stroke="#c41e3a" opacity="0.15"/>
-                    <!-- 垂直连接: 怎么办(182,442) -> 论列宁(182,535) -->
-                    <path d="M 182 442 C 176 475, 184 510, 182 535" class="line-internal" stroke="#c41e3a" opacity="0.2"/>
-                    <!-- 垂直连接: 帝国主义论(278,438) -> 论列宁(182,535) -->
-                    <path d="M 278 438 C 260 475, 200 510, 182 535" class="line-internal" stroke="#c41e3a" opacity="0.12"/>
+                    <!-- === 第三期: 恩格斯晚期 / 列宁主义前夜 (1884-1902) === -->
+                    <circle cx="55" cy="558" r="2" fill="#888" opacity="0.4"/>
+                    <text x="45" y="562" text-anchor="end" font-size="8" fill="#888">1884</text>
+                    <circle cx="55" cy="726" r="2.5" fill="#888" opacity="0.5"/>
+                    <text x="45" y="730" text-anchor="end" font-size="10" fill="#888">1900</text>
+                    <text x="30" y="655" text-anchor="end" font-size="6.5" fill="#888" opacity="0.6">(恩格斯晚期)</text>
 
-                    <!-- 哲学基础 曲线簇 (毛泽东哲学双峰 1937) -->
-                    <!-- 水平连线: 实践论(176,695) - 矛盾论(282,692) -->
-                    <path d="M 176 695 C 220 694, 250 693, 282 692" class="line-internal" stroke="#c41e3a" opacity="0.15"/>
-                    <!-- 垂直连接: 实践论(176,695) -> 青年运动(178,785) -->
-                    <path d="M 176 695 C 170 730, 178 762, 178 785" class="line-internal" stroke="#c41e3a" opacity="0.2"/>
+                    <!-- === 第四期: 列宁主义哲学 (1902-1917) === -->
+                    <circle cx="55" cy="747" r="2" fill="#888" opacity="0.5"/>
+                    <text x="45" y="751" text-anchor="end" font-size="8" fill="#888">1902</text>
+                    <circle cx="55" cy="821" r="2" fill="#888" opacity="0.4"/>
+                    <text x="45" y="825" text-anchor="end" font-size="8" fill="#888">1909</text>
+                    <circle cx="55" cy="905" r="2" fill="#888" opacity="0.5"/>
+                    <text x="45" y="909" text-anchor="end" font-size="8" fill="#888">1917</text>
+                    <text x="30" y="835" text-anchor="end" font-size="6.5" fill="#888" opacity="0.6">(列宁主义)</text>
 
-                    <!-- 哲学基础 曲线簇 (后期散落 1957) -->
-                    <!-- 水平连线: 正确处理(177,1095) -->
-                    <!-- (无同一高度的其他节点) -->
+                    <!-- === 第五期: 苏联建设 & 中国革命早期 (1917-1930) === -->
+                    <circle cx="55" cy="989" r="2" fill="#888" opacity="0.5"/>
+                    <text x="45" y="993" text-anchor="end" font-size="9" fill="#888">1925</text>
+                    <circle cx="55" cy="1041" r="2" fill="#888" opacity="0.4"/>
+                    <text x="45" y="1045" text-anchor="end" font-size="8" fill="#888">1930</text>
+                    <text x="30" y="1020" text-anchor="end" font-size="6.5" fill="#888" opacity="0.6">(苏联建设)</text>
 
-                    <!-- 垂直连接: 正确处理(177,1095) -> 学习和时局(277,1175) -->
-                    <path d="M 177 1095 C 200 1125, 255 1155, 277 1175" class="line-internal" stroke="#c41e3a" opacity="0.2"/>
+                    <!-- === 第六期: 毛泽东哲学 & 战争时期 (1930-1949) === -->
+                    <circle cx="55" cy="1115" r="3" fill="#c41e3a" opacity="0.6"/>
+                    <text x="45" y="1119" text-anchor="end" font-size="10" fill="#c41e3a">1937</text>
+                    <circle cx="55" cy="1188" r="2" fill="#888" opacity="0.4"/>
+                    <text x="45" y="1192" text-anchor="end" font-size="8" fill="#888">1944</text>
+                    <text x="30" y="1158" text-anchor="end" font-size="6.5" fill="#888" opacity="0.6">(战争时期)</text>
 
-                    <!-- 哲学基础节点 - 疏密分布 + 动态偏移 -->
-                    <g class="node-group" data-author="marx" onclick="showCard('gongchandanyan')" transform="translate(178,222)">
+                    <!-- === 第七期: 建国后建设期 (1949-1957) === -->
+                    <circle cx="55" cy="1251" r="2.5" fill="#888" opacity="0.5"/>
+                    <text x="45" y="1255" text-anchor="end" font-size="10" fill="#888">1950</text>
+                    <text x="30" y="1295" text-anchor="end" font-size="6.5" fill="#888" opacity="0.6">(建国后)</text>
+
+                    <!-- ===== 哲学基础 ==== -->
+                    <!-- 线性Y公式: Y=180+(year-1848)*10.5 -->
+                    <!-- 1844前节点挤在上方155-190区间(每年约8-10px) -->
+                    <!-- 1844=158, 1845=170, 1846=178, 1848=190, 1867=380, 1875=464, 1878=495, 1884=558, 1902=747, 1909=821, 1916=894, 1917=905, 1924=978, 1930=1041, 1937=1115, 1939=1140, 1944=1188, 1957=1325 -->
+
+                    <!-- 内部曲线 — 1844-1848密集簇 -->
+                    <!-- 黑格尔批判(150,158) → 1844手稿(280,162) -->
+                    <path d="M 150 158 C 200 159, 240 161, 280 162" class="line-internal" stroke="#c41e3a" opacity="0.08"/>
+                    <!-- 1844手稿(280,162) → 费尔巴哈(400,170) -->
+                    <path d="M 280 162 C 320 165, 360 168, 400 170" class="line-internal" stroke="#c41e3a" opacity="0.08"/>
+                    <!-- 黑格尔批判(150,158) → 德意志意识形态(350,178) -->
+                    <path d="M 150 158 C 220 165, 300 174, 350 178" class="line-internal" stroke="#c41e3a" opacity="0.08"/>
+                    <!-- 费尔巴哈(400,170) → 德意志意识形态(350,178) -->
+                    <path d="M 400 170 C 380 173, 365 176, 350 178" class="line-internal" stroke="#c41e3a" opacity="0.06"/>
+                    <!-- 德意志意识形态(350,178) → 共宣(178,190) -->
+                    <path d="M 350 178 C 280 183, 210 188, 178 190" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 共宣(178,190) → 资本论(278,380) 跨19年 -->
+                    <path d="M 178 190 C 172 280, 283 330, 278 380" class="line-internal" stroke="#c41e3a" opacity="0.12"/>
+                    <!-- 资本论(278,380) → 哥达纲领(378,464) -->
+                    <path d="M 278 380 C 300 410, 355 435, 378 464" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 哥达纲领(378,464) → 反杜林论(228,495) -->
+                    <path d="M 378 464 C 330 475, 270 486, 228 495" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 反杜林论(228,495) → 家庭起源(378,558) -->
+                    <path d="M 228 495 C 280 520, 340 540, 378 558" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 家庭起源(378,558) → 怎么办(182,747) 跨18年 -->
+                    <path d="M 378 558 C 320 620, 220 700, 182 747" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 怎么办(182,747) → 唯批(178,821) -->
+                    <path d="M 182 747 C 178 770, 180 800, 178 821" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 唯批(178,821) → 帝国主义论(278,894) -->
+                    <path d="M 178 821 C 210 850, 260 875, 278 894" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 帝国主义论(278,894) → 国家与革命(378,905) -->
+                    <path d="M 278 894 C 310 898, 345 900, 378 905" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 国家与革命(378,905) → 论列宁(228,978) -->
+                    <path d="M 378 905 C 330 930, 260 955, 228 978" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 论列宁(228,978) → 没有调查(178,1041) -->
+                    <path d="M 228 978 C 210 1000, 185 1020, 178 1041" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 没有调查(178,1041) → 实践论(176,1115) -->
+                    <path d="M 178 1041 C 172 1065, 174 1090, 176 1115" class="line-internal" stroke="#c41e3a" opacity="0.12"/>
+                    <!-- 实践论(176,1115) — 矛盾论(322,1110) 水平 -->
+                    <path d="M 176 1115 C 220 1113, 270 1112, 322 1110" class="line-internal" stroke="#c41e3a" opacity="0.12"/>
+                    <!-- 矛盾论(322,1110) → 青年运动(378,1140) -->
+                    <path d="M 322 1110 C 340 1120, 358 1130, 378 1140" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 青年运动(378,1140) → 学习和时局(277,1188) -->
+                    <path d="M 378 1140 C 345 1155, 305 1170, 277 1188" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 学习和时局(277,1188) → 正确处理(230,1325) 跨13年 -->
+                    <path d="M 277 1188 C 265 1240, 240 1290, 230 1325" class="line-internal" stroke="#c41e3a" opacity="0.1"/>
+
+                    <!-- 哲学基础节点 -->
+                    <!-- === 1844-1848 密簇: 马克思早期思想形成 === -->
+                    <g class="node-group" data-author="marx" onclick="showCard('heigeerpiping')" transform="translate(150,158)">
+                        <circle class="node-circle" r="22" fill="#c41e3a" opacity="0.88"/>
+                        <text class="node-label" y="-1" font-size="8">黑格尔法哲学</text>
+                        <text class="node-year" y="9" font-size="7">批判导言 1844</text>
+                    </g>
+
+                    <g class="node-group" data-author="marx" onclick="showCard('shougao1844')" transform="translate(280,162)">
+                        <circle class="node-circle" r="28" fill="#c41e3a"/>
+                        <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
+                        <text class="node-label" y="-3">1844手稿</text>
+                        <text class="node-year" y="9">1844</text>
+                    </g>
+
+                    <g class="node-group" data-author="marx" onclick="showCard('feierbaha')" transform="translate(400,170)">
+                        <circle class="node-circle" r="24" fill="#c41e3a" opacity="0.9"/>
+                        <text class="node-label" y="-3">费尔巴哈</text>
+                        <text class="node-year" y="9">的提纲 1845</text>
+                    </g>
+
+                    <g class="node-group" data-author="marx" onclick="showCard('deyizhixintai')" transform="translate(350,178)">
+                        <circle class="node-circle" r="24" fill="#c41e3a" opacity="0.9"/>
+                        <text class="node-label" y="-3">德意志</text>
+                        <text class="node-year" y="9">意识形态 1846</text>
+                    </g>
+
+                    <g class="node-group" data-author="marx" onclick="showCard('gongchandanyan')" transform="translate(178,190)">
                         <circle class="node-circle" r="30" fill="#c41e3a"/>
                         <circle class="node-ring" r="34" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
                         <text class="node-label" y="-5">共产党宣言</text>
                         <text class="node-year" y="10">1848</text>
                     </g>
 
-                    <g class="node-group" data-author="marx" onclick="showCard('zibenlun')" transform="translate(278,218)">
-                        <circle class="node-circle" r="24" fill="#c41e3a" opacity="0.88"/>
+                    <!-- === 1867-1884: 马克思恩格斯成熟期 === -->
+                    <g class="node-group" data-author="marx" onclick="showCard('zibenlun')" transform="translate(278,380)">
+                        <circle class="node-circle" r="28" fill="#c41e3a"/>
+                        <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
                         <text class="node-label" y="-3">资本论</text>
                         <text class="node-year" y="9">1867</text>
                     </g>
 
-                    <g class="node-group" data-author="marx" onclick="showCard('gedagangling')" transform="translate(378,218)">
-                        <circle class="node-circle" r="18" fill="#c41e3a" opacity="0.82"/>
-                        <text class="node-label" y="-1" font-size="9">哥达纲领</text>
-                        <text class="node-year" y="8" font-size="7">1875</text>
+                    <g class="node-group" data-author="marx" onclick="showCard('gedagangling')" transform="translate(378,464)">
+                        <circle class="node-circle" r="20" fill="#c41e3a" opacity="0.88"/>
+                        <text class="node-label" y="-1">哥达纲领</text>
+                        <text class="node-year" y="8">1875</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('diaocha')" transform="translate(178,282)">
-                        <circle class="node-circle" r="20" fill="#c41e3a" opacity="0.85"/>
-                        <text class="node-label" y="-1" font-size="9">没有调查</text>
-                        <text class="node-year" y="8" font-size="7">没有发言权 1930</text>
+                    <g class="node-group" data-author="marx" onclick="showCard('fandulilun')" transform="translate(228,495)">
+                        <circle class="node-circle" r="26" fill="#c41e3a"/>
+                        <circle class="node-ring" r="30" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
+                        <text class="node-label" y="-3">反杜林论</text>
+                        <text class="node-year" y="9">1878</text>
                     </g>
 
-                    <g class="node-group" data-author="lenin" onclick="showCard('zenmeban')" transform="translate(182,442)">
-                        <circle class="node-circle" r="22" fill="#c41e3a" opacity="0.88"/>
+                    <g class="node-group" data-author="marx" onclick="showCard('jiatingqiyuan')" transform="translate(378,558)">
+                        <circle class="node-circle" r="24" fill="#c41e3a" opacity="0.9"/>
+                        <text class="node-label" y="-3">家庭起源</text>
+                        <text class="node-year" y="9">1884</text>
+                    </g>
+
+                    <!-- === 1902-1917: 列宁主义哲学 === -->
+                    <g class="node-group" data-author="lenin" onclick="showCard('zenmeban')" transform="translate(182,747)">
+                        <circle class="node-circle" r="26" fill="#c41e3a"/>
+                        <circle class="node-ring" r="30" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
                         <text class="node-label" y="-3" font-size="10">怎么办?</text>
                         <text class="node-year" y="9">1902</text>
                     </g>
 
-                    <g class="node-group" data-author="lenin" onclick="showCard('diguo')" transform="translate(278,438)">
-                        <circle class="node-circle" r="26" fill="#c41e3a"/>
+                    <g class="node-group" data-author="lenin" onclick="showCard('weiwuzhuyijingyan')" transform="translate(178,821)">
+                        <circle class="node-circle" r="28" fill="#c41e3a"/>
+                        <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
+                        <text class="node-label" y="-3">唯物主义和</text>
+                        <text class="node-year" y="10" font-size="7">经验批判主义 1909</text>
+                    </g>
+
+                    <g class="node-group" data-author="lenin" onclick="showCard('diguo')" transform="translate(278,894)">
+                        <circle class="node-circle" r="28" fill="#c41e3a"/>
+                        <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
                         <text class="node-label" y="-3">帝国主义论</text>
                         <text class="node-year" y="9">1916</text>
                     </g>
 
-                    <g class="node-group" data-author="lenin" onclick="showCard('guojiayugeming')" transform="translate(378,435)">
-                        <circle class="node-circle" r="26" fill="#c41e3a"/>
+                    <g class="node-group" data-author="lenin" onclick="showCard('guojiayugeming')" transform="translate(378,905)">
+                        <circle class="node-circle" r="28" fill="#c41e3a"/>
+                        <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
                         <text class="node-label" y="-3">国家与革命</text>
                         <text class="node-year" y="9">1917</text>
                     </g>
 
-                    <g class="node-group" data-author="lenin" onclick="showCard('lunlian')" transform="translate(182,535)">
+                    <g class="node-group" data-author="lenin" onclick="showCard('lunlian')" transform="translate(228,978)">
                         <circle class="node-circle" r="20" fill="#c41e3a" opacity="0.85"/>
                         <text class="node-label" y="-1">论列宁</text>
                         <text class="node-year" y="9">1924</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('shijian')" transform="translate(176,695)">
-                        <circle class="node-circle" r="28" fill="#c41e3a"/>
-                        <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+                    <!-- === 1930-1957: 毛泽东哲学 === -->
+                    <g class="node-group" data-author="mao" onclick="showCard('diaocha')" transform="translate(178,1041)">
+                        <circle class="node-circle" r="18" fill="#c41e3a" opacity="0.82"/>
+                        <text class="node-label" y="-1" font-size="8">没有调查</text>
+                        <text class="node-year" y="8" font-size="7">没有发言权 1930</text>
+                    </g>
+
+                    <g class="node-group" data-author="mao" onclick="showCard('shijian')" transform="translate(176,1115)">
+                        <circle class="node-circle" r="30" fill="#c41e3a"/>
+                        <circle class="node-ring" r="34" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
                         <text class="node-label" y="-3">实践论</text>
                         <text class="node-year" y="9">1937</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('maodun')" transform="translate(282,692)">
-                        <circle class="node-circle" r="28" fill="#c41e3a"/>
-                        <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+                    <g class="node-group" data-author="mao" onclick="showCard('maodun')" transform="translate(322,1110)">
+                        <circle class="node-circle" r="30" fill="#c41e3a"/>
+                        <circle class="node-ring" r="34" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
                         <text class="node-label" y="-3">矛盾论</text>
                         <text class="node-year" y="9">1937</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('qingnian')" transform="translate(178,785)">
+                    <g class="node-group" data-author="mao" onclick="showCard('qingnian')" transform="translate(378,1140)">
                         <circle class="node-circle" r="20" fill="#c41e3a" opacity="0.85"/>
                         <text class="node-label" y="-1" font-size="9">青年运动</text>
                         <text class="node-year" y="9" font-size="7">的方向 1939</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('neibumao')" transform="translate(177,1095)">
-                        <circle class="node-circle" r="22" fill="#c41e3a" opacity="0.88"/>
-                        <text class="node-label" y="-1" font-size="9">正确处理</text>
-                        <text class="node-year" y="8" font-size="7">人民内部矛盾 1957</text>
-                    </g>
-
-                    <g class="node-group" data-author="mao" onclick="showCard('xuexishiju')" transform="translate(277,1175)">
+                    <g class="node-group" data-author="mao" onclick="showCard('xuexishiju')" transform="translate(277,1188)">
                         <circle class="node-circle" r="18" fill="#c41e3a" opacity="0.82"/>
                         <text class="node-label" y="-1" font-size="8">学习和时局</text>
                         <text class="node-year" y="8" font-size="7">1944</text>
                     </g>
 
-                    <!-- ===== 政治经济学 曲线簇 ===== -->
-                    <!-- 水平连线: 民族问题(558,258) - 马克思主义和民族问题(678,255) -->
-                    <path d="M 558 258 C 600 257, 640 256, 678 255" class="line-internal" stroke="#e65100" opacity="0.15"/>
-                    <!-- 垂直连接: 民族问题(558,258) -> 论列宁主义基础(562,378) -->
-                    <path d="M 558 258 C 556 300, 560 340, 562 378" class="line-internal" stroke="#e65100" opacity="0.2"/>
-                    <!-- 垂直连接: 马克思主义和民族问题(678,255) -> 论中国革命(682,375) -->
-                    <path d="M 678 255 C 676 295, 680 335, 682 375" class="line-internal" stroke="#e65100" opacity="0.2"/>
+                    <g class="node-group" data-author="mao" onclick="showCard('neibumao')" transform="translate(230,1325)">
+                        <circle class="node-circle" r="24" fill="#c41e3a" opacity="0.9"/>
+                        <text class="node-label" y="-1" font-size="9">正确处理</text>
+                        <text class="node-year" y="8" font-size="7">人民内部矛盾 1957</text>
+                    </g>
 
-                    <!-- 水平连线: 论列宁主义基础(562,378) - 论中国革命(682,375) - 十月革命(798,372) -->
-                    <path d="M 562 378 C 610 377, 640 376, 682 375 C 730 374, 760 373, 798 372" class="line-internal" stroke="#e65100" opacity="0.15"/>
-                    <!-- 垂直连接: 论列宁主义基础(562,378) -> 论列宁(558,522) -->
-                    <path d="M 562 378 C 560 420, 559 470, 558 522" class="line-internal" stroke="#e65100" opacity="0.2"/>
-                    <!-- 垂直连接: 论中国革命(682,375) -> 十月革命国际(678,518) -->
-                    <path d="M 682 375 C 680 418, 679 468, 678 518" class="line-internal" stroke="#e65100" opacity="0.2"/>
-                    <!-- 垂直连接: 十月革命(798,372) -> 无对应下方节点，删除 -->
+                    <!-- ===== 政治经济学 ===== -->
+                    <!-- 线性Y: 1913=863, 1924=978, 1926=999, 1930=1041, 1938=1125 -->
 
-                    <!-- 水平连线: 论列宁(558,522) - 十月革命国际(678,518) -->
-                    <path d="M 558 522 C 600 520, 640 519, 678 518" class="line-internal" stroke="#e65100" opacity="0.15"/>
+                    <!-- 内部曲线 -->
+                    <!-- 民族问题(558,860) — 马哲和民族(698,868) 水平 -->
+                    <path d="M 558 860 C 600 863, 650 865, 698 868" class="line-internal" stroke="#e65100" opacity="0.12"/>
+                    <!-- 民族问题(558,860) → 论列宁基础(562,976) -->
+                    <path d="M 558 860 C 555 900, 560 940, 562 976" class="line-internal" stroke="#e65100" opacity="0.1"/>
+                    <!-- 马哲和民族(698,868) → 论中国革命(682,999) -->
+                    <path d="M 698 868 C 695 910, 690 960, 682 999" class="line-internal" stroke="#e65100" opacity="0.1"/>
+                    <!-- 论列宁基础(562,976) → 论列宁经(610,1012) -->
+                    <path d="M 562 976 C 575 988, 590 1000, 610 1012" class="line-internal" stroke="#e65100" opacity="0.1"/>
+                    <!-- 十月革命策略(798,983) → 论中国革命(682,999) -->
+                    <path d="M 798 983 C 760 990, 720 996, 682 999" class="line-internal" stroke="#e65100" opacity="0.1"/>
+                    <!-- 论列宁经(610,1012) → 十月革命国际(760,1015) -->
+                    <path d="M 610 1012 C 660 1013, 710 1014, 760 1015" class="line-internal" stroke="#e65100" opacity="0.1"/>
+                    <!-- 十月革命国际(760,1015) → 社会分析(730,1045) -->
+                    <path d="M 760 1015 C 752 1025, 740 1035, 730 1045" class="line-internal" stroke="#e65100" opacity="0.08"/>
+                    <!-- 社会分析(730,1045) → 列宁主义问题(562,1125) -->
+                    <path d="M 730 1045 C 680 1070, 610 1100, 562 1125" class="line-internal" stroke="#e65100" opacity="0.1"/>
 
-                    <!-- 水平连线: 列宁主义几个问题(562,662) -->
-                    <!-- (无同一高度的其他节点) -->
-                    <!-- 垂直连接: 列宁主义几个问题(562,662) -> 社会分析(678,842) -->
-                    <path d="M 562 662 C 590 720, 650 790, 678 842" class="line-internal" stroke="#e65100" opacity="0.15"/>
-
-                    <!-- 社会分析(678,842) - 无下方节点连接 -->
-
-                    <!-- 政治经济学节点 - 动态偏移 -->
-                    <g class="node-group" data-author="stalin" onclick="showCard('minzu')" transform="translate(558,258)">
-                        <circle class="node-circle" r="22" fill="#e65100" opacity="0.88"/>
-                        <text class="node-label" y="-3">民族问题</text>
+                    <!-- 政治经济学节点 -->
+                    <g class="node-group" data-author="stalin" onclick="showCard('minzu')" transform="translate(558,860)">
+                        <circle class="node-circle" r="20" fill="#e65100" opacity="0.85"/>
+                        <text class="node-label" y="-1">民族问题</text>
                         <text class="node-year" y="9">1913</text>
                     </g>
 
-                    <g class="node-group" data-author="stalin" onclick="showCard('gongchandang')" transform="translate(678,255)">
-                        <circle class="node-circle" r="20" fill="#e65100" opacity="0.85"/>
+                    <g class="node-group" data-author="stalin" onclick="showCard('gongchandang')" transform="translate(698,868)">
+                        <circle class="node-circle" r="18" fill="#e65100" opacity="0.82"/>
                         <text class="node-label" y="-1" font-size="8">马克思主义</text>
-                        <text class="node-year" y="8" font-size="7">和民族问题 1913</text>
+                        <text class="node-year" y="9" font-size="7">和民族问题 1913</text>
                     </g>
 
-                    <g class="node-group" data-author="stalin" onclick="showCard('lunlun')" transform="translate(562,378)">
-                        <circle class="node-circle" r="26" fill="#e65100"/>
-                        <circle class="node-ring" r="30" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+                    <g class="node-group" data-author="stalin" onclick="showCard('lunlun')" transform="translate(562,976)">
+                        <circle class="node-circle" r="28" fill="#e65100"/>
+                        <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
                         <text class="node-label" y="-3">论列宁</text>
                         <text class="node-year" y="9">主义基础 1924</text>
                     </g>
 
-                    <g class="node-group" data-author="stalin" onclick="showCard('lunzhongguo')" transform="translate(682,375)">
-                        <circle class="node-circle" r="24" fill="#e65100" opacity="0.9"/>
-                        <text class="node-label" y="-3">论中国革命</text>
-                        <text class="node-year" y="9">前途 1926</text>
-                    </g>
-
-                    <g class="node-group" data-author="stalin" onclick="showCard('shiyuegeming')" transform="translate(798,372)">
+                    <g class="node-group" data-author="stalin" onclick="showCard('shiyuegeming')" transform="translate(798,983)">
                         <circle class="node-circle" r="22" fill="#e65100" opacity="0.88"/>
                         <text class="node-label" y="-3">十月革命</text>
                         <text class="node-year" y="9">俄共策略 1924</text>
                     </g>
 
-                    <g class="node-group" data-author="stalin" onclick="showCard('lunlian')" transform="translate(558,522)">
+                    <g class="node-group" data-author="stalin" onclick="showCard('lunzhongguo')" transform="translate(682,999)">
+                        <circle class="node-circle" r="24" fill="#e65100" opacity="0.9"/>
+                        <text class="node-label" y="-3">论中国革命</text>
+                        <text class="node-year" y="9">前途 1926</text>
+                    </g>
+
+                    <g class="node-group" data-author="stalin" onclick="showCard('lunlian')" transform="translate(610,1012)">
                         <circle class="node-circle" r="20" fill="#e65100" opacity="0.85"/>
                         <text class="node-label" y="-1">论列宁</text>
                         <text class="node-year" y="9">1924</text>
                     </g>
 
-                    <g class="node-group" data-author="stalin" onclick="showCard('shiyueguoji')" transform="translate(678,518)">
+                    <g class="node-group" data-author="stalin" onclick="showCard('shiyueguoji')" transform="translate(760,1015)">
                         <circle class="node-circle" r="18" fill="#e65100" opacity="0.82"/>
                         <text class="node-label" y="-1" font-size="8">十月革命</text>
                         <text class="node-year" y="8" font-size="7">国际性质 1924</text>
                     </g>
 
-                    <g class="node-group" data-author="stalin" onclick="showCard('lunlunji')" transform="translate(562,662)">
-                        <circle class="node-circle" r="24" fill="#e65100" opacity="0.9"/>
-                        <text class="node-label" y="-3">列宁主义</text>
-                        <text class="node-year" y="9">几个问题 1938</text>
-                    </g>
-
-                    <g class="node-group" data-author="stalin" onclick="showCard('diaocha')" transform="translate(678,842)">
+                    <g class="node-group" data-author="stalin" onclick="showCard('diaocha')" transform="translate(730,1045)">
                         <circle class="node-circle" r="18" fill="#e65100" opacity="0.82"/>
                         <text class="node-label" y="-1" font-size="8">社会分析</text>
                         <text class="node-year" y="8" font-size="7">方法 1930</text>
                     </g>
 
-                    <!-- ===== 政治理论 曲线簇 ===== -->
-                    <!-- 水平连线: 中国社会各阶级(958,238) - 湖南农民(1078,235) - 井冈山(1198,232) -->
-                    <path d="M 958 238 C 1010 237, 1030 236, 1078 235 C 1130 234, 1150 233, 1198 232" class="line-internal" stroke="#805ad5" opacity="0.15"/>
-                    <!-- 垂直连接: 中国社会各阶级(958,238) -> 星星之火(958,358) -->
-                    <path d="M 958 238 C 952 278, 960 318, 958 358" class="line-internal" stroke="#805ad5" opacity="0.2"/>
+                    <g class="node-group" data-author="stalin" onclick="showCard('lunlunji')" transform="translate(562,1125)">
+                        <circle class="node-circle" r="24" fill="#e65100" opacity="0.9"/>
+                        <text class="node-label" y="-3">列宁主义</text>
+                        <text class="node-year" y="9">几个问题 1938</text>
+                    </g>
 
-                    <!-- 水平连线: 星星之火(958,358) -->
-                    <!-- (无同一高度的其他节点，下方是论持久战) -->
-                    <!-- 垂直连接: 星星之火(958,358) -> 论持久战(1078,498) -->
-                    <path d="M 958 358 C 1000 410, 1040 460, 1078 498" class="line-internal" stroke="#805ad5" opacity="0.15"/>
+                    <!-- ===== 政治理论 ===== -->
+                    <!-- 线性Y: 1926=996, 1927=1010, 1928=1020, 1930=1041, 1938=1125, 1940=1146, 1949=1241, 1956=1314 -->
 
-                    <!-- 水平连线: 论持久战(1078,498) - 抗日游击战(1198,494) -->
-                    <path d="M 1078 498 C 1120 497, 1160 495, 1198 494" class="line-internal" stroke="#805ad5" opacity="0.15"/>
-                    <!-- 垂直连接: 论持久战(1078,498) -> 战争和战略(958,648) -->
-                    <path d="M 1078 498 C 1040 548, 990 598, 958 648" class="line-internal" stroke="#805ad5" opacity="0.15"/>
+                    <!-- 内部曲线 -->
+                    <!-- 阶级分析(958,996) — 湖南农民(1078,1010) — 井冈山(1198,1020) 水平链 -->
+                    <path d="M 958 996 C 1000 1000, 1040 1005, 1078 1010 C 1120 1013, 1160 1017, 1198 1020" class="line-internal" stroke="#805ad5" opacity="0.12"/>
+                    <!-- 阶级分析(958,996) → 星星之火(958,1045) -->
+                    <path d="M 958 996 C 952 1015, 962 1030, 958 1045" class="line-internal" stroke="#805ad5" opacity="0.1"/>
+                    <!-- 星星之火(958,1045) → 论持久战(940,1118) 跨8年 -->
+                    <path d="M 958 1045 C 950 1065, 945 1095, 940 1118" class="line-internal" stroke="#805ad5" opacity="0.1"/>
+                    <!-- 1938四节点: 论持久战(940,1118) — 抗日游击(1050,1128) — 战争和战略(1160,1115) -->
+                    <path d="M 940 1118 C 980 1121, 1020 1125, 1050 1128 C 1090 1123, 1130 1119, 1160 1115" class="line-internal" stroke="#805ad5" opacity="0.12"/>
+                    <!-- 论持久战(940,1118) → 战争和战略2(980,1153) -->
+                    <path d="M 940 1118 C 950 1128, 965 1142, 980 1153" class="line-internal" stroke="#805ad5" opacity="0.08"/>
+                    <!-- 战争和战略(1160,1115) → 新民主主义论(1198,1155) -->
+                    <path d="M 1160 1115 C 1170 1128, 1185 1142, 1198 1155" class="line-internal" stroke="#805ad5" opacity="0.1"/>
+                    <!-- 战争和战略2(980,1153) → 新民主主义论(1198,1155) -->
+                    <path d="M 980 1153 C 1050 1154, 1130 1155, 1198 1155" class="line-internal" stroke="#805ad5" opacity="0.08"/>
+                    <!-- 新民主主义论(1198,1155) → 论人民民主专政(958,1241) -->
+                    <path d="M 1198 1155 C 1120 1185, 1020 1220, 958 1241" class="line-internal" stroke="#805ad5" opacity="0.12"/>
+                    <!-- 论人民民主专政(958,1241) → 论十大关系(1078,1314) -->
+                    <path d="M 958 1241 C 990 1270, 1040 1300, 1078 1314" class="line-internal" stroke="#805ad5" opacity="0.1"/>
+                    <!-- 论人民民主专政(958,1241) → 帝国主义纸老虎(958,1319) -->
+                    <path d="M 958 1241 C 952 1270, 962 1300, 958 1319" class="line-internal" stroke="#805ad5" opacity="0.1"/>
+                    <!-- 论十大关系(1078,1314) — 帝国主义纸老虎(958,1319) -->
+                    <path d="M 1078 1314 C 1040 1316, 1000 1318, 958 1319" class="line-internal" stroke="#805ad5" opacity="0.08"/>
 
-                    <!-- 战争和战略(958,648) - 无同一高度其他节点 -->
-                    <!-- 垂直连接: 战争和战略(958,648) -> 新民主主义论(958,785) -->
-                    <path d="M 958 648 C 952 700, 960 745, 958 785" class="line-internal" stroke="#805ad5" opacity="0.2"/>
-
-                    <!-- 水平连线: 新民主主义论(958,785) - 战争和战略2(1078,782) -->
-                    <path d="M 958 785 C 1010 784, 1040 783, 1078 782" class="line-internal" stroke="#805ad5" opacity="0.15"/>
-                    <!-- 垂直连接: 新民主主义论(958,785) -> 论人民民主专政(958,928) -->
-                    <path d="M 958 785 C 952 840, 960 885, 958 928" class="line-internal" stroke="#805ad5" opacity="0.2"/>
-
-                    <!-- 论人民民主专政(958,928) - 无同一高度其他节点 -->
-                    <!-- 垂直连接: 论人民民主专政(958,928) -> 帝国主义纸老虎(958,1098) -->
-                    <path d="M 958 928 C 952 990, 960 1045, 958 1098" class="line-internal" stroke="#805ad5" opacity="0.15"/>
-
-                    <!-- 水平连线: 论十大关系(1078,1095) - 帝国主义纸老虎(958,1098) -->
-                    <path d="M 958 1098 C 1000 1097, 1040 1096, 1078 1095" class="line-internal" stroke="#805ad5" opacity="0.15"/>
-
-                    <!-- 政治理论节点 - 动态偏移 -->
-                    <g class="node-group" data-author="mao" onclick="showCard('jieji')" transform="translate(958,238)">
+                    <!-- 政治理论节点 -->
+                    <g class="node-group" data-author="mao" onclick="showCard('jieji')" transform="translate(958,996)">
                         <circle class="node-circle" r="24" fill="#805ad5" opacity="0.9"/>
                         <text class="node-label" y="-3">中国社会</text>
                         <text class="node-year" y="9">各阶级分析 1926</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('hunan')" transform="translate(1078,235)">
+                    <g class="node-group" data-author="mao" onclick="showCard('hunan')" transform="translate(1078,1010)">
                         <circle class="node-circle" r="24" fill="#805ad5" opacity="0.9"/>
                         <text class="node-label" y="-3">湖南农民</text>
                         <text class="node-year" y="9">运动报告 1927</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('jinggangshan')" transform="translate(1198,232)">
+                    <g class="node-group" data-author="mao" onclick="showCard('jinggangshan')" transform="translate(1198,1020)">
                         <circle class="node-circle" r="18" fill="#805ad5" opacity="0.82"/>
                         <text class="node-label" y="-1" font-size="8">井冈山的</text>
                         <text class="node-year" y="8" font-size="7">斗争 1928</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('xinghuo')" transform="translate(958,358)">
+                    <g class="node-group" data-author="mao" onclick="showCard('xinghuo')" transform="translate(958,1045)">
                         <circle class="node-circle" r="22" fill="#805ad5" opacity="0.88"/>
                         <text class="node-label" y="-1">星星之火</text>
                         <text class="node-year" y="9">可以燎原 1930</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('chijiuzhan')" transform="translate(1078,498)">
-                        <circle class="node-circle" r="26" fill="#805ad5"/>
-                        <circle class="node-ring" r="30" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+                    <g class="node-group" data-author="mao" onclick="showCard('chijiuzhan')" transform="translate(940,1118)">
+                        <circle class="node-circle" r="30" fill="#805ad5"/>
+                        <circle class="node-ring" r="34" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
                         <text class="node-label" y="-3">论持久战</text>
                         <text class="node-year" y="9">1938</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('youjizhan')" transform="translate(1198,494)">
-                        <circle class="node-circle" r="22" fill="#805ad5" opacity="0.88"/>
+                    <g class="node-group" data-author="mao" onclick="showCard('youjizhan')" transform="translate(1050,1128)">
+                        <circle class="node-circle" r="26" fill="#805ad5"/>
+                        <circle class="node-ring" r="30" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
                         <text class="node-label" y="-3">抗日游击战</text>
                         <text class="node-year" y="9">略问题 1938</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('zhanzhan')" transform="translate(958,648)">
+                    <g class="node-group" data-author="mao" onclick="showCard('zhanzhan')" transform="translate(1160,1115)">
+                        <circle class="node-circle" r="24" fill="#805ad5" opacity="0.9"/>
+                        <text class="node-label" y="-1">战争和</text>
+                        <text class="node-year" y="9">战略问题 1938</text>
+                    </g>
+
+                    <g class="node-group" data-author="mao" onclick="showCard('zhanzhan2')" transform="translate(980,1153)">
                         <circle class="node-circle" r="22" fill="#805ad5" opacity="0.88"/>
                         <text class="node-label" y="-1">战争和</text>
                         <text class="node-year" y="9">战略问题 1938</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('xinminzz')" transform="translate(958,785)">
-                        <circle class="node-circle" r="28" fill="#805ad5"/>
-                        <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+                    <g class="node-group" data-author="mao" onclick="showCard('xinminzz')" transform="translate(1198,1155)">
+                        <circle class="node-circle" r="30" fill="#805ad5"/>
+                        <circle class="node-ring" r="34" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
                         <text class="node-label" y="-3">新民主</text>
                         <text class="node-year" y="9">主义论 1940</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('zhanzhan2')" transform="translate(1078,782)">
-                        <circle class="node-circle" r="22" fill="#805ad5" opacity="0.88"/>
-                        <text class="node-label" y="-1">战争和</text>
-                        <text class="node-year" y="9">战略问题 1938</text>
-                    </g>
-
-                    <g class="node-group" data-author="mao" onclick="showCard('renmzhuanzheng')" transform="translate(958,928)">
+                    <g class="node-group" data-author="mao" onclick="showCard('renmzhuanzheng')" transform="translate(958,1241)">
                         <circle class="node-circle" r="24" fill="#805ad5" opacity="0.9"/>
                         <text class="node-label" y="-3">论人民</text>
                         <text class="node-year" y="9">民主专政 1949</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('shidaguanxi')" transform="translate(1078,1095)">
+                    <g class="node-group" data-author="mao" onclick="showCard('shidaguanxi')" transform="translate(1078,1314)">
                         <circle class="node-circle" r="22" fill="#805ad5" opacity="0.88"/>
                         <text class="node-label" y="-1">论十大关系</text>
                         <text class="node-year" y="9">1956</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('zhiminzhuyi')" transform="translate(958,1098)">
+                    <g class="node-group" data-author="mao" onclick="showCard('zhiminzhuyi')" transform="translate(958,1319)">
                         <circle class="node-circle" r="20" fill="#805ad5" opacity="0.85"/>
                         <text class="node-label" y="-1" font-size="9">帝国主义</text>
                         <text class="node-year" y="9" font-size="7">是纸老虎 1956</text>
                     </g>
 
-                    <!-- ===== 党的建设 曲线簇 ===== -->
-                    <!-- 水平连线: 纠正党内(1358,258) - 关心群众(1518,255) - 反对自由主义(1638,252) -->
-                    <path d="M 1358 258 C 1420 257, 1470 256, 1518 255 C 1570 254, 1600 253, 1638 252" class="line-internal" stroke="#38a169" opacity="0.15"/>
-                    <!-- 垂直连接: 纠正党内(1358,258) -> 改造我们(1358,542) -->
-                    <path d="M 1358 258 C 1352 370, 1360 450, 1358 542" class="line-internal" stroke="#38a169" opacity="0.15"/>
+                    <!-- ===== 党的建设 ===== -->
+                    <!-- 线性Y: 1929=1031, 1934=1083, 1937=1115, 1941=1157, 1942=1167, 1946=1209 -->
 
-                    <!-- 水平连线: 改造我们(1358,542) - 整顿党风(1518,538) - 反对党八股(1638,534) -->
-                    <path d="M 1358 542 C 1420 540, 1470 539, 1518 538 C 1570 536, 1600 535, 1638 534" class="line-internal" stroke="#38a169" opacity="0.15"/>
-                    <!-- 垂直连接: 改造我们(1358,542) -> 延安文艺(1358,688) -->
-                    <path d="M 1358 542 C 1352 590, 1360 640, 1358 688" class="line-internal" stroke="#38a169" opacity="0.15"/>
+                    <!-- 内部曲线 -->
+                    <!-- 纠正党内(1358,1031) — 关心群众(1518,1083) -->
+                    <path d="M 1358 1031 C 1410 1050, 1470 1068, 1518 1083" class="line-internal" stroke="#38a169" opacity="0.1"/>
+                    <!-- 关心群众(1518,1083) — 反对自由主义(1638,1115) -->
+                    <path d="M 1518 1083 C 1560 1093, 1600 1105, 1638 1115" class="line-internal" stroke="#38a169" opacity="0.1"/>
+                    <!-- 纠正党内(1358,1031) → 改造学习(1408,1157) 跨12年 -->
+                    <path d="M 1358 1031 C 1370 1070, 1390 1120, 1408 1157" class="line-internal" stroke="#38a169" opacity="0.1"/>
+                    <!-- 1942三节点: 整顿党风(1478,1167) — 反对党八股(1578,1160) — 延安文艺(1358,1175) -->
+                    <path d="M 1358 1175 C 1400 1172, 1440 1170, 1478 1167 C 1510 1165, 1545 1163, 1578 1160" class="line-internal" stroke="#38a169" opacity="0.12"/>
+                    <!-- 改造学习(1408,1157) → 延安文艺(1358,1175) -->
+                    <path d="M 1408 1157 C 1390 1162, 1375 1170, 1358 1175" class="line-internal" stroke="#38a169" opacity="0.08"/>
+                    <!-- 延安文艺(1358,1175) → 集中优势(1518,1209) -->
+                    <path d="M 1358 1175 C 1410 1188, 1470 1200, 1518 1209" class="line-internal" stroke="#38a169" opacity="0.1"/>
 
-                    <!-- 延安文艺(1358,688) - 无同一高度其他节点 -->
-                    <!-- 垂直连接: 延安文艺(1358,688) -> 集中优势(1518,818) -->
-                    <path d="M 1358 688 C 1410 735, 1470 780, 1518 818" class="line-internal" stroke="#38a169" opacity="0.15"/>
-
-                    <!-- 党的建设节点 - 动态偏移 -->
-                    <g class="node-group" data-author="mao" onclick="showCard('jiuzheng')" transform="translate(1358,258)">
+                    <!-- 党的建设节点 -->
+                    <g class="node-group" data-author="mao" onclick="showCard('jiuzheng')" transform="translate(1358,1031)">
                         <circle class="node-circle" r="24" fill="#38a169" opacity="0.9"/>
                         <text class="node-label" y="-3">纠正党内</text>
                         <text class="node-year" y="9">错误思想 1929</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('qianxuzhe')" transform="translate(1518,255)">
+                    <g class="node-group" data-author="mao" onclick="showCard('qianxuzhe')" transform="translate(1518,1083)">
                         <circle class="node-circle" r="20" fill="#38a169" opacity="0.85"/>
                         <text class="node-label" y="-3">关心群众</text>
                         <text class="node-year" y="9">生活 1934</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('ziyouzhuyi')" transform="translate(1638,252)">
+                    <g class="node-group" data-author="mao" onclick="showCard('ziyouzhuyi')" transform="translate(1638,1115)">
                         <circle class="node-circle" r="22" fill="#38a169" opacity="0.88"/>
                         <text class="node-label" y="-1">反对</text>
                         <text class="node-year" y="9">自由主义 1937</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('gaizao')" transform="translate(1358,542)">
+                    <g class="node-group" data-author="mao" onclick="showCard('gaizao')" transform="translate(1408,1157)">
                         <circle class="node-circle" r="22" fill="#38a169" opacity="0.88"/>
                         <text class="node-label" y="-1">改造我们</text>
                         <text class="node-year" y="9">的学习 1941</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('zhengdun')" transform="translate(1518,538)">
+                    <g class="node-group" data-author="mao" onclick="showCard('zhengdun')" transform="translate(1478,1167)">
                         <circle class="node-circle" r="24" fill="#38a169" opacity="0.9"/>
                         <text class="node-label" y="-3">整顿党</text>
                         <text class="node-year" y="9">的作风 1942</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('dangbage')" transform="translate(1638,534)">
+                    <g class="node-group" data-author="mao" onclick="showCard('dangbage')" transform="translate(1578,1160)">
                         <circle class="node-circle" r="20" fill="#38a169" opacity="0.85"/>
                         <text class="node-label" y="-1">反对党八股</text>
                         <text class="node-year" y="9">1942</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('wenyi')" transform="translate(1358,688)">
-                        <circle class="node-circle" r="26" fill="#38a169"/>
-                        <circle class="node-ring" r="30" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+                    <g class="node-group" data-author="mao" onclick="showCard('wenyi')" transform="translate(1358,1175)">
+                        <circle class="node-circle" r="28" fill="#38a169"/>
+                        <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
                         <text class="node-label" y="-3">延安文艺</text>
                         <text class="node-year" y="9">座谈讲话 1942</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('bingli')" transform="translate(1518,818)">
+                    <g class="node-group" data-author="mao" onclick="showCard('bingli')" transform="translate(1518,1209)">
                         <circle class="node-circle" r="22" fill="#38a169" opacity="0.88"/>
                         <text class="node-label" y="-1">集中优势</text>
                         <text class="node-year" y="9">兵力 1946</text>
                     </g>
 
-                    <!-- ===== 军事战略 曲线簇 ===== -->
-                    <!-- 水平连线: 中国革命战争战略(1758,298) - 论持久战(1918,295) -->
-                    <path d="M 1758 298 C 1820 297, 1870 296, 1918 295" class="line-internal" stroke="#3182ce" opacity="0.15"/>
-                    <!-- 垂直连接: 中国革命战争战略(1758,298) -> 抗日游击战(1758,478) -->
-                    <path d="M 1758 298 C 1752 370, 1760 430, 1758 478" class="line-internal" stroke="#3182ce" opacity="0.2"/>
+                    <!-- ===== 军事战略 ===== -->
+                    <!-- 线性Y: 1936=1104, 1938=1125, 1946=1209, 1948=1230 -->
+                    <!-- 修正: 错开X轴消除同列重叠 - 理论性(左)↔实践性(右) -->
 
-                    <!-- 水平连线: 抗日游击战(1758,478) - 战争和战略(1918,475) -->
-                    <path d="M 1758 478 C 1820 477, 1870 476, 1918 475" class="line-internal" stroke="#3182ce" opacity="0.15"/>
-                    <!-- 垂直连接: 抗日游击战(1758,478) -> 集中优势(1758,662) -->
-                    <path d="M 1758 478 C 1752 550, 1760 610, 1758 662" class="line-internal" stroke="#3182ce" opacity="0.15"/>
+                    <!-- 内部曲线 -->
+                    <!-- 革命战争战略(1710,1098) — 论持久战(1950,1118) -->
+                    <path d="M 1710 1098 C 1800 1105, 1880 1112, 1950 1118" class="line-internal" stroke="#3182ce" opacity="0.12"/>
+                    <!-- 革命战争战略(1710,1098) → 抗日游击战(1770,1140) 斜向 -->
+                    <path d="M 1710 1098 C 1730 1112, 1750 1128, 1770 1140" class="line-internal" stroke="#3182ce" opacity="0.1"/>
+                    <!-- 论持久战(1950,1118) → 抗日游击战(1770,1140) -->
+                    <path d="M 1950 1118 C 1880 1126, 1820 1135, 1770 1140" class="line-internal" stroke="#3182ce" opacity="0.1"/>
+                    <!-- 1938三节点: 抗日(1770,1140) — 战争战略(1850,1132) — 持久战(1950,1118) -->
+                    <path d="M 1770 1140 C 1800 1137, 1825 1135, 1850 1132 C 1885 1126, 1920 1121, 1950 1118" class="line-internal" stroke="#3182ce" opacity="0.1"/>
+                    <!-- 抗日游击战(1770,1140) → 集中优势(1758,1209) -->
+                    <path d="M 1770 1140 C 1765 1165, 1760 1190, 1758 1209" class="line-internal" stroke="#3182ce" opacity="0.1"/>
+                    <!-- 集中优势(1758,1209) → 辽沈战役(1710,1228) -->
+                    <path d="M 1758 1209 C 1740 1215, 1725 1222, 1710 1228" class="line-internal" stroke="#3182ce" opacity="0.1"/>
+                    <!-- 1948三节点: 辽沈(1710,1228) — 战略决战(1918,1230) — 淮海(1830,1248) -->
+                    <path d="M 1710 1228 C 1780 1229, 1850 1230, 1918 1230 C 1890 1238, 1860 1244, 1830 1248" class="line-internal" stroke="#3182ce" opacity="0.12"/>
 
-                    <!-- 集中优势(1758,662) - 无同一高度其他节点 -->
-                    <!-- 垂直连接: 集中优势(1758,662) -> 辽沈战役(1758,842) -->
-                    <path d="M 1758 662 C 1752 730, 1760 790, 1758 842" class="line-internal" stroke="#3182ce" opacity="0.15"/>
-
-                    <!-- 水平连线: 辽沈战役(1758,842) - 战略决战(1918,838) - 淮海战役(1918,905) -->
-                    <path d="M 1758 842 C 1820 840, 1870 839, 1918 838" class="line-internal" stroke="#3182ce" opacity="0.15"/>
-                    <!-- 垂直连接: 战略决战(1918,838) -> 淮海战役(1918,905) -->
-                    <path d="M 1918 838 C 1912 860, 1920 882, 1918 905" class="line-internal" stroke="#3182ce" opacity="0.15"/>
-
-                    <!-- 军事战略节点 - 动态偏移 -->
-                    <g class="node-group" data-author="mao" onclick="showCard('zhanlue')" transform="translate(1758,298)">
-                        <circle class="node-circle" r="26" fill="#3182ce"/>
+                    <!-- 军事战略节点 -->
+                    <g class="node-group" data-author="mao" onclick="showCard('zhanlue')" transform="translate(1710,1098)">
+                        <circle class="node-circle" r="28" fill="#3182ce"/>
+                        <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
                         <text class="node-label" y="-3">中国革命战</text>
                         <text class="node-year" y="9">争战略 1936</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('chijiuzhan2')" transform="translate(1918,295)">
-                        <circle class="node-circle" r="30" fill="#3182ce"/>
-                        <circle class="node-ring" r="34" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
+                    <g class="node-group" data-author="mao" onclick="showCard('chijiuzhan2')" transform="translate(1950,1118)">
+                        <circle class="node-circle" r="32" fill="#3182ce"/>
+                        <circle class="node-ring" r="36" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
                         <text class="node-label" y="-3">论持久战</text>
                         <text class="node-year" y="9">1938</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('youjizhan2')" transform="translate(1758,478)">
-                        <circle class="node-circle" r="24" fill="#3182ce" opacity="0.9"/>
+                    <g class="node-group" data-author="mao" onclick="showCard('youjizhan2')" transform="translate(1770,1140)">
+                        <circle class="node-circle" r="26" fill="#3182ce"/>
+                        <circle class="node-ring" r="30" fill="none" stroke="#fff" stroke-width="1.2" opacity="0.35"/>
                         <text class="node-label" y="-3">抗日游击战</text>
                         <text class="node-year" y="9">战略问题 1938</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('zhanzhan2')" transform="translate(1918,475)">
-                        <circle class="node-circle" r="22" fill="#3182ce" opacity="0.88"/>
+                    <g class="node-group" data-author="mao" onclick="showCard('zhanzhan2')" transform="translate(1850,1132)">
+                        <circle class="node-circle" r="24" fill="#3182ce" opacity="0.9"/>
                         <text class="node-label" y="-1">战争和</text>
                         <text class="node-year" y="9">战略问题 1938</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('bingli2')" transform="translate(1758,662)">
+                    <g class="node-group" data-author="mao" onclick="showCard('bingli2')" transform="translate(1758,1209)">
                         <circle class="node-circle" r="20" fill="#3182ce" opacity="0.85"/>
                         <text class="node-label" y="-1">集中优势</text>
                         <text class="node-year" y="9">兵力 1946</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('bingli3')" transform="translate(1918,838)">
+                    <g class="node-group" data-author="mao" onclick="showCard('bingli3')" transform="translate(1918,1230)">
                         <circle class="node-circle" r="22" fill="#3182ce" opacity="0.88"/>
                         <text class="node-label" y="-1">战略决战</text>
                         <text class="node-year" y="9">1948</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('bingli3')" transform="translate(1758,842)">
+                    <g class="node-group" data-author="mao" onclick="showCard('bingli3')" transform="translate(1710,1228)">
                         <circle class="node-circle" r="18" fill="#3182ce" opacity="0.82"/>
                         <text class="node-label" y="-1" font-size="8">辽沈战役</text>
                         <text class="node-year" y="9" font-size="7">1948</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('bingli3')" transform="translate(1918,905)">
+                    <g class="node-group" data-author="mao" onclick="showCard('bingli3')" transform="translate(1830,1248)">
                         <circle class="node-circle" r="18" fill="#3182ce" opacity="0.82"/>
                         <text class="node-label" y="-1" font-size="8">淮海战役</text>
                         <text class="node-year" y="9" font-size="7">1948</text>
                     </g>
 
-                    <!-- ===== 思想文化 曲线簇 ===== -->
-                    <!-- 水平连线: 延安文艺(2158,258) - 关于调查(2318,255) -->
-                    <path d="M 2158 258 C 2220 257, 2260 256, 2318 255" class="line-internal" stroke="#00695c" opacity="0.15"/>
-                    <!-- 垂直连接: 延安文艺(2158,258) -> 纪念白求恩(2158,402) -->
-                    <path d="M 2158 258 C 2152 315, 2160 365, 2158 402" class="line-internal" stroke="#00695c" opacity="0.2"/>
+                    <!-- ===== 思想文化 ===== -->
+                    <!-- 线性Y: 1919=926, 1939=1136, 1941=1157, 1942=1167, 1944=1188, 1945=1199, 1947=1220, 1949=1241 -->
+                    <!-- 修正: 错开X轴消除同列重叠(原X=2318堆叠4个节点) -->
 
-                    <!-- 水平连线: 纪念白求恩(2158,402) - 为人民服务(2318,398) -->
-                    <path d="M 2158 402 C 2220 400, 2260 399, 2318 398" class="line-internal" stroke="#00695c" opacity="0.15"/>
-                    <!-- 垂直连接: 纪念白求恩(2158,402) -> 愚公移山(2158,545) -->
-                    <path d="M 2158 402 C 2152 455, 2160 505, 2158 545" class="line-internal" stroke="#00695c" opacity="0.2"/>
+                    <!-- 内部曲线 -->
+                    <!-- 五四运动(2318,926) 孤立早期节点 -->
+                    <!-- 1939三节点: 纪念白求恩(2198,1136) — 中国革命(2268,1128) — 五四运动2(2395,1142) -->
+                    <path d="M 2198 1136 C 2220 1133, 2245 1130, 2268 1128 C 2320 1133, 2360 1138, 2395 1142" class="line-internal" stroke="#00695c" opacity="0.1"/>
+                    <!-- 中国革命(2268,1128) → 关于调查(2340,1157) -->
+                    <path d="M 2268 1128 C 2290 1140, 2315 1150, 2340 1157" class="line-internal" stroke="#00695c" opacity="0.08"/>
+                    <!-- 五四运动2(2395,1142) → 关于调查(2340,1157) -->
+                    <path d="M 2395 1142 C 2375 1148, 2355 1153, 2340 1157" class="line-internal" stroke="#00695c" opacity="0.08"/>
+                    <!-- 关于调查(2340,1157) → 延安文艺(2158,1167) -->
+                    <path d="M 2340 1157 C 2270 1160, 2210 1164, 2158 1167" class="line-internal" stroke="#00695c" opacity="0.1"/>
+                    <!-- 延安文艺(2158,1167) → 为人民服务(2280,1188) -->
+                    <path d="M 2158 1167 C 2200 1175, 2240 1183, 2280 1188" class="line-internal" stroke="#00695c" opacity="0.1"/>
+                    <!-- 延安文艺(2158,1167) → 愚公移山(2208,1199) -->
+                    <path d="M 2158 1167 C 2175 1178, 2192 1190, 2208 1199" class="line-internal" stroke="#00695c" opacity="0.08"/>
+                    <!-- 愚公移山(2208,1199) → 为什么要整风(2350,1220) -->
+                    <path d="M 2208 1199 C 2260 1206, 2305 1214, 2350 1220" class="line-internal" stroke="#00695c" opacity="0.08"/>
+                    <!-- 为什么要整风(2350,1220) → 丢掉幻想(2158,1241) -->
+                    <path d="M 2350 1220 C 2280 1228, 2210 1236, 2158 1241" class="line-internal" stroke="#00695c" opacity="0.1"/>
+                    <!-- 丢掉幻想(2158,1241) — 人民英雄纪念碑(2280,1240) -->
+                    <path d="M 2158 1241 C 2200 1240, 2240 1240, 2280 1240" class="line-internal" stroke="#00695c" opacity="0.1"/>
 
-                    <!-- 愚公移山(2158,545) - 无同一高度其他节点 -->
-                    <!-- 垂直连接: 愚公移山(2158,545) -> 丢掉幻想(2158,825) -->
-                    <path d="M 2158 545 C 2152 660, 2160 750, 2158 825" class="line-internal" stroke="#00695c" opacity="0.15"/>
+                    <!-- 思想文化节点 -->
+                    <g class="node-group" data-author="mao" onclick="showCard('zhongguo2')" transform="translate(2318,926)">
+                        <circle class="node-circle" r="18" fill="#00695c" opacity="0.82"/>
+                        <text class="node-label" y="-1" font-size="8">五四运动</text>
+                        <text class="node-year" y="9" font-size="7">1919</text>
+                    </g>
 
-                    <!-- 水平连线: 彻整风(2318,688) - 无同一高度其他节点 -->
+                    <g class="node-group" data-author="mao" onclick="showCard('jinianbaiqiuen')" transform="translate(2198,1136)">
+                        <circle class="node-circle" r="20" fill="#00695c" opacity="0.85"/>
+                        <text class="node-label" y="-1">纪念白求恩</text>
+                        <text class="node-year" y="9">1939</text>
+                    </g>
 
-                    <!-- 水平连线: 丢掉幻想(2158,825) - 人民英雄纪念碑(2318,822) -->
-                    <path d="M 2158 825 C 2220 824, 2260 823, 2318 822" class="line-internal" stroke="#00695c" opacity="0.15"/>
+                    <g class="node-group" data-author="mao" onclick="showCard('zhongguo')" transform="translate(2268,1128)">
+                        <circle class="node-circle" r="20" fill="#00695c" opacity="0.85"/>
+                        <text class="node-label" y="-1">中国革命</text>
+                        <text class="node-year" y="9">和中共 1939</text>
+                    </g>
 
-                    <!-- 水平连线: 中国革命和中共(2158,982) - 五四运动(2318,978) -->
-                    <path d="M 2158 982 C 2220 981, 2260 979, 2318 978" class="line-internal" stroke="#00695c" opacity="0.15"/>
-                    <!-- 垂直连接: 为人民服务(2318,398) -> 彻整风(2318,688) -->
-                    <path d="M 2318 398 C 2312 510, 2320 610, 2318 688" class="line-internal" stroke="#00695c" opacity="0.15"/>
-                    <!-- 垂直连接: 彻整风(2318,688) -> 人民英雄纪念碑(2318,822) -->
-                    <path d="M 2318 688 C 2312 740, 2320 785, 2318 822" class="line-internal" stroke="#00695c" opacity="0.15"/>
+                    <g class="node-group" data-author="mao" onclick="showCard('zhongguo2')" transform="translate(2395,1142)">
+                        <circle class="node-circle" r="18" fill="#00695c" opacity="0.82"/>
+                        <text class="node-label" y="-1" font-size="8">五四运动</text>
+                        <text class="node-year" y="9" font-size="7">1939</text>
+                    </g>
 
-                    <!-- 思想文化节点 - 动态偏移 -->
-                    <g class="node-group" data-author="mao" onclick="showCard('wenyi2')" transform="translate(2158,258)">
+                    <g class="node-group" data-author="mao" onclick="showCard('guanyu')" transform="translate(2340,1157)">
+                        <circle class="node-circle" r="18" fill="#00695c" opacity="0.82"/>
+                        <text class="node-label" y="-1" font-size="8">关于调查</text>
+                        <text class="node-year" y="9" font-size="7">研究 1941</text>
+                    </g>
+
+                    <g class="node-group" data-author="mao" onclick="showCard('wenyi2')" transform="translate(2158,1167)">
                         <circle class="node-circle" r="28" fill="#00695c"/>
                         <circle class="node-ring" r="32" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.4"/>
                         <text class="node-label" y="-3">延安文艺</text>
                         <text class="node-year" y="9">座谈讲话 1942</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('guanyu')" transform="translate(2318,255)">
-                        <circle class="node-circle" r="18" fill="#00695c" opacity="0.82"/>
-                        <text class="node-label" y="-1" font-size="8">关于调查</text>
-                        <text class="node-year" y="9" font-size="7">研究 1941</text>
-                    </g>
-
-                    <g class="node-group" data-author="mao" onclick="showCard('jinianbaiqiuen')" transform="translate(2158,402)">
-                        <circle class="node-circle" r="20" fill="#00695c" opacity="0.85"/>
-                        <text class="node-label" y="-1">纪念白求恩</text>
-                        <text class="node-year" y="9">1939</text>
-                    </g>
-
-                    <g class="node-group" data-author="mao" onclick="showCard('renmin')" transform="translate(2318,398)">
+                    <g class="node-group" data-author="mao" onclick="showCard('renmin')" transform="translate(2280,1188)">
                         <circle class="node-circle" r="20" fill="#00695c" opacity="0.85"/>
                         <text class="node-label" y="-1">为人民服务</text>
                         <text class="node-year" y="9">1944</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('yugong')" transform="translate(2158,545)">
+                    <g class="node-group" data-author="mao" onclick="showCard('yugong')" transform="translate(2208,1199)">
                         <circle class="node-circle" r="22" fill="#00695c" opacity="0.88"/>
                         <text class="node-label" y="-1">愚公移山</text>
                         <text class="node-year" y="9">1945</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('zhenhan')" transform="translate(2318,688)">
+                    <g class="node-group" data-author="mao" onclick="showCard('zhenhan')" transform="translate(2350,1220)">
                         <circle class="node-circle" r="20" fill="#00695c" opacity="0.85"/>
                         <text class="node-label" y="-1">为什么要</text>
                         <text class="node-year" y="9">彻整风 1947</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('diuxiaohuanxiang2')" transform="translate(2158,825)">
+                    <g class="node-group" data-author="mao" onclick="showCard('diuxiaohuanxiang2')" transform="translate(2158,1241)">
                         <circle class="node-circle" r="20" fill="#00695c" opacity="0.85"/>
                         <text class="node-label" y="-1">丢掉幻想</text>
                         <text class="node-year" y="9">准备斗争 1949</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('renminjiandan')" transform="translate(2318,822)">
+                    <g class="node-group" data-author="mao" onclick="showCard('renminjiandan')" transform="translate(2280,1240)">
                         <circle class="node-circle" r="18" fill="#00695c" opacity="0.82"/>
                         <text class="node-label" y="-1" font-size="8">人民英雄</text>
                         <text class="node-year" y="9" font-size="7">纪念碑 1949</text>
                     </g>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('zhongguo')" transform="translate(2158,982)">
-                        <circle class="node-circle" r="20" fill="#00695c" opacity="0.85"/>
-                        <text class="node-label" y="-1">中国革命</text>
-                        <text class="node-year" y="9">和中共 1939</text>
-                    </g>
+                    <!-- ===== 跨类别连线 (贝塞尔曲线, 匹配新坐标) ===== -->
+                    <!-- 哲学→政治经济学 -->
+                    <!-- 共宣(178,190) → 民族问题(558,860) 跨大时间 -->
+                    <path d="M 178 190 C 350 350, 480 700, 558 860" class="line-cross" stroke="#c41e3a" opacity="0.12"/>
+                    <!-- 帝国主义论(278,894) → 论列宁基础(562,976) -->
+                    <path d="M 278 894 C 400 920, 480 960, 562 976" class="line-cross" stroke="#c41e3a" opacity="0.12"/>
+                    <!-- 实践论(176,1115) → 论列宁经(610,1012) -->
+                    <path d="M 176 1115 C 350 1110, 480 1030, 610 1012" class="line-cross" stroke="#c41e3a" opacity="0.12"/>
 
-                    <g class="node-group" data-author="mao" onclick="showCard('zhongguo2')" transform="translate(2318,978)">
-                        <circle class="node-circle" r="18" fill="#00695c" opacity="0.82"/>
-                        <text class="node-label" y="-1" font-size="8">五四运动</text>
-                        <text class="node-year" y="9" font-size="7">1919</text>
-                    </g>
+                    <!-- 哲学→政治理论 -->
+                    <!-- 矛盾论(322,1110) → 论持久战(940,1118) -->
+                    <path d="M 322 1110 C 600 1114, 800 1116, 940 1118" class="line-cross" stroke="#c41e3a" opacity="0.15"/>
+                    <!-- 共宣(178,190) → 阶级分析(958,996) -->
+                    <path d="M 178 190 C 500 400, 800 800, 958 996" class="line-cross" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 怎么办(182,747) → 星星之火(958,1045) -->
+                    <path d="M 182 747 C 500 850, 800 980, 958 1045" class="line-cross" stroke="#c41e3a" opacity="0.1"/>
 
-                    <!-- ===== 跨类别连线 (贝塞尔曲线, 精确匹配节点坐标) ===== -->
-                    <!-- 哲学 -> 政治经济学 -->
-                    <!-- 共产党宣言(178,222) -> 民族问题(558,258) -->
-                    <path d="M 178 222 C 350 222, 450 258, 558 258" class="line-cross" stroke="#c41e3a" opacity="0.2"/>
-                    <!-- 帝国主义论(278,438) -> 论列宁主义基础(562,378) -->
-                    <path d="M 278 438 C 400 438, 470 378, 562 378" class="line-cross" stroke="#c41e3a" opacity="0.15"/>
-                    <!-- 实践论(176,695) -> 论列宁(558,522) -->
-                    <path d="M 176 695 C 350 695, 450 522, 558 522" class="line-cross" stroke="#c41e3a" opacity="0.15"/>
+                    <!-- 政治理论→党的建设 -->
+                    <!-- 阶级分析(958,996) → 纠正党内(1358,1031) -->
+                    <path d="M 958 996 C 1120 1010, 1250 1020, 1358 1031" class="line-cross" stroke="#805ad5" opacity="0.15"/>
+                    <!-- 星星之火(958,1045) → 改造学习(1408,1157) -->
+                    <path d="M 958 1045 C 1120 1080, 1280 1130, 1408 1157" class="line-cross" stroke="#805ad5" opacity="0.12"/>
+                    <!-- 战争和战略(1160,1115) → 延安文艺(1358,1175) -->
+                    <path d="M 1160 1115 C 1240 1135, 1300 1160, 1358 1175" class="line-cross" stroke="#805ad5" opacity="0.12"/>
 
-                    <!-- 哲学 -> 政治理论 -->
-                    <!-- 矛盾论(282,692) -> 论持久战(1078,498) -->
-                    <path d="M 282 692 C 650 692, 850 498, 1078 498" class="line-cross" stroke="#c41e3a" opacity="0.18"/>
-                    <!-- 青年运动(178,785) -> 星星之火(958,358) -->
-                    <path d="M 178 785 C 550 785, 750 358, 958 358" class="line-cross" stroke="#c41e3a" opacity="0.15"/>
-                    <!-- 共产党宣言(178,222) -> 中国社会各阶级(958,238) -->
-                    <path d="M 178 222 C 550 222, 750 238, 958 238" class="line-cross" stroke="#c41e3a" opacity="0.12"/>
+                    <!-- 政治理论→军事战略 -->
+                    <!-- 论持久战(940,1118) → 革命战争战略(1710,1098) -->
+                    <path d="M 940 1118 C 1250 1110, 1500 1102, 1710 1098" class="line-cross" stroke="#805ad5" opacity="0.15"/>
+                    <!-- 抗日游击战(1050,1128) → 抗日游击战军(1770,1140) -->
+                    <path d="M 1050 1128 C 1350 1132, 1580 1137, 1770 1140" class="line-cross" stroke="#805ad5" opacity="0.12"/>
+                    <!-- 新民主主义论(1198,1155) → 集中优势(1758,1209) -->
+                    <path d="M 1198 1155 C 1450 1180, 1620 1200, 1758 1209" class="line-cross" stroke="#805ad5" opacity="0.1"/>
 
-                    <!-- 政治理论 -> 党的建设 -->
-                    <!-- 中国社会各阶级(958,238) -> 纠正党内(1358,258) -->
-                    <path d="M 958 238 C 1100 238, 1250 258, 1358 258" class="line-cross" stroke="#805ad5" opacity="0.2"/>
-                    <!-- 星星之火(958,358) -> 改造我们(1358,542) -->
-                    <path d="M 958 358 C 1100 358, 1250 542, 1358 542" class="line-cross" stroke="#805ad5" opacity="0.18"/>
-                    <!-- 战争和战略(958,648) -> 延安文艺(1358,688) -->
-                    <path d="M 958 648 C 1100 648, 1250 688, 1358 688" class="line-cross" stroke="#805ad5" opacity="0.15"/>
+                    <!-- 党的建设→思想文化 -->
+                    <!-- 延安文艺(1358,1175) → 延安文艺文(2158,1167) -->
+                    <path d="M 1358 1175 C 1700 1170, 1950 1168, 2158 1167" class="line-cross" stroke="#38a169" opacity="0.15"/>
+                    <!-- 改造学习(1408,1157) → 关于调查(2340,1157) -->
+                    <path d="M 1408 1157 C 1800 1157, 2100 1157, 2340 1157" class="line-cross" stroke="#38a169" opacity="0.12"/>
+                    <!-- 纠正党内(1358,1031) → 五四运动(2318,926) -->
+                    <path d="M 1358 1031 C 1700 1000, 2100 950, 2318 926" class="line-cross" stroke="#38a169" opacity="0.1"/>
 
-                    <!-- 政治理论 -> 军事战略 -->
-                    <!-- 论持久战(1078,498) -> 中国革命战争战略(1758,298) -->
-                    <path d="M 1078 498 C 1350 498, 1550 298, 1758 298" class="line-cross" stroke="#805ad5" opacity="0.18"/>
-                    <!-- 论持久战(1078,498) -> 抗日游击战(1758,478) -->
-                    <path d="M 1078 498 C 1350 498, 1550 478, 1758 478" class="line-cross" stroke="#805ad5" opacity="0.15"/>
-                    <!-- 新民主主义论(958,785) -> 集中优势(1758,662) -->
-                    <path d="M 958 785 C 1250 785, 1500 662, 1758 662" class="line-cross" stroke="#805ad5" opacity="0.12"/>
+                    <!-- 政治经济学→政治理论 -->
+                    <!-- 十月革命策略(798,983) → 阶级分析(958,996) -->
+                    <path d="M 798 983 C 860 988, 910 994, 958 996" class="line-cross" stroke="#e65100" opacity="0.15"/>
+                    <!-- 论中国革命(682,999) → 论持久战(940,1118) -->
+                    <path d="M 682 999 C 800 1040, 880 1090, 940 1118" class="line-cross" stroke="#e65100" opacity="0.12"/>
+                    <!-- 论列宁经(610,1012) → 战争和战略2(980,1153) -->
+                    <path d="M 610 1012 C 750 1060, 880 1110, 980 1153" class="line-cross" stroke="#e65100" opacity="0.1"/>
 
-                    <!-- 党的建设 -> 思想文化 -->
-                    <!-- 延安文艺(1358,688) -> 丢掉幻想(2158,825) -->
-                    <path d="M 1358 688 C 1700 688, 1900 825, 2158 825" class="line-cross" stroke="#38a169" opacity="0.18"/>
-                    <!-- 改造我们(1358,542) -> 愚公移山(2158,545) -->
-                    <path d="M 1358 542 C 1700 542, 1900 545, 2158 545" class="line-cross" stroke="#38a169" opacity="0.15"/>
-                    <!-- 纠正党内(1358,258) -> 延安文艺(2158,258) -->
-                    <path d="M 1358 258 C 1700 258, 1900 258, 2158 258" class="line-cross" stroke="#38a169" opacity="0.12"/>
+                    <!-- 军事战略→思想文化 -->
+                    <!-- 革命战争战略(1710,1098) → 延安文艺文(2158,1167) -->
+                    <path d="M 1710 1098 C 1900 1120, 2050 1150, 2158 1167" class="line-cross" stroke="#3182ce" opacity="0.12"/>
+                    <!-- 战略决战(1918,1230) → 丢掉幻想(2158,1241) -->
+                    <path d="M 1918 1230 C 2000 1235, 2080 1239, 2158 1241" class="line-cross" stroke="#3182ce" opacity="0.12"/>
 
-                    <!-- 政治经济学 -> 政治理论 -->
-                    <!-- 十月革命(798,372) -> 中国社会各阶级(958,238) -->
-                    <path d="M 798 372 C 850 372, 910 238, 958 238" class="line-cross" stroke="#e65100" opacity="0.2"/>
-                    <!-- 论中国革命(682,375) -> 论持久战(1078,498) -->
-                    <path d="M 682 375 C 840 375, 960 498, 1078 498" class="line-cross" stroke="#e65100" opacity="0.18"/>
-                    <!-- 论列宁(558,522) -> 战争和战略(958,648) -->
-                    <path d="M 558 522 C 720 522, 860 648, 958 648" class="line-cross" stroke="#e65100" opacity="0.15"/>
-
-                    <!-- 军事战略 -> 思想文化 -->
-                    <!-- 中国革命战争战略(1758,298) -> 延安文艺(2158,258) -->
-                    <path d="M 1758 298 C 1920 298, 2020 258, 2158 258" class="line-cross" stroke="#3182ce" opacity="0.18"/>
-                    <!-- 战争和战略(1918,475) -> 愚公移山(2158,545) -->
-                    <path d="M 1918 475 C 2000 475, 2080 545, 2158 545" class="line-cross" stroke="#3182ce" opacity="0.15"/>
-
-                    <!-- 纵向主连线 (哲学理论发展脉络, 端点精确匹配节点坐标) -->
-                    <!-- 共产党宣言(178,222) -> 怎么办(182,442) -->
-                    <path d="M 178 222 C 173 332, 183 392, 182 442" class="line-major" stroke="#c41e3a" opacity="0.12"/>
-                    <!-- 资本论(278,218) -> 帝国主义论(278,438) -->
-                    <path d="M 278 218 C 272 328, 283 388, 278 438" class="line-major" stroke="#c41e3a" opacity="0.12"/>
-                    <!-- 帝国主义论(278,438) -> 矛盾论(282,692) -->
-                    <path d="M 278 438 C 272 565, 283 625, 282 692" class="line-major" stroke="#c41e3a" opacity="0.12"/>
-                    <!-- 星星之火(958,358) -> 战争和战略(958,648) -->
-                    <path d="M 958 358 C 952 502, 962 572, 958 648" class="line-major" stroke="#805ad5" opacity="0.12"/>
-                    <!-- 论持久战(1078,498) -> 战争和战略2(1078,782) -->
-                    <path d="M 1078 498 C 1072 625, 1082 685, 1078 782" class="line-major" stroke="#805ad5" opacity="0.12"/>
-                    <!-- 改造我们(1358,542) -> 延安文艺(1358,688) -->
-                    <path d="M 1358 542 C 1352 615, 1362 655, 1358 688" class="line-major" stroke="#38a169" opacity="0.12"/>
-                    <!-- 中国革命战争战略(1758,298) -> 抗日游击战(1758,478) -->
-                    <path d="M 1758 298 C 1752 388, 1762 428, 1758 478" class="line-major" stroke="#3182ce" opacity="0.12"/>
-                    <!-- 延安文艺(2158,258) -> 纪念白求恩(2158,402) -->
-                    <path d="M 2158 258 C 2152 330, 2162 360, 2158 402" class="line-major" stroke="#00695c" opacity="0.12"/>
-                    <!-- 纪念白求恩(2158,402) -> 愚公移山(2158,545) -->
-                    <path d="M 2158 402 C 2152 472, 2162 502, 2158 545" class="line-major" stroke="#00695c" opacity="0.12"/>
+                    <!-- ===== 纵向主连线 ===== -->
+                    <!-- 共宣(178,190) → 怎么办(182,747) 跨55年 -->
+                    <path d="M 178 190 C 173 450, 185 550, 182 747" class="line-major" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 资本论(278,380) → 帝国主义论(278,894) -->
+                    <path d="M 278 380 C 272 620, 283 720, 278 894" class="line-major" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 帝国主义论(278,894) → 矛盾论(322,1110) -->
+                    <path d="M 278 894 C 272 990, 310 1050, 322 1110" class="line-major" stroke="#c41e3a" opacity="0.1"/>
+                    <!-- 星星之火(958,1045) → 战争和战略(1160,1115) -->
+                    <path d="M 958 1045 C 1000 1070, 1100 1095, 1160 1115" class="line-major" stroke="#805ad5" opacity="0.1"/>
+                    <!-- 论持久战(940,1118) → 新民主主义论(1198,1155) -->
+                    <path d="M 940 1118 C 1020 1130, 1120 1145, 1198 1155" class="line-major" stroke="#805ad5" opacity="0.1"/>
+                    <!-- 改造学习(1408,1157) → 延安文艺(1358,1175) -->
+                    <path d="M 1408 1157 C 1390 1164, 1372 1170, 1358 1175" class="line-major" stroke="#38a169" opacity="0.1"/>
+                    <!-- 革命战争战略(1710,1098) → 抗日游击战军(1770,1140) -->
+                    <path d="M 1710 1098 C 1730 1112, 1750 1130, 1770 1140" class="line-major" stroke="#3182ce" opacity="0.1"/>
+                    <!-- 延安文艺文(2158,1167) → 为人民服务(2280,1188) -->
+                    <path d="M 2158 1167 C 2200 1175, 2240 1183, 2280 1188" class="line-major" stroke="#00695c" opacity="0.1"/>
+                    <!-- 为人民服务(2280,1188) → 愚公移山(2208,1199) -->
+                    <path d="M 2280 1188 C 2250 1192, 2230 1196, 2208 1199" class="line-major" stroke="#00695c" opacity="0.1"/>
 
                 </svg>
             </div>
@@ -1141,6 +1248,41 @@ body.dark-mode .filter-btn:hover {
     <script>
         const articles = {
             // 哲学基础
+            shougao1844: {
+                title: '1844年经济学哲学手稿', meta: '马克思 · 1844年4-8月', badge: '哲学基础', badgeColor: '#c41e3a', author: 'marx',
+                desc: '异化劳动理论——"劳动所生产的对象作为一种异己的存在物，作为不依赖于生产者的力量，同劳动相对立。"',
+                position: '马克思哲学思想的第一个重要里程碑，提出了"异化劳动"概念。', link: 'articles/1844-nian-jing-ji-xue-zhe-xue-shou-gao.html', stars: '★★★★★'
+            },
+            heigeerpiping: {
+                title: '黑格尔法哲学批判导言', meta: '马克思 · 1844年2月', badge: '哲学基础', badgeColor: '#c41e3a', author: 'marx',
+                desc: '"宗教是人民的鸦片"——标志着马克思从唯心主义向唯物主义世界观的转变。',
+                position: '马克思世界观转变的关键文本。', link: 'articles/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.html', stars: '★★★★'
+            },
+            feierbaha: {
+                title: '关于费尔巴哈的提纲', meta: '马克思 · 1845年春', badge: '哲学基础', badgeColor: '#c41e3a', author: 'marx',
+                desc: '"哲学家们只是用不同的方式解释世界，而问题在于改变世界"——首次系统提出"实践"概念。',
+                position: '确立了"实践"在马哲体系中的核心地位，被恩格斯称为"新世界观的天才萌芽"。', link: 'articles/guan-yu-fei-er-ba-ha-de-ti-gang.html', stars: '★★★★'
+            },
+            deyizhixintai: {
+                title: '德意志意识形态', meta: '马克思 · 1845-46年', badge: '哲学基础', badgeColor: '#c41e3a', author: 'marx',
+                desc: '系统阐述历史唯物主义——"不是意识决定生活，而是生活决定意识。"',
+                position: '历史唯物主义的奠基之作，《共产党宣言》的直接理论前提。', link: 'articles/de-yi-zhi-yi-xing-tai.html', stars: '★★★★★'
+            },
+            fandulilun: {
+                title: '反杜林论', meta: '恩格斯 · 1878年', badge: '哲学基础', badgeColor: '#c41e3a', author: 'marx',
+                desc: '马克思主义的百科全书——系统阐述哲学、政治经济学和科学社会主义三个组成部分。',
+                position: '马克思主义理论体系的第一次系统化阐述。', link: 'articles/fan-du-lin-lun.html', stars: '★★★★★'
+            },
+            jiatingqiyuan: {
+                title: '家庭、私有制和国家的起源', meta: '恩格斯 · 1884年', badge: '哲学基础', badgeColor: '#c41e3a', author: 'marx',
+                desc: '运用唯物史观分析人类早期社会——"国家是阶级矛盾不可调和的产物。"',
+                position: '唯物史观方法论在社会历史研究上的具体应用。', link: 'articles/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html', stars: '★★★★★'
+            },
+            weiwuzhuyijingyan: {
+                title: '唯物主义和经验批判主义', meta: '列宁 · 1909年5月', badge: '哲学基础', badgeColor: '#c41e3a', author: 'lenin',
+                desc: '列宁最重要的哲学著作——系统批判马赫主义，发展辩证唯物主义认识论。',
+                position: '填补了《怎么办》(1902)与《帝国主义论》(1916)之间的哲学理论空窗。', link: 'articles/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html', stars: '★★★★★'
+            },
             gongchandanyan: {
                 title: '共产党宣言', meta: '马克思恩格斯 · 1848年', badge: '哲学基础', badgeColor: '#c41e3a', author: 'marx',
                 desc: '科学社会主义的第一个纲领性文件。"一个幽灵，共产主义的幽灵，在欧洲游荡"。',
