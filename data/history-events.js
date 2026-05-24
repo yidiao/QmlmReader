@@ -278,7 +278,7 @@ const historyData = {
         { date: "5月21日", year: 1871, title: "巴黎公社烈士纪念", category: "revolution", nature: "positive", desc: "巴黎公社社员在拉雪兹神父公墓做最后抵抗。" },
         { date: "5月21日", year: 1949, title: "中共中央发布《关于对外贸易的决定》", category: "political", nature: "positive", desc: "建立新中国对外贸易体系。" },
         { date: "5月22日", year: 1905, title: "俄国社会民主工党大会", category: "political", nature: "positive", desc: "布尔什维克与孟什维克分裂加剧。" },
-        { date: "5月24日", year: 1949, title: "南昌解放", category: "war", nature: "positive", desc: "人民解放军解放江西省会南昌。" },
+        { date: "5月22日", year: 1949, title: "南昌解放", category: "war", nature: "positive", desc: "人民解放军解放江西省会南昌。" },
         { date: "5月23日", year: 1942, title: "毛泽东发表《在延安文艺座谈会上的讲话》", category: "culture", nature: "positive", desc: "毛泽东在延安文艺座谈会上发表重要讲话，明确文艺为工农兵服务的方向。" },
         { date: "5月23日", year: 1939, title: "德意签署钢铁条约", category: "political", nature: "negative", desc: "德国与意大利签署《钢铁条约》，结成军事同盟。" },
         { date: "5月23日", year: 1949, title: "毛泽东发表《南京政府往何处去？》", category: "political", nature: "positive", desc: "敦促南京政府接受和平条件。" },

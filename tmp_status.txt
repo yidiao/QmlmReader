@@ -1,6 +1,2 @@
- M changelog-detail.html
  M data/history-events.js
- M data/updates.json
- M puzzle.html
  M tmp_status.txt
-?? articles_gap_analysis.txt
