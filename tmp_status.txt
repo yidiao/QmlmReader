@@ -1,2 +1,11 @@
+ M gallery.html
+ M gallery/music.html
+ M gallery/poetry.html
+ M index.html
  M science.html
  M tmp_status.txt
+?? gallery/photos.html
+?? images/icons/music/啊，姑娘再见.jpg
+?? images/icons/music/喀秋莎.jpg
+?? images/icons/music/嘿，翔隼！.jpg
+?? images/icons/music/学习雷锋好榜样.jpg
