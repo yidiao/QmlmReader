@@ -1,2 +1,12 @@
+ D beautify_original_tab.py
+ D check_nav_issues.py
  M data/history-events.js
+ M masters.html
+ M masters/engels.html
+ M masters/lenin.html
+ M masters/mao.html
+ M masters/marx.html
+ M masters/stalin.html
+ M rectify/myths/young-october.html
+ M science.html
  M tmp_status.txt

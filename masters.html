@@ -159,6 +159,75 @@
             border-color: #555;
         }
 
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .masters-intro {
+                padding: 2rem 1rem;
+            }
+            .masters-intro h2 {
+                font-size: 1.6rem;
+            }
+            .masters-intro p {
+                font-size: 0.95rem;
+                padding: 0 0.5rem;
+            }
+            .masters-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.7rem;
+                padding: 0 0.7rem 2rem;
+            }
+            .master-card {
+                aspect-ratio: auto;
+            }
+            .master-card-header {
+                height: auto;
+                min-height: 70px;
+                padding: 0.8rem 0;
+            }
+            .master-avatar {
+                width: 55px;
+                height: 55px;
+                font-size: 1.5rem;
+            }
+            .master-avatar img {
+                width: 70px !important;
+                height: 70px !important;
+            }
+            .master-card-body {
+                padding: 0.6rem;
+            }
+            .master-card-body h3 {
+                font-size: 1rem;
+            }
+            /* 移动端隐藏次要内容，仅保留头像+名字 */
+            .master-years,
+            .master-title,
+            .master-works,
+            .enter-btn {
+                display: none;
+            }
+            /* 隐藏"资料持续完善中" */
+            .master-card-body p[style] {
+                display: none;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .masters-grid {
+                grid-template-columns: 1fr;
+                max-width: 300px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .master-card-header {
+                min-height: 50px;
+                padding: 0.6rem 0;
+            }
+            .master-card-body h3 {
+                font-size: 1.05rem;
+            }
+        }
+
     </style>
 </head>
 <body>

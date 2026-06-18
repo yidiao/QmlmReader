@@ -120,6 +120,7 @@ const historyData = {
     3: [
         { date: "3月1日", year: 1919, title: "共产国际成立", category: "revolution", nature: "positive", desc: "第三国际在莫斯科成立，促进世界革命。" },
         { date: "3月1日", year: 1950, title: "《人民日报》发表《学会管理企业》社论", category: "culture", nature: "positive", desc: "推动国营企业管理制度改革。" },
+        { date: "3月2日", year: 1919, title: "共产国际一大召开", category: "revolution", nature: "positive", desc: "1919年3月2日至6日，共产国际第一次代表大会在苏俄莫斯科召开，。" },
         { date: "3月2日", year: 1969, title: "珍宝岛自卫反击战", category: "war", nature: "neutral", desc: "中国边防部队击退苏联入侵。" },
         { date: "3月2日", year: 1933, title: "希特勒就任总理", category: "person", nature: "negative", desc: "希特勒正式就任德国总理，纳粹时代开始。" },
         { date: "3月3日", year: 1918, title: "苏俄签订布列斯特和约", category: "political", nature: "neutral", desc: "苏俄与德国签订屈辱性和约，退出大战。" },
@@ -302,7 +303,6 @@ const historyData = {
         { date: "6月2日", year: 1847, title: "共产主义者同盟成立", category: "revolution", nature: "positive", desc: "正义者同盟改组为共产主义者同盟。" },
         { date: "6月2日", year: 1973, title: "智利‘塔纳格多行动’", category: "political", nature: "negative", desc: "智利右翼军人发动未遂政变，阿连德政府暂时挫败。" },
         { date: "6月2日", year: 1949, title: "青岛解放完成", category: "war", nature: "positive", desc: "山东全境彻底解放。" },
-        { date: "6月3日", year: 1919, title: "共产国际一大", category: "revolution", nature: "positive", desc: "共产国际第一次代表大会在莫斯科召开。" },
         { date: "6月3日", year: 1949, title: "中共中央发布《关于向全国进军的部署》", category: "war", nature: "positive", desc: "部署解放西南、西北作战。" },
         { date: "6月4日", year: 1844, title: "西里西亚纺织工人起义", category: "revolution", nature: "positive", desc: "普鲁士西里西亚纺织工人举行起义。" },
         { date: "6月4日", year: 1949, title: "毛泽东发表《在新政治协商会议筹备会上的讲话》", category: "political", nature: "positive", desc: "强调团结全国人民建设新中国。" },

@@ -153,9 +153,28 @@
             color: #059669;
         }
 
-        .science-card.texts .science-card-header h3 {
-            color: #7c3aed;
-        }
+        .science-card.texts .science-card-header h3 { color: #7c3aed; }
+        .science-card.term-philo { border-top: 4px solid #0891b2; } .science-card.term-philo h3 { color: #0891b2; }
+        .science-card.term-econ { border-top: 4px solid #059669; } .science-card.term-econ h3 { color: #059669; }
+        .science-card.term-org { border-top: 4px solid #7c3aed; } .science-card.term-org h3 { color: #7c3aed; }
+        .science-card.term-strategy { border-top: 4px solid #d97706; } .science-card.term-strategy h3 { color: #d97706; }
+        .science-card.term-west { border-top: 4px solid #a855f7; } .science-card.term-west h3 { color: #a855f7; }
+        .science-card.fig-west { border-top: 4px solid #c41e3a; } .science-card.fig-west h3 { color: #c41e3a; }
+        .science-card.fig-system { border-top: 4px solid #1e3a5f; } .science-card.fig-system h3 { color: #1e3a5f; }
+        .science-card.fig-culture { border-top: 4px solid #a855f7; } .science-card.fig-culture h3 { color: #a855f7; }
+        .science-card.fig-global { border-top: 4px solid #166534; } .science-card.fig-global h3 { color: #166534; }
+        .science-card.fig-critique { border-top: 4px solid #92400e; } .science-card.fig-critique h3 { color: #92400e; }
+        .science-card.fig-invert { border-top: 4px solid #374151; } .science-card.fig-invert h3 { color: #374151; }
+        .science-card.mov-spontaneous { border-top: 4px solid #f59e0b; } .science-card.mov-spontaneous h3 { color: #d97706; }
+        .science-card.mov-organized { border-top: 4px solid #dc2626; } .science-card.mov-organized h3 { color: #dc2626; }
+        .science-card.mov-china { border-top: 4px solid #b91c1c; } .science-card.mov-china h3 { color: #b91c1c; }
+        .science-card.mov-antiimp { border-top: 4px solid #1e40af; } .science-card.mov-antiimp h3 { color: #1e40af; }
+        .science-card.mov-turn { border-top: 4px solid #6b7280; } .science-card.mov-turn h3 { color: #6b7280; }
+        .science-card.txt-found { border-top: 4px solid #c41e3a; } .science-card.txt-found h3 { color: #c41e3a; }
+        .science-card.txt-lenin { border-top: 4px solid #d97706; } .science-card.txt-lenin h3 { color: #d97706; }
+        .science-card.txt-mao { border-top: 4px solid #b91c1c; } .science-card.txt-mao h3 { color: #b91c1c; }
+        .science-card.txt-west { border-top: 4px solid #7c3aed; } .science-card.txt-west h3 { color: #7c3aed; }
+        .science-card.txt-polemic { border-top: 4px solid #374151; } .science-card.txt-polemic h3 { color: #374151; }
 
         .science-card-header .sub {
             font-size: 0.7rem;
@@ -211,13 +230,28 @@
                 text-decoration: underline;
             }
 
-        .science-content {
-            display: none;
-        }
-
-            .science-content.active {
-                display: block;
-            }
+        .science-content { display: none; }
+        .science-content.active { display: block; }
+        .science-search { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem; padding: 0.6rem 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; transition: border-color 0.2s; }
+        .science-search:focus-within { border-color: #c41e3a; box-shadow: 0 0 0 3px rgba(196,30,58,0.08); }
+        .science-search-icon { font-size: 0.95rem; opacity: 0.5; flex-shrink: 0; }
+        .science-search input { flex: 1; border: none; background: transparent; font-size: 0.85rem; outline: none; color: #333; font-family: inherit; }
+        .science-search input::placeholder { color: #aaa; }
+        body.dark-mode .science-search { background: #333; border-color: #444; }
+        body.dark-mode .science-search input { color: #ddd; }
+        .science-section-header { display: flex; align-items: center; gap: 0.55rem; padding: 0.6rem 0; margin: 1.8rem 0 0.9rem; border-bottom: 2px solid #eee; font-size: 0.9rem; font-weight: 700; grid-column: 1 / -1; color: #444; }
+        .science-section-header:first-child { margin-top: 0; }
+        body.dark-mode .science-section-header { border-bottom-color: #3a3a3a; color: #ccc; }
+        .science-section-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+        .science-section-count { font-size: 0.7rem; font-weight: 400; color: #999; margin-left: auto; }
+        body.dark-mode .science-section-count { color: #777; }
+        .science-filter { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+        .science-filter-btn { background: #f3f4f6; border: 1px solid #e5e7eb; padding: 0.35rem 0.9rem; font-size: 0.75rem; font-weight: 500; color: #666; cursor: pointer; border-radius: 20px; transition: all 0.15s; font-family: inherit; }
+        .science-filter-btn:hover { background: #fef3c7; color: #d97706; border-color: #fcd34d; }
+        .science-filter-btn.active { background: #c41e3a; color: white; border-color: #c41e3a; }
+        body.dark-mode .science-filter-btn { background: #333; border-color: #444; color: #aaa; }
+        body.dark-mode .science-filter-btn:hover { background: #4a3a1a; color: #fbbf24; }
+        body.dark-mode .science-filter-btn.active { background: #ff6b6b; color: #1a1a1a; }
 
         /* ========== 浮窗弹窗样式 ========== */
         .modal-overlay {
@@ -414,45 +448,65 @@
             </div>
 
             <!-- ==================== 人物思想 ==================== -->
-            <div class="science-content active" id="tab-figures">
-                <div class="science-grid">
-                    <div class="science-card figures" onclick="openModal('figure-gramsci')">
-                        <div class="science-card-header"><h3>葛兰西</h3><div class="sub">Antonio Gramsci · 1891-1937</div></div>
-                        <div class="science-card-body"><div class="tag-group"><span class="tag">文化霸权</span><span class="tag">阵地战</span><span class="tag">有机知识分子</span></div><p>意大利马克思主义理论家，提出"文化霸权"理论，强调统治阶级通过文化和意识形态塑造社会共识。</p><span class="read-link">点击查看详情 →</span></div>
-                    </div>
-                    <div class="science-card figures" onclick="openModal('figure-lukacs')">
-                        <div class="science-card-header"><h3>卢卡奇</h3><div class="sub">György Lukács · 1885-1971</div></div>
-                        <div class="science-card-body"><div class="tag-group"><span class="tag">物化</span><span class="tag">总体性</span><span class="tag">阶级意识</span></div><p>匈牙利哲学家，西方马克思主义奠基人，代表作《历史与阶级意识》，批判资本主义社会的异化关系。</p><span class="read-link">点击查看详情 →</span></div>
-                    </div>
-                    <div class="science-card figures" onclick="openModal('figure-althusser')">
-                        <div class="science-card-header"><h3>阿尔都塞</h3><div class="sub">Louis Althusser · 1918-1990</div></div>
-                        <div class="science-card-body"><div class="tag-group"><span class="tag">意识形态国家机器</span><span class="tag">质询</span><span class="tag">断裂认识论</span></div><p>法国结构主义马克思主义者，提出"意识形态国家机器"概念，论述意识形态如何塑造主体。</p><span class="read-link">点击查看详情 →</span></div>
-                    </div>
-                    <div class="science-card figures" onclick="openModal('figure-trotsky')">
-                        <div class="science-card-header"><h3>托洛茨基</h3><div class="sub">Leon Trotsky · 1879-1940</div></div>
-                        <div class="science-card-body"><div class="tag-group"><span class="tag">不断革命论</span><span class="tag">第四国际</span><span class="tag">不平衡发展</span></div><p>十月革命领导人之一，提出"不断革命论"，主张落后国家的革命必须直接转变为社会主义革命。</p><span class="read-link">点击查看详情 →</span></div>
-                    </div>
-                    <div class="science-card figures" onclick="openModal('figure-luxemburg')">
-                        <div class="science-card-header"><h3>罗莎·卢森堡</h3><div class="sub">Rosa Luxemburg · 1871-1919</div></div>
-                        <div class="science-card-body"><div class="tag-group"><span class="tag">群众罢工</span><span class="tag">资本积累论</span><span class="tag">自发革命</span></div><p>德国共产党创始人，代表作《资本积累论》，1919年与李卜克内西一同遇害。</p><span class="read-link">点击查看详情 →</span></div>
-                    </div>
-                    <div class="science-card figures" onclick="openModal('figure-bukharin')">
-                        <div class="science-card-header"><h3>布哈林</h3><div class="sub">Nikolai Bukharin · 1888-1938</div></div>
-                        <div class="science-card-body"><div class="tag-group"><span class="tag">均衡论</span><span class="tag">过渡时期经济学</span></div><p>苏联理论家，著有《过渡时期经济学》，在新经济政策时期主张温和的农业政策。</p><span class="read-link">点击查看详情 →</span></div>
-                    </div>
-                    <div class="science-card figures" onclick="openModal('figure-marcuse')">
-                        <div class="science-card-header"><h3>马尔库塞</h3><div class="sub">Herbert Marcuse · 1898-1979</div></div>
-                        <div class="science-card-body"><div class="tag-group"><span class="tag">单向度的人</span><span class="tag">大拒绝</span><span class="tag">爱欲与文明</span></div><p>德裔美国哲学家，法兰克福学派代表人物，批判发达工业社会对人的"单向度"塑造。</p><span class="read-link">点击查看详情 →</span></div>
-                    </div>
-                    <div class="science-card figures" onclick="openModal('figure-benjamin')">
-                        <div class="science-card-header"><h3>本雅明</h3><div class="sub">Walter Benjamin · 1892-1940</div></div>
-                        <div class="science-card-body"><div class="tag-group"><span class="tag">历史天使</span><span class="tag">灵韵</span><span class="tag">弥赛亚时间</span></div><p>德国犹太思想家，法兰克福学派外围成员，将马克思主义与弥赛亚主义结合。</p><span class="read-link">点击查看详情 →</span></div>
-                    </div>
-                </div>
-            </div>
+            <            <div class="science-content active" id="tab-figures">
+    <div class="science-search"><span class="science-search-icon">🔍</span><input type="text" placeholder="输入关键词筛选..." oninput="filterCards('tab-figures', this.value, getActiveCategory('tab-figures'))"></div>
+    <div class="science-filter">
+        <button class="science-filter-btn active" data-cat="all" onclick="setCategoryFilter('tab-figures', 'all', this)">全部</button>
+        <button class="science-filter-btn" data-cat="fig-west" onclick="setCategoryFilter('tab-figures', 'fig-west', this)">西方马克思主义者</button>
+        <button class="science-filter-btn" data-cat="fig-system" onclick="setCategoryFilter('tab-figures', 'fig-system', this)">体制建设与执行者</button>
+        <button class="science-filter-btn" data-cat="fig-culture" onclick="setCategoryFilter('tab-figures', 'fig-culture', this)">文化文艺战线</button>
+        <button class="science-filter-btn" data-cat="fig-global" onclick="setCategoryFilter('tab-figures', 'fig-global', this)">全球革命家</button>
+        <button class="science-filter-btn" data-cat="fig-critique" onclick="setCategoryFilter('tab-figures', 'fig-critique', this)">被批判者</button>
+        <button class="science-filter-btn" data-cat="fig-invert" onclick="setCategoryFilter('tab-figures', 'fig-invert', this)">逆练者</button>
+    </div>
+    <div class="science-grid">
+        <div class="science-section-header"><span class="science-section-dot" style="background:#c41e3a"></span>西方马克思主义者 · 理论创新者<span class="science-section-count">6个词条</span></div>
+        <div class="science-card fig-west" onclick="openModal('figure-gramsci')"><div class="science-card-header"><h3>葛兰西</h3><div class="sub">Antonio Gramsci · 1891-1937</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">文化霸权</span><span class="tag">阵地战</span></div><p>意大利马克思主义理论家，提出"文化霸权"，强调统治阶级通过意识形态塑造社会共识。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-west" onclick="openModal('figure-lukacs')"><div class="science-card-header"><h3>卢卡奇</h3><div class="sub">Gyorgy Lukacs · 1885-1971</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">物化</span><span class="tag">总体性</span></div><p>匈牙利哲学家，西方马克思主义奠基人，《历史与阶级意识》开创了全新的理论传统。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-west" onclick="openModal('figure-althusser')"><div class="science-card-header"><h3>阿尔都塞</h3><div class="sub">Louis Althusser · 1918-1990</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">ISA</span><span class="tag">断裂认识论</span></div><p>法国结构主义马克思主义者，提出"意识形态国家机器"和"质询"概念。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-west" onclick="openModal('figure-luxemburg')"><div class="science-card-header"><h3>罗莎·卢森堡</h3><div class="sub">Rosa Luxemburg · 1871-1919</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">群众罢工</span><span class="tag">资本积累论</span></div><p>德国共产党创始人，代表作《资本积累论》，1919年与李卜克内西一同遇害。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-west" onclick="openModal('figure-marcuse')"><div class="science-card-header"><h3>马尔库塞</h3><div class="sub">Herbert Marcuse · 1898-1979</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">单向度的人</span><span class="tag">大拒绝</span></div><p>法兰克福学派代表人物，批判发达工业社会对人的"单向度"塑造，1960年代新左派精神导师。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-west" onclick="openModal('figure-benjamin')"><div class="science-card-header"><h3>本雅明</h3><div class="sub">Walter Benjamin · 1892-1940</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">历史天使</span><span class="tag">灵韵</span></div><p>德国犹太思想家，将马克思主义与弥赛亚主义结合，20世纪文化批评的奠基人之一。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#1e3a5f"></span>体制建设与执行者<span class="science-section-count">5个词条</span></div>
+        <div class="science-card fig-system" onclick="openModal('figure-dzerzhinsky')"><div class="science-card-header"><h3>捷尔任斯基</h3><div class="sub">Felix Dzerzhinsky · 1877-1926</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">安全战线</span><span class="tag">契卡</span></div><p>契卡创始人，"铁腕费利克斯"。信仰坚定性与极端手段之间的张力是值得深思的课题。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-system" onclick="openModal('figure-kang-sheng')"><div class="science-card-header"><h3>康生</h3><div class="sub">1898-1975 · 中共安全战线</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">安全战线</span><span class="tag">理论家</span></div><p>中共情报安全核心建设者，理论水平深厚，愿意为革命"干脏活"的人。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-system" onclick="openModal('figure-andropov')"><div class="science-card-header"><h3>安德罗波夫</h3><div class="sub">Yuri Andropov · 1914-1984</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">技术官僚</span><span class="tag">改革</span></div><p>KGB主席→苏共总书记。少数真正认识到苏联体制危机的人，早逝错过改革窗口。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-system" onclick="openModal('figure-chernenko')"><div class="science-card-header"><h3>契尔年科</h3><div class="sub">Konstantin Chernenko · 1911-1985</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">技术官僚</span><span class="tag">停滞时代</span></div><p>勃列日涅夫"停滞时代"的活标本——老人政治、体制僵化的典型代表。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-system" onclick="openModal('figure-kosygin')"><div class="science-card-header"><h3>柯西金</h3><div class="sub">Alexei Kosygin · 1904-1980</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">体制改革</span><span class="tag">经济改革</span></div><p>1965年"柯西金改革"——在计划框架内引入市场机制，被布拉格之春打断。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#a855f7"></span>文化文艺战线<span class="science-section-count">6个词条</span></div>
+        <div class="science-card fig-culture" onclick="openModal('figure-wei-wei')"><div class="science-card-header"><h3>魏巍</h3><div class="sub">1920-2008 · 红色学者</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">理论宣传</span><span class="tag">作家</span></div><p>《谁是最可爱的人》作者，晚年政论影响深远。"一辈子信、一辈子写、一辈子斗"。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-culture" onclick="openModal('figure-ai-siqi')"><div class="science-card-header"><h3>艾思奇</h3><div class="sub">1910-1966 · 哲学通俗化先驱</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">理论宣传</span><span class="tag">大众哲学</span></div><p>《大众哲学》作者，用通俗语言把辩证法讲给普通读者，影响一代左翼青年。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-culture" onclick="openModal('figure-hu-qiaomu')"><div class="science-card-header"><h3>胡乔木</h3><div class="sub">1912-1992 · "党内一支笔"</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">理论宣传</span><span class="tag">政策语言</span></div><p>毛泽东的政治秘书，众多重要文献起草者。代表理论→政策语言的关键环节。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-culture" onclick="openModal('figure-guo-moruo')"><div class="science-card-header"><h3>郭沫若</h3><div class="sub">1892-1978 · 学者·文学家·革命者</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">学术</span><span class="tag">文艺</span></div><p>考古+文学+革命的多面手。知识分子的复杂位置——不是简单的"捧"或"骂"。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-culture" onclick="openModal('figure-brecht')"><div class="science-card-header"><h3>布莱希特</h3><div class="sub">Bertolt Brecht · 1898-1956</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">文艺</span><span class="tag">戏剧</span></div><p>德国马克思主义戏剧家，"间离效果"把辩证法用于戏剧美学。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-culture" onclick="openModal('figure-lu-xun')"><div class="science-card-header"><h3>鲁迅</h3><div class="sub">1881-1936 · "文化革命的主将"</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">文艺</span><span class="tag">文学</span></div><p>左翼文学旗手，以文学进行阶级斗争。毛泽东评价为"中国文化革命的主将"。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#166534"></span>全球革命家<span class="science-section-count">11个词条</span></div>
+        <div class="science-card fig-global" onclick="openModal('figure-che-guevara')"><div class="science-card-header"><h3>切·格瓦拉</h3><div class="sub">Che Guevara · 1928-1967</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">拉美</span><span class="tag">游击战</span></div><p>从古巴到刚果到玻利维亚，"不断革命"的肉身实践者。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-global" onclick="openModal('figure-castro')"><div class="science-card-header"><h3>卡斯特罗</h3><div class="sub">Fidel Castro · 1926-2016</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">拉美</span><span class="tag">执政</span></div><p>在美国鼻子底下建设社会主义50年。动辄5-7小时的演讲本身就是政治艺术。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-global" onclick="openModal('figure-ho-chi-minh')"><div class="science-card-header"><h3>胡志明</h3><div class="sub">Ho Chi Minh · 1890-1969</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">亚洲</span><span class="tag">执政</span></div><p>在法国、中国、苏联之间游走的国际主义者，又是越南民族独立的象征。终身简朴的传奇。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-global" onclick="openModal('figure-sankara')"><div class="science-card-header"><h3>托马斯·桑卡拉</h3><div class="sub">Thomas Sankara · 1949-1987</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">非洲</span><span class="tag">女性解放</span></div><p>"非洲的切"。33岁上台、37岁被战友刺杀。穷国社会主义的一次极短但极耀眼的回答。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-global" onclick="openModal('figure-cabral')"><div class="science-card-header"><h3>卡布拉尔</h3><div class="sub">Amilcar Cabral · 1924-1973</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">非洲</span><span class="tag">理论</span></div><p>几内亚比绍独立运动领袖/理论家，《返回源头》是第三世界革命理论的精细之作。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-global" onclick="openModal('figure-tito')"><div class="science-card-header"><h3>铁托</h3><div class="sub">Josip Broz Tito · 1892-1980</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">东欧</span><span class="tag">不结盟</span></div><p>南斯拉夫领导人，不结盟运动发起者——走了不同于苏联的路，但这条路本身也充满矛盾。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-global" onclick="openModal('figure-dubcek')"><div class="science-card-header"><h3>杜布切克</h3><div class="sub">Alexander Dubcek · 1921-1992</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">东欧</span><span class="tag">改革</span></div><p>布拉格之春——"带有人性面孔的社会主义"，被苏军坦克碾碎，曾是东欧改革的希望。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-global" onclick="openModal('figure-allende')"><div class="science-card-header"><h3>阿连德</h3><div class="sub">Salvador Allende · 1908-1973</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">拉美</span><span class="tag">和平道路</span></div><p>智利，民主选举上台的马克思主义者。1973年被皮诺切特政变推翻——与武装路线形成对比。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-global" onclick="openModal('figure-kim-il-sung')"><div class="science-card-header"><h3>金日成</h3><div class="sub">Kim Il-sung · 1912-1994</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">亚洲</span><span class="tag">执政</span></div><p>朝鲜创建者，提出"主体思想"。词条科普——客观介绍历史背景。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-global" onclick="openModal('figure-zetkin')"><div class="science-card-header"><h3>克拉拉·蔡特金</h3><div class="sub">Clara Zetkin · 1857-1933</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">德国</span><span class="tag">女性革命家</span></div><p>德国共产党创始人之一，国际妇女节的发起者。为女性解放和工人运动奋斗终身。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-global" onclick="openModal('figure-kollontai')"><div class="science-card-header"><h3>柯伦泰</h3><div class="sub">Alexandra Kollontai · 1872-1952</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">苏联</span><span class="tag">女性革命家</span></div><p>布尔什维克女性领袖，世界上第一位女性大使。在革命与女性解放问题上提出激进主张。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#92400e"></span>被批判者 · 修正主义与路线错误<span class="science-section-count">6个词条</span></div>
+        <div class="science-card fig-critique" onclick="openModal('figure-proudhon')"><div class="science-card-header"><h3>蒲鲁东</h3><div class="sub">Pierre-Joseph Proudhon · 1809-1865</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">无政府主义</span></div><p>"财产就是盗窃"——但主张互助制而非革命。《贫困的哲学》催生了《哲学的贫困》。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-critique" onclick="openModal('figure-bakunin')"><div class="science-card-header"><h3>巴枯宁</h3><div class="sub">Mikhail Bakunin · 1814-1876</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">无政府主义</span></div><p>无政府主义集大成者，第一国际内部与马克思激烈斗争。1872年被开除。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-critique" onclick="openModal('figure-lassalle')"><div class="science-card-header"><h3>拉萨尔</h3><div class="sub">Ferdinand Lassalle · 1825-1864</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">国家社会主义</span></div><p>德国工运早期领袖，主张依靠普鲁士国家帮助建合作社。马克思在《哥达纲领批判》中清算。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-critique" onclick="openModal('figure-bernstein')"><div class="science-card-header"><h3>伯恩斯坦</h3><div class="sub">Eduard Bernstein · 1850-1932</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">修正主义</span></div><p>"最终目的是微不足道的，运动就是一切。"修正主义之父，第二国际分裂的直接原因。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-critique" onclick="openModal('figure-kautsky')"><div class="science-card-header"><h3>考茨基</h3><div class="sub">Karl Kautsky · 1854-1938</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">中派机会主义</span></div><p>第二国际的"理论权威"，早期正统马克思主义者，后期堕落为列宁痛斥的"叛徒"。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-critique" onclick="openModal('figure-bukharin')"><div class="science-card-header"><h3>布哈林</h3><div class="sub">Nikolai Bukharin · 1888-1938</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">右倾路线</span></div><p>苏联理论家，新经济政策时期主张温和农业政策。与斯大林路线对立后被清洗。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#374151"></span>"逆练"者 · 反面教员<span class="science-section-count">2个词条</span></div>
+        <div class="science-card fig-invert" onclick="openModal('figure-mussolini')"><div class="science-card-header"><h3>墨索里尼</h3><div class="sub">Benito Mussolini · 1883-1945</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">反面教员</span><span class="tag">逆练马克思</span></div><p>前意大利社会党重要成员，学习过马克思但"逆练"——把阶级斗争扭转为民族斗争。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card fig-invert" onclick="openModal('figure-hitler')"><div class="science-card-header"><h3>希特勒</h3><div class="sub">Adolf Hitler · 1889-1945</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">反面教员</span><span class="tag">假左真右</span></div><p>"国家社会主义德国工人党"——名字偷了"社会主义"和"工人"。假左真右的极端形态。</p><span class="read-link">点击查看详情 →</span></div></div>
+    </div>
+</div>
 
-            <!-- ==================== 历史运动（待后续补充） ==================== -->
-            <div class="science-content" id="tab-movements">
+      <div class="science-content" id="tab-movements">
+    <div class="science-search"><span class="science-search-icon">🔍</span><input type="text" placeholder="输入关键词筛选..." oninput="filterCards('tab-movements', this.value, getActiveCategory('tab-movements'))"></div>
     <div class="science-grid">
         <div class="science-card movements" onclick="openModal('movement-1848')">
             <div class="science-card-header"><h3>1848年欧洲革命</h3><div class="sub">革命之春 · 1848</div></div>
@@ -486,49 +540,67 @@
 </div>
 
             <!-- ==================== 名词概念（待后续补充） ==================== -->
+      
+
             <div class="science-content" id="tab-terms">
+    <div class="science-search"><span class="science-search-icon">🔍</span><input type="text" placeholder="输入关键词筛选..." oninput="filterCards('tab-terms', this.value, getActiveCategory('tab-terms'))"></div>
+    <div class="science-filter">
+        <button class="science-filter-btn active" data-cat="all" onclick="setCategoryFilter('tab-terms', 'all', this)">全部</button>
+        <button class="science-filter-btn" data-cat="term-philo" onclick="setCategoryFilter('tab-terms', 'term-philo', this)">哲学地基</button>
+        <button class="science-filter-btn" data-cat="term-econ" onclick="setCategoryFilter('tab-terms', 'term-econ', this)">政治经济学</button>
+        <button class="science-filter-btn" data-cat="term-org" onclick="setCategoryFilter('tab-terms', 'term-org', this)">组织原则</button>
+        <button class="science-filter-btn" data-cat="term-strategy" onclick="setCategoryFilter('tab-terms', 'term-strategy', this)">理论炸弹</button>
+        <button class="science-filter-btn" data-cat="term-west" onclick="setCategoryFilter('tab-terms', 'term-west', this)">西马批判</button>
+    </div>
     <div class="science-grid">
-        <div class="science-card terms" onclick="openModal('term-surplus-value')">
-            <div class="science-card-header"><h3>剩余价值</h3><div class="sub">Surplus Value</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">政治经济学</span><span class="tag">剥削</span></div><p>工人创造价值超过劳动力价值的部分，被资本家无偿占有。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card terms" onclick="openModal('term-alienation')">
-            <div class="science-card-header"><h3>异化</h3><div class="sub">Alienation</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">哲学</span><span class="tag">1844年手稿</span></div><p>劳动者与劳动产品、劳动过程、类本质相分离的状态。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card terms" onclick="openModal('term-dictatorship-proletariat')">
-            <div class="science-card-header"><h3>无产阶级专政</h3><div class="sub">Dictatorship of the Proletariat</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">国家学说</span><span class="tag">过渡时期</span></div><p>从资本主义到共产主义的过渡时期的政治形式。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card terms" onclick="openModal('term-soviet')">
-            <div class="science-card-header"><h3>苏维埃</h3><div class="sub">Soviet</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">工农兵代表会议</span><span class="tag">政权形式</span></div><p>工农兵直接选举产生的代表机构，苏联的权力机关。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card terms" onclick="openModal('term-democratic-centralism')">
-            <div class="science-card-header"><h3>民主集中制</h3><div class="sub">Democratic Centralism</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">组织原则</span><span class="tag">列宁建党</span></div><p>共产党的根本组织原则：民主基础上的集中，集中指导下的民主。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card terms" onclick="openModal('term-hegemony')">
-            <div class="science-card-header"><h3>文化霸权</h3><div class="sub">Cultural Hegemony</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">葛兰西</span><span class="tag">意识形态</span></div><p>统治阶级通过文化和意识形态塑造社会共识，赢得被统治阶级的"同意"。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card terms" onclick="openModal('term-reification')">
-            <div class="science-card-header"><h3>物化</h3><div class="sub">Reification</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">卢卡奇</span><span class="tag">西方马克思主义</span></div><p>人与人的关系被物与物的关系掩盖，人沦为被动的客体。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card terms" onclick="openModal('term-isa')">
-            <div class="science-card-header"><h3>意识形态国家机器</h3><div class="sub">ISA</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">阿尔都塞</span><span class="tag">意识形态</span></div><p>学校、家庭、教会、媒体等通过意识形态塑造使人"自愿"服从统治。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card terms" onclick="openModal('term-uninterrupted-revolution')">
-            <div class="science-card-header"><h3>不断革命论</h3><div class="sub">Permanent Revolution</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">托洛茨基</span><span class="tag">革命理论</span></div><p>落后国家的无产阶级不能停留于民主革命阶段，必须不断过渡到社会主义革命。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#0891b2"></span>哲学地基 · 基本术语辨析<span class="science-section-count">12个词条</span></div>
+        <div class="science-card term-philo" onclick="openModal('term-proletariat')"><div class="science-card-header"><h3>无产阶级</h3><div class="sub">Proletariat · 被误解最多的概念</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">入门必读</span></div><p>"产"指生产资料而非一般财产。不占有资本、只能出卖劳动力的人。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-philo" onclick="openModal('term-bourgeoisie')"><div class="science-card-header"><h3>资产阶级</h3><div class="sub">Bourgeoisie</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">入门必读</span></div><p>占有生产资料、依靠剥削剩余价值为生的阶级，不是"有钱人"的同义词。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-philo" onclick="openModal('term-class')"><div class="science-card-header"><h3>阶级</h3><div class="sub">Class · 列宁的经典定义</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">入门必读</span></div><p>在生产关系中的地位不同。不是按收入、职业、出身划分，而是一个关系概念。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-philo" onclick="openModal('term-class-struggle')"><div class="science-card-header"><h3>阶级斗争</h3><div class="sub">Class Struggle</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">历史唯物主义</span></div><p>"至今一切社会的历史都是阶级斗争的历史"——不是煽动，而是客观描述。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-philo" onclick="openModal('term-means-of-production')"><div class="science-card-header"><h3>生产资料</h3><div class="sub">Means of Production</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">政治经济学</span></div><p>土地、工厂、机器、原料——归谁所有，决定社会性质。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-philo" onclick="openModal('term-productive-forces')"><div class="science-card-header"><h3>生产力与生产关系</h3><div class="sub">Productive Forces & Relations of Production</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">唯物史观</span></div><p>唯物史观骨架。生产力决定生产关系，生产关系反作用于生产力。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-philo" onclick="openModal('term-base-superstructure')"><div class="science-card-header"><h3>经济基础与上层建筑</h3><div class="sub">Base & Superstructure</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">唯物史观</span></div><p>法律、国家、意识形态不是"中立的"——但其有相对独立性。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-philo" onclick="openModal('term-materialism')"><div class="science-card-header"><h3>唯物主义</h3><div class="sub">Materialism</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">认识论</span></div><p>物质第一性，意识第二性。不是"爱钱"，而是认识论的基本立场。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-philo" onclick="openModal('term-idealism')"><div class="science-card-header"><h3>唯心主义</h3><div class="sub">Idealism</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">认识论</span></div><p>意识第一性。不是"有理想有信念"（那是褒义），而是哲学上的颠倒。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-philo" onclick="openModal('term-dialectics')"><div class="science-card-header"><h3>辩证法</h3><div class="sub">Dialectics</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">方法论</span></div><p>对立统一规律是实质。与"非黑即白"和"折中主义"的根本区别。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-philo" onclick="openModal('term-contradiction')"><div class="science-card-header"><h3>矛盾</h3><div class="sub">Contradiction · 哲学范畴</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">辩证法</span></div><p>哲学矛盾≠日常"冲突"。事物内部既对立又统一的关系。主要矛盾与次要矛盾。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-philo" onclick="openModal('term-qualitative-change')"><div class="science-card-header"><h3>量变与质变</h3><div class="sub">Quantitative & Qualitative Change</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">哲学基础</span><span class="tag">辩证法</span></div><p>革命（质变）需量变积累。修正主义者只讲改良（量变），不讲革命（质变）。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#059669"></span>政治经济学 · 剥削的秘密<span class="science-section-count">7个词条</span></div>
+        <div class="science-card term-econ" onclick="openModal('term-surplus-value')"><div class="science-card-header"><h3>剩余价值</h3><div class="sub">Surplus Value · 马克思经济学核心</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">政治经济学</span><span class="tag">剥削</span></div><p>工人创造价值超过劳动力价值的部分，被资本家无偿占有。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-econ" onclick="openModal('term-alienation')"><div class="science-card-header"><h3>异化劳动</h3><div class="sub">Alienated Labour</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">政治经济学</span><span class="tag">1844年手稿</span></div><p>劳动者与产品、劳动过程、类本质、他人相分离的四重异化。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-econ" onclick="openModal('term-commodity-fetishism')"><div class="science-card-header"><h3>商品拜物教</h3><div class="sub">Commodity Fetishism</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">政治经济学</span><span class="tag">资本论</span></div><p>人与人的社会关系被误认为物与物的关系，商品似乎有了"魔力"。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-econ" onclick="openModal('term-primitive-accumulation')"><div class="science-card-header"><h3>资本原始积累</h3><div class="sub">Primitive Accumulation</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">政治经济学</span><span class="tag">资本论</span></div><p>"羊吃人"、圈地运动、殖民掠夺——资本来到世间的"原罪"。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-econ" onclick="openModal('term-labour-power')"><div class="science-card-header"><h3>劳动力商品</h3><div class="sub">Labour-Power as Commodity</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">政治经济学</span><span class="tag">剥削机制</span></div><p>工人出卖的不是劳动，而是劳动力。这是揭开剩余价值秘密的钥匙。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-econ" onclick="openModal('term-falling-profit')"><div class="science-card-header"><h3>利润率趋向下降</h3><div class="sub">Falling Rate of Profit</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">政治经济学</span><span class="tag">危机理论</span></div><p>资本有机构成提高→利润率下降→资本主义的内在矛盾无法自我修复。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-econ" onclick="openModal('term-economic-crisis')"><div class="science-card-header"><h3>经济危机理论</h3><div class="sub">Theory of Economic Crisis</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">政治经济学</span><span class="tag">资本主义矛盾</span></div><p>生产过剩危机是资本主义的宿疾——不是"生产太多了"，而是人民买不起。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#7c3aed"></span>组织原则 · 党的学说<span class="science-section-count">5个词条</span></div>
+        <div class="science-card term-org" onclick="openModal('term-democratic-centralism')"><div class="science-card-header"><h3>民主集中制</h3><div class="sub">Democratic Centralism</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">组织原则</span><span class="tag">列宁建党</span></div><p>民主基础上的集中，集中指导下的民主。共产党的根本组织原则。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-org" onclick="openModal('term-vanguard')"><div class="science-card-header"><h3>先锋队</h3><div class="sub">Vanguard Party</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">组织原则</span><span class="tag">列宁建党</span></div><p>自发工人运动只能产生工联意识，革命需要职业革命家组织的领导。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-org" onclick="openModal('term-indoctrination')"><div class="science-card-header"><h3>灌输论</h3><div class="sub">Theory of Indoctrination</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">组织原则</span><span class="tag">意识培养</span></div><p>科学社会主义意识不能从工人自发产生，必须从外部"灌输"进工人运动。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-org" onclick="openModal('term-mass-line')"><div class="science-card-header"><h3>群众路线</h3><div class="sub">Mass Line</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">组织原则</span><span class="tag">工作方法</span></div><p>"从群众中来，到群众中去"——共产党的根本工作方法和认识路线。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-org" onclick="openModal('term-criticism-self-criticism')"><div class="science-card-header"><h3>批评与自我批评</h3><div class="sub">Criticism & Self-Criticism</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">组织原则</span><span class="tag">党的建设</span></div><p>共产党的独特武器——通过内部批评实现自我净化，防止腐化和官僚化。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#d97706"></span>理论炸弹 · 革命战略的大争论<span class="science-section-count">8个词条</span></div>
+        <div class="science-card term-strategy" onclick="openModal('term-imperialism-stage')"><div class="science-card-header"><h3>帝国主义论</h3><div class="sub">Imperialism, Highest Stage of Capitalism</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">列宁</span><span class="tag">革命战略</span></div><p>垄断→金融资本→资本输出→瓜分世界→战争→革命。帝国主义是社会主义的前夜。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-strategy" onclick="openModal('term-weakest-link')"><div class="science-card-header"><h3>锁链最薄弱环节</h3><div class="sub">The Weakest Link</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">列宁</span><span class="tag">革命战略</span></div><p>革命不一定在"最发达"处爆发——而是在帝国主义锁链矛盾最集中处。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-strategy" onclick="openModal('term-uninterrupted-revolution')"><div class="science-card-header"><h3>不断革命论</h3><div class="sub">Permanent Revolution · 托洛茨基</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">托洛茨基</span><span class="tag">革命战略</span></div><p>落后国家的民主革命必须由无产阶级领导，且不能停止——必须不断过渡到社会主义革命。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-strategy" onclick="openModal('term-socialism-one-country')"><div class="science-card-header"><h3>一国建成社会主义</h3><div class="sub">Socialism in One Country · 斯大林</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">斯大林</span><span class="tag">革命战略</span></div><p>在不具备世界革命条件时，苏联可以依靠自身力量建成社会主义。与"不断革命论"形成理论张力。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-strategy" onclick="openModal('term-uneven-development')"><div class="science-card-header"><h3>不平衡与综合发展</h3><div class="sub">Uneven & Combined Development</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">托洛茨基</span><span class="tag">发展规律</span></div><p>落后国家可"跳跃式"利用先进技术，但也被迫承受最残酷的剥削形式。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-strategy" onclick="openModal('term-new-democracy')"><div class="science-card-header"><h3>新民主主义论</h3><div class="sub">New Democracy · 毛泽东</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">毛泽东</span><span class="tag">革命战略</span></div><p>"两步走"——无产阶级领导的民主革命→社会主义革命。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-strategy" onclick="openModal('term-three-worlds')"><div class="science-card-header"><h3>三个世界理论</h3><div class="sub">Three Worlds Theory · 毛泽东</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">毛泽东</span><span class="tag">国际战略</span></div><p>第一世界（美苏）、第二世界（发达国家）、第三世界（发展中国家）。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-strategy" onclick="openModal('term-continuous-revolution')"><div class="science-card-header"><h3>继续革命论</h3><div class="sub">Continuous Revolution · 理论探讨</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">理论探讨</span><span class="tag">历史教训</span></div><p>无产阶级专政下如何防止资本主义复辟？这一理论探索及其历史后果值得深入反思。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#a855f7"></span>西方马克思主义 · 意识形态批判<span class="science-section-count">6个词条</span></div>
+        <div class="science-card term-west" onclick="openModal('term-hegemony')"><div class="science-card-header"><h3>文化霸权</h3><div class="sub">Cultural Hegemony · 葛兰西</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">葛兰西</span><span class="tag">意识形态</span></div><p>统治阶级不仅靠暴力，更靠文化和意识形态赢得被统治者的"同意"。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-west" onclick="openModal('term-reification')"><div class="science-card-header"><h3>物化</h3><div class="sub">Reification · 卢卡奇</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">卢卡奇</span><span class="tag">西方马克思主义</span></div><p>人与人的关系被物与物的关系掩盖，人沦为被动的客体。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-west" onclick="openModal('term-isa')"><div class="science-card-header"><h3>意识形态国家机器</h3><div class="sub">ISA · 阿尔都塞</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">阿尔都塞</span><span class="tag">意识形态</span></div><p>学校、教会、媒体等通过"质询"把个体塑造为自愿服从统治的主体。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-west" onclick="openModal('term-culture-industry')"><div class="science-card-header"><h3>文化工业</h3><div class="sub">Culture Industry · 阿多诺、霍克海默</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">法兰克福学派</span><span class="tag">文化批判</span></div><p>资本主义把文化变成可复制的商品——标准化、伪个性化，消解大众的反抗意识。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-west" onclick="openModal('term-one-dimensional')"><div class="science-card-header"><h3>单向度的人</h3><div class="sub">One-Dimensional Man · 马尔库塞</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">马尔库塞</span><span class="tag">技术理性批判</span></div><p>发达工业社会以技术理性消解"否定性思维"，使人丧失对另一种可能性的想象。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card term-west" onclick="openModal('term-spectacle')"><div class="science-card-header"><h3>景观社会</h3><div class="sub">Society of the Spectacle · 居伊·德波</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">情境主义</span><span class="tag">文化批判</span></div><p>"一切曾经直接存在的东西，都变成了纯粹的表象。"社会关系以影像为中介。</p><span class="read-link">点击查看详情 →</span></div></div>
     </div>
 </div>
 
-            <!-- ==================== 文本背景（待后续补充） ==================== -->
-            <div class="science-content" id="tab-texts">
+      <div class="science-content" id="tab-texts">
+    <div class="science-search"><span class="science-search-icon">🔍</span><input type="text" placeholder="输入关键词筛选..." oninput="filterCards('tab-texts', this.value, getActiveCategory('tab-texts'))"></div>
     <div class="science-grid">
         <div class="science-card texts" onclick="openModal('text-manifesto')">
             <div class="science-card-header"><h3>《共产党宣言》</h3><div class="sub">1848年 · 马克思主义诞生</div></div>
@@ -560,12 +632,8 @@
         </div>
         <div class="science-card texts" onclick="openModal('text-history-class')">
             <div class="science-card-header"><h3>《历史与阶级意识》</h3><div class="sub">1923年 · 卢卡奇</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">物化</span><span class="tag">总体性</span><span class="tag">西方马克思主义</span></div><p>西方马克思主义的开山之作。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-    </div>
-</div>
-        </div>
-    </main>
+            <div class="science-card-body"><div class="tag-group"><span class="tag
+</main>
 
     <!-- 浮窗弹窗 -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
@@ -577,15 +645,15 @@
             </div>
             <div class="modal-body">
                 <div class="modal-section">
-                    <div class="modal-section-title">📜 人物生平</div>
+                    <div class="modal-section-title" id="modalSection1Title">📜 人物生平</div>
                     <div class="modal-section-content" id="modalBio"></div>
                 </div>
                 <div class="modal-section">
-                    <div class="modal-section-title">💡 核心思想</div>
+                    <div class="modal-section-title" id="modalSection2Title">💡 核心思想</div>
                     <div class="modal-section-content" id="modalThought"></div>
                 </div>
                 <div class="modal-section">
-                    <div class="modal-section-title">📚 代表著作</div>
+                    <div class="modal-section-title" id="modalSection3Title">📚 代表著作</div>
                     <div class="modal-section-content" id="modalWorks"></div>
                 </div>
                 <div class="modal-section">
@@ -725,6 +793,239 @@
         works: '邓小平《在武昌、深圳、珠海、上海等地的谈话要点》、江泽民《关于坚持和发展中国特色社会主义》',
         warning: '⚠️ 剧变的成因非常复杂，既有外部渗透因素（西方和平演变战略），也有内部问题（体制僵化、腐败、民族矛盾等）。不应简单归因于单一因素。'
     }
+,
+    'figure-dzerzhinsky': {
+        name: '捷尔任斯基',
+        sub: 'Felix Dzerzhinsky · 1877-1926 · 契卡创始人',
+        bio: '捷尔任斯基出身波兰贵族家庭，早年投身革命，十月革命后列宁任命他为全俄肃反委员会（契卡）主席。在极端残酷的内战环境中，契卡以铁腕手段镇压反革命，他因此获得"铁腕费利克斯"的称号。1926年因心脏病去世。',
+        thought: '1. 契卡的性质：契卡是内战时期的"革命自卫武器"，没有契卡的铁腕，苏维埃政权在1918-1920年的内外夹攻中不可能存活。\\n2. 信仰与手段的张力：捷尔任斯基是真正有信仰的人，相信必须以一切手段保卫革命。问题是在革命者手中，"一切手段"的界限在哪里？\\n3. 历史评价：有人称他为"红色恐怖"的象征，有人称他为"革命的良心"。理解捷尔任斯基，就是在理解革命中最艰难的问题。',
+        works: '无专门著作。留下的主要是书信、报告和契卡工作文件',
+        warning: '捷尔任斯基创建的契卡是后来克格勃系统的源头，这个系统在斯大林时期被大规模滥用。虽然他本人于1926年去世（早于大清洗），但"契卡模式"的长期后果需要认真反思。'
+    },
+    'figure-kang-sheng': {
+        name: '康生',
+        sub: '1898-1975 · 中共安全与情报战线',
+        bio: '康生1925年加入中共，后在延安时期成为中共安全和情报工作的核心组织者。建国后长期负责中共情报和安保系统，理论水平深厚，书法造诣颇高——这种"文人+铁腕安全首脑"的组合极为罕见。',
+        thought: '1. 组织者与执行者：康生从不自己做理论创新——他的"信仰"是执行他认为正确的路线，不计个人名声。\\n2. "干脏活"的人：每个革命政权都有"干脏活"的人——不是领袖本人做的，但领袖默许甚至需要的。\\n3. 争议的核心：康生的问题不是"没有信仰"——恰恰相反，他太有信仰了，以至于相信目的可以正当化一切手段。',
+        works: '康生没有系统的理论著作，遗留的各种批注、批示和书法作品构成理解其人的侧面材料',
+        warning: '1980年中共十一届五中全会将康生定为林彪、江青反革命集团主犯之一，开除党籍。他的历史评价迄今仍有极大争议。'
+    },
+    'figure-andropov': {
+        name: '安德罗波夫',
+        sub: 'Yuri Andropov · 1914-1984 · 从KGB到总书记',
+        bio: '安德罗波夫长期从事党的工作和外交工作。1967年被任命为克格勃主席，在位15年。1982年勃列日涅夫去世后继任苏共中央总书记，在位仅15个月即因病去世。',
+        thought: '1. "认识危机的人"：安德罗波夫可能是苏联高层中第一个系统认识到体制危机的——因为他管克格勃，能看到真实的报告。\\n2. 改革未能启动的悲剧：他上台后开始整顿纪律、打击腐败、企图推动有限改革，但健康状况让一切戛然而止。\\n3. 他不是"自由派"——他也镇压异议人士，只想在不触动根本制度的前提下提高效率。',
+        works: '安德罗波夫的主要文献是各种报告和讲话汇编',
+        warning: ''
+    },
+    'figure-chernenko': {
+        name: '契尔年科',
+        sub: 'Konstantin Chernenko · 1911-1985 · 过渡式总书记',
+        bio: '契尔年科是勃列日涅夫的长期亲信幕僚长。1984年以72岁高龄接任苏共中央总书记。体弱多病的他实际上代表了勃列日涅夫时代"老人政治"的最后回光。在位仅13个月即去世。',
+        thought: '1. 象征意义大于个人意义：契尔年科作为一个"象征"——苏联体制僵化到只能让病重的老人轮流坐庄——具有极大的警示意义。\\n2. 体制问题的标本：他的上台不是因为能力，而是因为派系平衡——各方势力都不想让对方的人上台。',
+        works: '契尔年科没有有影响力的理论著作',
+        warning: ''
+    },
+    'figure-kosygin': {
+        name: '柯西金',
+        sub: 'Alexei Kosygin · 1904-1980 · 苏联经济改革者',
+        bio: '柯西金在斯大林时期逐步升至苏联部长会议主席（政府总理），在任16年。1965年他主导推行"柯西金改革"——在保持计划经济框架的前提下，引入利润指标、企业自主权和奖金激励。这是苏联体制内最后一次认真尝试经济改革。',
+        thought: '1. "柯西金改革"的意义：改革在早期取得了成效，但随后被党内保守势力反扑——布拉格之春（1968）让他们恐惧"经济改革会导向政治松动"。\\n2. 社会主义经济改革的两难：不改革→经济发展停滞；一旦改革→可能引发政治变革的连锁反应。\\n3. 从柯西金到邓小平：柯西金的问题是没有解决政治保障——改革者必须有足够的政治力量击退保守派的反扑。',
+        works: '无专著，柯西金的主要思想体现在各种政府报告和1965年改革方案中',
+        warning: ''
+    },
+    'figure-wei-wei': {
+        name: '魏巍',
+        sub: '1920-2008 · 红色学者',
+        bio: '魏巍是当代著名作家和政论家。他最广为人知的《谁是最可爱的人》是新中国文学中最著名的报告文学之一。晚年他转向政论写作，发表了大量坚持马列主义立场的文章。他是那种"一辈子信、一辈子写、一辈子斗"的红色学者典型。',
+        thought: '1. 红色学者的价值：在一个理论被市场化和娱乐化的时代，魏巍的"固执"本身就有意义——真正的信仰不是追潮流，而是无论顺境逆境都坚守同一个东西。\\n2. 他是"斗士型"学者而非"研究型"学者——力量在于立场的坚定和表达的犀利。',
+        works: '《谁是最可爱的人》、《东方》、《地球的红飘带》、《论无产阶级专政下继续革命》等政论文章',
+        warning: ''
+    },
+    'figure-ai-siqi': {
+        name: '艾思奇',
+        sub: '1910-1966 · 马克思主义哲学通俗化先驱',
+        bio: '艾思奇原名李生萱，云南腾冲人。1934年在《读书生活》杂志连载《哲学讲话》（后改名《大众哲学》），用日常生活事例解释唯物辩证法的基本原理，影响极广。1937年到延安，参与抗大教学工作，是马克思主义哲学通俗化和中国化的重要推动者。',
+        thought: '1. 《大众哲学》的历史意义：在一个文盲率极高的年代，艾思奇把辩证法用"鸡蛋变成小鸡"、"吃梨才知梨味"这样的日常比喻讲出来，使哲学不再是大学教授的专利。\\n2. 哲学的通俗化vs庸俗化：通俗化是把复杂的东西讲得易懂——不丢本意；庸俗化是把复杂的东西简化到失真。艾思奇的成就在于基本守住了这个边界。',
+        works: '《大众哲学》、《哲学与生活》、《辩证唯物主义纲要》',
+        warning: ''
+    },
+    'figure-hu-qiaomu': {
+        name: '胡乔木',
+        sub: '1912-1992 · "党内一支笔"',
+        bio: '胡乔木1941年到延安后，因其出色的文字能力被毛泽东看中，成为毛泽东的政治秘书。此后数十年间，他参与起草了《关于若干历史问题的决议》、《关于建国以来党的若干历史问题的决议》等众多重大文件。他被称为"党内一支笔"。',
+        thought: '1. "秘书政治"的正面意义：一个优秀的政治秘书在把领袖的思想转化为准确的政策语言的过程中，发挥着过滤、系统化和规范化的作用。\\n2. 理论→政策的关键环节：很多领袖的宏观思想是方向性的、口语化的，需要有人把它变成逻辑严密、表述准确的政策文件。',
+        works: '《胡乔木文集》（三卷）、《胡乔木回忆毛泽东》',
+        warning: ''
+    },
+    'figure-guo-moruo': {
+        name: '郭沫若',
+        sub: '1892-1978 · 学者·文学家·革命者',
+        bio: '郭沫若的一生几乎是20世纪中国知识分子命运的缩影。五四时期以诗集《女神》一鸣惊人。后流亡日本十年，从事甲骨文和金文研究，成为世界级古文字学家。建国后历任中国科学院院长、全国文联主席等职务。',
+        thought: '1. "多变"还是"复杂"？批判他的人说他奴颜婢膝；辩护他的人说他在极其复杂的时代中尽力保护文化和科学事业。两种说法都有事实依据。\\n2. 《李白与杜甫》——阶级分析法的文学应用：1971年他写的这本书用阶级分析方法重新评价李白和杜甫，是马克思主义文艺批评落实到古典文学的一个极端案例。\\n3. 理解而非审判：郭沫若是一个无法用"好人"还是"坏人"框架回答的人物。',
+        works: '《女神》、《中国古代社会研究》、《甲骨文研究》、《李白与杜甫》、《郭沫若全集》',
+        warning: ''
+    },
+    'figure-brecht': {
+        name: '布莱希特',
+        sub: 'Bertolt Brecht · 1898-1956 · 马克思主义戏剧家',
+        bio: '布莱希特是20世纪最重要的戏剧家之一，德国人。他将马克思主义方法论应用于戏剧理论和实践——开创了"史诗戏剧"和"间离效果"理论。1933年纳粹上台后流亡国外，战后回到东德。',
+        thought: '1. "间离效果"（陌生化效果）：传统戏剧让观众沉浸于剧情——产生情感共鸣。布莱希特主张戏剧应该让观众保持批判距离——不断提醒观众"你是在看一场戏，这是在展示给你思考的东西"。\\n2. 戏剧=意识形态批判工具：戏剧不是"娱乐"，而是帮助观众理解"社会是如何运作的"。\\n3. 与资本主义文化工业的对立：好莱坞让你哭、让你笑。布莱希特让你看、让你想。',
+        works: '《戏剧小工具篇》、《大胆妈妈和她的孩子们》、《四川好人》、《伽利略传》',
+        warning: ''
+    },
+    'figure-lu-xun': {
+        name: '鲁迅',
+        sub: '1881-1936 · "中国文化革命的主将"',
+        bio: '鲁迅，原名周树人，浙江绍兴人。早年留日学医，后弃医从文。1918年发表《狂人日记》，是中国第一篇白话短篇小说。后期受到马克思主义影响，成为左翼文学运动的事实领袖。毛泽东评价他为"中国文化革命的主将"。1936年在上海病逝。',
+        thought: '1. "横眉冷对千夫指，俯首甘为孺子牛"——鲁迅不依附权力、不讨好大众，始终以独立的批判者身份存在。\\n2. 鲁迅为什么是"马克思主义的同情者"而非党员？他害怕"吃了别人的饭，就不能说别人的不是"——独立批判位置是他的底线。\\n3. 文学=阶级斗争的一种形式：鲁迅用笔揭露"吃人"的礼教、批判国民性的弱点。',
+        works: '《狂人日记》、《阿Q正传》、《呐喊》、《彷徨》、《且介亭杂文》',
+        warning: '→ 在文艺馆（gallery.html）查看更多文学经典。'
+    },
+    'figure-che-guevara': {
+        name: '切·格瓦拉',
+        sub: 'Che Guevara · 1928-1967 · "不断革命"的实践者',
+        bio: '切·格瓦拉是阿根廷人，医生出身。1955年结识卡斯特罗兄弟，随后成为古巴革命的核心军事领导人之一。1965年，他放弃所有职务——包括古巴国籍——悄然离开古巴，先去刚果、后去玻利维亚开展游击战。1967年10月9日在玻利维亚被捕获后遭处决。',
+        thought: '1. 理论→生命的实践者：切·格瓦拉是那种把理论活出来的人。他放弃权力、放弃舒适、放弃国籍——因为他认为一个革命者的位置就应该在最需要革命的地方。\\n2. "新人"理想：切追求的是创造"社会主义新人"——不以物质刺激为驱动，而以道德激励和自觉意识去克服利己主义。\\n3. 为什么商业化？一个最反资本主义的人，他的头像被印在了无数T恤上——资本的逻辑就是可以吸收任何反叛符号，把它变成商品。',
+        works: '《摩托日记》、《古巴革命战争回忆录》、《游击战》、《人与社会主义在古巴》',
+        warning: '切的游击理论（foco理论）在玻利维亚的失败，证明了这一理论忽视了群众基础和具体条件的复杂性。'
+    },
+    'figure-castro': {
+        name: '卡斯特罗',
+        sub: 'Fidel Castro · 1926-2016 · 古巴革命领袖',
+        bio: '卡斯特罗出身古巴富裕农场主家庭。1953年率队攻打蒙卡达兵营失败，在法庭上发表了"历史将宣判我无罪"的著名辩护。1959年1月推翻巴蒂斯塔独裁政权，随后宣布走社会主义道路。在美国的全面封锁下领导古巴50余年。',
+        thought: '1. "在美国鼻子底下搞社会主义"：古巴距佛罗里达仅90英里，在美国的包围下坚持社会主义50年。\\n2. 演讲作为政治艺术：卡斯特罗以动辄5-7小时的演讲闻名——他把演讲本身变成了政治教育的过程。\\n3. "继承"问题：卡斯特罗晚年主动交权给弟弟劳尔——这是革命领袖中少有的"平和退休"。',
+        works: '《历史将宣判我无罪》、《卡斯特罗演讲全集》',
+        warning: '古巴的人权记录和政治自由限制一直受到国际批评。支持者认为这是美国封锁下的生存需要，批评者认为这是在为压制异见辩护。'
+    },
+    'figure-ho-chi-minh': {
+        name: '胡志明',
+        sub: 'Ho Chi Minh · 1890-1969 · 越南革命领袖',
+        bio: '胡志明早年当过厨子、扫雪工、海员——足迹遍布法国、英国、美国、苏联、中国。他在巴黎加入法国共产党，1945年领导八月革命，建立越南民主共和国。他终身未娶、生活极为简朴——穿着橡胶凉鞋、住在高脚茅草屋里。',
+        thought: '1. 国际主义与民族主义的"综合"：胡志明成功地将马列主义的国际主义与越南民族独立诉求有机统一在了一起。\\n2. "胡伯伯"形象的政治工程：当领袖本人在物质上没有任何特权时，对群众的革命动员就会产生截然不同的效果。\\n3. 遗嘱和身后事：他写了一封极为谦逊的遗嘱，但去世后西贡被命名为胡志明市——个人崇拜与革命精神之间的永恒矛盾。',
+        works: '《狱中日记》（诗集）、《胡志明遗嘱》、《胡志明选集》',
+        warning: ''
+    },
+    'figure-sankara': {
+        name: '托马斯·桑卡拉',
+        sub: 'Thomas Sankara · 1949-1987 · "非洲的切"',
+        bio: '桑卡拉是布基纳法索的军事军官。1983年通过政变上台任总统。在短短4年执政期间，他推行了大规模疫苗接种、扫盲运动（识字率从13%提升到73%）、禁止强迫婚姻和女性割礼。他卖掉政府的奔驰车队、拒绝使用空调。1987年10月被自己的战友发动的政变中杀害。',
+        thought: '1. "穷国能不能搞社会主义"的答案：桑卡拉的布基纳法索是世界上最贫穷的国家之一——没有石油、没有工业、没有港口。在没有"条件"的情况下，他硬是做了4年社会主义改革的尝试。\\n2. 他对女性解放的重视程度可能超过格瓦拉——禁止割礼、强制提拔女性官员。\\n3. 为什么这么快失败？4年、37岁、被战友背叛。结构性原因：极度贫困下缺乏物质基础来支撑改革。',
+        works: '《桑卡拉演讲集》',
+        warning: ''
+    },
+    'figure-cabral': {
+        name: '卡布拉尔',
+        sub: 'Amilcar Cabral · 1924-1973 · 革命理论家与实践者',
+        bio: '卡布拉尔生于几内亚比绍，在葡萄牙获得农学工程师学位。1963年领导几内亚比绍和佛得角独立运动，在条件极其艰苦的丛林中建立了游击区和文教系统。他还是一位有深度的理论家。1973年1月被葡萄牙特工暗杀。',
+        thought: '1. "返回源头"理论：卡布拉尔认为殖民地的小资产阶级和知识分子被殖民教育割裂了自己的文化根源，只有通过"返回源头"才能成为一个革命的阶级。\\n2. 理论与实践的合一：卡布拉尔不同于格瓦拉——他是专业的农学家，把科学技术用于根据地建设。',
+        works: '《返回源头》、《几内亚革命》、《团结与斗争》',
+        warning: ''
+    },
+    'figure-tito': {
+        name: '铁托',
+        sub: 'Josip Broz Tito · 1892-1980 · 不结盟的南斯拉夫',
+        bio: '铁托是南斯拉夫游击队的领导人——二战中抗击纳粹占领军，是欧洲最成功的抵抗运动之一。战后建立南斯拉夫社会主义联邦共和国，1948年与斯大林决裂——拒绝做苏联的卫星国。此后他推行"自治社会主义"，发起不结盟运动。',
+        thought: '1. "铁托主义"——独立于苏联的社会主义道路：铁托证明了一个命题——社会主义国家可以不依附于苏联。\\n2. 不结盟运动的遗产：在美苏两大阵营对立的冷战中，铁托聚集亚非新独立国家形成"第三力量"。\\n3. 铁托之后的南斯拉夫：他去世后不到十年，南斯拉夫逐步解体并陷入血腥的内战。',
+        works: '《铁托选集》',
+        warning: ''
+    },
+    'figure-dubcek': {
+        name: '杜布切克',
+        sub: 'Alexander Dubcek · 1921-1992 · 布拉格之春',
+        bio: '杜布切克是斯洛伐克人。1968年1月他就任捷克斯洛伐克共产党第一书记，随即发起"布拉格之春"改革——解除新闻审查、扩大企业自治、允许言论和集会自由。他提出的口号是"带有人性面孔的社会主义"。8月，苏联为首的华约军队入侵捷克，布拉格之春被坦克碾碎。',
+        thought: '1. "带有人性面孔的社会主义"——这个口号表达了社会主义改革的内在冲动：不是放弃社会主义，而是给社会主义加上人性。但这个"面孔"被苏联坦克碾碎了。\\n2. 杜布切克的困境：他既不想脱离社会主义阵营，又想把社会主义变得更加人性和民主。\\n3. 1989→1992：布拉格之春被粉碎20年后，天鹅绒革命中杜布切克重新出现在公众视野——但此时捷克斯洛伐克已经选择了离开社会主义。',
+        works: '《希望不死》——杜布切克晚年回忆录',
+        warning: ''
+    },
+    'figure-allende': {
+        name: '阿连德',
+        sub: 'Salvador Allende · 1908-1973 · 和平道路的烈士',
+        bio: '阿连德是智利医生出身的马克思主义政治家。1970年以微弱优势胜选总统。他在智利推行"和平的社会主义道路"——通过议会民主和现有宪法框架，逐步实行国有化、土地改革和医疗教育免费。1973年9月11日，皮诺切特将军在美国支持下发动军事政变，阿连德在总统府持卡斯特罗送的AK-47战斗至死。',
+        thought: '1. "民主社会主义能不能走得通"的实验：阿连德的死证明——资产阶级在面临失去权力的危险时，不会遵守它自己定的游戏规则。\\n2. 与格瓦拉的武装路线的对比：同一个拉美、同一个时代——格瓦拉选择武装斗争，阿连德选择和平道路。结果两人都死于敌人的暴力。\\n3. 遗产：阿连德被谋杀后，世界各地左翼运动中出现了"阿连德还是格瓦拉"的讨论。',
+        works: '《阿连德演讲集》——尤其是在联合国痛斥美国干涉的讲话',
+        warning: ''
+    },
+    'figure-kim-il-sung': {
+        name: '金日成',
+        sub: 'Kim Il-sung · 1912-1994 · 朝鲜创建者',
+        bio: '金日成早年在中国东北参加抗日游击队。1945年日本投降后，在苏联的支持下返回朝鲜，建立朝鲜民主主义人民共和国。1950-1953年领导朝鲜战争。此后在朝鲜建立了以"主体思想"为指导的政治体制，在位近50年。',
+        thought: '1. "主体思想"的形成：20世纪50-60年代，金日成提出"主体思想"（Juche）——核心是政治上自主、经济上自立、国防上自卫。这个思想在中苏分裂的背景下形成。\\n2. 冷战结构中的朝鲜：朝鲜的存在和发展不能脱离冷战结构来理解。\\n3. 为何放在词条科普：金日成在朝鲜的地位等同于马列主义宗师，不宜简单"捧"或"骂"。客观介绍其历史背景和思想主张。',
+        works: '《金日成著作集》（多卷）',
+        warning: '金日成建立的个人崇拜体系、世袭式的权力继承和极端的闭关锁国政策，受到了国际共运内外的广泛批评。'
+    },
+    'figure-zetkin': {
+        name: '克拉拉·蔡特金',
+        sub: 'Clara Zetkin · 1857-1933 · 国际妇女运动先驱',
+        bio: '蔡特金是德国马克思主义者和妇女权利活动家，德国共产党创始人之一。1910年在第二国际哥本哈根大会上，她提议设立"国际妇女节"——这就是"三八"国际劳动妇女节的来历。1932年在纳粹上台前夕，她在德国国会以最年长议员的身份发表演讲谴责法西斯主义。',
+        thought: '1. "妇女解放与阶级解放不可分割"：蔡特金的核心观点——妇女受压迫的根源在于私有制和阶级社会，因此妇女的彻底解放只能在社会主义革命中实现。\\n2. 三八节的演变：从蔡特金提议的"国际妇女斗争日"到今天的各种商业化版本——这个演变本身就是一个文化霸权理论的生动案例。',
+        works: '《关于妇女选举权》、《克拉拉·蔡特金选集》',
+        warning: ''
+    },
+    'figure-kollontai': {
+        name: '柯伦泰',
+        sub: 'Alexandra Kollontai · 1872-1952 · 革命与女性解放',
+        bio: '柯伦泰出身沙俄贵族家庭，却投身革命。十月革命后成为布尔什维克政府的第一位女性部长，后来成为苏联驻外大使——也是世界上第一位女性大使。她在革命初期提出了关于自由恋爱、婚姻制度批判、女性解放等一系列激进主张。',
+        thought: '1. "革命要解放的不只是工人，还有女人"：柯伦泰指出——如果社会主义只是改变了生产关系但没有改变家庭关系、性别关系和性道德，那么女性的解放就没有完成。\\n2. 后来的命运：柯伦泰的观点在斯大林时期被边缘化——她被派往国外当大使。但她幸存下来了。\\n3. 今天的意义：柯伦泰提出的问题——"社会主义革命能在多大程度上改变性别关系和家庭制度"——直到今天仍然没有圆满的回答。',
+        works: '《新妇女论》、《关于共产主义道德的几封信》',
+        warning: ''
+    },
+    'figure-proudhon': {
+        name: '蒲鲁东',
+        sub: 'Pierre-Joseph Proudhon · 1809-1865 · 无政府主义鼻祖',
+        bio: '蒲鲁东是法国印刷工出身的思想家，1840年出版《什么是财产？》（答案是"财产就是盗窃"）一举成名。他主张废除一切国家和权威，以"互助制"取代资本主义。马克思最初敬重他，但后来在《哲学的贫困》中系统地批判了他的"小资产阶级社会主义"。',
+        thought: '1. 为什么马克思要从欣赏到批判？蒲鲁东正确地指出了资本主义的不公正，但开出的"药方"（互助制、废除利息）是在不推翻资本主义制度的前提下进行改良。\\n2. 蒲鲁东的根本错误：他认为剥削的来源不是生产资料的私有制，而是流通和交换领域中的不公平。\\n3. 从《贫困的哲学》到《哲学的贫困》：这场论战是马克思主义形成史上的关键事件。',
+        works: '《什么是财产？》、《贫困的哲学》',
+        warning: ''
+    },
+    'figure-bakunin': {
+        name: '巴枯宁',
+        sub: 'Mikhail Bakunin · 1814-1876 · 无政府主义集大成者',
+        bio: '巴枯宁出身俄国贵族家庭，早年是黑格尔哲学的崇拜者，后转向激进革命。他参加了1848年欧洲革命的多个起义。1860年代加入第一国际，在内部与马克思展开了激烈的路线斗争——他反对一切国家（包括无产阶级专政）。1872年在海牙大会上被马克思派开除出第一国际。',
+        thought: '1. "废除一切国家"：巴枯宁认为任何国家——哪怕是无产阶级专政的国家——终将压迫人民。他的担心后来确实在一定程度上被某些历史经验所证实。\\n2. 与马克思的根本分歧：马克思认为在消灭阶级以前的过渡时期，无产阶级需要一个国家来镇压剥削阶级的反抗；巴枯宁认为任何国家权力最终都会腐化。\\n3. 巴枯宁的历史地位：他的理论提醒了"防止革命蜕变"这个真问题；但"立即废除一切国家"在实践中是空想主义。',
+        works: '《国家制度和无政府状态》',
+        warning: ''
+    },
+    'figure-lassalle': {
+        name: '拉萨尔',
+        sub: 'Ferdinand Lassalle · 1825-1864 · 国家社会主义者',
+        bio: '拉萨尔出身德国犹太商人家庭，是德国早期工人运动的重要组织者，全德工人联合会创始人。他主张在现有国家框架内、通过争取普选权和国家资助的工人合作社来改善工人状况。他还在私下与俾斯麦进行秘密接触。1864年在一次决斗中去世。马克思在《哥达纲领批判》中系统地清算了他的思想路线。',
+        thought: '1. "工资铁律"——拉萨尔的经济宿命论：他认为在资本主义下工资总是趋向于维持工人生存的最低水平，所以放弃工会斗争，转向"政治解决"。马克思指出这个"铁律"在经济学上是错的。\\n2. "国家社会主义"——通过普鲁士国家解放工人？拉萨尔幻想专制国家能够"中立地"帮助工人，这是根本性的政治幼稚。\\n3. 拉萨尔为什么重要？理解了他，就能理解为什么"社会主义"可以被扭曲成依附国家权力的改良主义。',
+        works: '《工人纲领》、《公开答复》',
+        warning: ''
+    },
+    'figure-bernstein': {
+        name: '伯恩斯坦',
+        sub: 'Eduard Bernstein · 1850-1932 · 修正主义之父',
+        bio: '伯恩斯坦是德国社会民主党的核心理论家，恩格斯临终前选定的遗稿整理人之一。恩格斯去世后，他在1896-1898年间发表了一系列文章，全面地"修正"了马克思主义的核心命题——认为资本主义可以通过渐进改革和平"长入"社会主义，主张放弃革命和无产阶级专政。',
+        thought: '1. "最终目的是微不足道的，运动就是一切"——这是伯恩斯坦最著名的一句话。他的逻辑：资本主义不会自动崩溃，所以革命不是必然的，改良本身就是目的。\\n2. 卢森堡和列宁的反击：卢森堡指出伯恩斯坦的改良一旦影响到资产阶级的根本利益就会被收回。\\n3. 修正主义的当代形态：今天的各种社会民主主义本质上就是伯恩斯坦路线的延续。',
+        works: '《社会主义的前提和社会民主党的任务》',
+        warning: ''
+    },
+    'figure-kautsky': {
+        name: '考茨基',
+        sub: 'Karl Kautsky · 1854-1938 · 从"马克思主义教皇"到"叛徒"',
+        bio: '考茨基是第二国际最重要的理论家之一，被称为"马克思主义的教皇"。早期是马克思理论的忠实阐释者。一战爆发后持中派立场。1917年十月革命后，列宁撰写《无产阶级革命和叛徒考茨基》对他进行猛烈批判。晚年被纳粹驱逐，流亡中去世。',
+        thought: '1. 从"教皇"到"叛徒"——考茨基是否真的背叛了？他在理论上忠实于马克思文本，但在关键时刻总是选择"中派"——不站队。列宁指出：在革命与反革命的时刻，"中立"就是站在反革命一边。\\n2. "纯粹民主"的谬误：考茨基鼓吹"纯粹民主"。列宁反驳说——不存在"纯粹的"民主，任何民主都是有阶级内容的。\\n3. 理论正确性vs政治决断：考茨基总是在需要做政治决断的时刻选择"不决断"——知识分子型马克思主义者的典型弱点。',
+        works: '《卡尔·马克思的经济学说》、《无产阶级专政》、《唯物主义历史观》',
+        warning: ''
+    },
+    'figure-mussolini': {
+        name: '墨索里尼',
+        sub: 'Benito Mussolini · 1883-1945 · 从社会党人到法西斯鼻祖',
+        bio: '青年墨索里尼是意大利社会党中的重要人物，担任社会党机关报《前进！》的主编。一战爆发后，他背叛了社会党"反对帝国主义战争"的立场，被社会党开除。战后他创建了"战斗的法西斯"组织，完成了从马克思主义者到法西斯主义创造者的惊人转变。1945年4月在逃亡中被游击队抓获并枪决。',
+        thought: '1. "逆练"马克思：墨索里尼并不是"不懂"马克思——他恰恰是学透了马克思的某些工具（群众动员技术、组织原理），但把核心内容篡改了：阶级斗争→民族斗争、无产阶级专政→国家极权。\\n2. 法西斯主义与左翼动员技术的镜像关系：法西斯的群众集会、口号、制服，本质上是对共产党组织形式的镜像拷贝。\\n3. 能"学透"马克思但不能"成为"马克思主义者的人：墨索里尼证明了"掌握理论"和"信仰理论"是两回事。',
+        works: '《我的自传》、《法西斯主义学说》（与哲学家根蒂莱合著）',
+        warning: '把墨索里尼放在人物词条中不是"宣传"法西斯主义，而是理解一个思想史事实：法西斯主义的很多组织技术确实是从左翼那里学来的。不理解对手，就无法真正战胜对手。'
+    },
+    'figure-hitler': {
+        name: '希特勒',
+        sub: 'Adolf Hitler · 1889-1945 · "国家社会主义"的欺骗性',
+        bio: '不需要详述希特勒的生平——他是二战和纳粹大屠杀的罪魁祸首。放在这里的原因只有一个：他领导的组织叫做"国家社会主义德国工人党"（简称"纳粹"）。这个名字的选择不是偶然的——"社会主义"+"工人"这两个词在当时的德国有极大的号召力。',
+        thought: '1. "假左真右"的极端形态：纳粹的经济政策不是社会主义（企业仍然私有），他们的"工人"政策不是解放工人（工会被解散）。但他们在竞选时大量使用反资本主义、反财阀的修辞——把人民的愤怒从"阶级剥削"引导到"犹太人阴谋"上。\\n2. "偷词术"：希特勒偷走了左翼的政治词汇——"社会主义"、"工人"、"革命"——然后把内核置换为种族主义、国家扩张和领袖崇拜。\\n3. 为什么左翼必须研究这个案例：如果无法区分真正的社会主义和"挂着社会主义牌子的极端民族主义"，就无法防止被欺骗和利用。',
+        works: '《我的奋斗》——纳粹德国的意识形态基石',
+        warning: '把希特勒放在人物词条中不是作为"研究"对象，而是作为"必须被辨识和防范的教训"——理解假左真右的手法是意识形态斗争的基本功。'
+    }
 };
 
         // ========== 名词概念数据 ==========
@@ -801,6 +1102,256 @@
         works: '托洛茨基《结果与展望》、《不断革命论》、《俄国革命史》',
         warning: '⚠️ 斯大林时期不断革命论被当作"托洛茨基主义"批判。1920年代苏联的经济实力能否支撑"不断革命"存在争议。'
     }
+,
+    'term-proletariat': {
+        name: '无产阶级',
+        sub: 'Proletariat · 被误解最多的概念',
+        bio: '"无产阶级"的"产"指的不是一般财产，而是生产资料。一个人可能拥有手机、存款、甚至一套房子，但如果他不占有工厂、土地、机器等生产资料，只能靠出卖劳动力换取工资谋生，他就是一个无产者。',
+        thought: '1. 马克思的明确定义：无产者是"自由得一无所有"的劳动者。\\n2. 小资产阶级与无产阶级的区别：小资产阶级拥有少量生产资料，自己劳动为主。\\n3. 现代含义：随着资本集中，越来越多的"中产"实质上是无产者。',
+        works: '马克思、恩格斯《共产党宣言》第一章；列宁《伟大的创举》',
+        warning: '最常见误解：以为"无产阶级"="穷人"。错。无产阶级是一个生产关系概念，不取决于收入多少。'
+    }
+,
+    'term-bourgeoisie': {
+        name: '资产阶级',
+        sub: 'Bourgeoisie · 不是"有钱人"那么简单',
+        bio: '资产阶级是占有生产资料、依靠雇佣劳动获取剩余价值的阶级。关键特征不是"有钱"，而是占有资本、剥削雇佣劳动。小商贩虽然有钱，但以自身劳动为主，不属于资产阶级。',
+        thought: '1. 马克思的分析：资产阶级在历史上起过"非常革命的作用"——摧毁封建制度、创造了前所未有的生产力。但它的生存条件建立在剥削雇佣劳动之上。\\n2. 资产阶级的不同层次：大资产阶级（垄断资本）、中等资产阶级（中小企业主）、小资产阶级（个体户）。\\n3. 雇佣关系的实质：表面上的自由平等掩盖了事实上的不平等。',
+        works: '马克思、恩格斯《共产党宣言》第一章；马克思《资本论》第一卷第四章',
+        warning: '不是所有"老板"都是资产阶级。小型早餐店店主自己每天干活十小时，雇一个帮工——这叫小资产阶级，不是资产阶级。'
+    },
+    'term-class': {
+        name: '阶级',
+        sub: 'Class · 列宁的经典定义',
+        bio: '列宁对阶级的定义是马克思主义中最经典、最精确的表述："所谓阶级，就是这样一些大的集团，这些集团在历史上一定社会生产体系中所处的地位不同，对生产资料的关系不同，因而领得自己所支配的那份社会财富的方式和多寡也不同。"核心是——阶级是生产中的关系，不是收入高低、职业种类或出身。',
+        thought: '1. 阶级是一个关系概念：阶级只存在于阶级关系中。没有资产阶级，就没有无产阶级。\\n2. 自在阶级 vs 自为阶级：自在阶级——客观存在，但没有认识到自己的阶级利益；自为阶级——认识到自己的阶级地位和历史使命。\\n3. 阶级分析的现实意义：今天的社会主流动辄说"中产阶级"——这些说法都模糊了阶级关系，把生产关系问题转化为收入问题。',
+        works: '列宁《伟大的创举》；马克思《路易·波拿巴的雾月十八日》',
+        warning: '"阶级"不是标签、不是道德评判。它是一个分析工具，用来理解社会中不同集团的利益和行动逻辑。'
+    },
+    'term-class-struggle': {
+        name: '阶级斗争',
+        sub: 'Class Struggle · 历史发展的直接动力',
+        bio: '"至今一切社会的历史都是阶级斗争的历史。"——《共产党宣言》开篇第一句。这不是在"煽动仇恨"，而是在描述客观事实：奴隶与奴隶主、农民与地主、工人与资本家之间的矛盾斗争，推动着社会形态的更替。',
+        thought: '1. 阶级斗争的三种形式：经济斗争（改善工资）、政治斗争（夺取政权）、理论斗争（争夺话语权）。三者缺一不可。\\n2. 改良与革命：改良是在不改变根本制度的前提下争取让步；革命是改变根本制度。\\n3. 今天的阶级斗争："阶级斗争"一词被污名化，但不说"阶级斗争"，不等于阶级斗争不存在。',
+        works: '马克思、恩格斯《共产党宣言》第一章；列宁《国家与革命》',
+        warning: '承认阶级斗争不等于主张"以阶级斗争为纲"。具体历史条件决定阶级斗争的形式和激烈程度。'
+    },
+    'term-means-of-production': {
+        name: '生产资料',
+        sub: 'Means of Production · 社会性质的基石',
+        bio: '生产资料是进行物质生产所需的物质条件：土地、矿藏、工厂、机器设备、原料、能源、运输工具等。生产资料归谁所有，是决定社会性质的根本标志——归私人资本家所有就是资本主义，归社会公共所有就是社会主义。',
+        thought: '1. 生产资料 vs 生活资料：生产资料是用来继续生产的（机器、厂房）；生活资料是用来直接消费的（食物、住房）。社会主义废除的是生产资料的私有制，不是个人生活资料的占有。\\n2. 生产资料的集中趋势：资本主义的发展规律是生产资料越来越集中在少数人手中。\\n3. 现代意义：数字时代的生产资料出现了新形式——数据、算法、平台——它们同样被少数科技巨头垄断。',
+        works: '马克思《资本论》第一卷第二十四章；恩格斯《共产主义原理》',
+        warning: ''
+    },
+    'term-productive-forces': {
+        name: '生产力与生产关系',
+        sub: 'Productive Forces & Relations of Production',
+        bio: '这是唯物史观的核心框架。生产力是人与自然的关系——劳动者、劳动工具、劳动对象。生产关系是生产过程中人与人的社会关系——谁拥有生产资料、人们在生产中的地位和相互关系、产品如何分配。',
+        thought: '1. 生产力决定生产关系：手推磨产生封建主的社会，蒸汽磨产生工业资本家的社会。\\n2. 生产关系反作用于生产力：当生产关系适合生产力时，推动其发展；当不适合时，就变成生产力的桎梏。\\n3. 社会革命的根源：生产力发展到一定阶段，便同现有生产关系发生冲突——于是社会革命的时代就到来了。',
+        works: '马克思《〈政治经济学批判〉序言》',
+        warning: ''
+    },
+    'term-base-superstructure': {
+        name: '经济基础与上层建筑',
+        sub: 'Base & Superstructure · 唯物史观的经典比喻',
+        bio: '经济基础是生产关系的总和（社会的经济结构）；上层建筑是竖立在经济基础之上的法律、政治、国家制度和各种社会意识形态（哲学、宗教、艺术等）。这个比喻帮助我们理解：法律和意识形态不是"从天而降的中立规则"。',
+        thought: '1. 基础决定上层建筑：法律不是抽象的"正义"，它保护特定的财产关系。\\n2. 上层建筑的反作用：上层建筑不是被动的。国家可以推动经济变革，意识形态可以加速或阻碍社会变革。\\n3. 相对独立性：上层建筑的变化并不总是立即跟随经济基础。',
+        works: '马克思《〈政治经济学批判〉序言》；恩格斯致布洛赫的信（1890年9月21日）',
+        warning: '这不是机械的"经济决定一切"。恩格斯晚年明确指出：经济因素是"最终"的决定因素，但上层建筑的各种因素也互相影响并对经济基础产生反作用。'
+    },
+    'term-materialism': {
+        name: '唯物主义',
+        sub: 'Materialism · 哲学基本立场',
+        bio: '唯物主义的基本命题：物质是第一性的，意识是第二性的——物质世界独立于人的意识而客观存在，意识是物质世界长期发展的产物。不是在说"人应该追求物质享受"——那是庸俗的理解。',
+        thought: '1. 朴素唯物主义、机械唯物主义、辩证唯物主义之间的区别：前两者要么粗糙要么机械，辩证唯物主义承认意识对物质的能动反作用。\\n2. 社会存在决定社会意识：不是人们的思想决定他们是什么样的，而是他们的社会存在决定了他们的大致思想倾向。\\n3. 唯物主义≠功利主义：唯物主义说的是认识的来源问题，功利主义说的是行为的动机问题。',
+        works: '恩格斯《路德维希·费尔巴哈和德国古典哲学的终结》；毛泽东《实践论》',
+        warning: ''
+    },
+    'term-idealism': {
+        name: '唯心主义',
+        sub: 'Idealism · 颠倒的世界观',
+        bio: '唯心主义的基本命题：意识是第一性的，物质是第二性的。注意：哲学上的"唯心主义"≠日常语言中的"有理想有信念"（那反而是褒义词）。在马克思主义语境内，唯心主义是指颠倒了思维与存在关系的哲学立场。',
+        thought: '1. 主观唯心主义（贝克莱）："存在就是被感知"。\\n2. 客观唯心主义（柏拉图、黑格尔）：存在一个超验的"理念世界"或"绝对精神"，现实世界只是它的表现。马克思把黑格尔的辩证法"倒过来"。\\n3. 为什么唯心主义"危险"：因为它掩盖了现实矛盾。宗教说"忍耐吧，你的奖赏在天堂"——否定物质条件对人的制约。',
+        works: '马克思、恩格斯《德意志意识形态》；恩格斯《路德维希·费尔巴哈和德国古典哲学的终结》',
+        warning: '批判唯心主义不等于否定意识的作用。辩证唯物主义承认意识的能力——理论一旦掌握群众，就会变成物质力量。'
+    },
+    'term-dialectics': {
+        name: '辩证法',
+        sub: 'Dialectics · 马克思主义的方法论',
+        bio: '辩证法是关于事物普遍联系和永恒发展的学说，是马克思主义的世界观和方法论。其核心是对立统一规律——事物内部的矛盾推动事物的运动和发展。与"非黑即白"的形而上学和"反正都对"的折中主义截然不同。',
+        thought: '1. 三大规律：对立统一规律（核心）、量变质变规律、否定之否定规律。\\n2. 辩证法 vs 形而上学：形而上学把事物看成孤立的、静止的、非此即彼的；辩证法认为事物是联系的、发展的、对立统一的。\\n3. 马克思对黑格尔的"颠倒"：黑格尔的辩证法是"头足倒置"的。马克思把辩证法置于唯物主义基础之上。',
+        works: '马克思《资本论》第一卷第二版跋；恩格斯《反杜林论》哲学编；毛泽东《矛盾论》',
+        warning: '辩证法的"诡辩化"是常见的滥用——用"辩证地看"来回避判断、各打五十大板。真正的辩证法是经过分析得出明确结论。'
+    },
+    'term-contradiction': {
+        name: '矛盾',
+        sub: 'Contradiction · 哲学范畴，非日常含义',
+        bio: '在马克思主义哲学中，"矛盾"是一个专门的哲学范畴——指事物内部及事物之间既对立又统一的关系。哲学上的"矛盾"≠日常用语中的"冲突"或"问题"。阶级矛盾是社会发展的内在动力。',
+        thought: '1. 矛盾的普遍性与特殊性：普遍性——矛盾存在于一切事物的发展过程中；特殊性——每种矛盾都有自己的特殊本质。\\n2. 主要矛盾与次要矛盾：在复杂事物中，必有一种矛盾起主导作用。\\n3. 对抗性矛盾与非对抗性矛盾：敌我矛盾用专政方法；人民内部矛盾用民主方法。',
+        works: '毛泽东《矛盾论》；列宁《谈谈辩证法问题》',
+        warning: ''
+    },
+    'term-qualitative-change': {
+        name: '量变与质变',
+        sub: 'Quantitative & Qualitative Change',
+        bio: '量变是渐进性的变化；质变是根本性的变化。革命是质变，改良是量变。理解这个规律，就理解了为什么改良主义者的问题不在于争取改良，而在于拒绝从量变推进到质变。',
+        thought: '1. 量变是质变的准备：没有长期的经济斗争和政治斗争的积累，革命不会凭空爆发。\\n2. 质变是量变的结果：水在标准大气压下加热到100℃才沸腾——之前99℃都是量变。\\n3. 修正主义的核心错误：只承认量变（渐进改良），否认质变（社会革命）。',
+        works: '恩格斯《反杜林论》哲学编；毛泽东《矛盾论》',
+        warning: '量变的"足够"没有机械公式。不能以"量变还不够"为借口无限期推迟应该采取的革命行动。'
+    },
+    'term-commodity-fetishism': {
+        name: '商品拜物教',
+        sub: 'Commodity Fetishism · 《资本论》开篇最精彩的概念',
+        bio: '马克思在《资本论》第一卷第一章第四节提出了"商品拜物教"概念：在资本主义社会中，人与人的社会关系被误认为是"物与物"的自然关系——商品似乎有了自己的意志和魔力。就像原始人崇拜自己制造的木偶一样，现代人崇拜自己生产的商品。',
+        thought: '1. 秘密所在：商品形式把人们劳动的社会性质反映为劳动产品的物的性质。\\n2. 日常表现：人们说"市场决定价格"、"资本创造就业"——这些都是商品拜物教的语言，把人的社会关系说成是物（市场、资本、GDP）的自主行为。\\n3. 商品拜物教是资产阶级意识形态的基础：一旦把贫富分化说成是"市场规律"，就自然化、合理化了资本主义。',
+        works: '马克思《资本论》第一卷第一章第四节"商品的拜物教性质及其秘密"',
+        warning: ''
+    },
+    'term-primitive-accumulation': {
+        name: '资本原始积累',
+        sub: 'Primitive Accumulation · 资本的"原罪"',
+        bio: '通常经济学说的"原始积累"是勤劳节俭的结果。马克思揭示了真相：资本原始积累是通过暴力手段——圈地运动让农民失去土地、殖民掠夺（美洲金银、非洲奴隶贸易）、国家暴力（"血腥立法"强迫失地农民进工厂）。资本来到世间，从头到脚每个毛孔都滴着血和肮脏的东西。',
+        thought: '1. "羊吃人"：圈地运动——地主把农民从土地上赶走，把耕地改成牧场。\\n2. 殖民掠夺：西班牙殖民者在美洲屠杀原住民；英国的奴隶贸易。这些殖民财富构成了欧洲工业化的原始资本。\\n3. 今天的"原始积累"：国有企业私有化中的权力寻租、对农民工的制度性剥削——逻辑是一样的。',
+        works: '马克思《资本论》第一卷第二十四章"所谓原始积累"',
+        warning: ''
+    },
+    'term-labour-power': {
+        name: '劳动力商品',
+        sub: 'Labour-Power as Commodity · 揭开剥削的钥匙',
+        bio: '马克思区分了"劳动"和"劳动力"——这是理解剩余价值的钥匙。工人出卖给资本家的不是"劳动"本身，而是"劳动力"（劳动能力）。资本家付的工资是劳动力的价值，但工人创造的价值大于这个数——差额就是剩余价值。',
+        thought: '1. 为什么这个区分如此重要：古典经济学家卡在这里——如果说工人出卖的是"劳动"，资本家按劳动价值付工资，那剩余价值从何而来？\\n2. 劳动力价值的构成：工人及其家庭的生活费用、教育训练费用、历史道德因素。',
+        works: '马克思《资本论》第一卷第四章"劳动力的买和卖"',
+        warning: ''
+    },
+    'term-falling-profit': {
+        name: '利润率趋向下降',
+        sub: 'Tendency of the Rate of Profit to Fall',
+        bio: '马克思发现，资本主义发展过程中存在一个内在趋势：平均利润率趋向下降。这不是因为资本家"做得不好"，恰恰相反——正是因为资本家在竞争中不断采用新技术、提高资本有机构成，导致利润率的总体下降。这是资本主义无法自我修复的内在矛盾。',
+        thought: '1. 机制：资本家A采用新机器→劳动生产率提高→其他资本家跟进→社会资本有机构成整体提高→平均利润率下降。\\n2. 为什么这不是好事：利润率下降不是"剥削少了"——反而意味着竞争加剧、产能过剩、危机频发。\\n3. 反作用趋势：对外投资、剥削的加强、金融化——但这些只是延缓，不能消除根本趋势。',
+        works: '马克思《资本论》第三卷第三篇"利润率趋向下降的规律"',
+        warning: ''
+    },
+    'term-economic-crisis': {
+        name: '经济危机理论',
+        sub: 'Theory of Economic Crisis · 资本主义的宿疾',
+        bio: '资本主义经济危机的本质特征是生产过剩——不是因为东西真的"太多了"人民不需要，而是因为人民买不起。一边是堆积如山的商品卖不出去，一边是失业工人家庭揭不开锅。这是资本主义基本矛盾的集中表现。',
+        thought: '1. 周期性：危机→萧条→复苏→高涨→新的危机。\\n2. 危机是资本主义解决矛盾的方式：危机强制破坏一部分生产力和产品，使生产和消费之间的关系被人为恢复。\\n3. 资产阶级的"解决方案"——凯恩斯主义、新自由主义——没有解决根本矛盾，只是改变了危机的表现形式。',
+        works: '马克思《资本论》第三卷第十五章；列宁《帝国主义是资本主义的最高阶段》',
+        warning: '不是每一次经济衰退都等于"资本主义总危机"。马克思讲的是资本主义发展的长期趋势。'
+    },
+    'term-vanguard': {
+        name: '先锋队',
+        sub: 'Vanguard Party · 职业革命家组织',
+        bio: '列宁建党学说的核心概念：无产阶级需要建立一个由职业革命家组成的高度集中统一的政治组织来领导革命。这不是对工人的不信任，而是基于对自发规律的清醒认识——纯粹自发的工人运动只能产生工联意识，不能自行产生推翻整个资本主义制度的政治觉悟。',
+        thought: '1. 不是"精英替群众做决定"：先锋队不是脱离群众的封闭团体，而是从群众中最有觉悟的分子中产生、并始终与群众保持血肉联系的组织。\\n2. 先锋队与群众的辩证关系：先锋队是群众的引路人——必须代表群众的利益，又不能做群众的尾巴。\\n3. 卢森堡的批评——先锋队是否可能导致党内寡头化？后来的历史证明了这种张力的存在。',
+        works: '列宁《怎么办？》、《进一步，退两步》',
+        warning: '先锋队如果脱离群众，就不再是先锋队——而是一个自我封闭的官僚集团。'
+    },
+    'term-indoctrination': {
+        name: '灌输论',
+        sub: 'Theory of Indoctrination · 意识的培养',
+        bio: '列宁在《怎么办？》中提出：科学社会主义意识不能从工人运动中自发产生，必须从外部"灌输"进去。注意："灌输"不是"洗脑"——它的原意是把系统的理论教育带入工人运动，因为工人在艰苦的劳动条件下没有时间、精力去系统研究理论。',
+        thought: '1. 为什么需要灌输：资产阶级垄断了文化生产工具，每时每刻都在"灌输"资产阶级的价值观。\\n2. 灌输≠命令：列宁强调灌输要通过宣传教育、说理、辩论——而不是行政命令或强迫。\\n3. "自发"vs"自觉"：罢工可以自发爆发，但要变成改造社会的政治革命，必须有理论的武装。',
+        works: '列宁《怎么办？》第三章',
+        warning: '在后来的历史中，"灌输"被某些人扭曲为"上面说什么就是什么"——丢失了列宁原意中"通过说理和辩论使理论掌握群众"的民主内涵。'
+    },
+    'term-mass-line': {
+        name: '群众路线',
+        sub: 'Mass Line · 共产党的根本工作方法',
+        bio: '"从群众中来，到群众中去"——这是毛泽东总结的共产党根本工作方法和认识路线。将群众分散的无系统的意见集中起来→经过研究化为集中的系统的意见→再到群众中宣传解释→在群众行动中考验其正确性→然后再从群众中集中起来。如此无限循环。',
+        thought: '1. 认识论意义：群众路线是辩证唯物主义认识论在实际工作中的运用。\\n2. 反对两个极端：命令主义（不看群众觉悟水平）和尾巴主义（落后于群众的觉悟）都是对群众路线的背离。\\n3. 不是"民粹"：群众路线不意味着"群众说什么就是什么"——党有责任把分散的意见提炼为更高的理性认识。',
+        works: '毛泽东《关于领导方法的若干问题》（1943年）',
+        warning: ''
+    },
+    'term-criticism-self-criticism': {
+        name: '批评与自我批评',
+        sub: 'Criticism & Self-Criticism · 共产党的自我纠错机制',
+        bio: '批评与自我批评被毛泽东称为共产党的"三大作风"之一。这是共产党区别于其他政党的重要标志——通过公开的内部批评和自觉的自我批评，实现自我净化、自我完善。',
+        thought: '1. 理论基础：矛盾是普遍的——党内也有矛盾。公开承认和解决这些矛盾，党才能保持健康。\\n2. 原则：惩前毖后、治病救人——批评不是为了"整人"，而是为了帮助同志认识错误、改正错误。\\n3. 历史教训：这个武器在历史上既被正确使用过（延安整风前半段），也被严重扭曲过。武器的扭曲不等于武器本身错了。',
+        works: '毛泽东《论联合政府》',
+        warning: '批评与自我批评在实践中最大的挑战是：当权力高度集中时，下级对上级的批评几乎不可能真实进行。'
+    },
+    'term-imperialism-stage': {
+        name: '帝国主义论',
+        sub: 'Imperialism as Highest Stage of Capitalism · 列宁',
+        bio: '列宁在1916年写成《帝国主义是资本主义的最高阶段》，提出了帝国主义的五大特征。结论：帝国主义是垄断的、寄生的、腐朽的、垂死的资本主义，是无产阶级社会主义革命的前夜。',
+        thought: '1. 为什么写这本书：第二国际多数领导人在一战中选择支持本国资产阶级政府。列宁揭露了：一战不是"意外事故"，而是帝国主义本质的必然产物。\\n2. 五大特征在今天：谷歌、亚马逊的垄断程度已超越洛克菲勒时代；华尔街的金融资本已完成了对实体经济的寄生关系。\\n3. 列宁的"工人贵族"理论：帝国主义通过从殖民地榨取的超额利润收买一部分工人来转移阶级矛盾。',
+        works: '列宁《帝国主义是资本主义的最高阶段》',
+        warning: '"垂死的"不能简单理解为"马上就咽气了"——列宁说的是资本主义制度的内在矛盾让其成为历史的腐朽存在。'
+    },
+    'term-weakest-link': {
+        name: '帝国主义锁链最薄弱环节',
+        sub: 'The Weakest Link · 列宁的革命突破理论',
+        bio: '按照机械的经济决定论，社会主义革命应该首先在最发达的资本主义国家发生。但十月革命偏偏在俄国首先胜利了。列宁的解释：帝国主义时代的革命不取决于单一国家的经济发展水平，而取决于帝国主义世界链条中矛盾最集中、最尖锐的那个环节。俄国在1917年就是这个最薄弱的环节。',
+        thought: '1. 俄国的特殊性：封建残余严重+资本主义有所发展+工人运动高涨+农民极度不满+一战拖垮了沙皇——所有矛盾集中在一个点上。\\n2. 这个理论的意义：打破了"我们太落后不能搞社会主义"的宿命论。\\n3. 但也包含了风险：在落后国家建设社会主义面临的特殊困难——后来的困难也正是因为它的"薄弱"本质。',
+        works: '列宁《论欧洲联邦口号》（1915）；列宁《无产阶级革命的军事纲领》（1916）',
+        warning: ''
+    },
+    'term-socialism-one-country': {
+        name: '一国建成社会主义',
+        sub: 'Socialism in One Country · 斯大林',
+        bio: '斯大林在1924-1925年明确提出：在资本主义的包围中，苏联一国可以建成社会主义。这个论断后来取代了托洛茨基的"不断革命论"，成为共产国际的正统路线。',
+        thought: '1. 政治背景：欧洲革命失败后，世界革命短期内不可能。苏联需要长期独自建设。\\n2. "建成"与"最终胜利"的区别：一国可以"建成"社会主义（消灭本国剥削阶级），但不能取得"最终胜利"（只要资本主义包围存在，就有被外部干涉颠覆的危险）。\\n3. 实际后果：一国建成论在政治上是动员口号，在经济实践中——为了快速工业化积累，迫使农民承受了巨大牺牲。',
+        works: '斯大林《论列宁主义基础》、《论列宁主义的几个问题》',
+        warning: '实践中"一国建成"成了封闭保守、拒绝改革的意识形态辩护词——这并非斯大林最初的论证。'
+    },
+    'term-uneven-development': {
+        name: '不平衡与综合发展',
+        sub: 'Uneven & Combined Development · 托洛茨基',
+        bio: '托洛茨基在《俄国革命史》开篇提出的分析框架。资本主义的发展在各地区和各国之间是不平衡的。但后来者可以"综合"吸收先行者的技术和制度成果，实现"跳跃式"发展——跳过某些中间阶段。但它也综合了西方最先进的工厂制度和最野蛮的剥削方式。',
+        thought: '1. 跳跃式发展的代价：后来者可以借用最新技术跳过发展步骤，但"跳跃"的代价极大且极为残酷。\\n2. 对今天的意义：当代中国的"跨越式发展"——从农业社会跳过充分工业化阶段直接进入信息时代——同样是不平衡与综合发展的体现。',
+        works: '托洛茨基《俄国革命史》第一章',
+        warning: ''
+    },
+    'term-new-democracy': {
+        name: '新民主主义论',
+        sub: 'New Democracy · 毛泽东的革命道路',
+        bio: '毛泽东在1940年《新民主主义论》中系统阐述：在殖民地和半殖民地国家，革命必须分两步走——第一步是新民主主义革命（无产阶级领导的、人民大众的、反对帝国主义封建主义和官僚资本主义的革命），第二步才是社会主义革命。',
+        thought: '1. 为什么叫"新"：旧民主主义革命是资产阶级领导的。但在殖民地半殖民地条件下资产阶级太软弱——领导权必然落到无产阶级手中。\\n2. 两步走的衔接：新民主主义革命胜利后建立的是新民主主义社会，然后逐步过渡到社会主义。\\n3. 与托洛茨基"不断革命论"的异同：都主张民主革命不能由资产阶级领导，但新民主主义论更强调过渡的阶段性和条件性。',
+        works: '毛泽东《新民主主义论》（1940年1月）',
+        warning: ''
+    },
+    'term-three-worlds': {
+        name: '三个世界理论',
+        sub: 'Three Worlds Theory · 毛泽东的国际战略',
+        bio: '1974年毛泽东提出：第一世界是美苏两个超级大国；第二世界是日本、欧洲、加拿大等发达国家；第三世界是亚洲（除日本）、非洲、拉丁美洲的发展中国家。中国属于第三世界。',
+        thought: '1. 革命性在于：把苏联也归入"第一世界"——等于公开宣告苏联已经不是社会主义，而是和帝国主义平起平坐的霸权国家。\\n2. 战略含义：第三世界联合第二世界，反对第一世界的霸权——不是以意识形态划线，而是以国际权力地位划线。\\n3. 局限性：这个框架解释不了今天的全球化——跨国公司的作用、金融资本的无国界流动。',
+        works: '毛泽东与卡翁达谈话记录（1974年2月22日）',
+        warning: ''
+    },
+    'term-continuous-revolution': {
+        name: '继续革命论',
+        sub: 'Continuous Revolution · 理论探讨与历史教训',
+        bio: '毛泽东晚年提出的理论概念：无产阶级专政下，阶级和阶级斗争仍然存在，资产阶级法权仍会产生新的资产阶级——因此需要"无产阶级专政下继续革命"来防止资本主义复辟。这个理论在实践中的应用导致了严重的历史后果。',
+        thought: '1. 理论关切：毛泽东触及了一个真实的问题——如果共产党单纯以"建设者"角色存在，逐渐脱离群众，谁来保证它不会蜕变？\\n2. 根本缺陷：继续革命论寄希望于主观意志和"群众运动"来解决问题，而没有认识到问题的根源在经济基础中。\\n3. 不能忽视的警示：苏联的演变证明"无产阶级专政内部存在蜕变的可能性"这个问题本身是真实的。继续革命论的问题不在于提出了这个问题，而在于给出的答案脱离了历史现实。',
+        works: '毛泽东《关于理论问题的重要指示》（1975年）',
+        warning: '1981年《关于建国以来党的若干历史问题的决议》已对继续革命论作出了官方定性。将其放在"理论炸弹"组中，目的是让读者自行对比不同路线对同一问题的不同回答。'
+    },
+    'term-culture-industry': {
+        name: '文化工业',
+        sub: 'Culture Industry · 阿多诺、霍克海默',
+        bio: '阿多诺和霍克海默在《启蒙辩证法》（1944）中提出"文化工业"概念——在资本主义下，文化不再是人的自由创造，而是被标准化、商品化、批量生产出来的消费品。好莱坞电影、流行音乐——虽然表面上花样繁多，但其深层模式高度统一。',
+        thought: '1. 标准化与伪个性化：同一首歌换个编曲、同一个故事换个布景——你以为你选择了"不同的"东西，实际上你选择的是同一套模板的不同皮肤。\\n2. 文化工业的功能：让人在工作之余"娱乐至死"——不是让人思考，而是让人"放松"，从而精神上被驯化。\\n3. 法兰克福学派的悲观主义：与葛兰西不同，阿多诺不认为大众文化中有任何反抗空间。',
+        works: '阿多诺、霍克海默《启蒙辩证法》"文化工业：作为大众欺骗的启蒙"',
+        warning: '文化工业理论被指责为精英主义——仿佛哲学家高人一等，可以判断群众的文化消费是"低级的"。'
+    },
+    'term-one-dimensional': {
+        name: '单向度的人',
+        sub: 'One-Dimensional Man · 马尔库塞',
+        bio: '马尔库塞在《单向度的人》（1964）中分析了发达工业社会的核心特征：技术理性统治一切——人的思想和行为变成了只有"肯定"没有"否定"的单向度状态。你以为你是自由的——但所有这些选择都在一个你无法选择的大框架内。',
+        thought: '1. 单向度社会的运作机制：技术理性把一切问题简化为效率和管理问题——把政治问题变成技术问题。\\n2. "大拒绝"：马尔库塞主张的不是具体的改良，而是对现存秩序的彻底否定。\\n3. 这个问题在今天：社交媒体、算法推荐——你以为自己选择了看什么，其实是算法让你看见"你已经被决定要看见的东西"。',
+        works: '马尔库塞《单向度的人》',
+        warning: '马尔库塞过于悲观地否定了工人阶级的革命性和改良斗争的意义——他认为西方工人阶级已经被系统"整合"了。'
+    },
+    'term-spectacle': {
+        name: '景观社会',
+        sub: 'Society of the Spectacle · 居伊·德波',
+        bio: '法国情境主义思想家居伊·德波1967年出版《景观社会》——这本薄薄的书写于五月风暴前夕，成为法国青年走上街头的最直接的理论武器之一。核心论点："一切曾经直接存在的东西，都变成了纯粹的表象。"',
+        thought: '1. 景观不是影像的集合，而是以影像为中介的人与人之间的社会关系。今天的人不是直接生活，而是通过屏幕。\\n2. 景观的双重作用：它把社会关系变成了可观看的"秀"；它在"秀"中发挥了意识形态功能。\\n3. 1968→今天：五月风暴的口号"海滩在路面下"受到了德波的直接影响。今天的社交网络把景观社会推到了极端。',
+        works: '居伊·德波《景观社会》',
+        warning: '德波的写作风格偏于格言和断言，不是学术论证。景观社会是分析工具，不是世界末日式的宿命论。'
+    }
 };
 
         // ========== 文本背景数据 ==========
@@ -871,61 +1422,81 @@
     }
 };
         // 浮窗功能
+        const modalLabels = {
+            figures:  { s1: '人物生平', s2: '核心观点', s3: '代表著作', warnPrefix: '批判性提醒：' },
+            movements:{ s1: '历史背景', s2: '事件经过', s3: '历史意义', warnPrefix: '经验教训：' },
+            terms:    { s1: '通俗解释', s2: '理论展开', s3: '延伸阅读', warnPrefix: '常见误解：' },
+            texts:    { s1: '写作背景', s2: '核心论点', s3: '推荐章节', warnPrefix: '阅读建议：' }
+        };
+        function getModalType(id) {
+            if (id.startsWith('figure-')) return 'figures';
+            if (id.startsWith('movement-')) return 'movements';
+            if (id.startsWith('term-')) return 'terms';
+            if (id.startsWith('text-')) return 'texts';
+            return 'terms';
+        }
         function openModal(id) {
-    let data = figuresData[id] || movementsData[id] || termsData[id] || textsData[id];
-    if (!data) return;
-    
-    document.getElementById('modalTitle').textContent = data.name;
-    document.getElementById('modalSub').textContent = data.sub;
-    document.getElementById('modalBio').innerHTML = data.bio.replace(/\n/g, '<br>');
-    document.getElementById('modalThought').innerHTML = data.thought.replace(/\n/g, '<br>');
-    document.getElementById('modalWorks').textContent = data.works;
-    
-    const warnEl = document.getElementById('modalWarning');
-    if (data.warning) {
-        warnEl.innerHTML = '<strong>⚠️ 批判性提醒：</strong><br>' + data.warning;
-        warnEl.style.display = 'block';
-    } else {
-        warnEl.style.display = 'none';
-    }
-    
-    document.getElementById('modalOverlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-        // 锚点自动跳转（从 toolkit 的热词点击过来）
-function handleAnchor() {
-    const hash = window.location.hash.slice(1); // 去掉 #
-    if (!hash) return;
-    
-    // 根据前缀决定打开哪个标签页
-    if (hash.startsWith('figure-')) {
-        // 切换到人物思想标签页
-        document.querySelector('.science-tab[data-tab="figures"]').click();
-        setTimeout(() => {
-            const card = document.querySelector(`.science-card[onclick*="${hash}"]`);
-            if (card) card.click();
-        }, 100);
-    } else if (hash.startsWith('movement-')) {
-        document.querySelector('.science-tab[data-tab="movements"]').click();
-        setTimeout(() => {
-            const card = document.querySelector(`.science-card[onclick*="${hash}"]`);
-            if (card) card.click();
-        }, 100);
-    } else if (hash.startsWith('term-')) {
-        document.querySelector('.science-tab[data-tab="terms"]').click();
-        setTimeout(() => {
-            const card = document.querySelector(`.science-card[onclick*="${hash}"]`);
-            if (card) card.click();
-        }, 100);
-    } else if (hash.startsWith('text-')) {
-        document.querySelector('.science-tab[data-tab="texts"]').click();
-        setTimeout(() => {
-            const card = document.querySelector(`.science-card[onclick*="${hash}"]`);
-            if (card) card.click();
-        }, 100);
-    }
-}
+	    let data = figuresData[id] || movementsData[id] || termsData[id] || textsData[id];
+	    if (!data) return;
+            const type = getModalType(id);
+            const labels = modalLabels[type] || modalLabels.terms;
+	    document.getElementById('modalTitle').textContent = data.name;
+	    document.getElementById('modalSub').textContent = data.sub;
+            document.getElementById('modalSection1Title').textContent = labels.s1;
+            document.getElementById('modalSection2Title').textContent = labels.s2;
+            document.getElementById('modalSection3Title').textContent = labels.s3;
+	    document.getElementById('modalBio').innerHTML = data.bio.replace(/\n/g, '<br>');
+	    document.getElementById('modalThought').innerHTML = data.thought.replace(/\n/g, '<br>');
+	    document.getElementById('modalWorks').textContent = data.works;
+	    const warnEl = document.getElementById('modalWarning');
+	    if (data.warning) { warnEl.innerHTML = '<strong>' + labels.warnPrefix + '</strong><br>' + data.warning; warnEl.style.display = 'block'; }
+	    else { warnEl.style.display = 'none'; }
+	    document.getElementById('modalOverlay').classList.add('active');
+	    document.body.style.overflow = 'hidden';
+	}
+        function getActiveCategory(tabId) {
+            const tab = document.getElementById(tabId);
+            if (!tab) return 'all';
+            const activeBtn = tab.querySelector('.science-filter-btn.active');
+            return activeBtn ? activeBtn.dataset.cat : 'all';
+        }
+        function filterCards(tabId, keyword, category) {
+            const tab = document.getElementById(tabId);
+            if (!tab) return;
+            const kw = (keyword || '').toLowerCase().trim();
+            const cat = category || 'all';
+            tab.querySelectorAll('.science-card').forEach(function(card) {
+                const text = (card.textContent || '').toLowerCase();
+                card.style.display = ((kw === '' || text.indexOf(kw) !== -1) && (cat === 'all' || card.classList.contains(cat))) ? '' : 'none';
+            });
+            tab.querySelectorAll('.science-section-header').forEach(function(header) {
+                let next = header.nextElementSibling;
+                let hasVisible = false;
+                while (next && !next.classList.contains('science-section-header')) {
+                    if (next.classList.contains('science-card') && next.style.display !== 'none') { hasVisible = true; break; }
+                    next = next.nextElementSibling;
+                }
+                header.style.display = hasVisible ? '' : 'none';
+            });
+        }
+        function setCategoryFilter(tabId, catClass, btn) {
+            const tab = document.getElementById(tabId);
+            if (!tab) return;
+            tab.querySelectorAll('.science-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+            if (btn) btn.classList.add('active');
+            const kw = (tab.querySelector('.science-search input') || {}).value || '';
+            filterCards(tabId, kw, catClass);
+        }
+	function handleAnchor() {
+	    const hash = window.location.hash.slice(1);
+	    if (!hash) return;
+            const prefixMap = { 'figure-': 'figures', 'movement-': 'movements', 'term-': 'terms', 'text-': 'texts' };
+            let targetTab = null;
+            for (const [prefix, tab] of Object.entries(prefixMap)) { if (hash.startsWith(prefix)) { targetTab = tab; break; } }
+            if (!targetTab) return;
+            document.querySelector('.science-tab[data-tab="' + targetTab + '"]').click();
+            setTimeout(function() { const card = document.querySelector('.science-card[onclick*="' + hash + '"]'); if (card) card.click(); }, 150);
+	}
 
 // 页面加载时执行
 window.addEventListener('load', handleAnchor);
