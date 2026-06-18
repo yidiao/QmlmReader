@@ -448,7 +448,7 @@
             </div>
 
             <!-- ==================== 人物思想 ==================== -->
-            <            <div class="science-content active" id="tab-figures">
+            <div class="science-content active" id="tab-figures">
     <div class="science-search"><span class="science-search-icon">🔍</span><input type="text" placeholder="输入关键词筛选..." oninput="filterCards('tab-figures', this.value, getActiveCategory('tab-figures'))"></div>
     <div class="science-filter">
         <button class="science-filter-btn active" data-cat="all" onclick="setCategoryFilter('tab-figures', 'all', this)">全部</button>
@@ -507,35 +507,45 @@
 
       <div class="science-content" id="tab-movements">
     <div class="science-search"><span class="science-search-icon">🔍</span><input type="text" placeholder="输入关键词筛选..." oninput="filterCards('tab-movements', this.value, getActiveCategory('tab-movements'))"></div>
+    <div class="science-filter">
+        <button class="science-filter-btn active" data-cat="all" onclick="setCategoryFilter('tab-movements', 'all', this)">全部</button>
+        <button class="science-filter-btn" data-cat="mov-spontaneous" onclick="setCategoryFilter('tab-movements', 'mov-spontaneous', this)">自发斗争</button>
+        <button class="science-filter-btn" data-cat="mov-organized" onclick="setCategoryFilter('tab-movements', 'mov-organized', this)">有组织工人运动</button>
+        <button class="science-filter-btn" data-cat="mov-china" onclick="setCategoryFilter('tab-movements', 'mov-china', this)">中国革命节点</button>
+        <button class="science-filter-btn" data-cat="mov-antiimp" onclick="setCategoryFilter('tab-movements', 'mov-antiimp', this)">反帝与卫国战争</button>
+        <button class="science-filter-btn" data-cat="mov-turn" onclick="setCategoryFilter('tab-movements', 'mov-turn', this)">国际共运转折</button>
+    </div>
     <div class="science-grid">
-        <div class="science-card movements" onclick="openModal('movement-1848')">
-            <div class="science-card-header"><h3>1848年欧洲革命</h3><div class="sub">革命之春 · 1848</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">民主革命</span><span class="tag">马克思主义诞生</span></div><p>波及全欧洲的民主革命浪潮。《共产党宣言》在革命前夕发表。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card movements" onclick="openModal('movement-paris-commune')">
-            <div class="science-card-header"><h3>巴黎公社</h3><div class="sub">1871年 · 第一个无产阶级政权</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">无产阶级专政</span><span class="tag">群众武装</span></div><p>人类历史上第一个无产阶级政权，存在72天。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card movements" onclick="openModal('movement-1905')">
-            <div class="science-card-header"><h3>1905年俄国革命</h3><div class="sub">十月革命的预演</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">苏维埃诞生</span><span class="tag">武装起义</span></div><p>俄国第一次资产阶级民主革命，苏维埃在这一时期诞生。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card movements" onclick="openModal('movement-spain-civil-war')">
-            <div class="science-card-header"><h3>西班牙内战</h3><div class="sub">1936-1939 · 国际纵队</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">国际主义</span><span class="tag">反法西斯</span></div><p>国际纵队由54国志愿者组成，支援西班牙共和国。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card movements" onclick="openModal('movement-german-november')">
-            <div class="science-card-header"><h3>德国十一月革命</h3><div class="sub">1918-1919 · 斯巴达克团</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">李卜克内西</span><span class="tag">卢森堡</span></div><p>推翻德意志帝国，李卜克内西和卢森堡领导起义。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card movements" onclick="openModal('movement-hungary-1919')">
-            <div class="science-card-header"><h3>匈牙利苏维埃共和国</h3><div class="sub">1919年 · 库恩·贝拉</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">苏维埃政权</span><span class="tag">列宁关注</span></div><p>一战后在东欧建立的苏维埃政权，存在133天。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card movements" onclick="openModal('movement-eastern-bloc')">
-            <div class="science-card-header"><h3>东欧剧变与苏联解体</h3><div class="sub">1989-1991 · 历史转折</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">苏东剧变</span><span class="tag">经验教训</span></div><p>东欧各国政权更迭，苏联解体，冷战结束。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#f59e0b"></span>自发斗争 · 早期工人运动<span class="science-section-count">5个词条</span></div>
+        <div class="science-card mov-spontaneous" onclick="openModal('movement-lyon-1831')"><div class="science-card-header"><h3>里昂工人起义</h3><div class="sub">1831 & 1834 · 法国</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">自发斗争</span><span class="tag">早期工人运动</span></div><p>欧洲第一次工人武装起义。"工作不能生活，毋宁战斗而死！"</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-spontaneous" onclick="openModal('movement-silesia-1844')"><div class="science-card-header"><h3>西里西亚织工起义</h3><div class="sub">1844 · 普鲁士</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">自发斗争</span><span class="tag">早期工人运动</span></div><p>德国早期工人运动的标志性事件。海涅以诗记之，马克思称其超越了单纯的"饥饿起义"。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-spontaneous" onclick="openModal('movement-chartism')"><div class="science-card-header"><h3>英国宪章运动</h3><div class="sub">1836-1848 · 英国</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">自发斗争</span><span class="tag">政治运动</span></div><p>"世界上第一次广泛的、真正群众性的、政治上成形的无产阶级革命运动"（列宁语）。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-spontaneous" onclick="openModal('movement-1848')"><div class="science-card-header"><h3>1848年欧洲革命</h3><div class="sub">革命之春 · 法国·德国·奥地利·匈牙利</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">民主革命</span><span class="tag">马克思主义诞生</span></div><p>波及全欧洲的民主革命浪潮。《共产党宣言》在革命前夕发表，马恩直接参与其中。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-spontaneous" onclick="openModal('movement-paris-commune')"><div class="science-card-header"><h3>巴黎公社</h3><div class="sub">1871年 · 第一个无产阶级政权</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">无产阶级专政</span><span class="tag">群众武装</span></div><p>人类历史上第一个无产阶级政权，存在72天。马克思高度评价为"无产阶级专政的第一次伟大尝试"。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#dc2626"></span>有组织工人运动 · 政党领导的革命尝试<span class="science-section-count">4个词条</span></div>
+        <div class="science-card mov-organized" onclick="openModal('movement-1905')"><div class="science-card-header"><h3>1905年俄国革命</h3><div class="sub">十月革命的预演 · 1905-1907</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">政党领导</span><span class="tag">苏维埃诞生</span></div><p>"十月革命的总演习"。苏维埃（工农代表会议）诞生，布尔什维克与孟什维克路线分歧明朗化。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-organized" onclick="openModal('movement-october-revolution')"><div class="science-card-header"><h3>十月革命 (1917)</h3><div class="sub">November 7, 1917 · 俄国</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">政党领导</span><span class="tag">武装夺权</span></div><p>布尔什维克领导的社会主义革命。第一次成功建立无产阶级专政国家，改变了世界历史进程。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-organized" onclick="openModal('movement-german-november')"><div class="science-card-header"><h3>德国十一月革命</h3><div class="sub">1918-1919 · 斯巴达克团</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">政党领导</span><span class="tag">卢森堡</span></div><p>推翻霍亨索伦王朝，李卜克内西和卢森堡领导斯巴达克团起义，被社民党右翼镇压。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-organized" onclick="openModal('movement-hungary-1919')"><div class="science-card-header"><h3>匈牙利苏维埃共和国</h3><div class="sub">1919年 · 库恩·贝拉</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">政党领导</span><span class="tag">短命政权</span></div><p>一战后在东欧建立的苏维埃政权，存在133天。列宁高度关注，帝国主义武装干涉将其绞杀。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#b91c1c"></span>中国革命的关键节点<span class="science-section-count">8个词条</span></div>
+        <div class="science-card mov-china" onclick="openModal('movement-anyuan-strike')"><div class="science-card-header"><h3>安源路矿工人大罢工</h3><div class="sub">1922年9月 · 江西萍乡</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">中国革命</span><span class="tag">工人运动</span></div><p>中共早期领导最成功的工人罢工之一，毛泽东、李立三、刘少奇参与领导。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-china" onclick="openModal('movement-shanghai-uprising')"><div class="science-card-header"><h3>上海工人三次武装起义</h3><div class="sub">1926-1927 · 上海</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">中国革命</span><span class="tag">武装斗争</span></div><p>北伐期间上海工人主动夺取政权，第三次起义成功占领上海。周恩来领导，后被蒋镇压。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-china" onclick="openModal('movement-april-12')"><div class="science-card-header"><h3>四一二反革命政变</h3><div class="sub">1927年4月12日 · 上海</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">中国革命</span><span class="tag">国共破裂</span></div><p>蒋介石清党，国共合作破裂。共产党从此认识到"枪杆子里出政权"——标志性转折。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-china" onclick="openModal('movement-nanchang-autumn')"><div class="science-card-header"><h3>南昌起义 / 秋收起义</h3><div class="sub">1927年8-9月 · 南昌·湘赣边</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">中国革命</span><span class="tag">武装斗争开端</span></div><p>共产党独立武装斗争的开端。南昌→八七会议→秋收→井冈山，"枪杆子里出政权"。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-china" onclick="openModal('movement-encirclement-long-march')"><div class="science-card-header"><h3>五次反"围剿"与长征</h3><div class="sub">1930-1934 · 中央苏区</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">中国革命</span><span class="tag">军事斗争</span></div><p>前四次胜利→第五次失败→被迫长征。军事路线斗争的惨痛教训，遵义会议是转折点。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-china" onclick="openModal('movement-long-march')"><div class="science-card-header"><h3>长征</h3><div class="sub">1934-1935 · 二万五千里</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">中国革命</span><span class="tag">战略转移</span></div><p>"长征是宣言书、宣传队、播种机"。博古李德错误→遵义会议确立毛泽东领导地位。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-china" onclick="openModal('movement-yanan-rectify')"><div class="science-card-header"><h3>延安整风</h3><div class="sub">1941-1945 · 延安</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">中国革命</span><span class="tag">思想建党</span></div><p>反对主观主义、宗派主义、党八股。确立毛泽东思想在全党的指导地位。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-china" onclick="openModal('movement-three-campaigns')"><div class="science-card-header"><h3>解放战争三大战役</h3><div class="sub">1948-1949 · 辽沈·淮海·平津</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">中国革命</span><span class="tag">大兵团作战</span></div><p>中共军队从游击战到大兵团作战的标志，奠定全国胜利的基础。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#1e40af"></span>反帝与卫国战争<span class="science-section-count">5个词条</span></div>
+        <div class="science-card mov-antiimp" onclick="openModal('movement-anti-japanese-war')"><div class="science-card-header"><h3>抗日战争</h3><div class="sub">1937-1945 · 中国</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">反帝战争</span><span class="tag">民族解放</span></div><p>中共在抗战中壮大——敌后战场、百团大战、论持久战。国际反法西斯东方主战场。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-antiimp" onclick="openModal('movement-great-patriotic-war')"><div class="science-card-header"><h3>苏联卫国战争</h3><div class="sub">1941-1945 · 苏联</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">卫国战争</span><span class="tag">反法西斯</span></div><p>社会主义国家存亡之战。斯大林格勒、库尔斯克——苏联以巨大牺牲保卫了社会主义制度。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-antiimp" onclick="openModal('movement-vietnam-war')"><div class="science-card-header"><h3>越南抗法/抗美战争</h3><div class="sub">1946-1975 · 越南</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">反帝战争</span><span class="tag">民族解放</span></div><p>第三世界民族解放运动的典范。奠边府、胡志明小道、春节攻势——近三十年连续抗战。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-antiimp" onclick="openModal('movement-korean-war')"><div class="science-card-header"><h3>朝鲜战争</h3><div class="sub">1950-1953 · 朝鲜半岛</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">反帝战争</span><span class="tag">冷战热战</span></div><p>社会主义阵营与帝国主义阵营第一次直接军事对抗。影响深远——中国确立国际地位。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-antiimp" onclick="openModal('movement-spain-civil-war')"><div class="science-card-header"><h3>西班牙内战</h3><div class="sub">1936-1939 · 国际纵队</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">反法西斯</span><span class="tag">国际主义</span></div><p>54国志愿者组成国际纵队支援西班牙共和国。二战前国际反法西斯斗争的关键战场。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#6b7280"></span>国际共运 · 历史转折<span class="science-section-count">3个词条</span></div>
+        <div class="science-card mov-turn" onclick="openModal('movement-comintern')"><div class="science-card-header"><h3>共产国际</h3><div class="sub">1919-1943 · 第三国际</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">国际共运</span><span class="tag">组织史</span></div><p>列宁创建的世界共产党联合组织，指导各国革命但也输出过错误路线。1943年解散。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-turn" onclick="openModal('movement-sino-soviet-split')"><div class="science-card-header"><h3>中苏论战</h3><div class="sub">1960s · 国际共运大分裂</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">国际共运</span><span class="tag">路线斗争</span></div><p>中苏两党围绕国际共运总路线的公开论战——九评苏共中央公开信。社会主义阵营分裂。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card mov-turn" onclick="openModal('movement-eastern-bloc')"><div class="science-card-header"><h3>东欧剧变与苏联解体</h3><div class="sub">1989-1991 · 历史转折</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">国际共运</span><span class="tag">历史反思</span></div><p>东欧各国政权更迭，苏联解体，冷战结束。社会主义运动遭遇重大挫折与深刻反思。</p><span class="read-link">点击查看详情 →</span></div></div>
     </div>
 </div>
 
@@ -601,38 +611,41 @@
 
       <div class="science-content" id="tab-texts">
     <div class="science-search"><span class="science-search-icon">🔍</span><input type="text" placeholder="输入关键词筛选..." oninput="filterCards('tab-texts', this.value, getActiveCategory('tab-texts'))"></div>
+    <div class="science-filter">
+        <button class="science-filter-btn active" data-cat="all" onclick="setCategoryFilter('tab-texts', 'all', this)">全部</button>
+        <button class="science-filter-btn" data-cat="txt-found" onclick="setCategoryFilter('tab-texts', 'txt-found', this)">奠基之作</button>
+        <button class="science-filter-btn" data-cat="txt-lenin" onclick="setCategoryFilter('tab-texts', 'txt-lenin', this)">列宁主义文本</button>
+        <button class="science-filter-btn" data-cat="txt-mao" onclick="setCategoryFilter('tab-texts', 'txt-mao', this)">毛主义文本</button>
+        <button class="science-filter-btn" data-cat="txt-west" onclick="setCategoryFilter('tab-texts', 'txt-west', this)">西方马克思主义文本</button>
+        <button class="science-filter-btn" data-cat="txt-polemic" onclick="setCategoryFilter('tab-texts', 'txt-polemic', this)">论战/清算文本</button>
+    </div>
     <div class="science-grid">
-        <div class="science-card texts" onclick="openModal('text-manifesto')">
-            <div class="science-card-header"><h3>《共产党宣言》</h3><div class="sub">1848年 · 马克思主义诞生</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">马恩</span><span class="tag">科学社会主义</span></div><p>"全世界无产者，联合起来！"标志着马克思主义的诞生。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card texts" onclick="openModal('text-capital')">
-            <div class="science-card-header"><h3>《资本论》</h3><div class="sub">1867-1894年 · "工人阶级的圣经"</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">马克思</span><span class="tag">政治经济学</span></div><p>揭示资本主义经济运动规律，剩余价值理论的系统阐述。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card texts" onclick="openModal('text-anti-during')">
-            <div class="science-card-header"><h3>《反杜林论》</h3><div class="sub">1878年 · 马克思主义百科全书</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">恩格斯</span><span class="tag">哲学</span><span class="tag">政治经济学</span><span class="tag">科学社会主义</span></div><p>系统阐述马克思主义三个组成部分。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card texts" onclick="openModal('text-what-is-to-be-done')">
-            <div class="science-card-header"><h3>《怎么办？》</h3><div class="sub">1902年 · 列宁建党学说</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">列宁</span><span class="tag">组织理论</span><span class="tag">灌输论</span></div><p>"没有革命的理论，就不会有革命的运动。"</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card texts" onclick="openModal('text-state-and-revolution')">
-            <div class="science-card-header"><h3>《国家与革命》</h3><div class="sub">1917年 · 国家学说</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">列宁</span><span class="tag">无产阶级专政</span></div><p>系统阐述马克思主义国家学说和无产阶级专政理论。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card texts" onclick="openModal('text-practice-contradiction')">
-            <div class="science-card-header"><h3>《实践论》《矛盾论》</h3><div class="sub">1937年 · 毛泽东哲学思想</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">毛泽东</span><span class="tag">认识论</span><span class="tag">辩证法</span></div><p>马克思主义哲学中国化的典范，党的思想路线的哲学基础。</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card texts" onclick="openModal('text-gramsci-prison')">
-            <div class="science-card-header"><h3>《狱中札记》</h3><div class="sub">1929-1935年 · 葛兰西</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag">文化霸权</span><span class="tag">西方马克思主义</span></div><p>狱中思考：为什么西欧革命失败了？</p><span class="read-link">点击查看详情 →</span></div>
-        </div>
-        <div class="science-card texts" onclick="openModal('text-history-class')">
-            <div class="science-card-header"><h3>《历史与阶级意识》</h3><div class="sub">1923年 · 卢卡奇</div></div>
-            <div class="science-card-body"><div class="tag-group"><span class="tag
+        <div class="science-section-header"><span class="science-section-dot" style="background:#c41e3a"></span>奠基之作<span class="science-section-count">4个词条</span></div>
+        <div class="science-card txt-found" onclick="openModal('text-manifesto')"><div class="science-card-header"><h3>《共产党宣言》</h3><div class="sub">1848年 · 马克思主义诞生</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">马恩</span><span class="tag">科学社会主义</span></div><p>"全世界无产者，联合起来！"马克思主义的出生证，国际共运第一个纲领性文献。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-found" onclick="openModal('text-capital')"><div class="science-card-header"><h3>《资本论》</h3><div class="sub">1867-1894年 · "工人阶级的圣经"</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">马克思</span><span class="tag">政治经济学</span></div><p>揭示资本主义经济运动规律，剩余价值理论的系统阐述，唯物辩证法的方法论典范。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-found" onclick="openModal('text-anti-during')"><div class="science-card-header"><h3>《反杜林论》</h3><div class="sub">1878年 · 马克思主义百科全书</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">恩格斯</span><span class="tag">哲学·政经·社会主义</span></div><p>系统阐述马克思主义三个组成部分，被列宁誉为"每个觉悟工人必读的书籍"。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-found" onclick="openModal('text-socialism-utopian')"><div class="science-card-header"><h3>《社会主义从空想到科学的发展》</h3><div class="sub">1880年 · 恩格斯</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">恩格斯</span><span class="tag">科学社会主义</span></div><p>《反杜林论》三章的抽印改编。最精炼的科学社会主义入门读物。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#d97706"></span>列宁主义文本<span class="science-section-count">4个词条</span></div>
+        <div class="science-card txt-lenin" onclick="openModal('text-what-is-to-be-done')"><div class="science-card-header"><h3>《怎么办？》</h3><div class="sub">1902年 · 列宁建党学说</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">列宁</span><span class="tag">组织理论</span><span class="tag">灌输论</span></div><p>"没有革命的理论，就不会有革命的运动。"奠定布尔什维克党的思想组织基础。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-lenin" onclick="openModal('text-state-and-revolution')"><div class="science-card-header"><h3>《国家与革命》</h3><div class="sub">1917年 · 列宁国家学说</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">列宁</span><span class="tag">国家学说</span></div><p>系统阐述马克思主义国家学说——打碎旧国家机器、无产阶级专政、国家消亡。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-lenin" onclick="openModal('text-imperialism')"><div class="science-card-header"><h3>《帝国主义是资本主义的最高阶段》</h3><div class="sub">1916年 · 列宁</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">列宁</span><span class="tag">帝国主义论</span></div><p>垄断→金融资本→资本输出→瓜分世界→战争→革命。帝国主义是社会主义的前夜。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-lenin" onclick="openModal('text-materialism-empirio')"><div class="science-card-header"><h3>《唯物主义与经验批判主义》</h3><div class="sub">1909年 · 列宁</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">列宁</span><span class="tag">哲学</span><span class="tag">认识论</span></div><p>列宁最重要的哲学著作，批判马赫主义，捍卫和发展辩证唯物主义认识论。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#b91c1c"></span>毛主义文本<span class="science-section-count">4个词条</span></div>
+        <div class="science-card txt-mao" onclick="openModal('text-practice-contradiction')"><div class="science-card-header"><h3>《实践论》《矛盾论》</h3><div class="sub">1937年 · 毛泽东哲学思想</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">毛泽东</span><span class="tag">认识论</span><span class="tag">辩证法</span></div><p>马克思主义哲学中国化的典范，党的实事求是思想路线的哲学基础。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-mao" onclick="openModal('text-new-democracy-mao')"><div class="science-card-header"><h3>《新民主主义论》</h3><div class="sub">1940年 · 毛泽东</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">毛泽东</span><span class="tag">革命战略</span></div><p>"两步走"——无产阶级领导的民主革命→社会主义革命。中国革命道路的系统阐述。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-mao" onclick="openModal('text-on-protracted-war')"><div class="science-card-header"><h3>《论持久战》</h3><div class="sub">1938年 · 毛泽东</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">毛泽东</span><span class="tag">军事辩证法</span></div><p>科学预见抗战三阶段——辩证法在军事战略中的经典运用。连国民党将领也研读。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-mao" onclick="openModal('text-on-ten-relations')"><div class="science-card-header"><h3>《论十大关系》</h3><div class="sub">1956年 · 毛泽东</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">毛泽东</span><span class="tag">社会主义建设</span></div><p>以苏联为鉴，探索中国自己的社会主义建设道路——调动一切积极因素。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#7c3aed"></span>西方马克思主义文本<span class="science-section-count">3个词条</span></div>
+        <div class="science-card txt-west" onclick="openModal('text-gramsci-prison')"><div class="science-card-header"><h3>《狱中札记》</h3><div class="sub">1929-1935年 · 葛兰西</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">葛兰西</span><span class="tag">文化霸权</span></div><p>狱中思考一个核心问题：为什么西方革命失败了？文化霸权、阵地战理论的诞生地。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-west" onclick="openModal('text-history-class')"><div class="science-card-header"><h3>《历史与阶级意识》</h3><div class="sub">1923年 · 卢卡奇</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">卢卡奇</span><span class="tag">物化</span><span class="tag">总体性</span></div><p>西方马克思主义的开山之作。物化、总体性辩证法、无产阶级的阶级意识。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-west" onclick="openModal('text-dialectic-enlightenment')"><div class="science-card-header"><h3>《启蒙辩证法》</h3><div class="sub">1947年 · 霍克海默、阿多诺</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">法兰克福学派</span><span class="tag">文化工业</span></div><p>启蒙理性为何走向了自己的反面？文化工业批判的奠基之作。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-section-header"><span class="science-section-dot" style="background:#374151"></span>论战/清算文本<span class="science-section-count">3个词条</span></div>
+        <div class="science-card txt-polemic" onclick="openModal('text-poverty-philosophy')"><div class="science-card-header"><h3>《哲学的贫困》</h3><div class="sub">1847年 · 马克思</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">马克思</span><span class="tag">论战</span><span class="tag">蒲鲁东</span></div><p>对蒲鲁东《贫困的哲学》的系统批判——马克思主义形成史上的关键论战。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-polemic" onclick="openModal('text-gotha-critique')"><div class="science-card-header"><h3>《哥达纲领批判》</h3><div class="sub">1875年 · 马克思</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">马克思</span><span class="tag">论战</span><span class="tag">拉萨尔</span></div><p>清算拉萨尔主义。首次提出共产主义社会两个阶段——社会主义和共产主义。</p><span class="read-link">点击查看详情 →</span></div></div>
+        <div class="science-card txt-polemic" onclick="openModal('text-proletarian-revolution-kautsky')"><div class="science-card-header"><h3>《无产阶级革命与叛徒考茨基》</h3><div class="sub">1918年 · 列宁</div></div><div class="science-card-body"><div class="tag-group"><span class="tag">列宁</span><span class="tag">论战</span><span class="tag">考茨基</span></div><p>对考茨基"纯粹民主"论的全面批判——无产阶级专政与资产阶级民主的对立。</p><span class="read-link">点击查看详情 →</span></div></div>
+    </div>
+</div>
+
 </main>
 
     <!-- 浮窗弹窗 -->
@@ -794,7 +807,150 @@
         warning: '⚠️ 剧变的成因非常复杂，既有外部渗透因素（西方和平演变战略），也有内部问题（体制僵化、腐败、民族矛盾等）。不应简单归因于单一因素。'
     }
 ,
-    'figure-dzerzhinsky': {
+    'movement-lyon-1831': {
+        name: '里昂工人起义',
+        sub: '1831 & 1834 · 法国 · 欧洲第一次工人武装起义',
+        bio: '1831年11月，法国里昂丝织工人因厂主拒绝执行最低工资标准举行起义，喊出"工作不能生活，毋宁战斗而死！"的口号，一度控制里昂全城。12月被政府军镇压。1834年4月再次起义，提出建立共和国的政治诉求，经过6天街垒战后被镇压。',
+        thought: '1️⃣ 历史地位：里昂工人起义被视为欧洲工人阶级作为独立政治力量登上历史舞台的标志之一。此前工人斗争主要是捣毁机器的"卢德运动"，而从里昂起义开始，工人阶级开始提出独立的政治和经济要求。\n2️⃣ 局限性：起义缺乏明确的政治纲领和组织领导，基本停留在自发斗争阶段。两次起义均被正规军迅速镇压。\n3️⃣ 教训：自发的工人起义——无论多么英勇——没有科学理论的指导和严密组织的领导，难以战胜武装到牙齿的资产阶级国家机器。',
+        works: '马克思、恩格斯在《共产党宣言》中总结早期工人运动的经验教训',
+        warning: ''
+    },
+    'movement-silesia-1844': {
+        name: '西里西亚织工起义',
+        sub: '1844年6月 · 普鲁士 · 德国早期工人运动',
+        bio: '1844年6月，普鲁士西里西亚地区（今波兰境内）的纺织工人因无法忍受包买商的残酷剥削而起事。起义者冲进工厂主的住宅和仓库，捣毁机器和账簿。普鲁士军队出动镇压，起义失败。德国诗人海涅为此写下了著名的《西里西亚织工之歌》。',
+        thought: '1️⃣ 马克思的评价：马克思指出西里西亚织工起义超越了此前法国和英国的工人起义——它"一开始就意识到无产阶级的本质"，不仅仅摧毁机器，而且"毁掉了账簿和财产契据"。\n2️⃣ 历史意义：起义是德国早期工人运动的重要里程碑，也激发了德国知识分子对社会问题的关注，为马克思主义在德国的传播创造了条件。\n3️⃣ 文学见证：海涅的诗《西里西亚织工之歌》被誉为德国最早的无产阶级政治诗歌之一。',
+        works: '海涅《西里西亚织工之歌》、马克思《评"普鲁士人"的"普鲁士国王和社会改革"一文》',
+        warning: ''
+    },
+    'movement-chartism': {
+        name: '英国宪章运动',
+        sub: '1836-1848 · 英国 · 第一次全国性工人政治运动',
+        bio: '1836年伦敦工人协会成立，次年提出《人民宪章》——六点要求包括普选权、秘密投票、废除议员财产资格等。运动在1839、1842、1848年三次高潮中征集了数百万人签名请愿书，均被议会否决。列宁称其为"世界上第一次广泛的、真正群众性的、政治上成形的无产阶级革命运动"。',
+        thought: '1️⃣ 历史意义：宪章运动标志着工人阶级已经从经济斗争上升到政治斗争——工人们意识到没有政治权利，经济状况永远不可能根本改善。\n2️⃣ 失败原因：运动内部存在"道义派"（和平请愿）和"暴力派"的分裂；缺乏统一的科学理论指导；资产阶级利用部分改革（如1846年废除谷物法）分化了工人队伍。\n3️⃣ 遗产：宪章运动的六点要求中，除每年召开议会一条外，其余五点后来在英国都已实现——说明了工人运动的长期历史推动作用。',
+        works: '恩格斯《英国工人阶级状况》、列宁《第三国际及其在历史上的地位》',
+        warning: ''
+    },
+    'movement-october-revolution': {
+        name: '十月革命',
+        sub: '1917年11月7日（俄历10月25日）· 俄国 · 布尔什维克夺权',
+        bio: '1917年二月革命推翻沙皇后，俄国出现资产阶级临时政府和工兵代表苏维埃两个政权并存的局面。列宁在《四月提纲》中提出"一切政权归苏维埃"。11月7日（俄历10月25日），布尔什维克领导的武装起义攻占冬宫，推翻临时政府。随后成立了以列宁为首的人民委员会——世界上第一个社会主义国家诞生。',
+        thought: '1️⃣ 历史意义：十月革命是人类历史上第一次成功的社会主义革命，将马克思主义从理论变为现实。它开创了人类历史的新纪元——帝国主义时代的无产阶级革命时代。\n2️⃣ 不同于此前各次革命：十月革命是无产阶级领导的、有严密政党组织的、有明确理论指导的社会主义革命，而非资产阶级民主革命。\n3️⃣ 世界影响：十月革命极大鼓舞了全世界被压迫民族的解放斗争，推动了各国共产党的建立，也迫使资本主义国家进行福利制度改革以抵御革命的"传染"。\n4️⃣ 理论创新：列宁的"帝国主义锁链最薄弱环节"理论解释了为什么革命首先在相对落后的俄国而非西欧发达国家爆发。',
+        works: '列宁《四月提纲》、《国家与革命》、《布尔什维克能保持国家政权吗？》、托洛茨基《俄国革命史》、约翰·里德《震撼世界的十天》',
+        warning: '⚠️ 十月革命是特定历史条件下的产物，其夺权方式（城市武装起义）不能机械照搬。中国革命走的是"农村包围城市"的不同道路。'
+    },
+    'movement-anyuan-strike': {
+        name: '安源路矿工人大罢工',
+        sub: '1922年9月 · 江西萍乡 · 中共早期工运巅峰',
+        bio: '安源煤矿和株萍铁路是中国南方重要工矿区，工人生活极为悲惨。1921年起，毛泽东、李立三先后到安源考察和宣传。1922年5月成立安源路矿工人俱乐部。9月，在刘少奇、李立三领导下，1.7万工人举行大罢工，提出增加工资、改善待遇等13条要求。经5天斗争，路矿当局被迫接受大部分条件，罢工取得重大胜利。',
+        thought: '1️⃣ 历史意义：安源罢工是中共早期领导的最成功的工人罢工之一，也是中国工人运动史上罕见的取得全面胜利的大罢工。\n2️⃣ 组织经验：安源工人在罢工后巩固和发展了工人俱乐部，创办了工人消费合作社和夜校——这是"工人阶级自己管理自己"的有益尝试。\n3️⃣ 人才摇篮：安源工人运动培养了一大批工运骨干，许多人在后来的革命斗争中发挥了重要作用。',
+        works: '刘少奇、朱少连《安源路矿工人俱乐部略史》',
+        warning: ''
+    },
+    'movement-shanghai-uprising': {
+        name: '上海工人三次武装起义',
+        sub: '1926-1927 · 上海 · 工人阶级夺取政权',
+        bio: '1926年10月和1927年2月，上海工人在中共领导下先后发动两次武装起义，均因准备不足和国民党右派的背叛而失败。1927年3月21日，在周恩来、罗亦农、赵世炎等领导下，上海80万工人总罢工后转入第三次武装起义。经过30小时激战，工人纠察队占领上海全部华界，成立了上海特别市临时市政府——这是中国工人第一次依靠自己的力量夺取的大城市政权。',
+        thought: '1️⃣ 历史意义：上海工人三次武装起义是中国工人阶级在共产党领导下独立夺取政权的英勇尝试，显示出工人阶级的巨大力量。\n2️⃣ 悲剧结局：第三次起义成功后仅三周，蒋介石于4月12日发动反革命政变，工人纠察队被缴械，大批共产党员和工人领袖被杀害。\n3️⃣ 核心教训：工人阶级即使占领了城市，如果没有一支由党绝对领导的强大军队，政权就无法巩固。这是"枪杆子里出政权"命题的直接历史来源。',
+        works: '周恩来《迅速出师讨伐蒋介石》（1927年4月给中共中央的建议书）',
+        warning: ''
+    },
+    'movement-april-12': {
+        name: '四一二反革命政变',
+        sub: '1927年4月12日 · 上海 · 国共第一次合作破裂',
+        bio: '1927年4月12日，蒋介石在上海发动突然袭击——以"调解工人内讧"为由，指使青帮武装分子和国民革命军对工人纠察队缴械，随后大规模捕杀共产党员和工人领袖。据不完全统计，三天内300多人被杀、500多人被捕、5000多人失踪。此后，国民党在全国范围内"清党"，第一次国共合作彻底破裂。',
+        thought: '1️⃣ 历史转折：四一二政变是中共历史上最惨痛的教训之一——共产党在即将收获大革命果实时被盟友从背后捅了一刀。\n2️⃣ 根本教训：共产党必须掌握革命领导权、必须有自己的军队——"枪杆子里出政权"（毛泽东在八七会议上）。此前党内陈独秀右倾投降主义路线放弃了武装斗争的领导权。\n3️⃣ 后续影响：四一二直接催生了南昌起义和秋收起义，共产党从此走上了独立领导武装斗争的道路。',
+        works: '毛泽东《湖南农民运动考察报告》（政变前的预警）、周恩来《迅速出师讨伐蒋介石》',
+        warning: ''
+    },
+    'movement-nanchang-autumn': {
+        name: '南昌起义 / 秋收起义',
+        sub: '1927年8-9月 · 共产党独立武装斗争的开端',
+        bio: '1927年8月1日，周恩来、贺龙、叶挺、朱德、刘伯承等领导南昌起义，打响了共产党武装反抗国民党反动派的第一枪。8月7日，中共中央在汉口紧急召开八七会议，毛泽东提出"枪杆子里出政权"。9月，毛泽东领导湘赣边界秋收起义——第一次公开打出"工农革命军"的旗帜。起义受挫后，毛泽东率部上井冈山，开辟了第一个农村革命根据地。',
+        thought: '1️⃣ 南昌→八七→秋收→井冈山，一条完整的逻辑链：南昌打响了武装斗争第一枪→八七会议从政治上清算右倾投降主义→秋收起义打出工农革命军旗帜→井冈山开辟农村包围城市的新道路。\n2️⃣ 南昌起义与秋收起义的对比：南昌是城市起义、以正规军为主力；秋收是农村起义、以农民为主力。后者更接近中国革命的实际情况。\n3️⃣ 历史意义：三大起义标志着共产党从"以俄为师"（城市中心论）向"中国道路"（农村包围城市）的初步转向。',
+        works: '毛泽东《中国的红色政权为什么能够存在？》、《井冈山的斗争》',
+        warning: ''
+    },
+    'movement-encirclement-long-march': {
+        name: '五次反"围剿"与长征',
+        sub: '1930-1934 · 中央苏区 · 军事路线斗争',
+        bio: '1930年底至1934年，国民党对中央苏区先后发动五次"围剿"。前四次在毛泽东、朱德的正确军事路线指导下取得反"围剿"胜利。1933年第五次反"围剿"中，博古和共产国际军事顾问李德推行"御敌于国门之外"的冒险主义方针和"分兵把口"的保守主义方针，导致反"围剿"失败。1934年10月，中央红军被迫撤离中央苏区，开始长征。1935年1月遵义会议纠正了错误的军事路线，确立了毛泽东的领导地位。',
+        thought: '1️⃣ 军事路线斗争的惨痛代价：前四次胜利（毛的游击战术：诱敌深入、集中兵力歼灭有生力量）vs第五次失败（博古/李德的"正规战"：碉堡对碉堡、分兵把口）。军事路线的正确与否直接关乎党和红军的生死存亡。\n2️⃣ 遵义会议：中国共产党第一次独立自主地解决自己的问题——不依赖共产国际指示——确立了毛泽东在红军和党中央的领导地位，是党的历史上生死攸关的转折点。',
+        works: '毛泽东《中国革命战争的战略问题》（对五次反围剿的系统总结）',
+        warning: ''
+    },
+    'movement-long-march': {
+        name: '长征',
+        sub: '1934-1935 · 二万五千里 · 宣言书·宣传队·播种机',
+        bio: '1934年10月，中央红军从江西瑞金出发，历时一年，穿越11省，翻越18座大山、24条大河，攻占700多座县城，行程约二万五千里。1935年10月到达陕北吴起镇。出发时8.6万余人，到达陕北时不足7000人。毛泽东说："长征是宣言书，长征是宣传队，长征是播种机。"',
+        thought: '1️⃣ 人类历史上的壮举：长征不仅是军事史上的奇迹，也是人类意志力的极限表现。平均年龄不到25岁的队伍，在绝境中完成了战略大转移。\n2️⃣ 政治意义：长征途中召开的遵义会议确立了毛泽东的领导地位——这是长征最重要的政治成果，比军事上的胜利更为根本。\n3️⃣ 精神遗产："长征精神"——坚定信念、不怕牺牲、独立自主、顾全大局——成为中共革命传统中最核心的精神符号之一。',
+        works: '毛泽东《七律·长征》、《论反对日本帝国主义的策略》、埃德加·斯诺《红星照耀中国》',
+        warning: ''
+    },
+    'movement-yanan-rectify': {
+        name: '延安整风',
+        sub: '1941-1945 · 延安 · 马克思主义中国化的关键一步',
+        bio: '1941年5月，毛泽东在延安干部会议上作《改造我们的学习》报告，拉开了延安整风的序幕。整风的主要内容是——反对主观主义以整顿学风、反对宗派主义以整顿党风、反对党八股以整顿文风。核心是清算以王明为代表的教条主义错误，确立实事求是的思想路线。1945年六届七中全会通过《关于若干历史问题的决议》，整风运动胜利结束。',
+        thought: '1️⃣ 思想建党的创举：以整风形式进行党内思想教育——用批评与自我批评的方法而非"残酷斗争、无情打击"的方法解决党内矛盾。\n2️⃣ 马克思主义中国化的关键：整风确立了毛泽东思想在全党的指导地位——从此中国共产党有了自己的、而非从莫斯科照搬的指导思想。\n3️⃣ 对今天的影响：整风精神（实事求是、理论联系实际）至今仍被视为党的建设的基本经验，党内集中教育活动延续了整风的传统。',
+        works: '毛泽东《改造我们的学习》、《整顿党的作风》、《反对党八股》、《在延安文艺座谈会上的讲话》',
+        warning: '⚠️ 延安整风后期（1943年"抢救运动"）出现了扩大化的问题，康生在其中起了恶劣作用。整风的成功经验和"抢救运动"的教训都应被认真对待。'
+    },
+    'movement-three-campaigns': {
+        name: '解放战争三大战役',
+        sub: '1948-1949 · 辽沈·淮海·平津 · 从游击战到大兵团',
+        bio: '1948年9月至1949年1月，中共在毛泽东指挥下先后发动辽沈、淮海、平津三大战役。辽沈战役解放东北全境；淮海战役歼敌55万，基本解放长江以北；平津战役解放北平（和平解放）和天津。三大战役共歼敌154万，国民党精锐部队基本覆灭。此后，中共军队渡过长江，迅速解放全中国。',
+        thought: '1️⃣ 军事奇迹：中共军队从1927年南昌起义的几千人，到三大战役时的数百万人；从游击战到大规模的攻坚战和运动战——这个过程只用21年。\n2️⃣ 政治基础：三大战役的胜利不只靠军事——土地改革使农民参军支前、统一战线分化敌方、瓦解敌军（大量国民党军队起义投诚）。\n3️⃣ 三大战役与解放战争是一个统一的词条：理解三大战役不能脱离土地改革和第二条战线（国统区的民主运动）。',
+        works: '毛泽东《关于辽沈战役的作战方针》、《关于淮海战役的作战方针》、《关于平津战役的作战方针》',
+        warning: ''
+    },
+    'movement-anti-japanese-war': {
+        name: '抗日战争',
+        sub: '1937-1945 · 中国 · 世界反法西斯战争东方主战场',
+        bio: '1937年7月7日卢沟桥事变，全面抗战爆发。中共领导的八路军、新四军深入敌后建立抗日根据地。1938年毛泽东发表《论持久战》，科学预见了抗战三个阶段。中共在敌后战场发动百团大战（1940）等大小战斗12.5万余次。1945年8月，日本宣布无条件投降。抗战期间中共武装从5万人发展到120万人，根据地人口达1亿。',
+        thought: '1️⃣ 中共在抗战中的角色：两个战场——国民党的正面战场和共产党的敌后战场。中共通过发动群众、建立根据地，在八年中实现了从被动到主动、从弱小到强大的转变。\n2️⃣ 《论持久战》的战略预见：毛泽东在抗战不到一年时就准确预见了战争的三个阶段（战略防御→战略相持→战略反攻）——显示了辩证唯物主义在军事战略中的强大力量。\n3️⃣ 民族解放与阶级解放的统一：抗战既是民族解放战争，也是中国革命的一部分。中共在抗战中壮大了力量，为解放战争的胜利奠定了基础。',
+        works: '毛泽东《论持久战》、《中国共产党在民族战争中的地位》、《论联合政府》',
+        warning: '⚠️ 抗战的"两个战场"问题在两岸有不同叙事。本词条重在客观介绍中共在抗战中的作用和历史事实。'
+    },
+    'movement-great-patriotic-war': {
+        name: '苏联卫国战争',
+        sub: '1941-1945 · 苏联 · 社会主义国家存亡之战',
+        bio: '1941年6月22日，纳粹德国发动"巴巴罗萨计划"，撕毁《苏德互不侵犯条约》，对苏联发动全面进攻。德军兵临莫斯科城下，包围列宁格勒900天。苏联在斯大林领导下全民动员，经过莫斯科保卫战（1941）、斯大林格勒战役（1942-1943）、库尔斯克战役（1943）等重大转折，最终攻克柏林（1945年5月）。苏联付出了约2700万人牺牲的惨重代价。',
+        thought: '1️⃣ 社会主义制度的考验：卫国战争是社会主义制度面临的最严峻生死考验。苏联在战争初期遭受惨重损失后仍能组织有效抵抗并反败为胜——证明了社会主义计划经济在战争动员中的巨大优势。\n2️⃣ 斯大林格勒战役的意义：斯大林格勒不仅是苏德战场的转折点，也是整个二战的转折点——德军从此丧失了战略主动权。\n3️⃣ 历史反思：战前的大清洗严重削弱了红军的指挥能力（大量优秀军官被处决）、对纳粹威胁的战略误判——这些教训不应被遗忘。',
+        works: '斯大林《论苏联伟大卫国战争》、朱可夫《回忆与思考》、西蒙诺夫《日日夜夜》',
+        warning: ''
+    },
+    'movement-vietnam-war': {
+        name: '越南抗法/抗美战争',
+        sub: '1946-1975 · 越南 · 第三世界民族解放的典范',
+        bio: '1945年胡志明宣布越南独立后，法国企图恢复殖民统治，抗战战争爆发（1946-1954）。1954年奠边府大捷，法国退出印度支那。但日内瓦协议后美国介入，支持南越政权。越南经历了近30年的连续抗战。1975年4月30日西贡解放，越南实现统一。近30年中越南人民抗击了法、日、美三个帝国主义国家。',
+        thought: '1️⃣ 为什么越南能赢？——胡志明成功地将马列主义的国际主义与越南民族主义结合，解决了"谁是我们的人、谁是我们的敌人"这个革命首要问题。\n2️⃣ 奠边府战役（1954）：越盟将重炮拆散后由人力搬运上陡峭山岭——这种不可复制的意志力逼迫法国在日内瓦谈判桌上认输。\n3️⃣ 胡志明小道：穿越老挝、柬埔寨的丛林补给线，美军倾泻了超过二战总和的炸弹却无法切断——技术优势的极限vs人民战争的韧性。\n4️⃣ 对国际共运的意义：越南证明了落后农业国家可以战胜世界上最强大的军事力量。',
+        works: '武元甲《奠边府》、《人民战争·人民军队》、胡志明《狱中日记》',
+        warning: '⚠️ 越南战争后中越关系恶化（对越自卫反击战）是复杂的后续。本词条聚焦革命战争本身。'
+    },
+    'movement-korean-war': {
+        name: '朝鲜战争',
+        sub: '1950-1953 · 朝鲜半岛 · 冷战中的热战',
+        bio: '1950年6月25日朝鲜战争爆发。北朝鲜军队迅速南下，几乎占领半岛全境。9月美军仁川登陆，战局逆转。10月中国人民志愿军入朝参战，将战线推回三八线附近。此后双方在三八线附近反复拉锯。1951年7月开始停战谈判，边谈边打持续两年。1953年7月27日签署停战协定。战争以三八线附近的僵局结束，朝鲜半岛分裂至今。',
+        thought: '1️⃣ 社会主义阵营与帝国主义阵营的第一次直接军事对抗——此前双方通过代理人战争，而在朝鲜，中美苏直接或间接地投入了军事力量。\n2️⃣ 对新中国的意义：中国以"保家卫国"为号召入朝参战，打出了新中国的国际地位——迫使世界上最强大的国家在未能取胜的停战协定上签字。但也付出了巨大牺牲。\n3️⃣ 朝鲜半岛分裂的固化：战争将临时性的三八线变成了世界上最坚固的军事分界线之一，朝鲜半岛问题的基本格局至今未变。',
+        works: '《中国人民志愿军抗美援朝战争政治工作经验总结》',
+        warning: '⚠️ 朝鲜战争的责任归属和发动者问题在国际史学界有不同看法。本词条客观介绍战争进程和历史影响，不做单一归因。'
+    },
+    'movement-comintern': {
+        name: '共产国际',
+        sub: '1919-1943 · 第三国际 · 世界共产党的联合组织',
+        bio: '1919年3月，在列宁主导下，来自21个国家的代表在莫斯科成立共产国际（第三国际）。与第二国际的社会民主主义不同，共产国际坚持革命路线和民主集中制组织原则，对各国共产党实行高度集中的领导。在其存在的24年中，帮助建立了数十个国家的共产党。1943年6月，为适应反法西斯统一战线的需要，斯大林宣布解散共产国际。',
+        thought: '1️⃣ 历史功绩：帮助各国建立共产党、传播马列主义、培养了大批革命干部。中共的建立和发展就得到了共产国际的重要帮助。\n2️⃣ 严重错误：共产国际的"遥控指挥"也输出过严重错误的路线——王明路线直接来源于共产国际，几乎断送了中国革命。\n3️⃣ 解散的意义：1943年解散标志着国际共运从"一个中心"转向各国党独立自主——这是积极的转变。',
+        works: '列宁《第三国际及其在历史上的地位》、《加入共产国际的条件》（"二十一条"）',
+        warning: '⚠️ 共产国际的历史角色充满矛盾：它既是各国共产党的"助产士"，也因高度集权和脱离各国实际而犯下过严重错误。客观看待其双重遗产。'
+    },
+    'movement-sino-soviet-split': {
+        name: '中苏论战',
+        sub: '1960s · 国际共运大分裂 · 九评苏共中央公开信',
+        bio: '1956年苏共二十大赫鲁晓夫作"秘密报告"后，中苏在斯大林评价、和平过渡、战争与和平等重大问题上逐渐产生分歧。1963-1964年，中共以《人民日报》和《红旗》杂志编辑部的名义，先后发表九篇评论苏共中央公开信的文章（"九评"）。论战导致国际共运正式分裂，中国走上了与苏联完全不同的发展道路。',
+        thought: '1️⃣ 论战的核心问题：斯大林的历史地位、从资本主义向社会主义过渡的道路（和平过渡还是革命？）、战争与和平（是否可以和平共处？）、社会主义建设的道路。\n2️⃣ 独立自主的意义：论战标志着中共在思想上不再接受任何外国党的"指导"——这是继遵义会议后，中共在更大范围内确立独立自主原则。\n3️⃣ 后果与反思：论战导致社会主义阵营分裂，削弱了国际共运的整体力量；但也在客观上促使各国共产党开始独立探索适合本国国情的社会主义道路。',
+        works: '《关于国际共产主义运动总路线的建议》（"二十五条"）、"九评"苏共中央公开信（1963-1964）',
+        warning: '⚠️ 中苏论战中双方都有"上纲上线"和以我划线的倾向。阅读时应注意区分原则问题的争论和因国家利益冲突而激化的非原则争论。'
+    },
         name: '捷尔任斯基',
         sub: 'Felix Dzerzhinsky · 1877-1926 · 契卡创始人',
         bio: '捷尔任斯基出身波兰贵族家庭，早年投身革命，十月革命后列宁任命他为全俄肃反委员会（契卡）主席。在极端残酷的内战环境中，契卡以铁腕手段镇压反革命，他因此获得"铁腕费利克斯"的称号。1926年因心脏病去世。',
@@ -1419,84 +1575,118 @@
         thought: '1️⃣ 核心概念：物化——对马克思商品拜物教理论的深化，批判资本主义社会中的异化现象。\n2️⃣ 总体性辩证法：马克思主义不是对个别事实的实证分析，而是一种把握社会总体的方法。放弃总体性就会陷入资产阶级科学的"事实拜物教"。\n3️⃣ 无产阶级的阶级意识：只有无产阶级同时作为历史的"主体"和"客体"，才能打破物化结构、认识总体。\n4️⃣ 批判第二国际：谴责考茨基等人的"反映论"——把马克思主义变成经济决定论，消弭革命的能动性。\n5️⃣ 对列宁的辩护：卢卡奇认为列宁的"策略性"思维是辩证法的实践运用，驳斥对列宁的机械主义指责。',
         works: '卢卡奇《历史与阶级意识》（中译本由商务印书馆出版）',
         warning: '⚠️ 卢卡奇后来多次自我批评，认为此书过分强调"意识"而忽视了客观经济基础，有"黑格尔主义的马克思主义"之嫌。苏联官方长期将此书列为禁书。'
+    },
+    'text-socialism-utopian': {
+        name: '《社会主义从空想到科学的发展》',
+        sub: 'Socialism: Utopian and Scientific · 1880年 · 恩格斯',
+        bio: '1880年，恩格斯应法国工人党领袖拉法格的请求，将《反杜林论》中"引论"第一章和社会主义编的前两章抽出改编成独立著作，以法文出版。这本不到100页的小册子成为马克思主义传播最广的著作之一，被译为数十种语言。',
+        thought: '1️⃣ 核心论点：恩格斯系统阐述了空想社会主义的历史贡献和根本局限——三大空想家（圣西门、傅立叶、欧文）天才地批判了资本主义但找不到出路；马克思的两大发现（唯物史观和剩余价值理论）使社会主义从空想变为科学。\n2️⃣ 结构：全书三章——空想社会主义的发展、唯物史观的基本原理、科学社会主义的基本原理。逻辑链条清晰：理解历史规律→理解资本主义剥削秘密→理解社会主义的历史必然性。\n3️⃣ 推荐章节：第三章（科学社会主义的基本原理）是全书精华，展开论述了资本主义基本矛盾——生产社会化与生产资料私人占有之间的矛盾——如何必然导致周期性的经济危机和最终的社会革命。',
+        works: '恩格斯《社会主义从空想到科学的发展》（人民出版社）',
+        warning: '⚠️ 篇幅短小但密度极大。建议先读《共产党宣言》做铺垫再读此书。1892年英文版导言是恩格斯晚年最重要的文章之一，不要跳过。'
+    },
+    'text-imperialism': {
+        name: '《帝国主义是资本主义的最高阶段》',
+        sub: 'Imperialism, the Highest Stage of Capitalism · 1916年 · 列宁',
+        bio: '1916年，一战正酣，列宁在苏黎世写成此书。由于沙皇书报检查，列宁用"伊·伊里奇"的笔名在彼得格勒出版，副标题是"通俗的论述"。列宁综合了希法亭、卢森堡、布哈林等人的研究，在霍布森《帝国主义》基础上，创立了马克思主义的帝国主义理论。',
+        thought: '1️⃣ 帝国主义的五大基本特征：生产集中和垄断→金融资本和金融寡头→资本输出→国际垄断同盟瓜分世界→列强瓜分世界领土。\n2️⃣ 帝国主义的历史地位：帝国主义是垄断的、寄生的、垂死的资本主义——是社会主义革命的前夜。列宁论证了帝国主义时代战争的不可避免性和革命的可能性。\n3️⃣ 与革命战略的关系：帝国主义论是列宁革命战略的理论基础——既然资本主义已达到其最高和最后阶段，党就应该以革命推翻它而非等待"资本主义的充分发展"。\n4️⃣ 推荐章节：第七章（"帝国主义是资本主义的特殊阶段"）和第十章（"帝国主义的历史地位"）是全书论点的总结。',
+        works: '列宁《帝国主义是资本主义的最高阶段》（《列宁选集》第二卷）',
+        warning: '⚠️ 列宁写作时利用了1913年前的统计材料。今天读此书应区分其方法论（阶级分析法、矛盾分析法）和受限于时代的具体数据。100多年后，"帝国主义"的外在形态变了，但列宁分析的核心逻辑仍然有效。'
+    },
+    'text-materialism-empirio': {
+        name: '《唯物主义与经验批判主义》',
+        sub: 'Materialism and Empirio-criticism · 1909年 · 列宁',
+        bio: '1905年革命失败后，俄国社会民主党内部分知识分子转向马赫主义（经验批判主义），以"修正"唯物主义。列宁在流亡中花大量时间研究哲学文献，1908年写成此书，1909年出版。这是列宁最重要的纯哲学著作。',
+        thought: '1️⃣ 核心论点：物质是"不依赖于人的意识并且为人的意识所反映的客观实在"——列宁的经典物质定义。认识是对客观实在的反映（反映论），而非经验批判主义者所说的"感觉的复合"。\n2️⃣ 哲学的党派性：列宁指出哲学上存在唯物主义和唯心主义两条基本路线——马赫主义以"超越"两者自居，实际上是在新的伪装下复活贝克莱的主观唯心主义。\n3️⃣ 推荐章节：第一章（认识论的基本问题）、第二章（关于反映论）、第六章（历史唯物主义与哲学党派性）。\n4️⃣ 地位：与《怎么办？》（政治）和《帝国主义论》（经济）共同构成列宁主义理论体系的三大支柱。',
+        works: '列宁《唯物主义与经验批判主义》（《列宁全集》第18卷，人民出版社）',
+        warning: '⚠️ 列宁在书中对某些物理学新发现的态度（如对彭加莱、马赫的批判）在今天看来有时代局限。阅读时将他的哲学立场（唯物主义反映论）和具体科学判断分开来看。'
+    },
+    'text-new-democracy-mao': {
+        name: '《新民主主义论》',
+        sub: 'On New Democracy · 1940年 · 毛泽东',
+        bio: '1940年初，抗日战争进入相持阶段。国民党在军事上反共摩擦加剧，在思想文化上掀起"共产主义不适合中国国情"的宣传攻势。毛泽东在延安《中国文化》创刊号上发表《新民主主义论》，系统回答了一个根本问题：中国向何处去？',
+        thought: '1️⃣ 核心论点："两步走"——中国革命分两步：第一步是新民主主义革命（无产阶级领导的、人民大众的、反帝反封建的革命），第二步是社会主义革命。两个阶段必须衔接，不容横插一个资产阶级专政阶段。\n2️⃣ 新民主主义的政治、经济、文化：政治——各革命阶级联合专政；经济——国营经济为领导、多种经济成分共存；文化——无产阶级领导的、人民大众的、反帝反封建的文化。\n3️⃣ 理论创新：列宁提出民主革命转社会主义革命的原理，毛泽东把这一原理具体化为适合中国国情的完整理论体系——马克思主义中国化的标志性成果之一。',
+        works: '毛泽东《新民主主义论》（《毛泽东选集》第二卷）',
+        warning: '⚠️ 新民主主义论是在抗战特定历史条件下提出的——联合一切抗日力量。它与1950年代的实际政策有区别（后者更强调社会主义改造）。阅读时注意区分理论框架和历史运用。'
+    },
+    'text-on-protracted-war': {
+        name: '《论持久战》',
+        sub: 'On Protracted War · 1938年 · 毛泽东',
+        bio: '1938年5月，全面抗战进行至第10个月。国内"亡国论"（日本太强，中国必败）和"速胜论"（英美介入，日本很快投降）同时流行。毛泽东在延安抗日战争研究会上连续发表《论持久战》讲演，科学预见了抗战的走向。',
+        thought: '1️⃣ 核心论点：抗日战争是持久的，最后胜利是中国的。战争分三个阶段——战略防御→战略相持→战略反攻。中日双方存在四对基本矛盾（敌强我弱、敌退步我进步、敌小国我大国、敌寡助我多助）。\n2️⃣ 方法论典范：《论持久战》是辩证唯物主义在军事领域最成功的运用——不是凭愿望或恐惧做判断，而是对交战双方的全部基本因素做客观分析，找出矛盾的发展和转化。\n3️⃣ 推荐章节：问题的根据（第1-7节）——如何用矛盾分析法预见战争进程；持久战的三个阶段（第10-13节）——战略预见的精确程度令人叹服。',
+        works: '毛泽东《论持久战》（《毛泽东选集》第二卷）',
+        warning: '⚠️ 连国民党将领白崇禧、卫立煌、傅作义等人都认真研读了这本书并印发部下。侧面证明其军事分析的穿透力超越党派。'
+    },
+    'text-on-ten-relations': {
+        name: '《论十大关系》',
+        sub: 'On the Ten Major Relationships · 1956年 · 毛泽东',
+        bio: '1956年4月，毛泽东在中共中央政治局扩大会议上发表《论十大关系》讲话。此前苏共二十大揭露了斯大林的严重错误，毛泽东开始反思苏联模式的弊端。这篇讲话标志着中国共产党开始独立探索中国自己的社会主义建设道路。',
+        thought: '1️⃣ 核心论点："以苏联为鉴，走自己的路"。十大关系——重工业与轻工业/农业、沿海与内地、经济与国防、国家与生产单位、中央与地方、汉族与少数民族、党与非党、革命与反革命、是非关系、中国与外国。\n2️⃣ 基本方针："把国内外一切积极因素调动起来，为社会主义事业服务"。\n3️⃣ 推荐章节：第一章（重工业与轻工业/农业——提出"多发展一些农业轻工业"的修正性意见）、第五章（中央与地方——"有中央和地方两个积极性，比只有一个积极性好得多"）。\n4️⃣ 历史意义：这篇文章是毛泽东思想中关于社会主义建设最有创见的部分，是改革思想的最早萌芽之一。',
+        works: '毛泽东《论十大关系》（《毛泽东选集》第五卷或单行本）',
+        warning: '⚠️ 《论十大关系》是在探索阶段提出的——其中许多正确思想在后来（特别是"文革"期间）未能得到贯彻。阅读时注意区分"提出了什么"和"后来执行了什么"。'
+    },
+    'text-dialectic-enlightenment': {
+        name: '《启蒙辩证法》',
+        sub: 'Dialectic of Enlightenment · 1947年 · 霍克海默、阿多诺',
+        bio: '1944年，霍克海默和阿多诺在流亡美国期间写成此书，1947年在阿姆斯特丹出版。两人是法兰克福社会研究所的核心成员。面对法西斯主义的经历和"美国化"的文化工业，他们重新思考了启蒙和理性的历史命运。',
+        thought: '1️⃣ 核心悖论：启蒙本意是使人从神话中解放出来，但"被彻底启蒙的世界却笼罩在一片因胜利而招致的灾难之中"——工具理性将一切（包括人本身）都变成了可计算和可操控的客体，启蒙退化为新的神话。\n2️⃣ 文化工业批判：流行文化不是从"大众"中自发产生的，而是被标准化、伪个性化地制造出来——其功能是消解大众的反抗意识。\n3️⃣ 推荐章节：文化工业章——读完后你无法再用之前的方式看任何商业娱乐产品；奥德修斯章——用《奥德赛》解读启蒙的辩证法，西方马克思主义文本批评的巅峰。',
+        works: '霍克海默、阿多诺《启蒙辩证法》（中译本由上海人民出版社出版）',
+        warning: '⚠️ 极度晦涩——阿多诺的文风以"防御式写作"（故意写得让庸人读不懂）著称。不要指望一次读懂。建议从"文化工业"章开始（最可读的一章），不要从哲学序言开始啃。'
+    },
+    'text-poverty-philosophy': {
+        name: '《哲学的贫困》',
+        sub: 'The Poverty of Philosophy · 1847年 · 马克思',
+        bio: '1846年，蒲鲁东出版了《经济矛盾的体系，或贫困的哲学》，宣称在资产阶级和无产阶级之间找到了一个"第三种公式"。马克思用法文写成《哲学的贫困》，对蒲鲁东进行了系统的毁灭性批判。这是马克思第一次公开系统地阐述自己的经济学观点。',
+        thought: '1️⃣ 核心批判：蒲鲁东把黑格尔辩证法庸俗化——把矛盾理解为"好的方面和坏的方面的对立"，解决方式是"保存好的、消除坏的"。马克思指出这不是辩证法而是诡辩术——矛盾的两个方面不能机械地拆开。\n2️⃣ 唯物史观的第一次科学表述：在生产关系和经济范畴的关系上，蒲鲁东认为是"原则创造了历史"（唯心主义），马克思指出是"历史创造了原则"——经济范畴是生产关系（由生产力决定的）的理论表现。\n3️⃣ 推荐章节：第二章（政治经济学的形而上学）——其中对辩证法和方法论的讨论是马克思主义哲学史上的关键文本。',
+        works: '马克思《哲学的贫困》（《马克思恩格斯全集》第4卷）',
+        warning: '⚠️ 理解此书前最好先了解蒲鲁东的基本主张（不然不知道靶子在哪）。可从人物卡片蒲鲁东→点击进入了解后再读。此书篇幅不大但密度高，建议分两次读完。'
+    },
+    'text-gotha-critique': {
+        name: '《哥达纲领批判》',
+        sub: 'Critique of the Gotha Programme · 1875年 · 马克思',
+        bio: '1875年，德国工人运动中两个派别——爱森纳赫派（马克思主义派）和拉萨尔派——计划合并为德国社会主义工人党，并起草了一份充斥拉萨尔主义错误的纲领草案。马克思抱病写下长篇批注寄给爱森纳赫派领导人，但被压下未予公开。恩格斯于1891年不顾阻力公开发表。',
+        thought: '1️⃣ 核心论点：马克思逐条批判了纲领草案中的拉萨尔主义错误——"劳动是一切财富的源泉"（错，只有劳动+自然才能创造财富）、"铁的工资规律"（拉萨尔的唯心主义经济学谬论）、"自由国家"（国家是阶级统治的工具，不可能是"自由的"）。\n2️⃣ 共产主义社会两阶段论："刚刚从资本主义社会中产生出来的"社会主义（按劳分配）和"在它自身基础上已经发展了的"共产主义（按需分配）。这是科学社会主义中最重要的理论命题之一。\n3️⃣ 推荐章节：第四章——"在资本主义社会和共产主义社会之间，有一个从前者变成后者的革命转变时期。同这个时期相适应的也有一个政治上的过渡时期，这个时期的国家只能是无产阶级的革命专政。"这是马克思主义国家学说最精炼的表述之一。',
+        works: '马克思《哥达纲领批判》（《马克思恩格斯选集》第3卷，人民出版社）',
+        warning: '⚠️ 这是一篇边注边批的手稿（不是"论文"），行文中有时重复和脱漏。列宁在《国家与革命》中对本书的核心论点做了最好的发挥，建议两书对照阅读。'
+    },
+    'text-proletarian-revolution-kautsky': {
+        name: '《无产阶级革命与叛徒考茨基》',
+        sub: 'The Proletarian Revolution and the Renegade Kautsky · 1918年 · 列宁',
+        bio: '1918年，十月革命一年后。考茨基发表《无产阶级专政》，攻击布尔什维克政权是"一党恐怖专政"、"违背民主原则"。列宁在百忙中迅速写成这部长篇论战著作，系统捍卫十月革命和无产阶级专政的理论合法性。',
+        thought: '1️⃣ 核心论点：不存在"纯粹民主"或"一般民主"——民主总是有阶级内容的。资产阶级民主是少数人的民主（对剥削者的民主），无产阶级民主是多数人的民主（对劳动人民的民主）。\n2️⃣ 无产阶级专政的必要性：过渡时期必然存在阶级和阶级斗争，无产阶级专政是镇压被推翻的剥削阶级反抗的必须手段。考茨基把"专政"和"民主"对立起来是诡辩。\n3️⃣ 推荐章节：第二章（"资产阶级民主和无产阶级民主"）——列宁以苏维埃为例，说明无产阶级民主无论在广度和深度上都远远超越最民主的资产阶级共和国。',
+        works: '列宁《无产阶级革命与叛徒考茨基》（《列宁选集》第三卷）',
+        warning: '⚠️ 列宁文风极度尖锐。这本论战著作的价值不在"温和公允"而在"立场鲜明"。理解考茨基被批判的观点后再读列宁的反驳——不要只读一面之词。'
     }
 };
         // 浮窗功能
-        const modalLabels = {
-            figures:  { s1: '人物生平', s2: '核心观点', s3: '代表著作', warnPrefix: '批判性提醒：' },
-            movements:{ s1: '历史背景', s2: '事件经过', s3: '历史意义', warnPrefix: '经验教训：' },
-            terms:    { s1: '通俗解释', s2: '理论展开', s3: '延伸阅读', warnPrefix: '常见误解：' },
-            texts:    { s1: '写作背景', s2: '核心论点', s3: '推荐章节', warnPrefix: '阅读建议：' }
-        };
-        function getModalType(id) {
-            if (id.startsWith('figure-')) return 'figures';
-            if (id.startsWith('movement-')) return 'movements';
-            if (id.startsWith('term-')) return 'terms';
-            if (id.startsWith('text-')) return 'texts';
-            return 'terms';
-        }
-        function openModal(id) {
-	    let data = figuresData[id] || movementsData[id] || termsData[id] || textsData[id];
-	    if (!data) return;
-            const type = getModalType(id);
-            const labels = modalLabels[type] || modalLabels.terms;
-	    document.getElementById('modalTitle').textContent = data.name;
-	    document.getElementById('modalSub').textContent = data.sub;
-            document.getElementById('modalSection1Title').textContent = labels.s1;
-            document.getElementById('modalSection2Title').textContent = labels.s2;
-            document.getElementById('modalSection3Title').textContent = labels.s3;
-	    document.getElementById('modalBio').innerHTML = data.bio.replace(/\n/g, '<br>');
-	    document.getElementById('modalThought').innerHTML = data.thought.replace(/\n/g, '<br>');
-	    document.getElementById('modalWorks').textContent = data.works;
-	    const warnEl = document.getElementById('modalWarning');
-	    if (data.warning) { warnEl.innerHTML = '<strong>' + labels.warnPrefix + '</strong><br>' + data.warning; warnEl.style.display = 'block'; }
-	    else { warnEl.style.display = 'none'; }
-	    document.getElementById('modalOverlay').classList.add('active');
-	    document.body.style.overflow = 'hidden';
-	}
-        function getActiveCategory(tabId) {
-            const tab = document.getElementById(tabId);
-            if (!tab) return 'all';
-            const activeBtn = tab.querySelector('.science-filter-btn.active');
-            return activeBtn ? activeBtn.dataset.cat : 'all';
-        }
-        function filterCards(tabId, keyword, category) {
-            const tab = document.getElementById(tabId);
-            if (!tab) return;
-            const kw = (keyword || '').toLowerCase().trim();
-            const cat = category || 'all';
-            tab.querySelectorAll('.science-card').forEach(function(card) {
-                const text = (card.textContent || '').toLowerCase();
-                card.style.display = ((kw === '' || text.indexOf(kw) !== -1) && (cat === 'all' || card.classList.contains(cat))) ? '' : 'none';
-            });
-            tab.querySelectorAll('.science-section-header').forEach(function(header) {
-                let next = header.nextElementSibling;
-                let hasVisible = false;
-                while (next && !next.classList.contains('science-section-header')) {
-                    if (next.classList.contains('science-card') && next.style.display !== 'none') { hasVisible = true; break; }
-                    next = next.nextElementSibling;
-                }
-                header.style.display = hasVisible ? '' : 'none';
-            });
-        }
-        function setCategoryFilter(tabId, catClass, btn) {
-            const tab = document.getElementById(tabId);
-            if (!tab) return;
-            tab.querySelectorAll('.science-filter-btn').forEach(function(b) { b.classList.remove('active'); });
-            if (btn) btn.classList.add('active');
-            const kw = (tab.querySelector('.science-search input') || {}).value || '';
-            filterCards(tabId, kw, catClass);
-        }
-	function handleAnchor() {
-	    const hash = window.location.hash.slice(1);
-	    if (!hash) return;
-            const prefixMap = { 'figure-': 'figures', 'movement-': 'movements', 'term-': 'terms', 'text-': 'texts' };
-            let targetTab = null;
-            for (const [prefix, tab] of Object.entries(prefixMap)) { if (hash.startsWith(prefix)) { targetTab = tab; break; } }
-            if (!targetTab) return;
-            document.querySelector('.science-tab[data-tab="' + targetTab + '"]').click();
-            setTimeout(function() { const card = document.querySelector('.science-card[onclick*="' + hash + '"]'); if (card) card.click(); }, 150);
-	}
+        const modalLabels={figures:{s1:'人物生平',s2:'核心观点',s3:'代表著作',warnPrefix:'批判性提醒：'},movements:{s1:'历史背景',s2:'事件经过',s3:'历史意义',warnPrefix:'经验教训：'},terms:{s1:'通俗解释',s2:'理论展开',s3:'延伸阅读',warnPrefix:'常见误解：'},texts:{s1:'写作背景',s2:'核心论点',s3:'推荐章节',warnPrefix:'阅读建议：'}};
+        function getModalType(id){if(id.startsWith('figure-'))return'figures';if(id.startsWith('movement-'))return'movements';if(id.startsWith('term-'))return'terms';if(id.startsWith('text-'))return'texts';return'terms';}
+        function openModal(id){
+	let d=figuresData[id]||movementsData[id]||termsData[id]||textsData[id];
+	if(!d)return;
+	const t=getModalType(id),l=modalLabels[t]||modalLabels.terms;
+	document.getElementById('modalTitle').textContent=d.name;
+	document.getElementById('modalSub').textContent=d.sub;
+	document.getElementById('modalSection1Title').textContent=l.s1;
+	document.getElementById('modalSection2Title').textContent=l.s2;
+	document.getElementById('modalSection3Title').textContent=l.s3;
+	document.getElementById('modalBio').innerHTML=d.bio.split('\\n').join('<br>');
+	document.getElementById('modalThought').innerHTML=d.thought.split('\\n').join('<br>');
+	document.getElementById('modalWorks').textContent=d.works;
+	var w=document.getElementById('modalWarning');
+	if(d.warning){w.innerHTML='<strong>'+l.warnPrefix+'</strong><br>'+d.warning;w.style.display='block';}
+	else{w.style.display='none';}
+	document.getElementById('modalOverlay').classList.add('active');
+	document.body.style.overflow='hidden';}
+        function getActiveCategory(tabId){var t=document.getElementById(tabId);if(!t)return'all';var b=t.querySelector('.science-filter-btn.active');return b?b.dataset.cat:'all';}
+        function filterCards(tabId,keyword,category){var t=document.getElementById(tabId);if(!t)return;var kw=(keyword||'').toLowerCase().trim();var cat=category||'all';t.querySelectorAll('.science-card').forEach(function(c){var tx=(c.textContent||'').toLowerCase();c.style.display=((kw===''||tx.indexOf(kw)!==-1)&&(cat==='all'||c.classList.contains(cat)))?'':'none';});t.querySelectorAll('.science-section-header').forEach(function(h){var n=h.nextElementSibling,f=false;while(n&&!n.classList.contains('science-section-header')){if(n.classList.contains('science-card')&&n.style.display!=='none'){f=true;break;}n=n.nextElementSibling;}h.style.display=f?'':'none';});}
+        function setCategoryFilter(tabId,catClass,btn){var t=document.getElementById(tabId);if(!t)return;t.querySelectorAll('.science-filter-btn').forEach(function(b){b.classList.remove('active');});if(btn)btn.classList.add('active');var kw=(t.querySelector('.science-search input')||{}).value||'';filterCards(tabId,kw,catClass);}
+	function handleAnchor(){
+	var h=window.location.hash.slice(1);if(!h)return;
+	var m={'figure-':'figures','movement-':'movements','term-':'terms','text-':'texts'},tb=null;
+	for(var k in m){if(h.startsWith(k)){tb=m[k];break;}}
+	if(!tb)return;
+	document.querySelector('.science-tab[data-tab="'+tb+'"]').click();
+	setTimeout(function(){var c=document.querySelector('.science-card[onclick*="'+h+'"]');if(c)c.click();},150);}
 
 // 页面加载时执行
 window.addEventListener('load', handleAnchor);
