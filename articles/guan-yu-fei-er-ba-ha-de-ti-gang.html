@@ -625,7 +625,9 @@ function initCharts() {
         updateDarkModeIcon();
     </script>
     <style>
-        .article-header { text-align: center; padding: 3rem 2rem; border-bottom: 2px solid #8b0000; color: white; background: linear-gradient(135deg,#4a0000,#8b0000,#c41e3a); position: relative; overflow: hidden; }
+        .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
+
+.article-header { text-align: center; padding: 3rem 2rem; border-bottom: 2px solid #8b0000; color: white; background: linear-gradient(135deg,#4a0000,#8b0000,#c41e3a); position: relative; overflow: hidden; }
         .article-header::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3C/svg%3E"); background-size: 120px; pointer-events: none; }
         .article-header > * { position: relative; z-index: 1; }
         .importance-badge { display: inline-block; background: rgba(255,215,0,0.9); color: #8b0000; padding: 6px 20px; border-radius: 25px; font-size: 0.9rem; font-weight: bold; margin-bottom: 1rem; }

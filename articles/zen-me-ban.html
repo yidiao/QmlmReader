@@ -15,7 +15,9 @@
         --party-dark: #1a0a2a;
         --gold: rgba(255,215,0,0.9);
     }
-    .article-header {
+    .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
+
+.article-header {
         position: relative; overflow: hidden; padding: 3rem 2rem; text-align: center; color: white;
     }
     .article-header[data-category="党的建设"] { background: var(--party-gradient); }
@@ -133,6 +135,33 @@
     /* 页脚 */
     .site-footer { background: #2a2a2a; color: #aaa; padding: 2rem 0; text-align: center; margin-top: 3rem; }
     .footer-note { color: #ffd700; margin-top: 0.5rem; font-size: 0.9rem; }
+
+    
+        .puzzle-timeline { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-timeline h3 { color: #8b0000; margin-bottom: 16px; }
+        .timeline-track { display: flex; gap: 0; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
+        .timeline-item { display: flex; flex-direction: column; align-items: center; min-width: 76px; position: relative; flex: 1; }
+        .timeline-item::after { content: ''; position: absolute; top: 9px; left: 50%; width: 100%; height: 2px; background: #ddd; z-index: 0; }
+        .timeline-item:last-child::after { display: none; }
+        .timeline-dot { width: 18px; height: 18px; border-radius: 50%; background: #ddd; border: 2px solid #bbb; z-index: 1; position: relative; }
+        .timeline-dot-active { width: 22px; height: 22px; border-radius: 50%; background: #c41e3a; border: 3px solid #8b0000; z-index: 1; position: relative; box-shadow: 0 0 8px rgba(196,30,58,0.4); }
+        .timeline-year { font-size: 0.75em; color: #555; margin-top: 6px; font-weight: 500; }
+        .timeline-label { font-size: 0.68em; color: #888; text-align: center; margin-top: 2px; line-height: 1.3; }
+        .timeline-here { font-size: 0.7em; color: #c41e3a; font-weight: bold; margin-top: 2px; white-space: nowrap; }
+        .timeline-item.active .timeline-year { color: #c41e3a; font-weight: bold; }
+        .puzzle-links { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-links h3 { color: #8b0000; margin-bottom: 8px; }
+        .puzzle-links-note { color: #888; font-size: 0.85em; margin-bottom: 16px; line-height: 1.6; }
+        .conn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+        .conn-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: white; border-radius: 8px; border: 1px solid #e8e8e8; border-left: 4px solid #8b0000; text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.15s; }
+        a.conn-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .conn-wip { opacity: 0.5; cursor: default; }
+        .conn-dir { font-size: 1.1em; font-weight: bold; line-height: 1; }
+        .conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; margin-top: 2px; }
+        .conn-label { font-size: 0.76em; color: #888; }
+        .conn-relation { font-size: 0.82em; color: #555; line-height: 1.5; margin-top: 3px; border-top: 1px solid #f0f0f0; padding-top: 4px; }
+        .conn-wip-badge { display: inline-block; background: #fed7aa; color: #c05621; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; margin-top: 4px; }
+        @media (max-width: 600px) { .conn-grid { grid-template-columns: 1fr; } }
 
     </style>
 <style>
@@ -930,7 +959,11 @@
                 <h4>理论关联</h4>
                 <p>读完《怎么办？》，你会明白它不只是"一本关于建党的书"。它回答了一个更根本的问题：有意识的革命行动从何而来？如果没有一个以科学理论武装起来的先锋组织，工人运动能不能自己找到通往社会主义的道路？</p>
             </div>
+
+<div class="puzzle-timeline"><h3>在思想发展时间轴上的位置</h3><div class="timeline-track"><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1898</div><div class="timeline-label">俄国社会民主工党一大</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1900</div><div class="timeline-label">火星报创刊</div></div><div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1901</div><div class="timeline-label">建党理论准备</div><div class="timeline-here">◀ 本文</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1903</div><div class="timeline-label">俄国社会民主工党二大·布尔什维克诞生</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1917</div><div class="timeline-label">十月革命</div></div></div></div>
+<div class="puzzle-links"><h3>文章联结网络</h3><p class="puzzle-links-note">点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（→ 输出影响 · ← 理论来源 · ↔ 相互支撑）</p><div class="conn-grid"><a href="lun-lunen-zhu-yi-ji-chu.html" class="conn-card" style="border-left-color:#553c9a;"><span class="conn-dir" style="color:#276749;">→</span><span class="conn-title">《论列宁主义基础》</span><span class="conn-label">党的建设</span><span class="conn-relation">列宁主义的系统化阐述</span></a><a href="guo-jia-yu-ge-ming.html" class="conn-card" style="border-left-color:#1a237e;"><span class="conn-dir" style="color:#276749;">→</span><span class="conn-title">《国家与革命》</span><span class="conn-label">政治理论</span><span class="conn-relation">从党建到夺取政权的逻辑延伸</span></a><a href="wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html" class="conn-card" style="border-left-color:#c41e3a;"><span class="conn-dir" style="color:#276749;">→</span><span class="conn-title">《唯物主义和经验批判主义》</span><span class="conn-label">哲学基础</span><span class="conn-relation">为建党提供哲学武器</span></a></div></div>
         </div>
+
         <div class="tab-content" id="further">
             <h2 class="tab-heading">📚 延伸阅读</h2>
             <div class="further-item">
@@ -998,6 +1031,151 @@
 
 
 
+
+
+
+<script>
+    // 标签切换
+    function switchTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        if (btn) btn.classList.add('active');
+
+        if (tabId === 'visual') {
+            setTimeout(initCharts, 100);
+        }
+    }
+
+    // 章节折叠
+    function toggleChapter(titleEl) {
+        const chapter = titleEl.closest('.chapter');
+        chapter.classList.toggle('collapsed');
+    }
+
+    // 搜索
+    function search() {
+        const query = document.getElementById('searchInput').value;
+        if (query) alert('搜索功能即将上线，请稍候');
+    }
+
+    // 图表初始化
+    let chartsInited = false;
+    function initCharts() {
+        if (chartsInited) return;
+        chartsInited = true;
+
+        var radarCtx = document.getElementById('radarChart').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['理论深度', '现实针对性', '论战力度', '行动指导性', '情感强度', '结构复杂度'],
+                datasets: [{
+                    label: '《怎么办？》',
+                    data: [8, 10, 9, 8, 7, 7],
+                    borderColor: '#c41e3a',
+                    backgroundColor: 'rgba(196,30,58,0.15)',
+                    pointBackgroundColor: '#c41e3a',
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        min: 0, max: 10,
+                        ticks: { stepSize: 2, font: { size: 10 } },
+                        pointLabels: { font: { size: 12 } }
+                    }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        var argCtx = document.getElementById('argumentCurve').getContext('2d');
+        new Chart(argCtx, {
+            type: 'line',
+            data: {
+                labels: ['第一章\n自发与自觉', '第二章\n群众自发性', '第三章\n工联主义', '第四章\n组织任务', '第五章\n全俄报纸', '结论\n党的建设'],
+                datasets: [{
+                    label: '论证强度',
+                    data: [6, 8, 9, 8, 7, 10],
+                    borderColor: '#e53e3e',
+                    backgroundColor: 'rgba(229,62,62,0.08)',
+                    fill: true,
+                    tension: 0.35,
+                    pointRadius: 7,
+                    pointHoverRadius: 9,
+                    borderWidth: 2.5,
+                    pointBackgroundColor: ['#718096','#718096','#e53e3e','#718096','#718096','#c41e3a']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) { return '论证强度：' + ctx.parsed.y + '/10'; }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0, max: 10,
+                        title: { display: true, text: '论证强度（低→高）', font: { size: 12 } }
+                    },
+                    x: { ticks: { font: { size: 10 } } }
+                }
+            }
+        });
+
+        var compareCtx = document.getElementById('compareChart').getContext('2d');
+        new Chart(compareCtx, {
+            type: 'bar',
+            data: {
+                labels: ['第一章', '第二章', '第三章', '第四章', '第五章', '结论'],
+                datasets: [
+                    {
+                        label: '阅读阻碍度',
+                        data: [6, 7, 8, 6, 5, 4],
+                        backgroundColor: 'rgba(229,62,62,0.6)',
+                    },
+                    {
+                        label: '获取价值',
+                        data: [7, 8, 9, 8, 7, 9],
+                        backgroundColor: 'rgba(56,161,105,0.7)',
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { min: 0, max: 10 } },
+                plugins: { legend: { position: 'top' } }
+            }
+        });
+    }
+
+    // 黑夜模式切换
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        var isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+        updateDarkModeIcon();
+    }
+
+    function updateDarkModeIcon() {
+        var btn = document.querySelector('.dark-mode-toggle');
+        if (btn) {
+            btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+    }
+
+    // 页面加载时恢复黑夜模式设置
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+    updateDarkModeIcon();
+</script>
 
 
 </body>

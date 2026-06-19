@@ -8,7 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* 与论列宁主义基础相同的样式 */
-        .article-header {
+        .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
+
+.article-header {
             background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
             color: white;
             padding: 3rem 2rem;
@@ -144,6 +146,33 @@
             .article-header h1 { font-size: 1.8rem; }
             .tab-content { padding: 1rem; }
         }
+    
+        .puzzle-timeline { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-timeline h3 { color: #8b0000; margin-bottom: 16px; }
+        .timeline-track { display: flex; gap: 0; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
+        .timeline-item { display: flex; flex-direction: column; align-items: center; min-width: 76px; position: relative; flex: 1; }
+        .timeline-item::after { content: ''; position: absolute; top: 9px; left: 50%; width: 100%; height: 2px; background: #ddd; z-index: 0; }
+        .timeline-item:last-child::after { display: none; }
+        .timeline-dot { width: 18px; height: 18px; border-radius: 50%; background: #ddd; border: 2px solid #bbb; z-index: 1; position: relative; }
+        .timeline-dot-active { width: 22px; height: 22px; border-radius: 50%; background: #c41e3a; border: 3px solid #8b0000; z-index: 1; position: relative; box-shadow: 0 0 8px rgba(196,30,58,0.4); }
+        .timeline-year { font-size: 0.75em; color: #555; margin-top: 6px; font-weight: 500; }
+        .timeline-label { font-size: 0.68em; color: #888; text-align: center; margin-top: 2px; line-height: 1.3; }
+        .timeline-here { font-size: 0.7em; color: #c41e3a; font-weight: bold; margin-top: 2px; white-space: nowrap; }
+        .timeline-item.active .timeline-year { color: #c41e3a; font-weight: bold; }
+        .puzzle-links { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
+        .puzzle-links h3 { color: #8b0000; margin-bottom: 8px; }
+        .puzzle-links-note { color: #888; font-size: 0.85em; margin-bottom: 16px; line-height: 1.6; }
+        .conn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+        .conn-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: white; border-radius: 8px; border: 1px solid #e8e8e8; border-left: 4px solid #8b0000; text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.15s; }
+        a.conn-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
+        .conn-wip { opacity: 0.5; cursor: default; }
+        .conn-dir { font-size: 1.1em; font-weight: bold; line-height: 1; }
+        .conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; margin-top: 2px; }
+        .conn-label { font-size: 0.76em; color: #888; }
+        .conn-relation { font-size: 0.82em; color: #555; line-height: 1.5; margin-top: 3px; border-top: 1px solid #f0f0f0; padding-top: 4px; }
+        .conn-wip-badge { display: inline-block; background: #fed7aa; color: #c05621; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; margin-top: 4px; }
+        @media (max-width: 600px) { .conn-grid { grid-template-columns: 1fr; } }
+
     </style>
 <style>
 
@@ -632,9 +661,11 @@
             <h4>📘 毛泽东《新民主主义论》</h4>
             <p>系统提出新民主主义革命理论，标志着马克思主义中国化的成熟。</p>
         </div>
+
+<div class="puzzle-timeline"><h3>在思想发展时间轴上的位置</h3><div class="timeline-track"><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1921</div><div class="timeline-label">中共成立</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1925</div><div class="timeline-label">五卅运动</div></div><div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1926</div><div class="timeline-label">共产国际执委会演讲</div><div class="timeline-here">◀ 本文</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1927</div><div class="timeline-label">四一二政变</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1949</div><div class="timeline-label">新中国成立</div></div></div></div>
+<div class="puzzle-links"><h3>文章联结网络</h3><p class="puzzle-links-note">点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（→ 输出影响 · ← 理论来源 · ↔ 相互支撑）</p><div class="conn-grid"><a href="lun-wo-guo-ge-ming.html" class="conn-card" style="border-left-color:#2b6cb0;"><span class="conn-dir" style="color:#276749;">←</span><span class="conn-title">《论我国革命》</span><span class="conn-label">政治理论</span><span class="conn-relation">列宁革命论的东方延伸</span></a><a href="xin-min-zhu.html" class="conn-card" style="border-left-color:#1a237e;"><span class="conn-dir" style="color:#276749;">→</span><span class="conn-title">《新民主主义论》</span><span class="conn-label">政治理论</span><span class="conn-relation">毛泽东对中国革命道路的回答</span></a><a href="nong-min-yun-dong.html" class="conn-card" style="border-left-color:#1b5e20;"><span class="conn-dir" style="color:#276749;">→</span><span class="conn-title">《湖南农民运动考察报告》</span><span class="conn-label">政治理论</span><span class="conn-relation">中国革命中农民问题的实践展开</span></a></div></div>
     </div>
 
-    <!-- 延伸阅读 -->
     <div class="tab-content" data-tab="further" id="further">
         <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">📚 延伸阅读</h2>
 

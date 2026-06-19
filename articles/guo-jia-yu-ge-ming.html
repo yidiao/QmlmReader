@@ -27,7 +27,9 @@
         body.dark-mode .back-link { color: var(--politics-secondary); border-color: var(--politics-secondary); }
         body.dark-mode .back-link:hover { background: var(--politics-secondary); color: white; }
 
-        .article-header {
+        .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
+
+.article-header {
             position: relative; overflow: hidden; padding: 3rem 2rem; text-align: center; color: white;
             background: var(--politics-gradient);
         }
@@ -1518,5 +1520,145 @@
 
 
     <script src="../js/main.js"></script>
+
+<script>
+    // 标签切换
+    function switchTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        if (btn) btn.classList.add('active');
+
+        if (tabId === 'visual') {
+            setTimeout(initCharts, 100);
+        }
+    }
+
+    // 章节折叠
+    function toggleChapter(titleEl) {
+        const chapter = titleEl.closest('.chapter');
+        chapter.classList.toggle('collapsed');
+    }
+
+    // 搜索
+    function search() {
+        const query = document.getElementById('searchInput').value;
+        if (query) alert('搜索功能即将上线，请稍候');
+    }
+
+    // 图表初始化
+    let chartsInited = false;
+    function initCharts() {
+        if (chartsInited) return;
+        chartsInited = true;
+
+        var radarCtx = document.getElementById('radarChart').getContext('2d');
+        new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['理论深度', '现实针对性', '论战力度', '行动指导性', '结构系统性', '历史纵深感'],
+                datasets: [{
+                    label: '《国家与革命》',
+                    data: [9, 10, 9, 9, 8, 9],
+                    borderColor: '#1a237e',
+                    backgroundColor: 'rgba(26,35,126,0.15)',
+                    pointBackgroundColor: '#1a237e',
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        min: 0, max: 10,
+                        ticks: { stepSize: 2, font: { size: 10 } },
+                        pointLabels: { font: { size: 12 } }
+                    }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        var rhythmCtx = document.getElementById('rhythmChart').getContext('2d');
+        new Chart(rhythmCtx, {
+            type: 'line',
+            data: {
+                labels: ['国家起源', '阶级斗争史', '国家消亡', '过渡时期', '革命任务', '结论'],
+                datasets: [{
+                    label: '论证强度',
+                    data: [6, 8, 9, 10, 7, 5],
+                    borderColor: '#3949ab',
+                    backgroundColor: 'rgba(57,73,171,0.08)',
+                    fill: true,
+                    tension: 0.35,
+                    pointRadius: 7,
+                    pointHoverRadius: 9,
+                    borderWidth: 2.5,
+                    pointBackgroundColor: ['#718096','#718096','#1a237e','#0d1b3e','#718096','#a0aec0']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) { return '论证强度：' + ctx.parsed.y + '/10'; }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0, max: 10,
+                        title: { display: true, text: '论证强度（低→高）', font: { size: 12 } }
+                    },
+                    x: { ticks: { font: { size: 11 } } }
+                }
+            }
+        });
+
+        var partsCtx = document.getElementById('partsChart').getContext('2d');
+        new Chart(partsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['国家本质', '暴力革命', '无产阶级专政', '国家消亡'],
+                datasets: [{
+                    data: [25, 25, 30, 20],
+                    backgroundColor: ['#1a237e', '#c41e3a', '#e65100', '#2e7d32'],
+                    borderColor: 'white',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    }
+
+    // 黑夜模式切换
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        var isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+        updateDarkModeIcon();
+    }
+
+    function updateDarkModeIcon() {
+        var btn = document.querySelector('.dark-mode-toggle');
+        if (btn) {
+            btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+    }
+
+    // 页面加载时恢复黑夜模式设置
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+    updateDarkModeIcon();
+</script>
+
+
 </body>
 </html>

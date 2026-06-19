@@ -620,7 +620,37 @@
 <button class="toc-toggle" id="tocToggleBtn" onclick="toggleToc()">📖 目录</button>
 
     <footer class="site-footer"><div class="container"><p>青年马列毛主义驿站 | Qmlm Reader</p><p class="footer-note">学习他 · 成为他 · 然后超越他</p></div></footer>
-    </body>
+    
+<script>
+    function switchTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        if (btn) btn.classList.add('active');
+    }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        var isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+        updateDarkModeIcon();
+    }
+
+    function updateDarkModeIcon() {
+        var btn = document.querySelector('.dark-mode-toggle');
+        if (btn) {
+            btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+    }
+
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+    updateDarkModeIcon();
+</script>
+
+
+</body>
     <script src="../js/main.js"></script>
     
 
@@ -784,6 +814,8 @@ body.dark-mode .back-link:hover {
 }
 
 /* ===== 文章头部 ===== */
+.article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
+
 .article-header {
     position: relative;
     overflow: hidden;
