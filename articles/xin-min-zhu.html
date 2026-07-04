@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新民主主义论 - 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/articles-detail.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 
@@ -16,7 +17,7 @@
         width: 56px;
         height: 56px;
         border-radius: 50%;
-        background: var(--party-primary, #c41e3a);
+        background: var(--cat-primary, #c41e3a);
         color: white;
         border: none;
         cursor: pointer;
@@ -52,8 +53,18 @@
         transition: all 0.2s;
     }
     body.dark-mode .dl-link { background: #3a3a3a; color: #eee; }
-    .dl-link:hover { background: var(--party-primary, #c41e3a); color: white; }
+    .dl-link:hover { background: var(--cat-primary, #c41e3a); color: white; }
 </style>
+
+<style>
+        :root {
+            --cat-primary: #1a237e;
+            --cat-secondary: #3949ab;
+            --cat-gradient: linear-gradient(135deg, #0d1259 0%, #1a237e 50%, #3949ab 100%);
+            --cat-light: #e8eaf6;
+            --cat-dark: #0a0a1a;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header">
@@ -111,14 +122,14 @@
         </header>
 
         <div class="tab-nav">
-            <button class="tab-btn active" onclick="switchTab('original', this)">原文</button>
-            <button class="tab-btn" onclick="switchTab('reading', this)">读法提示</button>
-            <button class="tab-btn" onclick="switchTab('difficulty', this)">难点解析</button>
-            <button class="tab-btn" onclick="switchTab('dialogue', this)">对话空间</button>
-            <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
-            <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
-            <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
-            <button class="tab-btn" onclick="switchTab('further', this)">延伸阅读</button>
+            <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
+            <button class="tab-btn" onclick="switchTab('further', this)">📚 延伸阅读</button>
         </div>
 
         <div class="tab-content active" id="original">
@@ -686,178 +697,9 @@
             </div>
         </div>
 
-
     </main>
 
-    <style>
-        /* ===== 政治理论深蓝渐变头部 ===== */
-        .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
-        
-        .article-header {
-            text-align: center;
-            padding: 3rem 2rem;
-            border-bottom: 2px solid #1a237e;
-            color: white;
-            background: linear-gradient(135deg, #0d1259 0%, #1a237e 50%, #3949ab 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .article-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3Ccircle cx='20' cy='80' r='25' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='0.5'/%3E%3Ccircle cx='80' cy='20' r='20' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='0.5'/%3E%3C/svg%3E");
-            background-size: 120px;
-            pointer-events: none;
-        }
-
-        .article-header > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .importance-badge {
-            display: inline-block;
-            background: rgba(255,215,0,0.9);
-            color: #1a237e;
-            padding: 6px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .article-header h1 {
-            font-size: 2.5rem;
-            margin: 0.5rem 0;
-            text-shadow: 2px 3px 6px rgba(0,0,0,0.4);
-            font-family: 'STSong', 'SimSun', serif;
-        }
-
-        .article-subtitle { color: rgba(255,255,255,0.9); font-size: 1.05em; margin-bottom: 12px; font-style: italic; }
-
-        .article-meta {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1.2rem;
-            font-size: 0.95rem;
-        }
-
-        .article-meta span {
-            background: rgba(0,0,0,0.25);
-            padding: 5px 14px;
-            border-radius: 18px;
-            backdrop-filter: blur(4px);
-        }
-
-        .article-meta .author { font-weight: 600; }
-        .article-meta .category { color: rgba(255,215,0,0.9); }
-        .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
-        body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
-
-        /* ===== 结构分析样式 ===== */
-        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
-        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
-        .structure-analysis h4 { color: #1a237e; margin-bottom: 12px; font-size: 1em; }
-        body.dark-mode .structure-analysis h4 { color: #3949ab; }
-        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
-        body.dark-mode .analysis-item { border-color: #444; }
-        .analysis-label { font-weight: 600; color: #1a237e; font-size: 0.92em; display: block; margin-bottom: 4px; }
-        body.dark-mode .analysis-label { color: #3949ab; }
-        .analysis-label.highlight { color: #3949ab; font-size: 0.96em; }
-        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
-        body.dark-mode .analysis-item p { color: #ccc; }
-
-        .tab-nav { display: flex; gap: 4px; margin: 30px 0 0; border-bottom: 2px solid #e2e8f0; overflow-x: auto; background: #f8f8f8; padding: 1rem; border-radius: 12px 12px 0 0; }
-        .tab-btn { background: none; border: none; padding: 10px 18px; cursor: pointer; color: #666; font-size: 0.95em; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; border-radius: 8px; }
-        .tab-btn:hover { background: #e8e8e8; color: #1a237e; }
-        .tab-btn.active { background: #1a237e; color: white; font-weight: 600; }
-        .tab-content { display: none; padding: 30px 0; background: white; border-radius: 0 0 12px 12px; }
-        .tab-content.active { display: block; }
-        .text-intro { background: linear-gradient(135deg, #e8eaf6, #c5cae9); border-left: 4px solid #3949ab; padding: 14px 20px; margin-bottom: 24px; border-radius: 0 6px 6px 0; }
-        .chapter { margin-bottom: 16px; border: 1px solid #e8e8e8; border-radius: 8px; overflow: hidden; }
-        .chapter-title { background: linear-gradient(135deg, #1a237e, #3949ab); padding: 14px 20px; margin: 0; cursor: pointer; font-size: 1.05em; color: white; display: flex; align-items: center; gap: 10px; user-select: none; transition: filter 0.2s; }
-        .chapter-title:hover { filter: brightness(1.1); }
-        .toggle-icon { font-size: 0.8em; transition: transform 0.2s; flex-shrink: 0; }
-        .chapter-title.collapsed .toggle-icon { transform: rotate(-90deg); }
-        .chapter-content { padding: 20px 24px; line-height: 1.9; color: #2d2d2d; font-size: 1em; background: #fafafa; }
-        .chapter-content p { margin-bottom: 16px; text-indent: 2em; }
-        .reading-guide, .difficulty-section, .dialogue-section, .action-section, .visualization-section, .puzzle-section, .further-reading { line-height: 1.9; }
-        .guide-block, .diff-item, .dialogue-block, .action-item, .chart-block, .reading-item { margin-bottom: 28px; padding: 20px 24px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .guide-block h3, .dialogue-block h3, .action-item h3 { color: #1a237e; margin-bottom: 12px; font-size: 1.05em; }
-        .wrong { background: #fff5f5; border-left: 4px solid #fc8181; padding: 10px 16px; margin-bottom: 10px; border-radius: 0 4px 4px 0; color: #742a2a; }
-        .correct { background: #f0fff4; border-left: 4px solid #68d391; padding: 10px 16px; border-radius: 0 4px 4px 0; color: #1a4731; }
-        .chart-container { position: relative; }
-        .chart-block h3 { color: #1a237e; margin-bottom: 8px; }
-        .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
-        .theory-tree { text-align: center; padding: 20px 0; }
-        .theory-node { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 0.9em; margin: 6px; }
-        .theory-node.root { background: #1a237e; color: white; font-weight: bold; }
-        .theory-node.branch { background: #2d3748; color: white; }
-        .theory-node.current { background: #1a237e; color: white; font-weight: bold; }
-        .theory-node.related { background: #e2e8f0; color: #333; }
-        .theory-branches { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 12px; }
-        .theory-branch { text-align: center; }
-        .theory-sub { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; justify-content: center; }
-        .puzzle-intro, .puzzle-position, .puzzle-connection, .puzzle-modern { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .puzzle-position h3, .puzzle-connection h3, .puzzle-modern h3 { color: #1a237e; margin-bottom: 12px; }
-        .further-reading .reading-item h3 { color: #1a237e; margin-bottom: 8px; font-size: 1em; }
-
-        /* 理论拼图增强样式 */
-        .puzzle-timeline { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .puzzle-timeline h3 { color: #1a237e; margin-bottom: 16px; }
-        .timeline-track { display: flex; gap: 0; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
-        .timeline-item { display: flex; flex-direction: column; align-items: center; min-width: 76px; position: relative; flex: 1; }
-        .timeline-item::after { content: ''; position: absolute; top: 9px; left: 50%; width: 100%; height: 2px; background: #ddd; z-index: 0; }
-        .timeline-item:last-child::after { display: none; }
-        .timeline-dot { width: 18px; height: 18px; border-radius: 50%; background: #ddd; border: 2px solid #bbb; z-index: 1; position: relative; }
-        .timeline-dot-active { width: 22px; height: 22px; border-radius: 50%; background: #3949ab; border: 3px solid #1a237e; z-index: 1; position: relative; box-shadow: 0 0 8px rgba(57,73,171,0.4); }
-        .timeline-year { font-size: 0.75em; color: #555; margin-top: 6px; font-weight: 500; }
-        .timeline-label { font-size: 0.68em; color: #888; text-align: center; margin-top: 2px; line-height: 1.3; }
-        .timeline-here { font-size: 0.7em; color: #3949ab; font-weight: bold; margin-top: 2px; white-space: nowrap; }
-        .timeline-item.active .timeline-year { color: #3949ab; font-weight: bold; }
-
-        .puzzle-links { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .puzzle-links h3 { color: #1a237e; margin-bottom: 8px; }
-        .puzzle-links-note { color: #888; font-size: 0.85em; margin-bottom: 16px; line-height: 1.6; }
-        .conn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
-        .conn-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: white; border-radius: 8px; border: 1px solid #e8e8e8; border-left: 4px solid #1a237e; text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.15s; }
-        a.conn-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
-        .conn-wip { opacity: 0.5; cursor: default; }
-        .conn-dir { font-size: 1.1em; font-weight: bold; line-height: 1; }
-        .conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; margin-top: 2px; }
-        .conn-label { font-size: 0.76em; color: #888; }
-        .conn-relation { font-size: 0.82em; color: #555; line-height: 1.5; margin-top: 3px; border-top: 1px solid #f0f0f0; padding-top: 4px; }
-
-        /* ===== Dark Mode ===== */
-        body.dark-mode .article-header { background: linear-gradient(135deg, #0a0a15 0%, #0d0d20 100%); }
-        body.dark-mode .tab-nav { background: #2a2a2a; border-color: #444; }
-        body.dark-mode .tab-btn:hover { background: #3a3a3a; color: #3949ab; }
-        body.dark-mode .tab-content { background: #1a1a1a; }
-        body.dark-mode .text-intro { background: linear-gradient(135deg, #1a1a2e, #252540); }
-        body.dark-mode .chapter { border-color: #444; }
-        body.dark-mode .chapter-content { background: #222; }
-        body.dark-mode .chapter-content p { color: #e0e0e0; }
-        body.dark-mode .guide-block, body.dark-mode .diff-item, body.dark-mode .dialogue-block, body.dark-mode .action-item, body.dark-mode .chart-block, body.dark-mode .reading-item, body.dark-mode .puzzle-intro, body.dark-mode .puzzle-position, body.dark-mode .puzzle-connection, body.dark-mode .puzzle-modern, body.dark-mode .puzzle-timeline, body.dark-mode .puzzle-links { background: #2a2a2a; border-color: #444; }
-        body.dark-mode .guide-block h3, body.dark-mode .dialogue-block h3, body.dark-mode .action-item h3, body.dark-mode .chart-block h3, body.dark-mode .puzzle-position h3, body.dark-mode .puzzle-connection h3, body.dark-mode .puzzle-modern h3, body.dark-mode .puzzle-timeline h3, body.dark-mode .puzzle-links h3 { color: #7986cb; }
-        body.dark-mode .wrong { background: #2d1a1a; color: #ef5350; }
-        body.dark-mode .correct { background: #1a2a1a; color: #66bb6a; }
-        body.dark-mode .theory-node.related { background: #333; color: #e0e0e0; }
-        body.dark-mode .timeline-dot { background: #555; border-color: #666; }
-        body.dark-mode .timeline-item::after { background: #444; }
-        body.dark-mode .conn-card { background: #2a2a2a; border-color: #444; }
-        body.dark-mode .conn-title { color: #e0e0e0; }
-
-        @media (max-width: 600px) { .article-header h1 { font-size: 1.8em; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .chapter-content { padding: 14px 16px; } .conn-grid { grid-template-columns: 1fr; } }
-    </style>
-
+    
     <script>
         function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -929,7 +771,6 @@
     <div id="downloadLinks"></div>
 </div>
 
-
 <script>
 (function(){
     const fab = document.getElementById("downloadFab");
@@ -956,10 +797,6 @@
     });
 })();
 </script>
-
-
-
-
 
     <script src="../js/main.js"></script>
 </body>

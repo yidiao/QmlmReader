@@ -5,195 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>唯物主义和经验批判主义 - 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/articles-detail.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --philosophy-primary: #8b0000;
-            --philosophy-secondary: #c41e3a;
-            --philosophy-gradient: linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
-            --philosophy-light: #fff5f5;
-            --philosophy-dark: #2a0000;
-            --gold: rgba(255,215,0,0.9);
+            --cat-primary: #8b0000;
+            --cat-secondary: #c41e3a;
+            --cat-gradient: linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
+            --cat-light: #fff5f5;
+            --cat-dark: #2d0a0a;
         }
-        
-        /* 返回按钮样式 */
-        .back-nav { background: #fafafa; border-bottom: 1px solid #e8e8e8; padding: 0.75rem 0; }
-        body.dark-mode .back-nav { background: #1a1a1a; border-color: #333; }
-        body.dark-mode .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
-
-.article-header { background: linear-gradient(135deg, #1a0a0a 0%, #2d0a0a 100%); }
-        .back-link {
-            display: inline-flex; align-items: center; gap: 6px; color: var(--philosophy-primary);
-            text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 8px;
-            transition: all 0.2s; border: 2px solid var(--philosophy-primary);
-        }
-        .back-link:hover { background: var(--philosophy-primary); color: white; }
-        body.dark-mode .back-link { color: var(--philosophy-secondary); border-color: var(--philosophy-secondary); }
-        body.dark-mode .back-link:hover { background: var(--philosophy-secondary); color: white; }
-        
-        /* 头部样式 */
-        .article-header {
-            position: relative; overflow: hidden; padding: 3rem 2rem; text-align: center; color: white;
-            background: linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
-        }
-        .article-header::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3Ccircle cx='20' cy='80' r='25' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='0.5'/%3E%3Ccircle cx='80' cy='20' r='20' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='0.5'/%3E%3C/svg%3E");
-            background-size: 120px; pointer-events: none;
-        }
-        .article-header > * {
-            position: relative;
-            z-index: 1;
-        }
-        .importance-badge {
-            display: inline-block; background: rgba(255,215,0,0.9); color: #8b0000; padding: 6px 20px;
-            border-radius: 25px; font-size: 0.9rem; font-weight: bold; margin-bottom: 1rem;
-            position: relative; z-index: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        .article-header h1 {
-            font-size: 2.5rem; margin: 0.5rem 0; text-shadow: 2px 3px 6px rgba(0,0,0,0.4);
-            position: relative; z-index: 1; font-family: 'STSong', 'SimSun', serif;
-        }
-        .article-subtitle { font-size: 1.15rem; opacity: 0.9; margin: 0.5rem 0; position: relative; z-index: 1; font-style: italic; }
-        .article-meta {
-            display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.2rem;
-            font-size: 0.95rem; position: relative; z-index: 1;
-        }
-        .article-meta span { background: rgba(0,0,0,0.25); padding: 5px 14px; border-radius: 18px; backdrop-filter: blur(4px); }
-        .article-meta .author { font-weight: 600; }
-        .article-meta .category { color: rgba(255,215,0,0.9); }
-
-        /* Tab导航 */
-        .tab-nav {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;
-            background: #f8f8f8; padding: 1rem; border-radius: 12px 12px 0 0;
-            border-bottom: 2px solid #e0e0e0; position: sticky; top: 70px; z-index: 50;
-        }
-        body.dark-mode .tab-nav { background: #2a2a2a; border-color: #444; }
-        .tab-btn {
-            padding: 10px 16px; border: none; background: transparent; color: #666;
-            cursor: pointer; font-size: 0.9rem; border-radius: 8px; transition: all 0.25s;
-        }
-        .tab-btn:hover { background: #e8e8e8; color: #333; }
-        body.dark-mode .tab-btn:hover { background: #3a3a3a; color: #fff; }
-        .tab-btn.active { color: white; font-weight: 600; }
-        .article-header[data-category="哲学基础"] ~ .tab-nav .tab-btn.active { background: var(--philosophy-primary); }
-
-        /* Tab内容 */
-        .tab-content { display: none; background: white; padding: 2rem; border-radius: 0 0 12px 12px; min-height: 60vh; }
-        body.dark-mode .tab-content { background: #1a1a1a; }
-        .tab-content.active { display: block; }
-        .tab-heading {
-            text-align: center; margin-bottom: 1.5rem; padding-bottom: 0.75rem;
-            border-bottom: 2px solid; font-size: 1.3rem; color: var(--philosophy-primary); border-color: var(--philosophy-primary);
-        }
-
-        /* 原文样式 */
-        .original-text { line-height: 1.9; font-size: 1.05rem; }
-        .text-intro {
-            background: linear-gradient(135deg, #fff8e1, #ffecb3); border-left: 4px solid #ffc107;
-            padding: 1.2rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;
-        }
-        body.dark-mode .text-intro { background: linear-gradient(135deg, #2d2a1a, #3d3520); border-color: #ffc107; }
-
-        /* 章节 */
-        .chapter { margin-bottom: 1.5rem; border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden; }
-        .chapter:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        body.dark-mode .chapter { border-color: #444; }
-        .chapter-title {
-            padding: 1rem 1.3rem; margin: 0; cursor: pointer; display: flex; align-items: center;
-            gap: 10px; font-size: 1.1rem; user-select: none; transition: all 0.25s; color: white;
-            background: linear-gradient(135deg, var(--philosophy-primary), var(--philosophy-secondary));
-        }
-        .chapter-title:hover { filter: brightness(1.1); }
-        .toggle-icon { font-size: 0.8rem; transition: transform 0.25s; flex-shrink: 0; }
-        .chapter.collapsed .toggle-icon { transform: rotate(-90deg); }
-        .chapter-content {
-            padding: 1.3rem; background: #fafafa; max-height: 5000px; overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-        }
-        body.dark-mode .chapter-content { background: #222; }
-        .chapter.collapsed .chapter-content { max-height: 0; padding: 0 1.3rem; }
-        .chapter-content p { text-indent: 2em; margin-bottom: 1em; text-align: justify; }
-        body.dark-mode .chapter-content p { color: #e0e0e0; }
-
-        /* 其他Tab样式 */
-        .reading-tip { background: #f9f9f9; border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #eee; }
-        body.dark-mode .reading-tip { background: #2a2a2a; border-color: #444; }
-        .reading-tip h4 { margin-top: 0; padding-bottom: 0.5rem; border-bottom: 2px solid var(--philosophy-primary); color: var(--philosophy-primary); }
-        .difficulty-item { background: #f9f9f9; border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; }
-        body.dark-mode .difficulty-item { background: #2a2a2a; border-color: #444; }
-        .dialogue-item { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-radius: 12px; padding: 1.3rem; margin-bottom: 1.2rem; }
-        body.dark-mode .dialogue-item { background: linear-gradient(135deg, #1a2a1a, #1f2f1f); }
-        .dialogue-q { color: #2e7d32; font-weight: bold; margin-bottom: 0.6rem; }
-        .dialogue-a { padding-left: 1.5rem; border-left: 3px solid #2e7d32; margin-top: 0.6rem; color: #1565c0; }
-        .action-item { background: linear-gradient(135deg, #fff3e0, #ffe0b2); border-radius: 10px; padding: 1.2rem; margin-bottom: 1.2rem; display: flex; gap: 1rem; align-items: flex-start; }
-        body.dark-mode .action-item { background: linear-gradient(135deg, #2a2015, #352a1a); }
-        .action-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; color: white; background: var(--philosophy-primary); }
-        .action-item h4 { margin: 0 0 0.5rem; color: #e65100; }
-        body.dark-mode .action-item h4 { color: #ffb74d; }
-        .chart-container { background: #fafafa; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-        body.dark-mode .chart-container { background: #2a2a2a; border-color: #444; }
-        .chart-container h4 { text-align: center; margin: 0 0 15px; }
-        .further-item { background: #f9f9f9; border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; border-left: 4px solid var(--philosophy-primary); }
-        body.dark-mode .further-item { background: #2a2a2a; border-color: #444; }
-        .further-item h4 { margin: 0 0 0.5rem; color: var(--philosophy-primary); }
-
-        /* 页脚 */
-        .site-footer { background: #2a2a2a; color: #aaa; padding: 2rem 0; text-align: center; margin-top: 3rem; }
-        .footer-note { color: #ffd700; margin-top: 0.5rem; font-size: 0.9rem; }
-
-        @media(max-width:768px) {
-            .tab-nav { padding: 0.75rem; top: 60px; }
-            .tab-btn { padding: 8px 12px; font-size: 0.85em; }
-            .article-header { padding: 2rem 1rem; }
-            .article-header h1 { font-size: 1.8rem; }
-            .tab-content { padding: 1.25rem; }
-        }
-        .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
-        body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
-
-        /* ===== 结构分析样式 ===== */
-        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
-        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
-        .structure-analysis h4 { color: #8b0000; margin-bottom: 12px; font-size: 1em; }
-        body.dark-mode .structure-analysis h4 { color: #c41e3a; }
-        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
-        body.dark-mode .analysis-item { border-color: #444; }
-        .analysis-label { font-weight: 600; color: #8b0000; font-size: 0.92em; display: block; margin-bottom: 4px; }
-        body.dark-mode .analysis-label { color: #c41e3a; }
-        .analysis-label.highlight { color: #c41e3a; font-size: 0.96em; }
-        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
-        body.dark-mode .analysis-item p { color: #ccc; }
     
-        .puzzle-timeline { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .puzzle-timeline h3 { color: #8b0000; margin-bottom: 16px; }
-        .timeline-track { display: flex; gap: 0; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
-        .timeline-item { display: flex; flex-direction: column; align-items: center; min-width: 76px; position: relative; flex: 1; }
-        .timeline-item::after { content: ''; position: absolute; top: 9px; left: 50%; width: 100%; height: 2px; background: #ddd; z-index: 0; }
-        .timeline-item:last-child::after { display: none; }
-        .timeline-dot { width: 18px; height: 18px; border-radius: 50%; background: #ddd; border: 2px solid #bbb; z-index: 1; position: relative; }
-        .timeline-dot-active { width: 22px; height: 22px; border-radius: 50%; background: #c41e3a; border: 3px solid #8b0000; z-index: 1; position: relative; box-shadow: 0 0 8px rgba(196,30,58,0.4); }
-        .timeline-year { font-size: 0.75em; color: #555; margin-top: 6px; font-weight: 500; }
-        .timeline-label { font-size: 0.68em; color: #888; text-align: center; margin-top: 2px; line-height: 1.3; }
-        .timeline-here { font-size: 0.7em; color: #c41e3a; font-weight: bold; margin-top: 2px; white-space: nowrap; }
-        .timeline-item.active .timeline-year { color: #c41e3a; font-weight: bold; }
-        .puzzle-links { margin-bottom: 24px; padding: 18px 22px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; }
-        .puzzle-links h3 { color: #8b0000; margin-bottom: 8px; }
-        .puzzle-links-note { color: #888; font-size: 0.85em; margin-bottom: 16px; line-height: 1.6; }
-        .conn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
-        .conn-card { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; background: white; border-radius: 8px; border: 1px solid #e8e8e8; border-left: 4px solid #8b0000; text-decoration: none; color: inherit; transition: box-shadow 0.2s, transform 0.15s; }
-        a.conn-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-2px); }
-        .conn-wip { opacity: 0.5; cursor: default; }
-        .conn-dir { font-size: 1.1em; font-weight: bold; line-height: 1; }
-        .conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; margin-top: 2px; }
-        .conn-label { font-size: 0.76em; color: #888; }
-        .conn-relation { font-size: 0.82em; color: #555; line-height: 1.5; margin-top: 3px; border-top: 1px solid #f0f0f0; padding-top: 4px; }
-        .conn-wip-badge { display: inline-block; background: #fed7aa; color: #c05621; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; margin-top: 4px; }
-        @media (max-width: 600px) { .conn-grid { grid-template-columns: 1fr; } }
 
-    </style>
-<style>
 
     /* ⬇ 下载原文浮动按钮 */
     .download-fab {
@@ -203,7 +26,7 @@
         width: 56px;
         height: 56px;
         border-radius: 50%;
-        background: var(--party-primary, #c41e3a);
+        background: var(--cat-primary, #c41e3a);
         color: white;
         border: none;
         cursor: pointer;
@@ -239,7 +62,7 @@
         transition: all 0.2s;
     }
     body.dark-mode .dl-link { background: #3a3a3a; color: #eee; }
-    .dl-link:hover { background: var(--party-primary, #c41e3a); color: white; }
+    .dl-link:hover { background: var(--cat-primary, #c41e3a); color: white; }
 </style>
 </head>
 <body data-category="哲学基础">
@@ -1816,7 +1639,6 @@
     <div id="downloadLinks"></div>
 </div>
 
-
 <script>
 (function(){
     const fab = document.getElementById("downloadFab");
@@ -1863,10 +1685,6 @@
     updateDarkModeIcon();
 
 </script>
-
-
-
-
 
 </body>
 </html>

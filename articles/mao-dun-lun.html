@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>矛盾论 - 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/articles-detail.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* ===== 渐变头部 - 哲学基础类 ===== */
@@ -83,9 +84,10 @@
         body.dark-mode .back-nav a { color: #7986cb; }
 
         /* ===== Tab导航 ===== */
-        .tab-nav { display:flex;flex-wrap:wrap;justify-content:center;gap:4px;background:#f8f8f8;padding:1rem;border-radius:12px 12px 0 0;border-bottom:2px solid #e0e0e0;position:sticky;top:70px;z-index:50; }
+        .tab-nav { display:flex;flex-wrap:nowrap;justify-content:flex-start;gap:4px;background:#f8f8f8;padding:0.6rem 0.8rem;border-radius:12px 12px 0 0;border-bottom:2px solid #e0e0e0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none; }
+        .tab-nav::-webkit-scrollbar { display:none; }
         body.dark-mode .tab-nav { background:#2a2a2a;border-color:#444; }
-        .tab-btn { padding:10px 16px;border:none;background:transparent;color:#666;cursor:pointer;font-size:0.9rem;border-radius:8px;transition:all 0.25s; }
+        .tab-btn { padding:8px 14px;border:none;background:transparent;color:#666;cursor:pointer;font-size:0.88rem;border-radius:8px;transition:all 0.25s;white-space:nowrap;flex-shrink:0; }
         .tab-btn:hover { background:#e8e8e8;color:#333; }
         body.dark-mode .tab-btn:hover { background:#3a3a3a;color:#fff; }
         .tab-btn.active { background:#8b0000;color:white;font-weight:600; }
@@ -190,7 +192,7 @@
 
         /* ===== 响应式 ===== */
         @media(max-width:768px) {
-            .tab-nav { padding:0.75rem;top:60px; }
+            .tab-nav { padding:0.5rem 0.6rem; }
             .tab-btn { padding:8px 12px;font-size:0.85em; }
             .article-header { padding:2rem 1rem; }
             .article-header h1 { font-size:1.8rem; }

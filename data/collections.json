@@ -1,0 +1,52 @@
+[
+  {
+    "id": "mao-vol1",
+    "title": "毛泽东选集 · 第一卷",
+    "subtitle": "1925—1937 · 第一次、二次国内革命战争时期",
+    "cover": "☭",
+    "desc": "毛选第一卷收录了毛泽东在第一次国内革命战争时期和第二次国内革命战争时期的17篇重要著作，涵盖阶级分析、农民运动、红色政权建设、军事战略和哲学方法论。",
+    "articles": [
+      { "title": "中国社会各阶级的分析", "date": "1926.3", "slug": null, "status": "wip" },
+      { "title": "湖南农民运动考察报告", "date": "1927.3", "slug": "nong-min-yun-dong", "status": "ready" },
+      { "title": "中国的红色政权为什么能够存在？", "date": "1928.10", "slug": null, "status": "wip" },
+      { "title": "井冈山的斗争", "date": "1928.11", "slug": null, "status": "wip" },
+      { "title": "关于纠正党内的错误思想", "date": "1929.12", "slug": null, "status": "wip" },
+      { "title": "星星之火，可以燎原", "date": "1930.1", "slug": null, "status": "wip" },
+      { "title": "反对本本主义", "date": "1930.5", "slug": null, "status": "wip" },
+      { "title": "必须注意经济工作", "date": "1933.8", "slug": null, "status": "wip" },
+      { "title": "怎样分析农村阶级", "date": "1933.10", "slug": null, "status": "wip" },
+      { "title": "我们的经济政策", "date": "1934.1", "slug": null, "status": "wip" },
+      { "title": "关心群众生活，注意工作方法", "date": "1934.1", "slug": null, "status": "wip" },
+      { "title": "论反对日本帝国主义的策略", "date": "1935.12", "slug": null, "status": "wip" },
+      { "title": "中国革命战争的战略问题", "date": "1936.12", "slug": "zhan-lue-wen-ti", "status": "ready" },
+      { "title": "关于蒋介石声明的声明", "date": "1936.12", "slug": null, "status": "wip" },
+      { "title": "中国共产党在抗日时期的任务", "date": "1937.5", "slug": null, "status": "wip" },
+      { "title": "实践论", "date": "1937.7", "slug": "shi-jian-lun", "status": "ready" },
+      { "title": "矛盾论", "date": "1937.8", "slug": "mao-dun-lun", "status": "ready" }
+    ]
+  },
+  {
+    "id": "mao-military",
+    "title": "毛泽东军事思想",
+    "subtitle": "1936—1938 · 从内战到抗战的战略转变",
+    "cover": "⚔️",
+    "desc": "毛泽东军事思想是马克思主义军事理论中国化的典范。这三篇著作系统阐述了人民战争、积极防御和游击战的战略地位。",
+    "articles": [
+      { "title": "中国革命战争的战略问题", "date": "1936.12", "slug": "zhan-lue-wen-ti", "status": "ready" },
+      { "title": "抗日游击战争的战略问题", "date": "1938.5", "slug": "you-ji-zhan", "status": "ready" },
+      { "title": "论持久战", "date": "1938.5", "slug": "lun-chi-jiu-zhan", "status": "ready" },
+      { "title": "战争和战略问题", "date": "1938.11", "slug": "zhan-zheng-zhan-lue", "status": "ready" }
+    ]
+  },
+  {
+    "id": "mao-philosophy",
+    "title": "毛泽东哲学方法论",
+    "subtitle": "1937 · 延安窑洞里的理论创造",
+    "cover": "🧠",
+    "desc": "《实践论》和《矛盾论》是毛泽东哲学思想的双璧，奠定了'实事求是'思想路线的哲学基础，是马克思主义中国化的理论标志。",
+    "articles": [
+      { "title": "实践论", "date": "1937.7", "slug": "shi-jian-lun", "status": "ready" },
+      { "title": "矛盾论", "date": "1937.8", "slug": "mao-dun-lun", "status": "ready" }
+    ]
+  }
+]

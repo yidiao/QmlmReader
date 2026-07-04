@@ -131,9 +131,22 @@
             border-bottom: 1px solid #f0e6e6;
         }
 
+        body.dark-mode .science-card {
+            background: #2a2a2a;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+        body.dark-mode .science-card:hover {
+            box-shadow: 0 12px 28px rgba(0,0,0,0.4);
+        }
         body.dark-mode .science-card-header {
             background: #333;
             border-color: #444;
+        }
+        body.dark-mode .science-card-body {
+            background: #2a2a2a;
+        }
+        body.dark-mode .science-card-body p {
+            color: #bbb;
         }
 
         .science-card-header h3 {
@@ -193,9 +206,31 @@
                 margin: 0 0 0.8rem 0;
             }
 
-        body.dark-mode .science-card-body p {
-            color: #ccc;
-        }
+        body.dark-mode .science-card-header .sub { color: #aaa; }
+        body.dark-mode .science-card.figures h3,
+        body.dark-mode .science-card.fig-west h3,
+        body.dark-mode .science-card.txt-found h3,
+        body.dark-mode .science-card.mov-organized h3 { color: #ff8a8a; }
+        body.dark-mode .science-card.movements h3,
+        body.dark-mode .science-card.term-strategy h3,
+        body.dark-mode .science-card.mov-spontaneous h3,
+        body.dark-mode .science-card.txt-lenin h3 { color: #fbbf24; }
+        body.dark-mode .science-card.terms h3,
+        body.dark-mode .science-card.term-econ h3,
+        body.dark-mode .science-card.fig-global h3 { color: #6ee7b7; }
+        body.dark-mode .science-card.texts h3,
+        body.dark-mode .science-card.term-org h3,
+        body.dark-mode .science-card.txt-west h3,
+        body.dark-mode .science-card.fig-culture h3 { color: #c4b5fd; }
+        body.dark-mode .science-card.term-philo h3 { color: #67e8f9; }
+        body.dark-mode .science-card.fig-system h3 { color: #93c5fd; }
+        body.dark-mode .science-card.fig-critique h3 { color: #fcd34d; }
+        body.dark-mode .science-card.fig-invert h3,
+        body.dark-mode .science-card.txt-polemic h3,
+        body.dark-mode .science-card.mov-turn h3 { color: #d1d5db; }
+        body.dark-mode .science-card.mov-china h3,
+        body.dark-mode .science-card.txt-mao h3 { color: #fca5a5; }
+        body.dark-mode .science-card.mov-antiimp h3 { color: #93c5fd; }
 
         .tag-group {
             display: flex;

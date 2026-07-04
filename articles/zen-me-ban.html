@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>怎么办？ - 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/articles-detail.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
     :root {
-        --party-primary: #6a1b9a;
-        --party-secondary: #8e24aa;
-        --party-gradient: linear-gradient(135deg, #2a0a3a 0%, #6a1b9a 50%, #8e24aa 100%);
-        --party-light: #f3e5f5;
-        --party-dark: #1a0a2a;
+        --cat-primary: #6a1b9a;
+        --cat-secondary: #8e24aa;
+        --cat-gradient: linear-gradient(135deg, #2a0a3a 0%, #6a1b9a 50%, #8e24aa 100%);
+        --cat-light: #f3e5f5;
+        --cat-dark: #1a0a2a;
         --gold: rgba(255,215,0,0.9);
     }
     .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
@@ -20,7 +21,7 @@
 .article-header {
         position: relative; overflow: hidden; padding: 3rem 2rem; text-align: center; color: white;
     }
-    .article-header[data-category="党的建设"] { background: var(--party-gradient); }
+    .article-header[data-category="党的建设"] { background: var(--cat-gradient); }
     .article-header::before {
         content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3C/svg%3E");
@@ -58,7 +59,7 @@
     .tab-btn:hover { background: #e8e8e8; color: #333; }
     body.dark-mode .tab-btn:hover { background: #3a3a3a; color: #fff; }
     .tab-btn.active { color: white; font-weight: 600; }
-    .article-header[data-category="党的建设"] ~ .tab-nav .tab-btn.active { background: var(--party-primary); }
+    .article-header[data-category="党的建设"] ~ .tab-nav .tab-btn.active { background: var(--cat-primary); }
 
     /* Tab内容 */
     .tab-content { display: none; background: white; padding: 2rem; border-radius: 0 0 12px 12px; min-height: 60vh; }
@@ -66,7 +67,7 @@
     .tab-content.active { display: block; }
     .tab-heading {
         text-align: center; margin-bottom: 1.5rem; padding-bottom: 0.75rem;
-        border-bottom: 2px solid; font-size: 1.3rem; color: var(--party-primary); border-color: var(--party-primary);
+        border-bottom: 2px solid; font-size: 1.3rem; color: var(--cat-primary); border-color: var(--cat-primary);
     }
 
     /* 原文样式 */
@@ -84,7 +85,7 @@
     .chapter-title {
         padding: 1rem 1.3rem; margin: 0; cursor: pointer; display: flex; align-items: center;
         gap: 10px; font-size: 1.1rem; user-select: none; transition: all 0.25s; color: white;
-        background: linear-gradient(135deg, var(--party-primary), var(--party-secondary));
+        background: linear-gradient(135deg, var(--cat-primary), var(--cat-secondary));
     }
     .chapter-title:hover { filter: brightness(1.1); }
     .toggle-icon { font-size: 0.8rem; transition: transform 0.25s; flex-shrink: 0; }
@@ -101,7 +102,7 @@
     /* 其他Tab样式 */
     .reading-tip { background: #f9f9f9; border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #eee; }
     body.dark-mode .reading-tip { background: #2a2a2a; border-color: #444; }
-    .reading-tip h4 { margin-top: 0; padding-bottom: 0.5rem; border-bottom: 2px solid var(--party-primary); color: var(--party-primary); }
+    .reading-tip h4 { margin-top: 0; padding-bottom: 0.5rem; border-bottom: 2px solid var(--cat-primary); color: var(--cat-primary); }
     .difficulty-item { background: #f9f9f9; border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; }
     body.dark-mode .difficulty-item { background: #2a2a2a; border-color: #444; }
     .dialogue-item { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-radius: 12px; padding: 1.3rem; margin-bottom: 1.2rem; }
@@ -110,27 +111,27 @@
     .dialogue-a { padding-left: 1.5rem; border-left: 3px solid #2e7d32; margin-top: 0.6rem; color: #1565c0; }
     .action-item { background: linear-gradient(135deg, #fff3e0, #ffe0b2); border-radius: 10px; padding: 1.2rem; margin-bottom: 1.2rem; display: flex; gap: 1rem; align-items: flex-start; }
     body.dark-mode .action-item { background: linear-gradient(135deg, #2a2015, #352a1a); }
-    .action-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; color: white; background: var(--party-primary); }
+    .action-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; color: white; background: var(--cat-primary); }
     .action-item h4 { margin: 0 0 0.5rem; color: #e65100; }
     body.dark-mode .action-item h4 { color: #ffb74d; }
     .chart-container { background: #fafafa; border: 1px solid #eee; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
     body.dark-mode .chart-container { background: #2a2a2a; border-color: #444; }
     .chart-container h4 { text-align: center; margin: 0 0 15px; }
-    .further-item { background: #f9f9f9; border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; border-left: 4px solid var(--party-primary); }
+    .further-item { background: #f9f9f9; border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; border-left: 4px solid var(--cat-primary); }
     body.dark-mode .further-item { background: #2a2a2a; border-color: #444; }
-    .further-item h4 { margin: 0 0 0.5rem; color: var(--party-primary); }
+    .further-item h4 { margin: 0 0 0.5rem; color: var(--cat-primary); }
 
     /* 返回按钮样式 */
     .back-nav { background: #fafafa; border-bottom: 1px solid #e8e8e8; padding: 0.75rem 0; }
     body.dark-mode .back-nav { background: #1a1a1a; border-color: #333; }
     .back-link {
-        display: inline-flex; align-items: center; gap: 6px; color: var(--party-primary);
+        display: inline-flex; align-items: center; gap: 6px; color: var(--cat-primary);
         text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 8px;
-        transition: all 0.2s; border: 2px solid var(--party-primary);
+        transition: all 0.2s; border: 2px solid var(--cat-primary);
     }
-    .back-link:hover { background: var(--party-primary); color: white; }
-    body.dark-mode .back-link { color: var(--party-secondary); border-color: var(--party-secondary); }
-    body.dark-mode .back-link:hover { background: var(--party-secondary); color: white; }
+    .back-link:hover { background: var(--cat-primary); color: white; }
+    body.dark-mode .back-link { color: var(--cat-secondary); border-color: var(--cat-secondary); }
+    body.dark-mode .back-link:hover { background: var(--cat-secondary); color: white; }
     
     /* 页脚 */
     .site-footer { background: #2a2a2a; color: #aaa; padding: 2rem 0; text-align: center; margin-top: 3rem; }
@@ -163,8 +164,8 @@
         .conn-wip-badge { display: inline-block; background: #fed7aa; color: #c05621; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; margin-top: 4px; }
         @media (max-width: 600px) { .conn-grid { grid-template-columns: 1fr; } }
 
-    </style>
-<style>
+    
+
 
     /* ⬇ 下载原文浮动按钮 */
     .download-fab {
@@ -174,7 +175,7 @@
         width: 56px;
         height: 56px;
         border-radius: 50%;
-        background: var(--party-primary, #c41e3a);
+        background: var(--cat-primary, #c41e3a);
         color: white;
         border: none;
         cursor: pointer;
@@ -210,8 +211,17 @@
         transition: all 0.2s;
     }
     body.dark-mode .dl-link { background: #3a3a3a; color: #eee; }
-    .dl-link:hover { background: var(--party-primary, #c41e3a); color: white; }
-</style>
+    .dl-link:hover { background: var(--cat-primary, #c41e3a); color: white; }
+
+
+        :root {
+            --cat-primary: #6a1b9a;
+            --cat-secondary: #8e24aa;
+            --cat-gradient: linear-gradient(135deg, #2a0a3a 0%, #6a1b9a 50%, #8e24aa 100%);
+            --cat-light: #f3e5f5;
+            --cat-dark: #1a0a2a;
+        }
+    </style>
 </head>
 <body data-category="党的建设">
 
@@ -994,13 +1004,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
 
-
 <button class="download-fab" id="downloadFab" title="下载原文">⬇</button>
 <div class="download-menu" id="downloadMenu">
     <h4>📥 下载原文</h4>
     <div id="downloadLinks"></div>
 </div>
-
 
 <script>
 (function(){
@@ -1028,11 +1036,6 @@
     });
 })();
 </script>
-
-
-
-
-
 
 <script>
     // 标签切换
@@ -1176,7 +1179,6 @@
     }
     updateDarkModeIcon();
 </script>
-
 
 </body>
 </html>

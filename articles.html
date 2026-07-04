@@ -527,6 +527,54 @@
             border-color: #fbbf24;
         }
         
+        /* ========== 合集卡片 ========== */
+        .collections-section { margin-bottom: 2rem; }
+        .collections-section h3 { font-size: 1.2rem; color: #2c3e4e; margin-bottom: 1rem; border-left: 4px solid #c41e3a; padding-left: 0.8rem; }
+        body.dark-mode .collections-section h3 { color: #c0d0e0; }
+        .collections-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .collection-card { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); cursor: pointer; transition: all 0.3s; border: 1px solid #eee; display: flex; gap: 1rem; align-items: flex-start; }
+        body.dark-mode .collection-card { background: #2a2a2a; border-color: #3a3a3a; }
+        .collection-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+        .coll-icon { font-size: 2.5rem; line-height: 1; flex-shrink: 0; }
+        .coll-info { flex: 1; min-width: 0; }
+        .coll-info h4 { margin: 0 0 0.3rem; font-size: 1.05rem; color: #1a1a1a; }
+        body.dark-mode .coll-info h4 { color: #e0e0e0; }
+        .coll-info .coll-sub { font-size: 0.8rem; color: #999; margin-bottom: 0.4rem; }
+        .coll-info .coll-desc { font-size: 0.85rem; color: #666; line-height: 1.5; margin-bottom: 0.5rem; }
+        body.dark-mode .coll-info .coll-desc { color: #aaa; }
+        .coll-info .coll-count { font-size: 0.78rem; color: #c41e3a; font-weight: 500; }
+
+        /* 合集弹窗 */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s; backdrop-filter: blur(3px); }
+        .modal-overlay.open { opacity: 1; visibility: visible; }
+        .modal-dialog { background: white; border-radius: 20px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3); transform: translateY(20px); transition: transform 0.3s; }
+        .modal-overlay.open .modal-dialog { transform: translateY(0); }
+        body.dark-mode .modal-dialog { background: #2a2a2a; }
+        .modal-header { background: linear-gradient(135deg, #c41e3a, #8b0000); color: white; padding: 1.5rem 2rem; border-radius: 20px 20px 0 0; display: flex; justify-content: space-between; align-items: flex-start; }
+        .modal-header h2 { margin: 0; font-size: 1.3rem; }
+        .modal-header .modal-sub { font-size: 0.85rem; opacity: 0.85; margin-top: 0.3rem; }
+        .modal-close { background: rgba(255,255,255,0.2); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; flex-shrink: 0; transition: background 0.2s; }
+        .modal-close:hover { background: rgba(255,255,255,0.35); }
+        .modal-body { padding: 1rem 2rem 2rem; }
+        .modal-article { display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 1rem; border-radius: 10px; transition: background 0.15s; text-decoration: none; color: inherit; border-bottom: 1px solid #f5f5f5; }
+        body.dark-mode .modal-article { border-bottom-color: #3a3a3a; }
+        .modal-article:hover { background: #fdf0f0; }
+        body.dark-mode .modal-article:hover { background: #3a2020; }
+        .modal-article.wip { opacity: 0.55; pointer-events: none; }
+        .ma-num { width: 28px; height: 28px; border-radius: 50%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: bold; color: #888; flex-shrink: 0; }
+        body.dark-mode .ma-num { background: #3a3a3a; }
+        .ma-info { flex: 1; min-width: 0; }
+        .ma-info .ma-title { font-weight: 500; font-size: 0.95rem; color: #333; }
+        body.dark-mode .ma-info .ma-title { color: #ddd; }
+        .ma-info .ma-date { font-size: 0.78rem; color: #999; }
+        .ma-status { font-size: 0.75rem; padding: 2px 8px; border-radius: 10px; flex-shrink: 0; }
+        .ma-status.ready { background: #e8f5e9; color: #2e7d32; }
+        .ma-status.wip { background: #fff3e0; color: #e65100; }
+        body.dark-mode .ma-status.ready { background: #1a2a1a; color: #66bb6a; }
+        body.dark-mode .ma-status.wip { background: #2a2015; color: #ffb74d; }
+        .modal-desc { font-size: 0.9rem; color: #666; line-height: 1.6; margin-bottom: 1rem; }
+        body.dark-mode .modal-desc { color: #aaa; }
+
         /* 响应式 */
         @media (max-width: 768px) {
             .articles-page .container {
@@ -597,6 +645,14 @@
                 </div>
             </div>
             
+            <!-- 合集 -->
+            <div class="collections-section">
+                <h3>📚 主题合集</h3>
+                <div class="collections-grid" id="collectionsGrid">
+                    <div class="collection-card" style="opacity:0.5;"><div class="coll-icon">📚</div><div class="coll-info"><h4>加载中…</h4></div></div>
+                </div>
+            </div>
+
             <!-- 筛选栏 -->
             <div class="filter-bar">
                 <button class="filter-btn active" data-filter="all">📌 全部</button>
@@ -607,10 +663,19 @@
                 <button class="filter-btn" data-filter="stalin">⭐ 斯大林</button>
                 <button class="filter-btn" data-filter="mao">🌾 毛泽东</button>
             </div>
+            <div class="filter-bar" style="margin-top:-0.5rem;">
+                <button class="filter-btn cat-btn active" data-cat="all">🏷️ 全部类别</button>
+                <button class="filter-btn cat-btn" data-cat="military">⚔️ 军事战略</button>
+                <button class="filter-btn cat-btn" data-cat="philosophy">🧠 哲学基础</button>
+                <button class="filter-btn cat-btn" data-cat="economics">💰 政治经济学</button>
+                <button class="filter-btn cat-btn" data-cat="politics">📜 政治理论</button>
+                <button class="filter-btn cat-btn" data-cat="party">🏛️ 党的建设</button>
+                <button class="filter-btn cat-btn" data-cat="culture">🎨 思想文化</button>
+            </div>
 
             <div class="article-grid">
                 <!-- 五星文章 - 毛泽东 -->
-                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                <article class="article-card priority-5" data-category="military" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1938年5月</span>
@@ -626,7 +691,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                <article class="article-card priority-5" data-category="philosophy" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1937年7月</span>
@@ -642,7 +707,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                <article class="article-card priority-5" data-category="philosophy" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1937年8月</span>
@@ -658,7 +723,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                <article class="article-card priority-5" data-category="military" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1936年12月</span>
@@ -674,7 +739,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                <article class="article-card priority-5" data-category="military" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1938年5月</span>
@@ -690,7 +755,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                <article class="article-card priority-5" data-category="military" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1938年11月</span>
@@ -706,7 +771,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                <article class="article-card priority-5" data-category="politics" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1940年1月</span>
@@ -722,7 +787,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                <article class="article-card priority-5" data-category="culture" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1942年5月</span>
@@ -738,7 +803,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                <article class="article-card priority-5" data-category="culture" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1944年4月</span>
@@ -754,7 +819,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="mao">
+                <article class="article-card priority-5" data-category="politics" data-priority="5" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1957年2月</span>
@@ -771,7 +836,7 @@
                 </article>
 
                 <!-- 五星文章 - 列宁（已完成） -->
-                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5" data-category="party" data-priority="5" data-author="lenin">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1902年</span>
@@ -787,7 +852,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5" data-category="philosophy" data-priority="5" data-author="lenin">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1908年</span>
@@ -803,7 +868,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5" data-category="economics" data-priority="5" data-author="lenin">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1916年</span>
@@ -819,7 +884,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5" data-category="politics" data-priority="5" data-author="lenin">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1917年</span>
@@ -835,7 +900,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5 wip" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5 wip" data-category="politics" data-priority="5" data-author="lenin">
                     <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
@@ -850,7 +915,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5" data-category="politics" data-priority="5" data-author="lenin">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1913年</span>
@@ -866,7 +931,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="lenin">
+                <article class="article-card priority-5" data-category="politics" data-priority="5" data-author="lenin">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1923年1月</span>
@@ -883,7 +948,7 @@
                 </article>
 
                 <!-- 五星文章 - 马克思恩格斯 -->
-                <article class="article-card priority-5" data-priority="5" data-author="marx">
+                <article class="article-card priority-5" data-category="politics" data-priority="5" data-author="marx">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1848年2月</span>
@@ -899,7 +964,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="marx">
+                <article class="article-card priority-5" data-category="politics" data-priority="5" data-author="marx">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1875年</span>
@@ -915,7 +980,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="marx">
+                <article class="article-card priority-5" data-category="philosophy" data-priority="5" data-author="marx">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1844年</span>
@@ -931,7 +996,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4" data-priority="4" data-author="marx">
+                <article class="article-card priority-4" data-category="philosophy" data-priority="4" data-author="marx">
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
                         <span class="article-date">1844年</span>
@@ -947,7 +1012,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4" data-priority="4" data-author="marx">
+                <article class="article-card priority-4" data-category="philosophy" data-priority="4" data-author="marx">
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
                         <span class="article-date">1845年</span>
@@ -963,7 +1028,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4" data-priority="4" data-author="marx">
+                <article class="article-card priority-4" data-category="philosophy" data-priority="4" data-author="marx">
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
                         <span class="article-date">1845-1846年</span>
@@ -979,7 +1044,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="marx">
+                <article class="article-card priority-5" data-category="philosophy" data-priority="5" data-author="marx">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1878年</span>
@@ -995,7 +1060,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="marx">
+                <article class="article-card priority-5" data-category="philosophy" data-priority="5" data-author="marx">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1884年</span>
@@ -1012,7 +1077,7 @@
                 </article>
 
                 <!-- 五星文章 - 斯大林 -->
-                <article class="article-card priority-5" data-priority="5" data-author="stalin">
+                <article class="article-card priority-5" data-category="politics" data-priority="5" data-author="stalin">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1924年</span>
@@ -1028,7 +1093,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5" data-priority="5" data-author="stalin">
+                <article class="article-card priority-5" data-category="politics" data-priority="5" data-author="stalin">
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
                         <span class="article-date">1926年11月</span>
@@ -1045,7 +1110,7 @@
                 </article>
 
                 <!-- 五星文章 - 斯大林（施工中） -->
-                <article class="article-card priority-5 wip" data-priority="5" data-author="stalin">
+                <article class="article-card priority-5 wip" data-category="party" data-priority="5" data-author="stalin">
                     <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
@@ -1060,7 +1125,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-5 wip" data-priority="5" data-author="stalin">
+                <article class="article-card priority-5 wip" data-category="politics" data-priority="5" data-author="stalin">
                     <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge">五星</span>
@@ -1076,7 +1141,7 @@
                 </article>
 
                 <!-- 四星文章 - 斯大林 -->
-                <article class="article-card priority-4 wip" data-priority="4" data-author="stalin">
+                <article class="article-card priority-4 wip" data-category="politics" data-priority="4" data-author="stalin">
                     <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
@@ -1091,7 +1156,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4 wip" data-priority="4" data-author="stalin">
+                <article class="article-card priority-4 wip" data-category="politics" data-priority="4" data-author="stalin">
                     <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
@@ -1106,7 +1171,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4 wip" data-priority="4" data-author="stalin">
+                <article class="article-card priority-4 wip" data-category="politics" data-priority="4" data-author="stalin">
                     <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
@@ -1121,7 +1186,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4 wip" data-priority="4" data-author="stalin">
+                <article class="article-card priority-4 wip" data-category="politics" data-priority="4" data-author="stalin">
                     <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
@@ -1136,7 +1201,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4 wip" data-priority="4" data-author="stalin">
+                <article class="article-card priority-4 wip" data-category="politics" data-priority="4" data-author="stalin">
                     <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
@@ -1152,7 +1217,7 @@
                 </article>
 
                 <!-- 四星文章 - 毛泽东 -->
-                <article class="article-card priority-4 wip" data-priority="4" data-author="mao">
+                <article class="article-card priority-4 wip" data-category="politics" data-priority="4" data-author="mao">
                     <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
@@ -1167,7 +1232,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4" data-priority="4" data-author="mao">
+                <article class="article-card priority-4" data-category="politics" data-priority="4" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
                         <span class="article-date">1927年3月</span>
@@ -1183,7 +1248,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4 wip" data-priority="4" data-author="mao">
+                <article class="article-card priority-4 wip" data-category="politics" data-priority="4" data-author="mao">
                     <span class="card-wip-badge">🚧 施工中</span>
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
@@ -1198,7 +1263,7 @@
                     </div>
                 </article>
 
-                <article class="article-card priority-4" data-priority="4" data-author="mao">
+                <article class="article-card priority-4" data-category="politics" data-priority="4" data-author="mao">
                     <div class="card-header">
                         <span class="priority-badge" style="background: #666;">四星</span>
                         <span class="article-date">1956年4月</span>
@@ -1295,6 +1360,20 @@
         </div>
     </main>
 
+    <!-- 合集弹窗 -->
+    <div class="modal-overlay" id="collectionModal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <div><h2 id="modalTitle"></h2><div class="modal-sub" id="modalSub"></div></div>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc" id="modalDesc"></p>
+                <div id="modalArticles"></div>
+            </div>
+        </div>
+    </div>
+
     <footer class="site-footer">
         <div class="container">
             <p>青年马列毛主义驿站 | Qmlm Reader</p>
@@ -1304,25 +1383,100 @@
 
     <script src="js/main.js"></script>
     <script>
-        // 筛选功能
-        document.querySelectorAll('.filter-btn').forEach(btn => {
+        // ========== 合集加载 & 弹窗 ==========
+        let collectionsData = [{"id":"mao-vol1","title":"毛泽东选集 · 第一卷","subtitle":"1925—1937 · 第一次、二次国内革命战争时期","cover":"☭","desc":"毛选第一卷17篇，涵盖阶级分析、农民运动、红色政权、军事战略和哲学方法论。","articles":[{"title":"中国社会各阶级的分析","date":"1926.3","slug":null,"status":"wip"},{"title":"湖南农民运动考察报告","date":"1927.3","slug":"nong-min-yun-dong","status":"ready"},{"title":"中国的红色政权为什么能够存在？","date":"1928.10","slug":null,"status":"wip"},{"title":"井冈山的斗争","date":"1928.11","slug":null,"status":"wip"},{"title":"关于纠正党内的错误思想","date":"1929.12","slug":null,"status":"wip"},{"title":"星星之火，可以燎原","date":"1930.1","slug":null,"status":"wip"},{"title":"反对本本主义","date":"1930.5","slug":null,"status":"wip"},{"title":"必须注意经济工作","date":"1933.8","slug":null,"status":"wip"},{"title":"怎样分析农村阶级","date":"1933.10","slug":null,"status":"wip"},{"title":"我们的经济政策","date":"1934.1","slug":null,"status":"wip"},{"title":"关心群众生活，注意工作方法","date":"1934.1","slug":null,"status":"wip"},{"title":"论反对日本帝国主义的策略","date":"1935.12","slug":null,"status":"wip"},{"title":"中国革命战争的战略问题","date":"1936.12","slug":"zhan-lue-wen-ti","status":"ready"},{"title":"关于蒋介石声明的声明","date":"1936.12","slug":null,"status":"wip"},{"title":"中国共产党在抗日时期的任务","date":"1937.5","slug":null,"status":"wip"},{"title":"实践论","date":"1937.7","slug":"shi-jian-lun","status":"ready"},{"title":"矛盾论","date":"1937.8","slug":"mao-dun-lun","status":"ready"}]},{"id":"mao-vol2","title":"毛泽东选集 · 第二卷","subtitle":"1937—1941 · 抗日战争时期（上）","cover":"☭","desc":"抗战初期至相持阶段，毛泽东关于持久战、游击战略、统一战线和新民主主义理论的经典论述。","articles":[{"title":"反对日本进攻的方针、办法和前途","date":"1937.7","slug":null,"status":"wip"},{"title":"为动员一切力量争取抗战胜利而斗争","date":"1937.8","slug":null,"status":"wip"},{"title":"反对自由主义","date":"1937.9","slug":null,"status":"wip"},{"title":"上海太原失陷以后抗日战争的形势和任务","date":"1937.11","slug":null,"status":"wip"},{"title":"抗日游击战争的战略问题","date":"1938.5","slug":"you-ji-zhan","status":"ready"},{"title":"论持久战","date":"1938.5","slug":"lun-chi-jiu-zhan","status":"ready"},{"title":"中国共产党在民族战争中的地位","date":"1938.10","slug":null,"status":"wip"},{"title":"统一战线中的独立自主问题","date":"1938.11","slug":null,"status":"wip"},{"title":"战争和战略问题","date":"1938.11","slug":"zhan-zheng-zhan-lue","status":"ready"},{"title":"青年运动的方向","date":"1939.5","slug":null,"status":"wip"},{"title":"《共产党人》发刊词","date":"1939.10","slug":null,"status":"wip"},{"title":"中国革命和中国共产党","date":"1939.12","slug":null,"status":"wip"},{"title":"新民主主义论","date":"1940.1","slug":"xin-min-zhu","status":"ready"},{"title":"论政策","date":"1940.12","slug":null,"status":"wip"}]},{"id":"mao-military","title":"毛泽东军事思想","subtitle":"1936—1938 · 从内战到抗战的战略转变","cover":"⚔️","desc":"系统阐述人民战争、积极防御和游击战战略地位，马克思主义军事理论中国化的典范。","articles":[{"title":"中国革命战争的战略问题","date":"1936.12","slug":"zhan-lue-wen-ti","status":"ready"},{"title":"抗日游击战争的战略问题","date":"1938.5","slug":"you-ji-zhan","status":"ready"},{"title":"论持久战","date":"1938.5","slug":"lun-chi-jiu-zhan","status":"ready"},{"title":"战争和战略问题","date":"1938.11","slug":"zhan-zheng-zhan-lue","status":"ready"}]},{"id":"mao-philosophy","title":"毛泽东哲学方法论","subtitle":"1937 · 延安窑洞里的理论创造","cover":"🧠","desc":"《实践论》《矛盾论》是毛泽东哲学双璧，奠定实事求是思想路线的哲学基础。","articles":[{"title":"实践论","date":"1937.7","slug":"shi-jian-lun","status":"ready"},{"title":"矛盾论","date":"1937.8","slug":"mao-dun-lun","status":"ready"}]},{"id":"marx-engels","title":"马克思恩格斯选集","subtitle":"1844—1878 · 从哲学批判到科学社会主义","cover":"📖","desc":"马克思主义形成与发展的关键文本：从巴黎手稿到《反杜林论》，覆盖哲学、政治经济学和科学社会主义三大组成部分。","articles":[{"title":"1844年经济学哲学手稿","date":"1844","slug":"1844-nian-jing-ji-xue-zhe-xue-shou-gao","status":"ready"},{"title":"关于费尔巴哈的提纲","date":"1845","slug":"guan-yu-fei-er-ba-ha-de-ti-gang","status":"ready"},{"title":"德意志意识形态","date":"1845—46","slug":"de-yi-zhi-yi-xing-tai","status":"ready"},{"title":"共产党宣言","date":"1848","slug":"gongchan-dan-yuan","status":"ready"},{"title":"《政治经济学批判》序言","date":"1859","slug":null,"status":"wip"},{"title":"资本论（第一卷）","date":"1867","slug":null,"status":"wip"},{"title":"法兰西内战","date":"1871","slug":null,"status":"wip"},{"title":"哥达纲领批判","date":"1875","slug":"ge-da-gang-ling","status":"ready"},{"title":"反杜林论","date":"1878","slug":"fan-du-lin-lun","status":"ready"},{"title":"社会主义从空想到科学的发展","date":"1880","slug":null,"status":"wip"},{"title":"家庭、私有制和国家的起源","date":"1884","slug":"jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan","status":"ready"},{"title":"路德维希·费尔巴哈和德国古典哲学的终结","date":"1886","slug":"hei-ge-er-fa-zhe-xue-pi-pan-dao-yan","status":"ready"}]},{"id":"lenin","title":"列宁选集","subtitle":"1902—1920 · 帝国主义时代与无产阶级革命","cover":"🔴","desc":"列宁在帝国主义时代对马克思主义的创造性发展：建党学说、帝国主义论、国家与革命、新经济政策。","articles":[{"title":"怎么办？","date":"1902","slug":"zen-me-ban","status":"ready"},{"title":"唯物主义和经验批判主义","date":"1909","slug":"wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi","status":"ready"},{"title":"马克思主义的三个来源和三个组成部分","date":"1913","slug":"ma-ke-si-zhu-yi-de-san-ge-lai-yuan","status":"ready"},{"title":"帝国主义是资本主义的最高阶段","date":"1916","slug":"di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan","status":"ready"},{"title":"国家与革命","date":"1917","slug":"guo-jia-yu-ge-ming","status":"ready"},{"title":"无产阶级革命和叛徒考茨基","date":"1918","slug":null,"status":"wip"},{"title":"共产主义运动中的'左派'幼稚病","date":"1920","slug":null,"status":"wip"}]},{"id":"stalin","title":"斯大林著作选","subtitle":"1924—1952 · 苏联社会主义建设时期","cover":"⭐","desc":"斯大林在列宁逝世后的理论贡献与苏联经验：一国建成社会主义、列宁主义基础、苏联经济问题。","articles":[{"title":"论列宁主义基础","date":"1924","slug":"lun-lunen-zhu-yi-ji-chu","status":"ready"},{"title":"论列宁主义的几个问题","date":"1926","slug":null,"status":"wip"},{"title":"关于苏联宪法草案","date":"1936","slug":null,"status":"wip"},{"title":"论辩证唯物主义和历史唯物主义","date":"1938","slug":"lun-shi-da-guan-xi","status":"ready"},{"title":"马克思主义和语言学问题","date":"1950","slug":null,"status":"wip"},{"title":"苏联社会主义经济问题","date":"1952","slug":null,"status":"wip"}]},{"id":"political-economy","title":"政治经济学经典","subtitle":"1844—1916 · 从劳动异化到帝国主义","cover":"💰","desc":"马克思主义政治经济学的核心文本链条：劳动价值论→剩余价值论→资本积累→帝国主义。","articles":[{"title":"1844年经济学哲学手稿","date":"1844","slug":"1844-nian-jing-ji-xue-zhe-xue-shou-gao","status":"ready"},{"title":"雇佣劳动与资本","date":"1849","slug":null,"status":"wip"},{"title":"《政治经济学批判》序言","date":"1859","slug":null,"status":"wip"},{"title":"工资、价格和利润","date":"1865","slug":null,"status":"wip"},{"title":"资本论（第一卷）","date":"1867","slug":null,"status":"wip"},{"title":"哥达纲领批判","date":"1875","slug":"ge-da-gang-ling","status":"ready"},{"title":"帝国主义是资本主义的最高阶段","date":"1916","slug":"di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan","status":"ready"},{"title":"苏联社会主义经济问题","date":"1952","slug":null,"status":"wip"}]},{"id":"party-building","title":"党的建设与组织理论","subtitle":"1902—1945 · 先锋队的自我锻造","cover":"🏛️","desc":"列宁式政党的组织原则、民主集中制、整风运动与思想建党——从怎么办到延安整风。","articles":[{"title":"怎么办？","date":"1902","slug":"zen-me-ban","status":"ready"},{"title":"共产主义运动中的'左派'幼稚病","date":"1920","slug":null,"status":"wip"},{"title":"论列宁主义基础","date":"1924","slug":"lun-lunen-zhu-yi-ji-chu","status":"ready"},{"title":"关于纠正党内的错误思想","date":"1929","slug":null,"status":"wip"},{"title":"《共产党人》发刊词","date":"1939","slug":null,"status":"wip"},{"title":"改造我们的学习","date":"1941","slug":null,"status":"wip"},{"title":"整顿党的作风","date":"1942","slug":null,"status":"wip"},{"title":"学习和时局","date":"1944","slug":"xue-xi-shi-ju","status":"ready"}]}];
+        renderCollections(collectionsData);
+
+        function renderCollections(data) {
+            const grid = document.getElementById('collectionsGrid');
+            grid.innerHTML = data.map((coll, i) => {
+                const ready = coll.articles.filter(a => a.status === 'ready').length;
+                const total = coll.articles.length;
+                return `<div class="collection-card" onclick="openCollection(${i})">
+                    <div class="coll-icon">${coll.cover}</div>
+                    <div class="coll-info">
+                        <h4>${coll.title}</h4>
+                        <div class="coll-sub">${coll.subtitle}</div>
+                        <div class="coll-desc">${coll.desc}</div>
+                        <div class="coll-count">📄 ${ready}/${total} 篇已收录</div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function openCollection(index) {
+            const coll = collectionsData[index];
+            if (!coll) return;
+            document.getElementById('modalTitle').textContent = coll.title;
+            document.getElementById('modalSub').textContent = coll.subtitle;
+            document.getElementById('modalDesc').textContent = coll.desc;
+            document.getElementById('modalArticles').innerHTML = coll.articles.map((a, i) => {
+                const cls = a.status === 'wip' ? ' modal-article wip' : 'modal-article';
+                const href = a.slug ? `articles/${a.slug}.html` : '#';
+                const statusBadge = a.status === 'ready'
+                    ? '<span class="ma-status ready">已收录</span>'
+                    : '<span class="ma-status wip">筹备中</span>';
+                return `<a href="${href}" class="${cls}">
+                    <span class="ma-num">${i + 1}</span>
+                    <span class="ma-info"><span class="ma-title">${a.title}</span><span class="ma-date">${a.date}</span></span>
+                    ${statusBadge}
+                </a>`;
+            }).join('');
+            document.getElementById('collectionModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('collectionModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.getElementById('collectionModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // 筛选功能 — 支持作者/星级 + 类别双维度
+        let activeAuthorFilter = 'all';
+        let activeCatFilter = 'all';
+
+        document.querySelectorAll('.filter-btn:not(.cat-btn)').forEach(btn => {
             btn.addEventListener('click', function() {
-                const filter = this.dataset.filter;
-                
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.filter-btn:not(.cat-btn)').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                
-                document.querySelectorAll('.article-card').forEach(card => {
-                    if (filter === 'all') {
-                        card.style.display = 'block';
-                    } else if (filter === 'mao' || filter === 'lenin' || filter === 'marx' || filter === 'stalin') {
-                        card.style.display = card.dataset.author === filter ? 'block' : 'none';
-                    } else {
-                        card.style.display = card.dataset.priority === filter ? 'block' : 'none';
-                    }
-                });
+                activeAuthorFilter = this.dataset.filter;
+                applyFilters();
             });
         });
+
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                activeCatFilter = this.dataset.cat;
+                applyFilters();
+            });
+        });
+
+        function applyFilters() {
+            document.querySelectorAll('.article-card').forEach(card => {
+                let show = true;
+                // Author/priority filter
+                const f = activeAuthorFilter;
+                if (f !== 'all') {
+                    if (f === 'mao' || f === 'lenin' || f === 'marx' || f === 'stalin') {
+                        if (card.dataset.author !== f) show = false;
+                    } else {
+                        if (card.dataset.priority !== f) show = false;
+                    }
+                }
+                // Category filter
+                const c = activeCatFilter;
+                if (c !== 'all' && card.dataset.category !== c) show = false;
+                card.style.display = show ? 'block' : 'none';
+            });
+        }
 
         // 拓展阅读折叠/展开
         function toggleExpand() {

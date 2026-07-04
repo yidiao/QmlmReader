@@ -5,6 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文艺 | 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ==================== 右侧悬停导航 ==================== */
+        .side-float-nav {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            font-family: inherit;
+        }
+        .sfn-toggle {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            background: linear-gradient(180deg, #c41e3a, #8b0000);
+            color: white;
+            padding: 0.85rem 0.4rem;
+            border-radius: 8px 0 0 8px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            box-shadow: -2px 2px 10px rgba(196,30,58,0.25);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            user-select: none;
+            line-height: 1.6;
+        }
+        .sfn-toggle:hover {
+            background: linear-gradient(180deg, #d42a44, #a00000);
+            padding-right: 0.6rem;
+        }
+        .sfn-panel {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(100%);
+            background: white;
+            border-radius: 12px 0 0 12px;
+            box-shadow: -4px 4px 20px rgba(0,0,0,0.15);
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(.4,0,.2,1);
+            min-width: 150px;
+            border: 1px solid #eee;
+            border-right: none;
+        }
+        .side-float-nav.expanded .sfn-panel {
+            transform: translateY(-50%) translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .sfn-panel a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.45rem 1rem;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+        .sfn-panel a:hover {
+            background: #fdf0f0;
+            color: #c41e3a;
+            padding-left: 1.3rem;
+        }
+        .sfn-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #c41e3a;
+            flex-shrink: 0;
+        }
+        .sfn-divider {
+            height: 1px;
+            background: #eee;
+            margin: 0.3rem 0.8rem;
+        }
+        .sfn-back-top {
+            color: #999 !important;
+            font-size: 0.8rem !important;
+        }
+        body.dark-mode .sfn-panel { background: #2a2a2a; border-color: #444; }
+        body.dark-mode .sfn-panel a { color: #ddd; }
+        body.dark-mode .sfn-panel a:hover { background: #3a2020; color: #ff6b6b; }
+        body.dark-mode .sfn-divider { background: #444; }
+    </style>
 </head>
 <body>
     <header class="site-header">
@@ -36,6 +127,20 @@
             </nav>
         </div>
     </header>
+
+    <!-- 右侧悬停导航 -->
+    <nav class="side-float-nav" id="sideNav">
+        <div class="sfn-toggle" onclick="toggleSideNav()" title="展开导航">☰ 快速导航</div>
+        <div class="sfn-panel">
+            <a href="#music" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span> 革命歌曲</a>
+            <a href="#videos" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span> 推荐视频</a>
+            <a href="#poetry" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span> 红色诗文</a>
+            <a href="#posters" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span> 海报与照片</a>
+            <a href="#quotes" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span> 经典语录</a>
+            <div class="sfn-divider"></div>
+            <a href="#" class="sfn-back-top" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});document.getElementById('sideNav').classList.remove('expanded')">⬆ 返回顶部</a>
+        </div>
+    </nav>
 
     <main class="gallery-page">
         <div class="container">
@@ -262,26 +367,24 @@
 
     <script src="js/main.js"></script>
     <script>
-        // 黑夜模式切换
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
-            updateDarkModeIcon();
+        // 右侧悬停导航
+        function toggleSideNav(){
+            document.getElementById('sideNav').classList.toggle('expanded');
         }
-
-        function updateDarkModeIcon() {
-            const btn = document.querySelector('.dark-mode-toggle');
-            if (btn) {
-                btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        document.addEventListener('click', function(e){
+            var nav = document.getElementById('sideNav');
+            if(nav && !nav.contains(e.target)){
+                nav.classList.remove('expanded');
             }
-        }
+        });
 
-        // 页面加载时恢复黑夜模式设置
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
+        function toggleDarkMode(){
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
+            document.querySelector('.dark-mode-toggle').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
         }
-        updateDarkModeIcon();
+        if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+        if(document.body.classList.contains('dark-mode')) document.querySelector('.dark-mode-toggle').textContent = '☀️';
     </script>
 </body>
 </html>

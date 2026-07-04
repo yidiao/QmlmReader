@@ -5,325 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>国家与革命 - 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/articles-detail.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --politics-primary: #1a237e;
-            --politics-secondary: #3949ab;
-            --politics-gradient: linear-gradient(135deg, #0d1b3e 0%, #1a237e 50%, #3949ab 100%);
-            --politics-light: #e8eaf6;
-            --politics-dark: #0a1628;
-            --gold: rgba(255,215,0,0.9);
+            --cat-primary: #1a237e;
+            --cat-secondary: #3949ab;
+            --cat-gradient: linear-gradient(135deg, #0d1259 0%, #1a237e 50%, #3949ab 100%);
+            --cat-light: #e8eaf6;
+            --cat-dark: #0a0a1a;
         }
+    
 
-        .back-nav { background: #fafafa; border-bottom: 1px solid #e8e8e8; padding: 0.75rem 0; }
-        body.dark-mode .back-nav { background: #1a1a1a; border-color: #333; }
-        .back-link {
-            display: inline-flex; align-items: center; gap: 6px; color: var(--politics-primary);
-            text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 8px;
-            transition: all 0.2s; border: 2px solid var(--politics-primary);
-        }
-        .back-link:hover { background: var(--politics-primary); color: white; }
-        body.dark-mode .back-link { color: var(--politics-secondary); border-color: var(--politics-secondary); }
-        body.dark-mode .back-link:hover { background: var(--politics-secondary); color: white; }
-
-        .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
-
-.article-header {
-            position: relative; overflow: hidden; padding: 3rem 2rem; text-align: center; color: white;
-            background: var(--politics-gradient);
-        }
-        .article-header::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3C/svg%3E");
-            background-size: 120px; pointer-events: none;
-        }
-        .article-header > * { position: relative; z-index: 1; }
-        .importance-badge {
-            display: inline-block; background: var(--gold); color: #1a237e; padding: 6px 20px;
-            border-radius: 25px; font-size: 0.9rem; font-weight: bold; margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-        .article-header h1 {
-            font-size: 2.5rem; margin: 0.5rem 0; text-shadow: 2px 3px 6px rgba(0,0,0,0.4);
-            font-family: 'STSong', 'SimSun', serif;
-        }
-        .article-subtitle { font-size: 1.15rem; opacity: 0.9; margin: 0.5rem 0; font-style: italic; }
-        .article-meta {
-            display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.2rem; font-size: 0.95rem;
-        }
-        .article-meta span { background: rgba(0,0,0,0.25); padding: 5px 14px; border-radius: 18px; }
-        .article-meta .author { font-weight: 600; }
-        .article-meta .category { color: var(--gold); }
-
-        .tab-nav {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 4px;
-            background: #f8f8f8; padding: 1rem; border-radius: 12px 12px 0 0;
-            border-bottom: 2px solid #e0e0e0; position: sticky; top: 70px; z-index: 50;
-        }
-        body.dark-mode .tab-nav { background: #2a2a2a; border-color: #444; }
-        .tab-btn {
-            padding: 10px 16px; border: none; background: transparent; color: #666;
-            cursor: pointer; font-size: 0.9rem; border-radius: 8px; transition: all 0.25s;
-        }
-        .tab-btn:hover { background: #e8e8e8; color: #333; }
-        body.dark-mode .tab-btn:hover { background: #3a3a3a; color: #fff; }
-        .tab-btn.active { color: white; font-weight: 600; background: var(--politics-primary); }
-        .tab-content { display: none; background: white; padding: 2rem; border-radius: 0 0 12px 12px; min-height: 60vh; }
-        body.dark-mode .tab-content { background: #1a1a1a; }
-        .tab-content.active { display: block; }
-        .tab-heading {
-            text-align: center; margin-bottom: 1.5rem; padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--politics-primary); font-size: 1.3rem; color: var(--politics-primary);
-        }
-
-        .original-text { line-height: 1.9; font-size: 1.05rem; }
-        .text-intro {
-            background: linear-gradient(135deg, #fff8e1, #ffecb3); border-left: 4px solid #ffc107;
-            padding: 1.2rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0;
-        }
-        body.dark-mode .text-intro { background: linear-gradient(135deg, #2d2a1a, #3d3520); border-color: #ffc107; }
-
-        .chapter { margin-bottom: 1.5rem; border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden; }
-        .chapter:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        body.dark-mode .chapter { border-color: #444; }
-        .chapter-title {
-            padding: 1rem 1.3rem; margin: 0; cursor: pointer; display: flex; align-items: center;
-            gap: 10px; font-size: 1.1rem; user-select: none; transition: all 0.25s; color: white;
-            background: var(--politics-gradient);
-        }
-        .chapter-title:hover { filter: brightness(1.1); }
-        .toggle-icon { font-size: 0.8rem; transition: transform 0.25s; flex-shrink: 0; }
-        .chapter.collapsed .toggle-icon { transform: rotate(-90deg); }
-        .chapter-content {
-            padding: 1.3rem;
-            background: #fafafa;
-            /* 删除 max-height 和 overflow 限制 */
-            transition: all 0.3s ease;
-        }
-
-        .chapter.collapsed .chapter-content {
-            max-height: 0;
-            padding: 0 1.3rem;
-            overflow: hidden;
-        }
-        body.dark-mode .chapter-content { background: #222; }
-        .chapter-content p { text-indent: 2em; margin-bottom: 1em; text-align: justify; }
-        body.dark-mode .chapter-content p { color: #e0e0e0; }
-        .chapter-content blockquote { border-left: 3px solid var(--politics-primary); padding-left: 1rem; margin: 1em 0; color: #555; font-style: italic; }
-
-        /* 侧边栏基础样式 */
-        .sidebar-nav {
-            position: fixed;
-            top: 60px;
-            right: 0;
-            width: 280px;
-            height: calc(100vh - 60px);
-            background: #fff;
-            border-left: 1px solid #e0e0e0;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.05);
-            transform: translateX(100%); /* 改这里：默认隐藏 */
-        }
-
-        body.dark-mode .sidebar-nav {
-            background: #1a1a1a;
-            border-color: #333;
-        }
-        /* 打开状态：显示 */
-        .sidebar-nav.open {
-            transform: translateX(0);
-        }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #e0e0e0;
-            background: #fafafa;
-        }
-
-        body.dark-mode .sidebar-header {
-            background: #222;
-            border-color: #333;
-        }
-
-        .sidebar-title {
-            font-weight: 600;
-            color: var(--politics-primary, #1a237e);
-        }
-
-        .sidebar-close {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: #666;
-            padding: 0 6px;
-            border-radius: 4px;
-        }
-
-            .sidebar-close:hover {
-                background: #e0e0e0;
-            }
-
-        body.dark-mode .sidebar-close {
-            color: #aaa;
-        }
-
-            body.dark-mode .sidebar-close:hover {
-                background: #3a3a3a;
-            }
-
-        /* 右下角目录按钮 */
-        .sidebar-toggle {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--politics-primary, #1a237e);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 12px 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            z-index: 101;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            align-items: center;
-            gap: 8px;
-        }
-
-            .sidebar-toggle:hover {
-                background: var(--politics-secondary, #3949ab);
-            }
-
-        /* 移动端显示按钮 */
-        @media (max-width: 1100px) {
-            .sidebar-toggle {
-                display: flex;
-            }
-        }
-
-        /* 目录项样式 */
-        .sidebar-toc {
-            flex: 1;
-            overflow-y: auto;
-            padding: 0.5rem 0;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 0.75rem 1rem;
-            color: #555;
-            text-decoration: none;
-            font-size: 0.9rem;
-            border-left: 3px solid transparent;
-            transition: all 0.2s;
-        }
-
-            .nav-item:hover {
-                background: #f5f5f5;
-                color: var(--politics-primary, #1a237e);
-            }
-
-            .nav-item.active {
-                background: var(--politics-light, #e8eaf6);
-                border-left-color: var(--politics-primary, #1a237e);
-                color: var(--politics-primary, #1a237e);
-                font-weight: 500;
-            }
-
-        .nav-num {
-            flex-shrink: 0;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #666;
-        }
-
-        .nav-item.active .nav-num {
-            background: var(--politics-primary, #1a237e);
-            color: white;
-        }
-
-        .nav-title {
-            flex: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-
-        .sidebar-progress {
-            height: 4px;
-            background: #e0e0e0;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: var(--politics-primary, #1a237e);
-            width: 0%;
-            transition: width 0.1s;
-        }
-
-        /* 其他Tab样式 */
-        .reading-tip { background: #f9f9f9; border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #eee; }
-        body.dark-mode .reading-tip { background: #2a2a2a; border-color: #444; }
-        .reading-tip h4 { margin-top: 0; padding-bottom: 0.5rem; border-bottom: 2px solid var(--politics-primary); color: var(--politics-primary); }
-        .site-footer {
-            background: linear-gradient(135deg, #0d1b3e 0%, #1a237e 100%);
-            color: #e0e0e0;
-            padding: 2rem 0;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .footer-note {
-            color: rgba(255,215,0,0.9);
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        body.dark-mode .site-footer {
-            background: #0a0a1a;
-        }
-
-        body.dark-mode .footer-note {
-            color: #ffd700;
-        }
-        .footer-note { color: #ffd700; margin-top: 0.5rem; font-size: 0.9rem; }
-        @media(max-width:768px) { .tab-nav { padding: 0.75rem; top: 60px; } .tab-btn { padding: 8px 12px; font-size: 0.85em; } .article-header { padding: 2rem 1rem; } .article-header h1 { font-size: 1.8rem; } .tab-content { padding: 1.25rem; } }
-        .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
-        body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
-
-        /* ===== 结构分析样式 ===== */
-        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
-        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
-        .structure-analysis h4 { color: #1a237e; margin-bottom: 12px; font-size: 1em; }
-        body.dark-mode .structure-analysis h4 { color: #3949ab; }
-        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
-        body.dark-mode .analysis-item { border-color: #444; }
-        .analysis-label { font-weight: 600; color: #1a237e; font-size: 0.92em; display: block; margin-bottom: 4px; }
-        body.dark-mode .analysis-label { color: #3949ab; }
-        .analysis-label.highlight { color: #3949ab; font-size: 0.96em; }
-        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
-        body.dark-mode .analysis-item p { color: #ccc; }
-    </style>
-<style>
 
     /* ⬇ 下载原文浮动按钮 */
     .download-fab {
@@ -369,7 +62,7 @@
         transition: all 0.2s;
     }
     body.dark-mode .dl-link { background: #3a3a3a; color: #eee; }
-    .dl-link:hover { background: var(--party-primary, #c41e3a); color: white; }
+    .dl-link:hover { background: var(--cat-primary, #c41e3a); color: white; }
 
     /* ===== 站点头部样式（与矛盾论完全一致） ===== */
     
@@ -419,7 +112,6 @@
     }
 
     </style>
-
 
 </head>
 <body data-category="政治理论">
@@ -1480,13 +1172,11 @@
 
     
 
-
 <button class="download-fab" id="downloadFab" title="下载原文">⬇</button>
 <div class="download-menu" id="downloadMenu">
     <h4>📥 下载原文</h4>
     <div id="downloadLinks"></div>
 </div>
-
 
 <script>
 (function(){
@@ -1514,10 +1204,6 @@
     });
 })();
 </script>
-
-
-
-
 
     <script src="../js/main.js"></script>
 
@@ -1658,7 +1344,6 @@
     }
     updateDarkModeIcon();
 </script>
-
 
 </body>
 </html>

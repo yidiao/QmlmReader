@@ -216,3 +216,236 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// ==================== 文章页：章节导航 + Tab记忆 ====================
+document.addEventListener('DOMContentLoaded', function() {
+    // ---- Tab 状态记忆 ----
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    if (tabBtns.length > 0) {
+        var pagePath = window.location.pathname;
+        var savedTab = sessionStorage.getItem('tab-' + pagePath);
+        if (savedTab) {
+            var targetBtn = document.querySelector('.tab-btn[onclick*="' + savedTab + '"]');
+            if (targetBtn) targetBtn.click();
+        }
+        tabBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var match = this.getAttribute('onclick').match(/switchTab\('(\w+)'/);
+                if (match) sessionStorage.setItem('tab-' + pagePath, match[1]);
+            });
+        });
+    }
+
+    // ---- 动态章节侧边导航 ----
+    var chapters = document.querySelectorAll('#original .chapter');
+    if (chapters.length < 3) return;
+
+    var nav = document.createElement('nav');
+    nav.id = 'dynamicChapterNav';
+    nav.className = 'dynamic-chapter-nav';
+    nav.innerHTML = '<div class="dcn-title">📑 章节导航</div><div class="dcn-list"></div>';
+    var list = nav.querySelector('.dcn-list');
+
+    chapters.forEach(function(ch, i) {
+        var titleEl = ch.querySelector('.chapter-title');
+        if (!titleEl) return;
+        var text = titleEl.textContent.replace(/[▼▶]/g, '').trim();
+        if (text.length > 22) text = text.substring(0, 22) + '…';
+        var id = 'ch-nav-' + i;
+        ch.id = id;
+        var a = document.createElement('a');
+        a.href = '#' + id;
+        a.textContent = text;
+        a.className = 'dcn-item';
+        a.addEventListener('click', function(e) {
+            e.preventDefault();
+            var target = document.getElementById(this.getAttribute('href').substring(1));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        list.appendChild(a);
+    });
+
+    document.body.appendChild(nav);
+    setTimeout(function() { nav.classList.add('visible'); }, 300);
+
+    // 滚动高亮
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                var scrollPos = window.scrollY + 120;
+                var items = list.querySelectorAll('.dcn-item');
+                chapters.forEach(function(ch, i) {
+                    if (ch.offsetTop <= scrollPos && ch.offsetTop + ch.offsetHeight > scrollPos) {
+                        items.forEach(function(it) { it.classList.remove('active'); });
+                        if (items[i]) items[i].classList.add('active');
+                    }
+                });
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+});
+
+// ==================== 合集上下文导航（面包屑 + 上/下一章） ====================
+var COLLECTIONS = [{"id":"mao-vol1","title":"毛泽东选集 · 第一卷","cover":"☭","articles":[{"title":"中国社会各阶级的分析","slug":null},{"title":"湖南农民运动考察报告","slug":"nong-min-yun-dong"},{"title":"中国的红色政权为什么能够存在？","slug":null},{"title":"井冈山的斗争","slug":null},{"title":"关于纠正党内的错误思想","slug":null},{"title":"星星之火，可以燎原","slug":null},{"title":"反对本本主义","slug":null},{"title":"必须注意经济工作","slug":null},{"title":"怎样分析农村阶级","slug":null},{"title":"我们的经济政策","slug":null},{"title":"关心群众生活，注意工作方法","slug":null},{"title":"论反对日本帝国主义的策略","slug":null},{"title":"中国革命战争的战略问题","slug":"zhan-lue-wen-ti"},{"title":"关于蒋介石声明的声明","slug":null},{"title":"中国共产党在抗日时期的任务","slug":null},{"title":"实践论","slug":"shi-jian-lun"},{"title":"矛盾论","slug":"mao-dun-lun"}]},{"id":"mao-vol2","title":"毛泽东选集 · 第二卷","cover":"☭","articles":[{"title":"反对日本进攻的方针、办法和前途","slug":null},{"title":"为动员一切力量争取抗战胜利而斗争","slug":null},{"title":"反对自由主义","slug":null},{"title":"上海太原失陷以后抗日战争的形势和任务","slug":null},{"title":"抗日游击战争的战略问题","slug":"you-ji-zhan"},{"title":"论持久战","slug":"lun-chi-jiu-zhan"},{"title":"中国共产党在民族战争中的地位","slug":null},{"title":"统一战线中的独立自主问题","slug":null},{"title":"战争和战略问题","slug":"zhan-zheng-zhan-lue"},{"title":"青年运动的方向","slug":null},{"title":"《共产党人》发刊词","slug":null},{"title":"中国革命和中国共产党","slug":null},{"title":"新民主主义论","slug":"xin-min-zhu"},{"title":"论政策","slug":null}]},{"id":"mao-military","title":"毛泽东军事思想","cover":"⚔️","articles":[{"title":"中国革命战争的战略问题","slug":"zhan-lue-wen-ti"},{"title":"抗日游击战争的战略问题","slug":"you-ji-zhan"},{"title":"论持久战","slug":"lun-chi-jiu-zhan"},{"title":"战争和战略问题","slug":"zhan-zheng-zhan-lue"}]},{"id":"mao-philosophy","title":"毛泽东哲学方法论","cover":"🧠","articles":[{"title":"实践论","slug":"shi-jian-lun"},{"title":"矛盾论","slug":"mao-dun-lun"}]},{"id":"marx-engels","title":"马克思恩格斯选集","cover":"📖","articles":[{"title":"1844年经济学哲学手稿","slug":"1844-nian-jing-ji-xue-zhe-xue-shou-gao"},{"title":"关于费尔巴哈的提纲","slug":"guan-yu-fei-er-ba-ha-de-ti-gang"},{"title":"德意志意识形态","slug":"de-yi-zhi-yi-xing-tai"},{"title":"共产党宣言","slug":"gongchan-dan-yuan"},{"title":"《政治经济学批判》序言","slug":null},{"title":"资本论（第一卷）","slug":null},{"title":"法兰西内战","slug":null},{"title":"哥达纲领批判","slug":"ge-da-gang-ling"},{"title":"反杜林论","slug":"fan-du-lin-lun"},{"title":"社会主义从空想到科学的发展","slug":null},{"title":"家庭、私有制和国家的起源","slug":"jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan"},{"title":"费尔巴哈和德国古典哲学的终结","slug":"hei-ge-er-fa-zhe-xue-pi-pan-dao-yan"}]},{"id":"lenin","title":"列宁选集","cover":"🔴","articles":[{"title":"怎么办？","slug":"zen-me-ban"},{"title":"唯物主义和经验批判主义","slug":"wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi"},{"title":"马克思主义的三个来源和三个组成部分","slug":"ma-ke-si-zhu-yi-de-san-ge-lai-yuan"},{"title":"帝国主义是资本主义的最高阶段","slug":"di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan"},{"title":"国家与革命","slug":"guo-jia-yu-ge-ming"},{"title":"无产阶级革命和叛徒考茨基","slug":null},{"title":"共产主义运动中的'左派'幼稚病","slug":null}]},{"id":"stalin","title":"斯大林著作选","cover":"⭐","articles":[{"title":"论列宁主义基础","slug":"lun-lunen-zhu-yi-ji-chu"},{"title":"论列宁主义的几个问题","slug":null},{"title":"关于苏联宪法草案","slug":null},{"title":"论辩证唯物主义和历史唯物主义","slug":"lun-shi-da-guan-xi"},{"title":"马克思主义和语言学问题","slug":null},{"title":"苏联社会主义经济问题","slug":null}]},{"id":"political-economy","title":"政治经济学经典","cover":"💰","articles":[{"title":"1844年经济学哲学手稿","slug":"1844-nian-jing-ji-xue-zhe-xue-shou-gao"},{"title":"雇佣劳动与资本","slug":null},{"title":"《政治经济学批判》序言","slug":null},{"title":"工资、价格和利润","slug":null},{"title":"资本论（第一卷）","slug":null},{"title":"哥达纲领批判","slug":"ge-da-gang-ling"},{"title":"帝国主义是资本主义的最高阶段","slug":"di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan"},{"title":"苏联社会主义经济问题","slug":null}]},{"id":"party-building","title":"党的建设与组织理论","cover":"🏛️","articles":[{"title":"怎么办？","slug":"zen-me-ban"},{"title":"共产主义运动中的'左派'幼稚病","slug":null},{"title":"论列宁主义基础","slug":"lun-lunen-zhu-yi-ji-chu"},{"title":"关于纠正党内的错误思想","slug":null},{"title":"《共产党人》发刊词","slug":null},{"title":"改造我们的学习","slug":null},{"title":"整顿党的作风","slug":null},{"title":"学习和时局","slug":"xue-xi-shi-ju"}]}];
+
+// 合集弹窗 — 与 articles.html 同款
+function injectCollModal() {
+    if (document.getElementById('collModal')) return;
+    var modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.id = 'collModal';
+    modal.innerHTML =
+        '<div class="modal-dialog">' +
+        '<div class="modal-header"><div><h2 id="collModalTitle"></h2></div>' +
+        '<button class="modal-close" onclick="closeCollModal()">✕</button></div>' +
+        '<div class="modal-body" id="collModalBody"></div></div>';
+    document.body.appendChild(modal);
+    modal.addEventListener('click', function(e) { if (e.target === modal) closeCollModal(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeCollModal(); });
+}
+function closeCollModal() {
+    var m = document.getElementById('collModal');
+    if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
+}
+var currentCollModalColl = null, currentCollModalAll = null;
+function openCollModal(coll, allMatches) {
+    injectCollModal();
+    currentCollModalColl = coll;
+    currentCollModalAll = allMatches || [coll];
+    renderCollModalBody(coll);
+}
+
+function renderCollModalBody(coll) {
+    currentCollModalColl = coll;
+    var titleEl = document.getElementById('collModalTitle');
+    var body = document.getElementById('collModalBody');
+
+    // Title with collection selector if multiple
+    var titleHTML = coll.cover + ' ' + coll.title;
+    if (currentCollModalAll && currentCollModalAll.length > 1) {
+        titleHTML += ' <span style="font-size:0.7rem;opacity:0.7;">(' + (currentCollModalAll.indexOf(coll) + 1) + '/' + currentCollModalAll.length + ')</span>';
+    }
+    titleEl.innerHTML = titleHTML;
+
+    // Collection tabs if multiple
+    var tabsHTML = '';
+    if (currentCollModalAll && currentCollModalAll.length > 1) {
+        tabsHTML = '<div style="display:flex;gap:4px;margin-bottom:1rem;flex-wrap:wrap;">';
+        currentCollModalAll.forEach(function(m) {
+            var active = m.coll.id === coll.id ? ' style="background:#c41e3a;color:white;font-weight:600;"' : ' style="background:#f0f0f0;color:#555;cursor:pointer;"';
+            tabsHTML += '<button onclick="renderCollModalBody(currentCollModalAll[' + currentCollModalAll.indexOf(m) + '].coll)"' + active + ' class="tab-btn" style="padding:4px 12px;font-size:0.8rem;border-radius:15px;border:none;">' + m.coll.cover + ' ' + m.coll.title + '</button>';
+        });
+        tabsHTML += '</div>';
+    }
+
+    body.innerHTML = tabsHTML + coll.articles.map(function(a, i) {
+        var href = a.slug ? '../articles/' + a.slug + '.html' : '#';
+        var cls = a.slug ? 'modal-article' : 'modal-article wip';
+        var badge = a.slug ? '<span class="ma-status ready">已收录</span>'
+                        : '<span class="ma-status wip">筹备中</span>';
+        return '<a href="' + href + '" class="' + cls + '">' +
+            '<span class="ma-num">' + (i+1) + '</span>' +
+            '<span class="ma-info"><span class="ma-title">' + a.title + '</span></span>' +
+            badge + '</a>';
+    }).join('');
+    document.getElementById('collModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var backNav = document.querySelector('.back-nav .back-link');
+    if (!backNav) return;
+
+    var path = window.location.pathname;
+    // Extract slug from path: /articles/xxx.html -> xxx
+    var slugMatch = path.match(/\/([^\/]+)\.html$/);
+    if (!slugMatch) return;
+    var currentSlug = slugMatch[1];
+
+    // Find ALL collections this article belongs to
+    var matches = [];
+    for (var ci = 0; ci < COLLECTIONS.length; ci++) {
+        var articles = COLLECTIONS[ci].articles;
+        for (var ai = 0; ai < articles.length; ai++) {
+            if (articles[ai].slug === currentSlug) {
+                matches.push({ coll: COLLECTIONS[ci], idx: ai });
+                break;
+            }
+        }
+    }
+    if (matches.length === 0) return;
+
+    // Use first match for breadcrumb, but track all for modal
+    var foundColl = matches[0].coll;
+    var foundIdx = matches[0].idx;
+    var allMatches = matches; // for quick-jump
+
+    var article = foundColl.articles[foundIdx];
+    var total = foundColl.articles.length;
+    var pos = foundIdx + 1;
+
+    var container = backNav.parentElement;
+    var bc = document.createElement('div');
+    bc.style.cssText = 'display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.6rem;width:100%;';
+
+    // Left: back + breadcrumb + quick-jump
+    var left = document.createElement('span');
+    left.style.cssText = 'display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;';
+    left.innerHTML = '<a href="../articles.html" class="back-link" style="margin:0;"><span>←</span> 返回文章列表</a>';
+
+    var sep = document.createElement('span');
+    sep.style.cssText = 'color:#ccc;font-size:1.2rem;';
+    sep.textContent = '|';
+    left.appendChild(sep);
+
+    var crumb = document.createElement('span');
+    crumb.style.cssText = 'font-size:0.88rem;color:#555;';
+    crumb.innerHTML = foundColl.cover + ' <strong>' + foundColl.title + '</strong> <span style="color:#aaa;">›</span> <em>' + article.title + '</em> <span style="font-size:0.78rem;color:#999;">(' + pos + '/' + total + ')</span>';
+    if (allMatches.length > 1) {
+        crumb.innerHTML += ' <span style="font-size:0.7rem;color:#999;">(+' + (allMatches.length - 1) + '个合集)</span>';
+    }
+    left.appendChild(crumb);
+    bc.appendChild(left);
+
+    // Right: prev/next + quick-jump
+    var right = document.createElement('span');
+    right.style.cssText = 'display:flex;align-items:center;gap:0.8rem;flex-shrink:0;';
+
+    if (foundIdx > 0) {
+        var prevA = foundColl.articles[foundIdx - 1];
+        var prevHref = prevA.slug ? '../articles/' + prevA.slug + '.html' : '#';
+        var prevDisabled = prevA.slug ? '' : ' style="opacity:0.35;pointer-events:none;"';
+        right.innerHTML += '<a href="' + prevHref + '" class="back-link" style="margin:0;font-size:0.88rem;"' + prevDisabled + '>← 上一章</a>';
+    } else {
+        right.innerHTML += '<span style="color:#ccc;font-size:0.88rem;">← 上一章</span>';
+    }
+
+    if (foundIdx < total - 1) {
+        var nextA = foundColl.articles[foundIdx + 1];
+        var nextHref = nextA.slug ? '../articles/' + nextA.slug + '.html' : '#';
+        var nextDisabled = nextA.slug ? '' : ' style="opacity:0.35;pointer-events:none;"';
+        right.innerHTML += '<a href="' + nextHref + '" class="back-link" style="margin:0;font-size:0.88rem;"' + nextDisabled + '>下一章 →</a>';
+    } else {
+        right.innerHTML += '<span style="color:#ccc;font-size:0.88rem;">下一章 →</span>';
+    }
+
+    // Quick-jump button — shows all collections if article belongs to multiple
+    var qjBtn = document.createElement('button');
+    qjBtn.textContent = '📚';
+    qjBtn.title = '浏览合集目录';
+    qjBtn.style.cssText = 'background:none;border:1px solid #ddd;border-radius:6px;padding:2px 8px;cursor:pointer;font-size:1rem;';
+    qjBtn.onclick = function(){ openCollModal(foundColl, allMatches); };
+    right.appendChild(qjBtn);
+
+    bc.appendChild(right);
+    container.innerHTML = '';
+    container.appendChild(bc);
+
+    // Dark mode fix for new elements
+    if (document.body.classList.contains('dark-mode')) {
+        crumb.style.color = '#bbb';
+    }
+});
