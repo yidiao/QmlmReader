@@ -265,8 +265,26 @@ document.addEventListener('DOMContentLoaded', function() {
         list.appendChild(a);
     });
 
+    // 侧边栏切换手柄
+    var toggle = document.createElement('button');
+    toggle.className = 'dcn-toggle';
+    toggle.title = '显示/隐藏章节导航';
+    toggle.textContent = '导航';
+    toggle.addEventListener('click', function() {
+        var visible = nav.classList.toggle('visible');
+        toggle.classList.toggle('shifted', visible);
+        try { sessionStorage.setItem('dcn-visible', visible ? '1' : '0'); } catch(e) {}
+    });
+
     document.body.appendChild(nav);
-    setTimeout(function() { nav.classList.add('visible'); }, 300);
+    document.body.appendChild(toggle);
+
+    // 恢复用户偏好：如果之前手动关闭过，则不自动展开
+    var savedVis;
+    try { savedVis = sessionStorage.getItem('dcn-visible'); } catch(e) {}
+    if (savedVis !== '0') {
+        setTimeout(function() { nav.classList.add('visible'); toggle.classList.add('shifted'); }, 300);
+    }
 
     // 滚动高亮
     var ticking = false;

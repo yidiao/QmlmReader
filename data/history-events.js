@@ -355,10 +355,9 @@ const historyData = {
         { date: '6月30日', year: 1949, title: '毛泽东发表《论人民民主专政》', category: 'political', nature: 'positive', desc: '系统阐述人民民主专政的理论。' },
         { date: "6月30日", year: 1941, title: "苏德战争全面展开", category: "war", nature: "negative", desc: "苏联全线抵抗德军进攻，卫国战争全面展开。" },
         { date: "6月30日", year: 1950, title: "《土地改革法》颁布", category: "political", nature: "positive", desc: "中央人民政府颁布《中华人民共和国土地改革法》。" },
-         { date: "6月30日", year: 1947, title: "刘邓大军挺进大别山", category: "war", nature: "positive", desc: "刘伯承、邓小平率晋冀鲁豫野战军主力强渡黄河，挺进大别山。" }
+        { date: "6月30日", year: 1947, title: "刘邓大军挺进大别山", category: "war", nature: "positive", desc: "刘伯承、邓小平率晋冀鲁豫野战军主力强渡黄河，挺进大别山。" }
     ],
     7: [
-        { date: "7月1日", year: 1916, title: "凡尔登战役", category: "war", nature: "negative", desc: "一战最惨烈战役之一在凡尔登持续。" },
         { date: "7月1日", year: 1921, title: "中国共产党成立", category: "revolution", nature: "positive", desc: "中共一大在上海召开，中国共产党正式成立，工人运动蓬勃发展。" },
         { date: "7月2日", year: 1949, title: "中华全国文学艺术工作者代表大会开幕", category: "cultural", nature: "positive", desc: "新中国文艺工作者的第一次盛会。" },
         { date: "7月3日", year: 1949, title: "毛泽东接见文艺界代表", category: "cultural", nature: "positive", desc: "鼓励文艺工作者为人民服务。" },
@@ -412,11 +411,8 @@ const historyData = {
         { date: "7月26日", year: 1954, title: "新中国第一次全国普选", category: "political", nature: "positive", desc: "全国基层普选开始，为第一届人大选举代表。" },
         { date: "7月26日", year: 1949, title: "中华全国总工会工作会议召开", category: "political", nature: "positive", desc: "部署工人阶级参加经济建设。" },
         { date: "7月27日", year: 1953, title: "朝鲜战争停战谈判", category: "political", nature: "neutral", desc: "朝鲜战争交战各方开始停战谈判。" },
-        { date: "7月28日", year: 1914, title: "一战欧洲各国宣战", category: "war", nature: "negative", desc: "奥匈帝国向塞尔维亚宣战，欧洲大战爆发。" },
         { date: "7月28日", year: 1949, title: "中共中央发布《关于恢复和发展生产的指示》", category: "political", nature: "positive", desc: "推动工业生产恢复。" },
         { date: "7月29日", year: 1949, title: "毛泽东接见全国工会代表", category: "political", nature: "positive", desc: "强调工人阶级领导作用。" },
-        { date: "7月29日", year: 1856, title: "太平天国天京事变", category: "war", nature: "negative", desc: "太平天国发生内讧，杨秀清被杀。" },
-        { date: "7月30日", year: 1914, title: "欧洲各国全面参战", category: "war", nature: "negative", desc: "第一次世界大战在欧洲全面爆发。" },
         { date: "7月30日", year: 1949, title: "中共中央发布《关于建立全国性青年组织的决定》", category: "political", nature: "positive", desc: "筹备成立全国青年联合会。" },
         { date: "7月31日", year: 1914, title: "马恩河战役前夜", category: "war", nature: "negative", desc: "德军执行施里芬计划，大战一触即发。" }
     ],

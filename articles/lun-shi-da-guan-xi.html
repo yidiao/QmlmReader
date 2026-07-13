@@ -42,6 +42,7 @@
         <div class="tab-content active" id="original">
             <div class="original-text">
                 <div class="text-intro"><p><strong>阅读提示：</strong>本文约1.2万字，是毛泽东在1956年4月25日中央政治局扩大会议上发表的讲话。讲话提出了社会主义建设中必须处理好的十对基本关系，是毛泽东探索中国社会主义建设道路的开篇之作，也是他晚年最具建设性、最务实的理论成果之一。</p></div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
                 <div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon">▼</span> 一、重工业和轻工业、农业的关系</h3><div class="chapter-content"><p style="color:#999;text-align:center;padding:40px 0;">📖 正文正在数字化整理中，即将上线...</p></div></div>
                 <div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon">▼</span> 二、沿海工业和内地工业的关系</h3><div class="chapter-content"><p style="color:#999;text-align:center;padding:40px 0;">📖 正文正在数字化整理中，即将上线...</p></div></div>
                 <div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon">▼</span> 三、经济建设和国防建设的关系</h3><div class="chapter-content"><p style="color:#999;text-align:center;padding:40px 0;">📖 正文正在数字化整理中，即将上线...</p></div></div>
@@ -103,6 +104,36 @@
     <script>
         function switchTab(t,b){document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(e=>e.classList.remove('active'));document.getElementById(t).classList.add('active');if(b)b.classList.add('active');if(t==='visual')setTimeout(initCharts,100);}
         function toggleChapter(e){const c=e.nextElementSibling;e.classList.toggle('collapsed');c.style.display=e.classList.contains('collapsed')?'none':'block';}
+        function toggleAllChapters() {
+            const chapters = document.querySelectorAll('.chapter');
+            const btn = document.getElementById('chapterToggleBtn');
+            let allExpanded = true;
+            chapters.forEach(ch => {
+                const content = ch.querySelector('.chapter-content');
+                if (content && (content.style.display === 'none' || content.style.maxHeight === '0px')) {
+                    allExpanded = false;
+                }
+            });
+            chapters.forEach(ch => {
+                const title = ch.querySelector('.chapter-title');
+                const content = ch.querySelector('.chapter-content');
+                if (!content) return;
+                if (allExpanded) {
+                    content.style.display = 'none';
+                    content.style.maxHeight = '0';
+                    content.style.padding = '0 1.3rem';
+                    ch.classList.add('collapsed');
+                    if (title) title.classList.add('collapsed');
+                } else {
+                    content.style.display = 'block';
+                    content.style.maxHeight = '5000px';
+                    content.style.padding = '1.3rem';
+                    ch.classList.remove('collapsed');
+                    if (title) title.classList.remove('collapsed');
+                }
+            });
+            if (btn) btn.textContent = allExpanded ? '展开全部' : '收起全部';
+        }
         let ci=false;function initCharts(){if(ci)return;ci=true;const ctx=document.getElementById('mainChart');if(!ctx)return;new Chart(ctx.getContext('2d'),{type:'bar',data:{labels:['重轻农','沿海内地','经济国防','国家集体','中央地方','民族关系','党政关系','革命反革命','是非关系','中外关系'],datasets:[{label:'经济建设(前五)',data:[9,8,7,8,8,0,0,0,0,0],backgroundColor:'rgba(26,35,126,0.7)'},{label:'政治社会(后五)',data:[0,0,0,0,0,8,7,7,8,9],backgroundColor:'rgba(106,27,154,0.7)'}]},options:{responsive:true,scales:{y:{min:0,max:10}}}});}
         function toggleDarkMode(){document.body.classList.toggle('dark-mode');localStorage.setItem('darkMode',document.body.classList.contains('dark-mode')?'true':'false');updateDarkModeIcon();}
         function updateDarkModeIcon(){const btn=document.querySelector('.dark-mode-toggle');if(btn)btn.textContent=document.body.classList.contains('dark-mode')?'☀️':'🌙';}

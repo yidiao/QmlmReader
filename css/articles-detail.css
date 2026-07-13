@@ -180,12 +180,27 @@
 .chapter-content {
     padding: 1.3rem;
     background: #fafafa;
-    max-height: 5000px;
-    overflow: hidden;
     transition: max-height 0.4s ease, padding 0.3s ease;
 }
-.chapter.collapsed .chapter-content { max-height: 0; padding: 0 1.3rem; }
+.chapter.collapsed .chapter-content { max-height: 0; padding: 0 1.3rem; overflow: hidden; }
 .chapter-content p { text-indent: 2em; margin-bottom: 1em; text-align: justify; }
+
+/* 章节全部展开/收起按钮 */
+.chapter-toggle-all {
+    display: inline-block;
+    margin: 0 0 0.8rem 0;
+    padding: 6px 18px;
+    background: var(--cat-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+.chapter-toggle-all:hover { filter: brightness(1.15); }
+body.dark-mode .chapter-toggle-all { background: #555; }
+body.dark-mode .chapter-toggle-all:hover { background: #777; }
 
 /* 引用/高亮/警告 */
 .quote {
@@ -562,6 +577,31 @@ body.dark-mode .modal-desc { color: #aaa; }
     transition: transform 0.35s cubic-bezier(.4,0,.2,1);
 }
 .dynamic-chapter-nav.visible { transform: translateY(-50%) translateX(0); }
+
+/* 侧边栏切换手柄 */
+.dcn-toggle {
+    position: fixed;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    width: 28px; height: 56px;
+    background: var(--cat-primary);
+    color: white;
+    border: none;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-lr;
+    letter-spacing: 2px;
+    box-shadow: -2px 2px 8px rgba(0,0,0,0.15);
+    transition: right 0.35s cubic-bezier(.4,0,.2,1), background 0.2s;
+    padding: 4px 0;
+}
+.dcn-toggle.shifted { right: 180px; }
+.dcn-toggle:hover { filter: brightness(1.15); }
 .dcn-title {
     font-weight: bold;
     font-size: 0.82rem;
@@ -663,6 +703,8 @@ body.dark-mode .dcn-title { border-color: #444; color: #7986cb; }
 body.dark-mode .dcn-item { color: #aaa; }
 body.dark-mode .dcn-item:hover { background: #2a2025; color: #7986cb; }
 body.dark-mode .dcn-item.active { color: #7986cb; border-left-color: #7986cb; background: #1a1a2a; }
+body.dark-mode .dcn-toggle { background: #555; }
+body.dark-mode .dcn-toggle:hover { background: #666; }
 
 /* 文章尾部 */
 body.dark-mode .article-footer { border-top-color: #444; color: #888; }

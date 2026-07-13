@@ -137,6 +137,7 @@
                 <div class="text-intro">
                     <p><strong>阅读提示：</strong>本文约29000字，15节，是毛泽东关于中国革命道路的纲领性文献。核心逻辑：中国革命已不是旧式资产阶级民主革命，而是"新民主主义革命"——由无产阶级领导的、人民大众的、反帝反封建的革命。建议先读第三、四、五节把握"新民主主义"的概念，再读第七、八、九节看毛泽东如何驳斥各种错误主张，最后读第十五节"民族的科学的大众的文化"。</p>
                 </div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
                 <div class="chapter">
                     <h3 class="chapter-title" onclick="toggleChapter(this)">
                         <span class="toggle-icon">▼</span>
@@ -567,7 +568,7 @@
                 <div class="chart-block">
                     <h3>论证逻辑曲线</h3>
                     <p class="chart-desc">从"中国向何处去"到"民族的科学的大众的文化"的论证节奏</p>
-                    <div class="chart-container" style="max-width:800px;margin:0 auto;">
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
                         <canvas id="argumentCurve"></canvas>
                     </div>
                 </div>
@@ -712,6 +713,37 @@
             const content = titleEl.nextElementSibling;
             titleEl.classList.toggle('collapsed');
             content.style.display = titleEl.classList.contains('collapsed') ? 'none' : 'block';
+        }
+
+        function toggleAllChapters() {
+            const chapters = document.querySelectorAll('.chapter');
+            const btn = document.getElementById('chapterToggleBtn');
+            let allExpanded = true;
+            chapters.forEach(ch => {
+                const content = ch.querySelector('.chapter-content');
+                if (content && (content.style.display === 'none' || content.style.maxHeight === '0px')) {
+                    allExpanded = false;
+                }
+            });
+            chapters.forEach(ch => {
+                const title = ch.querySelector('.chapter-title');
+                const content = ch.querySelector('.chapter-content');
+                if (!content) return;
+                if (allExpanded) {
+                    content.style.display = 'none';
+                    content.style.maxHeight = '0';
+                    content.style.padding = '0 1.3rem';
+                    ch.classList.add('collapsed');
+                    if (title) title.classList.add('collapsed');
+                } else {
+                    content.style.display = 'block';
+                    content.style.maxHeight = '5000px';
+                    content.style.padding = '1.3rem';
+                    ch.classList.remove('collapsed');
+                    if (title) title.classList.remove('collapsed');
+                }
+            });
+            if (btn) btn.textContent = allExpanded ? '展开全部' : '收起全部';
         }
         let chartsInited = false;
         function initCharts() {

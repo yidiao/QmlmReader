@@ -95,6 +95,8 @@
                     <p><strong>阅读提示：</strong>本文共 3 章，分别阐述马克思主义的哲学、政治经济学和科学社会主义三个组成部分。建议逐章阅读。</p>
                 </div>
 
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
+
                 <!-- 第一章 -->
                 <div class="chapter">
                     <h3 class="chapter-title" onclick="toggleChapter(this)">
@@ -323,7 +325,7 @@
                     <div class="chart-block">
                         <h3>🥧 三个组成部分的关系</h3>
                         <p class="chart-desc">马克思主义是完整的体系，不可分割</p>
-                        <div class="chart-container">
+                        <div class="chart-container" style="max-width:600px;margin:0 auto;">
                             <canvas id="mainChart" style="max-height: 300px;"></canvas>
                         </div>
                         <div style="margin-top: 16px; padding: 14px; background: #f0f4ff; border-radius: 12px;">
@@ -464,6 +466,37 @@
                 content.style.maxHeight = '5000px';
                 content.style.padding = '1.2rem';
             }
+        }
+
+        function toggleAllChapters() {
+            const chapters = document.querySelectorAll('.chapter');
+            const btn = document.getElementById('chapterToggleBtn');
+            let allExpanded = true;
+            chapters.forEach(ch => {
+                const content = ch.querySelector('.chapter-content');
+                if (content && (content.style.display === 'none' || content.style.maxHeight === '0px')) {
+                    allExpanded = false;
+                }
+            });
+            chapters.forEach(ch => {
+                const title = ch.querySelector('.chapter-title');
+                const content = ch.querySelector('.chapter-content');
+                if (!content) return;
+                if (allExpanded) {
+                    content.style.display = 'none';
+                    content.style.maxHeight = '0';
+                    content.style.padding = '0 1.3rem';
+                    ch.classList.add('collapsed');
+                    if (title) title.classList.add('collapsed');
+                } else {
+                    content.style.display = 'block';
+                    content.style.maxHeight = '5000px';
+                    content.style.padding = '1.3rem';
+                    ch.classList.remove('collapsed');
+                    if (title) title.classList.remove('collapsed');
+                }
+            });
+            if (btn) btn.textContent = allExpanded ? '展开全部' : '收起全部';
         }
 
         // 图表初始化

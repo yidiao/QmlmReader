@@ -146,6 +146,7 @@
                 <div class="text-intro">
                     <p><strong>阅读提示：</strong>本文约7000字，分三节。第一节讲研究历史经验的方法——"惩前毖后、治病救人"；第二节分析抗战时局——"人民势力的增强和反人民势力的衰落"；第三节提出"放下包袱和开动机器"——精神解放与独立思考。建议先读第三节，它最精炼、最具方法论价值；再回看第一节对历史经验的分析态度。</p>
                 </div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
                 <div class="chapter">
                     <h3 class="chapter-title" onclick="toggleChapter(this)">
                         <span class="toggle-icon">▼</span>
@@ -454,6 +455,37 @@
             const content = titleEl.nextElementSibling;
             titleEl.classList.toggle('collapsed');
             content.style.display = titleEl.classList.contains('collapsed') ? 'none' : 'block';
+        }
+
+        function toggleAllChapters() {
+            const chapters = document.querySelectorAll('.chapter');
+            const btn = document.getElementById('chapterToggleBtn');
+            let allExpanded = true;
+            chapters.forEach(ch => {
+                const content = ch.querySelector('.chapter-content');
+                if (content && (content.style.display === 'none' || content.style.maxHeight === '0px')) {
+                    allExpanded = false;
+                }
+            });
+            chapters.forEach(ch => {
+                const title = ch.querySelector('.chapter-title');
+                const content = ch.querySelector('.chapter-content');
+                if (!content) return;
+                if (allExpanded) {
+                    content.style.display = 'none';
+                    content.style.maxHeight = '0';
+                    content.style.padding = '0 1.3rem';
+                    ch.classList.add('collapsed');
+                    if (title) title.classList.add('collapsed');
+                } else {
+                    content.style.display = 'block';
+                    content.style.maxHeight = '5000px';
+                    content.style.padding = '1.3rem';
+                    ch.classList.remove('collapsed');
+                    if (title) title.classList.remove('collapsed');
+                }
+            });
+            if (btn) btn.textContent = allExpanded ? '展开全部' : '收起全部';
         }
         let chartsInited = false;
         function initCharts() {

@@ -94,6 +94,7 @@
                 <div class="text-intro">
                     <p><strong>阅读提示：</strong>本文共 2 章，建议逐章阅读。</p>
                 </div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
 
                 <div class="chapter">
                     <h3 class="chapter-title" onclick="toggleChapter(this)">
@@ -391,7 +392,7 @@
                     <div class="chart-block">
                         <h3>📈 文章结构饼图</h3>
                         <p class="chart-desc">《论我国革命》各板块篇幅占比</p>
-                        <div class="chart-container">
+                        <div class="chart-container" style="max-width:600px;margin:0 auto;">
                             <canvas id="structurePie" style="max-height: 320px; width: 100%;"></canvas>
                         </div>
                     </div>
@@ -399,15 +400,15 @@
                     <div class="chart-block">
                         <h3>📉 论证强度曲线</h3>
                         <p class="chart-desc">列宁的论证节奏——哪里是高潮，哪里是铺垫</p>
-                        <div class="chart-container">
-                            <canvas id="argumentCurve" style="max-height: 320px; width: 100%;"></canvas>
+                        <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                            <canvas id="argumentCurve"></canvas>
                         </div>
                     </div>
 
                     <div class="chart-block">
                         <h3>📊 教条主义 vs 革命辩证法</h3>
                         <p class="chart-desc">两种认识论在各维度上的对比得分</p>
-                        <div class="chart-container">
+                        <div class="chart-container" style="max-width:600px;margin:0 auto;">
                             <canvas id="compareChart" style="max-height: 320px; width: 100%;"></canvas>
                         </div>
                     </div>
@@ -548,6 +549,37 @@
                 content.style.maxHeight = '5000px';
                 content.style.padding = '1.2rem';
             }
+        }
+
+        function toggleAllChapters() {
+            const chapters = document.querySelectorAll('.chapter');
+            const btn = document.getElementById('chapterToggleBtn');
+            let allExpanded = true;
+            chapters.forEach(ch => {
+                const content = ch.querySelector('.chapter-content');
+                if (content && (content.style.display === 'none' || content.style.maxHeight === '0px')) {
+                    allExpanded = false;
+                }
+            });
+            chapters.forEach(ch => {
+                const title = ch.querySelector('.chapter-title');
+                const content = ch.querySelector('.chapter-content');
+                if (!content) return;
+                if (allExpanded) {
+                    content.style.display = 'none';
+                    content.style.maxHeight = '0';
+                    content.style.padding = '0 1.3rem';
+                    ch.classList.add('collapsed');
+                    if (title) title.classList.add('collapsed');
+                } else {
+                    content.style.display = 'block';
+                    content.style.maxHeight = '5000px';
+                    content.style.padding = '1.3rem';
+                    ch.classList.remove('collapsed');
+                    if (title) title.classList.remove('collapsed');
+                }
+            });
+            if (btn) btn.textContent = allExpanded ? '展开全部' : '收起全部';
         }
 
         // 获取当前是否为暗黑模式

@@ -138,6 +138,7 @@
                 <div class="text-intro">
                     <p><strong>阅读提示：</strong>本文是一部重要的马克思主义哲学著作，系统批判了马赫主义，阐述了辩证唯物主义认识论。全书结构严谨，建议重点阅读代绪论和各章核心论点。</p>
                 </div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
                 <div class="chapter">
                     <h3 class="chapter-title" onclick="toggleChapter(this)">
                         <span class="toggle-icon">▼</span>
@@ -1490,16 +1491,16 @@
 
         <div class="tab-content" id="visual">
             <h2 class="tab-heading">📊 一目了然</h2>
-            <div class="chart-container">
+            <div class="chart-container" style="max-width:500px;margin:0 auto;">
                 <h4>文章性格雷达图</h4>
                 <div style="max-width:500px;margin:0 auto;">
                     <canvas id="radarChart"></canvas>
                 </div>
             </div>
 
-            <div class="chart-container">
+            <div class="chart-container" style="max-width:700px;margin:0 auto;">
                 <h4>📈 论证节奏曲线</h4>
-                <canvas id="rhythmChart" height="200"></canvas>
+                <canvas id="rhythmChart"></canvas>
             </div>
 
             <div class="structure-analysis">
@@ -1588,6 +1589,37 @@
                 content.style.maxHeight = '5000px';
                 content.style.padding = '1.2rem';
             }
+        }
+
+        function toggleAllChapters() {
+            const chapters = document.querySelectorAll('.chapter');
+            const btn = document.getElementById('chapterToggleBtn');
+            let allExpanded = true;
+            chapters.forEach(ch => {
+                const content = ch.querySelector('.chapter-content');
+                if (content && (content.style.display === 'none' || content.style.maxHeight === '0px')) {
+                    allExpanded = false;
+                }
+            });
+            chapters.forEach(ch => {
+                const title = ch.querySelector('.chapter-title');
+                const content = ch.querySelector('.chapter-content');
+                if (!content) return;
+                if (allExpanded) {
+                    content.style.display = 'none';
+                    content.style.maxHeight = '0';
+                    content.style.padding = '0 1.3rem';
+                    ch.classList.add('collapsed');
+                    if (title) title.classList.add('collapsed');
+                } else {
+                    content.style.display = 'block';
+                    content.style.maxHeight = '5000px';
+                    content.style.padding = '1.3rem';
+                    ch.classList.remove('collapsed');
+                    if (title) title.classList.remove('collapsed');
+                }
+            });
+            if (btn) btn.textContent = allExpanded ? '展开全部' : '收起全部';
         }
 
         function initCharts() {

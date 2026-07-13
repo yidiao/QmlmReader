@@ -51,6 +51,7 @@
                     <div class="text-intro">
                         <p><strong>阅读提示：</strong>本文约8万字，是恩格斯为批判德国小资产阶级社会主义者杜林的"体系"而写的。全书分哲学、政治经济学、社会主义三编，全面阐述了马克思主义三个组成部分，被誉为"马克思主义的百科全书"。点击章节标题可展开/折叠内容。</p>
                     </div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
 
                     <!-- 三版序言 -->
                     <div class="chapter" id="preface">
@@ -433,6 +434,37 @@
             var content = titleEl.nextElementSibling;
             titleEl.classList.toggle('collapsed');
             content.style.display = titleEl.classList.contains('collapsed') ? 'none' : 'block';
+        }
+
+        function toggleAllChapters() {
+            const chapters = document.querySelectorAll('.chapter');
+            const btn = document.getElementById('chapterToggleBtn');
+            let allExpanded = true;
+            chapters.forEach(ch => {
+                const content = ch.querySelector('.chapter-content');
+                if (content && (content.style.display === 'none' || content.style.maxHeight === '0px')) {
+                    allExpanded = false;
+                }
+            });
+            chapters.forEach(ch => {
+                const title = ch.querySelector('.chapter-title');
+                const content = ch.querySelector('.chapter-content');
+                if (!content) return;
+                if (allExpanded) {
+                    content.style.display = 'none';
+                    content.style.maxHeight = '0';
+                    content.style.padding = '0 1.3rem';
+                    ch.classList.add('collapsed');
+                    if (title) title.classList.add('collapsed');
+                } else {
+                    content.style.display = 'block';
+                    content.style.maxHeight = '5000px';
+                    content.style.padding = '1.3rem';
+                    ch.classList.remove('collapsed');
+                    if (title) title.classList.remove('collapsed');
+                }
+            });
+            if (btn) btn.textContent = allExpanded ? '展开全部' : '收起全部';
         }
 
         // ========== 图表初始化（仅一次） ==========

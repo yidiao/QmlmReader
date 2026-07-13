@@ -43,6 +43,7 @@
                  <div class="text-intro">
         <p><strong>阅读提示：</strong>点击主标题可展开/折叠整章，点击子标题可展开/折叠小节。</p>
     </div>
+    <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
                  <!-- ===== 第一版序言 ===== -->
     <div class="chapter-group" data-chapter="preface">
         <h2 class="chapter-main-title" onclick="toggleChapterGroup(this)">
@@ -652,6 +653,33 @@
         if (btn) {
             btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
         }
+    }
+
+    function toggleAllChapters() {
+        const chapters = document.querySelectorAll('.chapter-group');
+        const btn = document.getElementById('chapterToggleBtn');
+        let allExpanded = true;
+        chapters.forEach(ch => {
+            const content = ch.querySelector('.chapter-group-content');
+            if (content && content.style.display === 'none') {
+                allExpanded = false;
+            }
+        });
+        chapters.forEach(ch => {
+            const title = ch.querySelector('.chapter-main-title');
+            const content = ch.querySelector('.chapter-group-content');
+            if (!content) return;
+            if (allExpanded) {
+                content.style.display = 'none';
+                ch.classList.add('collapsed');
+                if (title) title.classList.add('collapsed');
+            } else {
+                content.style.display = 'block';
+                ch.classList.remove('collapsed');
+                if (title) title.classList.remove('collapsed');
+            }
+        });
+        if (btn) btn.textContent = allExpanded ? '展开全部' : '收起全部';
     }
 
     if (localStorage.getItem('darkMode') === 'true') {

@@ -171,6 +171,7 @@
                 <div class="text-intro">
                     <p><strong>阅读提示：</strong>《共产党宣言》是科学社会主义的第一个纲领性文献，标志着马克思主义的公开问世。全文结构清晰：引言 + 四章正文。建议先读第一章（阶级斗争）和第二章（无产阶级专政），这是理解全书的核心。</p>
                 </div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
 
                 <!-- 引言 -->
                 <div class="chapter">
@@ -592,6 +593,37 @@
             const content = titleEl.nextElementSibling;
             titleEl.classList.toggle('collapsed');
             content.style.display = titleEl.classList.contains('collapsed') ? 'none' : 'block';
+        }
+
+        function toggleAllChapters() {
+            const chapters = document.querySelectorAll('.chapter');
+            const btn = document.getElementById('chapterToggleBtn');
+            let allExpanded = true;
+            chapters.forEach(ch => {
+                const content = ch.querySelector('.chapter-content');
+                if (content && (content.style.display === 'none' || content.style.maxHeight === '0px')) {
+                    allExpanded = false;
+                }
+            });
+            chapters.forEach(ch => {
+                const title = ch.querySelector('.chapter-title');
+                const content = ch.querySelector('.chapter-content');
+                if (!content) return;
+                if (allExpanded) {
+                    content.style.display = 'none';
+                    content.style.maxHeight = '0';
+                    content.style.padding = '0 1.3rem';
+                    ch.classList.add('collapsed');
+                    if (title) title.classList.add('collapsed');
+                } else {
+                    content.style.display = 'block';
+                    content.style.maxHeight = '5000px';
+                    content.style.padding = '1.3rem';
+                    ch.classList.remove('collapsed');
+                    if (title) title.classList.remove('collapsed');
+                }
+            });
+            if (btn) btn.textContent = allExpanded ? '展开全部' : '收起全部';
         }
 
         // 黑夜模式切换

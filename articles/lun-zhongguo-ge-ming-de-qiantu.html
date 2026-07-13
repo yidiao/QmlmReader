@@ -137,6 +137,8 @@
                 <p><strong>阅读提示：</strong>本文是斯大林1926年11月30日在共产国际执行委员会中国委员会会议上的演说，系统分析了中国革命的特点、性质和前途。对于理解中国革命史具有特殊价值。点击章节标题可展开。</p>
             </div>
 
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
+
             <div class="chapter">
                 <h3 class="chapter-title" onclick="toggleChapter(this)">
                     <span class="toggle-icon">▼</span>
@@ -420,10 +422,10 @@
     <div class="tab-content" data-tab="visual" id="visual">
         <h2 style="color:#1a237e;border-bottom:2px solid #1a237e;padding-bottom:0.5rem;">📊 一目了然</h2>
 
-        <div class="chart-container">
+        <div class="chart-container" style="max-width:700px;margin:0 auto;">
             <h4>📈 论证节奏曲线</h4>
             <p style="color:#666;font-size:0.9rem;margin-bottom:1rem;">本文论证强度分布：从革命形势分析到前途展望</p>
-            <canvas id="argumentChart" height="200"></canvas>
+            <canvas id="argumentChart"></canvas>
             <div class="structure-analysis" style="margin-top:20px;">
                 <h4>📊 论证结构解析</h4>
                 <div class="analysis-item">
@@ -449,19 +451,19 @@
             </div>
         </div>
 
-        <div class="chart-container">
+        <div class="chart-container" style="max-width:600px;margin:0 auto;">
             <h4>📋 中国革命三大特点</h4>
-            <canvas id="featuresChart" height="200"></canvas>
+            <canvas id="featuresChart"></canvas>
         </div>
 
-        <div class="chart-container">
+        <div class="chart-container" style="max-width:600px;margin:0 auto;">
             <h4>🏛️ 政权性质演变</h4>
-            <canvas id="regimeChart" height="180"></canvas>
+            <canvas id="regimeChart"></canvas>
         </div>
 
-        <div class="chart-container">
+        <div class="chart-container" style="max-width:500px;margin:0 auto;">
             <h4>👥 各阶级地位分析</h4>
-            <canvas id="classChart" height="220"></canvas>
+            <canvas id="classChart"></canvas>
         </div>
     </div>
 
@@ -558,6 +560,37 @@
 
         function toggleChapter(title) {
             title.parentElement.classList.toggle('collapsed');
+        }
+
+        function toggleAllChapters() {
+            const chapters = document.querySelectorAll('.chapter');
+            const btn = document.getElementById('chapterToggleBtn');
+            let allExpanded = true;
+            chapters.forEach(ch => {
+                const content = ch.querySelector('.chapter-content');
+                if (content && (content.style.display === 'none' || content.style.maxHeight === '0px')) {
+                    allExpanded = false;
+                }
+            });
+            chapters.forEach(ch => {
+                const title = ch.querySelector('.chapter-title');
+                const content = ch.querySelector('.chapter-content');
+                if (!content) return;
+                if (allExpanded) {
+                    content.style.display = 'none';
+                    content.style.maxHeight = '0';
+                    content.style.padding = '0 1.3rem';
+                    ch.classList.add('collapsed');
+                    if (title) title.classList.add('collapsed');
+                } else {
+                    content.style.display = 'block';
+                    content.style.maxHeight = '5000px';
+                    content.style.padding = '1.3rem';
+                    ch.classList.remove('collapsed');
+                    if (title) title.classList.remove('collapsed');
+                }
+            });
+            if (btn) btn.textContent = allExpanded ? '展开全部' : '收起全部';
         }
 
         let chartsInited = false;
