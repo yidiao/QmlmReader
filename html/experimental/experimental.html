@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实验性工具箱 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        body.dark-mode {
+            background: #121212;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        .site-header {
+            background: #8b0000;
+            background: linear-gradient(135deg, #8b0000 0%, #c41e3a 100%);
+            color: white;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        .main-nav a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        .main-nav a.active {
+            font-weight: bold;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        .dark-mode-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 30px;
+            transition: background 0.2s;
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* 实验性页面主内容 */
+        .experimental-hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 50%, #1a1a2e 100%);
+            border-radius: 24px;
+            padding: 48px 40px;
+            margin: 32px 0;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(196, 30, 58, 0.4);
+        }
+
+        body.dark-mode .experimental-hero {
+            background: linear-gradient(135deg, #0a0a14 0%, #05050f 50%, #0a0a14 100%);
+        }
+
+        .experimental-hero h1 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+
+        .experimental-hero h1 span {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .experimental-hero p {
+            color: #cbd5e0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .warning-badge {
+            display: inline-block;
+            background: rgba(196, 30, 58, 0.2);
+            border: 1px solid #c41e3a;
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+        }
+
+        /* 工具卡片区域 */
+        .tools-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin: 40px 0 60px;
+        }
+
+        .tool-card-large {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e0e0e0;
+        }
+
+        body.dark-mode .tool-card-large {
+            background: #1e1e2a;
+            border-color: #2c2c3a;
+        }
+
+        .tool-card-large:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+        }
+
+        .tool-header {
+            padding: 24px 32px;
+            background: linear-gradient(135deg, #f8f8f8, #f0f0f0);
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        body.dark-mode .tool-header {
+            background: #2a2a38;
+            border-color: #3a3a4a;
+        }
+
+        .tool-icon {
+            font-size: 2.8rem;
+        }
+
+        .tool-title {
+            flex: 1;
+        }
+
+        .tool-title h2 {
+            margin: 0 0 4px 0;
+            font-size: 1.5rem;
+            color: #c41e3a;
+        }
+
+        body.dark-mode .tool-title h2 {
+            color: #ff8a8a;
+        }
+
+        .tool-title p {
+            margin: 0;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        body.dark-mode .tool-title p {
+            color: #aaa;
+        }
+
+        .tool-status {
+            background: #fef3c7;
+            color: #b45309;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        body.dark-mode .tool-status {
+            background: #3e2a1f;
+            color: #ffcd94;
+        }
+
+        .tool-body {
+            padding: 32px;
+            min-height: 320px;
+        }
+
+        /* 占位内容样式 */
+        .placeholder-content {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .placeholder-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #c41e3a;
+        }
+
+        body.dark-mode .placeholder-title {
+            color: #ff8a8a;
+        }
+
+        .placeholder-desc {
+            color: #666;
+            max-width: 400px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .placeholder-desc {
+            color: #aaa;
+        }
+
+        .demo-preview {
+            background: #f8f8f8;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 500px;
+            margin: 20px auto 0;
+            text-align: left;
+        }
+
+        body.dark-mode .demo-preview {
+            background: #2a2a38;
+        }
+
+        .demo-preview h4 {
+            margin-bottom: 12px;
+            color: #c41e3a;
+        }
+
+        .demo-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        .demo-table th, .demo-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        body.dark-mode .demo-table th, 
+        body.dark-mode .demo-table td {
+            border-color: #444;
+        }
+
+        .demo-table th {
+            background: #e0e0e0;
+        }
+
+        body.dark-mode .demo-table th {
+            background: #3a3a4a;
+        }
+
+        .demo-btn {
+            background: #c41e3a;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-top: 16px;
+            transition: background 0.2s;
+        }
+
+        .demo-btn:hover {
+            background: #a01830;
+        }
+
+        .coming-soon {
+            display: inline-block;
+            background: #6b7280;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            margin-left: 12px;
+        }
+
+        hr {
+            margin: 16px 0;
+            border-color: #e0e0e0;
+        }
+
+        body.dark-mode hr {
+            border-color: #333;
+        }
+
+        /* 页脚 */
+        .site-footer {
+            background: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 32px 0;
+            margin-top: 48px;
+        }
+
+        .footer-note {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 8px;
+        }
+
+        /* 响应式 */
+        </style>
+</head>
+<body>
+        <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+                <a href="../index.html">首页</a>
+                <a href="../articles/articles.html">文章</a>
+                <a href="../masters/masters.html">导师</a>
+                <a href="../toolkit/toolkit.html">工具集</a>
+                <a href="../gallery/gallery.html">文艺</a>
+                <a href="../puzzle/puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international/international.html">🌍 国际共运</a>
+                <a href="../rectify/rectify.html">正名</a>
+                <a href="../about/about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- 面包屑导航 -->
+            <div class="breadcrumb">
+                <a href="../index.html">首页</a> / <span style="color: #c41e3a;">🧪 实验性武器库</span>
+            </div>
+
+            <!-- 实验性玩法头部 -->
+            <div class="experimental-hero">
+                <div class="warning-badge">
+                    🧪 实验性功能 | 持续迭代中
+                </div>
+                <h1>⚒️ <span>实验性玩法 ·武器库</span> 🔧</h1>
+                <p>这里是一些正在开发中的实用小工具（迫真），目前为占位演示版本。正式功能将在后续更新中陆续上线，欢迎提供宝贵建议。</p>
+            </div>
+
+            <!-- 工具列表 -->
+            <div class="tools-container">
+                
+                <!-- 工具1：Excel生成器 -->
+                <div class="tool-card-large" id="excel-generator">
+                    <div class="tool-header">
+                        <div class="tool-icon">📊</div>
+                        <div class="tool-title">
+                            <h2>Excel 一键生成器</h2>
+                            <p>快速生成抽象的带地区的标准化表格模板，用于同志间交流作数据导出</p>
+                        </div>
+                        <div class="tool-status">🚧 开发中 · 占位演示</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">📋</div>
+                            <div class="placeholder-title">Excel 表格生成工具</div>
+                            <div class="placeholder-desc">
+                                正式版将支持：自定义表头、数据填充、一键导出 .xlsx 文件。
+                                目前为界面占位，功能正在开发中。
+                            </div>
+                            
+                            <!-- 演示预览区域 -->
+                            <div class="demo-preview">
+                                <h4>📄 预览：某地统计表（示例）</h4>
+                                <table class="demo-table">
+                                    <thead>
+                                        <tr><th>日期</th><th>探讨内容</th><th>数值</th><th>备注</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>2026-05-01</td><td>A地</td><td>20%</td><td>形势xxx</td></tr>
+                                        <tr><td>2026-05-03</td><td>B地</td><td>40%</td><td>习俗xxx</td></tr>
+                                        <tr><td>2026-05-05</td><td>C地</td><td>60%</td><td>先例xxx</td></tr>
+                                    </tbody>
+                                </table>
+                                <button class="demo-btn" onclick="alert('🚧 Excel导出功能开发中，正式版将支持一键导出')">📎 导出 Excel（占位）</button>
+                                <p style="font-size: 0.7rem; margin-top: 12px; color: #888;">* 演示数据仅供参考，非真实导出功能</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 工具2：笔记整理器 -->
+                <div class="tool-card-large" id="note-organizer">
+                    <div class="tool-header">
+                        <div class="tool-icon">📝</div>
+                        <div class="tool-title">
+                            <h2>马克思主义笔记整理器</h2>
+                            <p>结构化整理读书笔记，自动生成摘要卡片</p>
+                        </div>
+                        <div class="tool-status">🚧 开发中 · 占位演示</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">📖</div>
+                            <div class="placeholder-title">智能笔记整理工具</div>
+                            <div class="placeholder-desc">
+                                正式版将支持：Markdown编辑、关键词自动提取、笔记卡片生成、云端同步。
+                                目前仅作界面展示。
+                            </div>
+                            
+                            <div class="demo-preview">
+                                <h4>📝 示例笔记卡片</h4>
+                                <div style="background: rgba(196,30,58,0.08); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
+                                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                                        <span style="background: #c41e3a; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem;">核心观点</span>
+                                        <span style="color: #666; font-size: 0.75rem;">2026-05-09</span>
+                                    </div>
+                                    <p style="margin-top: 10px; font-weight: 500;">“实践是检验真理的唯一标准”</p>
+                                    <p style="font-size: 0.85rem; color: #666;">—— 出自《实践论》，强调认识来源于实践并最终回归实践。</p>
+                                    <div style="margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+                                        <span style="background: #f0f0f0; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem;">#实践论</span>
+                                        <span style="background: #f0f0f0; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem;">#认识论</span>
+                                    </div>
+                                </div>
+                                <button class="demo-btn" onclick="alert('🚧 笔记整理功能开发中，正式版将支持笔记保存与管理')">✏️ 新建笔记（占位）</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 工具3：进度追踪表 -->
+                <div class="tool-card-large" id="progress-tracker">
+                    <div class="tool-header">
+                        <div class="tool-icon">✅</div>
+                        <div class="tool-title">
+                            <h2>理论学习进度追踪表</h2>
+                            <p>规划阅读路径，可视化学习进度</p>
+                        </div>
+                        <div class="tool-status">🚧 开发中 · 占位演示</div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">📈</div>
+                            <div class="placeholder-title">学习进度可视化工具</div>
+                            <div class="placeholder-desc">
+                                正式版将支持：阅读计划设定、进度百分比展示、完成度图表、学习提醒。
+                            </div>
+                            
+                            <div class="demo-preview">
+                                <h4>📊 当前学习进度（示例）</h4>
+                                <div style="margin-bottom: 16px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 6px;">
+                                        <span>《共产党宣言》</span>
+                                        <span>100%</span>
+                                    </div>
+                                    <div style="background: #e0e0e0; border-radius: 10px; height: 8px; overflow: hidden;">
+                                        <div style="background: #c41e3a; width: 100%; height: 100%;"></div>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: 16px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 6px;">
+                                        <span>《国家与革命》</span>
+                                        <span>65%</span>
+                                    </div>
+                                    <div style="background: #e0e0e0; border-radius: 10px; height: 8px; overflow: hidden;">
+                                        <div style="background: #ff8c00; width: 65%; height: 100%;"></div>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: 16px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 6px;">
+                                        <span>《实践论》</span>
+                                        <span>80%</span>
+                                    </div>
+                                    <div style="background: #e0e0e0; border-radius: 10px; height: 8px; overflow: hidden;">
+                                        <div style="background: #10b981; width: 80%; height: 100%;"></div>
+                                    </div>
+                                </div>
+                                <button class="demo-btn" onclick="alert('🚧 进度追踪功能开发中，正式版将支持自定义计划')">📅 设定学习计划（占位）</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 开发计划说明 -->
+            <div style="background: rgba(196,30,58,0.08); border-radius: 20px; padding: 24px; margin: 20px 0 40px; text-align: center;">
+                <h3 style="color: #c41e3a; margin-bottom: 12px;">🔜 后续开发计划</h3>
+                <p style="color: #666; max-width: 700px; margin: 0 auto 16px;">
+                    这些工具目前均为占位演示版本，后续将逐步实现完整功能。如果你有好的想法或建议，欢迎在b站评论区反馈。
+                </p>
+                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; font-size: 0.85rem;">
+                    <span style="background: #f0f0f0; padding: 4px 12px; border-radius: 20px;">📅 V1.0 预计 ？？？</span>
+                    <span style="background: #f0f0f0; padding: 4px 12px; border-radius: 20px;">📊 开发时间？？？</span>
+                    <span style="background: #f0f0f0; padding: 4px 12px; border-radius: 20px;">📝 正在规划中，正在规划，正在规</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script>
+
+
+        // 页面加载时恢复黑夜模式
+        // 处理锚点跳转（平滑滚动）
+        if (window.location.hash) {
+            const targetId = window.location.hash.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                setTimeout(() => {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+    
+</script>
+    <script src="../../js/main.js"></script>
+
+<script src="../../js/darkmode.js"></script>
+<script src="../../js/cursor.js"></script>
+</body>
+</html>

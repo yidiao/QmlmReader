@@ -5,38 +5,38 @@
 // ------ 1. 经典文章索引 ------
 const articleIndex = [
     // 五星 - 毛泽东
-    { title: '论持久战', file: 'articles/lun-chi-jiu-zhan.html', author: '毛泽东', authorKey: 'mao', year: '1938', priority: '5', category: '军事战略', keywords: ['抗日战争', '持久战', '军事', '战略'] },
-    { title: '实践论', file: 'articles/shi-jian-lun.html', author: '毛泽东', authorKey: 'mao', year: '1937', priority: '5', category: '哲学基础', keywords: ['认识论', '辩证法', '实践', '知行'] },
-    { title: '矛盾论', file: 'articles/mao-dun-lun.html', author: '毛泽东', authorKey: 'mao', year: '1937', priority: '5', category: '哲学基础', keywords: ['辩证法', '矛盾', '对立统一', '主要矛盾'] },
-    { title: '中国革命战争的战略问题', file: 'articles/zhan-lue-wen-ti.html', author: '毛泽东', authorKey: 'mao', year: '1936', priority: '5', category: '军事战略', keywords: ['革命战争', '战略', '游击战'] },
-    { title: '抗日游击战争的战略问题', file: 'articles/you-ji-zhan.html', author: '毛泽东', authorKey: 'mao', year: '1938', priority: '5', category: '军事战略', keywords: ['游击战', '抗日', '战略地位'] },
-    { title: '战争和战略问题', file: 'articles/zhan-zheng-zhan-lue.html', author: '毛泽东', authorKey: 'mao', year: '1938', priority: '5', category: '军事战略', keywords: ['武装斗争', '战略转变'] },
-    { title: '新民主主义论', file: 'articles/xin-min-zhu.html', author: '毛泽东', authorKey: 'mao', year: '1940', priority: '5', category: '政治理论', keywords: ['新民主主义', '政治', '经济', '文化'] },
-    { title: '在延安文艺座谈会上的讲话', file: 'articles/wen-yi-zuo-tan.html', author: '毛泽东', authorKey: 'mao', year: '1942', priority: '5', category: '思想文化', keywords: ['文艺', '文学', '为人民服务', '延安'] },
-    { title: '学习和时局', file: 'articles/xue-xi-shi-ju.html', author: '毛泽东', authorKey: 'mao', year: '1944', priority: '5', category: '思想文化', keywords: ['学习', '时局', '精神解放'] },
-    { title: '关于正确处理人民内部矛盾的问题', file: 'articles/ren-min-nei-bu-mao-dun.html', author: '毛泽东', authorKey: 'mao', year: '1957', priority: '5', category: '政治理论', keywords: ['人民内部矛盾', '敌我矛盾', '两类矛盾'] },
+    { title: '论持久战', file: 'articles/Mao/lun-chi-jiu-zhan.html', author: '毛泽东', authorKey: 'mao', year: '1938', priority: '5', category: '军事战略', keywords: ['抗日战争', '持久战', '军事', '战略'] },
+    { title: '实践论', file: 'articles/Mao/shi-jian-lun.html', author: '毛泽东', authorKey: 'mao', year: '1937', priority: '5', category: '哲学基础', keywords: ['认识论', '辩证法', '实践', '知行'] },
+    { title: '矛盾论', file: 'articles/Mao/mao-dun-lun.html', author: '毛泽东', authorKey: 'mao', year: '1937', priority: '5', category: '哲学基础', keywords: ['辩证法', '矛盾', '对立统一', '主要矛盾'] },
+    { title: '中国革命战争的战略问题', file: 'articles/Mao/zhan-lue-wen-ti.html', author: '毛泽东', authorKey: 'mao', year: '1936', priority: '5', category: '军事战略', keywords: ['革命战争', '战略', '游击战'] },
+    { title: '抗日游击战争的战略问题', file: 'articles/Mao/you-ji-zhan.html', author: '毛泽东', authorKey: 'mao', year: '1938', priority: '5', category: '军事战略', keywords: ['游击战', '抗日', '战略地位'] },
+    { title: '战争和战略问题', file: 'articles/Mao/zhan-zheng-zhan-lue.html', author: '毛泽东', authorKey: 'mao', year: '1938', priority: '5', category: '军事战略', keywords: ['武装斗争', '战略转变'] },
+    { title: '新民主主义论', file: 'articles/Mao/xin-min-zhu.html', author: '毛泽东', authorKey: 'mao', year: '1940', priority: '5', category: '政治理论', keywords: ['新民主主义', '政治', '经济', '文化'] },
+    { title: '在延安文艺座谈会上的讲话', file: 'articles/Mao/wen-yi-zuo-tan.html', author: '毛泽东', authorKey: 'mao', year: '1942', priority: '5', category: '思想文化', keywords: ['文艺', '文学', '为人民服务', '延安'] },
+    { title: '学习和时局', file: 'articles/Mao/xue-xi-shi-ju.html', author: '毛泽东', authorKey: 'mao', year: '1944', priority: '5', category: '思想文化', keywords: ['学习', '时局', '精神解放'] },
+    { title: '关于正确处理人民内部矛盾的问题', file: 'articles/Mao/ren-min-nei-bu-mao-dun.html', author: '毛泽东', authorKey: 'mao', year: '1957', priority: '5', category: '政治理论', keywords: ['人民内部矛盾', '敌我矛盾', '两类矛盾'] },
     // 五星 - 列宁
-    { title: '怎么办？', file: 'articles/zen-me-ban.html', author: '列宁', authorKey: 'lenin', year: '1902', priority: '5', category: '党的建设', keywords: ['建党', '灌输论', '先锋队', '经济派'] },
-    { title: '唯物主义和经验批判主义', file: 'articles/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html', author: '列宁', authorKey: 'lenin', year: '1909', priority: '5', category: '哲学基础', keywords: ['认识论', '马赫主义', '辩证唯物主义'] },
-    { title: '国家与革命', file: 'articles/guo-jia-yu-ge-ming.html', author: '列宁', authorKey: 'lenin', year: '1917', priority: '5', category: '政治理论', keywords: ['国家', '无产阶级专政', '打碎国家机器', '公社'] },
+    { title: '怎么办？', file: 'articles/Lenin/zen-me-ban.html', author: '列宁', authorKey: 'lenin', year: '1902', priority: '5', category: '党的建设', keywords: ['建党', '灌输论', '先锋队', '经济派'] },
+    { title: '唯物主义和经验批判主义', file: 'articles/Lenin/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html', author: '列宁', authorKey: 'lenin', year: '1909', priority: '5', category: '哲学基础', keywords: ['认识论', '马赫主义', '辩证唯物主义'] },
+    { title: '国家与革命', file: 'articles/Lenin/guo-jia-yu-ge-ming.html', author: '列宁', authorKey: 'lenin', year: '1917', priority: '5', category: '政治理论', keywords: ['国家', '无产阶级专政', '打碎国家机器', '公社'] },
     // 五星 - 马克思恩格斯
-    { title: '共产党宣言', file: 'articles/gongchan-dan-yuan.html', author: '马克思 · 恩格斯', authorKey: 'marx', year: '1848', priority: '5', category: '政治理论', keywords: ['科学社会主义', '阶级斗争', '无产阶级', '共产主义'] },
+    { title: '共产党宣言', file: 'articles/Marx/gongchan-dan-yuan.html', author: '马克思 · 恩格斯', authorKey: 'marx', year: '1848', priority: '5', category: '政治理论', keywords: ['科学社会主义', '阶级斗争', '无产阶级', '共产主义'] },
     // 五星 - 斯大林
-    { title: '论列宁主义基础', file: 'articles/lun-lunen-zhu-yi-ji-chu.html', author: '斯大林', authorKey: 'stalin', year: '1924', priority: '5', category: '政治理论', keywords: ['列宁主义', '帝国主义', '无产阶级革命', '无产阶级专政'] },
-    { title: '论中国革命的前途', file: 'articles/lun-zhongguo-ge-ming-de-qiantu.html', author: '斯大林', authorKey: 'stalin', year: '1926', priority: '5', category: '政治理论', keywords: ['中国革命', '农民问题', '无产阶级领导权', '非资本主义道路'] },
+    { title: '论列宁主义基础', file: 'articles/Stalin/lun-lunen-zhu-yi-ji-chu.html', author: '斯大林', authorKey: 'stalin', year: '1924', priority: '5', category: '政治理论', keywords: ['列宁主义', '帝国主义', '无产阶级革命', '无产阶级专政'] },
+    { title: '论中国革命的前途', file: 'articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html', author: '斯大林', authorKey: 'stalin', year: '1926', priority: '5', category: '政治理论', keywords: ['中国革命', '农民问题', '无产阶级领导权', '非资本主义道路'] },
     // 四星
-    { title: '湖南农民运动考察报告', file: 'articles/nong-min-yun-dong.html', author: '毛泽东', authorKey: 'mao', year: '1927', priority: '4', category: '政治理论', keywords: ['农民运动', '阶级分析', '农村'] },
+    { title: '湖南农民运动考察报告', file: 'articles/Mao/nong-min-yun-dong.html', author: '毛泽东', authorKey: 'mao', year: '1927', priority: '4', category: '政治理论', keywords: ['农民运动', '阶级分析', '农村'] },
     // 五星 - 马克思恩格斯（补充）
-    { title: '德意志意识形态', file: 'articles/de-yi-zhi-yi-xing-tai.html', author: '马克思 · 恩格斯', authorKey: 'marx', year: '1845', priority: '5', category: '哲学基础', keywords: ['历史唯物主义', '意识形态', '费尔巴哈', '生产力', '交往形式'] },
-    { title: '关于费尔巴哈的提纲', file: 'articles/guan-yu-fei-er-ba-ha-de-ti-gang.html', author: '马克思', authorKey: 'marx', year: '1845', priority: '5', category: '哲学基础', keywords: ['费尔巴哈', '实践', '唯物主义', '提纲', '十一条'] },
-    { title: '1844年经济学哲学手稿', file: 'articles/1844-nian-jing-ji-xue-zhe-xue-shou-gao.html', author: '马克思', authorKey: 'marx', year: '1844', priority: '4', category: '哲学基础', keywords: ['异化劳动', '手稿', '经济学', '哲学', '共产主义'] },
-    { title: '哥达纲领批判', file: 'articles/ge-da-gang-ling.html', author: '马克思', authorKey: 'marx', year: '1875', priority: '5', category: '政治理论', keywords: ['哥达纲领', '科学社会主义', '按劳分配', '共产主义两个阶段'] },
-    { title: '反杜林论', file: 'articles/fan-du-lin-lun.html', author: '恩格斯', authorKey: 'engels', year: '1878', priority: '5', category: '哲学基础', keywords: ['杜林', '马克思主义哲学', '政治经济学', '科学社会主义', '百科全书'] },
-    { title: '家庭、私有制和国家的起源', file: 'articles/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html', author: '恩格斯', authorKey: 'engels', year: '1884', priority: '4', category: '政治理论', keywords: ['家庭', '私有制', '国家', '起源', '摩尔根'] },
+    { title: '德意志意识形态', file: 'articles/Marx/de-yi-zhi-yi-xing-tai.html', author: '马克思 · 恩格斯', authorKey: 'marx', year: '1845', priority: '5', category: '哲学基础', keywords: ['历史唯物主义', '意识形态', '费尔巴哈', '生产力', '交往形式'] },
+    { title: '关于费尔巴哈的提纲', file: 'articles/Marx/guan-yu-fei-er-ba-ha-de-ti-gang.html', author: '马克思', authorKey: 'marx', year: '1845', priority: '5', category: '哲学基础', keywords: ['费尔巴哈', '实践', '唯物主义', '提纲', '十一条'] },
+    { title: '1844年经济学哲学手稿', file: 'articles/Marx/1844-nian-jing-ji-xue-zhe-xue-shou-gao.html', author: '马克思', authorKey: 'marx', year: '1844', priority: '4', category: '哲学基础', keywords: ['异化劳动', '手稿', '经济学', '哲学', '共产主义'] },
+    { title: '哥达纲领批判', file: 'articles/Marx/ge-da-gang-ling.html', author: '马克思', authorKey: 'marx', year: '1875', priority: '5', category: '政治理论', keywords: ['哥达纲领', '科学社会主义', '按劳分配', '共产主义两个阶段'] },
+    { title: '反杜林论', file: 'articles/Engels/fan-du-lin-lun.html', author: '恩格斯', authorKey: 'engels', year: '1878', priority: '5', category: '哲学基础', keywords: ['杜林', '马克思主义哲学', '政治经济学', '科学社会主义', '百科全书'] },
+    { title: '家庭、私有制和国家的起源', file: 'articles/Engels/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html', author: '恩格斯', authorKey: 'engels', year: '1884', priority: '4', category: '政治理论', keywords: ['家庭', '私有制', '国家', '起源', '摩尔根'] },
     // 五星 - 列宁（补充）
-    { title: '帝国主义是资本主义的最高阶段', file: 'articles/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html', author: '列宁', authorKey: 'lenin', year: '1916', priority: '5', category: '政治经济学', keywords: ['帝国主义', '垄断资本主义', '列宁', '资本主义发展', '殖民'] },
+    { title: '帝国主义是资本主义的最高阶段', file: 'articles/Lenin/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html', author: '列宁', authorKey: 'lenin', year: '1916', priority: '5', category: '政治经济学', keywords: ['帝国主义', '垄断资本主义', '列宁', '资本主义发展', '殖民'] },
     // 四星 - 毛泽东（补充）
-    { title: '论十大关系', file: 'articles/lun-shi-da-guan-xi.html', author: '毛泽东', authorKey: 'mao', year: '1956', priority: '4', category: '政治理论', keywords: ['十大关系', '社会主义建设', '中国', '1956', '工业化'] },
+    { title: '论十大关系', file: 'articles/Mao/lun-shi-da-guan-xi.html', author: '毛泽东', authorKey: 'mao', year: '1956', priority: '4', category: '政治理论', keywords: ['十大关系', '社会主义建设', '中国', '1956', '工业化'] },
 ];
 
 // ------ 2. 文艺视频索引 ------
@@ -221,7 +221,7 @@ function performSearch() {
                         desc: event.desc,
                         nature: event.nature,
                         category: event.category || 'neutral',
-                        file: 'international-calendar.html'
+                        file: 'international/international-calendar.html'
                     });
                 }
             });

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #6a0000 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 1.8rem; margin-bottom: 0.3rem; }
+        .page-header p { opacity: 0.9; font-size: 0.9rem; }
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .message-list { margin-bottom: 2rem; }
+        .message-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid #c41e3a;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .message-text { margin: 0 0 8px 0; line-height: 1.5; color: #333; }
+        .message-meta { font-size: 0.7rem; color: #999; display: flex; gap: 12px; }
+        .form-card {
+            background: #f9f9f9;
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        .form-card h3 { margin: 0 0 1rem 0; color: #c41e3a; font-size: 1.1rem; }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            resize: vertical;
+            min-height: 100px;
+            box-sizing: border-box;
+        }
+        textarea:focus { outline: none; border-color: #c41e3a; }
+        button {
+            background: #c41e3a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-top: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        button:hover { background: #8b0000; }
+        .rules {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        .placeholder-note { text-align: center; color: #999; margin-top: 2rem; font-size: 0.8rem; }
+        
+        body.dark-mode .message-item { background: #2a2a2a; }
+        body.dark-mode .message-text { color: #e0e0e0; }
+        body.dark-mode .form-card { background: #2a2a2a; }
+        body.dark-mode textarea { background: #3a3a3a; border-color: #555; color: white; }
+    </style>
+</head>
+<body>
+    <header class="site-header"><div class="container"><div class="logo"><span class="logo-icon">☭</span><div class="logo-text"><h1>青年马列毛主义驿站</h1><span class="logo-sub">Qmlm Reader</span></div></div><button class="hamburger-btn" id="hamburgerBtn"><span></span><span></span><span></span></button><nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button><a href="../index.html">首页</a><a href="../articles/articles.html">文章</a><a href="../masters/masters.html">导师</a><a href="../toolkit/toolkit.html">工具集</a><a href="../gallery/gallery.html">文艺</a><a href="../puzzle/puzzle.html">🧩 理论拼图</a><a href="../international/international.html">🌍 国际共运</a><a href="../rectify/rectify.html">正名</a><a href="../about/about.html">关于</a><button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button></nav></div></header>
+    
+    <main>
+        <section class="page-header">
+            <h1>💬 留言板（注意，本模块是占位符！！！目前无法评论！！！）</h1>
+            <p>唯有广泛的讨论才能促进理论进步</p>
+        </section>
+        
+        <div class="content-wrapper">
+            <div class="message-list">
+                <div class="message-item">
+                    <p class="message-text">读完《实践论》深受启发！“实践、认识、再实践、再认识”——这种螺旋上升的认识论让我重新理解了学习的方法。</p>
+                    <div class="message-meta"><span>📅 2026-05-09</span><span>❤️ 3</span><span>💬 2</span></div>
+                </div>
+            </div>
+            
+            <div class="form-card">
+                <h3>📝 发表留言</h3>
+                <textarea id="msgContent" placeholder="分享你的思考、提问或建议..."></textarea>
+                <button onclick="submitMessage()">✉️ 提交留言</button>
+                <div class="rules">📋 留言需审核 | 理性讨论，互相尊重</div>
+            </div>
+            <div class="placeholder-note">—— 更多留言审核后展示 ——</div>
+        </div>
+    </main>
+    
+    <footer class="site-footer"><div class="container"><p>青年马列毛主义驿站 | Qmlm Reader</p><p class="footer-note">学习他 · 成为他 · 然后超越他</p></div></footer>
+    
+    <script src="../../js/main.js"></script>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
+            var btn = document.querySelector('.dark-mode-toggle');
+            if (btn) btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        }
+        if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+        
+        function submitMessage() {
+            var content = document.getElementById('msgContent').value.trim();
+            if (!content) { alert('请输入留言内容'); return; }
+            alert('留言已提交，审核通过后显示。\n\n内容：' + content);
+            document.getElementById('msgContent').value = '';
+        }
+        
+        (function(){
+            document.addEventListener('DOMContentLoaded', function(){
+                var h = document.querySelector('.hamburger-btn'), n = document.querySelector('.main-nav');
+                if(!h || !n) return;
+                h.addEventListener('click', function(e){
+                    e.stopPropagation();
+                    var o = n.classList.toggle('open');
+                    h.classList.toggle('open', o);
+                    document.body.style.overflow = o ? 'hidden' : '';
+                });
+                document.addEventListener('click', function(e){
+                    if(n.classList.contains('open') && !n.contains(e.target) && e.target !== h){
+                        n.classList.remove('open');
+                        h.classList.remove('open');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+        })();
+    </script>
+
+<script src="../../js/darkmode.js"></script>
+<script src="../../js/cursor.js"></script>
+</body>
+</html>

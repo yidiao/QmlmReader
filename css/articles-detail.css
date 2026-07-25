@@ -64,10 +64,11 @@
     font-size: 0.95rem;
 }
 .article-meta span {
-    background: rgba(0,0,0,0.25);
+    background: rgba(0,0,0,0.45);
     padding: 5px 14px;
     border-radius: 18px;
     backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.15);
 }
 .article-meta .author { font-weight: 600; }
 .article-meta .category { color: rgba(255,215,0,0.9); }
@@ -145,7 +146,7 @@
 .original-text { line-height: 1.9; font-size: 1.05rem; }
 .text-intro {
     background: linear-gradient(135deg, #fff8f0, #ffe8d6);
-    border-left: 4px solid #c41e3a;
+    border-left: 4px solid var(--cat-secondary);
     padding: 1.2rem;
     margin-bottom: 2rem;
     border-radius: 0 8px 8px 0;
@@ -503,7 +504,7 @@ a.conn-card:hover {
 }
 .modal-overlay.open .modal-dialog { transform: translateY(0); }
 .modal-header {
-    background: linear-gradient(135deg, #c41e3a, #8b0000);
+    background: linear-gradient(135deg, var(--cat-secondary), var(--cat-primary));
     color: white;
     padding: 1.5rem 2rem;
     border-radius: 20px 20px 0 0;
@@ -643,7 +644,7 @@ body.dark-mode .tab-content { background: #1a1a1a; }
 body.dark-mode .tab-heading { color: #7986cb; border-color: #7986cb; }
 
 /* 原文 */
-body.dark-mode .text-intro { background: linear-gradient(135deg, #2d2015, #3d2a1a); border-color: #c41e3a; }
+body.dark-mode .text-intro { background: linear-gradient(135deg, #2d2015, #3d2a1a); border-color: var(--cat-secondary); }
 body.dark-mode .chapter { border-color: #444; }
 body.dark-mode .chapter-content { background: #222; }
 body.dark-mode .chapter-content p { color: #e0e0e0; }
@@ -679,7 +680,7 @@ body.dark-mode .timeline-item::after { background: #555; }
 body.dark-mode .timeline-dot { background: #555; border-color: #666; }
 body.dark-mode .timeline-year { color: #aaa; }
 body.dark-mode .timeline-label { color: #999; }
-body.dark-mode .timeline-here { color: #c41e3a; }
+body.dark-mode .timeline-here { color: var(--cat-secondary); }
 body.dark-mode .timeline-item.active .timeline-year { color: #7986cb; }
 body.dark-mode .puzzle-modern { background: linear-gradient(135deg, #2d2015, #3d2a1a); border-color: #4a3030; }
 body.dark-mode .puzzle-position h3, body.dark-mode .puzzle-connection h3,
@@ -709,37 +710,55 @@ body.dark-mode .dcn-toggle:hover { background: #666; }
 /* 文章尾部 */
 body.dark-mode .article-footer { border-top-color: #444; color: #888; }
 
-/* ==================== 兼容旧类名（非基准文章过渡使用） ==================== */
-.reading-tip { margin-bottom: 1.2rem; }
-.reading-tip h4 { margin-top: 0; padding-bottom: 0.5rem; border-bottom: 2px solid var(--cat-primary); color: var(--cat-primary); }
-body.dark-mode .reading-tip h4 { color: #7986cb; border-color: #7986cb; }
+/* ==================== 兼容旧类名（与标准类视觉一致） ==================== */
+.reading-tip, .difficulty-item, .dialogue-item {
+    margin-bottom: 28px;
+    padding: 20px 24px;
+    background: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+.reading-tip h4, .difficulty-item h4, .dialogue-item h4 {
+    color: var(--cat-primary);
+    margin-bottom: 12px;
+    font-size: 1.05em;
+}
+body.dark-mode .reading-tip, body.dark-mode .difficulty-item, body.dark-mode .dialogue-item {
+    background: #2a2a2a;
+    border-color: #444;
+}
+body.dark-mode .reading-tip h4, body.dark-mode .difficulty-item h4, body.dark-mode .dialogue-item h4 {
+    color: #7986cb;
+}
 
-.difficulty-item { margin-bottom: 1.2rem; }
-.difficulty-item h4 { color: #d32f2f; }
-body.dark-mode .difficulty-item h4 { color: #ef5350; }
-
-.dialogue-item { margin-bottom: 1.2rem; }
-.dialogue-q { color: #2e7d32; font-weight: bold; margin-bottom: 0.6rem; }
-.dialogue-a { padding-left: 1.5rem; border-left: 3px solid #2e7d32; margin-top: 0.6rem; color: #1565c0; }
-body.dark-mode .dialogue-q { color: #66bb6a; }
-body.dark-mode .dialogue-a { border-color: #66bb6a; color: #90caf9; }
+.dialogue-q { color: var(--cat-primary); font-weight: bold; margin-bottom: 0.6rem; }
+.dialogue-a { padding-left: 1.5rem; border-left: 3px solid var(--cat-secondary); margin-top: 0.6rem; color: #444; }
+body.dark-mode .dialogue-q { color: #7986cb; }
+body.dark-mode .dialogue-a { border-color: #7986cb; color: #bbb; }
 
 .action-num {
-    width: 32px; height: 32px;
+    width: 36px; height: 36px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-weight: bold; flex-shrink: 0;
     color: white; background: var(--cat-primary);
+    font-size: 1.1em;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 .further-item {
-    border-left: 3px solid var(--cat-primary);
-    padding-left: 1rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 28px;
+    padding: 20px 24px;
+    background: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    border-left: 4px solid var(--cat-primary);
 }
-.further-item h4 { margin: 0 0 0.3rem; color: var(--cat-primary); }
-.further-item p { margin: 0; color: #666; font-size: 0.95rem; }
-body.dark-mode .further-item p { color: #aaa; }
+.further-item h4 { margin: 0 0 8px; color: var(--cat-primary); font-size: 1em; }
+.further-item p { margin: 0; color: #555; font-size: 0.95rem; line-height: 1.7; }
+body.dark-mode .further-item { background: #2a2a2a; border-color: #444; }
+body.dark-mode .further-item h4 { color: #7986cb; }
+body.dark-mode .further-item p { color: #bbb; }
 
 /* 兼容：理论树（非基准文章可能使用） */
 .theory-tree { text-align: center; padding: 1.2rem 0; }

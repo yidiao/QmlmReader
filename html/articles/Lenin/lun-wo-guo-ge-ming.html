@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论我国革命 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/articles-detail.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --cat-primary:   #5c3d99;
+            --cat-secondary: #7c4dff;
+            --cat-gradient:  linear-gradient(135deg, #1a0a3e 0%, #5c3d99 50%, #7c4dff 100%);
+        }
+    </style>
+</head>
+<body data-category="politics">
+
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+                <a href="../../index.html">首页</a>
+                <a href="../../articles/articles.html" class="active">文章</a>
+                <a href="../../masters/masters.html">导师</a>
+                <a href="../../toolkit/toolkit.html">工具集</a>
+                <a href="../../gallery/gallery.html">文艺</a>
+                <a href="../../puzzle/puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../../international/international.html">🌍 国际共运</a>
+                <a href="../../rectify/rectify.html">正名</a>
+                <a href="../../about/about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="back-nav">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../../articles/articles.html" class="back-link">
+                <span>←</span> 返回文章列表
+            </a>
+        </div>
+    </div>
+
+    <main class="article-detail">
+
+        <header class="article-header">
+            <div class="importance-badge">⭐⭐⭐⭐⭐ 核心必读</div>
+            <h1>论我国革命</h1>
+            <div class="article-subtitle">评苏汉诺夫的札记——捍卫革命的辩证法</div>
+            <div class="article-meta">
+                <span class="author">列宁</span>
+                <span class="date">1923年1月</span>
+                <span class="category">政治理论 · 革命方法论</span>
+                <span class="word-count">约3,000字</span>
+                <span class="length-tag">📄 短篇</span>
+            </div>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 1: 原文                              -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro">
+                    <p><strong>阅读提示：</strong>本文是列宁晚年口授的最后几篇文章之一，写于1923年1月。列宁在病榻上读到孟什维克理论家苏汉诺夫的札记——苏汉诺夫攻击十月革命说"俄国生产力水平不够、不符合马克思主义发展顺序"。列宁愤怒地予以反驳，提出了革命辩证法的核心命题：世界历史发展的一般规律，不排除个别发展阶段在形式或顺序上的特殊性。全文仅两节，短小精悍。点击章节标题可展开/折叠。</p>
+                </div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        一、革命的辩证法——反对"教科书马克思主义"
+                    </h3>
+                    <div class="chapter-content">
+                        <p>这几天我翻阅了一下苏汉诺夫的革命札记。特别引人注目的是我国所有小资产阶级民主派也和第二国际全体英雄们一样迂腐、怯懦。他们和他们都可笑地以"生产力水平"、"文明前提"为借口，反对在俄国进行社会主义革命。他们说："俄国生产力还没有发展到足以实现社会主义的水平。"</p>
+                        <p>他们自命为马克思主义者，但对马克思主义的决定性的东西一窍不通。他们只看到资本主义和资产阶级民主在西欧发展的固定道路，却完全不懂得：世界历史发展的一般规律，不仅丝毫不排斥个别发展阶段在发展的形式或顺序上表现出特殊性，反而是以此为前提的。这些人只会背诵马克思主义的词句，却成了马克思主义的最大的叛徒。</p>
+                        <p>俄国是个介于文明国家和初次被这场战争最终卷入文明之列的整个东方各国即欧洲以外各国之间的国家，所以俄国能够而且势必表现出某些特殊性。这些特殊性当然符合世界发展的总路线，但它们使俄国革命显得有别于以前西欧各国的革命，而且这些特殊性到了东方国家又必然会产生某些局部的新东西。</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        二、革命的顺序——"先夺权，后建设"的辩证法
+                    </h3>
+                    <div class="chapter-content">
+                        <p>既然建立社会主义需要有一定的文化水平（虽然谁也说不出这个一定的"文化水平"究竟是什么样的），我们为什么不能首先用革命手段取得达到这个一定水平的前提，然后在工农政权和苏维埃制度的基础上赶上别国人民呢？</p>
+                        <p>你们说，为了建立社会主义就需要文明。好极了。那么，我们为什么不能首先在我国为这种文明创造前提，如驱逐地主，驱逐俄国资本家，然后开始走向社会主义呢？你们在哪个书本上读到过，通常的历史顺序是不容许或不可能有这类改变的呢？</p>
+                        <p>拿破仑写道："首先要投入真正的战斗，然后便见分晓。"我们也首先在1917年10月投入了真正的战斗，然后就看到了像布列斯特和约或新经济政策等等这样的发展中的细节。毫无疑问，我们已经取得了胜利。</p>
+                        <p>我们的苏汉诺夫们，更不必说那些比他们更右的社会民主党人了，连想也没想到：不这样就根本不能进行革命。我们的欧洲的庸人们做梦也想不到：在东方那些人口无比众多、社会情况无比复杂的国家里，今后的革命无疑会比俄国革命带有更多的特殊性。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 2: 读法提示                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2 class="tab-heading">💡 如何阅读本文</h2>
+                <div class="guide-block">
+                    <h3>① 理解论战背景——列宁在和谁对话？</h3>
+                    <p>苏汉诺夫是孟什维克理论家，他引用马克思关于"生产力决定生产关系"的论述，断言俄国生产力落后、不应进行社会主义革命。列宁的反驳不针对马克思，而是针对把马克思变成"教科书公式"的教条主义者。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>② 抓住核心论点：一般规律与特殊性的辩证法</h3>
+                    <p>列宁说"世界历史发展的一般规律，不仅丝毫不排斥个别发展阶段在形式或顺序上表现出特殊性，反而是以此为前提的"。这是全文的核心——普遍性和特殊性不是对立的，特殊性是普遍性的实现方式。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>③ 注意"顺序可变"的革命辩证法</h3>
+                    <p>教条主义者说：先有资本主义充分发展→再有社会主义革命。列宁说：可以先革命夺取政权→再利用政权创造文明条件。这是对机械"经济决定论"的彻底反驳。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>④ 联系毛泽东《实践论》《矛盾论》</h3>
+                    <p>毛泽东在1937年面对的是同类问题：教条主义者把苏联经验当作公式。列宁对"普遍性-特殊性"的辩证论述，直接启发了毛泽东的"实事求是"。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 3: 难点解析                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2 class="tab-heading">🔍 容易读错的地方</h2>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：列宁否定了"生产力决定论"</div>
+                    <div class="correct">✅ 正解：列宁绝没有否定生产力的根本作用。他否定的是教条主义者的机械理解——他们以为生产力水平必须在一个国家的资本主义框架下"自然达到"某个标准才能革命。列宁的辩证法是：夺取政权后，在社会主义制度下更快地发展生产力。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读："顺序可变"意味着想怎么革命就怎么革命</div>
+                    <div class="correct">✅ 正解：列宁说特殊性"符合世界发展的总路线"。顺序可以调整，但不能违背历史规律。俄国革命虽然"变了顺序"，但它依然是帝国主义时代矛盾运动的产物——俄国是帝国主义链条的"薄弱环节"。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：列宁只是说说而已——实际上"顺序"问题只限于俄国</div>
+                    <div class="correct">✅ 正解：列宁在文末明确提出"在东方那些人口无比众多、社会情况无比复杂的国家里，今后的革命无疑会比俄国革命带有更多的特殊性"——这已经预见了中国革命、越南革命等东方道路。毛泽东后来正是据此提出了"新民主主义革命"理论。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 4: 对话空间                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2 class="tab-heading">💬 这篇文章在回应谁？</h2>
+                <div class="dialogue-block">
+                    <h3>它在回应的问题</h3>
+                    <ul>
+                        <li>苏汉诺夫和孟什维克——"俄国生产力不够格，不能搞社会主义"</li>
+                        <li>第二国际的"正统马克思主义"——把历史唯物主义变成经济决定论</li>
+                        <li>一切用"条件不成熟"为借口反对革命的人——不论在哪个时代</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在问每一个读者</h3>
+                    <ul>
+                        <li>你有没有被"条件不成熟"这句话挡住过？——是真的条件不足，还是缺行动勇气？</li>
+                        <li>你对待理论的态度——是"掌握方法"还是"背诵公式"？</li>
+                        <li>你所在的环境中，有没有"教科书马克思主义者"——他们的话听起来都对，但就是解决不了实际问题？</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在等你的回应</h3>
+                    <p>找一个"大家都说条件不成熟所以做不了"的事（可以是任何领域）。用列宁的方法重新分析：有没有可能"先做后建"？顺序真的不能变吗？写一段分析。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 5: 行动实验                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2 class="tab-heading">⚡ 读完之后可以做什么</h2>
+                <div class="action-item">
+                    <h3>实验一：找出你身边的"苏汉诺夫"</h3>
+                    <p>在你的学习、工作、社会参与中，有没有人用"条件不成熟""时机未到""级别不够"来否定行动？他们的"条件论"是真的客观分析，还是不敢行动的借口？记录下来。</p>
+                </div>
+                <div class="action-item">
+                    <h3>实验二：分析一个"顺序改变"的历史案例</h3>
+                    <p>找一个历史上"改变了发展顺序"的成功案例（如中国的新民主主义革命、改革开放的"先富带后富"）。分析：它在什么条件下改变了顺序？结果如何？</p>
+                </div>
+                <div class="action-item">
+                    <h3>实验三：自我检视——你是"教条主义者"吗？</h3>
+                    <p>回想最近一次你拒绝一个方案/计划/提议的理由。是不是因为你认为"这样做不符合常理/规矩/教科书"？如果是——你是否犯了"苏汉诺夫式"的错误？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 6: 一目了然                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2 class="tab-heading">📊 一目了然</h2>
+
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量本文的"性格"</p>
+                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>论证强度曲线</h3>
+                    <p class="chart-desc">列宁的论证节奏——从驳斥到正面阐述的递进</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="argumentCurve"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4>📝 结构分析（对应曲线各波段）</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">★ 第一节：驳斥"生产力不够格"论（10/10）★</span>
+                            <p>全文最高峰。直接点名苏汉诺夫和第二国际，指出他们"对马克思主义的决定性东西一窍不通"。提出核心论点：一般规律不排斥特殊性，反而是以特殊性为前提。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">第二节前半：正面论证"顺序可变"（9/10）</span>
+                            <p>用反问句层层递进：为什么不能先夺权后建设？你们在哪本书里读到不能改变顺序？以拿破仑名言收束——"先投入战斗，然后便见分晓"。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">第二节后半：展望东方革命（8/10）</span>
+                            <p>从俄国推广到整个东方——"今后的革命无疑会比俄国革命带有更多的特殊性"。这是列宁对二十世纪革命道路的预言。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>教条主义 vs 革命辩证法</h3>
+                    <p class="chart-desc">两种认识论在各维度上的对比——五条战线看清根本分歧</p>
+                    <div class="chart-container" style="max-width:600px;margin:0 auto;">
+                        <canvas id="compareChart"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4>📝 五条战线详解——列宁如何拆穿"教科书马克思主义"</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">理论灵活性（教条2 vs 辩证法10）★</span>
+                            <p>苏汉诺夫说：马克思的公式是"先发展资本主义→生产力够了→社会主义革命"。列宁的回应是全书最锋利的一段："你们在哪个书本上读到过，通常的历史顺序是不容许或不可能有这类改变的呢？"讲理论灵活性不是抛弃原则——而是说，普遍规律不是死的顺序表。"世界历史发展的一般规律，不仅丝毫不排斥个别发展阶段在形式或顺序上表现出特殊性，反而是以此为前提的。"</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">实践指导力（教条1 vs 辩证法10）</span>
+                            <p>教条主义的实践指导力几乎为零——因为它只会告诉你"不能做什么"（"条件不成熟""不符合理论"），永远不会告诉你"可以做什么"。列宁的辩证法恰好相反：分析具体条件→找到突破口→敢于行动。十月革命不是"违反"了马克思主义，而是在帝国主义的薄弱环节验证了马克思主义。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">历史解释力（教条3 vs 辩证法9）</span>
+                            <p>教条主义者看俄国：啊，生产力落后，不该革命。列宁看俄国：它是帝国主义链条的最薄弱环节——战争把矛盾压缩到了极点，工人和农民已经无法忍受，资产阶级临时政府已经无力解决任何问题。不是"条件不成熟"，而是"条件已经成熟到不能再等"。历史解释力不在于事后总结，而在于在事件发生之前看到可能性。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">群众动员力（教条2 vs 辩证法10）</span>
+                            <p>你没法用"条件还不成熟，我们再等等"来动员群众。列宁"先投入战斗"的姿态本身就是动员——拿破仑的名言被列宁引用来激励革命者：不要等到所有条件都算清楚了再行动，因为实际上永远算不清。革命辩证法的群众动员力来自于它把群众看作历史的主体，而不是等待"经济条件"的被动看客。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">反对教条主义（教条1 vs 辩证法10）★</span>
+                            <p>这一项是列宁最大的贡献——也是全文最根本的战绩。教条主义本身就是最大的教条：它把马克思对西欧历史的分析当作全世界通用的"操作手册"。列宁说："应该及时宣布，认为教科书规定了今后世界历史发展的一切形式的人，简直就是傻瓜。"这不是否定马克思——恰恰是在教条主义的废墟上恢复马克思的革命精神。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 7: 理论拼图                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2 class="tab-heading">🧩 在马哲体系中的位置</h2>
+
+                <div class="puzzle-intro">
+                    <p>《论我国革命》是列宁晚年最重要的理论文献之一。它不是一篇"体系性"的哲学著作，而是在论战中写成的<strong>方法论宣言</strong>。它的核心贡献不是提出了某个新概念，而是<strong>捍卫了马克思主义的革命辩证法，反对把它变成死板的教条</strong>。</p>
+                </div>
+
+                <div class="puzzle-position">
+                    <h3>在马列主义体系中的位置</h3>
+                    <div class="theory-tree">
+                        <div class="theory-node root">马克思主义方法论</div>
+                        <div class="theory-branches">
+                            <div class="theory-branch">
+                                <div class="theory-node branch">历史唯物主义</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">社会发展规律</div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node current">革命辩证法<br><small>本文核心</small></div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">一般与特殊</div>
+                                    <div class="theory-node related">顺序可变性</div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">认识论</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">实践是真理标准</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puzzle-connection">
+                    <h3>与其他经典的联结</h3>
+                    <ul>
+                        <li>→ 马克思《法兰西内战》：革命灵活性的理论源头</li>
+                        <li>→ 列宁《帝国主义是资本主义的最高阶段》：本文的"特殊环境"分析建立在此基础之上</li>
+                        <li>→ 毛泽东《实践论》《矛盾论》：面对同类"教条主义"问题的回答</li>
+                        <li>→ 毛泽东《新民主主义论》：东方革命特殊性的系统理论</li>
+                    </ul>
+                </div>
+
+                <div class="puzzle-timeline">
+                    <h3>在思想发展时间轴上的位置</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1917</div><div class="timeline-label">十月革命</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1921</div><div class="timeline-label">新经济政策</div></div>
+                        <div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1923</div><div class="timeline-label">论我国革命</div><div class="timeline-here">◀ 本文</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1937</div><div class="timeline-label">实践论/矛盾论</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1940</div><div class="timeline-label">新民主主义论</div></div>
+                    </div>
+                    <p style="margin-top:12px;font-size:0.85em;color:#666;"><strong>历史位置：</strong>本文是列宁病榻上口授的最后几篇文章之一。写完此文不到一年，列宁逝世。这篇文章可以说是列宁的政治遗嘱之一——他留给后继者的不仅是革命经验，更是分析新情况的辩证法武器。</p>
+                </div>
+
+                <div class="puzzle-links">
+                    <h3>文章联结网络</h3>
+                    <p class="puzzle-links-note">点击已收录文章直接跳转阅读</p>
+                    <div class="conn-grid">
+                        <a href="di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html" class="conn-card" style="border-left-color:#e65100;">
+                            <span class="conn-dir" style="color:#276749;">←</span>
+                            <span class="conn-title">《帝国主义是资本主义的最高阶段》</span>
+                            <span class="conn-label">政治经济学</span>
+                            <span class="conn-relation">理论前提：帝国主义时代革命条件的分析</span>
+                        </a>
+                        <a href="../../articles/Mao/shi-jian-lun.html" class="conn-card" style="border-left-color:#8b0000;">
+                            <span class="conn-dir" style="color:#276749;">→</span>
+                            <span class="conn-title">《实践论》</span>
+                            <span class="conn-label">哲学基础</span>
+                            <span class="conn-relation">直接继承：反对教条主义的中国回答</span>
+                        </a>
+                        <a href="../../articles/Mao/mao-dun-lun.html" class="conn-card" style="border-left-color:#8b0000;">
+                            <span class="conn-dir" style="color:#276749;">→</span>
+                            <span class="conn-title">《矛盾论》</span>
+                            <span class="conn-label">哲学基础</span>
+                            <span class="conn-relation">方法论延伸：普遍性-特殊性辩证法的系统阐述</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>延伸阅读建议</h3>
+                    <p><strong>想看列宁对帝国主义时代革命条件的分析：</strong>读《帝国主义是资本主义的最高阶段》——本文的理论前提。</p>
+                    <p><strong>想看毛泽东对同类教条主义问题的回答：</strong>读《实践论》《矛盾论》——列宁的问题意识在中国的延续。</p>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>它解决的真实问题</h3>
+                    <p><strong>历史背景：</strong>1923年，十月革命已经过去五年多。苏汉诺夫等人在流亡中不断攻击布尔什维克——"你们违反了马克思主义，俄国生产力不够格搞社会主义"。列宁在病榻上读到这些札记，怒不可遏——他口授了这篇短文，字字如铁。</p>
+                    <p><strong>现实意义：</strong>"条件不成熟"可能是历史上被用来反对一切进步变革的最常见借口。列宁的回应已经成为经典：历史没有固定剧本。普遍规律不是死的公式，而是活的指南。任何教条主义——不管披着什么理论的外衣——本质上都是"不敢革命"的怯懦。</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <button class="download-fab" id="downloadFab" title="下载原文">⬇</button>
+    <div class="download-menu" id="downloadMenu">
+        <h4>📥 下载原文</h4>
+        <div id="downloadLinks"></div>
+    </div>
+
+    <script src="../../../js/article-common.js"></script>
+    <script>
+        var ARTICLE_CHARTS = [
+            {
+                id: 'radarChart',
+                config: {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                        datasets: [{
+                            label: '论我国革命',
+                            data: [9, 10, 8, 10, 9, 5],
+                            borderColor: '#7c4dff',
+                            backgroundColor: 'rgba(92,61,153,0.12)',
+                            pointBackgroundColor: '#7c4dff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
+                        plugins: { legend: { display: false } }
+                    }
+                }
+            },
+            {
+                id: 'argumentCurve',
+                config: {
+                    type: 'line',
+                    data: {
+                        labels: ['第一节\n驳斥教条主义★', '第二节前半\n正面论证', '第二节后半\n展望东方'],
+                        datasets: [{
+                            label: '论证强度',
+                            data: [10, 9, 8],
+                            borderColor: '#5c3d99',
+                            backgroundColor: 'rgba(92,61,153,0.08)',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            borderWidth: 2.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            },
+            {
+                id: 'compareChart',
+                config: {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论灵活性', '实践指导力', '历史解释力', '群众动员力', '反对教条主义'],
+                        datasets: [
+                            { label: '教条主义', data: [2, 1, 3, 2, 1], borderColor: '#a0aec0', backgroundColor: 'rgba(160,174,192,0.2)', pointBackgroundColor: '#a0aec0' },
+                            { label: '革命辩证法', data: [10, 10, 9, 10, 10], borderColor: '#5c3d99', backgroundColor: 'rgba(92,61,153,0.15)', pointBackgroundColor: '#5c3d99' }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
+                        plugins: { legend: { position: 'bottom' } }
+                    }
+                }
+            }
+        ];
+
+        var DOWNLOAD_LINKS = [
+            { href: '../../../data/lun-wo-guo-ge-ming.txt', label: '📝 下载 TXT' }
+        ];
+    </script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+</body>
+</html>

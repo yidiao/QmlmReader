@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完整更新历史 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .archive-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        .archive-header {
+            margin-bottom: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #c41e3a;
+            text-decoration: none;
+        }
+
+        .archive-title {
+            font-size: 1.8rem;
+            border-left: 4px solid #c41e3a;
+            padding-left: 20px;
+            margin-bottom: 24px;
+        }
+
+        .archive-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .archive-item {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            border-left: 2px solid #e0e0e0;
+            padding-left: 24px;
+            padding-bottom: 16px;
+        }
+
+        body.dark-mode .archive-item {
+            border-left-color: #444;
+        }
+
+        .archive-date {
+            min-width: 100px;
+            font-weight: 700;
+            color: #c41e3a;
+        }
+
+        .archive-content {
+            flex: 1;
+        }
+
+        .archive-title-link {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+            .archive-title-link a {
+                color: var(--text-color, #1f2937);
+                text-decoration: none;
+            }
+
+                .archive-title-link a:hover {
+                    color: #c41e3a;
+                }
+
+        .archive-tag {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: 10px;
+        }
+
+            .archive-tag.tag-important {
+                background: #dc2626;
+                color: white;
+            }
+
+            .archive-tag.tag-new {
+                background: #10b981;
+                color: white;
+            }
+
+            .archive-tag.tag-optimize {
+                background: #3b82f6;
+                color: white;
+            }
+
+            .archive-tag.tag-fix {
+                background: #f59e0b;
+                color: white;
+            }
+
+            .archive-tag.tag-default {
+                background: #6b7280;
+                color: white;
+            }
+
+        .archive-desc {
+            color: var(--text-light, #666);
+            margin: 8px 0 0;
+            line-height: 1.5;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+        <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+                <a href="../index.html">首页</a>
+                <a href="../articles/articles.html">文章</a>
+                <a href="../masters/masters.html">导师</a>
+                <a href="../toolkit/toolkit.html">工具集</a>
+                <a href="../gallery/gallery.html">文艺</a>
+                <a href="../puzzle/puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international/international.html">🌍 国际共运</a>
+                <a href="../rectify/rectify.html">正名</a>
+                <a href="about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="archive-container">
+            <a href="../index.html" class="back-link">← 返回首页</a>
+            <div class="archive-header">
+                <h1 class="archive-title">📜 完整更新历史</h1>
+            </div>
+            <div id="archiveTimeline" class="archive-timeline">
+                <div class="loading">加载中...</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+
+        function getTagClass(tag) {
+            const map = { '重要': 'tag-important', '新增': 'tag-new', '优化': 'tag-optimize', '修复': 'tag-fix' };
+            return map[tag] || 'tag-default';
+        }
+
+        async function loadFullHistory() {
+            const container = document.getElementById('archiveTimeline');
+            try {
+                const res = await fetch('../../data/updates.json');
+                if (!res.ok) throw new Error();
+                const updates = await res.json();
+                updates.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                if (updates.length === 0) {
+                    container.innerHTML = '<div style="text-align:center;padding:40px;">暂无更新记录</div>';
+                    return;
+                }
+
+                container.innerHTML = updates.map(u => {
+                    const formattedDate = u.date.replace(/-/g, '.');
+                    const tagClass = getTagClass(u.tag);
+                    return `
+                            <div class="archive-item">
+                                <div class="archive-date">${formattedDate}</div>
+                                <div class="archive-content">
+                                    <div class="archive-title-link">
+                                        <a href="changelog-detail.html?id=${u.detailId}">${escapeHtml(u.title)}</a>
+                                        <span class="archive-tag ${tagClass}">${escapeHtml(u.tag)}</span>
+                                    </div>
+                                    <p class="archive-desc">${escapeHtml(u.desc)}</p>
+                                </div>
+                            </div>
+                        `;
+                }).join('');
+            } catch (e) {
+                container.innerHTML = '<div style="text-align:center;padding:40px;color:#c41e3a;">加载失败，请检查 data/updates.json</div>';
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function (m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        loadFullHistory();
+    </script>
+    <script src="../../js/main.js"></script>
+
+<script src="../../js/darkmode.js"></script>
+<script src="../../js/cursor.js"></script>
+</body>
+</html>

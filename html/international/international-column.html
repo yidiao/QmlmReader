@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专栏 | 国际共运 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        :root {
+            --col-primary: #8b0000;
+            --col-accent: #c41e3a;
+            --col-dark: #1a1a2e;
+        }
+
+        /* ==================== 页面头部 ==================== */
+        .page-hero {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a0a 0%, #2d0808 35%, #6a0000 70%, #8b0000 100%);
+            color: white;
+            padding: 4rem 1.5rem;
+            text-align: center;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath d='M60 10 L70 40 L100 40 L76 57 L85 88 L60 72 L35 88 L44 57 L20 40 L50 40 Z' fill='rgba(255,215,0,0.06)'/%3E%3Ccircle cx='105' cy='15' r='8' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E");
+            background-size: 180px;
+            pointer-events: none;
+        }
+        .page-hero > * { position: relative; z-index: 1; }
+        .page-hero .hero-badge {
+            display: inline-block;
+            background: rgba(255,215,0,0.2);
+            border: 1px solid rgba(255,215,0,0.4);
+            color: #ffd700;
+            padding: 5px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 1px;
+        }
+        .page-hero h1 {
+            font-size: 2.8rem;
+            margin: 0.3rem 0 0.8rem;
+            font-family: 'STSong','SimSun','Noto Serif SC',serif;
+            text-shadow: 2px 3px 10px rgba(0,0,0,0.5);
+        }
+        .page-hero .hero-sub {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .hero-stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.8rem;
+            flex-wrap: wrap;
+        }
+        .hero-stat-item {
+            text-align: center;
+        }
+        .hero-stat-num {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+            display: block;
+        }
+        .hero-stat-label { font-size: 0.85rem; opacity: 0.75; }
+
+        /* ==================== 内容区域 ==================== */
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        /* ==================== 精选专栏（大卡片） ==================== */
+        .featured-hero {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 380px;
+        }
+        body.dark-mode .featured-hero { background: #2a2a2a; }
+
+        .featured-visual {
+            background: linear-gradient(160deg, #0d0d0d 0%, #3d0c0c 50%, #8b0000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+        .featured-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='40' cy='30' r='50' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='0.5'/%3E%3Ccircle cx='160' cy='160' r='60' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='0.5'/%3E%3Cpath d='M100 20 L110 60 L150 65 L118 85 L128 125 L100 105 L72 125 L82 85 L50 65 L90 60 Z' fill='rgba(255,215,0,0.15)'/%3E%3C/svg%3E");
+            background-size: 220px;
+            pointer-events: none;
+        }
+        .featured-visual-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+        }
+        .featured-visual-content .fv-icon {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+        .featured-visual-content .fv-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'STSong','SimSun',serif;
+        }
+        .featured-visual-content .fv-badge {
+            display: inline-block;
+            margin-top: 1rem;
+            background: rgba(255,215,0,0.2);
+            color: #ffd700;
+            padding: 4px 16px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+
+        .featured-info {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .featured-info .fi-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #c41e3a;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .featured-info h2 {
+            font-size: 1.6rem;
+            color: #1a1a1a;
+            margin: 0 0 0.8rem;
+            line-height: 1.4;
+        }
+        body.dark-mode .featured-info h2 { color: #e0e0e0; }
+        .featured-info .fi-desc {
+            color: #666;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+        }
+        body.dark-mode .featured-info .fi-desc { color: #aaa; }
+        .featured-info .fi-chapters {
+            font-size: 0.85rem;
+            color: #888;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+        }
+        body.dark-mode .featured-info .fi-chapters { color: #999; }
+        .featured-info .fi-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #c41e3a;
+            color: white;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+        .featured-info .fi-cta:hover {
+            background: #8b0000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(196,30,58,0.35);
+        }
+
+        /* ==================== 章节列表（展开在精选卡片下方） ==================== */
+        .chapter-outline {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.6rem;
+            margin-top: 1.2rem;
+        }
+        .chapter-outline .ch-item {
+            background: #f8f8f8;
+            border-radius: 8px;
+            padding: 0.6rem 0.8rem;
+            font-size: 0.82rem;
+            color: #555;
+            border-left: 3px solid #c41e3a;
+        }
+        body.dark-mode .chapter-outline .ch-item { background: #333; color: #bbb; border-left-color: #ff6b6b; }
+
+        /* ==================== 区域标题 ==================== */
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 2.5rem 0 1.5rem;
+        }
+        .section-heading .sh-line {
+            flex: 1;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        body.dark-mode .section-heading .sh-line { background: #444; }
+        .section-heading h3 {
+            font-size: 1.3rem;
+            color: #2c3e4e;
+            white-space: nowrap;
+        }
+        body.dark-mode .section-heading h3 { color: #c0d0e0; }
+
+        /* ==================== 国家卡片 ==================== */
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .country-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: all 0.35s;
+            border: 1px solid #eee;
+        }
+        body.dark-mode .country-card { background: #2a2a2a; border-color: #3a3a3a; }
+        .country-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.14);
+        }
+        .country-header {
+            background: linear-gradient(135deg, #2c3e4e 0%, #1a2a3a 100%);
+            color: white;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .country-header .ch-info {}
+        .country-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+        }
+        .country-period { font-size: 0.8rem; opacity: 0.8; }
+        .country-flag { font-size: 2.2rem; line-height: 1; }
+        .country-stats {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            background: #f8f8f8;
+            flex-wrap: wrap;
+        }
+        body.dark-mode .country-stats { background: #333; }
+        .stat-badge {
+            font-size: 0.78rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+            background: white;
+            color: #555;
+            border: 1px solid #e0e0e0;
+        }
+        body.dark-mode .stat-badge { background: #444; color: #ccc; border-color: #555; }
+        .stat-badge.positive { color: #2d6a4f; border-color: #74c69d; }
+        .stat-badge.negative { color: #c41e3a; border-color: #ff8a8a; }
+        .stat-badge.unknown { color: #b8860b; border-color: #e6a817; }
+        body.dark-mode .stat-badge.positive { color: #74c69d; }
+        body.dark-mode .stat-badge.negative { color: #ff8a8a; }
+        body.dark-mode .stat-badge.unknown { color: #e6a817; }
+
+        .country-content { padding: 1.2rem 1.5rem; }
+        .cc-section {
+            margin-bottom: 1rem;
+        }
+        .cc-section h4 {
+            font-size: 0.85rem;
+            color: #c41e3a;
+            margin: 0 0 0.5rem 0;
+            border-left: 3px solid #c41e3a;
+            padding-left: 0.6rem;
+        }
+        body.dark-mode .cc-section h4 { color: #ff6b6b; }
+        .cc-list {
+            font-size: 0.85rem;
+            line-height: 1.7;
+            padding-left: 1.2rem;
+            margin: 0;
+        }
+        .cc-list.achievements li { color: #2d6a4f; }
+        .cc-list.mistakes li { color: #c41e3a; }
+        body.dark-mode .cc-list.achievements li { color: #74c69d; }
+        body.dark-mode .cc-list.mistakes li { color: #ff8a8a; }
+        .cc-reflection {
+            font-size: 0.85rem;
+            color: #666;
+            background: #fef9e6;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border-left: 3px solid #e6a017;
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+        }
+        body.dark-mode .cc-reflection { background: #3a3520; color: #ccc; }
+        .cc-readmore {
+            display: inline-block;
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: opacity 0.2s;
+        }
+        .cc-readmore:hover { text-decoration: underline; }
+        .cc-readmore.coming {
+            opacity: 0.45;
+        }
+
+        /* ==================== 预告区 ==================== */
+        .coming-section {
+            background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        body.dark-mode .coming-section { background: linear-gradient(135deg, #222 0%, #2a2a2a 100%); }
+        .coming-section h3 {
+            font-size: 1.3rem;
+            color: #2c3e4e;
+            margin-bottom: 1.5rem;
+        }
+        body.dark-mode .coming-section h3 { color: #c0d0e0; }
+        .coming-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 0.8rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            text-align: left;
+        }
+        .coming-item {
+            background: white;
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            font-size: 0.9rem;
+            color: #555;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        body.dark-mode .coming-item { background: #333; color: #bbb; border-color: #444; }
+        .coming-item .ci-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #c41e3a;
+            flex-shrink: 0;
+        }
+        .coming-note {
+            font-size: 0.9rem;
+            color: #999;
+        }
+        body.dark-mode .coming-note { color: #888; }
+
+        /* ==================== 右侧悬停导航 ==================== */
+        .side-float-nav {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            font-family: inherit;
+        }
+        .sfn-toggle {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            background: linear-gradient(180deg, #c41e3a, #8b0000);
+            color: white;
+            padding: 0.85rem 0.4rem;
+            border-radius: 8px 0 0 8px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            box-shadow: -2px 2px 10px rgba(196,30,58,0.25);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            user-select: none;
+            line-height: 1.6;
+        }
+        .sfn-toggle:hover {
+            background: linear-gradient(180deg, #d42a44, #a00000);
+            padding-right: 0.6rem;
+        }
+        .sfn-panel {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(100%);
+            background: white;
+            border-radius: 12px 0 0 12px;
+            box-shadow: -4px 4px 20px rgba(0,0,0,0.15);
+            padding: 0.7rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(.4,0,.2,1);
+            min-width: 155px;
+            border: 1px solid #eee;
+            border-right: none;
+        }
+        .side-float-nav.expanded .sfn-panel {
+            transform: translateY(-50%) translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .sfn-panel a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1.2rem;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.87rem;
+            font-weight: 500;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+        .sfn-panel a:hover {
+            background: #fdf0f0;
+            color: #c41e3a;
+            padding-left: 1.5rem;
+        }
+        .sfn-divider {
+            height: 1px;
+            background: #eee;
+            margin: 0.3rem 0.8rem;
+        }
+        .sfn-back-top {
+            color: #999 !important;
+            font-size: 0.82rem !important;
+        }
+        body.dark-mode .sfn-panel { background: #2a2a2a; border-color: #444; }
+        body.dark-mode .sfn-panel a { color: #ddd; }
+        body.dark-mode .sfn-panel a:hover { background: #3a2020; color: #ff6b6b; }
+        body.dark-mode .sfn-divider { background: #444; }
+
+        /* ==================== 响应式 ==================== */
+        @media (max-width: 768px) {
+            .page-hero { padding: 2.5rem 1.2rem; }
+            .page-hero h1 { font-size: 1.8rem; }
+            .featured-hero { grid-template-columns: 1fr; min-height: auto; }
+            .featured-visual { padding: 2rem 1.5rem; }
+            .featured-info { padding: 1.5rem; }
+            .featured-info h2 { font-size: 1.3rem; }
+            .country-grid { grid-template-columns: 1fr; }
+            .hero-stats-row { gap: 1.2rem; }
+            .chapter-outline { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .coming-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+                <a href="../index.html">首页</a>
+                <a href="../articles/articles.html">文章</a>
+                <a href="../masters/masters.html">导师</a>
+                <a href="../toolkit/toolkit.html">工具集</a>
+                <a href="../gallery/gallery.html">文艺</a>
+                <a href="../puzzle/puzzle.html">🧩 理论拼图</a>
+                <a href="international.html" class="active">🌍 国际共运</a>
+                <a href="../rectify/rectify.html">正名</a>
+                <a href="../about/about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 右侧悬停导航 -->
+    <nav class="side-float-nav" id="sideNav">
+        <div class="sfn-toggle" onclick="toggleSideNav()" title="展开导航">☰ 快速导航</div>
+        <div class="sfn-panel">
+            <a href="#sec-featured" onclick="document.getElementById('sideNav').classList.remove('expanded')">⭐ 铁流与先锋</a>
+            <a href="#sec-encirclement" onclick="document.getElementById('sideNav').classList.remove('expanded')">🛡️ 包围圈的破产</a>
+            <a href="#sec-foundations" onclick="document.getElementById('sideNav').classList.remove('expanded')">🏔️ 地基</a>
+            <a href="#sec-countries" onclick="document.getElementById('sideNav').classList.remove('expanded')">📖 国家专题</a>
+            <a href="#sec-coming" onclick="document.getElementById('sideNav').classList.remove('expanded')">🌍 更多筹备</a>
+            <div class="sfn-divider"></div>
+            <a href="#" class="sfn-back-top" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});document.getElementById('sideNav').classList.remove('expanded')">⬆ 返回顶部</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- 页面头部 -->
+        <section class="page-hero">
+            <div class="hero-badge">🌍 INTERNATIONAL COMMUNIST MOVEMENT</div>
+            <h1>国际共运专栏</h1>
+            <p class="hero-sub">梳理历史脉络 · 分析成败得失 · 总结经验教训<br>以马克思主义的立场审视二十世纪国际共产主义运动的潮起潮落</p>
+            <div class="hero-stats-row">
+                <div class="hero-stat-item"><span class="hero-stat-num">2</span><span class="hero-stat-label">深度专栏已发布</span></div>
+                <div class="hero-stat-item"><span class="hero-stat-num">3</span><span class="hero-stat-label">国家专题已上线</span></div>
+                <div class="hero-stat-item"><span class="hero-stat-num">6</span><span class="hero-stat-label">选题筹备中</span></div>
+                <div class="hero-stat-item"><span class="hero-stat-num">11</span><span class="hero-stat-label">篇深度长文</span></div>
+            </div>
+        </section>
+
+        <div class="content-wrapper">
+
+            <!-- ========== 精选专栏：铁流与先锋 ========== -->
+            <div class="featured-hero" id="sec-featured">
+                <div class="featured-visual">
+                    <div class="featured-visual-content">
+                        <div class="fv-icon">☭</div>
+                        <div class="fv-title">铁流与先锋</div>
+                        <p style="opacity:0.8;margin:0.5rem 0;">中俄早期革命中的党与阶级</p>
+                        <div class="fv-badge">🔥 重磅首发</div>
+                    </div>
+                </div>
+                <div class="featured-info">
+                    <div class="fi-label">深度专栏 · 已发布</div>
+                    <h2>铁流与先锋——中俄早期革命中的党与阶级</h2>
+                    <p class="fi-desc">
+                        以"双螺旋结构"平行推进中俄革命历程——从1905年圣彼得堡的血色曙光，到1945年延安窑洞的理论创制。深度剖析<strong>党与阶级的二元辩证关系</strong>，系统比较城市闪电战与农村持久战两条革命道路，批判分析德、匈、意、法、日、柬、印/拉美等国革命失败的深层原因。
+                    </p>
+                    <div class="chapter-outline">
+                        <div class="ch-item">Ⅰ 序幕：帝国的黄昏</div>
+                        <div class="ch-item">Ⅱ 觉醒：1905—1917</div>
+                        <div class="ch-item">Ⅲ 裂变：1917—1921</div>
+                        <div class="ch-item">Ⅳ 狂飙：1922—1927</div>
+                        <div class="ch-item">Ⅴ 裂变与重塑</div>
+                        <div class="ch-item">Ⅵ 土地：两条道路</div>
+                        <div class="ch-item">附 莫斯科的引力场</div>
+                        <div class="ch-item">Ⅶ 烈火锻造：长征</div>
+                        <div class="ch-item">Ⅷ 延安：理论创造</div>
+                        <div class="ch-item">Ⅸ 比较与批判</div>
+                    </div>
+                    <a href="international-column/tieliu-yu-xianfeng.html" class="fi-cta">阅读全文 →</a>
+                </div>
+            </div>
+
+            <!-- ========== 深度长文：包围圈的破产 ========== -->
+            <div class="featured-hero" id="sec-encirclement" style="margin-top:2rem;">
+                <div class="featured-visual" style="background: linear-gradient(160deg, #1a0a0a 0%, #4a1010 50%, #8b0000 100%);">
+                    <div class="featured-visual-content">
+                        <div class="fv-icon">🛡️</div>
+                        <div class="fv-title">包围圈的破产</div>
+                        <p style="opacity:0.8;margin:0.5rem 0;">苏联反法西斯集体安全的失败<br>1921 — 1939</p>
+                        <div class="fv-badge">🆕 深度长文</div>
+                    </div>
+                </div>
+                <div class="featured-info">
+                    <div class="fi-label">深度长文 · 地缘政治分析 · 已发布</div>
+                    <h2>包围圈的破产——苏联反法西斯集体安全的失败（1921—1939）</h2>
+                    <p class="fi-desc">
+                        从1921年到1939年，苏联用十八年时间试图编织一张对德包围圈——它失败了。这场失败不是莫斯科的背叛，而是<strong>西方列强的反共本能、东欧小国的恐俄记忆、以及苏联自身在绝望中工业化狂奔的过度代价</strong>，三者共同制造的悲剧。列宁《宁肯少些，但要好些》、列宁《民族和殖民地问题提纲初稿》、毛泽东《矛盾论》——三篇经典文献为这段历史提供了系统的分析框架。
+                    </p>
+                    <div class="chapter-outline">
+                        <div class="ch-item">序幕 · 铁幕降临之前（1921—1933）</div>
+                        <div class="ch-item">一 · 魏玛德国——最想要的盟友</div>
+                        <div class="ch-item">二 · 斯大林的"毫无人性"从何而来</div>
+                        <div class="ch-item">三 · 大清洗——"社会和解"破产后</div>
+                        <div class="ch-item">四—五 · 英法的算盘 & 慕尼黑</div>
+                        <div class="ch-item">六—八 · 邻国的恐惧 & 盲区</div>
+                        <div class="ch-item">九—十 · 苏联的错误 & 秘密议定书</div>
+                        <div class="ch-item">十一—十二 · 没有选择的条约</div>
+                        <div class="ch-item">终幕 · 1941年6月22日</div>
+                    </div>
+                    <a href="international-column/encirclement.html" class="fi-cta">阅读全文 →</a>
+                </div>
+            </div>
+
+            <!-- ========== 深度长文：地基 ========== -->
+            <div class="featured-hero" id="sec-foundations" style="margin-top:2rem;">
+                <div class="featured-visual" style="background: linear-gradient(160deg, #0a0f1a 0%, #152238 50%, #1a3a5c 100%);">
+                    <div class="featured-visual-content">
+                        <div class="fv-icon">🏔️</div>
+                        <div class="fv-title">地基</div>
+                        <p style="opacity:0.8;margin:0.5rem 0;">自然条件对社会制度的制约<br>——对"北欧模式"和"亚洲四小龙"迷信的批判</p>
+                        <div class="fv-badge" style="background:rgba(100,180,220,0.2);color:#8cc8e8;border-color:rgba(100,180,220,0.3);">🆕 深度长文</div>
+                    </div>
+                </div>
+                <div class="featured-info">
+                    <div class="fi-label">深度长文 · 地理唯物主义分析 · 已发布</div>
+                    <h2>地基——自然条件对社会制度的制约</h2>
+                    <p class="fi-desc">
+                        拆解"北欧模式"和"亚洲四小龙"神话背后<strong>不可复制的物质前提</strong>。挪威可耕地仅3% → 从中世纪就清空了封建贵族 → 民主化道路上没有庄园主挡在投票箱前。日韩台不走"先重后轻"是因为<strong>它们不需要走——美国安全伞下可以自由进口设备和原料。</strong>斯大林的地理环境论、恩格斯的物质前提论、毛泽东的"游泳论"——构成了从地理约束到主观能动性的完整分析链条。
+                    </p>
+                    <div class="chapter-outline">
+                        <div class="ch-item" style="border-left-color:#1a3a5c;">序幕 · 殖民、分工与无痛发展</div>
+                        <div class="ch-item" style="border-left-color:#1a3a5c;">一 · 地理约束论 & 资本主义痉挛</div>
+                        <div class="ch-item" style="border-left-color:#1a3a5c;">二 · 北欧——挪威的3%可耕地</div>
+                        <div class="ch-item" style="border-left-color:#1a3a5c;">三 · 四小龙——冷战特供红利</div>
+                        <div class="ch-item" style="border-left-color:#1a3a5c;">四 · 新中国——封锁下的先重后轻</div>
+                        <div class="ch-item" style="border-left-color:#1a3a5c;">五 · 苏联与中国的镜像</div>
+                        <div class="ch-item" style="border-left-color:#1a3a5c;">六 · 规模/时机/叙事权力</div>
+                        <div class="ch-item" style="border-left-color:#1a3a5c;">七—八 · 批判 & 替代方法论</div>
+                    </div>
+                    <a href="international-column/foundations.html" class="fi-cta" style="background: linear-gradient(135deg, #1a3a5c, #0d2b45);">阅读全文 →</a>
+                </div>
+            </div>
+
+            <!-- ========== 国家 / 地区专题 ========== -->
+            <div class="section-heading" id="sec-countries">
+                <span class="sh-line"></span>
+                <h3>📖 国家 / 地区专题</h3>
+                <span class="sh-line"></span>
+            </div>
+
+            <div class="country-grid">
+
+                <!-- 柬埔寨 -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="ch-info">
+                            <div class="country-name">柬埔寨 · 红色高棉</div>
+                            <div class="country-period">1975 — 1979 | 民主柬埔寨</div>
+                        </div>
+                        <div class="country-flag">🇰🇭</div>
+                    </div>
+                    <div class="country-stats">
+                        <span class="stat-badge positive">✓ 抗美救国</span>
+                        <span class="stat-badge negative">✗ 极端政策</span>
+                        <span class="stat-badge unknown">? 争议评价</span>
+                    </div>
+                    <div class="country-content">
+                        <div class="cc-section">
+                            <h4>📌 历史成就</h4>
+                            <ul class="cc-list achievements">
+                                <li>1975年击败美国支持的朗诺政权，实现国家独立</li>
+                                <li>清除城市买办阶级和殖民残余势力</li>
+                                <li>推行全民免费医疗和基础教育</li>
+                            </ul>
+                        </div>
+                        <div class="cc-section">
+                            <h4>⚠️ 严重失误</h4>
+                            <ul class="cc-list mistakes">
+                                <li>极端农业集体化导致粮食危机和人道灾难</li>
+                                <li>对知识分子和旧政权人员的过度清洗</li>
+                                <li>关闭城市、废除货币、取消商品经济的激进试验</li>
+                            </ul>
+                        </div>
+                        <div class="cc-reflection">
+                            💡 <strong>经验教训：</strong>革命不能超越生产力发展阶段；阶级分析须结合具体国情；群众路线不能沦为领袖个人意志。
+                        </div>
+                        <a href="#" class="cc-readmore coming">深入阅读：红色高棉的兴衰与反思 → [筹备中]</a>
+                    </div>
+                </div>
+
+                <!-- 阿尔巴尼亚 -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="ch-info">
+                            <div class="country-name">阿尔巴尼亚 · 霍查时期</div>
+                            <div class="country-period">1944 — 1985 | 社会主义阿尔巴尼亚</div>
+                        </div>
+                        <div class="country-flag">🇦🇱</div>
+                    </div>
+                    <div class="country-stats">
+                        <span class="stat-badge positive">✓ 独立自主</span>
+                        <span class="stat-badge negative">✗ 自我封闭</span>
+                        <span class="stat-badge unknown">? 破碎外交</span>
+                    </div>
+                    <div class="country-content">
+                        <div class="cc-section">
+                            <h4>📌 历史成就</h4>
+                            <ul class="cc-list achievements">
+                                <li>二战中领导反法西斯游击战争，实现民族解放</li>
+                                <li>坚决抵制苏联霸权主义和美帝国主义的压力</li>
+                                <li>全民识字率从解放前的5%提高到90%以上</li>
+                                <li>消灭了天花、疟疾等地方病</li>
+                            </ul>
+                        </div>
+                        <div class="cc-section">
+                            <h4>⚠️ 严重失误</h4>
+                            <ul class="cc-list mistakes">
+                                <li>先后与南斯拉夫、苏联、中国交恶，陷入外交孤立</li>
+                                <li>修建数十万地堡，国民经济军事化过度</li>
+                                <li>闭关锁国导致经济发展严重滞后</li>
+                            </ul>
+                        </div>
+                        <div class="cc-reflection">
+                            💡 <strong>经验教训：</strong>独立自主不等于自我封闭；反对霸权不等于与世界为敌；社会主义需要开放学习和吸收先进经验。
+                        </div>
+                        <a href="#" class="cc-readmore coming">深入阅读："山鹰之国"的兴衰启示 → [筹备中]</a>
+                    </div>
+                </div>
+
+                <!-- 南斯拉夫 -->
+                <div class="country-card">
+                    <div class="country-header">
+                        <div class="ch-info">
+                            <div class="country-name">南斯拉夫 · 自治社会主义</div>
+                            <div class="country-period">1948 — 1992 | 铁托时期</div>
+                        </div>
+                        <div class="country-flag">🇾🇺</div>
+                    </div>
+                    <div class="country-stats">
+                        <span class="stat-badge positive">✓ 经济繁荣</span>
+                        <span class="stat-badge negative">✗ 民族矛盾</span>
+                        <span class="stat-badge unknown">? 联邦解体</span>
+                    </div>
+                    <div class="country-content">
+                        <div class="cc-section">
+                            <h4>📌 历史成就</h4>
+                            <ul class="cc-list achievements">
+                                <li>走出一条独立于苏联模式的"自治社会主义"道路</li>
+                                <li>经济繁荣，人民生活水平在社会主义国家中最高</li>
+                                <li>不结盟运动的创始国之一，国际影响力显著</li>
+                                <li>工人自治制度是社会主义民主的独特实验</li>
+                            </ul>
+                        </div>
+                        <div class="cc-section">
+                            <h4>⚠️ 严重失误</h4>
+                            <ul class="cc-list mistakes">
+                                <li>长期压制民族自决诉求，民族矛盾积累</li>
+                                <li>联邦制流于形式，缺乏中央权威</li>
+                                <li>经济权力过度下放导致地方保护主义和通货膨胀</li>
+                                <li>铁托逝世后缺乏制度化的权力交接机制</li>
+                            </ul>
+                        </div>
+                        <div class="cc-reflection">
+                            💡 <strong>经验教训：</strong>民族问题必须早解决、真解决；中央与地方权力需要科学配置；社会主义制度设计必须考虑国家统一与稳定的前提。
+                        </div>
+                        <a href="#" class="cc-readmore coming">深入阅读：南斯拉夫解体前的最后一课 → [筹备中]</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== 未来专题预告 ========== -->
+            <div class="coming-section" id="sec-coming">
+                <h3>🌍 更多专题筹备中</h3>
+                <div class="coming-grid">
+                    <div class="coming-item"><span class="ci-dot"></span>朝鲜 · 主体思想的形成与实践</div>
+                    <div class="coming-item"><span class="ci-dot"></span>罗马尼亚 · 齐奥塞斯库时期的个人崇拜与民生失衡</div>
+                    <div class="coming-item"><span class="ci-dot"></span>缅甸 · 奈温的"缅甸式社会主义"失败原因</div>
+                    <div class="coming-item"><span class="ci-dot"></span>埃塞俄比亚 · 门格斯图时期的土改与饥荒</div>
+                    <div class="coming-item"><span class="ci-dot"></span>古巴 · 革命政权的巩固与挑战</div>
+                    <div class="coming-item"><span class="ci-dot"></span>越南 · 抗法抗美战争中的群众动员</div>
+                </div>
+                <p class="coming-note">—— 欢迎提供选题建议 ——</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer"><div class="container"><p>青年马列毛主义驿站 | Qmlm Reader</p><p class="footer-note">学习他 · 成为他 · 然后超越他</p></div></footer>
+    <script src="../../js/main.js"></script>
+    <script>
+        function toggleDarkMode(){
+            document.body.classList.toggle('dark-mode');
+            var isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+            var btn = document.querySelector('.dark-mode-toggle');
+            if(btn) btn.textContent = isDark ? '☀️' : '🌙';
+        }
+        if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+        (function(){
+            var btn = document.querySelector('.dark-mode-toggle');
+            if(btn && document.body.classList.contains('dark-mode')) btn.textContent = '☀️';
+        })();
+        // 右侧悬停导航
+        function toggleSideNav(){
+            document.getElementById('sideNav').classList.toggle('expanded');
+        }
+        document.addEventListener('click', function(e){
+            var nav = document.getElementById('sideNav');
+            if(nav && !nav.contains(e.target)){
+                nav.classList.remove('expanded');
+            }
+        });
+    </script>
+
+<script src="../../js/darkmode.js"></script>
+<script src="../../js/cursor.js"></script>
+</body>
+</html>

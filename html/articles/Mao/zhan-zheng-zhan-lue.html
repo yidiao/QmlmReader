@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>战争和战略问题 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/articles-detail.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --cat-primary:   #1a4d7a;
+            --cat-secondary: #2b6aa5;
+            --cat-gradient:  linear-gradient(135deg, #0a1f33 0%, #1a4d7a 50%, #2b6aa5 100%);
+        }
+    </style>
+</head>
+<body data-category="military">
+
+    <header class="site-header">
+        <div class="container">
+            <div class="logo"><span class="logo-icon">☭</span><div class="logo-text"><h1>青年马列毛主义驿站</h1><span class="logo-sub">Qmlm Reader</span></div></div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单"><span></span><span></span><span></span></button>
+            <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+                <a href="../../index.html">首页</a><a href="../../articles/articles.html" class="active">文章</a><a href="../../masters/masters.html">导师</a><a href="../../toolkit/toolkit.html">工具集</a><a href="../../gallery/gallery.html">文艺</a><a href="../../puzzle/puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a><a href="../../international/international.html">🌍 国际共运</a><a href="../../rectify/rectify.html">正名</a><a href="../../about/about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="back-nav">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../../articles/articles.html" class="back-link"><span>←</span> 返回文章列表</a>
+        </div>
+    </div>
+
+    <main class="article-detail">
+        <header class="article-header">
+            <div class="importance-badge">⭐⭐⭐⭐ 重点推荐</div>
+            <h1>战争和战略问题</h1>
+            <div class="article-subtitle">全党都要注重战争，学习军事——枪杆子里面出政权</div>
+            <div class="article-meta">
+                <span class="author">毛泽东</span><span class="date">1938年11月6日</span><span class="category">军事战略 · 战争理论</span><span class="word-count">约15,000字</span><span class="length-tag">📄 中篇</span>
+            </div>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
+        </div>
+
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro"><p><strong>阅读提示：</strong>本文是毛泽东在中共六届六中全会上所作结论的一部分，与《论持久战》《抗日游击战争的战略问题》同属1938年军事理论高峰。核心命题：中国的具体国情决定了武装斗争是主要形式，"枪杆子里面出政权"。全文三部分。</p></div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
+                <div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon">▼</span> 一、中国的特点和战争</h3><div class="chapter-content"><p>中国的特点是：不是一个独立的民主的国家，而是一个半殖民地半封建的国家；在内部没有民主制度，而受封建制度压迫；在外部没有民族独立，而受帝国主义压迫。因此，无议会可以利用，无组织工人举行罢工的合法权利。在这里，共产党的任务，基本地不是经过长期合法斗争以进入起义和战争，也不是先占城市后取乡村，而是走相反的道路。在中国，主要的斗争形式是战争，而主要的组织形式是军队。离开了武装斗争，就没有无产阶级和共产党的地位，就不能完成任何的革命任务。</p></div></div>
+                <div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon">▼</span> 二、党的军事战略的转变</h3><div class="chapter-content"><p>我们党的军事战略的变化，分为国内战争和民族战争两个过程。在抗日战争的过程中，就我党的军事任务说来，也将大体上分为两个战略时期。在前期（包括战略防御和战略相持两个阶段），主要的是游击战争；在后期（战略反攻阶段），主要的将是正规战争。</p></div></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2 class="tab-heading">💡 如何阅读本文</h2>
+                <div class="guide-block"><h3>① 理解"中国特点"决定"中国道路"</h3><p>毛泽东不搞军事理论的抽象演绎。他从"中国是什么社会性质"出发——半殖民地半封建→没有议会可利用→必须以武装斗争为主要形式。这是《实践论》"一切从实际出发"的典型运用。</p></div>
+                <div class="guide-block"><h3>② 注意"战略转变"的分阶段思想</h3><p>战略不是一成不变的。毛泽东根据时间、地点、条件的变化不断调整。国内战争阶段→民族战争阶段；游击战为主→运动战为主。这与《矛盾论》中矛盾转化的原理一致。</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2 class="tab-heading">🔍 容易读错的地方</h2>
+                <div class="diff-item"><div class="wrong">❌ 常见误读："枪杆子里面出政权" = 暴力万能论</div><div class="correct">✅ 正解：毛泽东是"在中国具体条件"下做出的判断——没有议会、没有合法斗争空间。这不是抽象地"歌颂暴力"。在有多元政治空间的社会里，这条具体结论就不适用——但"一切从实际出发"的方法论永远适用。教条主义者会把"枪杆子"当作普世公式，马克思主义者会分析具体条件。</div></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2 class="tab-heading">💬 这篇文章在回应谁？</h2>
+                <div class="dialogue-block"><h3>它在回应的问题</h3><ul><li>党内右倾——放弃武装斗争领导权，主张"一切经过统一战线"</li><li>"城市中心论"——照搬十月革命模式，不理解中国农村武装斗争的必然性</li><li>轻视军事工作的倾向——认为军事是"粗活"，政治工作才是"高端"</li></ul></div>
+                <div class="dialogue-block"><h3>它在问每一个读者</h3><ul><li>毛泽东说"中国的特点决定了中国的斗争形式"——你的领域里，"特点"是什么？你是因为分析了自己的特点才选择了方法，还是直接照搬了别处的"标准做法"？</li><li>在你的组织中，"枪杆子"对应什么——什么是你们必须抓住的根本手段？</li></ul></div>
+                <div class="dialogue-block"><h3>它在等你的回应</h3><p>写一段"你的国情分析"：你所处的领域/组织/环境有什么独特性？这些独特性决定了你必须采用什么"不同于常规"的方法？不要套公式——从实际出发。</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2 class="tab-heading">⚡ 读完之后可以做什么</h2>
+                <div class="action-item"><h3>实验一：国情分析——你的"中国特点"是什么</h3><p>毛泽东从"半殖民地半封建"这个最根本的国情出发选择战略。你的领域最根本的"国情"是什么？用一段话概括——然后检查：你的策略和这个"国情"匹配吗？</p></div>
+                <div class="action-item"><h3>实验二：分阶段调整</h3><p>毛泽东根据战争阶段的变化调整军事战略。你正在做的一件事——它的"阶段"是否已经变了？你的策略该不该跟着变？</p></div>
+                <div class="action-item"><h3>实验三：识别你的"枪杆子"</h3><p>在你的领域里，什么是"不抓住就失去一切"的根本手段？你目前在这个根本手段上投入了多少精力？够吗？</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2 class="tab-heading">📊 一目了然</h2>
+                <div class="chart-block"><h3>文章特征雷达图</h3><p class="chart-desc">六个维度衡量本文的"性格"</p><div class="chart-container" style="max-width:500px;margin:0 auto;"><canvas id="radarChart"></canvas></div></div>
+                <div class="chart-block">
+                    <h3>论证节奏曲线</h3><p class="chart-desc">从国情分析到战略部署——第一部分是全篇核心</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;"><canvas id="argumentCurve"></canvas></div>
+                    <div class="structure-analysis"><h4>📝 结构分析</h4>
+                        <div class="analysis-item"><span class="analysis-label highlight">★ 第一部分：中国特点和战争（10/10）★</span><p>全文最高峰。半殖民地半封建→无议会可利用→必须以武装斗争为主要形式。"枪杆子里面出政权"的逻辑在此完整呈现——这不是一句口号，而是从国情出发的必然结论。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">第二部分：战略转变（7/10）</span><p>分阶段调整——国内战争到民族战争、游击战到运动战。具体战术部署。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">第三部分：游击战争的战略地位（8/10）</span><p>将游击战提升到战略高度——呼应同期写成的《抗日游击战争的战略问题》。</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2 class="tab-heading">🧩 在马哲体系中的位置</h2>
+                <div class="puzzle-intro"><p>《战争和战略问题》是毛泽东军事思想体系中"国情分析→战略选择"的经典案例。它与《论持久战》《抗日游击战争的战略问题》构成1938年军事理论三部曲。毛泽东展示了"从具体国情出发选择斗争形式"的方法论——马克思主义"具体问题具体分析"的典范。</p></div>
+                <div class="puzzle-timeline"><h3>在思想发展时间轴上的位置</h3><div class="timeline-track"><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1936</div><div class="timeline-label">战略问题</div></div><div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1938.11</div><div class="timeline-label">战争和战略</div><div class="timeline-here">◀ 本文</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1940</div><div class="timeline-label">新民主主义论</div></div></div></div>
+                <div class="puzzle-links"><h3>文章联结网络</h3><p class="puzzle-links-note">点击已收录文章直接跳转阅读</p><div class="conn-grid"><a href="lun-chi-jiu-zhan.html" class="conn-card" style="border-left-color:#1a4d7a;"><span class="conn-dir" style="color:#553c9a;">↔</span><span class="conn-title">《论持久战》</span><span class="conn-label">军事战略</span><span class="conn-relation">同期军事三部曲之一</span></a><a href="you-ji-zhan.html" class="conn-card" style="border-left-color:#1a4d7a;"><span class="conn-dir" style="color:#553c9a;">↔</span><span class="conn-title">《游击战争的战略问题》</span><span class="conn-label">军事战略</span><span class="conn-relation">同期军事三部曲之二</span></a></div></div>
+                <div class="puzzle-modern"><h3>它解决的真实问题</h3><p><strong>历史背景：</strong>1938年的六届六中全会，毛泽东需要解决党内根本性的路线分歧。"一切经过统一战线"的右倾主张放弃了武装斗争的领导权。毛泽东的回应斩钉截铁：在中国，离开了武装斗争，就没有共产党的地位。</p><p><strong>现实意义：</strong>"国情分析→战略选择"的方法论是永恒的。任何组织都有自己的"国情"——不分析它，就必然照搬别人的模式。毛泽东不给你答案，但他给了你找到答案的方法。</p></div>
+            </div>
+        </div>
+    </main>
+
+    <button class="download-fab" id="downloadFab" title="下载原文">⬇</button>
+    <div class="download-menu" id="downloadMenu"><h4>📥 下载原文</h4><div id="downloadLinks"></div></div>
+
+    <script src="../../../js/article-common.js"></script>
+    <script>
+        var ARTICLE_CHARTS = [
+            {
+                id: 'radarChart',
+                config: {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                        datasets: [{
+                            label: '战争和战略问题',
+                            data: [8, 10, 8, 10, 6, 7],
+                            borderColor: '#2b6aa5',
+                            backgroundColor: 'rgba(26,77,122,0.12)',
+                            pointBackgroundColor: '#2b6aa5'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
+                        plugins: { legend: { display: false } }
+                    }
+                }
+            },
+            {
+                id: 'argumentCurve',
+                config: {
+                    type: 'line',
+                    data: {
+                        labels: ['第一部分\n中国特点和战争★', '第二部分\n战略转变', '第三部分\n游击战地位'],
+                        datasets: [{
+                            label: '论证强度',
+                            data: [10, 7, 8],
+                            borderColor: '#1a4d7a',
+                            backgroundColor: 'rgba(26,77,122,0.08)',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            borderWidth: 2.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            }
+        ];
+        var DOWNLOAD_LINKS = [{ href: '../../../data/zhan-zheng-zhan-lue.txt', label: '📝 下载 TXT' }];
+    </script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+</body>
+</html>

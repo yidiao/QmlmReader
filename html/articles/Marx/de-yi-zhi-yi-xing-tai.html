@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>德意志意识形态 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/articles-detail.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* ===== 类别色值（必填，六选一）===== */
+        :root {
+            --cat-primary:   #8b0000;
+            --cat-secondary: #c41e3a;
+            --cat-gradient:  linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
+        }
+    </style>
+</head>
+<body data-category="philosophy">
+
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+                <a href="../../index.html">首页</a>
+                <a href="../../articles/articles.html" class="active">文章</a>
+                <a href="../../masters/masters.html">导师</a>
+                <a href="../../toolkit/toolkit.html">工具集</a>
+                <a href="../../gallery/gallery.html">文艺</a>
+                <a href="../../puzzle/puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../../international/international.html">🌍 国际共运</a>
+                <a href="../../rectify/rectify.html">正名</a>
+                <a href="../../about/about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="back-nav">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../../articles/articles.html" class="back-link">
+                <span>←</span> 返回文章列表
+            </a>
+        </div>
+    </div>
+
+    <main class="article-detail">
+
+        <header class="article-header">
+            <div class="importance-badge">⭐⭐⭐⭐ 经典必读</div>
+            <h1>德意志意识形态</h1>
+            <div class="article-subtitle">对费尔巴哈、鲍威尔和施蒂纳所代表的现代德国哲学的批判</div>
+            <div class="article-meta">
+                <span class="author">马克思 恩格斯</span>
+                <span class="date">1845-1846年</span>
+                <span class="category">哲学基础 · 历史唯物主义</span>
+                <span class="word-count">约50,000字（节选）</span>
+                <span class="length-tag">📚 长篇</span>
+            </div>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 1: 原文                              -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro">
+                    <p><strong>阅读提示：</strong>本文是唯物史观正式诞生的标志性著作。马克思和恩格斯在此第一次系统阐述了历史唯物主义的基本原理：物质生产是历史的起点、生产力与交往形式（生产关系）的矛盾是历史的动力、经济基础决定上层建筑、意识形态是统治阶级的思想。建议重点阅读第一章"费尔巴哈"部分。点击章节标题可展开/折叠内容。</p>
+                </div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第一章 费尔巴哈——唯物主义观点和唯心主义观点的对立
+                    </h3>
+                    <div class="chapter-content">
+                        <p>人们迄今为止总是为自己造出关于自己本身、关于自己是何物或应当成为何物的种种虚假观念。他们按照自己关于神、关于标准人等等观念来建立自己的关系。他们头脑的产物不受他们支配。他们这些创造者屈从于自己的创造物。他们在幻象、观念、教条和臆想的存在物的枷锁下日渐委靡消沉，我们要把他们从中解放出来。我们要起来反抗这种思想的统治。一个人说，我们要教会他们用符合人的本质的思想来代替这些臆想，另一个人说，我们要教会他们批判地对待这些臆想，还有个人说，我们要教会他们从头脑里抛掉这些臆想，这样——当前的现实就会崩溃。这些天真的幼稚的空想构成现代青年黑格尔派哲学的核心。</p>
+                        <p>从施特劳斯开始的黑格尔体系的解体过程发展为一种席卷一切"过去的力量"的世界性骚动。在普遍的混乱中，一些强大的王国产生了，又匆匆消逝了，瞬息之间出现了许多英雄，但是马上又因为出现了更勇敢更强悍的对手而销声匿迹。在1842-1845年这三年中间，在德国进行的清洗比过去三个世纪都要彻底得多。据说这一切都是在纯粹的思想领域中发生的。</p>
+                        <p>为了正确地评价这种甚至在可敬的德国市民心中唤起怡然自得的民族感情的哲学叫卖，为了清楚地表明这整个青年黑格尔派运动的狭隘性、地域局限性，特别是为了揭示这些英雄们的真正业绩和关于这些业绩的幻想之间的令人啼笑皆非的显著差异，就必须站在德国以外的立场上来考察一下这些喧嚣吵嚷。</p>
+                        <p>德国的批判，直至它最近所作的种种努力，都没有离开过哲学的基地。这个批判虽然没有研究过自己的一般哲学前提，但是它谈到的全部问题终究是在一定的哲学体系即黑格尔体系的基地上产生的。不仅是它的回答，而且连它所提出的问题本身，都包含着神秘主义。</p>
+                        <p>从施特劳斯到施蒂纳的整个德国哲学批判都局限于对宗教观念的批判。他们的出发点是现实的宗教和真正的神学。所谓占统治地位的形而上学观念、政治观念、法律观念、道德观念以及其他观念也被归入宗教观念或神学观念的领域。宗教的统治被当成了前提。一切占统治地位的关系逐渐地都被宣布为宗教的关系，继而被转化为迷信——对法的迷信，对国家的迷信等等。</p>
+                        <p>老年黑格尔派认为，只要把一切都归入黑格尔的逻辑范畴，他们就理解了一切。青年黑格尔派则硬说一切都包含宗教观念或者宣布一切都是神学上的东西，由此来批判一切。青年黑格尔派同意老年黑格尔派的这样一个信念，即认为宗教、概念、普遍的东西统治着现存世界。不过一派认为这种统治是篡夺而加以反对，另一派则认为这种统治是合法的而加以赞扬。</p>
+                        <p>既然青年黑格尔派认为，观念、思想、概念，总之，被他们变为某种独立东西的意识的一切产物，是人们的真正枷锁，那么不言而喻，青年黑格尔派只要同意识的这些幻想进行斗争就行了。青年黑格尔派的意识形态家们尽管满口讲的都是所谓"震撼世界的"词句，却是最大的保守派。如果说，他们之中最年轻的人宣称只为反对"词句"而斗争，那就确切地表达了他们的活动。不过他们忘记了：他们只是用词句来反对这些词句，既然他们仅仅反对这个世界的词句，那么他们就绝对不是反对现实的现存世界。</p>
+                        <p>我们开始要谈的前提不是任意提出的，不是教条，而是一些只有在臆想中才能撇开的现实前提。这是一些现实的个人，是他们的活动和他们的物质生活条件，包括他们已有的和由他们自己的活动创造出来的物质生活条件。因此，这些前提可以用纯粹经验的方法来确认。</p>
+                        <p>全部人类历史的第一个前提无疑是有生命的个人的存在。因此第一个需要确认的事实就是这些个人的肉体组织以及由此产生的个人对其他自然的关系。任何历史记载都应当从这些自然基础以及它们在历史进程中由于人们的活动而发生的变更出发。</p>
+                        <p>可以根据意识、宗教或随便别的什么来区别人和动物。一当人开始生产自己的生活资料，即迈出由他们的肉体组织所决定的这一步的时候，人本身就开始把自己和动物区别开来。人们生产自己的生活资料，同时间接地生产着自己的物质生活本身。</p>
+                        <p>人们用以生产自己的生活资料的方式，首先取决于他们已有的和需要再生产的生活资料本身的特性。这种生产方式不应当只从它是个人肉体存在的再生产这方面加以考察。更确切地说，它是这些个人的一定的活动方式，是他们表现自己生命的一定方式、他们的一定的生活方式。个人怎样表现自己的生命，他们自己就是怎样。因此，他们是什么样的，这同他们的生产是一致的——既和他们生产什么一致，又和他们怎样生产一致。因而，个人是什么样的，这取决于他们进行生产的物质条件。</p>
+                        <p>一个民族的生产力发展的水平，最明显地表现于该民族分工的发展程度。任何新的生产力，只要它不是迄今已知的生产力单纯的量的扩大（例如，开垦土地），都会引起分工的进一步发展。一个民族内部的分工，首先引起工商业劳动同农业劳动的分离，从而也引起城乡的分离和城乡利益的对立。分工的进一步发展导致商业劳动同工业劳动的分离。同时，由于这些不同部门内部的分工，共同从事某种劳动的个人之间又形成不同的分工。分工的各个不同发展阶段，同时也就是所有制的各种不同形式。这就是说，分工的每一个阶段还决定个人在劳动材料、劳动工具和劳动产品方面的相互关系。</p>
+                        <p>以一定的方式进行生产活动的一定的个人，发生一定的社会关系和政治关系。经验的观察在任何情况下都应当根据经验来揭示社会结构和政治结构同生产的联系，而不应当带有任何神秘和思辨的色彩。社会结构和国家总是从一定的个人的生活过程中产生的。但是，这里所说的个人不是他们自己或别人想象中的那种个人，而是现实中的个人，也就是说，这些个人是从事活动的，进行物质生产的，因而是在一定的物质的、不受他们任意支配的界限、前提和条件下活动着的。</p>
+                        <p>思想、观念、意识的生产最初是直接与人们的物质活动，与人们的物质交往，与现实生活的语言交织在一起的。人们的想象、思维、精神交往在这里还是人们物质行动的直接产物。表现在某一民族的政治、法律、道德、宗教、形而上学等的语言中的精神生产也是这样。人们是自己的观念、思想等等的生产者，但这里所说的人们是现实的、从事活动的人们，他们受自己的生产力和与之相适应的交往的一定发展——直到交往的最遥远的形态——所制约。意识在任何时候都只能是被意识到了的存在，而人们的存在就是他们的现实生活过程。如果在全部意识形态中，人们和他们的关系就像在照相机中一样是倒立成像的，那么这种现象也是从人们生活的历史过程中产生的，正如物体在视网膜上的倒影是直接从人们生活的生理过程中产生的一样。</p>
+                        <p>不是意识决定生活，而是生活决定意识。前一种考察方法从意识出发，把意识看作是有生命的个人。后一种符合现实生活的考察方法则从现实的、有生命的个人本身出发，把意识仅仅看作是他们的意识。这种考察方法不是没有前提的。它从现实的前提出发，它一刻也不离开这种前提。它的前提是人，但不是处在某种虚幻的离群索居和固定不变状态中的人，而是处在现实的、可以通过经验观察到的、在一定条件下进行的发展过程中的人。</p>
+                        <p>由此可见，这种历史观就在于：从直接生活的物质生产出发阐述现实的生产过程，把同这种生产方式相联系的、它所产生的交往形式即各个不同阶段上的市民社会理解为整个历史的基础，从市民社会作为国家的活动描述市民社会，同时从市民社会出发阐明意识的所有各种不同的理论产物和形式，如宗教、哲学、道德等等，而且追溯它们产生的过程。这样做当然就能够完整地描述事物（因而也能够描述事物的这些不同方面之间的相互作用）。这种历史观和唯心主义历史观不同，它不是在每个时代中寻找某种范畴，而是始终站在现实历史的基础上，不是从观念出发来解释实践，而是从物质实践出发来解释各种观念形态。</p>
+                        <p>统治阶级的思想在每一时代都是占统治地位的思想。这就是说，一个阶级是社会上占统治地位的物质力量，同时也是社会上占统治地位的精神力量。支配着物质生产资料的阶级，同时也支配着精神生产资料，因此，那些没有精神生产资料的人的思想，一般地是隶属于这个阶级的。占统治地位的思想不过是占统治地位的物质关系在观念上的表现，不过是以思想的形式表现出来的占统治地位的物质关系。</p>
+                        <p>共产主义对我们来说不是应当确立的状况，不是现实应当与之相适应的理想。我们所称为共产主义的是那种消灭现存状况的现实的运动。这个运动的条件是由现有的前提产生的。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 2: 读法提示                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2 class="tab-heading">💡 如何阅读本文</h2>
+                <div class="guide-block">
+                    <h3>① 先理解"德意志意识形态"这个标题</h3>
+                    <p>马恩所说的"意识形态"不是中性的"思想体系"，而是特指"颠倒了的意识"——把观念当作现实，用观念解释历史。他们批判"德意志"意识形态家们：费尔巴哈、鲍威尔、施蒂纳——三人代表了从黑格尔哲学解体出来的三种唯心主义变体。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>② 重点读两个核心命题</h3>
+                    <p><strong>"不是意识决定生活，而是生活决定意识"</strong>——这是唯物史观最根本的原理。不是从观念出发理解人，而是从人的物质生产活动出发理解观念。<strong>"统治阶级的思想是统治地位的思想"</strong>——谁掌握物质生产资料，谁就掌握精神生产资料。所有的"普遍真理"背后都有阶级基础。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>③ 注意"分工"和"所有制"的关系</h3>
+                    <p>马克思提出：分工的发展阶段就是所有制的各种不同形式。分工不仅是经济学概念，更是理解"异化"和"私有制"的关键——分工导致劳动与享受的分离、生产与消费的分离、个人与共同体的分离。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>④ 最后读"费尔巴哈"部分</h3>
+                    <p>这是全书理论高峰。马恩在批判费尔巴哈的过程中正面阐述了唯物史观的所有核心范畴。如果时间有限，只读这一部分也足够理解全书。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 3: 难点解析                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2 class="tab-heading">🔍 容易读错的地方</h2>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读："生活决定意识" = 人只由经济条件决定</div>
+                    <div class="correct">✅ 正解：马克思说的是"归根结底"的决定性——物质生产方式是最根本的解释框架，但他绝不否认观念、政治、文化的"相对独立性"。上层建筑会反作用于经济基础。马克思恩格斯批判的是把观念当作"第一性"的唯心主义，而不是否认观念的任何作用。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读："统治阶级的思想" = 统治阶级有意识地欺骗</div>
+                    <div class="correct">✅ 正解：马克思不是说统治阶级"故意编造假思想欺骗人民"。统治思想之所以成为统治思想，是因为统治阶级掌握了物质生产和精神生产的手段——教育、出版、教会都在他们手里。这种思想统治不依赖于"谎言"，而依赖于整套制度安排。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：历史唯物主义 = "经济决定论"</div>
+                    <div class="correct">✅ 正解：这是最常见的误读。恩格斯后来专门澄清："根据唯物史观，历史过程中的决定性因素归根到底是现实生活的生产和再生产。无论马克思或我都从来没有肯定过比这更多的东西。如果有人在这里加以歪曲，说经济因素是唯一决定性的因素，那么他就是把这个命题变成毫无内容的、抽象的、荒诞无稽的空话。"</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 4: 对话空间                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2 class="tab-heading">💬 这篇文章在回应谁？</h2>
+                <div class="dialogue-block">
+                    <h3>它在回应的问题</h3>
+                    <ul>
+                        <li>费尔巴哈的人本主义——用抽象的"人的本质"解释人，看不到人是在物质生产中生活的人</li>
+                        <li>鲍威尔的"自我意识"哲学——把历史变成"批判的批判"的历史，以为改变了思想就改变了世界</li>
+                        <li>施蒂纳的"唯一者"——极端个人主义，否定一切普遍性，却看不到"个人"本身就是历史产物</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在问每一个读者</h3>
+                    <ul>
+                        <li>你日常解释社会问题时，是"从观念出发"还是"从物质生产出发"？</li>
+                        <li>你相信的那些"普遍真理"——真的普遍吗？它们代表谁的阶级利益？</li>
+                        <li>"统治阶级的思想是统治地位的思想"——在今天，这意味着什么？</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在等你的回应</h3>
+                    <p>选一个当代"共识"（如"市场是最有效的资源配置方式""努力就能成功"），用唯物史观的方法追问：这个观念从什么物质条件中产生？它服务于哪个阶级的利益？如果物质条件改变，这个观念还会"不言自明"吗？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 5: 行动实验                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2 class="tab-heading">⚡ 读完之后可以做什么</h2>
+                <div class="action-item">
+                    <h3>实验一：从"观念解释"切换到"物质解释"</h3>
+                    <p>选一个你关注的社会现象，先写下通常的"观念解释"（如"因为人们觉得……""因为某种思想……"），然后用唯物史观重新分析：生产力的发展状况如何？阶级力量对比如何？生产关系的矛盾如何最终爆发？比较两种解释的差异。</p>
+                </div>
+                <div class="action-item">
+                    <h3>实验二：意识形态分析</h3>
+                    <p>找三篇主流媒体关于同一事件的报道。分析：这些报道隐含着什么"不言自明"的前提？这些前提对谁有利？如果不接受这些前提，报道还站得住吗？</p>
+                </div>
+                <div class="action-item">
+                    <h3>实验三：分工与生活方式观察</h3>
+                    <p>观察你认识的不同职业的人：他们的工作方式如何塑造了他们的思维方式、生活习惯、社交圈子？马克思说"个人是什么样的，这同他们的生产是一致的"——在你自己身上，这句话成立吗？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 6: 一目了然（核心）                    -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2 class="tab-heading">📊 一目了然</h2>
+
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量《德意志意识形态》的"性格"</p>
+                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>论证节奏曲线</h3>
+                    <p class="chart-desc">从序言到施蒂纳批判的论证强度变化——费尔巴哈章是全书理论高峰</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="argumentCurve"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4>📝 结构分析（对应曲线各波段）</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label">序言：批判对象总览（5/10）</span>
+                            <p>开篇点名批判费尔巴哈、鲍威尔、施蒂纳，说明"德国意识形态"的基本特征——用观念解释世界，而不是改变世界。节奏平稳铺垫。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">★ 第一章：费尔巴哈批判（10/10）★</span>
+                            <p>全文理论最高峰。正面阐述唯物史观基本原理：物质生产是历史起点，生产力与交往形式的矛盾是历史动力，分工与私有制互为表里，统治阶级的思想是统治思想。这一章是本书精华。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">第二部分：鲍威尔批判（7/10）</span>
+                            <p>批判"自我意识"哲学。鲍威尔把历史归结为思想批判史，马克思指出：改变观念不等于改变现实，批判的武器不能代替武器的批判。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">第三部分：施蒂纳批判（8/10）</span>
+                            <p>篇幅最长的一部分。批判施蒂纳的"唯一者"及其极端个人主义。马克思指出：抽象地否定一切普遍性是空洞的，必须在具体的生产关系变革中实现人的解放。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">结语：共产主义的历史必然性（7/10）</span>
+                            <p>"共产主义对我们来说不是应当确立的状况，而是消灭现存状况的现实的运动。"——不是道德义愤，是生产力发展的逻辑结果。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>唯物史观的基本结构</h3>
+                    <p class="chart-desc">生产力 → 生产关系（经济基础）→ 上层建筑 → 意识形态 的决定关系</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="structureChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>历史动力结构图</h3>
+                    <p class="chart-desc">各层级的决定作用强度与相对独立性</p>
+                    <div class="chart-container" style="max-width:600px;margin:0 auto;">
+                        <canvas id="powerChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>批判对象及其核心问题</h3>
+                    <p class="chart-desc">马克思如何逐一批驳三种德国唯心主义</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="targetChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 7: 理论拼图                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2 class="tab-heading">🧩 在马哲体系中的位置</h2>
+
+                <div class="puzzle-intro">
+                    <p>如果说《1844年手稿》是马克思从人本主义向唯物史观过渡的"桥梁"，那么《德意志意识形态》就是唯物史观正式宣告诞生的"分娩书"。本书第一次系统阐述了历史唯物主义的基本范畴：物质生产、分工、生产力与交往形式的矛盾、经济基础与上层建筑、意识形态。从此，马克思主义有了自己的历史哲学——不再从"人的本质"出发，而是从"物质生产"出发理解历史。</p>
+                </div>
+
+                <div class="puzzle-position">
+                    <h3>本文在马克思思想发展中的坐标</h3>
+                    <div class="theory-tree">
+                        <div class="theory-node root">马克思思想发展</div>
+                        <div class="theory-branches">
+                            <div class="theory-branch">
+                                <div class="theory-node branch">前期（1841-1844）</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">《黑格尔法哲学批判》<br><small>哲学批判起步</small></div>
+                                    <div class="theory-node related">《1844年手稿》<br><small>异化劳动 · 人本主义</small></div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">转折（1845-1846）</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">《关于费尔巴哈的提纲》<br><small>新世界观萌芽</small></div>
+                                    <div class="theory-node current">《德意志意识形态》<br><small>唯物史观正式形成</small></div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">成熟期（1848以后）</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">《共产党宣言》<br><small>科学社会主义</small></div>
+                                    <div class="theory-node related">《资本论》<br><small>唯物史观的典范运用</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puzzle-connection">
+                    <h3>与其他经典的联结</h3>
+                    <ul>
+                        <li>→ 《关于费尔巴哈的提纲》：11条提纲是本书的思想草图</li>
+                        <li>→ 《1844年经济学哲学手稿》：从"异化"到"分工"的思想飞跃</li>
+                        <li>→ 《共产党宣言》：唯物史观在阶级斗争理论中的直接运用</li>
+                        <li>→ 《资本论》：从"抽象到具体"——唯物史观方法论的典范</li>
+                        <li>→ 马克思《政治经济学批判·序言》：唯物史观最简明、最经典的表述</li>
+                    </ul>
+                </div>
+
+                <div class="puzzle-timeline">
+                    <h3>在思想发展时间轴上的位置</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1844</div><div class="timeline-label">《1844年手稿》</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1845</div><div class="timeline-label">《关于费尔巴哈的提纲》</div></div>
+                        <div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1845-46</div><div class="timeline-label">《德意志意识形态》</div><div class="timeline-here">◀ 本文</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1848</div><div class="timeline-label">《共产党宣言》</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1859</div><div class="timeline-label">《政治经济学批判·序言》</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1867</div><div class="timeline-label">《资本论》第1卷</div></div>
+                    </div>
+                    <p style="margin-top:12px;font-size:0.85em;color:#666;"><strong>历史位置：</strong>本书写于布鲁塞尔，正值马恩从哲学批判转向政治经济学批判的关键时期。它在马克思生前未全部发表，直到1932年才首次完整出版。马克思后来回顾说："我们情愿让原稿留给老鼠的牙齿去批判了。"</p>
+                </div>
+
+                <div class="puzzle-links">
+                    <h3>文章联结网络</h3>
+                    <p class="puzzle-links-note">点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（→ 输出影响 · ← 理论来源 · ↔ 相互支撑）</p>
+                    <div class="conn-grid">
+                        <a href="guan-yu-fei-er-ba-ha-de-ti-gang.html" class="conn-card" style="border-left-color:#8b0000;">
+                            <span class="conn-dir" style="color:#276749;">←</span>
+                            <span class="conn-title">《关于费尔巴哈的提纲》</span>
+                            <span class="conn-label">哲学基础</span>
+                            <span class="conn-relation">理论前奏：11条提纲是本书的思想草图</span>
+                        </a>
+                        <a href="1844-nian-jing-ji-xue-zhe-xue-shou-gao.html" class="conn-card" style="border-left-color:#e65100;">
+                            <span class="conn-dir" style="color:#276749;">←</span>
+                            <span class="conn-title">《1844年经济学哲学手稿》</span>
+                            <span class="conn-label">政治经济学</span>
+                            <span class="conn-relation">思想飞跃：从"异化"到"分工"的转折</span>
+                        </a>
+                        <a href="gongchan-dan-yuan.html" class="conn-card" style="border-left-color:#5c3d99;">
+                            <span class="conn-dir" style="color:#276749;">→</span>
+                            <span class="conn-title">《共产党宣言》</span>
+                            <span class="conn-label">政治理论</span>
+                            <span class="conn-relation">政治应用：唯物史观在阶级斗争理论中的运用</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>延伸阅读建议</h3>
+                    <p><strong>想看唯物史观最简明的表述：</strong>读马克思《政治经济学批判·序言》——几千字，却是精髓中的精髓。</p>
+                    <p><strong>想看本书思想如何发展为《资本论》：</strong>读《资本论》第一卷第一篇——"商品拜物教"是意识形态理论在政治经济学中的具体运用。</p>
+                    <p><strong>想看恩格斯晚年对这段历史的回顾：</strong>读恩格斯《路德维希·费尔巴哈和德国古典哲学的终结》。</p>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>它解决的真实问题</h3>
+                    <p><strong>历史背景：</strong>1845年，德国思想界充斥着费尔巴哈的人本主义、鲍威尔的自我意识哲学、施蒂纳的个人主义。这些思潮的共同特点是：用观念解释历史，认为只要改变了思想，世界就会改变。年轻马克思也受到费尔巴哈影响。为了清算这种影响，也为建立自己的理论体系，马恩决定合写此书，从正面阐述历史唯物主义。</p>
+                    <p><strong>现实意义：</strong>当今天有人用"观念改变世界""思想引领时代"的简化描述来理解社会变革时，《德意志意识形态》仍然是那个"提醒者"：观念很重要，但观念的社会根源是物质生产。不理解生产方式，就不可能真正理解为什么某些观念在这个时代流行、在另一个时代消亡。这不是"经济决定论"，而是"归根结底的决定性"——历史唯物主义的核心智慧。</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <button class="download-fab" id="downloadFab" title="下载原文">⬇</button>
+    <div class="download-menu" id="downloadMenu">
+        <h4>📥 下载原文</h4>
+        <div id="downloadLinks"></div>
+    </div>
+
+    <script src="../../../js/article-common.js"></script>
+    <script>
+        var ARTICLE_CHARTS = [
+            {
+                id: 'radarChart',
+                config: {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                        datasets: [{
+                            label: '德意志意识形态',
+                            data: [10, 8, 10, 8, 6, 8],
+                            borderColor: '#8b0000',
+                            backgroundColor: 'rgba(139,0,0,0.12)',
+                            pointBackgroundColor: '#8b0000'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
+                        plugins: { legend: { display: false } }
+                    }
+                }
+            },
+            {
+                id: 'argumentCurve',
+                config: {
+                    type: 'line',
+                    data: {
+                        labels: ['序言\n批判对象总览', '费尔巴哈批判★', '鲍威尔批判', '施蒂纳批判', '共产主义\n历史必然性'],
+                        datasets: [{
+                            label: '论证强度',
+                            data: [5, 10, 7, 8, 7],
+                            borderColor: '#8b0000',
+                            backgroundColor: 'rgba(139,0,0,0.08)',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            borderWidth: 2.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            },
+            {
+                id: 'structureChart',
+                config: {
+                    type: 'bar',
+                    data: {
+                        labels: ['生产力', '生产关系', '上层建筑', '意识形态'],
+                        datasets: [
+                            { label: '归根结底的决定作用', data: [10, 8, 5, 4], backgroundColor: '#8b0000', borderRadius: 6 },
+                            { label: '相对独立性', data: [2, 4, 7, 9], backgroundColor: '#c41e3a', borderRadius: 6 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { position: 'bottom' } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            },
+            {
+                id: 'powerChart',
+                config: {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['生产力（决定）', '生产关系（制约）', '上层建筑（反作用）', '意识形态（相对独立）'],
+                        datasets: [{
+                            data: [40, 30, 20, 10],
+                            backgroundColor: ['#8b0000', '#a52a2a', '#c41e3a', '#dda0a0'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { position: 'bottom' } }
+                    }
+                }
+            },
+            {
+                id: 'targetChart',
+                config: {
+                    type: 'bar',
+                    data: {
+                        labels: ['费尔巴哈批判', '鲍威尔批判', '施蒂纳批判'],
+                        datasets: [
+                            { label: '篇幅占比 (%)', data: [35, 20, 45], backgroundColor: '#8b0000', borderRadius: 6 },
+                            { label: '理论贡献度 (%)', data: [45, 15, 20], backgroundColor: '#c41e3a', borderRadius: 6 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { position: 'bottom' } },
+                        scales: { y: { min: 0, max: 50 } }
+                    }
+                }
+            }
+        ];
+
+        var DOWNLOAD_LINKS = [
+            { href: '../../../data/de-yi-zhi-yi-xing-tai.txt', label: '📝 下载 TXT' }
+        ];
+    </script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+</body>
+</html>

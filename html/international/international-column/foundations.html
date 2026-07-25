@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地基——自然条件对社会制度的制约 | 国际共运专栏 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <style>
+        :root {
+            --col-primary: #1a3a5c;
+            --col-secondary: #2c6e8a;
+            --col-gradient: linear-gradient(155deg, #0a0f1a 0%, #152238 35%, #1a3a5c 65%, #0d2b45 100%);
+            --col-gold: rgba(255,200,80,0.9);
+        }
+        .back-nav { background: #f5f5f5; border-bottom: 1px solid #e0e0e0; padding: 10px 0; }
+        body.dark-mode .back-nav { background: #1a1a1a; border-color: #333; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 500; color: var(--col-primary); transition: color 0.2s; }
+        body.dark-mode .back-link { color: #6ab0d0; }
+        .back-link:hover { color: var(--col-secondary); }
+
+        .article-header { position: relative; overflow: hidden; padding: 3.5rem 2rem; text-align: center; color: white; background: var(--col-gradient); }
+        .article-header::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Crect x='10' y='10' width='60' height='60' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='0.8'/%3E%3Crect x='90' y='80' width='50' height='50' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='0.8'/%3E%3Cline x1='0' y1='160' x2='160' y2='0' stroke='rgba(255,255,255,0.03)' stroke-width='2'/%3E%3Ccircle cx='130' cy='25' r='18' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='0.5'/%3E%3C/svg%3E"); background-size: 220px; pointer-events: none; }
+        .article-header > * { position: relative; z-index: 1; }
+        .importance-badge { display: inline-block; background: var(--col-gold); color: #1a1a1a; padding: 6px 20px; border-radius: 25px; font-size: 0.9rem; font-weight: bold; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        .article-header h1 { font-size: 2.4rem; margin: 0.5rem 0; text-shadow: 2px 3px 6px rgba(0,0,0,0.4); font-family: 'STSong','SimSun','Noto Serif SC',serif; line-height: 1.4; }
+        .article-subtitle { font-size: 1.1rem; opacity: 0.88; margin: 0.6rem 0; font-style: italic; line-height: 1.6; }
+        .article-meta { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.2rem; font-size: 0.9rem; }
+        .article-meta span { background: rgba(0,0,0,0.25); padding: 5px 14px; border-radius: 18px; backdrop-filter: blur(4px); }
+        .article-meta .length-tag { background: rgba(255,200,80,0.2); color: var(--col-gold); border: 1px solid rgba(255,200,80,0.4); }
+        .article-keywords { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; margin: 1rem 0 0.4rem; position: relative; z-index: 1; }
+        .article-keywords .kw { font-size: 0.75rem; padding: 3px 12px; border-radius: 14px; background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.18); transition: all 0.2s; }
+        .article-keywords .kw:hover { background: rgba(255,255,255,0.22); color: white; }
+
+        .article-detail { max-width: 900px; margin: 2rem auto 4rem; padding: 0 20px; }
+
+        .article-content { background: white; border-radius: 12px; padding: 2.5rem 3rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+        body.dark-mode .article-content { background: #2a2a2a; }
+        .article-content h2 { color: var(--col-primary); border-left: 4px solid var(--col-secondary); padding: 0.4rem 0 0.4rem 1rem; margin: 3rem 0 1.2rem; font-size: 1.55rem; line-height: 1.4; }
+        body.dark-mode .article-content h2 { color: #6ab0d0; border-left-color: #6ab0d0; }
+        .article-content h3 { color: #2c2c2c; margin: 2.2rem 0 1rem; font-size: 1.25rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
+        body.dark-mode .article-content h3 { color: #e0e0e0; border-bottom-color: #444; }
+        .article-content p { line-height: 2; margin-bottom: 1.2rem; color: #333; text-align: justify; font-size: 1.05rem; }
+        body.dark-mode .article-content p { color: #ccc; }
+        .article-content strong { color: var(--col-secondary); }
+        body.dark-mode .article-content strong { color: #6ab0d0; }
+        .article-content ul, .article-content ol { margin: 0.8rem 0 1.5rem 2rem; color: #444; }
+        body.dark-mode .article-content ul, body.dark-mode .article-content ol { color: #ccc; }
+        .article-content li { margin-bottom: 0.4rem; line-height: 1.8; }
+        .article-content hr.section-divider { border: none; border-top: 1px solid #ddd; margin: 2.5rem 0; }
+        body.dark-mode .article-content hr.section-divider { border-top-color: #444; }
+
+        .side-float-nav { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 999; display: flex; align-items: center; font-family: inherit; }
+        .sfn-toggle { writing-mode: vertical-rl; text-orientation: mixed; background: linear-gradient(180deg, #2c6e8a, #1a3a5c); color: white; padding: 0.85rem 0.4rem; border-radius: 8px 0 0 8px; cursor: pointer; font-size: 0.82rem; font-weight: bold; letter-spacing: 3px; box-shadow: -2px 2px 10px rgba(26,58,92,0.25); transition: all 0.3s ease; white-space: nowrap; user-select: none; line-height: 1.6; }
+        .sfn-toggle:hover { background: linear-gradient(180deg, #3a8eaa, #1a3a5c); padding-right: 0.6rem; }
+        .sfn-panel { position: absolute; right: 0; top: 50%; transform: translateY(-50%) translateX(100%); background: white; border-radius: 12px 0 0 12px; box-shadow: -4px 4px 20px rgba(0,0,0,0.15); padding: 0.5rem 0; opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(.4,0,.2,1); min-width: 180px; max-height: 70vh; overflow-y: auto; border: 1px solid #eee; border-right: none; }
+        .side-float-nav.expanded .sfn-panel { transform: translateY(-50%) translateX(0); opacity: 1; visibility: visible; }
+        .sfn-panel a { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 1rem; color: #333; text-decoration: none; font-size: 0.8rem; font-weight: 500; transition: all 0.15s; white-space: nowrap; }
+        .sfn-panel a:hover { background: #e8f2f8; color: #1a3a5c; padding-left: 1.3rem; }
+        .sfn-dot { width: 6px; height: 6px; border-radius: 50%; background: #2c6e8a; flex-shrink: 0; }
+        .sfn-divider { height: 1px; background: #eee; margin: 0.3rem 0.8rem; }
+        .sfn-back-top { color: #999 !important; font-size: 0.78rem !important; }
+        body.dark-mode .sfn-panel { background: #2a2a2a; border-color: #444; }
+        body.dark-mode .sfn-panel a { color: #ddd; }
+        body.dark-mode .sfn-panel a:hover { background: #1a2a35; color: #6ab0d0; }
+        body.dark-mode .sfn-divider { background: #444; }
+
+        @media (max-width: 768px) {
+            .article-header { padding: 2.2rem 1.2rem; }
+            .article-header h1 { font-size: 1.6rem; }
+            .article-content { padding: 1.5rem 1.3rem; }
+            .article-content h2 { font-size: 1.2rem; }
+            .article-content p { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container">
+        <div class="logo">
+            <span class="logo-icon">☭</span>
+            <div class="logo-text"><h1>青年马列毛主义驿站</h1><span class="logo-sub">Qmlm Reader</span></div>
+        </div>
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单"><span></span><span></span><span></span></button>
+        <nav class="main-nav">
+            <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+            <a href="../../index.html">首页</a><a href="../../articles/articles.html">文章</a><a href="../../masters/masters.html">导师</a><a href="../../toolkit/toolkit.html">工具集</a><a href="../../gallery/gallery.html">文艺</a><a href="../../puzzle/puzzle.html">🧩 理论拼图</a><a href="../../international/international.html" class="active">🌍 国际共运</a><a href="../../rectify/rectify.html">正名</a><a href="../../about/about.html">关于</a>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+        </nav>
+    </div>
+</header>
+
+<nav class="back-nav"><div class="container"><a href="../international-column.html" class="back-link">← 返回国际共运专栏</a></div></nav>
+
+<nav class="side-float-nav" id="sideNav">
+    <div class="sfn-toggle" onclick="toggleSideNav()" title="展开导航">☰ 章节导航</div>
+    <div class="sfn-panel">
+        <a href="#prologue" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span>序幕 · 殖民与分工</a>
+        <a href="#act1" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span>一 · 地理约束论</a>
+        <a href="#act2" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span>二 · 北欧模式</a>
+        <a href="#act3" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span>三 · 亚洲四小龙</a>
+        <a href="#act4" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span>四 · 新中国前三十年</a>
+        <a href="#act5" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span>五 · 苏联与中国镜像</a>
+        <a href="#act6" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span>六 · 三个维度</a>
+        <a href="#act7" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span>七 · 模式可复制论</a>
+        <a href="#act8" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span>八 · 替代方法论</a>
+        <div class="sfn-divider"></div>
+        <a href="#" class="sfn-back-top" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});document.getElementById('sideNav').classList.remove('expanded')">⬆ 返回顶部</a>
+    </div>
+</nav>
+
+<header class="article-header">
+    <div class="importance-badge">🌐 深度长文 · 地理唯物主义分析</div>
+    <h1>地基</h1>
+    <p class="article-subtitle">自然条件对社会制度的制约<br>——对"北欧模式"和"亚洲四小龙"迷信的批判</p>
+    <div class="article-keywords">
+        <span class="kw">地理约束论</span><span class="kw">北欧模式</span><span class="kw">亚洲四小龙</span><span class="kw">冷战红利</span><span class="kw">发展型国家</span><span class="kw">国家资本主义</span><span class="kw">四三方案</span><span class="kw">凯恩斯主义</span><span class="kw">次贷危机</span><span class="kw">AI泡沫</span><span class="kw">后发劣势</span>
+    </div>
+    <div class="article-meta">
+        <span>📝 约 9,000 字</span><span class="length-tag">⏱ 阅读约 30 分钟</span><span>📅 2026年7月</span>
+    </div>
+</header>
+
+<div class="article-detail">
+    <article class="article-content">
+
+
+        <p><strong>核心命题：</strong></p>
+
+        <p>这个世界上不存在"选项菜单"式的发展道路。每一个国家走到今天的位置——无论富得流油还是穷得叮当——都不是在某间会议室里从几个"模式"中挑选出来的，而是在地理、气候、资源禀赋、国际格局和历史路径的重重重压之下，被"挤压"出来的唯一可行的裂缝。所谓"某国模式"的可复制性，在剥离了这些不可复制的物质前提之后，只剩一个空标签——它不能提供发展路径，只能为指责你"为什么不成功"提供弹药。</p>
+
+        <hr class="section-divider">
+
+
+
+        <h2 id="prologue">序幕：概念的奠基——殖民、分工与"无痛发展"的假象</h2>
+
+        <p>在进入任何具体的国家案例之前，必须厘清三个概念。不厘清它们，后面的所有讨论都会塌陷为口号。</p>
+
+        <h3 id="殖民的三个版本">殖民的三个版本</h3>
+
+        <p><strong>殖民1.0——赤裸裸的暴力。</strong> 军事征服，直接统治，拿走一切能拿走的。英国对印度：用印度人的税款支付英国军官的退休金，同时把印度纺织业砸碎，让曼彻斯特的棉布倾销。比利时对刚果：完不成橡胶配额砍手。日本对朝鲜和台湾：你的孩子说日语，你的稻米运往大阪，你是一个"皇民"——二等的那种。<strong>土地是别人的，人是别人的，你活在别人的国家里，只是这个"别人"没有把你当成人。</strong></p>
+
+        <p><strong>殖民2.0——独立的不独立。</strong> 二战后，名义上的独立完成了。你的国家有了国旗、国歌和联合国席位。但你的货币与英镑挂钩，你的中央银行由巴黎的顾问说了算，你的矿山开采权早已以九十九年为期签给了一家注册在开曼群岛的欧洲公司。前法国殖民地在"法兰西共同体"里继续为巴黎输送廉价原料——法国军队驻扎在你的领土上，"帮你维护稳定"。这不是殖民——这是一个假装退出了的房主，把钥匙留在了地毯下面。</p>
+
+        <p><strong>殖民3.0——全球化的垂直分工。</strong> 跨国公司不需要占领你的土地。它只需要让你的政府相信：对外资开放是唯一的出路。苹果在加州设计，富士康在深圳组装，锂矿来自刚果的童工，最终利润的百分之七十归苹果股东。你的工人拿到了每月四千元——在世界银行的报表上，这算"脱贫"。但苹果的利润率是你的工厂永远无法达到的数字——因为你没有品牌，没有专利，没有设计能力。你有的是手，人家有的是定价权。</p>
+
+        <p><strong>划分这三个版本的意义在于：当你听到"韩国从一个贫穷的农业国变成了发达国家"时，你需要知道韩国属于哪个版本的受益者。它没有被殖民3.0锁死——但它享受了殖民1.0的转移支付（日本赔款）和冷战2.0的安全伞（美国驻军）。它的发展路径在殖民3.0的全球分工形成之前就完成了——后来的国家没有这个窗口了。</strong></p>
+
+        <hr class="section-divider">
+
+        <h3 id="不对外剥削的快速发展钱从哪来的">"不对外剥削"的快速发展——钱从哪来的？</h3>
+
+        <p>如果一个国家不搞对外殖民、不搞对外侵略、还"快速发展"了——这笔财富必然有两个来源。</p>
+
+        <p><strong>来源一：上游输血。</strong> 马歇尔计划对西欧——美国用140亿美元（相当于今天的数千亿）重建了被战争摧毁的盟国。美国援助对韩国和台湾——1960年代每年的军经援助相当于韩国政府预算的一半。苏联的"156项"援助对中国——全套重工业体系的技术转让和低息贷款。</p>
+
+        <p>你拿了别人的钱和别人的技术，当然比全靠自己的人跑得快。这不叫"制度优越"。这叫你有一个愿意帮你付学费的大哥——而且这位大哥之所以帮你付学费，不是出于慷慨，而是因为你在他的战略棋盘上恰好站在了对的位置。</p>
+
+        <p><strong>来源二：对内压制。</strong> 压低国内的消费、压低劳动力的价格、牺牲环境和自然资源。日韩高速增长时期对劳工的压制丝毫不亚于任何发展中国家——韩国工人直到1987年才被允许自由罢工。在此之前的四十年里，罢工是非法的、工会是受政府控制的、试图组织独立工会的人会被关进监狱。《劳动法》字面上写了八小时工作制——实际上每周工作六七十个小时是常态，加班费是可以不给的。</p>
+
+        <p>当韩国今天的年轻人拿着三星手机，在首尔的咖啡店里喝着拿铁，看一部关于1980年代工人运动的纪录片时，他们往往表示震惊："那个时候这么惨？"那个时候就是这么惨。只是"发达国家"的滤镜把所有血渍都调成了暖色调的复古滤镜。</p>
+
+        <hr class="section-divider">
+
+        <h2 id="act1">第一幕：理论基石——地理约束论与资本主义的周期性痉挛</h2>
+
+        <h3 id="马克思与普列汉诺夫的地理遗产">马克思与普列汉诺夫的地理遗产</h3>
+
+        <p>马克思在《资本论》第一卷里花了不少笔墨讨论"自然条件"——不是闲笔，而是他论证剩余价值理论的基石之一。一个社会需要生产多少"剩余"才能养活非生产者（教士、官僚、军人、资本家），首先取决于土壤有多肥沃、雨水有多充沛、河流能带动多少磨坊的水车。尼罗河流域能养出一个法老帝国，不是古埃及人比北欧人更有"统治天赋"——是尼罗河每年泛滥的淤泥让他们有余粮。</p>
+
+        <p>普列汉诺夫——俄国马克思主义之父——把这一逻辑推得更远："地理环境通过生产力影响社会关系。"他不是在说"地理决定了制度"，而是说"地理划定了制度的可能性边界"。边界之内你可以有很多选择；边界之外你什么都选不了。</p>
+
+        <p>斯大林在《论辩证唯物主义和历史唯物主义》中，将"地理环境"列为决定社会发展的三大物质条件之首——排在"人口"和"生产方式"之前。他给出的定性精确而节制：地理环境"加速或者延缓社会发展进程"，但"它的影响不是决定的影响"。后世批评者常常引用这句话来指责斯大林"轻视地理因素"——但他们漏掉了紧随其后的限定：地理环境的变化"几百万年间几乎察觉不出来"，而社会制度的变化则以几十年、几年甚至更短的周期发生。在一个以千年为刻度的变量面前，制度设计者要么适应它，要么被它碾碎——没有第三种选项。</p>
+
+        <p><strong>这不是地理决定论。这是地理约束论。</strong> 土地告诉你：你可以养多少人、种什么庄稼、建什么工厂。人口告诉你：你的劳动力值多少钱、你的税收能收多少、你的军队有多大。资源告诉你：你是坐在油桶上还是坐在石头上。这些不是"背景信息"——它们是牌桌上的底牌。所有号称"制度设计"和"政策选择"的讨论，都是在底牌已经发完之后才开始打的手牌。</p>
+
+        <hr class="section-divider">
+
+        <h3 id="资本主义不会自己修好自己凯恩斯之后的五次痉挛">资本主义不会自己修好自己——凯恩斯之后的五次痉挛</h3>
+
+        <p>在继续讨论各国之前，需要简短科普一段资本主义内在的不稳定性。因为有人在鼓吹"只要放开市场，自然就会发展"——而这句话连资产阶级自己的经济学家都不信。</p>
+
+        <p><strong>1929年：大萧条给凯恩斯的出场铺了红毯。</strong> 纽约股市崩盘后，全球贸易萎缩三分之二。每一个资本家都在等"市场自动恢复均衡"——等了四年也没等到。凯恩斯说：别等了，市场不会自己恢复——政府必须"挖坑再填坑"来创造需求。罗斯福新政、纳粹德国的军工扩张、日本军部在满洲的铁路建设——本质上都是政府"花钱"的不同版本。区别只在于一个修水坝、一个造坦克、一个铺铁轨——钱都花了，需求都创造了，失业率都降下来了。</p>
+
+        <p><strong>1970年代：凯恩斯自己也解决不了滞涨。</strong> 通胀和失业同时飙升——这是凯恩斯教科书预言不会发生的事情。于是哈耶克和弗里德曼上台了。撒切尔和里根的"放松管制"——本质上是把国家从资本身上扒下来，让资本重新自由。代价？此后四十年，西方国家工人实际工资几乎没有增长，而最富有的百分之一人口的财富翻了三倍。</p>
+
+        <p><strong>2000年：互联网泡沫。</strong> 纳斯达克一年蒸发五万亿美元。每家号称"改变世界"的dot com公司都在烧钱，烧到没钱可烧就死掉。投资者相信"这次不一样"——最后发现这次完全一样。教训：资本在缺乏约束的时候，会追逐任何能讲"故事"的东西。当时的"故事"是dot com。今天是AI。故事不变，换了个头像。</p>
+
+        <p><strong>2008年：次贷危机。</strong> 美国穷人买不起房→银行硬贷给他们（因为反正可以把贷款打包成金融产品卖给全世界）→一个密歇根的失业工人还不上房贷→冰岛银行破产→希腊国债崩盘→全球金融系统停摆。这是"市场自动均衡"理论被现实抽过的最响亮的一记耳光。政府和纳税人被迫用数万亿美元去救银行——而酿成危机的银行家们拿到了奖金。</p>
+
+        <p><strong>预警：AI泡沫。</strong> 这是当代的互联网泡沫回放。资本找不到实体投资出口，全涌向"下一个大故事"。每一家AI公司都在烧数十亿美元训练模型，而盈利模式仍然是"将来会有盈利模式的"。投资回报期被不断推迟——从三年推迟到五年，从五年推迟到十年。唯一不确定的是：潮水退去时，谁在裸泳。</p>
+
+        <p><strong>插这一段不是为了离题——而是为了提供一个关键支点：</strong> 如果资本主义自身的核心国家都反复经历泡沫和崩溃，那么它凭什么被当成后发国家应该"学习"的模板？你不是在学一个成功的模式——你是在学一个靠间歇性心脏病发作来维持循环的系统。</p>
+
+        <hr class="section-divider">
+
+        <h2 id="act2">第二幕：北欧——当农业地理的不可能性成为民主的接生婆</h2>
+
+        <h3 id="挪威没有庄园主所以没有人挡住投票箱">挪威：没有庄园主，所以没有人挡住投票箱</h3>
+
+        <p>在挪威那一期的文章中，我们详细梳理了这个国家九个世纪的工农抗争史。这里只提炼最核心的论证。</p>
+
+        <p>挪威可耕地仅占国土面积约百分之三。这个数字不是一句"气候寒冷"就能打发的自然地理事实——它是整个挪威政治基因的第一推动力。</p>
+
+        <p>百分之三的可耕地意味着什么？意味着从中世纪开始，这里就没有条件发育出欧洲大陆那种占地数千公顷、有成百上千农奴劳作的贵族庄园。一个贵族家庭如果想要在这里建立庄园，他能圈到的土地勉强够养活一家人的仆役。这样的"贵族"与其说是领主，不如说是——一个稍微富一点的农民。</p>
+
+        <p><strong>没有庄园主阶级 → 农民没有被捆绑在土地上的人身依附 → 近代以来，挪威农民以自由人的身份进入政治博弈 → 不需要暴力革命来"推翻"封建贵族，因为投票箱前没有人拦着他们 → 农民通过十九世纪的选举拿到了议会多数席位 → 进而与二十世纪的工人政党平起平坐地谈判。</strong></p>
+
+        <p>这不是"挪威人天生热爱民主"。这是农业地理的不可能性，从中世纪就替挪威人清空了民主化道路上最大的一块绊脚石。挪威农民不需要像法国农民那样攻打巴士底狱，因为那片土地的物理属性从源头上就没让巴士底狱长出来。</p>
+
+        <p><strong>当你今天读到西方媒体赞美"北欧模式"时，请记住——这个模式的第一行代码，是几万年前冰川消退时就已经写好的。</strong></p>
+
+        <hr class="section-divider">
+
+        <h3 id="资源几百万人口坐在整个地球最富的矿脉上">资源：几百万人口坐在整个地球最富的矿脉上</h3>
+
+        <p>北欧五国总人口约两千七百万——相当于一个上海市加上周边。但他们的地下和领海内蕴藏着：北海的石油和天然气（挪威）、欧洲最大的铁矿（瑞典）、最密集的水力资源、稀土和林业资源。</p>
+
+        <p>挪威——五百万人——主权财富基金超过一万四千亿美元。每一位挪威公民从出生那天起，就有一个国家替他存好了约二十八万美元的石油储蓄。这不是勤奋工作的结果。这是地下的石油恰好长在了挪威海域的结果。挪威人当然也有勤奋和智慧——但把任何一个民族放到同样体量和同样资源禀赋的土地上，他们的政府很难比挪威政府做得更差。正如前文所言，手牌已经明确，任何有头脑的人都知道接下来如何打，除非他是个把炸弹拆成单张的蠢人。</p>
+
+        <p><strong>因此，寄希望于把一艘游艇的驾驶经验推广到一艘航母上——这是"学习北欧模式"这句话里隐藏的最深的愚蠢。</strong> 游艇开得再稳，也不是航母的驾驶手册。</p>
+
+        <hr class="section-divider">
+
+        <h3 id="冷战中立的生意最好做">冷战：中立的生意最好做</h3>
+
+        <p>北欧在美苏之间充当"中立缓冲区"的角色，获得了两边都对你开放的贸易条件。苏联需要瑞典的精密轴承和特种钢。美国需要挪威的军事基地和情报站。两边都给你订单，两边都不炸你。瑞典在整个冷战期间没有军事开支的负担——当欧洲大陆列强每年把GDP的百分之五到十砸进军备竞赛时，瑞典的工厂在全功率运转，给两边供货。</p>
+
+        <p>最典型的例子是芬兰。芬兰加入北欧理事会，建立北欧共同劳动市场，签北欧护照联盟——这些动作的政治意义远远大于经济意义。它们是宣告：<strong>芬兰不属于东方阵营。不是因为我们反共——虽然我们也反——而是因为我们是"北欧人"。我们的身份认同在西边，不管苏联的坦克离得多近。</strong></p>
+
+        <hr class="section-divider">
+
+        <h2 id="act3">第三幕：亚洲四小龙——冷战"特供红利"的四个孩子</h2>
+
+
+        <h3 id="日韩的先轻后重一个需要被拆解的假象">日韩的"先轻后重"——一个需要被拆解的假象</h3>
+
+        <p>讨论新中国工业化时，一个无法绕开的质疑是：<strong>日本和韩国走的明明是"先轻后重"——轻纺出口赚汇，再买设备搞重化工——它们也成功了。既然如此，"先重后轻"就不是唯一道路，中国的选择是一种政策失误。</strong></p>
+
+        <p>这个质疑看上去有力，但它建立在一个致命的前提错误上——<strong>它默认日韩是"独立自主"发展的。它们从来就不是。</strong></p>
+
+        <p>日本在甲午战争后从中国拿到的战争赔款相当于日本四年的财政收入——用这笔钱建了八幡制铁所，直接注入了重工业。一战后接管了德国在山东和太平洋的殖民地。二战前已是能造航空母舰的工业强国。明治维新后的工业化进程——生丝和棉布出口赚取外汇，购买英德机器，发展造船和军工——每一步都不曾面对全面封锁。英国的纺织机和德国的炼钢炉，只要付得起钱，随时能买到。</p>
+
+        <p>韩国在1960年代靠什么？美国每年数亿美元的军事和经济援助。越南战争期间对美物资出口暴增，韩国建筑公司承包美军基地和后勤工程，赚取了数亿美元的外汇——这是朴正熙1973年宣布"重化工宣言"的第一桶金。对沙特建筑劳务出口换回石油美元。国内未经工会同意的低工资和每周六天、七十个小时的劳动时间，持续了将近四十年。韩国工人直到1987年六月民主运动之后才能合法罢工——此前整个"经济奇迹"是在禁止罢工、监禁工会领袖、警察和资方联手镇压工人的体制下完成的。</p>
+
+        <p>台湾拿的是什么？蒋介石从大陆运走的中国国库黄金和外汇。朝鲜战争后美国军援涌入。最关键的是——<strong>国民党在台湾没有自己的土地利益</strong>，所以可以毫无顾忌地从台湾地主手中把地夺过来分给佃农（"耕者有其田"）。同样的土改，为什么菲律宾、巴西、印度的效果差了十万八千里？因为统治那些国家的人自己就是大地主。让地主动自己的地，等于让狼改吃素。</p>
+
+        <p><strong>日韩台不走"先重后轻"的原因极其简单：它们不需要走。</strong> 钢铁不够？从日本进口。机床造不了？从美国进口。谁来封锁？美国海军第七舰队在封锁想封锁它们的人。1950年代中国面对的是"巴黎统筹委员会对华特别清单"——禁运品种比苏联多出数百项。而韩国面对的是美军采购订单。</p>
+
+        <p><strong>如果1950年的新中国也可以像韩国那样——美国不封锁，每年有几亿美元援助，越战订单源源不断，设备原料自由进口——那荣氏兄弟的纺织厂当然可以继续开花。上海的民族资本家当然可以把轻纺出口做到全球。但中国不能。封锁替中国"选择"了先重后轻。</strong></p>
+
+        <hr class="section-divider">
+
+        <h3 id="四小龙逐个拆解">四小龙逐个拆解</h3>
+
+        <p><strong>韩国。</strong> 朴正熙的"经济开发五年计划"——计划指标、重化工优先、国家指导信贷、政府指定的出口目标——翻开任何一页，格式与社会主义国家的五年计划如出一辙。这不是"自由市场"。在《华尔街日报》的用词里叫"发展型国家"，在实事求是的描述里叫"国家资本主义"。韩国工人直到1987年六月民主运动之后才能合法罢工——此前整个朴正熙和全斗焕时代的"经济奇迹"，是在禁止罢工、监禁工会领袖、警察和资方联手镇压工人的体制下完成的。</p>
+
+        <p><strong>台湾。</strong> 土地改革为何能成功？因为1949年退到台湾的国民党是一个"流亡政权"——它在台湾本地没有土地利益。台湾地主对蒋介石来说是"可以用但不需要依靠"的存在。当美国人建议他搞土改（主要是为了防止台湾农民被共产党吸引），他可以干净利落地干——杀了几个不听话的，剩下的乖乖听话。菲律宾地主、巴西地主、印度地主——当年为什么没人能搞成这样？因为菲律宾的议员就是地主自己。你不能指望绵羊投票把自己变成羊肉。</p>
+
+        <p><strong>香港。</strong> 一个城市就是一个经济体。不需要修从省城到乡镇的公路网，不需要为八亿农民提供灌溉系统，不需要管东北老工业基地的转型阵痛。还有1949年后涌入的上海纺织资本家——带着他们的机器、图纸、技术和海外客户名单。还有大陆在被全面封锁期间——唯一的对西方贸易窗口。一个城市的垄断利润，被包装成了"自由贸易"的智慧。</p>
+
+        <p><strong>新加坡。</strong> 一个城市国家。人口不到六百万，面积没有北京的通州区大，坐落在全球最繁忙的航运咽喉——马六甲海峡。李光耀可以认识政府里所有处长以上的官员——全中国任何一个省长都做不到这一点。淡马锡——新加坡政府全资控股的投资公司，管着数千亿美元的资产——这是什么？这是资本主义吗？这是国家资本主义。西方媒体夸新加坡自由市场的时候从不提淡马锡，因为一旦提了，就必须承认：政府控股公司可以高效运营。而这扇门一开，太多不方便的问题就会挤进来。</p>
+
+        <hr class="section-divider">
+
+        <h2 id="act4">第四幕：新中国前三十年——封锁下的"先重后轻"苦旅</h2>
+
+        <h3 id="为什么不是先轻后重">为什么不是"先轻后重"？</h3>
+
+        <p>民国不是没有轻工业。荣氏兄弟的纱厂和面粉厂在1920—1930年代做到了中国最大。但荣氏的纺纱机是英国造的，润滑油是进口的，优质棉花是进口的，连机器的备用零件都要从曼彻斯特订货。一旦国际禁运，工厂就是一堆废铁。</p>
+
+        <p>1950年的新中国面对的正是这样一道禁运令——但比禁运民国更彻底。巴黎统筹委员会。对华特别清单。全面封锁。无法用棉花换机床——因为没人卖机床。无法用猪鬃换精密仪器——因为猪鬃换不来美元，美元账户被冻结。面前只剩一条路：<strong>先砸锅卖铁造出T1——钢铁、石油、电力。然后用T1去支撑T2——机床、重型机械、测量仪器。等到T2成熟了，才能造出物美价廉的纺织机、拖拉机和化肥、药品（T3）以回馈民生。在此之前，几亿人得穿补丁衣服过年。</strong></p>
+
+        <p>这不是"选择了重工业"。这是封锁替你做的选择。</p>
+
+        <hr class="section-divider">
+
+        <h3 id="四三方案骨头长好了开始长肉">四三方案——骨头长好了，开始长肉</h3>
+
+        <p>但到了1970年代初，情况变了。大庆油田稳产了。沈阳和上海的机床厂能批量生产了。万吨水压机有了一台又一台。T1和T2初步成型。同时——1972年尼克松访华，封锁松动。西方正在经历经济危机，急于找出口市场。周恩来和李先念拍板：动用外汇储备——总额四十三亿美元——引进二十六套大型化肥和化纤生产设备。</p>
+
+        <p>这笔投资的逻辑是精密的"要素置换"：用大庆的石油去换化肥和化纤设备 → 这些设备把石油变成衣服和粮食 → 耕地不再大面积种棉花（种粮食） → 粮食增产 → 化肥上去了，粮食总产量从1972年的大约两亿四千万吨跃升到1980年的大约三亿两千万吨 → 化纤上去了，布票终于取消了。</p>
+
+        <p><strong>四三方案是"重工业优先"战略开始收割红利的时刻。但它收割红利的时机，恰好与中国经济政策的历史性转折重叠了。到了1980年代，当的确良衬衫穿在中国人身上、当饭碗里的粮食终于够吃了——历史时钟已经走到了"改革开放"。</strong></p>
+
+        <hr class="section-divider">
+
+        <h3 id="前三十年保守一改开就起飞这句话的欺骗性">"前三十年保守，一改开就起飞"——这句话的欺骗性</h3>
+
+        <p>改开初期的确增长极快。但快的原因被主流叙述只留了一半——政策的松绑当然有巨大释放效应。但另一半原因是：<strong>前三十年造好的那条跑道，改开后第一架飞机终于可以在上面起降了。</strong> 大庆的油、鞍钢的钢、三门峡和刘家峡的电、遍布全国的铁路干线——这些不是1980年代才由"市场经济"变出来的。它们的烟囱和铁轨在前三十年里就已经矗立在那里了。无论走计划经济还是市场经济，它们都默默地发挥着作用。</p>
+
+        <p>然而改开剧痛持续了二十年。1990年代：国企破产、数千万工人下岗、"企业办社会"的保障体系——厂办托儿所、厂办医院、厂办养老院——一夜之间被拆光了。工人被告诉："转变观念，自谋生路。"曾经站在车床前为集体、为国家创造价值的体面，变成了在超市理货、在建筑工地搬砖、在外企流水线上被人用秒表计时的"廉价劳动力"。而伴随着取消阶级斗争为纲、人民公社和赤脚医生的废止，党政在农村和偏远地区的全面退缩为旧风俗、旧秩序和封建思想复辟和黑社会、人口贩卖、飞车党等的兴起提供了温床。直到城市经济辐射、治理现代化才销声匿迹。</p>
+
+        <p>国企改革换来了什么？企业卸下了社会负担，可以"轻装上阵"进入市场竞争。效率提高了。GDP起飞了。但代价是工厂大院里那些托儿所的钥匙永远锁上了，那些厂办医院的诊室永远空了，那些退休工人发现他们的养老金发不出了，而某些人的养老金却越来越多了。</p>
+
+        <p><strong>后人站在2020年代，批评前三十年"只会搞重工业，不关心民生"——就像站在高楼顶上，责备打地基的人为什么不先种花。不是他不想种。是他不把地基打牢，这栋楼盖不到三层就会塌。</strong></p>
+
+        <hr class="section-divider">
+
+        <h2 id="act5">第五幕：苏联与中国的镜像——同一道方程，不同的参数</h2>
+
+        <p>苏联和中国面对的是同一道方程：一个被封锁的落后农业国，必须在西方军事围堵中完成工业化。但方程中的参数完全不同——解也因此不同。</p>
+
+        <h3 id="技术窗口一个接住了大萧条一个撞上了铁幕">技术窗口：一个接住了大萧条，一个撞上了铁幕</h3>
+
+        <p>苏联的第一个五年计划（1928—1932年）与人类历史上最大的经济崩溃同步发生。大萧条期间，整个资本主义世界的工业产能闲置了将近一半。美国、德国、英国、意大利的工厂——没人买他们的东西。苏联正好相反：它有钱（通过出口粮食、木材、黄金攒的），急着买东西。于是1929年至1933年间，苏联进口了全球大约百分之五十的出口机器设备。斯大林格勒拖拉机厂的全套生产线是美国工程师设计的，高尔基汽车厂是福特公司帮忙建起来的，第聂伯河水电站的涡轮机是通用电气造的。</p>
+
+        <p><strong>这是资本主义历史上最大的讽刺：西方资本家为了在大萧条中活下去，亲手帮自己最恐惧的敌人建起了工业骨架。</strong> 斯大林后来有一句不怎么出名的实话——"苏联工业的三分之二是用美国技术和德国设备建成的。"他没有说的是：这些技术和设备是在资本主义最脆弱的时刻，被一群急于脱困的资本家主动送上门的。</p>
+
+        <p>中国呢？1950年代唯一的窗口是苏联的"156项"援助。1960年赫鲁晓夫撤走全部专家、带走所有图纸、停止设备供应——这个窗口关上了。而同时期的西方对中国实行的是比对苏联更严格的禁运——巴黎统筹委员会有份"中国特别清单"，禁运品种比苏联多出数百种。唯一的缝隙是香港——中国通过这个狭窄窗户搞到了部分机床和精密仪器，但规模完全无法与苏联在大萧条期间那种遍布欧美的大型采购相提并论。</p>
+
+        <p><strong>结论短而残酷：苏联工业化起步时面对的是一个"求着你买东西"的西方。中国工业化起步时面对的是一个"铁了心不卖给你东西"的西方。这个窗口差异，直接决定了速度。</strong></p>
+
+        <hr class="section-divider">
+
+        <h3 id="速度与惨烈一样的方程不一样的时间底牌">速度与惨烈：一样的方程，不一样的时间底牌</h3>
+
+        <p>斯大林1931年说的那句话不是修辞——"我们比先进国家落后了五十到一百年。我们必须在十年内跑完这段距离。要么我们做到，要么我们被碾碎。"他给自己规定的倒计时是十年。十年后纳粹入侵，苏联工业确实撑住了——拼尽全力撑住了。</p>
+
+        <p>代价呢？集体化把农民的口粮变成了出口换设备的硬通货。乌克兰大饥荒（1932—1933年），数百万人死于饥饿。余粮收集制的残酷程度超过沙皇时代的任何一次征粮。这不是一个在正常年代会做出的选择。这是一个倒计时归零之前、不惜任何代价的选择。</p>
+
+        <p>中国的倒计时没有那么急迫。朝鲜战争结束后，美国的威胁虽然真实存在，但全面入侵并非迫在眉睫。中苏同盟提供了缓冲期。所以中国可以"慢一点"——统购统销比余粮收集制温和，农村保留了自留地，工人虽然苦但农民没有饿到1933年乌克兰的程度。代价是慢——等到1970年代末四三方案的设备投产、粮棉双双跃升时，历史的接力棒已经交到了改革的一代。</p>
+
+        <p><strong>这是历史记忆分配中最残酷的不公。斯大林活着看到了工业化完成、二战胜利、成为超级大国——功与过都在他身上。毛泽东时代完成了T1和T2的建造，但T3的果实——化纤和化肥带来的衣服和粮食——开花在邓小平时代。吃苦和误解全算给前三十年了，功劳记在改革头上。你会穿着的确良衬衫走进一家百货公司，买走一件你不会问"这块布料是哪个厂的机器织的"的衣服——织这块布的化纤设备，是1973年从法国和日本买的，用大庆石油出口积攒的外汇。这个链条上最早的起点——是大庆的钻井工人，是鞍钢的炼钢工，是1972年在人民大会堂拍板签字的周恩来。你在1985年的的确良衬衫里，穿的是1955年的铁和1965年的油。</strong></p>
+
+        <hr class="section-divider">
+
+        <h3 id="人口相同方程里最不一样的分母">人口：相同方程里最不一样的分母</h3>
+
+        <p>苏联1928年人口约一亿六千万。中国1953年人口约五亿五千万。同样是砸锅卖铁省食缩用凑一套钢铁厂的钱，在苏联是用一亿六千万人的勒紧裤腰带摊下来的，在中国则要五亿五千万人勒紧裤腰带摊下来。在农业国向工业化转型期，人口反而是负担：同样建一座厂，中国每个人的腰要比苏联人多紧三分。</p>
+
+        <hr class="section-divider">
+
+        <h2 id="act6">第六幕：三个被忽略的维度</h2>
+
+        <h3 id="一规模的物理极限">一、规模的物理极限</h3>
+
+        <p>列宁在1917年写作《国家与革命》时反复强调一个被后来的"北欧模式""新加坡模式"迷信者彻底遗忘的原则：国家问题"比人们通常所想象的要复杂得多"。在分析任何一种政治形式时，首先必须问——这是在多大的人口规模、多大的领土面积、多深的族群复杂性上运转的制度？</p>
+
+        <p>新加坡六十五万人口——李光耀可以认识所有中层以上官员。丹麦五百五十万——政府出台一个政策，反馈在两周内就能到达部长桌上。中国十四亿——省长认不全县级以上的官员名字。一个政策从北京到某个西部县城，中间经历了五到七级信息传递。第一层说的是"精准落实"，第五层听到的是"完成任务"，最后一层执行出来的是"应付检查"。这不是官僚主义——这是信息的物理性衰减。毛泽东同志曾经做过一个大胆的尝试：越过层层传递，直接写信给每个生产队，告诫再告诫大跃进的农业农村问题。但这本身就是一种临时性的措施，至少在当下，长期完全越过官僚系统去治理幅员辽阔、人口众多的国家也不可取的。<strong>在信息不对称被根除之前，任何"小国经验"放大到十四亿人的规模上，都不可避免地会变成另一件事。</strong></p>
+
+        <p>恩格斯在1872年致库格曼的信中写过一个被严重低估的判断：革命不仅仅需要"一个统治集团已经变得无法维持"，还需要"一个能够承担替代的社会力量已经成熟"——他补充了一个纯粹物质的限定条件：<strong>"在人口稀少的国家里……即使有最进步的纲领，物质前提的缺失也会让一切都变得不可能。"</strong> 恩格斯说的是革命。但他的逻辑完全适用于发展模式：物质前提划定了可能性的刚性边界。没有足够的物质条件，最慷慨激昂的宣言也只是宣言。</p>
+
+        <h3 id="二启动时刻的后发诅咒">二、启动时刻的后发诅咒</h3>
+
+        <p>英国工业化最早（十八世纪下半叶）——全世界都是它的市场，没有竞争对手，想怎么搞就怎么搞。德国的工业化晚了一百年——轻纺市场已经被英国占了，只能另辟蹊径：化工（巴斯夫、拜耳）、电气（西门子）、精密机械。日本更晚——轻纺和化工都有人了，只能军事扩张去抢殖民地。中国最晚——所有好赛道都被人占了，而且这些人组成联盟禁止进入他们的赛道。</p>
+
+        <p>列宁在《帝国主义是资本主义的最高阶段》中提出的"经济政治发展不平衡"规律——帝国主义链条在其最薄弱环节断裂——常被引用来解释俄国革命的胜利。但同一个规律还有一个冷酷的背面：<strong>后发国家不仅要面对"薄弱环节"的机遇，还要面对"所有坚固环节联合封锁你"的现实。</strong> 所谓"后发优势"有一个极其苛刻的前置条件：前人愿意把技术卖给你。如果前人用禁运代替教学，后发优势立刻变成后发劣势。</p>
+
+        <h3 id="三先富起来的人有权力删改叙事">三、先富起来的人有权力删改叙事</h3>
+
+        <p>日本的经济史教科书里，甲午战争赔款（相当于四年国家预算）被一笔带过——或者根本不在"经济奇迹"的章节里。韩国不谈越南战争劳工伤痕和经济红利，不谈朴正熙时代的禁止罢工和压制劳工。先富起来的人书写"我们为什么先富"的权威叙事，然后用这个叙事告诉后发国家：学我这样做。</p>
+
+        <p><strong>但后发国家根本学不了。因为没有一份战争赔款可以拿，没有一个超级大国愿意每年给几十亿美元的援助，没有一个马六甲海峡可以坐地收租。</strong></p>
+
+        <hr class="section-divider">
+
+        <h2 id="act7">第七幕："模式可复制论"的真实功能</h2>
+
+        <p>"你看北欧——高福利高税收，人民幸福。你为什么不学？"</p>
+
+        <p>"你看韩国——从废墟到发达国家，只用了三十年。你凭什么不行？"</p>
+
+        <p>"你看新加坡——一个小渔村变成全球金融中心。制度对了一切都对。"</p>
+
+        <p>这些话术剥离了每一个"成功案例"中不可复制的物质前提：资源禀赋、人口规模、国际窗口、历史时机、殖民遗产、冷战红利。剥离之后剩下的是什么？一个标签。"北欧模式"。"亚洲四小龙"。这些标签的任务根本不是为后发国家提供可操作的发展路径——而是为"你为什么失败了"准备一个不用费脑子的答案。</p>
+
+        <p><strong>不是帮你找路。是证明你不配走路。</strong></p>
+
+        <hr class="section-divider">
+
+        <h2 id="act8">第八幕：替代方法论——从"学模式"到"读条件"</h2>
+
+        <p>放弃"哪个模式更好"的追问。换成三个问题——在任何政策讨论之前，先回答这三个：</p>
+
+        <ol>
+            <li><strong>地理和资源禀赋允许什么？</strong> 你的耕地面积决定了你能养多少人、农业剩余能支撑多大的工业投资。你的矿产资源决定了你是坐在油桶上还是石头上。你的地理位置决定了你是面对封锁还是面对包围。</li>
+            <li><strong>国际格局当前给了你什么窗口？</strong> 有没有一个大国愿意当你的安全伞和贸易伙伴？有没有一个正在转移的产业链你可以接住？有没有一批因为各种原因急着卖给你技术和设备的人？</li>
+            <li><strong>社会结构和历史路径已经锁定了什么？</strong> 你国内有没有土地高度集中的地主阶级会烂在土改的门口？有没有彻底破碎的族群认同让你建不起统一市场？</li>
+        </ol>
+
+        <p>这三个问题的答案，是在允许范围内的"政策菜单"的物理边界。在这之外的一切"模式推荐"——是推销话术。</p>
+
+        <p><strong>社会主义实践的路径同样被这些物质条件严格约束。苏联要防两线作战。中国要解决八亿农民的吃饭问题。古巴在封锁下撑了几十年。越南在山地和丛林里打了一代人的仗。这些不是靠"信念坚定"就能绕过去的物理事实。</strong></p>
+
+        <p><strong>但这恰恰是马克思主义的力量所在——它从一开始就告诉你：社会制度不是在真空中设计出来的。你手里有什么牌，你就只能打什么牌。好的牌手不是那个抱怨牌不好的人——而是那个在不被允许弃牌的牌局里，用一手烂牌撑到最后一轮的人。</strong></p>
+
+        <p>毛泽东在《中国革命战争的战略问题》中，将这一认识论提炼为一种军事—哲学方法论。他写道，战争的指导者"不可以超越客观条件许可的限度期求战争的胜利"，但"可以而且必须在客观条件的限度之内，能动地争取战争的胜利"。他把这种能动性称为"指挥员在战争的大海中游泳"——"他们要不使自己沉没，而要使自己决定地有步骤地到达彼岸。'指导战争'的规律，就是'指导游泳'的规律。"</p>
+
+        <p>这句话适用于战争。它也适用于被封锁下的工业化。适用于四三方案在1972年精确把握住的那道窄缝。适用于挪威农民在3%可耕地上经营了九百年才站到投票箱前面。<strong>不是信仰创造了条件。是在给定的条件下，信仰让人坚持到条件成熟的时刻。</strong></p>
+
+
+        <hr class="section-divider">
+
+        <div class="article-footer">
+            <p>潜狂 · 写于2026.7.4</p>
+            <p>海燕，暴风雨所诞生的</p>
+        </div>
+
+
+    </article>
+</div>
+
+<footer class="site-footer"><div class="container"><p>青年马列毛主义驿站 | Qmlm Reader</p><p class="footer-note">学习他 · 成为他 · 然后超越他</p></div></footer>
+<script src="../../../js/main.js"></script>
+<script>
+    function toggleDarkMode(){
+        document.body.classList.toggle('dark-mode');
+        var isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+        var btn = document.querySelector('.dark-mode-toggle');
+        if(btn) btn.textContent = isDark ? '☀️' : '🌙';
+    }
+    if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+    (function(){
+        var btn = document.querySelector('.dark-mode-toggle');
+        if(btn && document.body.classList.contains('dark-mode')) btn.textContent = '☀️';
+    })();
+    function toggleSideNav(){
+        document.getElementById('sideNav').classList.toggle('expanded');
+    }
+    document.addEventListener('click', function(e){
+        var nav = document.getElementById('sideNav');
+        if(nav && !nav.contains(e.target)) nav.classList.remove('expanded');
+    });
+</script>
+
+<script src="../../../js/darkmode.js"></script>
+<script src="../../../js/cursor.js"></script>
+</body>
+</html>

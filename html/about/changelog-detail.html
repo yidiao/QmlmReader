@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新详情 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .detail-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 32px;
+            background: var(--card-bg, #fff);
+            border-radius: 20px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+        }
+
+        body.dark-mode .detail-container {
+            background: #1e1e2a;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #c41e3a;
+            text-decoration: none;
+        }
+
+        .detail-date {
+            color: #c41e3a;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .detail-title {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+        }
+
+        .detail-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+
+            .detail-tag.tag-important {
+                background: #dc2626;
+                color: white;
+            }
+
+            .detail-tag.tag-new {
+                background: #10b981;
+                color: white;
+            }
+
+            .detail-tag.tag-optimize {
+                background: #3b82f6;
+                color: white;
+            }
+
+            .detail-tag.tag-fix {
+                background: #f59e0b;
+                color: white;
+            }
+
+        .detail-content {
+            line-height: 1.8;
+            color: var(--text-color, #333);
+        }
+
+            .detail-content h3 {
+                margin-top: 24px;
+                color: #c41e3a;
+            }
+
+        .not-found {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+        <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+                <a href="../index.html">首页</a>
+                <a href="../articles/articles.html">文章</a>
+                <a href="../masters/masters.html">导师</a>
+                <a href="../toolkit/toolkit.html">工具集</a>
+                <a href="../gallery/gallery.html">文艺</a>
+                <a href="../puzzle/puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../international/international.html">🌍 国际共运</a>
+                <a href="../rectify/rectify.html">正名</a>
+                <a href="about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="detail-container" id="detailContainer">
+            <a href="../index.html" class="back-link">← 返回首页</a>
+            <div id="detailContent" class="loading">加载中...</div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+
+        function getTagClass(tag) {
+            const map = { '重要': 'tag-important', '新增': 'tag-new', '优化': 'tag-optimize', '修复': 'tag-fix' };
+            return map[tag] || 'tag-default';
+        }
+
+        async function loadDetail() {
+    const container = document.getElementById('detailContent');
+    const params = new URLSearchParams(window.location.search);
+    const detailId = params.get('id');
+
+    if (!detailId) {
+        container.innerHTML = '<div class="not-found">❓ 未指定更新条目</div>';
+        return;
+    }
+
+    try {
+        const res = await fetch('../../data/updates.json');
+        if (!res.ok) throw new Error();
+        const updates = await res.json();
+        const update = updates.find(u => u.detailId == detailId);
+
+        if (!update) {
+            container.innerHTML = '<div class="not-found">🔍 未找到该更新详情，请返回首页查看其他更新</div>';
+            return;
+        }
+
+        const formattedDate = update.date.replace(/-/g, '.');
+        const tagClass = getTagClass(update.tag);
+
+        // 根据 detailId 生成详细内容
+        const detailedContent = getDetailedContent(detailId, update.title);
+
+        let detailedHtml = `
+            <div class="detail-date">${formattedDate}</div>
+            <h1 class="detail-title">
+                ${escapeHtml(update.title)}
+                <span class="detail-tag ${tagClass}">${escapeHtml(update.tag)}</span>
+            </h1>
+            <div class="detail-content">
+                <p><strong>📝 简介：</strong> ${escapeHtml(update.desc)}</p>
+                ${detailedContent}
+            </div>
+        `;
+        container.innerHTML = detailedHtml;
+
+    } catch (e) {
+        container.innerHTML = '<div class="not-found">⚠️ 加载失败，请检查网络或 data/updates.json 文件</div>';
+    }
+}
+
+// 根据 detailId 返回不同的详细内容（在这里添加各更新条目的详情）
+function getDetailedContent(detailId, title) {
+    const contents = {
+
+        // 2026-05-25 111
+        'revolution': `
+            <h3>日历修复、添加几则；拼图稀疏区补全</h3>
+            <p>在日历和拼图里</p>
+            <ul>
+                <li>日历添加我国工人运动和早期革命起义约十则；拼图稀疏区补全，进行一定优化orz<\li>
+            </ul>   
+            <p>未来计划给工人运动做个专栏...安息吧，山西煤矿工人...</p>
+            <p><a href="../international/international-calendar.html" style="color:#c41e3a;">👉 立即体验</a></p>
+        `,
+        // 2026-05-09 工具集、搜索优化
+        'poetry': `
+            <h3>新增诗词模块</h3>
+            <p>在文艺里</p>
+            <ul>
+                <li>懒得写了orz<\li>
+            </ul>   
+            <p>诗人身份和思想比较杂，暂时没工夫管</p>
+            <p><a href="gallery/poetry.html" style="color:#c41e3a;">👉 立即体验</a></p>
+        `,
+        // 2026-05-09 工具集、搜索优化
+        'article-update1': `
+            <h3>实装一批文章</h3>
+            <p>比如反杜林论</p>
+            <ul>
+                <li>懒得写了orz<\li>
+            </ul>
+            <p>其他也有很多</p>
+            <p><a href="../articles/Engels/fan-du-lin-lun.html" style="color:#c41e3a;">👉 立即体验</a></p>
+        `,
+
+        // 2026-05-09 工具集、搜索优化
+        'toolkit': `
+            <h3>工具集、搜索优化、杂七杂八的优化</h3>
+            <p>啥也不懂上来可以逛逛工具集</p>
+            <ul>
+                <li>懒得写了orz<\li>
+            </ul>
+            <p>大量占位符，是对的。</p>
+            <p><a href="../toolkit/toolkit.html" style="color:#c41e3a;">👉 立即体验新版工具集</a></p>
+        `,
+        // 2026-05-09 实验性工具
+        'experimental': `
+            <h3>实验性工具</h3>
+            <p>我有很大胆的想法，但我要酝酿怎么实现</p>
+            <ul>
+                <li>如何在互联网上大量的群体实践？这个问题留给读者<\li>
+            </ul>
+            <p>在构思了。在构思</p>
+        `,
+        // 2026-05-09 子板块
+        'three-new': `
+            <h3>新增“国际共运”三个子板块、新增留言板（占位符）、科普模块（工具集里）和更新日志</h3>
+            <p>理论拼图将所有经典文章按照马哲体系分为六大板块：</p>
+            <ul>
+                懒得写了orz
+            </ul>
+            <p><a href="../international/international.html" style="color:#c41e3a;">👉 立即体验国际共运子模块</a></p>
+        `,
+
+        // 2026-05-08 文章修复
+        'article-update': `
+            <h3>《国家与革命》等文章修复、统一样式；新增马恩著作（提取出正文但尚未实装）、新增拓展阅读（空壳子）</h3>
+            <p>文章的格式逐渐确定。后续添加书签功能。</p>
+            <ul>
+                <li><strong>短、中、长篇</strong>：长篇优先配置书签和目录以及其他便于阅读功能</li>
+                <li><strong>六大分类</strong> ......</li>
+                <li>懒得写了orz</li>
+            </ul>
+            <p><a href="../articles/Lenin/guo-jia-yu-ge-ming.html" style="color:#c41e3a;">👉 立即体验《国家与革命》</a></p>
+        `,
+
+        // 2026-05-05 手机适配
+        'mobile': `
+            <h3>手机版适配</h3>
+            <p>暂时这么着，有不舒服再改</p>
+            <ul>
+                <li>懒得写了orz</li>
+            </ul>
+           
+        `,
+
+
+    };
+
+    // 如果找不到对应 ID，返回默认模板（方便您后续补充）
+    if (!contents[detailId]) {
+        return `
+            <h3>📌 更新详情</h3>
+            <p>本次更新为“${escapeHtml(title)}”，具体内容正在补充中。</p>
+            <p><em>💡 提示：请在 changelog-detail.html 的 getDetailedContent() 函数中为 detailId="${escapeHtml(detailId)}" 添加详细内容。</em></p>
+        `;
+    }
+
+    return contents[detailId];
+}
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function (m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        loadDetail();
+    </script>
+    <script src="../../js/main.js"></script>
+
+<script src="../../js/darkmode.js"></script>
+<script src="../../js/cursor.js"></script>
+</body>
+</html>

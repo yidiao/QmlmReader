@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唯物主义和经验批判主义 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/articles-detail.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --cat-primary:   #8b0000;
+            --cat-secondary: #c41e3a;
+            --cat-gradient:  linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
+        }
+    </style>
+</head>
+<body data-category="philosophy">
+
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+                <a href="../../index.html">首页</a>
+                <a href="../../articles/articles.html" class="active">文章</a>
+                <a href="../../masters/masters.html">导师</a>
+                <a href="../../toolkit/toolkit.html">工具集</a>
+                <a href="../../gallery/gallery.html">文艺</a>
+                <a href="../../puzzle/puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../../international/international.html">🌍 国际共运</a>
+                <a href="../../rectify/rectify.html">正名</a>
+                <a href="../../about/about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="back-nav">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../../articles/articles.html" class="back-link"><span>←</span> 返回文章列表</a>
+        </div>
+    </div>
+
+    <main class="article-detail">
+
+        <header class="article-header">
+            <div class="importance-badge">⭐⭐⭐⭐ 重点推荐</div>
+            <h1>唯物主义和经验批判主义</h1>
+            <div class="article-subtitle">对一种反动哲学的批判——捍卫辩证唯物主义认识论</div>
+            <div class="article-meta">
+                <span class="author">列宁</span>
+                <span class="date">1908年</span>
+                <span class="category">哲学基础 · 认识论</span>
+                <span class="word-count">约150,000字（节选）</span>
+                <span class="length-tag">📚 长篇</span>
+            </div>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 1: 原文                              -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro">
+                    <p><strong>阅读提示：</strong>本书是列宁最重要的哲学著作，写于1908年。俄国1905年革命失败后，党内部分知识分子追随马赫主义（经验批判主义），宣扬唯心主义认识论。列宁愤怒地写下了这本"论战性巨著"，系统捍卫了辩证唯物主义的认识论——物质第一性、意识是物质的反映、实践是真理标准。重点阅读前三章的代绪论和第二章（认识论核心）。点击章节标题可展开/折叠内容。</p>
+                </div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        一、代绪论——马赫主义的思想根源
+                    </h3>
+                    <div class="chapter-content">
+                        <p>马赫主义（经验批判主义）的理论来源可以追溯到贝克莱主教的主观唯心主义——"存在就是被感知"。马赫和阿芬那留斯把"物"说成是"感觉的复合"，本质上是贝克莱主义的翻版。物理学的危机（放射性、电子等新发现）被唯心主义哲学家利用来宣扬"物质消失了"——他们混淆了物理学关于物质结构的具体认识（可以改变）和哲学上物质概念的客观存在（不依赖于感觉）。列宁指出：承认客观实在的存在是唯物主义认识论的基础。</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        二、认识论核心——反映论与真理论
+                    </h3>
+                    <div class="chapter-content">
+                        <p>列宁提出了辩证唯物主义认识论的三个重要结论：（1）物是不依赖于我们的意识而客观存在的；（2）在现象和自在之物之间没有任何原则的差别，差别只存在于已经认识的和尚未认识的之间；（3）在认识论上，应该辩证地思考——分析怎样从不知到知，从不完全不确切的知识到比较完全比较确切的知识。关于真理问题：是否存在着客观真理？绝对真理和相对真理的关系是什么？列宁回答：承认客观真理，但不把任何具体认识绝对化。绝对真理是由相对真理的总和构成的。</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        三、实践是检验真理的标准
+                    </h3>
+                    <div class="chapter-content">
+                        <p>生活、实践的观点，应该是认识论的首要的和基本的观点。这种观点必然会导致唯物主义。实践标准既是确定的又是不确定的——之所以是确定的，因为除了实践没有别的办法可以最终判别认识的真理性；之所以是不确定的，因为任何具体的实践都有历史局限性，不能完全证实或驳倒任何认识。列宁把这个标准运用到了对马赫主义的批判中：如果马赫主义连"世界在我感觉之外存在"这个实践一再证明的判断都否认，它就不可能是一种科学的认识论。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 2: 读法提示                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2 class="tab-heading">💡 如何阅读本文</h2>
+                <div class="guide-block">
+                    <h3>① 先弄清"列宁在反对谁"</h3>
+                    <p>马赫和阿芬那留斯是"经验批判主义"的创始人。他们声称超越了唯物主义和唯心主义的对立，用"中立的"经验要素代替物质和意识的对立。列宁的任务是证明：他们实际上只是换了个名字的贝克莱主观唯心主义。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>② 重点读第二章——认识论的三个结论</h3>
+                    <p>列宁在这里正面阐述了自己的认识论——物质第一性、可知论（现象和自在之物之间没有不可逾越的鸿沟）、认识是辩证的过程。这三个结论是全书的理论核心。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>③ 注意列宁区分"物理学的物质"和"哲学的物质"</h3>
+                    <p>物理学的物质概念可以随科学发现而改变（如原子→电子→量子），但"物质是客观实在"这个哲学命题不会因任何科学发现而动摇——这是列宁最精彩的论证之一。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>④ 联系毛泽东《实践论》</h3>
+                    <p>毛泽东在《实践论》中关于真理标准、认识的辩证过程的论述，大量吸收了列宁本书的核心观点。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 3: 难点解析                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2 class="tab-heading">🔍 容易读错的地方</h2>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：列宁的"反映论" = 镜子式的机械反映</div>
+                    <div class="correct">✅ 正解：列宁的反映论是辩证的——认识不是一次性的照相，而是一个从相对真理走向绝对真理的无限过程。意识对物质的"反映"是能动的、历史的、永无止境的。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：列宁否认感觉在认识中的作用</div>
+                    <div class="correct">✅ 正解：列宁从不否认感觉是认识的来源。他反对的是马赫主义者把感觉当作"世界的最终要素"——即否认感觉之外有客观实在。列宁说：感觉是客观世界在人脑中的主观映象。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：这本书只是论战——哲学上没有原创贡献</div>
+                    <div class="correct">✅ 正解：列宁在书中首次系统阐述了"绝对真理与相对真理的辩证法"和"实践标准的确定性与不确定性"——这两个命题在后来的马克思主义哲学发展中影响极为深远。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 4: 对话空间                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2 class="tab-heading">💬 这篇文章在回应谁？</h2>
+                <div class="dialogue-block">
+                    <h3>它在回应的问题</h3>
+                    <ul>
+                        <li>马赫和阿芬那留斯的经验批判主义——用"要素"替代物质和意识，伪装超越唯物主义和唯心主义</li>
+                        <li>波格丹诺夫等俄国马赫主义者——把马赫主义引入俄国党内，动摇唯物主义的哲学基础</li>
+                        <li>"物理学危机"的唯心主义解读——"物质消失了"、"没有物质的运动"</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在问每一个读者</h3>
+                    <ul>
+                        <li>你相信"你看到的这个世界"是客观存在的吗？还是一个巨大的"模拟"或"感觉的复合"？</li>
+                        <li>有一个你深信不疑的"真理"——用什么来检验它？列宁的标准：实践。</li>
+                        <li>你区分过"科学能改变的事实描述"和"不依赖于科学的客观存在"吗？</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在等你的回应</h3>
+                    <p>找一篇当代的科学新闻（如量子力学、AI、神经科学的新发现）。分析：这个发现是否被用来宣扬某种唯心主义（"意识决定物质""现实是幻觉"）？用列宁的方法——区分物理学的问题和哲学的问题——写一段回应。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 5: 行动实验                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2 class="tab-heading">⚡ 读完之后可以做什么</h2>
+                <div class="action-item">
+                    <h3>实验一：识别当代"新马赫主义"</h3>
+                    <p>找一篇用前沿科学（量子力学、神经科学）来论证"世界是主观的""物质不存在了"的文章。用列宁的方法逐条分析：它在偷换概念吗？它混淆了物理学的"物质"和哲学的"物质"吗？</p>
+                </div>
+                <div class="action-item">
+                    <h3>实验二：实践检验——自己验证一个"真理"</h3>
+                    <p>选一个你最近相信的、但还没有经过自己实践检验的"理论"或"方法"。设计一个简单的实践来检验它。记录结果——你的"真理"通过了实践的检验吗？</p>
+                </div>
+                <div class="action-item">
+                    <h3>实验三：区分"不确定的知识"和"不可知论"</h3>
+                    <p>找三个科学上尚不确定的问题。对每个问题，问自己：承认"我们暂时不知道"是否等于承认"我们永远不可能知道"？列宁说：差距只在已经认识和尚未认识之间——这个态度如何改变你对待未知的方式？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 6: 一目了然                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2 class="tab-heading">📊 一目了然</h2>
+
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量本书的"性格"</p>
+                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>论证节奏曲线</h3>
+                    <p class="chart-desc">从揭露马赫主义根源到正面阐述辩证唯物主义认识论</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="argumentCurve"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4>📝 结构分析（对应曲线各波段）</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label">代绪论：揭露马赫主义的贝克莱根源（7/10）</span>
+                            <p>有力的历史论证——证明马赫主义不过是贝克莱主观唯心主义的翻版。论战开篇，基调确立。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">★ 第一章：认识论基本问题（9/10）★</span>
+                            <p>正面回答"物是否在我们之外存在"。"物质是标志客观实在的哲学范畴"——列宁最著名的定义在此提出。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">★ 第二章：认识论核心——反映论（10/10）★</span>
+                            <p>全书最高峰。三个重要认识论结论、绝对真理与相对真理的辩证法、实践标准——最完整、最系统的阐述。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">第三章：因果性与必然性（7/10）</span>
+                            <p>论证自然界的因果性和必然性是客观的，不以人的意志为转移。论证节奏略降。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">结论：四个重要原则（8/10）</span>
+                            <p>总结全书的四个哲学结论——从认识论到实践，列宁给出了辩证唯物主义认识论的完整纲领。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>辩证唯物主义认识论三角</h3>
+                    <p class="chart-desc">物质、意识、实践——三者不可分割的辩证关系</p>
+                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                        <canvas id="epistemologyChart"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4>📝 理解这个三角——列宁认识论的三个支柱</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">物质→意识：反映论（10/10）★</span>
+                            <p>列宁反复论证的核心命题：物质第一性，意识第二性。意识是"客观世界在人脑中的主观映象"。不是镜子式的机械反映，而是能动的、辩证的、从相对真理走向绝对真理的无限过程。马赫主义者说"物是感觉的复合"，列宁说"感觉是物的映象"——主语和宾语一换，两条哲学路线的分水岭就划出来了。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">物质→实践：实践是真理标准（9/10）</span>
+                            <p>列宁从恩格斯和马克思那里继承并发展了实践标准——"生活、实践的观点，应该是认识论的首要的和基本的观点"。实践标准既是确定的（只有实践能最终裁决真理），又是不确定的（任何具体实践都有历史局限性）。这个"既是又不是"就是辩证法——避免了独断论，也避免了相对主义。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">意识→实践：理论指导行动（8/10）</span>
+                            <p>列宁反对的不仅是唯心主义，也包括"没有理论的实践"——没有科学理论指导的行动是盲目的。列宁写这本书不仅是为了"驳倒"马赫主义，更是为了捍卫革命行动的理论基础：如果物质不是客观存在的，历史唯物主义就站不住脚，革命就没有科学依据。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 7: 理论拼图                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2 class="tab-heading">🧩 在马哲体系中的位置</h2>
+
+                <div class="puzzle-intro">
+                    <p>《唯物主义和经验批判主义》是马克思主义哲学史上最重要的认识论著作。列宁在1905年革命失败后的"反动时期"，面对知识界向唯心主义的全面倒退，捍卫了唯物主义的哲学基础。本书的核心贡献：阐明了物质第一性、意识是物质的反映、实践是真理的标准——这三个命题构成了辩证唯物主义认识论的基本框架。</p>
+                </div>
+
+                <div class="puzzle-position">
+                    <h3>在马哲体系中的坐标</h3>
+                    <div class="theory-tree">
+                        <div class="theory-node root">辩证唯物主义</div>
+                        <div class="theory-branches">
+                            <div class="theory-branch">
+                                <div class="theory-node branch">本体论</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node current">物质第一性<br><small>本文核心论述</small></div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">认识论</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">反映论<br><small>意识是物质的反映</small></div>
+                                    <div class="theory-node related">真理论<br><small>绝对/相对真理的辩证法</small></div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">实践论</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">实践标准<br><small>实践是真理标准</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puzzle-connection">
+                    <h3>与其他经典的联结</h3>
+                    <ul>
+                        <li>→ 恩格斯《反杜林论》《费尔巴哈论》：列宁大量引用的哲学经典</li>
+                        <li>→ 马克思《关于费尔巴哈的提纲》："实践是真理标准"的思想源头</li>
+                        <li>→ 毛泽东《实践论》：列宁认识论的中国展开——尤其是实践标准的论述</li>
+                        <li>→ 列宁《哲学笔记》：本书的后继补充——列宁对黑格尔辩证法的深入研究</li>
+                    </ul>
+                </div>
+
+                <div class="puzzle-timeline">
+                    <h3>在思想发展时间轴上的位置</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1878</div><div class="timeline-label">反杜林论</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1886</div><div class="timeline-label">费尔巴哈论</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1905</div><div class="timeline-label">俄国革命失败</div></div>
+                        <div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1908</div><div class="timeline-label">唯物与经验批判</div><div class="timeline-here">◀ 本文</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1914-16</div><div class="timeline-label">哲学笔记</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1937</div><div class="timeline-label">实践论</div></div>
+                    </div>
+                </div>
+
+                <div class="puzzle-links">
+                    <h3>文章联结网络</h3>
+                    <p class="puzzle-links-note">点击已收录文章直接跳转阅读</p>
+                    <div class="conn-grid">
+                        <a href="../../articles/Engels/fan-du-lin-lun.html" class="conn-card" style="border-left-color:#8b0000;">
+                            <span class="conn-dir" style="color:#276749;">←</span>
+                            <span class="conn-title">《反杜林论》</span>
+                            <span class="conn-label">哲学基础</span>
+                            <span class="conn-relation">理论来源：恩格斯系统阐述的唯物主义哲学</span>
+                        </a>
+                        <a href="../../articles/Mao/shi-jian-lun.html" class="conn-card" style="border-left-color:#8b0000;">
+                            <span class="conn-dir" style="color:#276749;">→</span>
+                            <span class="conn-title">《实践论》</span>
+                            <span class="conn-label">哲学基础</span>
+                            <span class="conn-relation">中国发展：认识论的系统展开与实践运用</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>延伸阅读建议</h3>
+                    <p><strong>想看认识论的中国发展：</strong>读毛泽东《实践论》——对列宁四个认识论结论的中国化展开。</p>
+                    <p><strong>想深入了解列宁的辩证法思想：</strong>读《哲学笔记》——列宁对黑格尔《逻辑学》的深度研究。</p>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>它解决的真实问题</h3>
+                    <p><strong>历史背景：</strong>1905年革命失败后，俄国知识分子中弥漫着消沉、神秘主义和对理性的放弃。"马赫主义"宣称超越了唯物主义和唯心主义的对立，以"科学哲学"的面目出现，吸引了党内一批知识分子。列宁敏锐地看到：看似"学术"的争论，实际上动摇的是整个马克思主义的世界观基础——如果物质不是客观存在的，历史唯物主义还怎么成立？</p>
+                    <p><strong>现实意义：</strong>当今天的"量子佛学""意识创造宇宙""我们生活在模拟中"等观念流行时，列宁的批判方法依然锋利。区分科学发现和哲学偷换概念、区分"我们对物质结构的认识在变化"和"物质本身是客观存在"——这两条判断标准至今有效。</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <button class="download-fab" id="downloadFab" title="下载原文">⬇</button>
+    <div class="download-menu" id="downloadMenu">
+        <h4>📥 下载原文</h4>
+        <div id="downloadLinks"></div>
+    </div>
+
+    <script src="../../../js/article-common.js"></script>
+    <script>
+        var ARTICLE_CHARTS = [
+            {
+                id: 'radarChart',
+                config: {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                        datasets: [{
+                            label: '唯物主义和经验批判主义',
+                            data: [10, 8, 8, 7, 9, 10],
+                            borderColor: '#c41e3a',
+                            backgroundColor: 'rgba(139,0,0,0.12)',
+                            pointBackgroundColor: '#c41e3a'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
+                        plugins: { legend: { display: false } }
+                    }
+                }
+            },
+            {
+                id: 'argumentCurve',
+                config: {
+                    type: 'line',
+                    data: {
+                        labels: ['代绪论\n揭露根源', '第一章\n基本问题★', '第二章\n认识论核心★', '第三章\n因果必然性', '结论\n四个原则'],
+                        datasets: [{
+                            label: '论证强度',
+                            data: [7, 9, 10, 7, 8],
+                            borderColor: '#8b0000',
+                            backgroundColor: 'rgba(139,0,0,0.08)',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            borderWidth: 2.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            },
+            {
+                id: 'epistemologyChart',
+                config: {
+                    type: 'bar',
+                    data: {
+                        labels: ['物质→意识\n(反映论)', '物质→实践\n(真理标准)', '意识→实践\n(理论指导)'],
+                        datasets: [{
+                            label: '列宁论证力度',
+                            data: [10, 9, 8],
+                            backgroundColor: [
+                                'rgba(139,0,0,0.85)',
+                                'rgba(180,20,40,0.7)',
+                                'rgba(196,30,58,0.55)'
+                            ],
+                            borderColor: '#8b0000',
+                            borderWidth: 1.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            }
+        ];
+
+        var DOWNLOAD_LINKS = [
+            { href: '../../../data/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.txt', label: '📝 下载 TXT' }
+        ];
+    </script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+</body>
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>共产党宣言 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/articles-detail.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* ===== 类别色值（必填，六选一）===== */
+        :root {
+            /* 哲学基础:   #8b0000 / #c41e3a  (暗红) */
+            /* 政治经济学: #bf360c / #d84315 (深焦橙) */
+            /* 政治理论:   #5c3d99 / #7c4dff (深紫) */
+            /* 党的建设:   #3d6b4f / #4a7c59 (森林绿) */
+            /* 军事战略:   #1a4d7a / #2b6aa5 (海军蓝) */
+            /* 思想文化:   #9a7b0a / #b8960c (古金) */
+            --cat-primary:   #5c3d99;
+            --cat-secondary: #7c4dff;
+            --cat-gradient:  linear-gradient(135deg, #1a0a3e 0%, #5c3d99 50%, #7c4dff 100%);
+        }
+    </style>
+</head>
+<body data-category="politics">
+
+    <!-- ========== 导航栏（不动）========== -->
+    <header class="site-header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">☭</span>
+                <div class="logo-text">
+                    <h1>青年马列毛主义驿站</h1>
+                    <span class="logo-sub">Qmlm Reader</span>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button>
+                <a href="../../index.html">首页</a>
+                <a href="../../articles/articles.html" class="active">文章</a>
+                <a href="../../masters/masters.html">导师</a>
+                <a href="../../toolkit/toolkit.html">工具集</a>
+                <a href="../../gallery/gallery.html">文艺</a>
+                <a href="../../puzzle/puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>
+                <a href="../../international/international.html">🌍 国际共运</a>
+                <a href="../../rectify/rectify.html">正名</a>
+                <a href="../../about/about.html">关于</a>
+                <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== 返回按钮（不动）========== -->
+    <div class="back-nav">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../../articles/articles.html" class="back-link">
+                <span>←</span> 返回文章列表
+            </a>
+        </div>
+    </div>
+
+    <!-- ========== 文章主体 ========== -->
+    <main class="article-detail">
+
+        <!-- ───── 头部 ───── -->
+        <header class="article-header">
+            <div class="importance-badge">⭐⭐⭐⭐⭐ 核心必读</div>
+            <h1>共产党宣言</h1>
+            <div class="article-subtitle">全世界无产者，联合起来！</div>
+            <div class="article-meta">
+                <span class="author">马克思 恩格斯</span>
+                <span class="date">1848年2月</span>
+                <span class="category">政治理论 · 科学社会主义</span>
+                <span class="word-count">约18,000字</span>
+                <span class="length-tag">📄 中篇</span>
+            </div>
+        </header>
+
+        <!-- ───── Tab 导航 ───── -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 1: 原文                              -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro">
+                    <p><strong>阅读提示：</strong>《共产党宣言》是科学社会主义的第一个纲领性文献，标志着马克思主义的公开问世。全文结构清晰：引言 + 四章正文。建议先读第一章（阶级斗争）和第二章（无产阶级专政），这是理解全书的核心。</p>
+                </div>
+                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        引言：一个幽灵，共产主义的幽灵，在欧洲游荡
+                    </h3>
+                    <div class="chapter-content">
+                        <p>一个幽灵，共产主义的幽灵，在欧洲游荡。为了对这个幽灵进行神圣的围剿，旧欧洲的一切势力，教皇和沙皇、梅特涅和基佐、法国的激进派和德国的警察，都联合起来了。</p>
+                        <p>有哪一个反对党不被它的当政的敌人骂为共产党呢？又有哪一个反对党不拿共产主义这个罪名去回敬更进步的反对党人和自己的敌人呢？</p>
+                        <p>从这一事实中可以得出两个结论：</p>
+                        <p>共产主义已经被欧洲的一切势力公认为一种势力；</p>
+                        <p>现在是共产党人向全世界公开说明自己的观点、自己的目的、自己的意图并且拿党自己的宣言来反驳关于共产主义幽灵的神话的时候了。</p>
+                        <p>为了这个目的，各国共产党人集会于伦敦，拟定了如下的宣言，用英文、法文、德文、意大利文、弗拉芒文和丹麦文公布于世。</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第一章 资产者和无产者
+                    </h3>
+                    <div class="chapter-content">
+                        <p>至今一切社会的历史都是阶级斗争的历史。</p>
+                        <p>自由民和奴隶、贵族和平民、领主和农奴、行会师傅和帮工，一句话，压迫者和被压迫者，始终处于相互对立的地位，进行不断的、有时隐蔽有时公开的斗争，而每一次斗争的结局都是整个社会受到革命改造或者斗争的各阶级同归于尽。</p>
+                        <p>在过去的各个历史时代，我们几乎到处都可以看到社会完全划分为各个不同的等级，看到社会地位分成多种多样的层次。在古罗马，有贵族、骑士、平民和奴隶；在中世纪，有封建主、臣仆、行会师傅、帮工和农奴，而且几乎在每一个阶级内部又有一些特殊的阶层。</p>
+                        <p>从封建社会的灭亡中产生出来的现代资产阶级社会并没有消灭阶级对立。它只是用新的阶级、新的压迫条件、新的斗争形式代替了旧的。</p>
+                        <p>但是，我们的时代，资产阶级时代，却有一个特点：它使阶级对立简单化了。整个社会日益分裂为两大敌对的阵营，分裂为两大相互直接对立的阶级：资产阶级和无产阶级。</p>
+                        <p>资产阶级在历史上曾经起过非常革命的作用。资产阶级在它已经取得了统治的地方把一切封建的、宗法的和田园般的关系都破坏了。它无情地斩断了把人们束缚于天然尊长的形形色色的封建羁绊，它使人和人之间除了赤裸裸的利害关系，除了冷酷无情的"现金交易"，就再也没有任何别的联系了。它把宗教虔诚、骑士热忱、小市民伤感这些情感的神圣发作，淹没在利己主义打算的冰水之中。它把人的尊严变成了交换价值，用一种没有良心的贸易自由代替了无数特许的和自力挣得的自由。</p>
+                        <p>资产阶级撕下了罩在家庭关系上的温情脉脉的面纱，把这种关系变成了纯粹的金钱关系。</p>
+                        <p>资产阶级日甚一日地消灭生产资料、财产和人口的分散状态。它使人口密集起来，使生产资料集中起来，使财产聚集在少数人的手里。由此必然产生的结果就是政治的集中。</p>
+                        <p>资产阶级在它的不到一百年的阶级统治中所创造的生产力，比过去一切世代创造的全部生产力还要多，还要大。自然力的征服，机器的采用，化学在工业和农业中的应用，轮船的行驶，铁路的通行，电报的使用，整个整个大陆的开垦，河川的通航，仿佛用法术从地下呼唤出来的大量人口，——过去哪一个世纪料想到在社会劳动里蕴藏有这样的生产力呢？</p>
+                        <p>现在，我们眼前又进行着类似的运动。资产阶级的生产关系和交换关系，资产阶级的所有制关系，这个曾经仿佛用法术创造了如此庞大的生产资料和交换手段的现代资产阶级社会，现在像一个巫师那样不能再支配自己用符咒呼唤出来的魔鬼了。几十年来的工业和商业的历史，只不过是现代生产力反抗现代生产关系、反抗作为资产阶级及其统治的存在条件的所有制关系的历史。</p>
+                        <p>在商业危机期间，总是有很大一部分本来就是已经形成的生产力被毁灭。在危机期间，发生一种在过去一切时代看来都好像是荒唐现象的社会瘟疫，即生产过剩的瘟疫。社会突然发现自己回到了一时的野蛮状态；仿佛是一次饥荒、一场普遍的毁灭性战争，使社会失去了全部生活资料；仿佛是工业和商业全被毁灭了。</p>
+                        <p>资产阶级用来推翻封建制度的武器，现在却对准资产阶级自己了。</p>
+                        <p>但是，资产阶级不仅锻造了置自身于死地的武器；同时它还造就了将运用这武器来反对它自己的人——现代的工人，即无产者。</p>
+                        <p>随着工业的发展，无产阶级不仅人数增加了，而且它结合成更大的集体，它的力量日益增长，它越来越感觉到自己的力量。机器使劳动的差别越来越小，使工资几乎到处都降到同样低的水平。无产者的利益和生活状况越来越趋于一致。</p>
+                        <p>在当前同资产阶级对立的一切阶级中，只有无产阶级是真正革命的阶级。其余的阶级都随着大工业的发展而日趋没落和灭亡，无产阶级却是大工业本身的产物。</p>
+                        <p>过去的一切运动都是少数人的或者为少数人谋利益的运动。无产阶级的运动是绝大多数人的、为绝大多数人谋利益的独立的运动。无产阶级，现今社会的最下层，如果不炸毁构成官方社会的整个上层，就不能抬起头来，挺起胸来。</p>
+                        <p>如果不就内容而就形式来说，无产阶级反对资产阶级的斗争首先是一国范围内的斗争。每一个国家的无产阶级当然首先应该打倒本国的资产阶级。</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第二章 无产者和共产党人
+                    </h3>
+                    <div class="chapter-content">
+                        <p>共产党人同全体无产者的关系是怎样的呢？共产党人不是同其他工人政党相对立的特殊政党。他们没有任何同整个无产阶级的利益不同的利益。他们不提出什么特殊的原则，用以塑造无产阶级的运动。</p>
+                        <p>共产党人的最近目的是和其他一切无产阶级政党的最近目的一样的：使无产阶级形成为阶级，推翻资产阶级的统治，由无产阶级夺取政权。</p>
+                        <p>共产党人的理论原理，决不是以这个或那个世界改革家所臆想或发现的思想或原则为根据的。这些原理不过是现存的阶级斗争、我们眼前的历史运动的真实关系的一般表述。</p>
+                        <p>共产党人可以把自己的理论概括为一句话：消灭私有制。</p>
+                        <p>有人责备我们共产党人，说我们消灭个人挣得的、自己劳动得来的财产，要消灭构成个人的一切自由、活动和独立的基础的财产。好一个劳动得来的、自己挣得的、自己赚来的财产！你们说的是资产阶级政权以前的那种小资产阶级的、小农的财产吗？那种财产用不着我们去消灭，工业的发展已经把它消灭了，而且每天都在消灭它。</p>
+                        <p>共产主义并不剥夺任何人占有社会产品的权力，它只是剥夺利用这种占有去奴役他人劳动的权力。</p>
+                        <p>资产阶级生存和统治的根本条件，是财富在私人手里的积累，是资本的形成和增殖。资本的生存条件是雇佣劳动。雇佣劳动完全是建立在工人的自相竞争之上的。因此，资产阶级无意间造成而又无力抵抗的工业进步，使工人通过结社而达到的革命联合代替了他们通过竞争而进行的分散。</p>
+                        <p>随着大工业的发展，资产阶级赖以生产和占有产品的基础本身也就从它的脚下被挖掉了。资产阶级用来推翻封建制度的武器，现在却对准资产阶级自己了。但是，资产阶级不仅锻造了置自身于死地的武器；它还造就了将运用这武器来反对它自己的人——现代的工人，即无产者。</p>
+                        <p>当阶级差别已经消失而全部生产集中在联合起来的个人的手里的时候，公共权力就失去政治性质。原来意义上的政治权力，是一个阶级用以压迫另一个阶级的有组织的暴力。</p>
+                        <p>代替那存在着各种阶级以及阶级对立的资产阶级旧社会的，将是一个联合体，在那里，每个人的自由发展是一切人的自由发展的条件。</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第三章 社会主义和共产主义的文献
+                    </h3>
+                    <div class="chapter-content">
+                        <p>在考察无产阶级运动的对立面——那些各种各样的社会主义和共产主义文献时，我们必须区分：</p>
+                        <p><strong>一、反动的社会主义</strong></p>
+                        <p>（甲）封建的社会主义：法国和英国的贵族，按照他们的历史地位所负的使命，在纸上反对资产阶级，他们只是感到愤慨而已。为了激起同情，贵族们不得不装出一副无所事事的样子，把自己的愤怒发泄在资产阶级身上。</p>
+                        <p>（乙）小资产阶级的社会主义：这个阶级力图恢复旧式封建秩序，批判资本主义却向往过去，在现代社会中处于矛盾的位置。</p>
+                        <p>（丙）德国的或"真正的"社会主义：把法国的社会主义文献照搬到德国，却抽掉了法国的现实条件，变成了一种关于"人的本质"的哲学空谈。</p>
+                        <p><strong>二、保守的或资产阶级的社会主义</strong></p>
+                        <p>资产阶级中有一部分人想把资产阶级社会改变成某种不同于现存状况的东西，以便保障资产阶级社会的生存。这一部分人包括：经济学家、博爱主义者、人道主义者、劳资协调派、改良派、慈善家等。他们想要消除社会的弊病，以便保障资产阶级社会的生存。</p>
+                        <p><strong>三、批判的空想的社会主义和共产主义</strong></p>
+                        <p>这种社会主义在工人阶级中曾经发生过影响，但它的致命缺陷在于它把希望寄托在少数天才人物身上，而不是依靠无产阶级的集体行动。它反对一切政治行动，特别是一切革命行动。随着阶级斗争的发展，这种超乎阶级斗争的幻想就失去了任何实践意义。</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon">▼</span>
+                        第四章 共产党人对各国政党的态度
+                    </h3>
+                    <div class="chapter-content">
+                        <p>共产党人为工人阶级的最近的目的和利益而斗争，但是他们在当前的运动中同时代表运动的未来。</p>
+                        <p>在法国，共产党人支持社会主义民主党来反对资产阶级激进派。在瑞士，共产党人支持激进派，但同时要注意工人阶级和其他阶级的对立。在波兰，共产党人支持1846年克拉科夫起义中的民族民主派。在德国，只要资产阶级采取革命行动，共产党人就支持它。</p>
+                        <p>共产党人一分钟也不忽略教育工人尽可能明确地意识到资产阶级和无产阶级的敌对和对立。</p>
+                        <p>在无产阶级和资产阶级的斗争所经历的各个发展阶段上，共产党人始终代表整个运动的利益。</p>
+                        <p>共产党人到处支持一切反对现存的社会制度和政治制度的革命运动。在所有这些运动中，他们都强调所有制问题是运动的基本问题，不管这个问题当时的发展程度怎样。</p>
+                        <p>共产党人公开宣布：他们的目的只有用暴力推翻全部现存的社会制度才能达到。让统治阶级在共产主义革命面前发抖吧。无产者在这个革命中失去的只是锁链。他们获得的将是整个世界。</p>
+                        <p><strong>全世界无产者，联合起来！</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 2: 读法提示                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2 class="tab-heading">💡 如何阅读本文</h2>
+                <div class="guide-block">
+                    <h3>① 先抓住一个核心概念：阶级斗争</h3>
+                    <p>"至今一切社会的历史都是阶级斗争的历史。"这句话是整个《宣言》的出发点。马克思用这句话宣告了一种新的历史观：历史不是英雄人物的传记，不是思想的演进史，而是阶级斗争的历史。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>② 理解"两个必然"</h3>
+                    <p>《宣言》的核心结论是：资本主义必然灭亡，社会主义必然胜利。这"两个必然"是马克思对人类社会发展规律的科学认识，不是道德呼吁，不是理想憧憬，而是基于对资本主义内在矛盾的科学分析。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>③ 重点读第一章</h3>
+                    <p>第一章"资产者和无产者"是全书最长也是最核心的部分，论证了资产阶级在历史上的革命作用、资本主义的基本矛盾（生产社会化与生产资料私人占有）、无产阶级的产生和壮大、无产阶级的历史使命。</p>
+                </div>
+                <div class="guide-block">
+                    <h3>④ 注意区分"资产阶级"和"资本主义"</h3>
+                    <p>马克思批判的是资本主义制度，不是个体的资产阶级分子。他在第一章肯定了资产阶级在历史上的革命作用，指出"资产阶级在它的不到一百年的阶级统治中所创造的生产力，比过去一切世代创造的全部生产力还要多，还要大"。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 3: 难点解析                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2 class="tab-heading">🔍 容易读错的地方</h2>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：《宣言》只是宣传品，没有学术价值</div>
+                    <div class="correct">✅ 正解：《宣言》是科学社会主义的奠基之作，包含了对资本主义生产方式的深刻分析。它的"两个必然"结论不是空洞的口号，而是建立在对生产力与生产关系矛盾运动的科学分析之上的。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：马克思主张消灭一切私有财产</div>
+                    <div class="correct">✅ 正解：马克思区分了"资产阶级的所有制"和"个人劳动所得的财产"。他批判的是资本主义私有制——即少数人占有生产资料、剥削雇佣劳动的制度——而不是个人消费品。原文明确说："共产主义并不剥夺任何人占有社会产品的权力，它只是剥夺利用这种占有去奴役他人劳动的权力。"</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读：《宣言》主张立即实现共产主义</div>
+                    <div class="correct">✅ 正解：《宣言》区分了无产阶级革命的最近目标（夺取政权）和最终目标（消灭阶级差别，建立共产主义社会）。它指出了一个过渡时期——在这个时期，无产阶级需要建立自己的政治统治，即无产阶级专政。</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong">❌ 常见误读："全世界无产者，联合起来！"只是一句口号</div>
+                    <div class="correct">✅ 正解：这句话体现了马克思主义的国际主义原则。马克思指出，无产阶级的解放是国际性的事业，单个国家的无产阶级不可能单独完成消灭资本主义的历史任务。"工人没有祖国"不是否认民族差别，而是要求各国无产阶级超越民族局限性，在国际联合中实现解放。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 4: 对话空间                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2 class="tab-heading">💬 这篇文章在回应谁？</h2>
+                <div class="dialogue-block">
+                    <h3>它在回应的问题</h3>
+                    <ul>
+                        <li>封建残余势力对共产主义的恐惧和攻击</li>
+                        <li>资产阶级意识形态——把资本主义制度说成"永恒的""自然的"</li>
+                        <li>早期社会主义流派——封建社会主义、小资产阶级社会主义、空想社会主义——的错误</li>
+                        <li>工人阶级自身的困惑："我们是谁？我们要做什么？"</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在问每一个读者</h3>
+                    <ul>
+                        <li>你站在哪个阶级一边？你的利益与哪个阶级一致？</li>
+                        <li>你能看清你所处社会的基本矛盾吗？</li>
+                        <li>你是否意识到历史发展的规律——资本主义不是永恒的？</li>
+                        <li>你准备为改造世界做些什么？</li>
+                    </ul>
+                </div>
+                <div class="dialogue-block">
+                    <h3>它在等你的回应</h3>
+                    <p>用《宣言》的阶级分析方法，分析你今天所处的社会环境：哪些人占有生产资料？哪些人靠出卖劳动力为生？社会的主要矛盾是什么？然后问自己——你的立场在哪里？你的行动指向哪里？</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 5: 行动实验                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2 class="tab-heading">⚡ 读完之后可以做什么</h2>
+                <div class="action-item">
+                    <h3>实验一：分析你所处的社会阶层</h3>
+                    <p>用《宣言》的阶级分析方法，分析你周围的社会结构：</p>
+                    <ul>
+                        <li>哪些人占有生产资料？哪些人靠出卖劳动力为生？</li>
+                        <li>不同阶层之间的利益关系是怎样的？</li>
+                        <li>社会的主要矛盾是什么？</li>
+                    </ul>
+                </div>
+                <div class="action-item">
+                    <h3>实验二：观察资本主义的当代表现</h3>
+                    <p>《宣言》写作170多年后的今天，资本主义发生了很多变化，但基本矛盾依然存在：</p>
+                    <ul>
+                        <li>2008年金融危机、2020年疫情危机——生产过剩与有效需求不足的矛盾</li>
+                        <li>贫富分化加剧——资产阶级与无产阶级的对立</li>
+                        <li>全球南北差距——国际范围的阶级分化</li>
+                    </ul>
+                </div>
+                <div class="action-item">
+                    <h3>实验三：撰写你的"宣言"</h3>
+                    <p>选择一个你关注的社会问题，用《宣言》的分析框架写一段分析：</p>
+                    <ul>
+                        <li>这个问题的阶级根源是什么？</li>
+                        <li>谁在维持现状？谁在推动变革？</li>
+                        <li>如果让你写一句口号，你会写什么？</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 6: 一目了然（核心）                    -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2 class="tab-heading">📊 一目了然</h2>
+
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量《共产党宣言》的"性格"</p>
+                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>论证节奏曲线</h3>
+                    <p class="chart-desc">从引言到第四章的论证强度变化——第二章"无产者和共产党人"是全书最高峰</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="argumentCurve"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4>📝 结构分析（对应曲线各波段）</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label">引言（6/10）</span>
+                            <p>以"幽灵"隐喻开篇，点明共产主义已成为欧洲公认的力量。节奏平稳，为全文奠定基调——这是一个需要正面回应的挑战，不是秘密结社的密谋。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">★ 第一章 资产者和无产者（9/10）★</span>
+                            <p>全书论证高峰之一。从历史唯物主义出发揭示阶级斗争规律，分析资产阶级的革命作用与内在矛盾，论证无产阶级诞生的必然性。"资产阶级用来推翻封建制度的武器，现在却对准资产阶级自己了"——这句是全文最锋利的历史辩证法。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">★ 第二章 无产者和共产党人（10/10）★</span>
+                            <p>论证最高峰。阐明共产党性质，提出"消灭私有制"的革命纲领，正面批驳资产阶级的各种污蔑。最后提出无产阶级专政和"每个人的自由发展"——从最尖锐的批判上升到最宏大的理想。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">第三章 社会主义和共产主义的文献（7/10）</span>
+                            <p>批判性分析各种社会主义流派，区分科学社会主义与空想社会主义。论证节奏相对平缓——这是在清理战场、划定边界，防止自己的理论被混淆。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">第四章 共产党人对各国政党的态度（5/10）</span>
+                            <p>提出具体斗争策略，号召"全世界无产者联合起来"。低调收尾——不是因为不重要，而是因为前面已经把理论说透了，这一章只给行动指令。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>《宣言》核心论点逻辑链</h3>
+                    <p class="chart-desc">四个核心论点的递进关系——从历史观到行动指南</p>
+                    <div class="chart-container" style="max-width:650px;margin:0 auto;">
+                        <canvas id="logicChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 7: 理论拼图                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2 class="tab-heading">🧩 在马哲体系中的位置</h2>
+
+                <div class="puzzle-intro">
+                    <p>《共产党宣言》是马克思主义公开问世的标志。它将唯物史观、政治经济学批判和科学社会主义熔于一炉，用最精炼的语言宣告了一个新世界观的诞生。如果说《资本论》是马克思主义的"重型武器"，《宣言》就是它的"宣言书"——先告诉你目标在哪，再给你论证为什么这个目标是必然的。</p>
+                </div>
+
+                <div class="puzzle-position">
+                    <h3>《宣言》在马哲体系中的坐标</h3>
+                    <div class="theory-tree">
+                        <div class="theory-node root">马克思主义</div>
+                        <div class="theory-branches">
+                            <div class="theory-branch">
+                                <div class="theory-node branch">哲学基础</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">唯物史观<br><small>《德意志意识形态》</small></div>
+                                    <div class="theory-node related">辩证法</div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">政治经济学</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">剩余价值理论<br><small>《资本论》</small></div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node current">科学社会主义<br><small>《宣言》核心</small></div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">无产阶级专政理论</div>
+                                    <div class="theory-node related">阶级斗争学说</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puzzle-connection">
+                    <h3>与其他经典的联结</h3>
+                    <ul>
+                        <li>→ 《资本论》：将《宣言》中"消灭私有制"的纲领发展为完整的政治经济学体系</li>
+                        <li>→ 《法兰西内战》：总结巴黎公社经验，将《宣言》的无产阶级专政理论具体化</li>
+                        <li>→ 列宁《国家与革命》：在帝国主义时代继承和发展《宣言》的国家学说</li>
+                        <li>→ 毛泽东《新民主主义论》：将《宣言》思想与中国实际结合</li>
+                    </ul>
+                </div>
+
+                <div class="puzzle-timeline">
+                    <h3>在思想发展时间轴上的位置</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1845-46</div><div class="timeline-label">《德意志意识形态》</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1847</div><div class="timeline-label">正义者同盟改组</div></div>
+                        <div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1848</div><div class="timeline-label">《宣言》发表</div><div class="timeline-here">◀ 本文</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1867</div><div class="timeline-label">《资本论》第1卷</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1871</div><div class="timeline-label">巴黎公社</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1917</div><div class="timeline-label">十月革命</div></div>
+                    </div>
+                </div>
+
+                <div class="puzzle-links">
+                    <h3>文章联结网络</h3>
+                    <p class="puzzle-links-note">点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（→ 输出影响 · ← 理论来源 · ↔ 相互支撑）</p>
+                    <div class="conn-grid">
+                        <a href="de-yi-zhi-yi-xing-tai.html" class="conn-card" style="border-left-color:#5c3d99;">
+                            <span class="conn-dir" style="color:#276749;">←</span>
+                            <span class="conn-title">《德意志意识形态》</span>
+                            <span class="conn-label">哲学基础</span>
+                            <span class="conn-relation">理论来源：唯物史观为《宣言》提供方法论基础</span>
+                        </a>
+                        <a href="1844-nian-jing-ji-xue-zhe-xue-shou-gao.html" class="conn-card" style="border-left-color:#c41e3a;">
+                            <span class="conn-dir" style="color:#276749;">←</span>
+                            <span class="conn-title">《1844年经济学哲学手稿》</span>
+                            <span class="conn-label">哲学基础</span>
+                            <span class="conn-relation">异化理论为《宣言》的剥削分析提供哲学根基</span>
+                        </a>
+                        <a href="ge-da-gang-ling.html" class="conn-card" style="border-left-color:#5c3d99;">
+                            <span class="conn-dir" style="color:#553c9a;">→</span>
+                            <span class="conn-title">《哥达纲领批判》</span>
+                            <span class="conn-label">政治理论</span>
+                            <span class="conn-relation">深化发展：对无产阶级专政和共产主义阶段的系统阐述</span>
+                        </a>
+                        <a href="../../articles/Lenin/guo-jia-yu-ge-ming.html" class="conn-card" style="border-left-color:#5c3d99;">
+                            <span class="conn-dir" style="color:#276749;">→</span>
+                            <span class="conn-title">《国家与革命》</span>
+                            <span class="conn-label">政治理论</span>
+                            <span class="conn-relation">继承发展：无产阶级专政理论的系统阐述</span>
+                        </a>
+                        <a href="../../articles/Engels/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html" class="conn-card" style="border-left-color:#8b0000;">
+                            <span class="conn-dir" style="color:#276749;">→</span>
+                            <span class="conn-title">《家庭、私有制和国家的起源》</span>
+                            <span class="conn-label">历史唯物主义</span>
+                            <span class="conn-relation">历史纵深：补充《宣言》中阶级与国家起源的历史论证</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>延伸阅读建议</h3>
+                    <p><strong>想看阶级分析方法的具体应用：</strong>读恩格斯《家庭、私有制和国家的起源》——深入理解阶级和国家的起源。</p>
+                    <p><strong>想系统理解资本主义经济运行：</strong>读《资本论》第一卷——系统分析剩余价值的生产过程。</p>
+                    <p><strong>想看列宁如何继承和发展：</strong>读《国家与革命》——马克思主义国家学说的系统阐述。</p>
+                    <p><strong>想看马克思主义中国化的成果：</strong>读毛泽东《新民主主义论》——将《宣言》思想与中国实际结合。</p>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>它解决的真实问题</h3>
+                    <p><strong>历史背景：</strong>1848年革命前夕，欧洲工人阶级运动风起云涌。但当时工人组织被各种空想社会主义、小资产阶级改良主义思想所迷惑。《宣言》的任务是一锤定音——告诉工人们：你们是谁、你们的敌人是谁、你们的目标是什么、你们应该怎么做。</p>
+                    <p><strong>现实意义：</strong>今天重读《宣言》，最震撼的不是它对1848年的描述，而是它对资本主义运行规律的分析至今依然有效——周期性危机、贫富两极分化、全球化的剥削链条——这些都是《宣言》已经预言过的东西。它不提供"解决方案"，但提供了理解这些现象的分析框架。而有了分析框架，就有了找到解决方案的前提。</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ========== 下载浮动按钮 ========== -->
+    <button class="download-fab" id="downloadFab" title="下载原文">⬇</button>
+    <div class="download-menu" id="downloadMenu">
+        <h4>📥 下载原文</h4>
+        <div id="downloadLinks"></div>
+    </div>
+
+    <!-- ========== JS 脚本 ========== -->
+    <script src="../../../js/article-common.js"></script>
+    <script>
+        // ===== 本文图表配置 =====
+        var ARTICLE_CHARTS = [
+            {
+                id: 'radarChart',
+                config: {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                        datasets: [{
+                            label: '共产党宣言',
+                            data: [9, 10, 10, 10, 9, 6],
+                            borderColor: '#7c4dff',
+                            backgroundColor: 'rgba(92,61,153,0.12)',
+                            pointBackgroundColor: '#7c4dff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
+                        plugins: { legend: { display: false } }
+                    }
+                }
+            },
+            {
+                id: 'argumentCurve',
+                config: {
+                    type: 'line',
+                    data: {
+                        labels: ['引言', '第一章\n资产者和无产者★', '第二章\n无产者和共产党人★', '第三章\n社会主义文献', '第四章\n各国政党态度'],
+                        datasets: [{
+                            label: '论证强度',
+                            data: [6, 9, 10, 7, 5],
+                            borderColor: '#5c3d99',
+                            backgroundColor: 'rgba(92,61,153,0.08)',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            borderWidth: 2.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            },
+            {
+                id: 'logicChart',
+                config: {
+                    type: 'bar',
+                    data: {
+                        labels: ['阶级斗争\n是历史动力', '资本主义\n基本矛盾', '"两个必然"\n历史结论', '无产阶级\n革命行动'],
+                        datasets: [{
+                            label: '论证推进力度',
+                            data: [7, 9, 10, 10],
+                            backgroundColor: [
+                                'rgba(92,61,153,0.5)',
+                                'rgba(92,61,153,0.65)',
+                                'rgba(124,77,255,0.8)',
+                                'rgba(124,77,255,0.9)'
+                            ],
+                            borderColor: '#5c3d99',
+                            borderWidth: 1.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            }
+        ];
+
+        // ===== 下载链接 =====
+        var DOWNLOAD_LINKS = [
+            { href: '../../../data/gongchan-dan-yuan.txt', label: '📝 下载 TXT' }
+        ];
+    </script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+</body>
+</html>

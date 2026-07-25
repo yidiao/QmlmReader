@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时事 | 国际共运 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #6a0000 100%);
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .page-header p { opacity: 0.9; }
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 400px;
+        }
+        
+        /* 新闻时间轴样式 */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .news-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            border-left: 4px solid #c41e3a;
+        }
+        
+        .news-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .news-date {
+            min-width: 80px;
+            text-align: center;
+            padding: 0.5rem;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        
+        .news-date .day {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #c41e3a;
+        }
+        
+        .news-date .month {
+            font-size: 0.7rem;
+            color: #666;
+        }
+        
+        .news-content {
+            flex: 1;
+        }
+        
+        .news-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+        
+        .news-desc {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .news-tag {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background: #fee2e2;
+            color: #c41e3a;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* 原placeholder */
+        .legacy-placeholder {
+            text-align: center;
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 16px;
+            color: #666;
+            margin-top: 2rem;
+        }
+        .legacy-placeholder-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .legacy-placeholder h3 { color: #c41e3a; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        
+        body.dark-mode .news-item { background: #2a2a2a; }
+        body.dark-mode .news-title { color: #e0e0e0; }
+        body.dark-mode .news-desc { color: #aaa; }
+        body.dark-mode .news-date { background: #3a3a3a; }
+        body.dark-mode .legacy-placeholder { background: #2a2a2a; }
+    </style>
+</head>
+<body>
+    <header class="site-header"><div class="container"><div class="logo"><span class="logo-icon">☭</span><div class="logo-text"><h1>青年马列毛主义驿站</h1><span class="logo-sub">Qmlm Reader</span></div></div><button class="hamburger-btn" id="hamburgerBtn"><span></span><span></span><span></span></button><nav class="main-nav">
+                <button class="nav-close-btn" aria-label="关闭菜单">✕</button><a href="../index.html">首页</a><a href="../articles/articles.html">文章</a><a href="../masters/masters.html">导师</a><a href="../toolkit/toolkit.html">工具集</a><a href="../gallery/gallery.html">文艺</a><a href="../puzzle/puzzle.html">🧩 理论拼图</a><a href="international.html" class="active">🌍 国际共运</a><a href="../rectify/rectify.html">正名</a><a href="../about/about.html">关于</a><button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button></nav></div></header>
+    <main>
+        <section class="page-header"><h1>⚡ 国际共运时事</h1><p>最新动态 · 工人运动 · 左翼之声</p></section>
+        <div class="content-wrapper">
+            
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-date"><div class="day">15</div><div class="month">2026.05</div></div>
+                    <div class="news-content">
+                        <div class="news-title">法国总工会发起全国性罢工抗议养老金改革</div>
+                        <div class="news-desc">数百万工人走上街头，要求撤回养老金改革方案。这是继2023年以来最大规模的罢工浪潮。</div>
+                        <span class="news-tag">⚡ 工人运动</span>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-date"><div class="day">08</div><div class="month">2026.05</div></div>
+                    <div class="news-content">
+                        <div class="news-title">巴西总统卢拉宣布新一阶段“家庭补助金”计划</div>
+                        <div class="news-desc">该计划将覆盖超过3000万贫困家庭，被巴西媒体称为“历史上最大规模的社会福利计划”。</div>
+                        <span class="news-tag">📊 左翼执政</span>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-date"><div class="day">01</div><div class="month">2026.05</div></div>
+                    <div class="news-content">
+                        <div class="news-title">五一国际劳动节：全球工人联合示威</div>
+                        <div class="news-desc">从首尔到巴黎，从墨西哥城到约翰内斯堡，数百万工人走上街头，要求提高工资、改善工作条件。</div>
+                        <span class="news-tag">🌍 全球行动</span>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-date"><div class="day">22</div><div class="month">2026.04</div></div>
+                    <div class="news-content">
+                        <div class="news-title">尼泊尔共产党（毛主义中心）纪念人民战争三十周年</div>
+                        <div class="news-desc">尼共（毛中心）主席普拉昌达发表讲话，强调将继续推进社会主义道路。</div>
+                        <span class="news-tag">🔴 毛主义动态</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="legacy-placeholder">
+                <div class="legacy-placeholder-icon">🌍</div>
+                <h3>更多动态实时更新中</h3>
+                <p>我们将持续关注世界各地的工人运动与社会主义实践。<br>—— 未完待续 ——</p>
+            </div>
+        </div>
+    </main>
+    <footer class="site-footer"><div class="container"><p>青年马列毛主义驿站 | Qmlm Reader</p><p class="footer-note">学习他 · 成为他 · 然后超越他</p></div></footer>
+    <script src="../../js/main.js"></script><script>function toggleDarkMode(){document.body.classList.toggle('dark-mode');localStorage.setItem('darkMode',document.body.classList.contains('dark-mode')?'true':'false');document.querySelector('.dark-mode-toggle').textContent=document.body.classList.contains('dark-mode')?'☀️':'🌙';}if(localStorage.getItem('darkMode')==='true')document.body.classList.add('dark-mode');(function(){document.addEventListener('DOMContentLoaded',function(){var h=document.querySelector('.hamburger-btn'),n=document.querySelector('.main-nav');if(!h||!n)return;h.addEventListener('click',function(e){e.stopPropagation();var o=n.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});n.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){n.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';});});document.addEventListener('click',function(e){if(n.classList.contains('open')&&!n.contains(e.target)&&e.target!==h){n.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';}});});})();</script>
+
+<script src="../../js/darkmode.js"></script>
+<script src="../../js/cursor.js"></script>
+</body>
+</html>
