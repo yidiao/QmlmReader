@@ -1,2 +1,2 @@
  M tmp_status.txt
-?? .github/
+?? index.html
