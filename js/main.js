@@ -1,3 +1,35 @@
+// ==================== 导航栏自动注入 ====================
+// 替代所有页面的硬编码 site-header。每页只需 <div id="nav-placeholder"></div>
+(function(){
+    var path = window.location.pathname;
+    var dir = path.replace(/\/[^\/]*\.html$/, '');
+    var parts = dir.split('/').filter(function(p){return p.length>0;});
+    var htmlIdx = parts.indexOf('html');
+    var depth = htmlIdx === -1 ? 0 : parts.length - htmlIdx - 1;
+    var p = '';
+    for (var i = 0; i < depth; i++) p += '../';
+
+    var nav = '<header class="site-header"><div class="container">' +
+        '<div class="logo"><span class="logo-icon">☭</span><div class="logo-text"><h1>青年马列毛主义驿站</h1><span class="logo-sub">Qmlm Reader</span></div></div>' +
+        '<button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单"><span></span><span></span><span></span></button>' +
+        '<nav class="main-nav">' +
+        '<button class="nav-close-btn" aria-label="关闭菜单">✕</button>' +
+        '<a href="' + p + 'index.html">首页</a>' +
+        '<a href="' + p + 'articles/articles.html">文章</a>' +
+        '<a href="' + p + 'masters/masters.html">导师</a>' +
+        '<a href="' + p + 'toolkit/toolkit.html">工具集</a>' +
+        '<a href="' + p + 'gallery/gallery.html">文艺</a>' +
+        '<a href="' + p + 'puzzle/puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>' +
+        '<a href="' + p + 'international/international.html">🌍 国际共运</a>' +
+        '<a href="' + p + 'rectify/rectify.html">正名</a>' +
+        '<a href="' + p + 'about/about.html">关于</a>' +
+        '<button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>' +
+        '</nav></div></header>';
+
+    var ph = document.getElementById('nav-placeholder');
+    if (ph) { ph.outerHTML = nav; }
+})();
+
 // 标签切换功能
 document.addEventListener('DOMContentLoaded', function() {
     // 标签切换 - 支持两种模式：
