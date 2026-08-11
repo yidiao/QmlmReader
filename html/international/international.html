@@ -6,29 +6,64 @@
     <title>国际共运 | 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="../../css/style.css">
     <style>
-        /* 页面基础 */
+        /* ===== 国际共运 — 图志风格，深海蓝 + 红金 ===== */
+        body { background: #f5f0e8; }
+        body.dark-mode { background: #121212; }
+
         .page-header {
-            background: linear-gradient(135deg, #c41e3a 0%, #6a0000 100%);
-            color: white;
-            padding: 2.5rem 0;
-            text-align: center;
+            position: relative; background: linear-gradient(170deg, #0a1a2a 0%, #0d2035 40%, #0a1520 100%);
+            margin: 28px auto 0; padding: 48px 44px; overflow: hidden;
+            max-width: 1100px;
+            border-bottom: 3px solid #1a4a6a;
         }
-        
+        .page-header::before {
+            content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+            background:
+                radial-gradient(ellipse at 80% 20%, rgba(196,30,58,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(212,160,23,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        body.dark-mode .page-header { background: linear-gradient(170deg, #050d15 0%, #081520 40%, #040a10 100%); }
+
+        .page-header-badge {
+            position: relative; display: inline-block;
+            color: #4a8ab5; font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 5px; margin-bottom: 16px;
+        }
         .page-header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
+            position: relative; font-size: 2.4rem; font-weight: 900;
+            color: #d0dce8; margin: 0 0 10px; letter-spacing: 3px;
         }
-        
+        .page-header h1 span { color: #c41e3a; }
         .page-header p {
-            font-size: 1rem;
-            opacity: 0.9;
+            position: relative; color: #6a8aa5; font-size: 0.9rem; max-width: 500px; line-height: 1.7;
         }
+
+        /* 统计条 */
+        .stats-bar {
+            background: #0d2035; border: 1px solid #1a3a54;
+            border-radius: 0; padding: 1.2rem; margin-bottom: 1.5rem;
+            display: flex; justify-content: space-around; flex-wrap: wrap;
+        }
+        body.dark-mode .stats-bar { background: #081520; border-color: #152840; }
+        .stat-number { color: #c41e3a; font-size: 1.6rem; font-weight: 900; }
+        .stat-label { color: #6a8aa5; font-size: 0.78rem; }
+
+        /* 板块卡片 */
+        .intl-card {
+            background: #fff; border: 1px solid #d8dce2;
+            box-shadow: 3px 3px 0 #c0c8d0; padding: 1.5rem;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+        .intl-card:hover { border-color: #4a8ab5; box-shadow: 5px 5px 0 #b0b8c4; }
+        body.dark-mode .intl-card { background: #141a22; border-color: #1e2a38; box-shadow: 3px 3px 0 #0a1018; }
+        body.dark-mode .intl-card:hover { border-color: #3a6a95; box-shadow: 5px 5px 0 #080c14; }
         
         /* 主布局 */
         .main-layout {
-            max-width: 1400px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 1.5rem;
+            padding: 1.5rem 24px;
         }
         
         /* 地图容器 */
@@ -484,10 +519,11 @@
 
     <main>
         <!-- 页面头部 -->
-        <section class="page-header">
-            <h1>🌍 国际共产主义运动</h1>
-            <p>1917-2026 | 世界范围内的社会主义革命与建设历程</p>
-        </section>
+        <div class="page-header">
+            <div class="page-header-badge">INTERNATIONAL</div>
+            <h1><span>国际</span>共运</h1>
+            <p>1917 - 2026 | 世界范围内的社会主义革命与建设历程</p>
+        </div>
 
         <div class="main-layout">
             <!-- 统计信息 -->

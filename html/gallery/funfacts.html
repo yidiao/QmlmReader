@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>趣闻 | 文艺 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #6b2fa0 0%, #4a1a6b 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .page-header p { font-size: 1.05rem; opacity: 0.88; }
+
+        .gallery-container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: #6b2fa0; text-decoration: none; margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* 分类筛选 */
+        .funfacts-categories {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .category-btn {
+            padding: 0.5rem 1.25rem;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .category-btn:hover, .category-btn.active {
+            background: #6b2fa0;
+            border-color: #6b2fa0;
+            color: white;
+        }
+
+        /* 卡片网格 */
+        .funfacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .funfact-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .funfact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .funfact-card.joke { border-top: 4px solid #e65100; }
+        .funfact-card.anecdote { border-top: 4px solid #2e7d32; }
+
+        .funfact-card-header {
+            padding: 1.25rem 1.5rem 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .funfact-card-header .icon {
+            font-size: 1.4rem;
+        }
+        .funfact-card-header .title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-color);
+        }
+        .funfact-card-header .badge {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            color: white;
+            margin-left: auto;
+        }
+        .badge-joke { background: #e65100; }
+        .badge-anecdote { background: #2e7d32; }
+
+        .funfact-body {
+            padding: 0 1.5rem 1.25rem;
+            font-size: 0.98rem;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+        .funfact-body blockquote {
+            border-left: 3px solid #e0e0e0;
+            margin: 0.5rem 0;
+            padding: 0.5rem 1rem;
+            background: #fafafa;
+            border-radius: 0 6px 6px 0;
+            font-style: italic;
+        }
+
+        .funfact-footer {
+            padding: 0.75rem 1.5rem;
+            background: #f9f9f9;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.4rem;
+            line-height: 1.6;
+        }
+        .funfact-footer .reflect-icon {
+            flex-shrink: 0;
+        }
+
+        /* 黑暗模式 */
+        body.dark-mode .category-btn {
+            background: #3a3a3a;
+            border-color: #555;
+            color: #ddd;
+        }
+        body.dark-mode .category-btn:hover,
+        body.dark-mode .category-btn.active {
+            background: #6b2fa0;
+            border-color: #6b2fa0;
+            color: white;
+        }
+        body.dark-mode .funfact-body blockquote {
+            background: #2a2a2a;
+            border-left-color: #555;
+        }
+        body.dark-mode .funfact-footer {
+            background: #2a2a2a;
+        }
+        body.dark-mode .back-link { color: #b388ff; }
+
+        @media (max-width: 768px) {
+            .funfacts-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <section class="page-header">
+            <h1>📯 趣闻</h1>
+            <p>笑中带思 · 史海拾贝 —— 于荒诞处照见真实，于轶事中触摸脉搏</p>
+        </section>
+
+        <div class="gallery-container">
+            <a href="gallery.html" class="back-link">← 返回文艺首页</a>
+
+            <div class="funfacts-categories">
+                <button class="category-btn active" data-filter="all">全部</button>
+                <button class="category-btn" data-filter="joke">🇷🇺 苏联笑话</button>
+                <button class="category-btn" data-filter="anecdote">🌍 国际共运逸闻</button>
+            </div>
+
+            <div class="funfacts-grid">
+
+                <!-- ==================== 苏联笑话 ==================== -->
+
+                <div class="funfact-card joke" data-category="joke">
+                    <div class="funfact-card-header">
+                        <span class="icon">🪆</span>
+                        <span class="title">他们假装付工资，我们假装工作</span>
+                        <span class="badge badge-joke">苏联笑话</span>
+                    </div>
+                    <div class="funfact-body">
+                        <p>勃列日涅夫时期流传最广的一句话。一位工人在工厂里对同事如是说。</p>
+                        <p>这句话后来成了对整个勃列日涅夫"停滞时期"的精确概括——表面上计划经济仍在运行，实际上从管理层到基层工人都在维持一种心照不宣的表演。计划指标被虚报填满，商店货架空荡依旧。</p>
+                    </div>
+                    <div class="funfact-footer">
+                        <span class="reflect-icon">💡</span>
+                        <span>当社会主义失去了群众的真心参与，蜕变为官僚机构的例行公事，"假装"就成了唯一剩下的社会契约。这也是为什么修正主义路线下的苏联最终失去了人民的认同——不是因为物质不够丰富，而是连劳动的意义都被架空了。</span>
+                    </div>
+                </div>
+
+                <div class="funfact-card joke" data-category="joke">
+                    <div class="funfact-card-header">
+                        <span class="icon">🗳️</span>
+                        <span class="title">选票上只有一个名字</span>
+                        <span class="badge badge-joke">苏联笑话</span>
+                    </div>
+                    <div class="funfact-body">
+                        <blockquote>走进投票站，工作人员递来一张选票。选民看了一眼，上面只有一个名字。他犹豫了一下，开始在选票上写字。工作人员赶紧拦住："同志，您这是干什么？"选民说："我在给自己写推荐信，万一下次这个人不选了，我好顶上。"</blockquote>
+                        <p>苏联的选举制度规定等额选举：席位数量 = 候选人数量。投票实际上只是"赞成"或"反对"（没有反对的后果另当别论）。</p>
+                    </div>
+                    <div class="funfact-footer">
+                        <span class="reflect-icon">💡</span>
+                        <span>形式上的民主不是民主。工人阶级的真正民主应当体现在生产资料的占有和管理上，而不是一张只写了一个名字的选票。苏联的"选举"沦为仪式，恰恰说明政治上层已经与群众脱节。</span>
+                    </div>
+                </div>
+
+                <div class="funfact-card joke" data-category="joke">
+                    <div class="funfact-card-header">
+                        <span class="icon">🛒</span>
+                        <span class="title">排队</span>
+                        <span class="badge badge-joke">苏联笑话</span>
+                    </div>
+                    <div class="funfact-body">
+                        <blockquote>一个男人看到街上排着长队，二话不说就站到了队尾。排了两个小时，他才问前面的人："同志，这队在排什么？"前面的人耸耸肩："不知道，我也是一看到排队就站进来了。反正在苏联，有排队的地方就一定有东西。"</blockquote>
+                        <p>"排队文化"是晚期苏联的日常景观。人们养成了随身携带网兜的习惯，随时准备在突然出现的队伍中抢购不知是什么的商品。</p>
+                    </div>
+                    <div class="funfact-footer">
+                        <span class="reflect-icon">💡</span>
+                        <span>计划经济的初衷是合理配置资源、消灭浪费。但当计划变成了官僚主义的数字游戏，当重工业吞噬了消费品生产，普通人的日常生活就变成了一场对"物资"的盲目追逐。短缺经济下的"排队本能"，是计划经济异化的最直观写照。</span>
+                    </div>
+                </div>
+
+                <div class="funfact-card joke" data-category="joke">
+                    <div class="funfact-card-header">
+                        <span class="icon">🏠</span>
+                        <span class="title">美国梦vs苏联现实</span>
+                        <span class="badge badge-joke">苏联笑话</span>
+                    </div>
+                    <div class="funfact-body">
+                        <blockquote>一个苏联人和一个美国人在争论谁的祖国更好。<br>
+                        美国人说："在我国，我可以走进白宫，拍着总统的桌子告诉他——你的政策是错误的！"<br>
+                        苏联人说："那又怎样？在我国，我也可以走进克里姆林宫，拍着总书记的桌子告诉他——美国总统的政策是错误的！"</blockquote>
+                    </div>
+                    <div class="funfact-footer">
+                        <span class="reflect-icon">💡</span>
+                        <span>这个笑话的锐利之处在于：它同时刺穿了两边的虚伪。美国人吹嘘的"言论自由"仅限于对自家政府的无意义发泄，苏联人标榜的"人民当家作主"早已变成了对外喊话的传声筒。两边都忘了——真正的民主应该让劳动者决定自己的生产与生活。</span>
+                    </div>
+                </div>
+
+                <div class="funfact-card joke" data-category="joke">
+                    <div class="funfact-card-header">
+                        <span class="icon">📞</span>
+                        <span class="title">克格勃上门</span>
+                        <span class="badge badge-joke">苏联笑话</span>
+                    </div>
+                    <div class="funfact-body">
+                        <blockquote>深夜，敲门声响起。主人开门，两个穿风衣的人站在门口。<br>
+                        "伊万诺夫同志，您昨天在酒馆里说'勃列日涅夫是个白痴'，有这回事吗？"<br>
+                        "天哪，你们怎么知道的？"<br>
+                        "请跟我们走一趟。"<br>
+                        "等等，我说的是赫鲁晓夫是个白痴！"<br>
+                        "别狡辩了，伊万诺夫同志。谁是白痴我们还不知道吗？"</blockquote>
+                    </div>
+                    <div class="funfact-footer">
+                        <span class="reflect-icon">💡</span>
+                        <span>这个笑话的喜剧张力来自一个荒诞的前提：秘密警察真心认同你的批评是"正确的"，但这不妨碍他们来逮捕你。当国家机器变成了只效忠于职位而非真理的暴力工具，它就与一切信仰和理想彻底无关了。</span>
+                    </div>
+                </div>
+
+                <div class="funfact-card joke" data-category="joke">
+                    <div class="funfact-card-header">
+                        <span class="icon">📻</span>
+                        <span class="title">真理报上的真理</span>
+                        <span class="badge badge-joke">苏联笑话</span>
+                    </div>
+                    <div class="funfact-body">
+                        <blockquote>一个老布尔什维克每天买两份《真理报》。别人问他为什么。"一份看今天的新闻，另一份留着——十年后，同一件事的报道会完全不一样。这样我就能同时拥有两个版本的'真理'了。"</blockquote>
+                        <p>《真理报》（Правда）是苏共中央机关报，其名称直译即为"真理"。在苏联的不同时期，同一位领导人可能在头版被颂扬、又在改日被批判得体无完肤（如赫鲁晓夫下台第二天即从所有报道中消失），"真理"随政治风向摇摆。</p>
+                    </div>
+                    <div class="funfact-footer">
+                        <span class="reflect-icon">💡</span>
+                        <span>当"真理"不再来自对客观世界的科学认识，而是来自权力意志的随时定调，马克思主义的精髓——实事求是——就被彻底抽空了。一个政党如果连自己的历史都不敢诚实面对，又怎能正确地认识现实、指导未来？</span>
+                    </div>
+                </div>
+
+                <!-- ==================== 国际共运逸闻 ==================== -->
+
+                <div class="funfact-card anecdote" data-category="anecdote">
+                    <div class="funfact-card-header">
+                        <span class="icon">🍞</span>
+                        <span class="title">列宁与黑面包</span>
+                        <span class="badge badge-anecdote">逸闻</span>
+                    </div>
+                    <div class="funfact-body">
+                        <p>1918年，苏维埃俄国处于内战和饥荒之中。列宁的配给标准与普通工人完全相同——每天150克黑面包。一天，一位农民代表来克里姆林宫向列宁汇报，看到列宁桌上放着啃了一半的硬面包，惊讶地说："弗拉基米尔·伊里奇，您怎么能吃这个？"列宁抬起头，淡淡地说："我的人民在吃什么，我就吃什么。"</p>
+                        <p>在场的工作人员后来回忆，列宁经常因为工作太晚忘记吃饭。有时到了深夜，他饿得不行，就自己走到厨房找些面包屑冲水喝。他从不允许任何人因为他的职位而多给他哪怕一克黄油。</p>
+                    </div>
+                    <div class="funfact-footer">
+                        <span class="reflect-icon">💡</span>
+                        <span>这不只是个人品格问题。列宁认为，如果革命领袖不能与群众同甘共苦，就不可能真正理解群众的处境——而不理解群众的处境，就不可能做出正确的决策。在他看来，"特殊化"不是微不足道的作风问题，而是官僚蜕化的第一步。</span>
+                    </div>
+                </div>
+
+                <div class="funfact-card anecdote" data-category="anecdote">
+                    <div class="funfact-card-header">
+                        <span class="icon">🏍️</span>
+                        <span class="title">切·格瓦拉的摩托车</span>
+                        <span class="badge badge-anecdote">逸闻</span>
+                    </div>
+                    <div class="funfact-body">
+                        <p>1952年，23岁的医学院学生埃内斯托·格瓦拉和好友阿尔贝托骑着一辆破旧的诺顿500摩托车从阿根廷出发，穿越了整个南美大陆。在智利的铜矿，他看到矿工们在非人的条件下劳作；在秘鲁的麻风村，他与被社会遗弃的麻风病人一起生活；在亚马逊河畔，他目睹了橡胶工人的赤贫。</p>
+                        <p>多年后，已成为"切·格瓦拉"的他在给父母的信中写道："那趟旅程改变了我。当我看到那些饥饿的人、那些被遗弃的人，我开始理解——医学可以治愈一个病人，但如果不改变让千千万万人受害的社会结构，治愈又有什么意义？"</p>
+                    </div>
+                    <div class="funfact-footer">
+                        <span class="reflect-icon">💡</span>
+                        <span>切的故事之所以动人，不是因为他的传奇色彩，而是因为在旅途中他完成了一个关键的思想转变：从"个人同情"走向"阶级认同"。他看到的不再是一个个孤立的"可怜人"，而是一个被资本逻辑系统性压迫的阶级。这种从经验到自觉的升华，正是真正的革命者成长的典型路径。</span>
+                    </div>
+                </div>
+
+                <div class="funfact-card anecdote" data-category="anecdote">
+                    <div class="funfact-card-header">
+                        <span class="icon">📚</span>
+                        <span class="title">马克思在大英博物馆的脚印</span>
+                        <span class="badge badge-anecdote">逸闻</span>
+                    </div>
+                    <div class="funfact-body">
+                        <p>1850年到1853年间，马克思几乎每天从早晨9点到晚上7点都坐在大英博物馆的阅览室里，为《资本论》的写作积累材料。据传，他常年坐在同一个座位上，脚在地板上磨出了两个凹痕。这个故事虽然可能带有夸张成分，但马克思在伦敦流亡期间所下的苦功是毋庸置疑的。</p>
+                        <p>在写作《资本论》的过程中，马克思阅读和摘录了超过1500本书，用几十种语言查阅了从工厂视察员报告到议会蓝皮书的大量原始资料，笔记堆起来等身。他在给恩格斯的信中写道："我不得不把全部时间都用来工作，直到我的健康状况彻底崩溃。"</p>
+                    </div>
+                    <div class="funfact-footer">
+                        <span class="reflect-icon">💡</span>
+                        <span>马克思不是一个凭空构建体系的哲学家。他的每一个论断背后，都站着成千上万页的经济数据和历史事实。《资本论》里一句"资本来到世间，每个毛孔都滴着血"，是用数年翻阅殖民档案和工厂记录换来的。科学社会主义之所以"科学"，首先是因为它的创始人对事实有着近乎苛求的尊重。</span>
+                    </div>
+                </div>
+
+                <div class="funfact-card anecdote" data-category="anecdote">
+                    <div class="funfact-card-header">
+                        <span class="icon">💰</span>
+                        <span class="title">斯大林的第比利斯劫案</span>
+                        <span class="badge badge-anecdote">逸闻</span>
+                    </div>
+                    <div class="funfact-body">
+                        <p>1907年6月26日，一群布尔什维克武装人员在格鲁吉亚第比利斯的埃里温广场成功袭击了一辆沙俄国家银行的运钞马车，劫走约34.1万卢布（相当于今天数百万美元）。这次行动的策划者就是年轻的约瑟夫·朱加什维利——后来的斯大林。</p>
+                        <p>这笔钱被秘密运往欧洲，用于资助列宁领导的布尔什维克活动。为了洗钱，他们设法将大额钞票在不同城市兑换——但沙俄警方早已记录了被盗钞票的序列号，导致包括高尔基的伴侣在内的多人因为无意中持有这些钞票而被捕。列宁本人也因为试图在巴黎兑换这些钞票险些暴露。</p>
+                    </div>
+                    <div class="funfact-footer">
+                        <span class="reflect-icon">💡</span>
+                        <span>这件事展示了革命时期的某种无奈：在沙俄这样一个没有任何合法政治空间的专制国家里，革命者不得不用极端手段筹集经费。但这也预示着后来斯大林行事风格中的某些特质——目标优先、极少顾忌手段带来的代价。革命伦理在极端处境下比在任何和平时期都更难把握。</span>
+                    </div>
+                </div>
+
+                <div class="funfact-card anecdote" data-category="anecdote">
+                    <div class="funfact-card-header">
+                        <span class="icon">🚩</span>
+                        <span class="title">国际纵队的午餐</span>
+                        <span class="badge badge-anecdote">逸闻</span>
+                    </div>
+                    <div class="funfact-body">
+                        <p>1936年西班牙内战爆发，来自54个国家的约3.5万名志愿者组成"国际纵队"奔赴西班牙，与佛朗哥的法西斯军队作战。这些人中有英国矿工、美国卡车司机、法国教师、德国反纳粹流亡者、中国的医生——他们绝大多数从未拿过枪。</p>
+                        <p>在一个寒冷的冬夜，国际纵队的一个营刚经历惨烈战斗，蜷缩在战壕里。有人问一个年轻的英国志愿者："你是为了什么来这里？西班牙跟你有什么关系？"他想了想说："我的国家什么都没对我做过。但我知道此刻有一个意大利农民的儿子正坐在对面的战壕里，他也不知道为什么要来这里。如果法西斯今天赢了这里，明天我家门口也会出现法西斯的传单。所以这里就是我的家门口。"</p>
+                    </div>
+                    <div class="funfact-footer">
+                        <span class="reflect-icon">💡</span>
+                        <span>国际纵队是人类历史上规模最大的一次纯粹出于道义信念的跨国武装志愿行动。他们中的许多人并非共产党员，却在行动中践行了最纯粹的国际主义——跨越五大洲的语言、肤色和职业差异，为一个遥远国家的反法西斯事业献出生命。这种精神，是任何精致的利己主义理论都无法解释的。</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <p style="text-align:center;color:#d97706;font-size:0.85rem;margin-top:2rem;padding-top:0.5rem;border-top:1px dashed #e0d0a0;">—— 内容持续扩充中 ——</p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+        </div>
+    </footer>
+
+    <script src="../../js/main.js"></script>
+    <script>
+        // 分类筛选
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.funfact-card').forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="../../js/darkmode.js"></script>
+    <script src="../../js/cursor.js"></script>
+</body>
+</html>

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="./html/">
     <title>青年马列毛主义驿站 | Qmlm Reader</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
@@ -112,6 +111,70 @@
             font-style: italic;
         }
         
+        /* 今日语录 */
+        .daily-quote-container {
+            margin: 24px 0;
+            border-radius: 12px;
+            border-left: 5px solid;
+            color: white;
+            box-shadow: 0 4px 20px rgba(139, 0, 0, 0.25);
+            overflow: hidden;
+            transition: border-left-color 0.3s;
+        }
+        .daily-quote-inner {
+            padding: 20px 24px;
+        }
+        .daily-quote-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .daily-quote-date {
+            font-size: 0.8rem;
+            opacity: 0.65;
+        }
+        .daily-quote-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin: 0 0 10px;
+            padding: 0;
+            border: none;
+            font-weight: 500;
+            font-style: italic;
+            quotes: none;
+        }
+        .daily-quote-source {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.75;
+            font-style: normal;
+            margin-bottom: 14px;
+        }
+        .daily-quote-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.8rem;
+        }
+        .daily-quote-counter {
+            opacity: 0.55;
+        }
+        .daily-quote-more {
+            color: #ffd700;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        .daily-quote-more:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
         /* 搜索结果样式 */
         .search-results {
             display: none;
@@ -701,10 +764,11 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
 <a href="#featuredSection"><span class="nav-icon">⭐</span> 五星必读</a>
 <a href="#mastersPreview"><span class="nav-icon">👤</span> 革命导师</a>
 <a href="#toolkitPreview"><span class="nav-icon">🛠️</span> 工具集</a>
+<a href="#experimentalPreview"><span class="nav-icon">⚒</span> 武器库</a>
 <a href="#puzzleEntry"><span class="nav-icon">🧩</span> 理论拼图</a>
 <a href="#funCultureSection"><span class="nav-icon">🎨</span> 有趣的文艺</a>
 <a href="#messageBoardSection"><span class="nav-icon">💬</span> 留言板</a>
-<a href="#changelogSection"><span class="nav-icon">📋</span> 更新日志</a>
+<a href="about/about.html"><span class="nav-icon">📋</span> 更新日志</a>
 <div class="home-nav-divider"></div>
         <a href="#" class="home-back-top" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});toggleHomeSideNav();">
             ⬆ 返回顶部
@@ -794,6 +858,9 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                     </div>
                 </div>
             </section>
+
+            <!-- 今日语录 -->
+            <div class="daily-quote-container" id="dailyQuote"></div>
 
             <section class="featured-section" id="featuredSection">
                 <h3 class="section-title">五星必读</h3>
@@ -925,6 +992,32 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                         <h4>🧠 独立思考</h4>
                         <p>学会辨别真伪，以正确的态度对待历史与现实</p>
                         <a href="toolkit/toolkit.html#part5">进入学习 →</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="toolkit-preview" id="experimentalPreview">
+                <h3 class="section-title">武器库</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <h4>&#9773; 马列体生成器</h4>
+                        <p>将日常文本转换为革命导师的行文风格——五位导师、多时期切换、AI 深度润色</p>
+                        <a href="experimental/marxist-style.html">进入工具 →</a>
+                    </div>
+                    <div class="tool-card">
+                        <h4>Excel 一键生成器</h4>
+                        <p>快速生成标准化表格模板，用于数据导出与交流</p>
+                        <a href="experimental/experimental.html#excel-generator">了解更多 →</a>
+                    </div>
+                    <div class="tool-card">
+                        <h4>笔记整理器</h4>
+                        <p>结构化整理读书笔记，自动生成摘要卡片</p>
+                        <a href="experimental/experimental.html#note-organizer">了解更多 →</a>
+                    </div>
+                    <div class="tool-card">
+                        <h4>理论学习进度追踪</h4>
+                        <p>规划阅读路径，可视化学习进度</p>
+                        <a href="experimental/experimental.html#progress-tracker">了解更多 →</a>
                     </div>
                 </div>
             </section>
@@ -1145,22 +1238,16 @@ function quickPostMessage() {
 
         <!-- ========= 更新日志模块 ========= -->
         <section class="changelog-section" id="changelogSection">
-            <div class="changelog-header" id="changelogHeader">
+            <div class="changelog-header" style="cursor:default;">
                 <div class="changelog-header-left">
                     <span class="changelog-icon">📋</span>
                     <h3 class="changelog-title">更新日志</h3>
-                    <span class="changelog-badge" id="updateCount">加载中...</span>
                 </div>
-                <span class="changelog-toggle-icon" id="changelogToggleIcon">▼</span>
             </div>
-            <div class="changelog-body" id="changelogBody">
-                <div class="changelog-inner">
-                    <div class="update-timeline" id="updateTimeline">
-                        <div style="text-align:center;padding:32px;color:#999;">加载更新记录中...</div>
-                    </div>
-                    <div class="changelog-footer">
-                        <a href="about/changelog-archive.html" class="changelog-archive-link">📜 查看完整更新历史 →</a>
-                    </div>
+            <div class="changelog-body" style="display:block;">
+                <div class="changelog-inner" style="text-align:center;padding:32px 20px;">
+                    <p style="color:#666;margin:0 0 12px;">更新日志已迁移至「关于」页面。</p>
+                    <a href="about/about.html" style="display:inline-block;background:#c41e3a;color:#fff;padding:8px 24px;border-radius:6px;text-decoration:none;font-weight:600;">前往查看 →</a>
                 </div>
             </div>
         </section>
@@ -1176,13 +1263,13 @@ function quickPostMessage() {
                     <p style="margin: 4px 0 0 0; font-size: 0.8rem; color: #9ca3af;">实用小工具 | 持续实验迭代中</p>
                 </div>
             </div>
-            <a href="experimental.html" style="background: rgba(196, 30, 58, 0.8); color: white; padding: 6px 20px; border-radius: 30px; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;" onmouseover="this.style.background='#c41e3a'" onmouseout="this.style.background='rgba(196,30,58,0.8)'">进入实验室 →</a>
+            <a href="/experimental/experimental.html" style="background: rgba(196, 30, 58, 0.8); color: white; padding: 6px 20px; border-radius: 30px; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;" onmouseover="this.style.background='#c41e3a'" onmouseout="this.style.background='rgba(196,30,58,0.8)'">进入实验室 →</a>
         </div>
         
         <div style="padding: 24px 28px;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
                 <!-- 工具1：Excel生成器 -->
-                <a href="experimental.html#excel-generator" style="text-decoration: none;">
+                <a href="/experimental/experimental.html#excel-generator" style="text-decoration: none;">
                     <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.08);" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='#c41e3a'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.08)'">
                         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
                             <span style="font-size: 2rem;">📊</span>
@@ -1194,7 +1281,7 @@ function quickPostMessage() {
                 </a>
 
                 <!-- 工具2：笔记整理器 -->
-                <a href="experimental.html#note-organizer" style="text-decoration: none;">
+                <a href="/experimental/experimental.html#note-organizer" style="text-decoration: none;">
                     <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.08);" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='#c41e3a'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.08)'">
                         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
                             <span style="font-size: 2rem;">📝</span>
@@ -1206,7 +1293,7 @@ function quickPostMessage() {
                 </a>
 
                 <!-- 工具3：进度追踪表 -->
-                <a href="experimental.html#progress-tracker" style="text-decoration: none;">
+                <a href="/experimental/experimental.html#progress-tracker" style="text-decoration: none;">
                     <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.08);" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='#c41e3a'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.08)'">
                         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
                             <span style="font-size: 2rem;">✅</span>
@@ -1424,6 +1511,7 @@ function quickPostMessage() {
         });
         </script>
 
+<script src="../js/daily-quote.js"></script>
 <script src="../js/darkmode.js"></script>
 <script src="../js/cursor.js"></script>
 </body>

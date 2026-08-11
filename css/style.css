@@ -1308,6 +1308,8 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
         justify-content: center;
         align-items: center;
         min-width: 36px;
+        position: relative;
+        z-index: 1001;
     }
 
     /* logo 文字稍微缩小 */
@@ -1910,4 +1912,287 @@ body.dark-mode .no-results-suggest ul {
 
 .dark-mode-toggle:hover {
     background: rgba(255,255,255,0.1);
+}
+
+/* ==================== 面包屑导航 ==================== */
+.breadcrumb {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    padding: 10px 0 2px;
+    margin-left: 0;
+}
+
+.breadcrumb a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.breadcrumb .bc-sep {
+    color: #bbb;
+    font-weight: 300;
+    user-select: none;
+    margin: 0 3px;
+}
+
+.breadcrumb .bc-current {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+body.dark-mode .breadcrumb .bc-sep {
+    color: #555;
+}
+
+/* ==================== 全局交互动画 ==================== */
+
+/* 卡片初始隐藏——由 IntersectionObserver 渐进显示，消除页面加载闪烁 */
+.article-card,
+.tool-card,
+.tool-card-large,
+.master-card,
+.featured-card,
+.music-card,
+.video-card,
+.poster-card,
+.quote-card,
+.funfact-card,
+.hero-card,
+.path-stage,
+.concept-item,
+.cornerstone-card {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 页面入场 */
+@keyframes pageFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+main {
+    animation: pageFadeIn 0.4s ease-out;
+}
+
+/* 卡片悬浮微交互 */
+@keyframes cardLift {
+    from { transform: translateY(0); box-shadow: var(--shadow); }
+    to   { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+}
+
+/* 按钮按压反馈 */
+@keyframes btnPress {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(0.96); }
+    100% { transform: scale(1); }
+}
+
+.btn-press:active {
+    animation: btnPress 0.15s ease-out;
+}
+
+button:active:not(.dark-mode-toggle):not(.hamburger-btn):not(.nav-close-btn) {
+    animation: btnPress 0.15s ease-out;
+}
+
+/* 链接下划线滑入 */
+a.underline-slide {
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.3s ease;
+}
+
+a.underline-slide:hover {
+    background-size: 100% 1px;
+}
+
+/* 滚动入场 */
+@keyframes scrollReveal {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 卡片入场错峰 */
+@keyframes cardStaggerIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-stagger {
+    opacity: 0;
+    animation: cardStaggerIn 0.45s ease-out forwards;
+}
+
+/* 图片/卡片加载骨架屏 */
+@keyframes shimmer {
+    0%   { background-position: -200px 0; }
+    100% { background-position: calc(200px + 100%) 0; }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+body.dark-mode .skeleton {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200px 100%;
+}
+
+/* prefers-reduced-motion 全局降级 */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    main { animation: none; }
+    .scroll-reveal { opacity: 1; transform: none; transition: none; }
+    .card-stagger { opacity: 1; animation: none; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ==================== 全局视觉交互增强 ==================== */
+
+/* 暗色模式平滑过渡 */
+body {
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+.site-header,
+.site-footer,
+.search-section {
+    transition: background 0.35s ease;
+}
+
+/* 所有卡片暗色模式过渡 */
+.article-card,
+.tool-card,
+.tool-card-large,
+.master-card,
+.featured-card,
+.music-card,
+.video-card,
+.poster-card,
+.quote-card,
+.tool-card-header,
+.tool-card-body {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+/* 导航链接下划线滑入 */
+.main-nav a {
+    position: relative;
+    text-decoration: none;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 0; height: 2px;
+    background: #ffd700;
+    transition: width 0.25s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
+}
+
+/* 卡片悬浮统一 */
+.article-card:hover,
+.tool-card:hover,
+.tool-card-large:hover,
+.master-card:hover,
+.featured-card:hover,
+.music-card:hover,
+.video-card:hover,
+.poster-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* 图片渐进加载 */
+img {
+    opacity: 1;
+    transition: opacity 0.4s ease;
+}
+
+img[loading="lazy"] {
+    opacity: 0;
+}
+
+img[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+/* 区块分隔线 */
+.section-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+    border: none;
+    margin: 20px auto;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform 0.6s ease;
+}
+
+.section-divider.visible {
+    transform: scaleX(1);
+}
+
+/* 输入框聚焦 */
+input[type="text"],
+input[type="search"],
+textarea {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.12);
+}
+
+body.dark-mode input[type="text"]:focus,
+body.dark-mode input[type="search"]:focus,
+body.dark-mode textarea:focus {
+    box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.25);
+}
+
+/* 选中文字 */
+::selection {
+    background: rgba(196, 30, 58, 0.2);
+    color: inherit;
+}
+
+body.dark-mode ::selection {
+    background: rgba(255, 107, 107, 0.3);
 }

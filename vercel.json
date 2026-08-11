@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "buildCommand": null,
+  "functions": {
+    "api/translate.js": {
+      "memory": 512,
+      "maxDuration": 30,
+      "runtime": "nodejs20.x"
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://qmlmreader.github.io" },
+        { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, x-client-id" },
+        { "key": "Access-Control-Max-Age", "value": "86400" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/api/translate", "destination": "/api/translate" }
+  ]
+}

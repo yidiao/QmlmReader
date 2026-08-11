@@ -95,6 +95,95 @@
         body.dark-mode .sfn-panel a { color: #ddd; }
         body.dark-mode .sfn-panel a:hover { background: #3a2020; color: #ff6b6b; }
         body.dark-mode .sfn-divider { background: #444; }
+
+        /* ===== 文艺展厅 — 沉浸暗色，金色点缀 ===== */
+        body { background: #f5f0e8; }
+        body.dark-mode { background: #121212; }
+
+        .gallery-hero {
+            background: linear-gradient(160deg, #1a1410 0%, #1a1a1a 40%, #14100a 100%);
+            margin: 28px 0 32px; padding: 52px 44px;
+            border-bottom: 3px solid #d4a017;
+            position: relative; overflow: hidden;
+        }
+        .gallery-hero::before {
+            content: ''; position: absolute; top: 0; right: 0;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(212,160,23,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        body.dark-mode .gallery-hero { background: linear-gradient(160deg, #0a0804 0%, #0a0a10 40%, #080602 100%); }
+
+        .gallery-hero-badge {
+            position: relative; display: inline-block;
+            color: #d4a017; font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 5px; margin-bottom: 16px;
+        }
+        .gallery-hero h1 {
+            position: relative; font-size: 2.6rem; font-weight: 900;
+            color: #f0e8d8; margin: 0 0 10px; letter-spacing: 3px;
+        }
+        .gallery-hero h1 span { color: #d4a017; }
+        .gallery-hero p {
+            position: relative; color: #a09080;
+            font-size: 0.9rem; max-width: 480px; line-height: 1.7;
+        }
+
+        /* 卡片：暗底金边，让图发光 */
+        .music-card {
+            background: #1a1a1a; border: 1px solid #2a2a2a;
+            box-shadow: 3px 3px 0 #0a0a0a; padding: 1.5rem 1rem;
+            text-align: center; min-height: 220px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .music-card:hover { border-color: #d4a017; box-shadow: 5px 5px 0 #0a0a0a; }
+        .music-card img { width: 120px; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: 0.8rem; }
+        .music-card h4 { color: #e0d8c8; font-size: 1rem; margin: 0 0 4px; }
+        .music-desc { color: #888; font-size: 0.8rem; }
+        body.dark-mode .music-card { background: #14141a; border-color: #252530; }
+
+        .video-card {
+            background: #1a1a1a; border: 1px solid #2a2a2a;
+            box-shadow: 3px 3px 0 #0a0a0a; min-height: 300px;
+            display: flex; flex-direction: column;
+            transition: border-color 0.2s;
+        }
+        .video-card:hover { border-color: #d4a017; }
+        .video-card h4 { color: #e0d8c8; padding: 0.8rem 1rem 0; margin: 0; font-size: 0.95rem; }
+        .video-desc { color: #888; padding: 0 1rem; font-size: 0.8rem; flex: 1; }
+        .video-link { color: #d4a017; padding: 0 1rem 1rem; font-size: 0.82rem; text-decoration: none; }
+        .video-thumb { height: 150px; overflow: hidden; }
+        .video-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        body.dark-mode .video-card { background: #14141a; border-color: #252530; }
+
+        .poster-card {
+            background: #1a1a1a; border: 1px solid #2a2a2a;
+            box-shadow: 3px 3px 0 #0a0a0a; min-height: 280px;
+            transition: border-color 0.2s;
+        }
+        .poster-card:hover { border-color: #d4a017; }
+        .poster-card img { width: 100%; height: 220px; object-fit: cover; }
+        body.dark-mode .poster-card { background: #14141a; border-color: #252530; }
+
+        .quote-card {
+            background: #1a1a1a; border: 1px solid #2a2a2a;
+            box-shadow: 3px 3px 0 #0a0a0a; padding: 1.5rem; min-height: 140px;
+            transition: border-color 0.2s;
+        }
+        .quote-card:hover { border-color: #d4a017; }
+        .quote-card p { color: #c0b8a8; line-height: 1.7; }
+        body.dark-mode .quote-card { background: #14141a; border-color: #252530; }
+
+        .gallery-title { color: #e0d8c8 !important; font-size: 1.2rem; }
+        body.dark-mode .gallery-title { color: #ddd !important; }
+
+        @media (max-width: 768px) {
+            .gallery-hero { padding: 32px 20px; margin: 16px 0 20px; }
+            .gallery-hero h1 { font-size: 1.8rem; }
+            .music-card { min-height: 170px; }
+            .music-card img { width: 90px; height: 90px; }
+        }
     </style>
 </head>
 <body>
@@ -109,6 +198,7 @@
             <a href="#poetry" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span> 红色诗文</a>
             <a href="#posters" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span> 海报与照片</a>
             <a href="#quotes" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span> 经典语录</a>
+            <a href="#funfacts" onclick="document.getElementById('sideNav').classList.remove('expanded')"><span class="sfn-dot"></span> 趣闻</a>
             <div class="sfn-divider"></div>
             <a href="#" class="sfn-back-top" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});document.getElementById('sideNav').classList.remove('expanded')">⬆ 返回顶部</a>
         </div>
@@ -116,8 +206,11 @@
 
     <main class="gallery-page">
         <div class="container">
-            <h2 class="section-title">有趣的和文艺的</h2>
-            <p class="section-desc">社会主义建设和宣传的海报、革命歌曲、视频资源</p>
+            <div class="gallery-hero">
+                <div class="gallery-hero-badge">GALLERY</div>
+                <h1><span>文艺</span>长廊</h1>
+                <p>团结、紧张、严肃、活泼。社会主义文化不是枯燥的——这里有海报、歌曲、影像，有温度，有力量。</p>
+            </div>
 
             <!-- 革命歌曲 -->
             <section class="gallery-section" id="music">
@@ -324,6 +417,45 @@
                     <a href="quotes.html" onclick="sessionStorage.setItem('openQuote','mao-5')" class="quote-card" style="text-decoration:none;color:inherit;display:block;">
                         <p>"没有调查，就没有发言权。"</p>
                         <cite>—— 毛泽东《反对本本主义》</cite>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 趣闻 -->
+            <section class="gallery-section" id="funfacts">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                    <h3 class="gallery-title" style="margin:0;">📯 趣闻</h3>
+                    <a href="funfacts.html" style="color:#6b2fa0;font-size:0.9rem;font-weight:500;">查看全部 →</a>
+                </div>
+                <p style="color:#888;font-size:0.88rem;margin-bottom:1rem;">苏联笑话笑中带思，国际共运逸闻史海拾贝——于荒诞处照见真实，于轶事中触摸脉搏</p>
+                <div class="funfacts-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+                    <a href="funfacts.html" style="text-decoration:none;color:inherit;">
+                        <div class="funfact-teaser" style="background:var(--card-bg);border-radius:10px;padding:1.2rem;border-top:4px solid #e65100;box-shadow:var(--shadow);transition:transform 0.2s;">
+                            <span style="font-size:1.5rem;">🪆</span>
+                            <h4 style="margin:0.5rem 0 0.3rem;font-size:0.95rem;">他们假装付工资，我们假装工作</h4>
+                            <p style="font-size:0.8rem;color:var(--text-light);margin:0;">勃列日涅夫"停滞时期"最经典的冷笑话，一语道破修正主义下的社会契约崩塌。</p>
+                        </div>
+                    </a>
+                    <a href="funfacts.html" style="text-decoration:none;color:inherit;">
+                        <div class="funfact-teaser" style="background:var(--card-bg);border-radius:10px;padding:1.2rem;border-top:4px solid #2e7d32;box-shadow:var(--shadow);transition:transform 0.2s;">
+                            <span style="font-size:1.5rem;">🏍️</span>
+                            <h4 style="margin:0.5rem 0 0.3rem;font-size:0.95rem;">切·格瓦拉的摩托车之旅</h4>
+                            <p style="font-size:0.8rem;color:var(--text-light);margin:0;">23岁的医学院学生骑着一辆破摩托穿越南美，这趟旅程改变了他的一生。</p>
+                        </div>
+                    </a>
+                    <a href="funfacts.html" style="text-decoration:none;color:inherit;">
+                        <div class="funfact-teaser" style="background:var(--card-bg);border-radius:10px;padding:1.2rem;border-top:4px solid #e65100;box-shadow:var(--shadow);transition:transform 0.2s;">
+                            <span style="font-size:1.5rem;">📞</span>
+                            <h4 style="margin:0.5rem 0 0.3rem;font-size:0.95rem;">克格勃上门</h4>
+                            <p style="font-size:0.8rem;color:var(--text-light);margin:0;">秘密警察深夜到访："谁是白痴我们还不知道吗？"</p>
+                        </div>
+                    </a>
+                    <a href="funfacts.html" style="text-decoration:none;color:inherit;">
+                        <div class="funfact-teaser" style="background:var(--card-bg);border-radius:10px;padding:1.2rem;border-top:4px solid #2e7d32;box-shadow:var(--shadow);transition:transform 0.2s;">
+                            <span style="font-size:1.5rem;">📚</span>
+                            <h4 style="margin:0.5rem 0 0.3rem;font-size:0.95rem;">马克思在大英博物馆的脚印</h4>
+                            <p style="font-size:0.8rem;color:var(--text-light);margin:0;">每天9点到19点，阅读超1500本书，用几十年心血打造《资本论》。</p>
+                        </div>
                     </a>
                 </div>
             </section>

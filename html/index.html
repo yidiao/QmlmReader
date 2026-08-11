@@ -111,6 +111,70 @@
             font-style: italic;
         }
         
+        /* 今日语录 */
+        .daily-quote-container {
+            margin: 24px 0;
+            border-radius: 12px;
+            border-left: 5px solid;
+            color: white;
+            box-shadow: 0 4px 20px rgba(139, 0, 0, 0.25);
+            overflow: hidden;
+            transition: border-left-color 0.3s;
+        }
+        .daily-quote-inner {
+            padding: 20px 24px;
+        }
+        .daily-quote-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .daily-quote-date {
+            font-size: 0.8rem;
+            opacity: 0.65;
+        }
+        .daily-quote-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin: 0 0 10px;
+            padding: 0;
+            border: none;
+            font-weight: 500;
+            font-style: italic;
+            quotes: none;
+        }
+        .daily-quote-source {
+            display: block;
+            font-size: 0.9rem;
+            opacity: 0.75;
+            font-style: normal;
+            margin-bottom: 14px;
+        }
+        .daily-quote-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.8rem;
+        }
+        .daily-quote-counter {
+            opacity: 0.55;
+        }
+        .daily-quote-more {
+            color: #ffd700;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        .daily-quote-more:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
         /* 搜索结果样式 */
         .search-results {
             display: none;
@@ -794,6 +858,9 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                 </div>
             </section>
 
+            <!-- 今日语录 -->
+            <div class="daily-quote-container" id="dailyQuote"></div>
+
             <section class="featured-section" id="featuredSection">
                 <h3 class="section-title">五星必读</h3>
                 <h4>点击标题跳转</h4>
@@ -1175,13 +1242,13 @@ function quickPostMessage() {
                     <p style="margin: 4px 0 0 0; font-size: 0.8rem; color: #9ca3af;">实用小工具 | 持续实验迭代中</p>
                 </div>
             </div>
-            <a href="experimental.html" style="background: rgba(196, 30, 58, 0.8); color: white; padding: 6px 20px; border-radius: 30px; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;" onmouseover="this.style.background='#c41e3a'" onmouseout="this.style.background='rgba(196,30,58,0.8)'">进入实验室 →</a>
+            <a href="experimental/experimental.html" style="background: rgba(196, 30, 58, 0.8); color: white; padding: 6px 20px; border-radius: 30px; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;" onmouseover="this.style.background='#c41e3a'" onmouseout="this.style.background='rgba(196,30,58,0.8)'">进入实验室 →</a>
         </div>
         
         <div style="padding: 24px 28px;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
                 <!-- 工具1：Excel生成器 -->
-                <a href="experimental.html#excel-generator" style="text-decoration: none;">
+                <a href="experimental/experimental.html#excel-generator" style="text-decoration: none;">
                     <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.08);" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='#c41e3a'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.08)'">
                         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
                             <span style="font-size: 2rem;">📊</span>
@@ -1193,7 +1260,7 @@ function quickPostMessage() {
                 </a>
 
                 <!-- 工具2：笔记整理器 -->
-                <a href="experimental.html#note-organizer" style="text-decoration: none;">
+                <a href="experimental/experimental.html#note-organizer" style="text-decoration: none;">
                     <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.08);" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='#c41e3a'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.08)'">
                         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
                             <span style="font-size: 2rem;">📝</span>
@@ -1205,7 +1272,7 @@ function quickPostMessage() {
                 </a>
 
                 <!-- 工具3：进度追踪表 -->
-                <a href="experimental.html#progress-tracker" style="text-decoration: none;">
+                <a href="experimental/experimental.html#progress-tracker" style="text-decoration: none;">
                     <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.08);" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='#c41e3a'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.08)'">
                         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
                             <span style="font-size: 2rem;">✅</span>
@@ -1423,6 +1490,7 @@ function quickPostMessage() {
         });
         </script>
 
+<script src="../js/daily-quote.js"></script>
 <script src="../js/darkmode.js"></script>
 <script src="../js/cursor.js"></script>
 </body>

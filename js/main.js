@@ -18,16 +18,105 @@
         '<a href="' + p + 'articles/articles.html">文章</a>' +
         '<a href="' + p + 'masters/masters.html">导师</a>' +
         '<a href="' + p + 'toolkit/toolkit.html">工具集</a>' +
+        '<a href="' + p + 'experimental/experimental.html">武器库</a>' +
         '<a href="' + p + 'gallery/gallery.html">文艺</a>' +
-        '<a href="' + p + 'puzzle/puzzle.html" style="color:#ffd700;font-weight:bold;">🧩 理论拼图</a>' +
-        '<a href="' + p + 'international/international.html">🌍 国际共运</a>' +
+        '<a href="' + p + 'downloads/downloads.html">下载</a>' +
+        '<a href="' + p + 'puzzle/puzzle.html">理论拼图</a>' +
+        '<a href="' + p + 'international/international.html">国际共运</a>' +
         '<a href="' + p + 'rectify/rectify.html">正名</a>' +
         '<a href="' + p + 'about/about.html">关于</a>' +
         '<button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>' +
         '</nav></div></header>';
 
     var ph = document.getElementById('nav-placeholder');
-    if (ph) { ph.outerHTML = nav; }
+    if (ph) {
+        ph.outerHTML = nav;
+
+        // ---- 面包屑自动生成 ----
+        var PATH_LABELS = {
+            // Top-level nav
+            'index': '首页', 'articles': '文章', 'masters': '导师', 'toolkit': '工具集',
+            'experimental': '武器库', 'gallery': '文艺', 'puzzle': '理论拼图',
+            'international': '国际共运', 'rectify': '正名', 'about': '关于', 'downloads': '下载',
+            // Master names
+            'marx': '马克思', 'engels': '恩格斯', 'lenin': '列宁', 'stalin': '斯大林', 'mao': '毛泽东',
+            // Gallery sub-pages
+            'quotes': '语录库', 'photos': '历史照片', 'propaganda': '宣传画', 'music': '革命音乐',
+            'videos': '影像资料', 'poetry': '诗歌', 'funfacts': '冷知识', 'soviet': '苏联印记',
+            // International sub-pages
+            'international-column': '专栏', 'international-calendar': '日历',
+            'international-memorial': '纪念', 'international-current': '当代共运',
+            'encirclement': '围剿与反围剿', 'foundations': '美共基础建设', 'tieliu-yu-xianfeng': '铁流与先锋',
+            // Rectify categories
+            'economy': '经济', 'leaders': '人物', 'military': '军事',
+            'myths': '迷思', 'political': '政治',
+            // Rectify articles
+            'soviet-agriculture': '苏联农业问题', 'gorky-lenin': '高尔基与列宁',
+            'stalin-era': '斯大林时代', 'pol-pot': '波尔布特',
+            'finland-war': '芬兰战争', 'soviet-afghanistan': '苏联阿富汗战争',
+            'human-nature': '人性论', 'power-illusion': '权力幻觉',
+            'wisdom-of-elites': '精英的智慧', 'young-october': '青年十月',
+            // Experimental tools
+            'marxist-style': '马列体生成器', 'message-board': '留言板',
+            // About
+            'changelog-archive': '更新日志存档', 'changelog-detail': '更新详情'
+        };
+
+        function bcLabel(seg) {
+            var key = seg.toLowerCase();
+            return PATH_LABELS[key] || PATH_LABELS[seg] || seg;
+        }
+
+        var fullPath = window.location.pathname;
+        var pathAfterHtml = fullPath.replace(/.*\/html\//, '').replace(/\.html$/, '');
+        var rawSegments = pathAfterHtml.split('/').filter(function(s) { return s.length > 0 && s !== 'index'; });
+
+        // Dedup consecutive equal segments (e.g. experimental/experimental → experimental)
+        var segments = [];
+        for (var si = 0; si < rawSegments.length; si++) {
+            if (si > 0 && rawSegments[si] === rawSegments[si-1]) continue;
+            segments.push(rawSegments[si]);
+        }
+
+        if (!pathAfterHtml || pathAfterHtml === 'index') {
+            segments = [];
+        }
+
+        var breadcrumbHTML = '<a href="' + p + 'index.html">首页</a>';
+
+        // For article detail pages, get the article title from <title>
+        if (segments.length >= 2 && segments[0] === 'articles') {
+            breadcrumbHTML += ' <span class="bc-sep">/</span> <a href="' + p + 'articles/articles.html">文章</a>';
+            var pageTitle = document.title.replace(/\s*[-|]\s*青年马列毛主义驿站.*$/, '').trim();
+            breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + (pageTitle || bcLabel(segments[segments.length-1])) + '</span>';
+        } else if (segments.length >= 2 && segments[0] === 'masters' && segments.length === 2) {
+            breadcrumbHTML += ' <span class="bc-sep">/</span> <a href="' + p + 'masters/masters.html">导师</a>';
+            breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + bcLabel(segments[1]) + '</span>';
+        } else if (segments.length >= 2 && segments[0] === 'gallery') {
+            breadcrumbHTML += ' <span class="bc-sep">/</span> <a href="' + p + 'gallery/gallery.html">文艺</a>';
+            breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + bcLabel(segments[segments.length-1]) + '</span>';
+        } else {
+            for (var i = 0; i < segments.length; i++) {
+                var label = bcLabel(segments[i]);
+                breadcrumbHTML += ' <span class="bc-sep">/</span> ';
+                if (i === segments.length - 1) {
+                    breadcrumbHTML += '<span class="bc-current">' + label + '</span>';
+                } else {
+                    breadcrumbHTML += '<a href="' + p + segments[i] + '/' + segments[i] + '.html">' + label + '</a>';
+                }
+            }
+        }
+
+        var bcEl = document.createElement('div');
+        bcEl.className = 'breadcrumb';
+        bcEl.innerHTML = breadcrumbHTML;
+
+        // Insert as first child of <main>, before any container
+        var mainEl = document.querySelector('main');
+        if (mainEl) {
+            mainEl.insertBefore(bcEl, mainEl.firstChild);
+        }
+    }
 })();
 
 // 标签切换功能
@@ -118,12 +207,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // 导航高亮
 document.addEventListener('DOMContentLoaded', function() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('.main-nav a');
-    
-    navLinks.forEach(link => {
-        const linkPage = link.getAttribute('href');
-        if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+    var fullPath = window.location.pathname;
+    var currentPage = fullPath.split('/').pop() || 'index.html';
+
+    // Also match parent directory for index pages (e.g. /experimental/ matches experimental.html)
+    var currentDir = fullPath.replace(/\/[^\/]*\.html$/, '').split('/').filter(function(p){return p.length>0;}).pop() || '';
+
+    var navLinks = document.querySelectorAll('.main-nav a');
+
+    navLinks.forEach(function(link) {
+        var href = link.getAttribute('href') || '';
+        // Match: the link ends with the current page filename, OR the link's
+        // last path segment matches the current directory (for index pages)
+        var linkLast = href.replace(/\/$/, '').split('/').pop();
+        if (linkLast === currentPage || (currentPage === 'index.html' && linkLast === 'index.html') || linkLast === currentDir) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
@@ -312,10 +409,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(toggle);
 
     // 恢复用户偏好：如果之前手动关闭过，则不自动展开
+    // 在 timeout 内部重新检查，防止用户在 300ms 内手动关闭后被强制打开
     var savedVis;
     try { savedVis = sessionStorage.getItem('dcn-visible'); } catch(e) {}
     if (savedVis !== '0') {
-        setTimeout(function() { nav.classList.add('visible'); toggle.classList.add('shifted'); }, 300);
+        setTimeout(function() {
+            var cur;
+            try { cur = sessionStorage.getItem('dcn-visible'); } catch(e) {}
+            if (cur !== '0') {
+                nav.classList.add('visible');
+                toggle.classList.add('shifted');
+            }
+        }, 300);
     }
 
     // 滚动高亮
@@ -494,8 +599,108 @@ document.addEventListener('DOMContentLoaded', function() {
     container.innerHTML = '';
     container.appendChild(bc);
 
+    // Show the back-nav container (hidden by default in new templates)
+    var backNavEl = container.parentElement;
+    if (backNavEl && backNavEl.classList.contains('back-nav')) {
+        backNavEl.style.display = 'block';
+    }
+
     // Dark mode fix for new elements
     if (document.body.classList.contains('dark-mode')) {
         crumb.style.color = '#bbb';
     }
 });
+
+// ==================== 全局卡片滚动入场动画 ====================
+// 自动检测页面上所有卡片类型，应用错峰淡入效果
+(function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var CARD_SELECTORS = [
+        '.article-card',
+        '.tool-card',
+        '.tool-card-large',
+        '.master-card',
+        '.featured-card',
+        '.music-card',
+        '.video-card',
+        '.poster-card',
+        '.quote-card',
+        '.funfact-card',
+        '.hero-card',
+        '.path-stage',
+        '.concept-item',
+        '.cornerstone-card'
+    ];
+
+    var allCards = [];
+    CARD_SELECTORS.forEach(function(sel) {
+        var nodes = document.querySelectorAll(sel);
+        for (var i = 0; i < nodes.length; i++) {
+            // Skip cards that are already being animated by page-specific scripts
+            if (nodes[i].style.opacity === '0') continue;
+            allCards.push(nodes[i]);
+        }
+    });
+
+    if (allCards.length === 0) return;
+
+    // Sort by DOM order so stagger follows visual reading order
+    var allPageCards = [];
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
+    while (walker.nextNode()) {
+        var el = walker.currentNode;
+        if (allCards.indexOf(el) !== -1) {
+            allPageCards.push(el);
+        }
+    }
+
+    // Apply initial hidden state
+    allPageCards.forEach(function(card) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.willChange = 'opacity, transform';
+    });
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                var card = entry.target;
+                var index = allPageCards.indexOf(card);
+                var delay = Math.min(index * 35, 500); // stagger 35ms each, max 500ms
+
+                card.style.transition = 'opacity 0.35s ease ' + delay + 'ms, transform 0.35s ease ' + delay + 'ms';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+
+                // Clean up will-change after animation completes
+                setTimeout(function() {
+                    card.style.willChange = 'auto';
+                }, 350 + delay);
+
+                observer.unobserve(card);
+            }
+        });
+    }, { threshold: 0, rootMargin: '0px 0px 60px 0px' });
+
+    allPageCards.forEach(function(card) {
+        observer.observe(card);
+    });
+
+    // ---- 图片渐进加载 ----
+    document.querySelectorAll('img[loading="lazy"]').forEach(function(img) {
+        if (img.complete) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', function() {
+                img.classList.add('loaded');
+            });
+            // Fallback: show after 3s even if load event doesn't fire
+            setTimeout(function() {
+                if (!img.classList.contains('loaded')) {
+                    img.classList.add('loaded');
+                }
+            }, 3000);
+        }
+    });
+})();

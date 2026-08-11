@@ -220,8 +220,8 @@
         /* 榜样人物卡片 */
         .hero-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
         }
         .hero-card {
             background: white;
@@ -655,7 +655,242 @@ body.dark-mode .ext-link:hover {
     color: #1a1a1a;
 }
 
+/* ===== 工具集 — 学术工坊设计 ===== */
+body { background: #f5f0e8; }
+body.dark-mode { background: #121212; }
 
+/* 容器 */
+.toolkit-page .container { max-width: 1050px; }
+
+/* Hero：浅色学术风，与全站暗色 Hero 拉开差异 */
+.toolkit-hero {
+    background: #faf8f5;
+    margin: 28px 0 32px; padding: 48px 40px;
+    border: 1px solid #e0dcd5;
+    position: relative;
+}
+.toolkit-hero::after {
+    content: ''; position: absolute; bottom: -1px; left: 40px; right: 40px;
+    height: 3px; background: linear-gradient(90deg, #2563eb, #60a5fa, transparent 70%);
+}
+body.dark-mode .toolkit-hero { background: #1a1a20; border-color: #2a2a34; }
+body.dark-mode .toolkit-hero::after { background: linear-gradient(90deg, #3b82f6, #60a5fa, transparent 70%); }
+
+.toolkit-hero-badge {
+    display: inline-block;
+    color: #2563eb; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 4px; margin-bottom: 16px;
+}
+body.dark-mode .toolkit-hero-badge { color: #60a5fa; }
+
+.toolkit-hero h1 {
+    font-size: 2.4rem; font-weight: 900;
+    color: #1a1a1a; margin: 0 0 10px; letter-spacing: 2px;
+}
+.toolkit-hero h1 span { color: #2563eb; }
+body.dark-mode .toolkit-hero h1 { color: #e8e4dc; }
+body.dark-mode .toolkit-hero h1 span { color: #60a5fa; }
+
+.toolkit-hero p {
+    color: #777; font-size: 0.9rem; max-width: 440px; line-height: 1.7; margin: 0;
+}
+body.dark-mode .toolkit-hero p { color: #999; }
+
+/* 大标题卡片：桌面三列 */
+@media (min-width: 769px) {
+    .concept-grid-2col {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+    }
+}
+
+/* 卡片统一 */
+.tool-card-large {
+    background: #fff; border: 1px solid #e8e4dc;
+    box-shadow: 3px 3px 0 #e0dcd5; padding: 1rem 1.2rem;
+    transition: box-shadow 0.2s;
+}
+.tool-card-large:hover { box-shadow: 5px 5px 0 #d4cec5; }
+body.dark-mode .tool-card-large { background: #1e1e2a; border-color: #2e2e3a; box-shadow: 3px 3px 0 #151520; }
+body.dark-mode .tool-card-large:hover { box-shadow: 5px 5px 0 #1a1a28; }
+.tool-card-large h4 { color: #1a1a1a; font-size: 0.95rem; margin: 0 0 0.6rem; padding-bottom: 0.4rem; border-bottom: 2px solid #2563eb; }
+body.dark-mode .tool-card-large h4 { color: #e0e0e0; border-color: #3b82f6; }
+
+.cornerstone-card {
+    background: #fff; border: 1px solid #e8e4dc;
+    box-shadow: 3px 3px 0 #e0dcd5; padding: 1.6rem; margin-bottom: 1.5rem;
+}
+body.dark-mode .cornerstone-card { background: #1e1e2a; border-color: #2e2e3a; box-shadow: 3px 3px 0 #151520; }
+.cornerstone-card h4 { color: #2563eb; font-size: 1rem; margin: 0 0 0.6rem; }
+body.dark-mode .cornerstone-card h4 { color: #60a5fa; }
+
+/* 概念卡片：紧凑三列 */
+.concept-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+.concept-item {
+    padding: 0.5rem 0.7rem;
+    border: 1px solid #e8e4dc;
+    background: #fdfdfb;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    position: relative;
+}
+.concept-item:hover {
+    border-color: #2563eb;
+    box-shadow: 2px 2px 0 #d0d8e8;
+}
+.concept-item h5 {
+    color: #1a1a1a; font-size: 0.8rem; margin: 0 0 2px;
+    padding-right: 14px; line-height: 1.3;
+}
+.concept-item .concept-summary {
+    color: #999; font-size: 0.7rem; line-height: 1.4;
+    display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
+    overflow: hidden; margin: 0;
+}
+.concept-item::after {
+    content: '+'; position: absolute; right: 6px; top: 6px;
+    color: #2563eb; font-size: 0.9rem; font-weight: 300; line-height: 1;
+}
+.concept-body { display: none; }
+body.dark-mode .concept-item { background: #1a1a24; border-color: #2a2a36; }
+body.dark-mode .concept-item:hover { border-color: #3b82f6; box-shadow: 2px 2px 0 #1a2a3a; }
+body.dark-mode .concept-item h5 { color: #ddd; }
+body.dark-mode .concept-item .concept-summary { color: #999; }
+body.dark-mode .concept-item::after { color: #60a5fa; }
+
+/* 概念弹窗 */
+.concept-modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5); z-index: 2000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden; transition: opacity 0.2s;
+}
+.concept-modal-overlay.open { opacity: 1; visibility: visible; }
+.concept-modal {
+    background: #fff; max-width: 560px; width: 90%;
+    max-height: 80vh; overflow-y: auto;
+    box-shadow: 8px 8px 0 #1a1a1a;
+    padding: 2rem;
+}
+body.dark-mode .concept-modal { background: #1e1e2a; box-shadow: 8px 8px 0 #0a0a10; }
+.concept-modal h3 { color: #2563eb; margin: 0 0 1rem; font-size: 1.2rem; }
+body.dark-mode .concept-modal h3 { color: #60a5fa; }
+.concept-modal p { color: #444; line-height: 1.7; font-size: 0.9rem; }
+body.dark-mode .concept-modal p { color: #ccc; }
+.concept-modal ul { padding-left: 1.2rem; color: #555; line-height: 1.7; font-size: 0.88rem; }
+body.dark-mode .concept-modal ul { color: #bbb; }
+.concept-modal li { margin-bottom: 0.4rem; }
+.concept-modal .ext-link { display: inline-block; margin-top: 0.8rem; margin-right: 0.6rem; }
+.concept-modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none; font-size: 1.4rem;
+    cursor: pointer; color: #888;
+}
+.concept-modal-close:hover { color: #c41e3a; }
+
+/* 斗争策略卡片暗色模式 */
+body.dark-mode .strategy-card { background: #1e1e2a !important; border-color: #2e2e3a !important; box-shadow: 3px 3px 0 #151520 !important; }
+body.dark-mode .strategy-card p { color: #ccc; }
+body.dark-mode .strategy-card .strategy-tip { background: #1a1a24; color: #999; }
+
+@media (max-width: 768px) {
+    .concept-list { grid-template-columns: repeat(2, 1fr); }
+    .strategy-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 480px) {
+    .strategy-grid { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 480px) {
+    .concept-list { grid-template-columns: 1fr; }
+}
+
+.part-header { text-align: left; margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 2px solid #2563eb; }
+.part-header::after { display: none; }
+.part-header h3 { color: #1a1a1a; font-size: 1.3rem; }
+body.dark-mode .part-header h3 { color: #e0e0e0; }
+.part-header p { color: #888; font-size: 0.85rem; }
+body.dark-mode .part-header p { color: #999; }
+
+.path-stage {
+    background: #fff; border: 1px solid #e8e4dc;
+    box-shadow: 3px 3px 0 #e0dcd5; padding: 1.5rem; min-height: auto;
+}
+body.dark-mode .path-stage { background: #1e1e2a; border-color: #2e2e3a; box-shadow: 3px 3px 0 #151520; }
+
+.hero-card {
+    background: #fff; border: 1px solid #e8e4dc;
+    box-shadow: 3px 3px 0 #e0dcd5; cursor: pointer;
+    transition: border-color 0.15s;
+    position: relative; overflow: hidden;
+}
+.hero-card:hover { border-color: #2563eb; }
+.hero-card-header {
+    padding: 0.7rem 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+    background: linear-gradient(135deg, #fdf2f2, #fff5f5);
+    border-bottom: 1px solid #f0e0e0;
+}
+body.dark-mode .hero-card-header { background: linear-gradient(135deg, #2a1a1a, #221818); border-color: #3a2828; }
+.hero-avatar { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; }
+.hero-info { flex: 1; min-width: 0; }
+.hero-info h4 { font-size: 0.9rem; margin: 0 0 2px; color: #8b0000; }
+body.dark-mode .hero-info h4 { color: #ff9999; }
+.hero-info span {
+    font-size: 0.72rem; color: #888;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    display: block;
+}
+.hero-card .hero-card-body { display: none; }
+/* 卡片底部标签预览 */
+.hero-tag-preview {
+    padding: 0.5rem 1rem 0.7rem;
+    display: flex; flex-wrap: wrap; gap: 4px;
+}
+.hero-tag-preview .htp-tag {
+    font-size: 0.65rem; color: #2563eb;
+    background: #f0f4fa; padding: 1px 8px; border-radius: 3px;
+}
+body.dark-mode .hero-tag-preview .htp-tag { background: #1a2840; color: #6098d8; }
+.hero-card::after {
+    content: '+'; position: absolute; right: 10px; top: 10px;
+    color: #2563eb; font-size: 1rem; font-weight: 300;
+}
+body.dark-mode .hero-card { background: #1e1e2a; border-color: #2e2e3a; box-shadow: 3px 3px 0 #151520; }
+body.dark-mode .hero-card:hover { border-color: #3b82f6; }
+
+/* 弹窗内恢复 + 去折叠白边 */
+.concept-modal .hero-quote {
+    display: block !important; font-style: italic;
+    color: #555; padding: 0.8rem; background: #f8f6f0;
+    border-left: 3px solid #2563eb; margin-bottom: 0.8rem; line-height: 1.7;
+}
+.concept-modal .hero-desc-wrapper,
+.concept-modal .hero-desc { display: block !important; color: #444; line-height: 1.8; margin-bottom: 0.6rem; }
+.concept-modal .hero-desc.collapsed {
+    max-height: none !important; overflow: visible !important;
+}
+.concept-modal .hero-desc.collapsed::after { display: none !important; }
+.concept-modal .hero-tag {
+    display: inline-block !important; background: #e8f0fa; color: #2563eb;
+    padding: 2px 10px; border-radius: 3px; font-size: 0.75rem; margin: 2px 4px 2px 0;
+}
+.concept-modal .toggle-btn { display: none !important; }
+body.dark-mode .concept-modal .hero-quote { background: #1a1a24; color: #bbb; }
+body.dark-mode .concept-modal .hero-desc { color: #ccc; }
+
+/* 索引条 */
+body.dark-mode .index-bar { background: #1a1a24 !important; border-color: #2e2a1a !important; }
+
+@media (max-width: 768px) {
+    .toolkit-hero { padding: 28px 20px; margin: 16px 0 20px; }
+    .toolkit-hero h1 { font-size: 1.6rem; }
+    .toolkit-page .container { padding: 0 16px; }
+}
     </style>
 </head>
 <body>
@@ -663,8 +898,11 @@ body.dark-mode .ext-link:hover {
 
     <main class="toolkit-page">
         <div class="container">
-            <h2 class="section-title">理论学习工具集</h2>
-            <p class="section-desc">从理论基石到实践应用，从经典阅读到独立思考——系统化的马克思主义学习路线图</p>
+            <div class="toolkit-hero">
+                <div class="toolkit-hero-badge">TOOLKIT</div>
+                <h1><span>工具</span>集</h1>
+                <p>从理论基石到实践应用，从经典阅读到独立思考——系统化的马克思主义学习路线图。</p>
+            </div>
 
             <!-- 右侧悬停导航（五大板块快速跳转） -->
             <nav class="side-float-nav" id="sideNav">
@@ -713,7 +951,7 @@ body.dark-mode .ext-link:hover {
     </div>
 
     <!-- 三大板块网格 -->
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:1.5rem;">
+    <div class="concept-grid-2col">
 
         <!-- ========== 板块一：辩证唯物主义 ========== -->
         <div class="tool-card-large">
@@ -1071,32 +1309,47 @@ body.dark-mode .ext-link:hover {
                 <p class="wip-note">📖 更多榜样故事整理中（如白求恩、张思德、黄继光、邱少云等）</p>
 
                 <!-- 斗争策略主题提炼 -->
-                <div style="margin-top:2.5rem;padding:2rem;background:linear-gradient(135deg,#c41e3a08,#fef3c720,#c41e3a08);border:2px solid #c41e3a20;border-radius:14px;">
-                    <h4 style="text-align:center;color:#c41e3a;font-size:1.25rem;margin-bottom:1.5rem;">🗡️ 从这些人身上，我们能学到什么？</h4>
-                    <p style="color:#555;line-height:1.9;font-size:0.93rem;max-width:780px;margin:0 auto 1.5rem;">上面这些人物，有的在战场上出生入死，有的在荒原上改天换地，有的在实验室里默默奉献，有的在权力面前坚守立场。他们的斗争领域各不相同，但精神内核高度一致——这就是马克思主义实践观在具体历史条件中的生动体现。</p>
+                <div style="margin-top:2.5rem;">
+                    <h4 style="text-align:center;color:#1a1a1a;font-size:1.2rem;margin-bottom:0.4rem;">从这些人身上，我们能学到什么</h4>
+                    <p style="text-align:center;color:#999;font-size:0.82rem;margin-bottom:1.5rem;">每一条都不是空谈——附带了你可以今天就用的实践方法</p>
 
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-bottom:1.8rem;">
-                        <div style="background:white;border-radius:10px;padding:1.2rem;border-left:4px solid #c41e3a;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                            <h5 style="color:#c41e3a;margin:0 0 0.5rem 0;font-size:0.98rem;">🎯 斗争的第一步：认清矛盾</h5>
-                            <p style="color:#555;font-size:0.88rem;line-height:1.75;margin:0;">焦裕禄没有坐在办公室听汇报，而是跑遍了兰考的每一个大队——这是调查研究，更是<strong>对矛盾特殊性的把握</strong>。陈永贵没有照搬外面的经验，而是从大寨的实际出发——这是具体问题具体分析。当代斗争的第一步不是喊口号，而是搞清楚：<strong>我们面对的矛盾到底是什么？它的特殊性在哪里？</strong>不被表面现象迷惑，不被别人预设的框架束缚，自己去发现问题的真相。</p>
+                    <div class="strategy-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.8rem;">
+                        <!-- 1 -->
+                        <div class="strategy-card" style="background:#fff;border:1px solid #e8e4dc;box-shadow:3px 3px 0 #e0dcd5;padding:1.2rem;">
+                            <h5 style="color:#c41e3a;margin:0 0 0.6rem 0;font-size:0.92rem;border-bottom:2px solid #c41e3a10;padding-bottom:0.5rem;">斗争的第一步：认清矛盾</h5>
+                            <p style="color:#444;font-size:0.84rem;line-height:1.75;margin:0 0 0.8rem;">焦裕禄跑遍兰考每一个大队，陈永贵从大寨实际出发——他们不是坐在屋里想问题，而是<strong>先去调查</strong>。你不必成为理论家：遭遇不公时，先把事实列清楚——时间、地点、涉及谁、依据哪条规定。不被情绪牵着走，不被对方预设的框架带偏。搞清楚"我面对的矛盾到底是什么"，问题就解决了一半。</p>
+                            <div class="strategy-tip" style="background:#f8f6f0;padding:0.5rem 0.7rem;font-size:0.72rem;color:#888;line-height:1.6;">下次遇到纠纷，先打开备忘录写下来：发生了什么、什么时候、谁说了什么。写下来，你就已经比90%的人冷静了。</div>
                         </div>
-                        <div style="background:white;border-radius:10px;padding:1.2rem;border-left:4px solid #d97706;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                            <h5 style="color:#d97706;margin:0 0 0.5rem 0;font-size:0.98rem;">🦾 斗争的核心：发挥主体性</h5>
-                            <p style="color:#555;font-size:0.88rem;line-height:1.75;margin:0;">王进喜说"没有条件创造条件也要上"，陈永贵用铁锹和扁担在荒坡上造出梯田，邓稼先在被封锁的条件下靠算盘完成核物理计算——<strong>他们共同的特点是拒绝被动等待</strong>。当代社会的"内卷""躺平"困境，本质上就是主体性被消解的表现。真正的斗争，首先是与自己内心的惰性、依附性和消极性作斗争，重新确立"我可以改变"的主体意识。</p>
+                        <!-- 2 -->
+                        <div class="strategy-card" style="background:#fff;border:1px solid #e8e4dc;box-shadow:3px 3px 0 #e0dcd5;padding:1.2rem;">
+                            <h5 style="color:#d97706;margin:0 0 0.6rem 0;font-size:0.92rem;border-bottom:2px solid #d9770610;padding-bottom:0.5rem;">斗争的方法：组织力量</h5>
+                            <p style="color:#444;font-size:0.84rem;line-height:1.75;margin:0 0 0.8rem;">大寨靠全村人、大庆靠全体工人——历史上没有一场斗争是单打独斗赢的。<strong>一个人是孤岛，一群人是力量。</strong>车间里的工友、班上的同学、同小区的租户——有共同利益就能形成共同行动。从两个人开始，找到处境相同的人，把个人的不满变成集体的诉求。</p>
+                            <div class="strategy-tip" style="background:#f8f6f0;padding:0.5rem 0.7rem;font-size:0.72rem;color:#888;line-height:1.6;">下次你想抱怨一件事，先问身边一个人："你也觉得是这样吗？"如果答案是"是"，你们已经迈出了组织的第一步。</div>
                         </div>
-                        <div style="background:white;border-radius:10px;padding:1.2rem;border-left:4px solid #059669;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                            <h5 style="color:#059669;margin:0 0 0.5rem 0;font-size:0.98rem;">⚖️ 斗争的原则：站稳人民立场</h5>
-                            <p style="color:#555;font-size:0.88rem;line-height:1.75;margin:0;">雷锋一辈子做的是"小事"，但每一件小事都站在人民的立场上。焦裕禄拖着肝癌的身体依然牵挂着兰考的群众。张钦礼宁可自己受迫害，也不背叛实事求是的原则——<strong>因为他们心里装的不是自己，是人民</strong>。当代斗争中，站稳人民立场意味着：在做任何选择时，先问一句"这对大多数人有利吗？"这不是空话，这是区分正确斗争与错误斗争的根本标准。</p>
+                        <!-- 3 -->
+                        <div class="strategy-card" style="background:#fff;border:1px solid #e8e4dc;box-shadow:3px 3px 0 #e0dcd5;padding:1.2rem;">
+                            <h5 style="color:#2563eb;margin:0 0 0.6rem 0;font-size:0.92rem;border-bottom:2px solid #2563eb10;padding-bottom:0.5rem;">斗争的武器：善用规则</h5>
+                            <p style="color:#444;font-size:0.84rem;line-height:1.75;margin:0 0 0.8rem;">劳动法、合同法、消费者权益法、校规——<strong>这些是现成的武器。</strong>资本家和管理者怕的不是你的情绪，是你懂规则。学会查阅法律法规，保留证据——聊天记录、录音、书面记录。用书面方式提出诉求，白纸黑字比一百句情绪化的控诉更有分量。</p>
+                            <div class="strategy-tip" style="background:#f8f6f0;padding:0.5rem 0.7rem;font-size:0.72rem;color:#888;line-height:1.6;">把你遇到的问题输入搜索引擎，加上"劳动法"或"规定"三个字。你不需要成为律师，只需要知道那条法规的名字。</div>
                         </div>
-                        <div style="background:white;border-radius:10px;padding:1.2rem;border-left:4px solid #7c3aed;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                            <h5 style="color:#7c3aed;margin:0 0 0.5rem 0;font-size:0.98rem;">🔥 斗争的底色：坚定的信念与韧劲</h5>
-                            <p style="color:#555;font-size:0.88rem;line-height:1.75;margin:0;">保尔在双目失明、全身瘫痪的情况下依然坚持写作。邓稼先在荒漠中隐姓埋名28年。焦裕禄用藤椅顶着肝部工作到最后一刻——<strong>他们不是因为看到了希望才坚持，而是因为坚持了才创造了希望</strong>。当代斗争中，最稀缺的不是聪明才智，而是在看不到短期回报时依然不放弃的信念。斗争是长期的、曲折的，但方向是前进的。</p>
+                        <!-- 4 -->
+                        <div class="strategy-card" style="background:#fff;border:1px solid #e8e4dc;box-shadow:3px 3px 0 #e0dcd5;padding:1.2rem;">
+                            <h5 style="color:#7c3aed;margin:0 0 0.6rem 0;font-size:0.92rem;border-bottom:2px solid #7c3aed10;padding-bottom:0.5rem;">斗争的主动：自创条件</h5>
+                            <p style="color:#444;font-size:0.84rem;line-height:1.75;margin:0 0 0.8rem;">王进喜说"没有条件创造条件也要上"，邓稼先靠算盘完成核物理计算——<strong>他们拒绝被"只能这样"框住。</strong>当现有渠道走不通时，自己开一条。食堂太贵就组织带饭、租房被坑就工友合租、举报无门就联名写信、老板不回应就集体面谈。</p>
+                            <div class="strategy-tip" style="background:#f8f6f0;padding:0.5rem 0.7rem;font-size:0.72rem;color:#888;line-height:1.6;">想一件你一直觉得"没办法"的事，花5分钟列一个"如果不管现有限制，我能怎么做"的清单。你可能会发现办法比想象中多。</div>
                         </div>
-                    </div>
-
-                    <div style="background:linear-gradient(135deg,#c41e3a,#8b0000);border-radius:12px;padding:1.5rem;color:white;text-align:center;">
-                        <h5 style="margin:0 0 0.6rem 0;font-size:1.05rem;letter-spacing:1px;">一句话总结</h5>
-                        <p style="margin:0;font-size:0.95rem;line-height:1.9;max-width:680px;margin-left:auto;margin-right:auto;">真正的斗争策略，不是学几招"技巧"，而是<strong>确立一种立场、掌握一种方法、锤炼一种意志</strong>。站稳人民的立场，用辩证唯物主义的方法分析矛盾，在实践中磨炼出钢铁般的意志——这就是马克思主义从理论到实践的闭环。这些人物的共同特点是：他们不是被动地"被时代选中"，而是主动地在自己的岗位上做出了选择。这种<strong>自觉的选择</strong>，正是当代斗争最需要的东西。</p>
+                        <!-- 5 -->
+                        <div class="strategy-card" style="background:#fff;border:1px solid #e8e4dc;box-shadow:3px 3px 0 #e0dcd5;padding:1.2rem;">
+                            <h5 style="color:#059669;margin:0 0 0.6rem 0;font-size:0.92rem;border-bottom:2px solid #05966910;padding-bottom:0.5rem;">斗争的节奏：持久推进</h5>
+                            <p style="color:#444;font-size:0.84rem;line-height:1.75;margin:0 0 0.8rem;">保尔失明瘫痪仍在写作，邓稼先隐姓埋名28年——<strong>真正的改变很少一蹴而就。</strong>今天谈不拢明天再谈，这个渠道堵了就换一个。设定小目标逐个击破，记录进展防止气馁。找到能互相打气的同伴——斗争是马拉松，不是百米冲刺。</p>
+                            <div class="strategy-tip" style="background:#f8f6f0;padding:0.5rem 0.7rem;font-size:0.72rem;color:#888;line-height:1.6;">把一个大目标拆成三个小步骤，每完成一个就勾掉。看见进度条在走，比你想象中更能支撑你走下去。</div>
+                        </div>
+                        <!-- 6 -->
+                        <div class="strategy-card" style="background:#fff;border:1px solid #e8e4dc;box-shadow:3px 3px 0 #e0dcd5;padding:1.2rem;">
+                            <h5 style="color:#c41e3a;margin:0 0 0.6rem 0;font-size:0.92rem;border-bottom:2px solid #c41e3a10;padding-bottom:0.5rem;">斗争的根基：站稳立场</h5>
+                            <p style="color:#444;font-size:0.84rem;line-height:1.75;margin:0 0 0.8rem;">雷锋做小事，件件为人民。焦裕禄到死牵挂群众。张钦礼宁可受迫害也不背叛实事求是——<strong>立场不是喊出来的，是每次选择中检验出来的。</strong>做任何决定前问一句"这对多数人有利吗"——这不是空话，是区分正确斗争与错误斗争的根本标准。</p>
+                            <div class="strategy-tip" style="background:#f8f6f0;padding:0.5rem 0.7rem;font-size:0.72rem;color:#888;line-height:1.6;">提诉求时，尽量找到"不只我一个人受影响"的共同点。把个人诉求转化为公共利益，你的声音会更难被忽视。</div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1123,7 +1376,7 @@ body.dark-mode .ext-link:hover {
                             <li><a href="../articles/Mao/mao-dun-lun.html">《矛盾论》</a> <span class="sub-text">—— 唯物辩证法的核心</span></li>
                             <li><a href="gallery/quotes.html">经典语录库</a> <span class="sub-text">—— 快速感受导师语言风格</span></li>
                         </ul>
-                        <span class="stage-hint">💡 建议：从这里开始，不要一上来就看大部头</span>
+                        <span class="stage-hint">建议：从这里开始，不要一上来就看大部头</span>
                     </div>
 
                     <!-- 第一阶段：基础 -->
@@ -1136,7 +1389,7 @@ body.dark-mode .ext-link:hover {
                             <li>《社会主义从空想到科学的发展》 <span class="sub-text">—— 了解社会主义思想的来龙去脉</span></li>
                             <li><a href="../articles/Lenin/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html">《帝国主义是资本主义的最高阶段》</a><span class="sub-text">—— 理解现代资本主义的本质 </span></li>
                         </ul>
-                        <span class="stage-hint">💡 这三本都不长，适合精读</span>
+                        <span class="stage-hint">这三本都不长，适合精读</span>
                     </div>
 
                     <!-- 第二阶段：深化哲学 -->
@@ -1149,7 +1402,7 @@ body.dark-mode .ext-link:hover {
                             <li><a href="../articles/Lenin/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html">《唯物主义和经验批判主义》</a><span class="sub-text">—— 列宁捍卫辩证唯物主义 </span></li>
                             <li><a href="../articles/Engels/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html">《家庭、私有制和国家的起源》</a><span class="sub-text">—— 唯物史观的典范运用 </span></li>
                         </ul>
-                        <span class="stage-hint">⚠️ 这几本有一定难度，可配合导读资料</span>
+                        <span class="stage-hint">这几本有一定难度，可配合导读资料</span>
                     </div>
 
                     <!-- 第三阶段：中国化 -->
@@ -1163,23 +1416,31 @@ body.dark-mode .ext-link:hover {
                             <li><a href="../articles/Mao/lun-shi-da-guan-xi.html">《论十大关系》</a><span class="sub-text">—— 社会主义建设的探索 </span></li>
                             <li><a href="../articles/Mao/ren-min-nei-bu-mao-dun.html">《关于正确处理人民内部矛盾的问题》</a> <span class="sub-text">—— 社会主义社会的矛盾学说</span></li>
                         </ul>
-                        <span class="stage-hint">🇨🇳 重点体会：基本原理与中国实际的结合</span>
+                        <span class="stage-hint">重点体会：基本原理与中国实际的结合</span>
                     </div>
 
-                    <!-- 第三点五阶段：军事与农民 -->
+                    <!-- 第三阶段补充 A：军事辩证法 -->
                     <div class="path-stage">
-                        <span class="path-stage-num">3+</span>
-                        <h4>第三阶段补充：军事战略与农民问题</h4>
-                        <p class="stage-goal">毛泽东军事辩证法的精髓与中国革命的特殊道路</p>
+                        <span class="path-stage-num">3a</span>
+                        <h4>第三阶段补充：军事辩证法</h4>
+                        <p class="stage-goal">毛泽东军事思想的精髓——从战略到战术的辩证思维</p>
                         <ul>
                             <li><a href="../articles/Mao/zhan-lue-wen-ti.html">《中国革命战争的战略问题》</a> <span class="sub-text">—— 军事辩证法的重要奠基</span></li>
                             <li><a href="../articles/Mao/you-ji-zhan.html">《抗日游击战争的战略问题》</a> <span class="sub-text">—— 游击战的战略地位</span></li>
                             <li><a href="../articles/Mao/zhan-zheng-zhan-lue.html">《战争和战略问题》</a> <span class="sub-text">—— 武装斗争的根本问题</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- 第三阶段补充 B：群众路线与党建 -->
+                    <div class="path-stage">
+                        <span class="path-stage-num">3b</span>
+                        <h4>第三阶段补充：群众路线与党的建设</h4>
+                        <p class="stage-goal">发动群众、组织群众、依靠群众——以及党自身的建设</p>
+                        <ul>
                             <li><a href="../articles/Mao/nong-min-yun-dong.html">《湖南农民运动考察报告》</a> <span class="sub-text">—— 农民革命的伟大作用</span></li>
                             <li><a href="../articles/Mao/wen-yi-zuo-tan.html">《在延安文艺座谈会上的讲话》</a> <span class="sub-text">—— 文艺为工农兵服务</span></li>
                             <li><a href="../articles/Mao/xue-xi-shi-ju.html">《学习和时局》</a> <span class="sub-text">—— 放下包袱，开动机器</span></li>
                         </ul>
-                        <span class="stage-hint">这些都是四、五星文章，可在学完第三阶段后选读</span>
                     </div>
 
                     <!-- 第四阶段：拓展 -->
@@ -1193,7 +1454,7 @@ body.dark-mode .ext-link:hover {
                             <li><a href="../articles/Stalin/lun-lunen-zhu-yi-ji-chu.html">《论列宁主义基础》</a> <span class="sub-text">—— 斯大林对列宁主义的系统阐述</span></li>
                             <li><a href="../articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html">《论中国革命的前途》</a> <span class="sub-text">—— 中国革命的非资本主义道路</span></li>
                         </ul>
-                        <span class="stage-hint">📚 到这个阶段，你已经具备自学能力了</span>
+                        <span class="stage-hint">到这个阶段，你已经具备自学能力了</span>
                     </div>
                 </div>
 
@@ -1361,6 +1622,14 @@ body.dark-mode .ext-link:hover {
         </div>
     </footer>
 
+    <!-- 概念弹窗 -->
+    <div class="concept-modal-overlay" id="conceptModalOverlay">
+        <div class="concept-modal" id="conceptModal">
+            <button class="concept-modal-close" id="conceptModalClose">&times;</button>
+            <div id="conceptModalContent"></div>
+        </div>
+    </div>
+
     <script src="../../js/main.js"></script>
     <script>
 
@@ -1389,8 +1658,89 @@ document.querySelectorAll('.science-tab').forEach(tab => {
 
 
 
+        // ===== 概念卡片压缩 + 弹窗 =====
+        (function() {
+            var overlay = document.getElementById('conceptModalOverlay');
+            var modalContent = document.getElementById('conceptModalContent');
+            var closeBtn = document.getElementById('conceptModalClose');
+
+            function openModal(title, bodyHTML) {
+                modalContent.innerHTML = '<h3>' + title + '</h3>' + bodyHTML;
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeModal() {
+                overlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+            closeBtn.addEventListener('click', closeModal);
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) closeModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeModal();
+            });
+
+            // ---- 人物卡片：注入标签预览 + 点击弹窗 ----
+            document.querySelectorAll('.hero-card').forEach(function(card) {
+                var header = card.querySelector('.hero-card-header');
+                var body = card.querySelector('.hero-card-body');
+                if (!header || !body) return;
+                var title = (header.querySelector('h4') || {}).textContent || '';
+                var sub = (header.querySelector('span') || {}).textContent || '';
+
+                // 提取标签，注入预览行
+                var tags = body.querySelectorAll('.hero-tag');
+                if (tags.length > 0) {
+                    var preview = document.createElement('div');
+                    preview.className = 'hero-tag-preview';
+                    tags.forEach(function(t) {
+                        var pill = document.createElement('span');
+                        pill.className = 'htp-tag';
+                        pill.textContent = t.textContent.trim();
+                        preview.appendChild(pill);
+                    });
+                    header.insertAdjacentElement('afterend', preview);
+                }
+
+                // 弹窗内去掉折叠 → 展开全部描述
+                card.addEventListener('click', function() {
+                    var bodyClone = body.cloneNode(true);
+                    var descs = bodyClone.querySelectorAll('.hero-desc.collapsed');
+                    descs.forEach(function(d) { d.classList.remove('collapsed'); });
+                    openModal(title, '<p style="color:#888;font-size:0.8rem;margin-bottom:0.8rem;">' + sub + '</p>' + bodyClone.innerHTML);
+                });
+            });
+
+            // 压缩：把 h5 之后的所有内容移入 .concept-body，插入摘要
+            document.querySelectorAll('.concept-item').forEach(function(item) {
+                var h5 = item.querySelector('h5');
+                if (!h5) return;
+                var title = h5.textContent.replace(/^[^\s]+\s*/, ''); // strip emoji
+                var body = document.createElement('div');
+                body.className = 'concept-body';
+                while (h5.nextSibling) {
+                    body.appendChild(h5.nextSibling);
+                }
+                item.appendChild(body);
+
+                // 提取摘要（取第一个 p 的首句）
+                var firstP = body.querySelector('p');
+                var summary = firstP ? firstP.textContent.replace(/^(.{40}[^。]*。).*$/, '$1') : '';
+                var summaryEl = document.createElement('p');
+                summaryEl.className = 'concept-summary';
+                summaryEl.textContent = summary;
+                h5.insertAdjacentElement('afterend', summaryEl);
+
+                // 点击整张卡片 → 弹窗
+                item.addEventListener('click', function() {
+                    openModal(title, body.innerHTML);
+                });
+            });
+        })();
+
         // 页面加载时恢复黑夜模式设置
-        
+
 </script>
 
     <script>

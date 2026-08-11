@@ -1,0 +1,452 @@
+window.__MARXIST_RULES__ = 
+{
+  "version": "1.0.0",
+  "description": "马列体风格规则库 — 每位导师10条规则，覆盖词汇/句法/修辞/逻辑四个维度",
+  "rules": [
+    {
+      "id": "marx-vocab-001",
+      "author": "marx",
+      "dimension": "vocabulary",
+      "priority": 10,
+      "pattern": "发展",
+      "replacement": "增殖与扩张",
+      "constraints": { "excludeIf": ["经济发展", "个人发展", "发展中国家"] },
+      "source": { "work": "资本论", "chapter": "第一卷 第二十四章", "quote": "剩余价值转化为资本，即资本积累，也就是剩余价值的资本化。" }
+    },
+    {
+      "id": "marx-vocab-002",
+      "author": "marx",
+      "dimension": "vocabulary",
+      "priority": 10,
+      "pattern": "问题",
+      "replacement": "矛盾",
+      "constraints": { "excludeIf": ["没问题", "数学问题", "技术问题"] },
+      "source": { "work": "政治经济学批判·序言", "chapter": "序言", "quote": "社会的物质生产力发展到一定阶段，便同它们一直在其中运动的现存生产关系发生矛盾。" }
+    },
+    {
+      "id": "marx-vocab-003",
+      "author": "marx",
+      "dimension": "vocabulary",
+      "priority": 8,
+      "pattern": "工资",
+      "replacement": "劳动力价值的货币表现",
+      "constraints": { "minContextLength": 3 },
+      "source": { "work": "资本论", "chapter": "第一卷 第十七章", "quote": "工资的形式消灭了工作日分为必要劳动和剩余劳动的一切痕迹。" }
+    },
+    {
+      "id": "marx-syntax-001",
+      "author": "marx",
+      "dimension": "syntax",
+      "priority": 9,
+      "pattern": "一方面(.*)另一方面(.*)",
+      "replacement": "一方面[A]，另一方面[B]。然而，从[C]的观点来看——",
+      "constraints": {},
+      "source": { "work": "共产党宣言", "chapter": "第一章", "quote": "一方面，资产阶级在历史上曾经起过非常革命的作用……另一方面，它使人和人之间除了赤裸裸的利害关系，就再也没有任何别的联系了。" }
+    },
+    {
+      "id": "marx-syntax-002",
+      "author": "marx",
+      "dimension": "syntax",
+      "priority": 9,
+      "pattern": "不是(.*)而是(.*)",
+      "replacement": "不是[A]，恰恰相反，是[B]。",
+      "constraints": {},
+      "source": { "work": "德意志意识形态", "chapter": "第一卷", "quote": "不是意识决定生活，而是生活决定意识。" }
+    },
+    {
+      "id": "marx-rhetoric-001",
+      "author": "marx",
+      "dimension": "rhetoric",
+      "priority": 7,
+      "pattern": "就像(.*)一样",
+      "replacement": "正如[A]不过是[B]的表现形式一样",
+      "constraints": {},
+      "source": { "work": "资本论", "chapter": "第一卷 第一章", "quote": "商品形式的奥秘不过在于：商品形式在人们面前把人们本身劳动的社会性质反映成劳动产品本身的物的性质。" }
+    },
+    {
+      "id": "marx-rhetoric-002",
+      "author": "marx",
+      "dimension": "rhetoric",
+      "priority": 8,
+      "pattern": "表面上(.*)实际上(.*)",
+      "replacement": "在现象层面，[A]；然而就其本质而言，[B]。",
+      "constraints": {},
+      "source": { "work": "资本论", "chapter": "第一卷", "quote": "在现象上，工资表现为劳动的价格……但实质上，工资是劳动力价值的转化形式。" }
+    },
+    {
+      "id": "marx-logic-001",
+      "author": "marx",
+      "dimension": "logic",
+      "priority": 9,
+      "pattern": "这是因为(.*)",
+      "replacement": "这一现象的物质根源在于[A]。而[B]不过是这一根源在[领域]的表现。",
+      "constraints": { "triggerTag": "explanation" },
+      "source": { "work": "政治经济学批判·序言", "chapter": "序言", "quote": "物质生活的生产方式制约着整个社会生活、政治生活和精神生活的过程。" }
+    },
+    {
+      "id": "marx-logic-002",
+      "author": "marx",
+      "dimension": "logic",
+      "priority": 8,
+      "pattern": "越来越(.*)",
+      "replacement": "呈现出日益[A]的趋势。这不是偶然的波动——而是深层结构性运动的必然表现。",
+      "constraints": {},
+      "source": { "work": "共产党宣言", "chapter": "第一章", "quote": "资产阶级除非对生产工具，从而对生产关系，从而对全部社会关系不断地进行革命，否则就不能生存下去。" }
+    },
+    {
+      "id": "marx-vocab-004",
+      "author": "marx",
+      "dimension": "vocabulary",
+      "priority": 7,
+      "pattern": "贫富差距",
+      "replacement": "两极分化的再生产",
+      "constraints": {},
+      "source": { "work": "资本论", "chapter": "第一卷 第二十三章", "quote": "在一极是财富的积累，同时在另一极是贫困、劳动折磨、受奴役、无知、粗野和道德堕落的积累。" }
+    },
+
+    {
+      "id": "engels-vocab-001",
+      "author": "engels",
+      "dimension": "vocabulary",
+      "priority": 10,
+      "pattern": "自然规律",
+      "replacement": "客观必然性",
+      "constraints": {},
+      "source": { "work": "反杜林论", "chapter": "第一编 哲学", "quote": "辩证法不过是关于自然、人类社会和思维的运动和发展的普遍规律的科学。" }
+    },
+    {
+      "id": "engels-syntax-001",
+      "author": "engels",
+      "dimension": "syntax",
+      "priority": 9,
+      "pattern": "诚然(.*)但是(.*)",
+      "replacement": "诚然，[A]——但是，[B]。这并非折中，而是对事物自身辩证运动的如实反映。",
+      "constraints": {},
+      "source": { "work": "路德维希·费尔巴哈和德国古典哲学的终结", "chapter": "第四章", "quote": "诚然，人们自己创造自己的历史，但他们并不是按照共同意志、根据共同计划来创造。" }
+    },
+    {
+      "id": "engels-syntax-002",
+      "author": "engels",
+      "dimension": "syntax",
+      "priority": 8,
+      "pattern": "首先(.*)其次(.*)",
+      "replacement": "首先，[A]——这是起点。其次，[B]——这是深化。归根到底，[C]才是决定性因素。",
+      "constraints": {},
+      "source": { "work": "反杜林论", "chapter": "引论", "quote": "首先，以往的社会主义批判过现存的生产方式……其次，它提供了启发工人意识的材料……" }
+    },
+    {
+      "id": "engels-rhetoric-001",
+      "author": "engels",
+      "dimension": "rhetoric",
+      "priority": 8,
+      "pattern": "充分说明",
+      "replacement": "这再清楚不过地揭示了一个事实：",
+      "constraints": {},
+      "source": { "work": "自然辩证法", "chapter": "导言", "quote": "这是一次人类从来没有经历过的最伟大的、进步的变革……" }
+    },
+    {
+      "id": "engels-rhetoric-002",
+      "author": "engels",
+      "dimension": "rhetoric",
+      "priority": 7,
+      "pattern": "证据(.*)表明",
+      "replacement": "全部经验材料都指向同一结论：",
+      "constraints": {},
+      "source": { "work": "家庭、私有制和国家的起源", "chapter": "第一版序言", "quote": "根据唯物主义观点，历史中的决定性因素，归根结底是直接生活的生产和再生产。" }
+    },
+    {
+      "id": "engels-logic-001",
+      "author": "engels",
+      "dimension": "logic",
+      "priority": 9,
+      "pattern": "从(.*)到(.*)的变化",
+      "replacement": "量变积累到一定程度，必然引发质变——从[A]到[B]的飞跃",
+      "constraints": {},
+      "source": { "work": "反杜林论", "chapter": "第一编 哲学", "quote": "量转化为质和质转化为量的规律。" }
+    },
+    {
+      "id": "engels-logic-002",
+      "author": "engels",
+      "dimension": "logic",
+      "priority": 8,
+      "pattern": "归根到底",
+      "replacement": "归根到底，[A]是决定性的因素。但这并不意味着[B]只是[A]的被动反映——恰恰相反，[B]对[A]具有反作用。",
+      "constraints": {},
+      "source": { "work": "致约瑟夫·布洛赫的信", "chapter": "(书信)", "quote": "根据唯物史观，历史过程中的决定性因素归根到底是现实生活的生产和再生产。" }
+    },
+    {
+      "id": "engels-vocab-002",
+      "author": "engels",
+      "dimension": "vocabulary",
+      "priority": 7,
+      "pattern": "科学地",
+      "replacement": "以严格的经验方法",
+      "constraints": {},
+      "source": { "work": "社会主义从空想到科学的发展", "chapter": "第一章", "quote": "唯物主义历史观……使社会主义变成了科学。" }
+    },
+    {
+      "id": "engels-syntax-003",
+      "author": "engels",
+      "dimension": "syntax",
+      "priority": 7,
+      "pattern": "(.*)不是偶然的",
+      "replacement": "[A]之所以出现，根源在于[B]。这不是偶然的巧合，而是历史必然性的表现。",
+      "constraints": {},
+      "source": { "work": "路德维希·费尔巴哈和德国古典哲学的终结", "chapter": "第四章", "quote": "历史进程是受内在的一般规律支配的。" }
+    },
+
+    {
+      "id": "lenin-vocab-001",
+      "author": "lenin",
+      "dimension": "vocabulary",
+      "priority": 10,
+      "pattern": "必须(.*)",
+      "replacement": "必须[A]。没有别的选择。",
+      "constraints": {},
+      "source": { "work": "怎么办？", "chapter": "第二章", "quote": "没有革命的理论，就不会有革命的运动。" }
+    },
+    {
+      "id": "lenin-syntax-001",
+      "author": "lenin",
+      "dimension": "syntax",
+      "priority": 10,
+      "pattern": "难道(.*)吗[？?]",
+      "replacement": "难道[A]吗？不，[B]。问题的关键正在于此。",
+      "constraints": {},
+      "source": { "work": "国家与革命", "chapter": "第一章", "quote": "国家是阶级矛盾不可调和的产物和表现。" }
+    },
+    {
+      "id": "lenin-syntax-002",
+      "author": "lenin",
+      "dimension": "syntax",
+      "priority": 9,
+      "pattern": "(.*)在(.*)条件下",
+      "replacement": "在[B]的具体条件下，[A]只能采取[C]的形式。抽象地谈论[A]而不分析[B]——这正是我们必须反对的。",
+      "constraints": {},
+      "source": { "work": "共产主义运动中的「左派」幼稚病", "chapter": "第二章", "quote": "具体地分析具体的情况——这是马克思主义的活的灵魂。" }
+    },
+    {
+      "id": "lenin-rhetoric-001",
+      "author": "lenin",
+      "dimension": "rhetoric",
+      "priority": 9,
+      "pattern": "实际上(.*)是(.*)",
+      "replacement": "剥去[A]的外壳，其内核无非是[B]。这就是全部问题的实质。",
+      "constraints": {},
+      "source": { "work": "帝国主义是资本主义的最高阶段", "chapter": "序言", "quote": "帝国主义是资本主义的垄断阶段……是寄生的或腐朽的资本主义。" }
+    },
+    {
+      "id": "lenin-rhetoric-002",
+      "author": "lenin",
+      "dimension": "rhetoric",
+      "priority": 8,
+      "pattern": "有人说(.*)",
+      "replacement": "有人高喊[A]。但是我们只需要问一个简单的问题：[B]？",
+      "constraints": {},
+      "source": { "work": "怎么办？", "chapter": "第一章", "quote": "所谓「批评自由」，就是机会主义派在社会民主党内的自由……" }
+    },
+    {
+      "id": "lenin-logic-001",
+      "author": "lenin",
+      "dimension": "logic",
+      "priority": 9,
+      "pattern": "(.*)才是根本",
+      "replacement": "[A]不是问题。真正的问题是[B]。而[B]的解决，取决于[C]。",
+      "constraints": {},
+      "source": { "work": "怎么办？", "chapter": "第三章", "quote": "政治揭露是培养群众革命积极性的基本条件。" }
+    },
+    {
+      "id": "lenin-logic-002",
+      "author": "lenin",
+      "dimension": "logic",
+      "priority": 8,
+      "pattern": "关键(在于|是)(.*)",
+      "replacement": "全部争论归结为一个问题：[A]。在这个问题上没有中间道路。",
+      "constraints": {},
+      "source": { "work": "唯物主义和经验批判主义", "chapter": "第一章", "quote": "在解决哲学问题上有两条基本路线……唯物主义和唯心主义。" }
+    },
+    {
+      "id": "lenin-vocab-002",
+      "author": "lenin",
+      "dimension": "vocabulary",
+      "priority": 8,
+      "pattern": "组织起来",
+      "replacement": "有组织地、步调一致地行动",
+      "constraints": {},
+      "source": { "work": "怎么办？", "chapter": "第四章", "quote": "给我们一个革命家组织，我们就能把俄国翻转过来！" }
+    },
+    {
+      "id": "lenin-syntax-003",
+      "author": "lenin",
+      "dimension": "syntax",
+      "priority": 7,
+      "pattern": "一方面(.*)另一方面(.*)",
+      "replacement": "一方面，[A]；另一方面，[B]。二者之间的张力——这就是问题的辩证法。",
+      "constraints": {},
+      "source": { "work": "国家与革命", "chapter": "第五章", "quote": "一方面，国家是阶级统治的机关……另一方面，国家又是从社会中分化出来的管理机关。" }
+    },
+
+    {
+      "id": "mao-vocab-001",
+      "author": "mao",
+      "dimension": "vocabulary",
+      "priority": 10,
+      "pattern": "主要(问题|矛盾|方面)",
+      "replacement": "主要矛盾",
+      "constraints": {},
+      "source": { "work": "矛盾论", "chapter": "第四章", "quote": "在复杂的事物的发展过程中，有许多的矛盾存在，其中必有一种是主要的矛盾。" }
+    },
+    {
+      "id": "mao-syntax-001",
+      "author": "mao",
+      "dimension": "syntax",
+      "priority": 10,
+      "pattern": "(.*)，(.*)，(.*)。",
+      "replacement": "[A]，[B]，一句话，[概括C]。",
+      "constraints": { "patternType": "parallel" },
+      "source": { "work": "星星之火，可以燎原", "chapter": "全文", "quote": "它是站在海岸遥望海中已经看得见桅杆尖头了的一只航船，它是立于高山之巅远看东方已见光芒四射喷薄欲出的一轮朝日……" }
+    },
+    {
+      "id": "mao-rhetoric-001",
+      "author": "mao",
+      "dimension": "rhetoric",
+      "priority": 9,
+      "pattern": "困难(.*)好(.*|)",
+      "replacement": "用[A]比喻困难——在战略上藐视它，但在战术上重视它。",
+      "constraints": {},
+      "source": { "work": "论持久战", "chapter": "问题的根据", "quote": "武器是战争的重要因素，但不是决定的因素，决定的因素是人不是物。" }
+    },
+    {
+      "id": "mao-rhetoric-002",
+      "author": "mao",
+      "dimension": "rhetoric",
+      "priority": 9,
+      "pattern": "要(.*)应该(.*)",
+      "replacement": "要[A]，就应该[B]。没有[B]，[A]不过是一句空话。",
+      "constraints": {},
+      "source": { "work": "实践论", "chapter": "全文", "quote": "你要知道梨子的滋味，你就得变革梨子，亲口吃一吃。" }
+    },
+    {
+      "id": "mao-logic-001",
+      "author": "mao",
+      "dimension": "logic",
+      "priority": 10,
+      "pattern": "(.*)有两(个|种|方面)(.*)",
+      "replacement": "看[A]，要一分为二。有[B]的一面，也有[C]的一面。否认任何一面，都不是辩证法。",
+      "constraints": {},
+      "source": { "work": "矛盾论", "chapter": "第一节", "quote": "事物的矛盾法则，即对立统一的法则，是唯物辩证法的最根本的法则。" }
+    },
+    {
+      "id": "mao-vocab-002",
+      "author": "mao",
+      "dimension": "vocabulary",
+      "priority": 8,
+      "pattern": "大家|我们|人们",
+      "replacement": "人民群众",
+      "constraints": { "excludeIf": ["我们家", "我们公司", "我们学校"] },
+      "source": { "work": "论联合政府", "chapter": "全文", "quote": "人民，只有人民，才是创造世界历史的动力。" }
+    },
+    {
+      "id": "mao-syntax-002",
+      "author": "mao",
+      "dimension": "syntax",
+      "priority": 8,
+      "pattern": "因为(.*)所以(.*)",
+      "replacement": "因为[A]，所以[B]。事情很明白：由[A]到[B]，这是不以人的意志为转移的。",
+      "constraints": {},
+      "source": { "work": "中国革命战争的战略问题", "chapter": "第一章", "quote": "战争——从有私有财产和有阶级以来就开始了的——是民族和民族、国家和国家……" }
+    },
+    {
+      "id": "mao-logic-002",
+      "author": "mao",
+      "dimension": "logic",
+      "priority": 7,
+      "pattern": "表面(看|上|来看)(.*)",
+      "replacement": "表面看来，[A]。但是，透过现象看本质——[B]。",
+      "constraints": {},
+      "source": { "work": "星星之火，可以燎原", "chapter": "全文", "quote": "我们看事情必须要看它的实质，而把它的现象只看作入门的向导，一进了门就要抓住它的实质。" }
+    },
+    {
+      "id": "mao-vocab-003",
+      "author": "mao",
+      "dimension": "vocabulary",
+      "priority": 7,
+      "pattern": "根本(问题|所在|原因)",
+      "replacement": "根源",
+      "constraints": {},
+      "source": { "work": "矛盾论", "chapter": "第四章", "quote": "事物发展的根本原因，不是在事物的外部而是在事物的内部，在于事物内部的矛盾性。" }
+    },
+    {
+      "id": "mao-syntax-003",
+      "author": "mao",
+      "dimension": "syntax",
+      "priority": 6,
+      "pattern": "如果(.*)那么(.*)",
+      "replacement": "如果[A]，那就必然[B]。我们说[C]，正是基于这一判断。",
+      "constraints": {},
+      "source": { "work": "论持久战", "chapter": "问题的根据", "quote": "如果这些条件不能很快实现，那么战争就是持久的，但最后胜利属于中国。" }
+    },
+
+    {
+      "id": "stalin-vocab-001",
+      "author": "stalin",
+      "dimension": "vocabulary",
+      "priority": 10,
+      "pattern": "因此(.*)",
+      "replacement": "因此，[A]。由此得出的结论是无可辩驳的。",
+      "constraints": {},
+      "source": { "work": "论列宁主义基础", "chapter": "第一章", "quote": "列宁主义是帝国主义和无产阶级革命时代的马克思主义。" }
+    },
+    {
+      "id": "stalin-syntax-001",
+      "author": "stalin",
+      "dimension": "syntax",
+      "priority": 10,
+      "pattern": "什么是(.*)[？?]",
+      "replacement": "什么是[A]？[A]就是[B]。这就是我们对[A]的定义。",
+      "constraints": {},
+      "source": { "work": "论列宁主义基础", "chapter": "第一章", "quote": "什么是列宁主义呢？列宁主义就是帝国主义和无产阶级革命时代的马克思主义。" }
+    },
+    {
+      "id": "stalin-syntax-002",
+      "author": "stalin",
+      "dimension": "syntax",
+      "priority": 9,
+      "pattern": "首先(.*)其次(.*)",
+      "replacement": "第一，[A]。第二，[B]。这两点已经足以说明问题。",
+      "constraints": {},
+      "source": { "work": "论列宁主义的几个问题", "chapter": "全文", "quote": "第一、第二、第三……" }
+    },
+    {
+      "id": "stalin-rhetoric-001",
+      "author": "stalin",
+      "dimension": "rhetoric",
+      "priority": 8,
+      "pattern": "已经证明",
+      "replacement": "经验已经无可辩驳地证明——",
+      "constraints": {},
+      "source": { "work": "苏联社会主义经济问题", "chapter": "全文", "quote": "实践证明，社会主义经济规律是客观存在的。" }
+    },
+    {
+      "id": "stalin-logic-001",
+      "author": "stalin",
+      "dimension": "logic",
+      "priority": 9,
+      "pattern": "由此可见(.*)",
+      "replacement": "由此可见，[A]。这一结论具有普遍意义。否认这一点，就是否认[领域]的基本原理。",
+      "constraints": {},
+      "source": { "work": "论列宁主义基础", "chapter": "全文", "quote": "由此可见，列宁主义并不是列宁个人的学说，而是整个时代的产物。" }
+    },
+    {
+      "id": "stalin-vocab-002",
+      "author": "stalin",
+      "dimension": "vocabulary",
+      "priority": 7,
+      "pattern": "应该(.*)",
+      "replacement": "必须[A]。问题就是这样明确地摆着的。",
+      "constraints": {},
+      "source": { "work": "论经济工作人员的任务", "chapter": "全文", "quote": "必须掌握技术，必须成为内行。" }
+    }
+  ]
+}
+;

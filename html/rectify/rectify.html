@@ -7,25 +7,62 @@
     <link rel="stylesheet" href="../../css/style.css">
     <style>
         /* 正名页面样式 */
+        /* ===== 正名 — 论战台，锐利红黑 ===== */
+        body { background: #f5f0e8; }
+        body.dark-mode { background: #121212; }
+
         .rectify-hero {
-            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
+            position: relative; background: #0d0000;
+            margin: 28px auto 0; padding: 48px 44px; overflow: hidden;
+            max-width: 1100px;
+            border-left: 6px solid #c41e3a;
         }
-        
+        .rectify-hero::after {
+            content: ''; position: absolute; right: 0; top: 0; bottom: 0;
+            width: 6px; background: #8b0000;
+        }
+        body.dark-mode .rectify-hero { background: #050000; }
+
+        .rectify-hero-badge {
+            display: inline-block; background: #c41e3a; color: #fff;
+            padding: 3px 14px; font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 4px; margin-bottom: 18px;
+        }
         .rectify-hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 2.8rem; font-weight: 900;
+            color: #f5f0e8; margin: 0 0 12px; letter-spacing: 6px;
         }
-        
+        .rectify-hero h1 span { color: #c41e3a; }
         .rectify-hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
+            color: #a08888; font-size: 0.9rem; max-width: 500px; line-height: 1.7;
         }
+
+        /* 导航按钮：硬边 + 粗红 */
+        .section-nav-btn {
+            padding: 1.8rem 1.2rem; background: #fff;
+            border: 2px solid #c41e3a; cursor: pointer;
+            transition: all 0.15s; text-align: center;
+            box-shadow: 4px 4px 0 #8b0000; min-height: 130px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .section-nav-btn:hover {
+            background: #c41e3a; color: #fff;
+            transform: translate(-1px, -1px);
+            box-shadow: 6px 6px 0 #5a0000;
+        }
+        .section-nav-btn .icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+        .section-nav-btn .title { font-weight: 700; font-size: 1.1rem; }
+        body.dark-mode .section-nav-btn { background: #1a1010; border-color: #8b0000; color: #ddd; box-shadow: 4px 4px 0 #300000; }
+        body.dark-mode .section-nav-btn:hover { background: #c41e3a; color: #fff; box-shadow: 6px 6px 0 #200000; }
+
+        /* 文章卡片 */
+        .rectify-article-card {
+            background: #fff; border-left: 5px solid #c41e3a;
+            box-shadow: 3px 3px 0 #ddd; padding: 1.4rem;
+            transition: box-shadow 0.2s;
+        }
+        .rectify-article-card:hover { box-shadow: 5px 5px 0 #c41e3a30; }
+        body.dark-mode .rectify-article-card { background: #1a1010; border-color: #8b0000; box-shadow: 3px 3px 0 #150808; }
         
         .rectify-container {
             max-width: 1200px;
@@ -42,21 +79,28 @@
         }
         
         .section-nav-btn {
-            padding: 1.5rem 1rem;
+            padding: 1.8rem 1.2rem;
             background: white;
             border: 2px solid #c41e3a;
-            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             text-align: center;
+            box-shadow: 4px 4px 0 #1a1a1a;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        
+        body.dark-mode .section-nav-btn { background: #1e1e2a; border-color: #555; box-shadow: 4px 4px 0 #0a0a10; }
+
         .section-nav-btn:hover {
             background: #c41e3a;
             color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(196, 30, 58, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 0 #1a1a1a;
         }
+        body.dark-mode .section-nav-btn:hover { box-shadow: 6px 6px 0 #0a0a10; }
         
         .section-nav-btn.active {
             background: #c41e3a;
@@ -317,10 +361,11 @@
 
     <main>
         <!-- 页面头部 -->
-        <section class="rectify-hero">
-            <h1>正名</h1>
-            <p>还原历史真相，澄清歪曲误解，为被污名化的革命事业和革命领袖正名</p>
-        </section>
+        <div class="rectify-hero">
+            <div class="rectify-hero-badge">RECTIFY</div>
+            <h1><span>正</span>名</h1>
+            <p>还原历史真相，澄清歪曲误解——真理是越辩越明的。</p>
+        </div>
 
         <!-- 板块导航 -->
         <div class="rectify-container">

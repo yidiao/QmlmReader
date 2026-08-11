@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>马列体生成器 | Qmlm Reader</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/marxist-style.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main class="ms-app">
+
+        <!-- 红头五星横幅 -->
+        <div class="ms-red-seal">
+            <div class="ms-rs-line"></div>
+            <div class="ms-rs-star"></div>
+            <div class="ms-rs-line"></div>
+        </div>
+
+        <!-- Hero -->
+        <section class="ms-hero">
+            <div class="container">
+                <h1 class="ms-hero-title">
+                    <span class="ms-hero-red">马</span>列<span class="ms-hero-gold">体</span>
+                    <span class="ms-hero-divider"></span>
+                    <span class="ms-hero-sub">生 成 器</span>
+                </h1>
+                <p class="ms-hero-desc">
+                    将日常表达转换为革命导师的论述风格——<br>让文字更有立场、更有逻辑、更有战斗力。
+                </p>
+            </div>
+        </section>
+
+        <!-- 工作区 -->
+        <div class="ms-workspace">
+
+            <!-- ========== 上排：导师选择 | 时期三角 + 三维分析 ========== -->
+            <div class="ms-top-row">
+                <div class="ms-mentor-col">
+                    <h2 class="ms-section-title">选 择 导 师</h2>
+                    <p class="ms-profile-subtitle">点击展开时期与风格剖面</p>
+                    <div class="ms-mentor-cards" id="ms-mentor-cards">
+                        <div class="ms-mentor-card" data-author="marx" data-color="#c41e3a" data-tint="rgba(196,30,58,0.06)" data-shadow="rgba(196,30,58,0.25)">
+                            <div class="ms-mc-bar"></div>
+                            <img class="ms-mc-avatar" src="../../images/masters/marx.jpg" alt="马克思">
+                            <div class="ms-mc-body"><div class="ms-mc-name">马 克 思</div><div class="ms-mc-posture">发现者</div></div>
+                            <div class="ms-mc-geo circle"></div>
+                        </div>
+                        <div class="ms-mentor-card" data-author="engels" data-color="#2563eb" data-tint="rgba(37,99,235,0.06)" data-shadow="rgba(37,99,235,0.25)">
+                            <div class="ms-mc-bar"></div>
+                            <img class="ms-mc-avatar" src="../../images/masters/enges.jpg" alt="恩格斯">
+                            <div class="ms-mc-body"><div class="ms-mc-name">恩 格 斯</div><div class="ms-mc-posture">阐释者</div></div>
+                            <div class="ms-mc-geo square"></div>
+                        </div>
+                        <div class="ms-mentor-card" data-author="lenin" data-color="#d97706" data-tint="rgba(217,119,6,0.06)" data-shadow="rgba(217,119,6,0.25)">
+                            <div class="ms-mc-bar"></div>
+                            <img class="ms-mc-avatar" src="../../images/masters/lenin.jpg" alt="列宁">
+                            <div class="ms-mc-body"><div class="ms-mc-name">列 宁</div><div class="ms-mc-posture">论战者</div></div>
+                            <div class="ms-mc-geo triangle"></div>
+                        </div>
+                        <div class="ms-mentor-card active" data-author="stalin" data-color="#c2410c" data-tint="rgba(194,65,12,0.06)" data-shadow="rgba(194,65,12,0.25)">
+                            <div class="ms-mc-bar"></div>
+                            <img class="ms-mc-avatar" src="../../images/masters/stalin.jpg" alt="斯大林">
+                            <div class="ms-mc-body"><div class="ms-mc-name">斯 大 林</div><div class="ms-mc-posture">定论者</div></div>
+                            <div class="ms-mc-geo diamond"></div>
+                        </div>
+                        <div class="ms-mentor-card" data-author="mao" data-color="#059669" data-tint="rgba(5,150,105,0.06)" data-shadow="rgba(5,150,105,0.25)">
+                            <div class="ms-mc-bar"></div>
+                            <img class="ms-mc-avatar" src="../../images/masters/mao.jpg" alt="毛泽东">
+                            <div class="ms-mc-body"><div class="ms-mc-name">毛 泽 东</div><div class="ms-mc-posture">引导者</div></div>
+                            <div class="ms-mc-geo star"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ms-period-col">
+                    <div class="ms-period-cluster" id="ms-period-cluster">
+                        <svg class="ms-period-lines" viewBox="0 0 300 160" preserveAspectRatio="none">
+                            <line x1="150" y1="30" x2="60" y2="130" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <line x1="150" y1="30" x2="240" y2="130" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3"/>
+                            <line x1="60" y1="130" x2="240" y2="130" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        </svg>
+                        <button class="ms-period-tag pos-top" data-pi="0"></button>
+                        <button class="ms-period-tag pos-left" data-pi="1"></button>
+                        <button class="ms-period-tag pos-right" data-pi="2"></button>
+                    </div>
+                    <div class="ms-analysis-panel" id="ms-analysis-panel">
+                        <div class="ms-ap-header">
+                            <span id="ms-ap-title"></span>
+                            <button class="ms-ap-close" id="ms-ap-close-btn">×</button>
+                        </div>
+                        <div class="ms-detail-grid" id="ms-ap-body"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== 下排：输入（左）| 输出（右） ========== -->
+            <div class="ms-bottom-row">
+                <!-- 输入区 -->
+                <div class="ms-input-col" id="ms-input-col">
+                    <div class="ms-input-card">
+                        <!-- 多页导航 -->
+                        <div class="ms-page-nav" id="ms-input-page-nav">
+                            <button class="ms-page-btn" id="ms-input-prev">◀</button>
+                            <span class="ms-page-indicator" id="ms-input-page-num">1 / 1</span>
+                            <button class="ms-page-btn" id="ms-input-next">▶</button>
+                            <button class="ms-page-btn ms-page-add" id="ms-input-add" title="新增输入页">+</button>
+                        </div>
+                        <!-- 时期标签 -->
+                        <div class="ms-period-selector" id="ms-period-selector" style="display:none;">
+                            <span class="ms-ps-label">时 期</span>
+                            <div class="ms-ps-tags" id="ms-ps-tags">
+                                <button class="ms-ps-tag active" data-period="standard">标 准</button>
+                                <button class="ms-ps-tag" data-period="period1"></button>
+                                <button class="ms-ps-tag" data-period="period2"></button>
+                                <button class="ms-ps-tag" data-period="period3"></button>
+                            </div>
+                        </div>
+
+                        <div class="ms-input-header">
+                            <div class="ms-char-limit">
+                                <span id="ms-char-count">0</span><span style="font-size:0.7rem;color:#999;"> 字</span>
+                                <span style="font-size:0.65rem;color:#aaa;">（≤2000）</span>
+                            </div>
+                        </div>
+                        <textarea id="ms-input-text"
+                                  class="ms-textarea"
+                                  placeholder="输入你想转换的文字……&#10;&#10;长文建议控制在 2000 字以内，效果最佳。"
+                                  maxlength="2000"
+                                  rows="5"></textarea>
+                        <div class="ms-input-actions">
+                            <button id="ms-convert-btn" class="ms-btn-primary">
+                                <span id="ms-convert-btn-text">转 为 马 列 体</span>
+                                <span class="ms-btn-shortcut">Ctrl+Enter</span>
+                            </button>
+                            <button id="ms-style-btn" class="ms-btn-secondary" title="分析输入文本风格特征及其与导师时期的差异">
+                                🔍 风格分析
+                            </button>
+                            <button id="ms-polish-btn" class="ms-btn-secondary" title="梳理逻辑与段落结构">
+                                ✎ 润色与分段
+                            </button>
+                        </div>
+
+                        <!-- API Key 设置（可选，Vercel 后端不可用时的备用方案） -->
+                        <div class="ms-api-key-wrap" id="ms-api-key-wrap">
+                            <button class="ms-api-key-toggle" id="ms-api-key-toggle">
+                                <span>个人 API Key（可选备用）</span>
+                                <span class="ms-akt-arrow">▾</span>
+                            </button>
+                            <div class="ms-api-key-body" id="ms-api-key-body" style="display:none;">
+                                <p class="ms-api-key-hint" style="margin:0 0 8px;font-size:0.75rem;color:#888;">
+                                    默认通过 Vercel 后端调用，无需设置。仅当服务器不可用时作为备用。
+                                </p>
+                                <input type="password"
+                                       id="ms-api-key-input"
+                                       class="ms-api-key-input"
+                                       placeholder="粘贴你的 DeepSeek API Key（sk-...）"
+                                       autocomplete="off" />
+                                <button id="ms-api-key-save" class="ms-btn-secondary" style="font-size:0.8rem;padding:5px 14px;">保存</button>
+                                <span id="ms-api-key-status" class="ms-api-key-status"></span>
+                                <p class="ms-api-key-hint">
+                                    Key 仅存储在浏览器，不经过任何服务器。
+                                    <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">获取 Key →</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 输出区 -->
+                <div class="ms-output-col" id="ms-output-col">
+                    <div class="ms-output-card ms-output-ai" id="ms-output-panel">
+                        <!-- 输出页导航 -->
+                        <div class="ms-page-nav" id="ms-output-page-nav" style="margin-bottom:10px;">
+                            <button class="ms-page-btn" id="ms-output-prev">◀</button>
+                            <span class="ms-page-indicator" id="ms-output-page-num">1 / 1</span>
+                            <button class="ms-page-btn" id="ms-output-next">▶</button>
+                        </div>
+                        <div class="ms-ai-output-header">
+                            <h3 class="ms-card-title" style="margin-bottom:0;">转 换 结 果</h3>
+                            <span class="ms-ai-badge" id="ms-output-badge">就绪</span>
+                        </div>
+                        <span style="font-size:0.7rem;color:#999;" id="ms-output-subtitle">选择导师，输入文字，点击转换</span>
+                        <div class="ms-ai-output-text" id="ms-output-text" style="min-height:80px;color:#aaa;font-style:italic;">转换后的文本将显示在这里……</div>
+                        <div class="ms-ai-meta" id="ms-ai-meta" style="display:none;"></div>
+                        <div class="ms-output-btns" style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+                            <button class="ms-btn-secondary" id="ms-btn-copy">复制文字</button>
+                            <button class="ms-btn-secondary" id="ms-btn-share">分享卡片</button>
+                            <button class="ms-btn-secondary" id="ms-btn-regenerate" style="color:#c2410c;border-color:#c2410c;">🔄 重新生成</button>
+                            <button class="ms-btn-secondary" id="ms-btn-changes">修改明细</button>
+                            <button class="ms-btn-secondary" id="ms-btn-diagnosis">风格诊断</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .ms-workspace -->
+
+        <!-- 问答聊天区 -->
+        <section class="ms-chat-section">
+            <div class="ms-chat-header">
+                <h2 class="ms-chat-title">与 导 师 聊 聊</h2>
+                <span class="ms-chat-hint">最多 10 条消息 · 点击左侧导师切换聊天对象</span>
+            </div>
+            <div class="ms-chat-body">
+                <!-- 左侧：导师快捷选择 -->
+                <div class="ms-chat-sidebar" id="ms-chat-sidebar">
+                </div>
+                <!-- 右侧：聊天区 -->
+                <div class="ms-chat-main">
+                    <div class="ms-chat-card">
+                        <div class="ms-chat-messages" id="ms-chat-messages">
+                            <div class="ms-chat-empty">选择左侧导师，开始对话。</div>
+                        </div>
+                        <div class="ms-chat-input-row">
+                            <textarea id="ms-chat-input" class="ms-chat-input" placeholder="说点什么……" rows="2" maxlength="500"></textarea>
+                            <button id="ms-chat-send" class="ms-chat-send-btn">发 送</button>
+                        </div>
+                        <div class="ms-chat-footer">
+                            <span id="ms-chat-count">0 / 10</span>
+                            <button id="ms-chat-clear" class="ms-btn-secondary" style="font-size:0.75rem;padding:4px 12px;">清空</button>
+                            <button id="ms-chat-export" class="ms-btn-secondary" style="font-size:0.75rem;padding:4px 12px;">导出图片</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 演示区：构成主义风格 -->
+        <section class="ms-demo-section">
+            <div class="ms-demo-bg-red"></div>
+            <div class="ms-demo-bg-black"></div>
+            <div class="ms-demo-geo-circle"></div>
+            <div class="ms-demo-geo-line l1"></div>
+            <div class="ms-demo-geo-line l2"></div>
+
+            <div class="container ms-demo-container">
+                <div class="ms-demo-examples">
+                    <div class="ms-demo-head-wrap">
+                        <h2 class="ms-demo-heading">文 案 示 例</h2>
+                        <span class="ms-demo-head-bar"></span>
+                    </div>
+
+                    <div class="ms-demo-card" style="--rot:-1.5deg;--clip:polygon(0 0,100% 3%,96% 100%,2% 97%);">
+                        <div class="ms-dc-orig">"最近工作压力很大，工资也不见涨。"</div>
+                        <div class="ms-dc-arrow-wrap"><span class="ms-dc-arrow-line"></span><span class="ms-dc-arrow-head"></span></div>
+                        <div class="ms-dc-result">劳动强度的持续攀升与劳动力报酬的相对停滞，构成当代生产关系中一组日益尖锐的内在矛盾。</div>
+                        <div class="ms-dc-tag"><span class="ms-dc-tag-dot"></span>马克思 · 资本论</div>
+                    </div>
+
+                    <div class="ms-demo-card" style="--rot:1deg;--clip:polygon(1% 0,100% 0,98% 98%,0 100%);">
+                        <div class="ms-dc-orig">"网上的人都在吵架，没人认真讨论问题。"</div>
+                        <div class="ms-dc-arrow-wrap"><span class="ms-dc-arrow-line"></span><span class="ms-dc-arrow-head"></span></div>
+                        <div class="ms-dc-result">公共言说空间的碎片化与情绪化，恰是理性对话机制被悬置的表征——但悬置不等于消解。</div>
+                        <div class="ms-dc-tag"><span class="ms-dc-tag-dot"></span>恩格斯 · 反杜林论</div>
+                    </div>
+
+                    <div class="ms-demo-card" style="--rot:-0.8deg;--clip:polygon(0 2%,99% 0,100% 96%,2% 100%);">
+                        <div class="ms-dc-orig">"房价这么高，我们这代人怎么办？"</div>
+                        <div class="ms-dc-arrow-wrap"><span class="ms-dc-arrow-line"></span><span class="ms-dc-arrow-head"></span></div>
+                        <div class="ms-dc-result">住房作为生存资料的属性与资本增殖逻辑之间的张力，正以一代人的生存焦虑为代价展开。</div>
+                        <div class="ms-dc-tag"><span class="ms-dc-tag-dot"></span>马克思 · 政治经济学批判</div>
+                    </div>
+                </div>
+
+                <div class="ms-demo-sources">
+                    <div class="ms-demo-head-wrap">
+                        <h2 class="ms-demo-heading">风 格 出 处</h2>
+                        <span class="ms-demo-head-bar"></span>
+                    </div>
+                    <div class="ms-src-list">
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">01</span><span>定义先行<br>自问自答收网</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">斯大林《论列宁主义基础》</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">02</span><span>"不是……恰恰相反，<br>是……" 唯物论反转</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">马克思《德意志意识形态》</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">03</span><span>"诚然……然而……"<br>让步-反驳结构</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">恩格斯《费尔巴哈论》</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">04</span><span>"剥去……的外壳，<br>其内核无非是……"</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">列宁《帝国主义论》</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">05</span><span>一分为二法<br>+ 俗谚打底</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">毛泽东《矛盾论》《实践论》</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">06</span><span>"量变积累到一定程度<br>必然引发质变"</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">恩格斯《反杜林论》</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">07</span><span>短促反问<br>+ 剥壳分析</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">列宁《怎么办？》</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">08</span><span>短句链式递进<br>"必须…由此…因此…"</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">斯大林《论经济工作人员的任务》</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 弹窗遮罩 -->
+        <div class="ms-modal-overlay" id="ms-modal-overlay">
+            <div class="ms-modal-card">
+                <div class="ms-modal-header">
+                    <span id="ms-modal-title"></span>
+                    <button class="ms-modal-close" id="ms-modal-close">&times;</button>
+                </div>
+                <div class="ms-modal-body" id="ms-modal-body"></div>
+                <div class="ms-modal-footer" id="ms-modal-footer"></div>
+            </div>
+        </div>
+    </main>
+
+    <div id="ms-toast"></div>
+
+    <script src="../../js/marxist-style-rules-data.js"></script>
+    <script src="../../js/mentors/stalin.js"></script>
+    <script src="../../js/mentors/lenin.js"></script>
+    <script src="../../js/mentors/marx.js"></script>
+    <script src="../../js/mentors/engels.js"></script>
+    <script src="../../js/mentors/mao.js"></script>
+    <script src="../../js/mentors/article-db.js"></script>
+    <script src="../../js/marxist-style-ai.js"></script>
+    <script src="../../js/marxist-style.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/darkmode.js"></script>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 / 成为他 / 超越他</p>
+        </div>
+    </footer>
+</body>
+</html>

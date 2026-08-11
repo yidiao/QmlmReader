@@ -6,391 +6,378 @@
     <title>导师 | 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="../../css/style.css">
     <style>
-        /* 导师选择页面样式 */
-        .masters-intro {
-            text-align: center;
-            padding: 3rem 0;
-            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
-            color: white;
-            margin-bottom: 3rem;
+        body { background: #f5f0e8; }
+        body.dark-mode { background: #121212; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ---- Hero ---- */
+        .masters-hero {
+            position: relative;
+            background: #1a1a1a;
+            margin: 28px 0 36px;
+            padding: 48px 44px;
+            overflow: hidden;
         }
-        
-        .masters-intro h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .masters-hero::before {
+            content: '';
+            position: absolute;
+            top: -20%; right: -8%;
+            width: 240px; height: 160%;
+            background: #c41e3a;
+            transform: rotate(12deg);
+            opacity: 0.1;
+            pointer-events: none;
         }
-        
-        .masters-intro p {
-            font-size: 1.2rem;
-            opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
+        .masters-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 4px;
+            background: #c41e3a;
         }
-        
+        .masters-hero-badge {
+            position: relative; z-index: 2;
+            display: inline-block;
+            border: 2px solid #c41e3a;
+            color: #c41e3a;
+            padding: 4px 16px;
+            font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+        .masters-hero h1 {
+            position: relative; z-index: 2;
+            font-size: 2.2rem; font-weight: 900;
+            color: #f5f0e8;
+            margin: 0 0 10px;
+            letter-spacing: 4px;
+        }
+        .masters-hero h1 span { color: #ffd700; }
+        .masters-hero p {
+            position: relative; z-index: 2;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+            max-width: 480px;
+            line-height: 1.7;
+        }
+        body.dark-mode .masters-hero { background: #0a0a10; }
+
+        /* ---- Grid ---- */
         .masters-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.2rem;
-            padding: 0 1rem 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 0 0 48px;
         }
-        
+
         .master-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-            aspect-ratio: 9/16;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            box-shadow: 5px 5px 0 #1a1a1a;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
         }
-        
         .master-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(196, 30, 58, 0.2);
-            border-color: #c41e3a;
+            transform: translateY(-3px);
+            box-shadow: 7px 7px 0 #1a1a1a;
         }
-        
+        body.dark-mode .master-card {
+            background: #1e1e2a;
+            border-color: #333;
+            box-shadow: 5px 5px 0 #0a0a10;
+        }
+        body.dark-mode .master-card:hover {
+            box-shadow: 7px 7px 0 #0a0a10;
+        }
+
         .master-card-header {
-            height: 45%;
-            min-height: 45%;
+            height: 140px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
         }
-        
-        .master-card-header.marx { background: linear-gradient(135deg, #8b0000 0%, #c41e3a 100%); }
-        .master-card-header.lenin { background: linear-gradient(135deg, #c41e3a 0%, #ff6b6b 100%); }
-        .master-card-header.mao { background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%); }
-        
+        .master-card-header.marx  { background: linear-gradient(135deg, #8b0000, #c41e3a); }
+        .master-card-header.engels{ background: linear-gradient(135deg, #4a5568, #2d3748); }
+        .master-card-header.lenin { background: linear-gradient(135deg, #c41e3a, #d4a017); }
+        .master-card-header.stalin{ background: linear-gradient(135deg, #744210, #5a3510); }
+        .master-card-header.mao   { background: linear-gradient(135deg, #8b0000, #dc143c); }
+
         .master-avatar {
-            width: 70px;
-            height: 70px;
+            width: 100px; height: 100px;
             border-radius: 50%;
-            background: white;
+            overflow: hidden;
+            border: 3px solid rgba(255,255,255,0.35);
+        }
+        .master-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .master-card-body {
+            padding: 20px 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .master-card-body h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 4px;
+        }
+        body.dark-mode .master-card-body h3 { color: #e0e0e0; }
+
+        .master-years {
+            color: #888;
+            font-size: 0.82rem;
+            margin-bottom: 8px;
+        }
+        body.dark-mode .master-years { color: #999; }
+
+        .master-desc {
+            color: #555;
+            font-size: 0.85rem;
+            line-height: 1.55;
+            margin-bottom: 12px;
+            flex: 1;
+        }
+        body.dark-mode .master-desc { color: #aaa; }
+
+        .master-works {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+        .work-tag {
+            background: #e8e0e0;
+            color: #6b0000;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            border: 1px solid #d4c8c8;
+        }
+        body.dark-mode .work-tag {
+            background: #4a3030;
+            color: #ffaaaa;
+            border-color: #5a4040;
+        }
+
+        .enter-btn {
+            display: block;
+            text-align: center;
+            padding: 10px 0;
+            background: #8b0000;
+            color: #fff !important;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.88rem;
+            letter-spacing: 1px;
+            transition: background 0.2s;
+        }
+        .enter-btn:hover { background: #5a0000; }
+
+        .master-note {
+            text-align: center;
+            color: #999;
+            font-size: 0.72rem;
+            margin-top: 8px;
+        }
+        body.dark-mode .master-note { color: #777; }
+
+        /* 后继有人 */
+        .master-card.placeholder .master-card-header {
+            background: linear-gradient(135deg, #333, #555);
+        }
+        .master-card.placeholder .master-avatar {
+            background: rgba(255,255,255,0.08);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            font-weight: bold;
-            color: #c41e3a;
-            border: 3px solid rgba(255,255,255,0.3);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        
-        .master-card-body {
-            padding: 1.5rem;
-        }
-        
-        .master-card-body h3 {
-            color: #c41e3a;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .master-years {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-        
-        .master-title {
-            color: #333;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        
-        .master-works {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .work-tag {
-            background: #f5f5f5;
-            color: #c41e3a;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .enter-btn {
-            display: block;
-            width: 100%;
-            padding: 0.8rem;
-            background: #c41e3a;
-            color: white;
-            text-align: center;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        
-        .enter-btn:hover {
-            background: #8b0000;
-        }
-        
-        /* 黑夜模式适配 */
-        body.dark-mode .master-card {
-            background: #2a2a2a;
-            border-color: #444;
-        }
-        
-        body.dark-mode .master-card-body h3 {
-            color: #ff6b6b;
-        }
-        
-        body.dark-mode .master-title {
-            color: #e0e0e0;
-        }
-        
-        body.dark-mode .work-tag {
-            background: #3a3a3a;
-            color: #ff6b6b;
-            border-color: #555;
+            color: rgba(255,255,255,0.25);
         }
 
-        /* 移动端适配 */
         @media (max-width: 768px) {
-            .masters-intro {
-                padding: 2rem 1rem;
+            .masters-hero {
+                padding: 32px 20px;
+                margin: 20px 0 24px;
             }
-            .masters-intro h2 {
+            .masters-hero h1 {
                 font-size: 1.6rem;
-            }
-            .masters-intro p {
-                font-size: 0.95rem;
-                padding: 0 0.5rem;
+                letter-spacing: 2px;
             }
             .masters-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.7rem;
-                padding: 0 0.7rem 2rem;
+                gap: 14px;
             }
-            .master-card {
-                aspect-ratio: auto;
-            }
-            .master-card-header {
-                height: auto;
-                min-height: 70px;
-                padding: 0.8rem 0;
-            }
-            .master-avatar {
-                width: 55px;
-                height: 55px;
-                font-size: 1.5rem;
-            }
-            .master-avatar img {
-                width: 70px !important;
-                height: 70px !important;
-            }
-            .master-card-body {
-                padding: 0.6rem;
-            }
-            .master-card-body h3 {
-                font-size: 1rem;
-            }
-            /* 移动端隐藏次要内容，仅保留头像+名字 */
-            .master-years,
-            .master-title,
-            .master-works,
-            .enter-btn {
-                display: none;
-            }
-            /* 隐藏"资料持续完善中" */
-            .master-card-body p[style] {
-                display: none;
-            }
+            .master-card-header { height: 100px; }
+            .master-avatar { width: 70px; height: 70px; }
+            .master-card-body { padding: 14px; }
+            .master-card-body h3 { font-size: 1rem; }
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 420px) {
             .masters-grid {
                 grid-template-columns: 1fr;
-                max-width: 300px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .master-card-header {
-                min-height: 50px;
-                padding: 0.6rem 0;
-            }
-            .master-card-body h3 {
-                font-size: 1.05rem;
+                max-width: 320px;
+                margin-left: auto; margin-right: auto;
             }
         }
-
     </style>
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
     <main>
-        <section class="masters-intro">
-            <h2>☭ 革命导师</h2>
-            <p>走近马克思主义理论发展的历程，学习革命导师的人生轨迹、理论贡献与历史地位</p>
-        </section>
+        <div class="container">
+            <div class="masters-hero">
+                <div class="masters-hero-badge">MASTERS</div>
+                <h1><span>革命</span>导师</h1>
+                <p>走近马克思主义理论发展的历程，学习革命导师的人生轨迹、理论贡献与历史地位。</p>
+            </div>
 
-    <div class="masters-grid">
+            <div class="masters-grid">
 
-            <!-- 马克思卡片 -->
-                <div class="master-card" onclick="location.href='masters/marx.html'">
-                    <div class="master-card-header marx" style="background: #8b0000; ">
-                      <div class="master-avatar" style="background:none;border:none;box-shadow:none;">
-                            <img src="../../images/masters/marx.jpg"
-                                 style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                <!-- 马克思 -->
+                <div class="master-card">
+                    <div class="master-card-header marx">
+                        <div class="master-avatar">
+                            <img src="../../images/masters/marx.jpg" alt="马克思">
                         </div>
                     </div>
                     <div class="master-card-body">
                         <h3>卡尔·马克思</h3>
                         <p class="master-years">1818 — 1883</p>
-                        <p class="master-title">科学社会主义创始人 · 全世界无产阶级和劳动人民的伟大导师</p>
+                        <p class="master-desc">科学社会主义创始人，全世界无产阶级和劳动人民的伟大导师。</p>
                         <div class="master-works">
                             <span class="work-tag">《共产党宣言》</span>
                             <span class="work-tag">《资本论》</span>
                             <span class="work-tag">《德意志意识形态》</span>
                         </div>
-                        <a href="marx/marx.html" class="enter-btn">进入学习 →</a>
-                        <p style="text-align:center;color:#d97706;font-size:0.8rem;margin-top:0.6rem;">📖 资料持续完善中</p>
+                        <a href="marx/marx.html" class="enter-btn">进入学习</a>
+                        <p class="master-note">资料持续完善中</p>
                     </div>
                 </div>
 
-                <!-- 恩格斯卡片 -->
-                <div class="master-card" onclick="location.href='masters/engels.html'">
-                    <div class="master-card-header" style="background:  #4a5568 100%;">
-                        <div class="master-avatar" style="background:none;border:none;box-shadow:none;">
-                            <img src="../../images/masters/enges.jpg"
-                                 style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                <!-- 恩格斯 -->
+                <div class="master-card">
+                    <div class="master-card-header engels">
+                        <div class="master-avatar">
+                            <img src="../../images/masters/enges.jpg" alt="恩格斯">
                         </div>
                     </div>
                     <div class="master-card-body">
                         <h3>弗里德里希·恩格斯</h3>
                         <p class="master-years">1820 — 1895</p>
-                        <p class="master-title">科学社会主义创始人 · 马克思的亲密战友 · 第二国际奠基人</p>
+                        <p class="master-desc">科学社会主义创始人，马克思的亲密战友，第二国际奠基人。</p>
                         <div class="master-works">
-                            <span class="work-tag">《共产党宣言》</span>
                             <span class="work-tag">《反杜林论》</span>
+                            <span class="work-tag">《自然辩证法》</span>
                             <span class="work-tag">《家庭、私有制和国家的起源》</span>
                         </div>
-                        <a href="engels/engels.html" class="enter-btn">进入学习 →</a>
-                        <p style="text-align:center;color:#d97706;font-size:0.8rem;margin-top:0.6rem;">📖 资料持续完善中</p>
+                        <a href="engels/engels.html" class="enter-btn">进入学习</a>
+                        <p class="master-note">资料持续完善中</p>
                     </div>
                 </div>
 
-                <!-- 列宁卡片 -->
-                <div class="master-card" onclick="location.href='masters/lenin.html'">
-                    <div class="master-card-header lenin" style="background: #d4a017; ">
-                        <div class="master-avatar" style="background:none;border:none;box-shadow:none;">
-                            <img src="../../images/masters/lenin.jpg"
-                                 style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                <!-- 列宁 -->
+                <div class="master-card">
+                    <div class="master-card-header lenin">
+                        <div class="master-avatar">
+                            <img src="../../images/masters/lenin.jpg" alt="列宁">
                         </div>
                     </div>
                     <div class="master-card-body">
                         <h3>弗拉基米尔·列宁</h3>
                         <p class="master-years">1870 — 1924</p>
-                        <p class="master-title">十月革命领袖 · 世界上第一个社会主义国家的缔造者 · 帝国主义论奠基人</p>
+                        <p class="master-desc">十月革命领袖，世界上第一个社会主义国家的缔造者，帝国主义论奠基人。</p>
                         <div class="master-works">
                             <span class="work-tag">《怎么办？》</span>
                             <span class="work-tag">《帝国主义论》</span>
                             <span class="work-tag">《国家与革命》</span>
                         </div>
-                        <a href="lenin/lenin.html" class="enter-btn">进入学习 →</a>
-                        <p style="text-align:center;color:#d97706;font-size:0.8rem;margin-top:0.6rem;">📖 资料持续完善中</p>
+                        <a href="lenin/lenin.html" class="enter-btn">进入学习</a>
+                        <p class="master-note">资料持续完善中</p>
                     </div>
                 </div>
 
-                <!-- 斯大林卡片 -->
-                <div class="master-card" onclick="location.href='masters/stalin.html'">
-                    <div class="master-card-header" style="background: #744210;">
-                        <div class="master-avatar" style="background:none;border:none;box-shadow:none;">
-                            <img src="../../images/masters/stalin.jpg"
-                                 style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                <!-- 斯大林 -->
+                <div class="master-card">
+                    <div class="master-card-header stalin">
+                        <div class="master-avatar">
+                            <img src="../../images/masters/stalin.jpg" alt="斯大林">
                         </div>
                     </div>
                     <div class="master-card-body">
                         <h3>约瑟夫·斯大林</h3>
                         <p class="master-years">1878 — 1953</p>
-                        <p class="master-title">苏联社会主义建设领导者 · 反法西斯战争统帅 · 苏联工业化奠基人</p>
+                        <p class="master-desc">苏联社会主义建设领导者，反法西斯战争统帅，苏联工业化奠基人。</p>
                         <div class="master-works">
                             <span class="work-tag">《论列宁主义基础》</span>
-                            <span class="work-tag">《联共(布)党史简明教程》</span>
                             <span class="work-tag">《马克思主义和语言学问题》</span>
+                            <span class="work-tag">《苏联社会主义经济问题》</span>
                         </div>
-                        <a href="stalin/stalin.html" class="enter-btn">进入学习 →</a>
-                        <p style="text-align:center;color:#d97706;font-size:0.8rem;margin-top:0.6rem;">📖 资料持续完善中</p>
+                        <a href="stalin/stalin.html" class="enter-btn">进入学习</a>
+                        <p class="master-note">资料持续完善中</p>
                     </div>
                 </div>
 
-                <!-- 毛泽东卡片 -->
-                <div class="master-card" onclick="location.href='masters/mao.html'">
-                    <div class="master-card-header mao" style="background: #e8192c;">
-                        <div class="master-avatar" style="background:none;border:none;box-shadow:none;">
-                            <img src="../../images/masters/mao.jpg"
-                                 style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.3);">
+                <!-- 毛泽东 -->
+                <div class="master-card">
+                    <div class="master-card-header mao">
+                        <div class="master-avatar">
+                            <img src="../../images/masters/mao.jpg" alt="毛泽东">
                         </div>
                     </div>
                     <div class="master-card-body">
                         <h3>毛泽东</h3>
                         <p class="master-years">1893 — 1976</p>
-                        <p class="master-title">中国共产党创始人之一 · 中国人民解放军缔造者 · 毛泽东思想创立者</p>
+                        <p class="master-desc">中国共产党创始人之一，中国人民解放军缔造者，毛泽东思想创立者。</p>
                         <div class="master-works">
                             <span class="work-tag">《实践论》</span>
                             <span class="work-tag">《矛盾论》</span>
                             <span class="work-tag">《论持久战》</span>
                             <span class="work-tag">《论十大关系》</span>
-                            <span class="work-tag">《湖南农民运动考察报告》</span>
                         </div>
-                        <a href="mao/mao.html" class="enter-btn">进入学习 →</a>
-                        <p style="text-align:center;color:#d97706;font-size:0.8rem;margin-top:0.6rem;">📖 资料持续完善中</p>
+                        <a href="mao/mao.html" class="enter-btn">进入学习</a>
+                        <p class="master-note">资料持续完善中</p>
                     </div>
                 </div>
 
-                <!-- 后继有人卡片 -->
-                <div class="master-card" >
-                    <div class="master-card-header mao">
-                        <div class="master-avatar"></div>
+                <!-- 后继有人 -->
+                <div class="master-card placeholder">
+                    <div class="master-card-header">
+                        <div class="master-avatar">?</div>
                     </div>
                     <div class="master-card-body">
                         <h3>后继有人</h3>
-                        <p class="master-years">？？？ — ？？？</p>
-                        <p class="master-title">未完待续</p>
+                        <p class="master-years">？ — ？</p>
+                        <p class="master-desc">我们的事业是伟大的，我们的道路是光明的。我们在做前人从未做过的事情。</p>
                         <div class="master-works">
-                            <span class="work-tag">我们的事业是伟大的</span>
-                            <span class="work-tag">我们的道路是光明的</span>
-                            <span class="work-tag">我们在做前人从未做过的事情</span>
-                            <span class="work-tag">我们一定会取得胜利！</span>
-                            
+                            <span class="work-tag">未完待续</span>
                         </div>
-
                     </div>
                 </div>
+
             </div>
+        </div>
     </main>
 
     <footer class="site-footer">
         <div class="container">
             <p>青年马列毛主义驿站 | Qmlm Reader</p>
-            <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+            <p class="footer-note">学习他 / 成为他 / 超越他</p>
         </div>
     </footer>
 
     <script src="../../js/main.js"></script>
-    <script>
-
-
-        // 页面加载时恢复黑夜模式设置
-        
-</script>
-
-<script src="../../js/darkmode.js"></script>
-<script src="../../js/cursor.js"></script>
+    <script src="../../js/darkmode.js"></script>
+    <script src="../../js/cursor.js"></script>
 </body>
 </html>
