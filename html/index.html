@@ -758,19 +758,19 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
 
     <!-- 右侧悬停导航 -->
 <nav class="home-side-nav" id="homeSideNav">
-    <div class="home-nav-toggle" onclick="toggleHomeSideNav()" title="展开导航">☰ 快速导航</div>
+    <div class="home-nav-toggle" onclick="toggleHomeSideNav()" title="展开导航"> 快速导航</div>
     <div class="home-nav-panel">
-        <a href="#historyToday"><span class="nav-icon">📅</span> 历史上的今天</a>
-<a href="#featuredSection"><span class="nav-icon">⭐</span> 五星必读</a>
-<a href="#mastersPreview"><span class="nav-icon">👤</span> 革命导师</a>
-<a href="#toolkitPreview"><span class="nav-icon">🛠️</span> 工具集</a>
-<a href="#puzzleEntry"><span class="nav-icon">🧩</span> 理论拼图</a>
-<a href="#funCultureSection"><span class="nav-icon">🎨</span> 有趣的文艺</a>
-<a href="#messageBoardSection"><span class="nav-icon">💬</span> 留言板</a>
-<a href="#changelogSection"><span class="nav-icon">📋</span> 更新日志</a>
+        <a href="#historyToday"><span class="nav-icon"></span> 历史上的今天</a>
+<a href="#featuredSection"><span class="nav-icon"></span> 五星必读</a>
+<a href="#mastersPreview"><span class="nav-icon"></span> 革命导师</a>
+<a href="#toolkitPreview"><span class="nav-icon"></span> 工具集</a>
+<a href="#puzzleEntry"><span class="nav-icon"></span> 理论拼图</a>
+<a href="#funCultureSection"><span class="nav-icon"></span> 有趣的文艺</a>
+<a href="#messageBoardSection"><span class="nav-icon"></span> 留言板</a>
+<a href="#changelogSection"><span class="nav-icon"></span> 更新日志</a>
 <div class="home-nav-divider"></div>
         <a href="#" class="home-back-top" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});toggleHomeSideNav();">
-            ⬆ 返回顶部
+             返回顶部
         </a>
     </div>
 </nav>
@@ -778,12 +778,12 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
     <div class="search-section">
         <div class="container">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="搜索文章、作者、关键词...（现已支持文章外关键词搜索）" autocomplete="off">
+                <input type="text" id="searchInput" placeholder="搜索文章作者关键词...（现已支持文章外关键词搜索）" autocomplete="off">
                 <button onclick="performSearch()">搜索</button>
                 <div class="search-results" id="searchResults"></div>
             </div>
             <div class="category-toggle">
-                <button onclick="toggleCategories()">展开分类筛选 ▼</button>
+                <button onclick="toggleCategories()">展开分类筛选 </button>
             </div>
             <div class="category-filters" id="categoryFilters">
                 <div class="filter-group">
@@ -834,7 +834,7 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
             </section>
 
             <section class="hero" id="hero" style="margin-top:0;padding-top:0;">
-                <p>青马驿旨在为同志们提供马克思、恩格斯、列宁、斯大林、毛泽东等革命导师的经典著作、为深入理解马克思主义理论的精髓、为当代斗争和建设社会主义提供解忧驿站之便。</p>
+                <p>青马驿旨在为同志们提供马克思恩格斯列宁斯大林毛泽东等革命导师的经典著作为深入理解马克思主义理论的精髓为当代斗争和建设社会主义提供解忧驿站之便</p>
                 <div class="hero-actions">
                     <a href="articles/articles.html" class="btn-primary">开始阅读</a>
                     <a href="masters/masters.html" class="btn-secondary">了解导师</a>
@@ -845,12 +845,12 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
             <section class="history-today-section" id="historyToday">
                 <div class="history-card">
                     <div class="history-card-header">
-                        <div class="history-icon">📅</div>
+                        <div class="history-icon"></div>
                         <div class="history-title-area">
                             <h3 class="history-title">历史上的今天</h3>
                             <span class="history-date" id="todayDate"></span>
                         </div>
-                        <a href="international/international-calendar.html" class="history-more">完整日历 →</a>
+                        <a href="international/international-calendar.html" class="history-more">完整日历 </a>
                     </div>
                     <div class="history-events" id="historyEvents">
                         <div class="history-loading">加载中...</div>
@@ -919,7 +919,7 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                         </div>
                         <h4>马克思</h4>
                         <p>科学社会主义创始人</p>
-                        <a href="masters/marx.html">查看著作 →</a>
+                        <a href="masters/marx.html">查看著作 </a>
                     </div>
                     <div class="master-card">
                         <div class="master-avatar">
@@ -928,7 +928,7 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                         </div>
                         <h4>恩格斯</h4>
                         <p>马克思的亲密战友</p>
-                        <a href="masters/engels.html">查看著作 →</a>
+                        <a href="masters/engels.html">查看著作 </a>
                     </div>
 
                     <div class="master-card">
@@ -938,7 +938,7 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                         </div>
                         <h4>毛泽东</h4>
                         <p>马克思主义中国化开拓者</p>
-                        <a href="masters/mao.html">查看著作 →</a>
+                        <a href="masters/mao.html">查看著作 </a>
                     </div>
 
 
@@ -949,7 +949,7 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                         </div>
                         <h4>列宁</h4>
                         <p>马克思主义捍卫和开拓者</p>
-                        <a href="masters/lenin.html">查看著作 →</a>
+                        <a href="masters/lenin.html">查看著作 </a>
                     </div>
                     <div class="master-card">
                         <div class="master-avatar">
@@ -958,7 +958,7 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                         </div>
                         <h4>斯大林</h4>
                         <p>苏联社会主义建设领导者</p>
-                        <a href="masters/stalin.html">查看著作 →</a>
+                        <a href="masters/stalin.html">查看著作 </a>
                     </div>
 
                 </div>
@@ -968,29 +968,29 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                 <h3 class="section-title">工具集</h3>
                 <div class="tools-grid">
                     <div class="tool-card">
-                        <h4>📐 哲学原理</h4>
-                        <p>唯物辩证法、认识论、历史唯物主义核心概念</p>
-                        <a href="toolkit/toolkit.html#part1">进入学习 →</a>
+                        <h4> 哲学原理</h4>
+                        <p>唯物辩证法认识论历史唯物主义核心概念</p>
+                        <a href="toolkit/toolkit.html#part1">进入学习 </a>
                     </div>
                     <div class="tool-card">
-                        <h4>⚔️ 斗争策略</h4>
+                        <h4> 斗争策略</h4>
                         <p>化理论为实际行动——革命导师们是如何把道理变成力量的？</p>
-                        <a href="toolkit/toolkit.html#part2">进入学习 →</a>
+                        <a href="toolkit/toolkit.html#part2">进入学习 </a>
                     </div>
                     <div class="tool-card">
-                        <h4>📖 学习与思考</h4>
+                        <h4> 学习与思考</h4>
                         <p>分阶段推荐阅读路径，以及如何真正把书读进去</p>
-                        <a href="toolkit/toolkit.html#part3">进入学习 →</a>
+                        <a href="toolkit/toolkit.html#part3">进入学习 </a>
                     </div>
                     <div class="tool-card">
-                        <h4>🔍 见微知著</h4>
+                        <h4> 见微知著</h4>
                         <p>透过经典语录，窥见整篇著作的思想内核</p>
-                        <a href="toolkit/toolkit.html#part4">进入学习 →</a>
+                        <a href="toolkit/toolkit.html#part4">进入学习 </a>
                     </div>
                     <div class="tool-card">
-                        <h4>🧠 独立思考</h4>
+                        <h4> 独立思考</h4>
                         <p>学会辨别真伪，以正确的态度对待历史与现实</p>
-                        <a href="toolkit/toolkit.html#part5">进入学习 →</a>
+                        <a href="toolkit/toolkit.html#part5">进入学习 </a>
                     </div>
                 </div>
             </section>
@@ -998,10 +998,10 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
             <!-- 理论拼图入口 -->
             <section class="puzzle-entry" id="puzzleEntry" style="margin-top:48px;">
                 <div style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border-radius:12px;padding:36px 32px;text-align:center;border:1px solid #c53030;">
-                    <div style="font-size:2.5em;margin-bottom:12px;">🧩</div>
+                    <div style="font-size:2.5em;margin-bottom:12px;"></div>
                     <h3 style="color:#fbbf24;font-size:1.4em;margin-bottom:10px;">马哲理论拼图</h3>
                     <p style="color:#cbd5e0;font-size:0.95em;margin-bottom:20px;max-width:480px;margin-left:auto;margin-right:auto;">
-                        经典著作不是孤立的——它们是一个有机整体。理论拼图将所有文章定位在马哲体系中，帮助你看清每篇文章的理论坐标与相互联系。
+                        经典著作不是孤立的——它们是一个有机整体理论拼图将所有文章定位在马哲体系中，帮助你看清每篇文章的理论坐标与相互联系
                     </p>
                     <div style="display:flex;justify-content:center;gap:24px;margin-bottom:20px;flex-wrap:wrap;">
                         <span style="color:#90cdf4;font-size:0.88em;">哲学基础</span>
@@ -1014,18 +1014,18 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                         <span style="color:#fbd38d;font-size:0.88em;">·</span>
                         <span style="color:#d6bcfa;font-size:0.88em;">文化文艺</span>
                     </div>
-                    <a href="puzzle/puzzle.html" style="display:inline-block;background:#c53030;color:white;padding:12px 32px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:1em;transition:background 0.2s;" onmouseover="this.style.background='#e53e3e'" onmouseout="this.style.background='#c53030'">进入理论拼图 →</a>
+                    <a href="puzzle/puzzle.html" style="display:inline-block;background:#c53030;color:white;padding:12px 32px;border-radius:6px;text-decoration:none;font-weight:bold;font-size:1em;transition:background 0.2s;" onmouseover="this.style.background='#e53e3e'" onmouseout="this.style.background='#c53030'">进入理论拼图 </a>
                 </div>
             </section>
 
             <!-- 有趣的文艺的 -->
             <section class="fun-culture-section" id="funCultureSection" style="margin-top:48px;">
-                <h3 class="section-title">🎨 有趣的文艺的</h3>
+                <h3 class="section-title"> 有趣的文艺的</h3>
                 <p style="text-align:center;color:var(--text-light);margin-bottom:1.5rem;">每次刷新随机推荐，发现更多宝藏</p>
                 <div id="funCultureGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;">
                 </div>
                 <div style="text-align:center;margin-top:1.2rem;">
-                    <a href="gallery/gallery.html" style="display:inline-block;color:#c41e3a;text-decoration:none;font-weight:600;font-size:0.95rem;">查看全部文艺内容 →</a>
+                    <a href="gallery/gallery.html" style="display:inline-block;color:#c41e3a;text-decoration:none;font-weight:600;font-size:0.95rem;">查看全部文艺内容 </a>
                 </div>
 
 
@@ -1172,22 +1172,22 @@ document.addEventListener('click', function(e) {
     <div style="background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,0.12);">
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 20px 28px; background: rgba(0,0,0,0.15); border-bottom: 1px solid rgba(255,255,255,0.1);">
             <div style="display: flex; align-items: center; gap: 12px;">
-                <span style="font-size: 2rem;">💬</span>
+                <span style="font-size: 2rem;"></span>
                 <div>
                     <h3 style="margin: 0; font-size: 1.3rem; color: #ffd700;">留言板（注意，本模块是占位符！！！目前无法评论！！！）</h3>
                     <p style="margin: 4px 0 0 0; font-size: 0.8rem; color: #cbd5e0;">唯有广泛的讨论才能促进理论进步</p>
                 </div>
             </div>
-            <a href="message-board.html" style="background: rgba(255,255,255,0.15); color: white; padding: 6px 18px; border-radius: 30px; text-decoration: none; font-size: 0.85rem;">进入留言板 →</a>
+            <a href="message-board.html" style="background: rgba(255,255,255,0.15); color: white; padding: 6px 18px; border-radius: 30px; text-decoration: none; font-size: 0.85rem;">进入留言板 </a>
         </div>
         
         <div style="padding: 20px 28px;">
             <div style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
-                <p style="margin: 0 0 8px 0; color: #e2e8f0; font-size: 0.9rem; line-height: 1.5;">“读完《实践论》深受启发，认识的过程就是这样螺旋上升的。希望和大家多交流！”</p>
+                <p style="margin: 0 0 8px 0; color: #e2e8f0; font-size: 0.9rem; line-height: 1.5;">“读完实践论深受启发，认识的过程就是这样螺旋上升的希望和大家多交流！”</p>
                 <div style="display: flex; gap: 16px; font-size: 0.75rem; color: #9ca3af;">
-                    <span>❤️ 3</span>
-                    <span>💬 2</span>
-                    <span>📅 2026-05-09</span>
+                    <span> 3</span>
+                    <span> 2</span>
+                    <span> 2026-05-09</span>
                 </div>
             </div>
             <div style="margin-top: 16px; display: flex; gap: 10px;">
@@ -1204,7 +1204,7 @@ function quickPostMessage() {
     var input = document.getElementById('quickMessageInput');
     var content = input.value.trim();
     if (!content) { alert('请输入留言内容'); return; }
-    alert('留言已提交，审核通过后显示。\n\n内容：' + content);
+    alert('留言已提交，审核通过后显示\n\n内容：' + content);
     input.value = '';
 }
 </script>
@@ -1213,11 +1213,11 @@ function quickPostMessage() {
         <section class="changelog-section" id="changelogSection">
             <div class="changelog-header" id="changelogHeader">
                 <div class="changelog-header-left">
-                    <span class="changelog-icon">📋</span>
+                    <span class="changelog-icon"></span>
                     <h3 class="changelog-title">更新日志</h3>
                     <span class="changelog-badge" id="updateCount">加载中...</span>
                 </div>
-                <span class="changelog-toggle-icon" id="changelogToggleIcon">▼</span>
+                <span class="changelog-toggle-icon" id="changelogToggleIcon"></span>
             </div>
             <div class="changelog-body" id="changelogBody">
                 <div class="changelog-inner">
@@ -1225,7 +1225,7 @@ function quickPostMessage() {
                         <div style="text-align:center;padding:32px;color:#999;">加载更新记录中...</div>
                     </div>
                     <div class="changelog-footer">
-                        <a href="about/changelog-archive.html" class="changelog-archive-link">📜 查看完整更新历史 →</a>
+                        <a href="about/changelog-archive.html" class="changelog-archive-link"> 查看完整更新历史 </a>
                     </div>
                 </div>
             </div>
@@ -1236,13 +1236,13 @@ function quickPostMessage() {
     <div style="background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 50%, #1a1a2e 100%); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,0.2); border: 1px solid rgba(196, 30, 58, 0.4);">
         <div style="padding: 20px 28px; background: rgba(0,0,0,0.3); border-bottom: 1px solid rgba(196, 30, 58, 0.3); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
             <div style="display: flex; align-items: center; gap: 12px;">
-                <span style="font-size: 1.8rem;">🧪</span>
+                <span style="font-size: 1.8rem;"></span>
                 <div>
                     <h3 style="margin: 0; font-size: 1.3rem; color: #ffd700;">实验性玩法 · 武器库</h3>
                     <p style="margin: 4px 0 0 0; font-size: 0.8rem; color: #9ca3af;">实用小工具 | 持续实验迭代中</p>
                 </div>
             </div>
-            <a href="experimental/experimental.html" style="background: rgba(196, 30, 58, 0.8); color: white; padding: 6px 20px; border-radius: 30px; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;" onmouseover="this.style.background='#c41e3a'" onmouseout="this.style.background='rgba(196,30,58,0.8)'">进入实验室 →</a>
+            <a href="experimental/experimental.html" style="background: rgba(196, 30, 58, 0.8); color: white; padding: 6px 20px; border-radius: 30px; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;" onmouseover="this.style.background='#c41e3a'" onmouseout="this.style.background='rgba(196,30,58,0.8)'">进入实验室 </a>
         </div>
         
         <div style="padding: 24px 28px;">
@@ -1251,11 +1251,11 @@ function quickPostMessage() {
                 <a href="experimental/experimental.html#excel-generator" style="text-decoration: none;">
                     <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.08);" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='#c41e3a'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.08)'">
                         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
-                            <span style="font-size: 2rem;">📊</span>
+                            <span style="font-size: 2rem;"></span>
                             <h4 style="margin: 0; color: #fbbf24;">Excel 一键生成</h4>
                         </div>
-                        <p style="margin: 0 0 12px 0; color: #cbd5e0; font-size: 0.88rem; line-height: 1.5;">快速生成标准化表格模板，支持数据导出和格式预设，适用于理论学习数据整理。</p>
-                        <span style="color: #c41e3a; font-size: 0.8rem;">正在开发 →</span>
+                        <p style="margin: 0 0 12px 0; color: #cbd5e0; font-size: 0.88rem; line-height: 1.5;">快速生成标准化表格模板，支持数据导出和格式预设，适用于理论学习数据整理</p>
+                        <span style="color: #c41e3a; font-size: 0.8rem;">正在开发 </span>
                     </div>
                 </a>
 
@@ -1263,11 +1263,11 @@ function quickPostMessage() {
                 <a href="experimental/experimental.html#note-organizer" style="text-decoration: none;">
                     <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.08);" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='#c41e3a'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.08)'">
                         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
-                            <span style="font-size: 2rem;">📝</span>
+                            <span style="font-size: 2rem;"></span>
                             <h4 style="margin: 0; color: #fbbf24;">马克思主义笔记整理器</h4>
                         </div>
-                        <p style="margin: 0 0 12px 0; color: #cbd5e0; font-size: 0.88rem; line-height: 1.5;">结构化整理读书笔记，自动生成摘要卡片和关键词标签，支持Markdown导出。</p>
-                        <span style="color: #c41e3a; font-size: 0.8rem;">正在开发 →</span>
+                        <p style="margin: 0 0 12px 0; color: #cbd5e0; font-size: 0.88rem; line-height: 1.5;">结构化整理读书笔记，自动生成摘要卡片和关键词标签，支持Markdown导出</p>
+                        <span style="color: #c41e3a; font-size: 0.8rem;">正在开发 </span>
                     </div>
                 </a>
 
@@ -1275,17 +1275,17 @@ function quickPostMessage() {
                 <a href="experimental/experimental.html#progress-tracker" style="text-decoration: none;">
                     <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.08);" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='#c41e3a'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(255,255,255,0.08)'">
                         <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
-                            <span style="font-size: 2rem;">✅</span>
+                            <span style="font-size: 2rem;"></span>
                             <h4 style="margin: 0; color: #fbbf24;">理论学习进度追踪表</h4>
                         </div>
-                        <p style="margin: 0 0 12px 0; color: #cbd5e0; font-size: 0.88rem; line-height: 1.5;">规划阅读路径，记录学习时长与完成度，可视化你的理论进阶之旅。</p>
-                        <span style="color: #c41e3a; font-size: 0.8rem;">正在开发 →</span>
+                        <p style="margin: 0 0 12px 0; color: #cbd5e0; font-size: 0.88rem; line-height: 1.5;">规划阅读路径，记录学习时长与完成度，可视化你的理论进阶之旅</p>
+                        <span style="color: #c41e3a; font-size: 0.8rem;">正在开发 </span>
                     </div>
                 </a>
             </div>
             
             <div style="margin-top: 20px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); text-align: center;">
-                <span style="font-size: 0.7rem; color: #6b7280;">⚡ 实验性功能 | 界面与功能持续优化中 | 欢迎反馈建议</span>
+                <span style="font-size: 0.7rem; color: #6b7280;"> 实验性功能 | 界面与功能持续优化中 | 欢迎反馈建议</span>
             </div>
         </div>
     </div>
@@ -1301,6 +1301,7 @@ function quickPostMessage() {
         </div>
     </footer>
 
+    <script src="../js/site-data.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/shutter.js"></script>
     <script src="../data/history-events.js"></script>
@@ -1336,8 +1337,8 @@ function quickPostMessage() {
                     events.forEach(event => {
                         const natureClass = event.nature === 'positive' ? 'positive' : 
                                           event.nature === 'negative' ? 'negative' : 'neutral';
-                        const natureIcon = event.nature === 'positive' ? '✓' : 
-                                          event.nature === 'negative' ? '✗' : '•';
+                        const natureIcon = event.nature === 'positive' ? '' : 
+                                          event.nature === 'negative' ? '' : '•';
                         html += `
                             <div class="history-event-item ${natureClass}">
                                 <span class="event-year">${event.year}年</span>
@@ -1428,7 +1429,7 @@ function quickPostMessage() {
                 }
 
                 timelineContainer.innerHTML = recentUpdates.map(update => {
-                    // 格式化日期显示（2026-05-09 → 2026.05.09）
+                    // 格式化日期显示（2026-05-09  2026.05.09）
                     const formattedDate = update.date.replace(/-/g, '.');
                     // 标签颜色映射
                     const tagClass = getTagClass(update.tag);
@@ -1442,7 +1443,7 @@ function quickPostMessage() {
                                     <span class="update-tag ${tagClass}">${escapeHtml(update.tag)}</span>
                                 </div>
                                 <p class="update-desc">${escapeHtml(update.desc)}</p>
-                                <a href="changelog-archive.html?id=${update.detailId}" class="update-detail-link">查看详情 →</a>
+                                <a href="changelog-archive.html?id=${update.detailId}" class="update-detail-link">查看详情 </a>
                             </div>
                         </div>
                     `;
@@ -1452,7 +1453,7 @@ function quickPostMessage() {
                 console.error('加载更新日志失败:', error);
                 timelineContainer.innerHTML = `
                     <div style="text-align:center;padding:32px;color:#c41e3a;">
-                        ⚠️ 加载失败，请检查 data/updates.json 文件是否存在
+                         加载失败，请检查 data/updates.json 文件是否存在
                     </div>
                 `;
                 if (updateCountBadge) updateCountBadge.textContent = '加载失败';

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>悼列宁 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/articles-detail.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* ===== 类别色值（必填，六选一）===== */
+        :root {
+            --cat-primary:   #38a169;
+            --cat-secondary: #68d391;
+            --cat-gradient:  linear-gradient(135deg, #1a3a2a 0%, #38a169 50%, #68d391 100%);
+        }
+    </style>
+</head>
+<body data-category="party">
+
+    <!-- ========== 导航栏（自动注入）========== -->
+    <div id="nav-placeholder"></div>
+
+    <!-- ========== 合集上下文导航（自动注入）========== -->
+    <div class="back-nav" style="display:none;">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../../articles/articles.html" class="back-link"></a>
+        </div>
+    </div>
+
+    <!-- ========== 文章主体 ========== -->
+    <main class="article-detail">
+
+        <!-- ───── 头部 ───── -->
+        <header class="article-header">
+            <div class="importance-badge"> 重点推荐</div>
+            <h1>悼列宁</h1>
+            <div class="article-subtitle">1924年1月26日在全苏苏维埃第二次代表大会上的演说</div>
+            <div class="article-meta">
+                <span class="author">斯大林</span>
+                <span class="date">1924年1月26日</span>
+                <span class="category">党的建设 · 列宁研究</span>
+                <span class="word-count">约3,100字</span>
+                <span class="length-tag"> 短篇</span>
+            </div>
+        </header>
+
+        <!-- ───── Tab 导航 ───── -->
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 1: 原文                              -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro">
+                    <p><strong>阅读提示：</strong>本文是斯大林在列宁逝世后不久发表的著名演说全篇以“列宁同志嘱咐我们……我们向你宣誓……”的重复结构展开，概括了列宁留给布尔什维克党的六条遗嘱：珍惜党员称号保护党的统一巩固无产阶级专政巩固工农联盟巩固共和国联盟忠实于共产国际适合作为理解“列宁主义建党原则”和“无产阶级专政基石”的入门短篇</p>
+                </div>
+
+                <div style="text-align:right;">
+                    <button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon"></span>
+                        一由特殊材料制成的党
+                    </h3>
+                    <div class="chapter-content">
+                        <p>同志们！我们共产党人是具有特殊性格的人，我们是由特殊材料制成的伟大的无产阶级战略家的军队，列宁同志的军队，就是由我们这些人组成的在这个军队里做一个战士，是再光荣不过的了，以列宁同志为创始人和领导者的这个党的党员称号，是再高尚不过的了并不是任何人都能做这个党的党员，并不是任何人都能经得住这个党的党员所必须经历的种种苦难和风暴，工人阶级的儿女，在贫困和斗争中成长起来的儿女——首先就是这些人应当成为这个党的党员正因为如此，列宁主义的党，共产主义的党，同时也叫做工人阶级的党</p>
+                        <p>列宁同志和我们永别时嘱咐我们要珍惜党员这个伟大称号，并保持这个伟大称号的纯洁性，列宁同志：我们向你宣誓，我们一定要光荣地执行你的这个遗嘱！</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon"></span>
+                        二保护党的统一
+                    </h3>
+                    <div class="chapter-content">
+                        <p>二十五年来，列宁同志培养了我们党把我们党培养成为世界上最坚固最有锻炼的工人党沙皇政府及其走狗的打击，资产阶级和地主的疯狂暴行，高尔察克和邓尼金的武装袭击，英国和法国的武装干涉，一切资产阶级报刊异口同声的造谣和诬陷——二十五年来所有这一切恶毒的攻击都落在我们党的头上可是，我们党像一座石山一样屹立着，打退了敌人无数次的攻击，引导工人阶级向胜利前进我们党在残酷的战斗中锻炼了自己队伍的统一和团结，它依靠统一和团结战胜了工人阶级的敌人</p>
+                        <p>列宁同志和我们永别的时候嘱咐我们要保护我们党的统一如同保护眼睛一样，列宁同志：我们谨向你宣誓，我们也一定要光荣地执行你的这个遗嘱！</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon"></span>
+                        三保护和巩固无产阶级专政
+                    </h3>
+                    <div class="chapter-content">
+                        <p>工人阶级的命运痛苦不堪，劳动者备受折磨和苦难奴隶和奴隶主，农奴和农奴主，农民和地主，工人和资本家，被压迫者和压迫者——自古以来世界就是这样构成的，而且现在绝大多数国家都还是这样的千百年来，劳动者数十次数百次地企图推翻压迫者，使自己成为自己生活的主宰但是他们每一次都遭到失败，受到侮辱，不得不退却，不得不把委屈和耻辱，愤怒和绝望埋在心里仰望茫茫的苍天，希望在那里找到救星奴隶制的枷锁依然如故，或者旧枷锁只是被一些同样沉重，同样侮辱人的新枷锁所代替只有在我们国家里，被压迫被践踏的劳动群众才推翻了地主和资本家的统治，建立了工人和农民的统治同志们，你们知道，而且现在全世界都承认，这个伟大的斗争是列宁同志和他的党领导的列宁的伟大，首先就在于他创立了苏维埃共和国，从而在事实上向全世界被压迫群众表明了：得救的希望并没有丧失地主和资本家的统治是不会长久的，劳动王国是可以靠劳动者自身的努力来建立的，劳动王国是应该建立在地上，而不应该建立在天上这样，他就激发了全世界工农争取解放的热望，这也就说明为什么列宁的名字成了被剥削的劳动群众最爱慕的名字</p>
+                        <p>列宁同志和我们永别的时候嘱咐我们要保护和巩固无产阶级专政列宁同志：我们谨向你宣誓，我们一定不遗余力来光荣地执行你的这个遗嘱！</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon"></span>
+                        四巩固工农联盟
+                    </h3>
+                    <div class="chapter-content">
+                        <p>我国的无产阶级专政是建立在工农联盟的基础上的，这是苏维埃共和国的第一个和根本的基石工人和农民不结成这样的联盟就不能战胜资本家和地主，工人没有农民的支持就不能打倒资本家，农民没有工人的领导就不能打倒地主我国国内战争的全部历史说明了这一点可是，巩固苏维埃共和国的斗争还远远没有结束，它只是采取了一种新的形式从前工农联盟具有军事联盟的形式，因为它是以反对高尔察克和邓尼金为目标的，现在工农联盟应当采取城市和乡村间，工人和农民间经济合作的形式，因为它是以反对商人和富农为目标的，因为它是以工人和农民互相供给一切必需品为目标的你们知道，没有一个人像列宁同志那样坚决地执行过这个任务</p>
+                        <p>列宁同志和我们永别时嘱咐我们要竭力巩固工农联盟列宁同志：我们谨向你宣誓，我们也一定要光荣地执行你的这个遗嘱！</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon"></span>
+                        五巩固并扩大共和国联盟
+                    </h3>
+                    <div class="chapter-content">
+                        <p>我国各民族劳动者的联盟是苏维埃共和国的第二个基石俄罗斯人和乌克兰人，巴什基利亚人和白俄罗斯人，格鲁吉亚人和阿捷尔拜疆人，阿尔明基亚人和达格斯坦人，鞑靼人和吉尔吉斯人，乌兹别克人和土尔克明尼亚人——他们都同样和无产阶级专政的巩固休戚相关不仅无产阶级专政使这些民族摆脱枷锁和压迫，而且这些民族也以他们对苏维埃共和国的无限忠诚，以他们为苏维埃共和国牺牲的决心来使我们苏维埃共和国免遭工人阶级的敌人的暗算和袭击正因为如此，列宁同志始终不倦地对我们说明我国各族人民自愿联盟的必要性，说明我国各族人民在共和国联盟内实现兄弟合作的必要性</p>
+                        <p>列宁同志和我们永别的时候嘱咐我们要巩固并扩大共和国联盟，列宁同志：我们谨向你宣誓，我们也一定要光荣地执行你的这个遗嘱！</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon"></span>
+                        六巩固红军和红海军
+                    </h3>
+                    <div class="chapter-content">
+                        <p>我们的红军，我们的红海军是无产阶级专政的第三个基石列宁同志曾屡次对我们说过：我们从资本主义国家那里争取的喘息时机可能是很短的列宁曾屡次向我们指出：巩固红军和改善红军状况是我们党的最重要的任务之一，和寇松最后通牒以及和德国危机有关的事变，再一次证实了列宁向来是正确的同志们，我们来宣誓：我们一定不遗余力地来巩固我们的红军，巩固我们的红海军！</p>
+                        <p>处在资产阶级国家汪洋大海包围中的我国，像一座巨大的石山一样屹立着，波浪一个接着一个地向它冲击，声势汹汹地要把它淹没，把它冲毁但是，这座石山仍然屹立不动我们为什么这样有力量呢？这不仅因为我国建立在工农联盟上，它体现着各自由民族的联盟，它受到红军和红海军的强有力的保护我们所以有力量，所以坚强巩固，还因为它得到全世界工人和农民深刻的同情和坚决支持全世界工人和农民都希望保全苏维埃共和国，认为这是列宁同志用他百发百中的妙手射入敌人阵营的一支箭，是他们希望摆脱压迫和剥削的靠山，是给他们指出解放道路的可以信赖的灯塔他们想保全苏维埃共和国，不让地主和资本家破坏它我们的力量就在这里，世界各国劳动者的力量就在这里，全世界资产阶级的软弱也在这里</p>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <h3 class="chapter-title" onclick="toggleChapter(this)">
+                        <span class="toggle-icon"></span>
+                        七全世界劳动者的联盟——共产国际
+                    </h3>
+                    <div class="chapter-content">
+                        <p>列宁从来没有把苏维埃共和国看做最终目的，他始终把它看做加强西方和东方各国革命运动的必要环节，看做是促进全世界劳动者战胜资本的必要环节列宁知道，不仅从国际的观点来看，而且从保存苏维埃共和国本身的观点来看，只有这样的见解才是正确的列宁知道，只有用这样的方法，才能鼓舞全世界劳动者去进行争取解放的坚决战斗正因为如此，列宁这位无产阶级英明的领袖中最英明的领袖，还在无产阶级专政成立的第二天，就奠定了工人国际的基础，正因为如此，列宁始终不倦地扩大并巩固全世界劳动者的联盟——共产国际</p>
+                        <p>这几天你们已经看见有几万几十万劳动者来拜谒列宁同志的灵柩，过一些时候你们会看见有几百万劳动者的代表们来拜谒列宁同志的陵墓用不着怀疑，在几百万劳动者的后面，一定会有全世界各地几千万，几万万劳动者的代表们接踵而来，以证实列宁不仅是俄国无产阶级的领袖，不仅是欧洲工人的领袖，不仅是殖民地东方的领袖，而且是全世界整个劳动世界的领袖</p>
+                        <p>列宁同志和我们永别时嘱咐我们要忠实于共产国际的原则，列宁同志：我们谨向你宣誓，我们一定奋不顾身地来巩固并扩大全世界劳动者的联盟——共产国际！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 2: 读法提示                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2 class="tab-heading"> 如何阅读本文</h2>
+                <div class="guide-block">
+                    <h3>① 抓住“宣誓”结构</h3>
+                    <p>全文反复出现“列宁同志嘱咐我们……我们谨向你宣誓……”的句式这不是修辞重复，而是政治承诺的结构化表达每一段“嘱咐”都对应布尔什维克党的一项根本原则</p>
+                </div>
+                <div class="guide-block">
+                    <h3>② 记住无产阶级专政的三个基石</h3>
+                    <p>工农联盟各自由民族的联盟红军和红海军这三点既是当时苏维埃政权的现实基础，也是理解列宁主义国家观的重要线索</p>
+                </div>
+                <div class="guide-block">
+                    <h3>③ 把“悼词”读成“党建纲领”</h3>
+                    <p>表面是悼念列宁，实际是在列宁逝世后第一时间向全党全国和全世界重申：党要保持统一，无产阶级专政要继续巩固，工农联盟要继续发展，国际主义不能放弃</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 3: 难点解析                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2 class="tab-heading"> 容易读错的地方</h2>
+                <div class="diff-item">
+                    <div class="wrong"> 常见误读：这是个人崇拜式的悼词，没有理论价值</div>
+                    <div class="correct"> 正解：它是一篇高度凝练的党建文献全文把列宁遗嘱归纳为党员纯洁性党的统一无产阶级专政工农联盟民族联盟军队建设和国际主义，是研究列宁主义建党学说的入门文本</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong"> 常见误读：“特殊材料制成的”是指血统或身份特殊</div>
+                    <div class="correct"> 正解：这里强调的是共产党人经过阶级斗争和革命风暴锻炼而形成的政治品质，不是先天的血统，而是在革命实践中炼成的</div>
+                </div>
+                <div class="diff-item">
+                    <div class="wrong"> 常见误读：巩固红军和红海军只是军事问题</div>
+                    <div class="correct"> 正解：在资本主义包围的条件下，军队是保护无产阶级专政的基石之一列宁强调军队问题，本质上是政权安全问题</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 4: 对话空间                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2 class="tab-heading"> 这篇文章在回应谁？</h2>
+                <div class="dialogue-block">
+                    <h3>对全体党员</h3>
+                    <p>列宁逝世后，党面临“谁来领导如何继续”的问题文章以宣誓形式统一全党意志，防止因领袖逝世而出现组织涣散</p>
+                </div>
+                <div class="dialogue-block">
+                    <h3>对国内外敌人</h3>
+                    <p>资产阶级曾预言列宁逝世会导致苏维埃政权崩溃文章明确宣告：党仍在工农联盟仍在红军仍在共产国际仍在</p>
+                </div>
+                <div class="dialogue-block">
+                    <h3>对后来的共产党人</h3>
+                    <p>它提出一个持久问题：在创始人逝世后，一个革命政党靠什么继续存在？答案是：靠统一靠阶级基础靠群众联盟靠国际主义原则</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 5: 行动实验                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2 class="tab-heading"> 行动实验</h2>
+                <div class="action-item">
+                    <h3>① 列出“列宁遗嘱清单”</h3>
+                    <p>把文中六条嘱咐逐条抄出，并用自己的话说明每一条在今天对应的组织原则是什么</p>
+                </div>
+                <div class="action-item">
+                    <h3>② 分析“三个基石”</h3>
+                    <p>结合当代社会，思考：一个革命政权需要依靠哪些社会力量？工农联盟民族联盟武装力量分别解决什么问题？</p>
+                </div>
+                <div class="action-item">
+                    <h3>③ 比较“宣誓”与“口号”</h3>
+                    <p>为什么文章中的重复宣誓不显得空洞？因为它每一项都对应具体历史任务试写一段有具体任务承诺的“行动宣言”，避免空喊口号</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 6: 一目了然                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2 class="tab-heading"> 一目了然</h2>
+                <div class="chart-block">
+                    <h3>文章特征雷达</h3>
+                    <p class="chart-desc">这篇演说以情感动员与政治纲领并重</p>
+                    <div class="chart-container"><canvas id="radarChart"></canvas></div>
+                </div>
+                <div class="chart-block">
+                    <h3>论证节奏曲线</h3>
+                    <p class="chart-desc">七段“嘱咐—宣誓”形成重复递进的节奏，每次宣誓都是一次情感与政治上的加强</p>
+                    <div class="chart-container"><canvas id="argumentCurve"></canvas></div>
+                </div>
+                <div class="structure-analysis">
+                    <h4>结构分析</h4>
+                    <div class="analysis-item"><span class="analysis-label">党员与党的统一</span><p>先确立党的性质，再强调统一是党的生命</p></div>
+                    <div class="analysis-item"><span class="analysis-label">政权基础</span><p>无产阶级专政需要工农联盟民族联盟和武装力量三大基石</p></div>
+                    <div class="analysis-item"><span class="analysis-label">国际主义</span><p>最后把苏维埃共和国放到世界革命进程中理解，落脚于共产国际</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 7: 理论拼图                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2 class="tab-heading"> 理论拼图</h2>
+                <div class="puzzle-intro">
+                    <p>本文是列宁逝世后斯大林对“列宁主义政治遗嘱”的概括，可与怎么办？国家与革命论列宁主义基础对照阅读</p>
+                </div>
+                <div class="puzzle-timeline">
+                    <h3>在思想发展时间轴上的位置</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">1902</div>
+                            <div class="timeline-label">怎么办？</div>
+                        </div>
+                        <div class="timeline-item active">
+                            <div class="timeline-dot-active"></div>
+                            <div class="timeline-year">1924</div>
+                            <div class="timeline-label">悼列宁</div>
+                            <div class="timeline-here"> 本文</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">1924</div>
+                            <div class="timeline-label">论列宁主义基础</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="puzzle-links">
+                    <h3>文章联结网络</h3>
+                    <div class="conn-grid">
+                        <a href="../Lenin/zen-me-ban.html" class="conn-card" style="border-left-color:#38a169;">
+                            <span class="conn-dir"> 理论来源</span>
+                            <span class="conn-title">怎么办？</span>
+                            <span class="conn-label">党的建设</span>
+                            <span class="conn-relation">关于先锋队与党的组织原则</span>
+                        </a>
+                        <a href="../Lenin/guo-jia-yu-ge-ming.html" class="conn-card" style="border-left-color:#38a169;">
+                            <span class="conn-dir"> 理论来源</span>
+                            <span class="conn-title">国家与革命</span>
+                            <span class="conn-label">政治理论</span>
+                            <span class="conn-relation">关于无产阶级专政与国家消亡</span>
+                        </a>
+                        <a href="lun-lunen-zhu-yi-ji-chu.html" class="conn-card" style="border-left-color:#38a169;">
+                            <span class="conn-dir"> 后续展开</span>
+                            <span class="conn-title">论列宁主义基础</span>
+                            <span class="conn-label">党的建设</span>
+                            <span class="conn-relation">系统化阐述列宁主义</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ========== 下载浮动按钮 ========== -->
+    <button class="download-fab" id="downloadFab" title="下载原文"></button>
+    <div class="download-menu" id="downloadMenu">
+        <h4> 下载原文</h4>
+        <div id="downloadLinks"></div>
+    </div>
+
+    <!-- ========== JS 脚本 ========== -->
+    <script src="../../../js/article-common.js"></script>
+    <script>
+        // ===== 本文图表配置 =====
+        var ARTICLE_CHARTS = [
+            {
+                id: 'radarChart',
+                config: {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                        datasets: [{
+                            label: '悼列宁',
+                            data: [6, 9, 8, 9, 10, 8],
+                            borderColor: getComputedStyle(document.documentElement).getPropertyValue('--cat-secondary').trim(),
+                            backgroundColor: 'rgba(56,161,105,0.15)',
+                            pointBackgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--cat-secondary').trim()
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
+                        plugins: { legend: { display: false } }
+                    }
+                }
+            },
+            {
+                id: 'argumentCurve',
+                config: {
+                    type: 'line',
+                    data: {
+                        labels: ['特殊材料', '党的统一', '无产阶级专政', '工农联盟', '共和国联盟', '红军红海军', '共产国际'],
+                        datasets: [{
+                            label: '论证强度',
+                            data: [7, 8, 10, 9, 8, 8, 9],
+                            borderColor: '#38a169',
+                            backgroundColor: 'rgba(56,161,105,0.08)',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            borderWidth: 2.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            }
+        ];
+
+        // ===== 下载链接 =====
+        var DOWNLOAD_LINKS = [
+            { href: '../../../data/dao-lunen.txt', label: ' 下载 TXT' }
+        ];
+    </script>
+    <script src="../../../js/site-data.js"></script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+</body>
+</html>

@@ -191,7 +191,7 @@
 
     <main>
         <section class="page-header">
-            <h1>📥 下载中心</h1>
+            <h1> 下载中心</h1>
             <p>经典著作 PDF · 宣传画高清图包 · 原始文本 —— 统一收纳，一站下载</p>
         </section>
 
@@ -219,7 +219,7 @@
             <!-- ========== 经典著作 PDF ========== -->
             <section class="dl-section" data-section="articles">
                 <div class="dl-section-title">
-                    📖 经典著作 PDF
+                     经典著作 PDF
                     <span class="dl-section-count">24 篇</span>
                 </div>
                 <div class="dl-grid" id="articlesGrid"></div>
@@ -228,7 +228,7 @@
             <!-- ========== 正名文章 PDF ========== -->
             <section class="dl-section" data-section="rectify">
                 <div class="dl-section-title">
-                    🔍 正名文章 PDF
+                     正名文章 PDF
                     <span class="dl-section-count">7 篇</span>
                 </div>
                 <div class="dl-grid" id="rectifyGrid"></div>
@@ -237,7 +237,7 @@
             <!-- ========== 宣传画图包 ========== -->
             <section class="dl-section" data-section="posters">
                 <div class="dl-section-title">
-                    🎨 宣传画图包 ZIP
+                     宣传画图包 ZIP
                     <span class="dl-section-count">14 个</span>
                 </div>
                 <div class="dl-grid" id="postersGrid"></div>
@@ -253,6 +253,7 @@
         </div>
     </footer>
 
+    <script src="../../js/site-data.js"></script>
     <script src="../../js/main.js"></script>
     <script>
     // ========== 数据 ==========
@@ -315,15 +316,23 @@
         { label:'苏联宣传画·其他', size:'3.7 MB', cat:'posters', file:'soviet-posters-其他.zip' }
     ];
 
+      // 统一数据源：优先使用 site-data.js 生成的下载数据
+      if (window.SITE_DATA && window.SITE_DATA.downloadData) {
+          articlePDFs = window.SITE_DATA.downloadData.articles || [];
+          rectifyPDFs = window.SITE_DATA.downloadData.rectify || [];
+          posterZIPs = window.SITE_DATA.downloadData.posters || [];
+      }
+
+
     // ========== 渲染 ==========
     var authorIcons = {
-        mao: '⭐', marx: '📕', lenin: '📗', stalin: '📘', engels: '📙',
-        rectify: '🔍', posters: '🖼️'
+        mao: '', marx: '', lenin: '', stalin: '', engels: '',
+        rectify: '', posters: ''
     };
 
     function renderArticleCard(item) {
         return '<div class="dl-card cat-' + item.cat + '" data-cat="' + item.cat + '">' +
-            '<div class="dl-icon">' + (authorIcons[item.cat] || '📄') + '</div>' +
+            '<div class="dl-icon">' + (authorIcons[item.cat] || '') + '</div>' +
             '<div class="dl-info">' +
                 '<div class="dl-title">' + esc(item.title) + '</div>' +
                 '<div class="dl-meta">' +
@@ -338,7 +347,7 @@
 
     function renderRectifyCard(item) {
         return '<div class="dl-card cat-rectify" data-cat="rectify">' +
-            '<div class="dl-icon">🔍</div>' +
+            '<div class="dl-icon"></div>' +
             '<div class="dl-info">' +
                 '<div class="dl-title">' + esc(item.title) + '</div>' +
                 '<div class="dl-meta">' +
@@ -352,7 +361,7 @@
 
     function renderPosterCard(item) {
         return '<div class="dl-card cat-posters" data-cat="posters">' +
-            '<div class="dl-icon">🖼️</div>' +
+            '<div class="dl-icon"></div>' +
             '<div class="dl-info">' +
                 '<div class="dl-title">' + esc(item.label) + '</div>' +
                 '<div class="dl-meta">' +

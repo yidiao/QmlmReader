@@ -1,0 +1,73 @@
+/* ============================================================
+   风格二：精致书刊（现代独立杂志风）
+   冷白纸 · 墨灰 · 细衬线 · 大留白 · 细线
+   作用域：body[data-style="book"]
+   ============================================================ */
+
+body[data-style="book"] {
+  --paper: #ffffff;
+  --ink: #1a1a1a;
+  --accent: #8b2f2f;
+  --accent2: #8b2f2f;
+  --line: #e2ddd2;
+  --muted: #8a8a8a;
+}
+
+body[data-style="book"] .xc-page {
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+body[data-style="book"] .xc-body-content {
+  font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+  color: #3a3a3a;
+  line-height: 2.1;
+}
+
+body[data-style="book"] .xc-cover-title {
+  font-weight: 400;
+  color: var(--ink);
+}
+
+body[data-style="book"] .xc-toc-heading {
+  font-weight: 400;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+
+body[data-style="book"] .xc-body-content h1,
+body[data-style="book"] .xc-body-content h2,
+body[data-style="book"] .xc-body-content h3 {
+  font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: 3px;
+}
+
+body[data-style="book"] .xc-body-content blockquote {
+  border-left: 1px solid var(--accent);
+  color: var(--muted);
+  font-family: "KaiTi", "STKaiti", "楷体", serif;
+}
+
+body[data-style="book"] .xc-body-content hr {
+  border-top: 1px solid var(--line);
+}
+
+body[data-style="book"] .xc-back-ornament {
+  color: var(--accent);
+}
+
+/* 暗色 */
+body.dark-mode[data-style="book"] {
+  --paper: #1c1c1c;
+  --ink: #e8e8e8;
+  --accent: #c96a6a;
+  --accent2: #c96a6a;
+  --line: #333333;
+  --muted: #9a9a9a;
+}
+body.dark-mode[data-style="book"] .xc-body-content {
+  color: #d0d0d0;
+}

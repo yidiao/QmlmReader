@@ -541,19 +541,19 @@
         <div class="stat-label">大洲覆盖</div>
     </div>
     <div class="stat-item">
-        <a href="../international/international-calendar.html">📅 日历</a>
+        <a href="../international/international-calendar.html"> 日历</a>
         <div class="stat-label">历史上的今天</div>
     </div>
     <div class="stat-item">
-        <a href="../international/international-column.html">📰 专栏</a>
+        <a href="../international/international-column.html"> 专栏</a>
         <div class="stat-label">深度分析</div>
     </div>
     <div class="stat-item">
-        <a href="../international/international-current.html">⚡ 时事</a>
+        <a href="../international/international-current.html"> 时事</a>
         <div class="stat-label">最新动态</div>
     </div>
     <div class="stat-item">
-        <a href="../international/international-memorial.html">🕯️ 纪念</a>
+        <a href="../international/international-memorial.html"> 纪念</a>
         <div class="stat-label">为了忘却的纪念</div>
     </div>
 </div>
@@ -568,7 +568,7 @@
 
             <!-- 世界地图 -->
             <div class="map-container">
-                <div class="map-title">🗺️ 世界社会主义运动热力图（边界模糊处理）</div>
+                <div class="map-title"> 世界社会主义运动热力图（边界模糊处理）</div>
                 <svg class="world-map" viewBox="0 0 1200 650" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <filter id="blurMap"><feGaussianBlur stdDeviation="1.2" /></filter>
@@ -687,7 +687,7 @@
 
             <!-- 详细时间轴 -->
             <div class="detailed-timeline">
-                <h2>📜 运动历史详览</h2>
+                <h2> 运动历史详览</h2>
                 <div class="timeline" id="detailedTimeline"></div>
             </div>
         </div>
@@ -701,32 +701,33 @@
         </div>
     </footer>
 
+    <script src="../../js/site-data.js"></script>
     <script src="../../js/main.js"></script>
     <script>
         // 完整历史事件数据
         const eventsData = [
-            { year: "1917", title: "十月革命胜利", location: "俄国 · 彼得格勒", desc: "列宁领导的布尔什维克党发动武装起义，推翻资产阶级临时政府，建立世界上第一个社会主义国家。", region: "ussr", type: "violent", era: "1917-1945", tags: ["胜利", "政权建立", "世界首创"], major: true },
-            { year: "1918-1922", title: "苏俄内战与外国武装干涉", location: "俄国全境", desc: "14个帝国主义国家武装干涉苏俄，支持白卫军叛乱。红军击败白卫军和外国干涉军，保卫了苏维埃政权。", region: "ussr", type: "violent", era: "1917-1945", tags: ["胜利", "反干涉"] },
-            { year: "1919", title: "共产国际（第三国际）成立", location: "苏联 · 莫斯科", desc: "列宁倡议成立共产国际，统一领导世界各国共产党的革命运动。来自21个国家的35个政党和组织参加成立大会。", region: "ussr", type: "violent", era: "1917-1945", tags: ["国际组织", "理论传播"] },
-            { year: "1921", title: "中国共产党成立", location: "中国 · 上海", desc: "中国共产党第一次全国代表大会召开，中国革命进入新阶段。", region: "eastasia", type: "violent", era: "1917-1945", tags: ["建党", "革命起点"] },
-            { year: "1922", title: "苏维埃社会主义共和国联盟成立", location: "苏联", desc: "俄罗斯、乌克兰、白俄罗斯、外高加索联邦签署联盟条约，成立世界上第一个多民族社会主义联邦国家。", region: "ussr", type: "violent", era: "1917-1945", tags: ["胜利", "国家联盟", "制度创新"], major: true },
-            { year: "1936-1939", title: "西班牙内战", location: "西班牙", desc: "西班牙人民阵线政府与佛朗哥法西斯叛军的战争。国际纵队由54个国家约4万名志愿者组成支援共和国。", region: "europe-west", type: "guerrilla", era: "1917-1945", tags: ["失败", "国际纵队", "反法西斯"] },
-            { year: "1945-1949", title: "东欧社会主义政权建立", location: "东欧多国", desc: "波兰、捷克斯洛伐克、匈牙利、罗马尼亚、保加利亚、阿尔巴尼亚、南斯拉夫等国相继建立人民民主政权。", region: "europe-west", type: "violent", era: "1945-1991", tags: ["胜利", "阵营形成", "欧洲扩展"], major: true },
-            { year: "1945-1954", title: "朝鲜、越南民主共和国成立", location: "朝鲜、越南", desc: "1948年朝鲜民主主义人民共和国成立，1945年越南民主共和国成立。亚洲社会主义力量壮大。", region: "korea", type: "violent", era: "1945-1991", tags: ["胜利", "亚洲扩展", "反帝斗争"], major: true },
-            { year: "1949", title: "中华人民共和国成立", location: "中国", desc: "中国共产党领导的新民主主义革命胜利，中华人民共和国成立，占世界人口四分之一的东方大国走上社会主义道路。", region: "eastasia", type: "violent", era: "1945-1991", tags: ["胜利", "革命胜利", "亚洲扩展"], major: true },
-            { year: "1953", title: "东柏林工人起义", location: "东德 · 东柏林", desc: "东柏林建筑工人因不满劳动定额提高而罢工，蔓延至全国。苏联驻军介入平息事态。", region: "europe-west", type: "violent", era: "1945-1991", tags: ["工人运动", "社会矛盾"] },
-            { year: "1956", title: "匈牙利十月事件", location: "匈牙利", desc: "因反对苏联控制和要求改革而爆发大规模示威，后演变为武装冲突。苏联两次军事干预平息事态。", region: "europe-west", type: "violent", era: "1945-1991", tags: ["失败", "改革失败", "苏东关系"] },
-            { year: "1959", title: "古巴革命胜利", location: "古巴", desc: "菲德尔·卡斯特罗领导的'七二六运动'推翻巴蒂斯塔独裁政权，建立革命政府。古巴成为西半球唯一的社会主义国家。", region: "caribbean", type: "violent", era: "1945-1991", tags: ["胜利", "革命胜利", "美洲突破", "反美斗争"], major: true },
-            { year: "1968", title: "布拉格之春", location: "捷克斯洛伐克", desc: "杜布切克领导'带有人性面孔的社会主义'改革，推行政治经济自由化。苏联及华约国家军事入侵，改革夭折。", region: "europe-west", type: "violent", era: "1945-1991", tags: ["失败", "改革中断", "苏东矛盾"] },
-            { year: "1970-1973", title: "智利人民团结政府", location: "智利", desc: "社会党人阿连德通过民主选举当选总统，推行'智利式社会主义'道路。1973年皮诺切特军事政变，阿连德殉职。", region: "samerica", type: "parliament", era: "1945-1991", tags: ["失败", "政变中断", "和平过渡", "民主社会主义"] },
-            { year: "1975", title: "越南统一", location: "越南", desc: "北越军队攻占西贡，越南战争结束，南北统一，建立越南社会主义共和国。", region: "indochina", type: "violent", era: "1945-1991", tags: ["胜利", "国家统一", "抗美胜利"], major: true },
-            { year: "1979", title: "尼加拉瓜桑地诺革命", location: "尼加拉瓜", desc: "桑地诺民族解放阵线推翻索摩查独裁政权，建立民族复兴政府。实行土地改革、国有化等左翼政策。", region: "central", type: "guerrilla", era: "1945-1991", tags: ["胜利", "革命胜利", "左翼政权"] },
-            { year: "1989-1991", title: "东欧剧变与苏联解体", location: "东欧、苏联", desc: "波兰、匈牙利、东德、捷克斯洛伐克、罗马尼亚、保加利亚等国政权更迭，共产党失去执政地位。1991年苏联解体。", region: "ussr", type: "violent", era: "1991-2026", tags: ["失败", "阵营瓦解", "历史转折"], major: true },
-            { year: "1994", title: "萨帕塔民族解放军起义", location: "墨西哥 · 恰帕斯州", desc: "以'副司令马科斯'为发言人的萨帕塔民族解放军发动起义，争取印第安人权利和社会正义。", region: "central", type: "guerrilla", era: "1991-2026", tags: ["进行中", "持续抗争", "新左翼", "原住民权利"] },
-            { year: "1998-2013", title: "委内瑞拉'玻利瓦尔革命'", location: "委内瑞拉", desc: "乌戈·查韦斯当选总统，推行'21世纪社会主义'，实施石油国有化、土地改革、社会计划等。", region: "samerica", type: "violent", era: "1991-2026", tags: ["胜利", "左翼执政", "21世纪社会主义", "进行中"], major: true },
-            { year: "2006-2011", title: "尼泊尔联邦民主共和国成立", location: "尼泊尔", desc: "尼泊尔共产党（毛主义）结束十年人民战争，通过和平谈判废除君主制，建立共和国。", region: "india", type: "guerrilla", era: "1991-2026", tags: ["胜利", "共和建立", "毛主义", "和平过渡"] },
-            { year: "2006-2019", title: "拉美'粉红浪潮'", location: "拉丁美洲多国", desc: "巴西卢拉、阿根廷基什内尔、玻利维亚莫拉莱斯、厄瓜多尔科雷亚等左翼领导人相继执政。", region: "samerica", type: "parliament", era: "1991-2026", tags: ["胜利", "左翼执政", "区域浪潮"] },
-            { year: "2020-2026", title: "拉美'第二次粉红浪潮'", location: "拉丁美洲", desc: "墨西哥洛佩斯、阿根廷费尔南德斯、智利博里奇、哥伦比亚佩特罗、巴西卢拉等左翼领导人相继执政。", region: "samerica", type: "parliament", era: "1991-2026", tags: ["胜利", "左翼复兴", "进行中", "持续执政"] }
+            { year: "1917", title: "十月革命胜利", location: "俄国 · 彼得格勒", desc: "列宁领导的布尔什维克党发动武装起义，推翻资产阶级临时政府，建立世界上第一个社会主义国家", region: "ussr", type: "violent", era: "1917-1945", tags: ["胜利", "政权建立", "世界首创"], major: true },
+            { year: "1918-1922", title: "苏俄内战与外国武装干涉", location: "俄国全境", desc: "14个帝国主义国家武装干涉苏俄，支持白卫军叛乱红军击败白卫军和外国干涉军，保卫了苏维埃政权", region: "ussr", type: "violent", era: "1917-1945", tags: ["胜利", "反干涉"] },
+            { year: "1919", title: "共产国际（第三国际）成立", location: "苏联 · 莫斯科", desc: "列宁倡议成立共产国际，统一领导世界各国共产党的革命运动来自21个国家的35个政党和组织参加成立大会", region: "ussr", type: "violent", era: "1917-1945", tags: ["国际组织", "理论传播"] },
+            { year: "1921", title: "中国共产党成立", location: "中国 · 上海", desc: "中国共产党第一次全国代表大会召开，中国革命进入新阶段", region: "eastasia", type: "violent", era: "1917-1945", tags: ["建党", "革命起点"] },
+            { year: "1922", title: "苏维埃社会主义共和国联盟成立", location: "苏联", desc: "俄罗斯乌克兰白俄罗斯外高加索联邦签署联盟条约，成立世界上第一个多民族社会主义联邦国家", region: "ussr", type: "violent", era: "1917-1945", tags: ["胜利", "国家联盟", "制度创新"], major: true },
+            { year: "1936-1939", title: "西班牙内战", location: "西班牙", desc: "西班牙人民阵线政府与佛朗哥法西斯叛军的战争国际纵队由54个国家约4万名志愿者组成支援共和国", region: "europe-west", type: "guerrilla", era: "1917-1945", tags: ["失败", "国际纵队", "反法西斯"] },
+            { year: "1945-1949", title: "东欧社会主义政权建立", location: "东欧多国", desc: "波兰捷克斯洛伐克匈牙利罗马尼亚保加利亚阿尔巴尼亚南斯拉夫等国相继建立人民民主政权", region: "europe-west", type: "violent", era: "1945-1991", tags: ["胜利", "阵营形成", "欧洲扩展"], major: true },
+            { year: "1945-1954", title: "朝鲜越南民主共和国成立", location: "朝鲜越南", desc: "1948年朝鲜民主主义人民共和国成立，1945年越南民主共和国成立亚洲社会主义力量壮大", region: "korea", type: "violent", era: "1945-1991", tags: ["胜利", "亚洲扩展", "反帝斗争"], major: true },
+            { year: "1949", title: "中华人民共和国成立", location: "中国", desc: "中国共产党领导的新民主主义革命胜利，中华人民共和国成立，占世界人口四分之一的东方大国走上社会主义道路", region: "eastasia", type: "violent", era: "1945-1991", tags: ["胜利", "革命胜利", "亚洲扩展"], major: true },
+            { year: "1953", title: "东柏林工人起义", location: "东德 · 东柏林", desc: "东柏林建筑工人因不满劳动定额提高而罢工，蔓延至全国苏联驻军介入平息事态", region: "europe-west", type: "violent", era: "1945-1991", tags: ["工人运动", "社会矛盾"] },
+            { year: "1956", title: "匈牙利十月事件", location: "匈牙利", desc: "因反对苏联控制和要求改革而爆发大规模示威，后演变为武装冲突苏联两次军事干预平息事态", region: "europe-west", type: "violent", era: "1945-1991", tags: ["失败", "改革失败", "苏东关系"] },
+            { year: "1959", title: "古巴革命胜利", location: "古巴", desc: "菲德尔·卡斯特罗领导的'七二六运动'推翻巴蒂斯塔独裁政权，建立革命政府古巴成为西半球唯一的社会主义国家", region: "caribbean", type: "violent", era: "1945-1991", tags: ["胜利", "革命胜利", "美洲突破", "反美斗争"], major: true },
+            { year: "1968", title: "布拉格之春", location: "捷克斯洛伐克", desc: "杜布切克领导'带有人性面孔的社会主义'改革，推行政治经济自由化苏联及华约国家军事入侵，改革夭折", region: "europe-west", type: "violent", era: "1945-1991", tags: ["失败", "改革中断", "苏东矛盾"] },
+            { year: "1970-1973", title: "智利人民团结政府", location: "智利", desc: "社会党人阿连德通过民主选举当选总统，推行'智利式社会主义'道路1973年皮诺切特军事政变，阿连德殉职", region: "samerica", type: "parliament", era: "1945-1991", tags: ["失败", "政变中断", "和平过渡", "民主社会主义"] },
+            { year: "1975", title: "越南统一", location: "越南", desc: "北越军队攻占西贡，越南战争结束，南北统一，建立越南社会主义共和国", region: "indochina", type: "violent", era: "1945-1991", tags: ["胜利", "国家统一", "抗美胜利"], major: true },
+            { year: "1979", title: "尼加拉瓜桑地诺革命", location: "尼加拉瓜", desc: "桑地诺民族解放阵线推翻索摩查独裁政权，建立民族复兴政府实行土地改革国有化等左翼政策", region: "central", type: "guerrilla", era: "1945-1991", tags: ["胜利", "革命胜利", "左翼政权"] },
+            { year: "1989-1991", title: "东欧剧变与苏联解体", location: "东欧苏联", desc: "波兰匈牙利东德捷克斯洛伐克罗马尼亚保加利亚等国政权更迭，共产党失去执政地位1991年苏联解体", region: "ussr", type: "violent", era: "1991-2026", tags: ["失败", "阵营瓦解", "历史转折"], major: true },
+            { year: "1994", title: "萨帕塔民族解放军起义", location: "墨西哥 · 恰帕斯州", desc: "以'副司令马科斯'为发言人的萨帕塔民族解放军发动起义，争取印第安人权利和社会正义", region: "central", type: "guerrilla", era: "1991-2026", tags: ["进行中", "持续抗争", "新左翼", "原住民权利"] },
+            { year: "1998-2013", title: "委内瑞拉'玻利瓦尔革命'", location: "委内瑞拉", desc: "乌戈·查韦斯当选总统，推行'21世纪社会主义'，实施石油国有化土地改革社会计划等", region: "samerica", type: "violent", era: "1991-2026", tags: ["胜利", "左翼执政", "21世纪社会主义", "进行中"], major: true },
+            { year: "2006-2011", title: "尼泊尔联邦民主共和国成立", location: "尼泊尔", desc: "尼泊尔共产党（毛主义）结束十年人民战争，通过和平谈判废除君主制，建立共和国", region: "india", type: "guerrilla", era: "1991-2026", tags: ["胜利", "共和建立", "毛主义", "和平过渡"] },
+            { year: "2006-2019", title: "拉美'粉红浪潮'", location: "拉丁美洲多国", desc: "巴西卢拉阿根廷基什内尔玻利维亚莫拉莱斯厄瓜多尔科雷亚等左翼领导人相继执政", region: "samerica", type: "parliament", era: "1991-2026", tags: ["胜利", "左翼执政", "区域浪潮"] },
+            { year: "2020-2026", title: "拉美'第二次粉红浪潮'", location: "拉丁美洲", desc: "墨西哥洛佩斯阿根廷费尔南德斯智利博里奇哥伦比亚佩特罗巴西卢拉等左翼领导人相继执政", region: "samerica", type: "parliament", era: "1991-2026", tags: ["胜利", "左翼复兴", "进行中", "持续执政"] }
         ];
 
         const regionColors = {
@@ -757,7 +758,7 @@
                     <div class="timeline-card ${ev.type}" data-region="${ev.region}" data-year="${ev.year}">
                         <div class="card-year">${ev.year}</div>
                         <div class="card-title">${ev.title}</div>
-                        <div class="card-location">📍 ${ev.location}</div>
+                        <div class="card-location"> ${ev.location}</div>
                         <div class="card-desc">${ev.desc.substring(0, 50)}...</div>
                         <div class="card-tags">${tagsHtml}</div>
                     </div>
@@ -796,7 +797,7 @@
                         <span class="timeline-year">${ev.year}</span>
                         <div class="timeline-content">
                             <h3>${ev.title}</h3>
-                            <div class="timeline-location">📍 ${ev.location}</div>
+                            <div class="timeline-location"> ${ev.location}</div>
                             <p>${ev.desc}</p>
                             <div class="timeline-tags">${tagsHtml}</div>
                         </div>

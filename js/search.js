@@ -3,7 +3,7 @@
 // ============================================================
 
 // ------ 1. 经典文章索引 ------
-const articleIndex = [
+var articleIndex = (window.SITE_DATA && window.SITE_DATA.articleIndex) ? window.SITE_DATA.articleIndex : [
     // 五星 - 毛泽东
     { title: '论持久战', file: 'articles/Mao/lun-chi-jiu-zhan.html', author: '毛泽东', authorKey: 'mao', year: '1938', priority: '5', category: '军事战略', keywords: ['抗日战争', '持久战', '军事', '战略'] },
     { title: '实践论', file: 'articles/Mao/shi-jian-lun.html', author: '毛泽东', authorKey: 'mao', year: '1937', priority: '5', category: '哲学基础', keywords: ['认识论', '辩证法', '实践', '知行'] },
@@ -40,7 +40,7 @@ const articleIndex = [
 ];
 
 // ------ 2. 文艺视频索引 ------
-const galleryIndex = [
+var galleryIndex = (window.SITE_DATA && window.SITE_DATA.galleryIndex) ? window.SITE_DATA.galleryIndex : [
     // 经典影视
     { title: '大型音乐舞蹈史诗《东方红》', file: 'gallery/videos.html', type: 'video', category: '经典影视', year: '1965', keywords: ['东方红', '歌舞', '革命史诗', '国庆', '经典'] },
     { title: '电影《列宁在十月》', file: 'gallery/videos.html', type: 'video', category: '经典影视', year: '1937', keywords: ['列宁', '十月革命', '苏联电影', '历史影片'] },
@@ -73,7 +73,7 @@ const galleryIndex = [
 ];
 
 // ------ 3. 正名文章索引 ------
-const rectifyIndex = [
+var rectifyIndex = (window.SITE_DATA && window.SITE_DATA.rectifyIndex) ? window.SITE_DATA.rectifyIndex : [
     // 领导人正名
     {
         title: '历史的审判台：苏联七十年兴亡再思考',

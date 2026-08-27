@@ -28,7 +28,7 @@
                     <span class="ms-hero-sub">生 成 器</span>
                 </h1>
                 <p class="ms-hero-desc">
-                    将日常表达转换为革命导师的论述风格——<br>让文字更有立场、更有逻辑、更有战斗力。
+                    将日常表达转换为革命导师的论述风格——<br>让文字更有立场更有逻辑更有战斗力
                 </p>
             </div>
         </section>
@@ -103,9 +103,9 @@
                     <div class="ms-input-card">
                         <!-- 多页导航 -->
                         <div class="ms-page-nav" id="ms-input-page-nav">
-                            <button class="ms-page-btn" id="ms-input-prev">◀</button>
+                            <button class="ms-page-btn" id="ms-input-prev"></button>
                             <span class="ms-page-indicator" id="ms-input-page-num">1 / 1</span>
-                            <button class="ms-page-btn" id="ms-input-next">▶</button>
+                            <button class="ms-page-btn" id="ms-input-next"></button>
                             <button class="ms-page-btn ms-page-add" id="ms-input-add" title="新增输入页">+</button>
                         </div>
                         <!-- 时期标签 -->
@@ -127,7 +127,7 @@
                         </div>
                         <textarea id="ms-input-text"
                                   class="ms-textarea"
-                                  placeholder="输入你想转换的文字……&#10;&#10;长文建议控制在 2000 字以内，效果最佳。"
+                                  placeholder="输入你想转换的文字……&#10;&#10;长文建议控制在 2000 字以内，效果最佳"
                                   maxlength="2000"
                                   rows="5"></textarea>
                         <div class="ms-input-actions">
@@ -136,10 +136,10 @@
                                 <span class="ms-btn-shortcut">Ctrl+Enter</span>
                             </button>
                             <button id="ms-style-btn" class="ms-btn-secondary" title="分析输入文本风格特征及其与导师时期的差异">
-                                🔍 风格分析
+                                 风格分析
                             </button>
                             <button id="ms-polish-btn" class="ms-btn-secondary" title="梳理逻辑与段落结构">
-                                ✎ 润色与分段
+                                 润色与分段
                             </button>
                         </div>
 
@@ -147,11 +147,11 @@
                         <div class="ms-api-key-wrap" id="ms-api-key-wrap">
                             <button class="ms-api-key-toggle" id="ms-api-key-toggle">
                                 <span>个人 API Key（可选备用）</span>
-                                <span class="ms-akt-arrow">▾</span>
+                                <span class="ms-akt-arrow"></span>
                             </button>
                             <div class="ms-api-key-body" id="ms-api-key-body" style="display:none;">
                                 <p class="ms-api-key-hint" style="margin:0 0 8px;font-size:0.75rem;color:#888;">
-                                    默认通过 Vercel 后端调用，无需设置。仅当服务器不可用时作为备用。
+                                    默认通过 Vercel 后端调用，无需设置仅当服务器不可用时作为备用
                                 </p>
                                 <input type="password"
                                        id="ms-api-key-input"
@@ -161,8 +161,8 @@
                                 <button id="ms-api-key-save" class="ms-btn-secondary" style="font-size:0.8rem;padding:5px 14px;">保存</button>
                                 <span id="ms-api-key-status" class="ms-api-key-status"></span>
                                 <p class="ms-api-key-hint">
-                                    Key 仅存储在浏览器，不经过任何服务器。
-                                    <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">获取 Key →</a>
+                                    Key 仅存储在浏览器，不经过任何服务器
+                                    <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">获取 Key </a>
                                 </p>
                             </div>
                         </div>
@@ -174,9 +174,9 @@
                     <div class="ms-output-card ms-output-ai" id="ms-output-panel">
                         <!-- 输出页导航 -->
                         <div class="ms-page-nav" id="ms-output-page-nav" style="margin-bottom:10px;">
-                            <button class="ms-page-btn" id="ms-output-prev">◀</button>
+                            <button class="ms-page-btn" id="ms-output-prev"></button>
                             <span class="ms-page-indicator" id="ms-output-page-num">1 / 1</span>
-                            <button class="ms-page-btn" id="ms-output-next">▶</button>
+                            <button class="ms-page-btn" id="ms-output-next"></button>
                         </div>
                         <div class="ms-ai-output-header">
                             <h3 class="ms-card-title" style="margin-bottom:0;">转 换 结 果</h3>
@@ -188,7 +188,7 @@
                         <div class="ms-output-btns" style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
                             <button class="ms-btn-secondary" id="ms-btn-copy">复制文字</button>
                             <button class="ms-btn-secondary" id="ms-btn-share">分享卡片</button>
-                            <button class="ms-btn-secondary" id="ms-btn-regenerate" style="color:#c2410c;border-color:#c2410c;">🔄 重新生成</button>
+                            <button class="ms-btn-secondary" id="ms-btn-regenerate" style="color:#c2410c;border-color:#c2410c;"> 重新生成</button>
                             <button class="ms-btn-secondary" id="ms-btn-changes">修改明细</button>
                             <button class="ms-btn-secondary" id="ms-btn-diagnosis">风格诊断</button>
                         </div>
@@ -211,7 +211,7 @@
                 <div class="ms-chat-main">
                     <div class="ms-chat-card">
                         <div class="ms-chat-messages" id="ms-chat-messages">
-                            <div class="ms-chat-empty">选择左侧导师，开始对话。</div>
+                            <div class="ms-chat-empty">选择左侧导师，开始对话</div>
                         </div>
                         <div class="ms-chat-input-row">
                             <textarea id="ms-chat-input" class="ms-chat-input" placeholder="说点什么……" rows="2" maxlength="500"></textarea>
@@ -243,23 +243,23 @@
                     </div>
 
                     <div class="ms-demo-card" style="--rot:-1.5deg;--clip:polygon(0 0,100% 3%,96% 100%,2% 97%);">
-                        <div class="ms-dc-orig">"最近工作压力很大，工资也不见涨。"</div>
+                        <div class="ms-dc-orig">"最近工作压力很大，工资也不见涨"</div>
                         <div class="ms-dc-arrow-wrap"><span class="ms-dc-arrow-line"></span><span class="ms-dc-arrow-head"></span></div>
-                        <div class="ms-dc-result">劳动强度的持续攀升与劳动力报酬的相对停滞，构成当代生产关系中一组日益尖锐的内在矛盾。</div>
+                        <div class="ms-dc-result">劳动强度的持续攀升与劳动力报酬的相对停滞，构成当代生产关系中一组日益尖锐的内在矛盾</div>
                         <div class="ms-dc-tag"><span class="ms-dc-tag-dot"></span>马克思 · 资本论</div>
                     </div>
 
                     <div class="ms-demo-card" style="--rot:1deg;--clip:polygon(1% 0,100% 0,98% 98%,0 100%);">
-                        <div class="ms-dc-orig">"网上的人都在吵架，没人认真讨论问题。"</div>
+                        <div class="ms-dc-orig">"网上的人都在吵架，没人认真讨论问题"</div>
                         <div class="ms-dc-arrow-wrap"><span class="ms-dc-arrow-line"></span><span class="ms-dc-arrow-head"></span></div>
-                        <div class="ms-dc-result">公共言说空间的碎片化与情绪化，恰是理性对话机制被悬置的表征——但悬置不等于消解。</div>
+                        <div class="ms-dc-result">公共言说空间的碎片化与情绪化，恰是理性对话机制被悬置的表征——但悬置不等于消解</div>
                         <div class="ms-dc-tag"><span class="ms-dc-tag-dot"></span>恩格斯 · 反杜林论</div>
                     </div>
 
                     <div class="ms-demo-card" style="--rot:-0.8deg;--clip:polygon(0 2%,99% 0,100% 96%,2% 100%);">
                         <div class="ms-dc-orig">"房价这么高，我们这代人怎么办？"</div>
                         <div class="ms-dc-arrow-wrap"><span class="ms-dc-arrow-line"></span><span class="ms-dc-arrow-head"></span></div>
-                        <div class="ms-dc-result">住房作为生存资料的属性与资本增殖逻辑之间的张力，正以一代人的生存焦虑为代价展开。</div>
+                        <div class="ms-dc-result">住房作为生存资料的属性与资本增殖逻辑之间的张力，正以一代人的生存焦虑为代价展开</div>
                         <div class="ms-dc-tag"><span class="ms-dc-tag-dot"></span>马克思 · 政治经济学批判</div>
                     </div>
                 </div>
@@ -270,14 +270,14 @@
                         <span class="ms-demo-head-bar"></span>
                     </div>
                     <div class="ms-src-list">
-                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">01</span><span>定义先行<br>自问自答收网</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">斯大林《论列宁主义基础》</span></div>
-                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">02</span><span>"不是……恰恰相反，<br>是……" 唯物论反转</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">马克思《德意志意识形态》</span></div>
-                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">03</span><span>"诚然……然而……"<br>让步-反驳结构</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">恩格斯《费尔巴哈论》</span></div>
-                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">04</span><span>"剥去……的外壳，<br>其内核无非是……"</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">列宁《帝国主义论》</span></div>
-                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">05</span><span>一分为二法<br>+ 俗谚打底</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">毛泽东《矛盾论》《实践论》</span></div>
-                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">06</span><span>"量变积累到一定程度<br>必然引发质变"</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">恩格斯《反杜林论》</span></div>
-                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">07</span><span>短促反问<br>+ 剥壳分析</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">列宁《怎么办？》</span></div>
-                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">08</span><span>短句链式递进<br>"必须…由此…因此…"</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">斯大林《论经济工作人员的任务》</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">01</span><span>定义先行<br>自问自答收网</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">斯大林论列宁主义基础</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">02</span><span>"不是……恰恰相反，<br>是……" 唯物论反转</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">马克思德意志意识形态</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">03</span><span>"诚然……然而……"<br>让步-反驳结构</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">恩格斯费尔巴哈论</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">04</span><span>"剥去……的外壳，<br>其内核无非是……"</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">列宁帝国主义论</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">05</span><span>一分为二法<br>+ 俗谚打底</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">毛泽东矛盾论实践论</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">06</span><span>"量变积累到一定程度<br>必然引发质变"</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">恩格斯反杜林论</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">07</span><span>短促反问<br>+ 剥壳分析</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">列宁怎么办？</span></div>
+                        <div class="ms-src-row"><div class="ms-src-pattern"><span class="ms-src-num">08</span><span>短句链式递进<br>"必须…由此…因此…"</span></div><span class="ms-src-sep"></span><span class="ms-src-ref">斯大林论经济工作人员的任务</span></div>
                     </div>
                 </div>
             </div>
@@ -298,15 +298,16 @@
 
     <div id="ms-toast"></div>
 
-    <script src="../../js/marxist-style-rules-data.js"></script>
-    <script src="../../js/mentors/stalin.js"></script>
-    <script src="../../js/mentors/lenin.js"></script>
-    <script src="../../js/mentors/marx.js"></script>
-    <script src="../../js/mentors/engels.js"></script>
-    <script src="../../js/mentors/mao.js"></script>
-    <script src="../../js/mentors/article-db.js"></script>
-    <script src="../../js/marxist-style-ai.js"></script>
-    <script src="../../js/marxist-style.js"></script>
+    <script src="../../js/marxist/marxist-style-rules-data.js"></script>
+    <script src="../../js/marxist/mentors/stalin.js"></script>
+    <script src="../../js/marxist/mentors/lenin.js"></script>
+    <script src="../../js/marxist/mentors/marx.js"></script>
+    <script src="../../js/marxist/mentors/engels.js"></script>
+    <script src="../../js/marxist/mentors/mao.js"></script>
+    <script src="../../js/marxist/mentors/article-db.js"></script>
+    <script src="../../js/marxist/marxist-style-ai.js"></script>
+    <script src="../../js/marxist/marxist-style.js"></script>
+    <script src="../../js/site-data.js"></script>
     <script src="../../js/main.js"></script>
     <script src="../../js/darkmode.js"></script>
 

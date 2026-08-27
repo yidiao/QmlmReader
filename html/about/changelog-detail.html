@@ -94,7 +94,7 @@
 
     <main>
         <div class="detail-container" id="detailContainer">
-            <a href="../index.html" class="back-link">← 返回首页</a>
+            <a href="../index.html" class="back-link"> 返回首页</a>
             <div id="detailContent" class="loading">加载中...</div>
         </div>
     </main>
@@ -125,7 +125,7 @@
     const detailId = params.get('id');
 
     if (!detailId) {
-        container.innerHTML = '<div class="not-found">❓ 未指定更新条目</div>';
+        container.innerHTML = '<div class="not-found"> 未指定更新条目</div>';
         return;
     }
 
@@ -136,7 +136,7 @@
         const update = updates.find(u => u.detailId == detailId);
 
         if (!update) {
-            container.innerHTML = '<div class="not-found">🔍 未找到该更新详情，请返回首页查看其他更新</div>';
+            container.innerHTML = '<div class="not-found"> 未找到该更新详情，请返回首页查看其他更新</div>';
             return;
         }
 
@@ -153,14 +153,14 @@
                 <span class="detail-tag ${tagClass}">${escapeHtml(update.tag)}</span>
             </h1>
             <div class="detail-content">
-                <p><strong>📝 简介：</strong> ${escapeHtml(update.desc)}</p>
+                <p><strong> 简介：</strong> ${escapeHtml(update.desc)}</p>
                 ${detailedContent}
             </div>
         `;
         container.innerHTML = detailedHtml;
 
     } catch (e) {
-        container.innerHTML = '<div class="not-found">⚠️ 加载失败，请检查网络或 data/updates.json 文件</div>';
+        container.innerHTML = '<div class="not-found"> 加载失败，请检查网络或 data/updates.json 文件</div>';
     }
 }
 
@@ -170,15 +170,15 @@ function getDetailedContent(detailId, title) {
 
         // 2026-05-25 111
         'revolution': `
-            <h3>日历修复、添加几则；拼图稀疏区补全</h3>
+            <h3>日历修复添加几则；拼图稀疏区补全</h3>
             <p>在日历和拼图里</p>
             <ul>
                 <li>日历添加我国工人运动和早期革命起义约十则；拼图稀疏区补全，进行一定优化orz<\li>
             </ul>   
             <p>未来计划给工人运动做个专栏...安息吧，山西煤矿工人...</p>
-            <p><a href="../international/international-calendar.html" style="color:#c41e3a;">👉 立即体验</a></p>
+            <p><a href="../international/international-calendar.html" style="color:#c41e3a;"> 立即体验</a></p>
         `,
-        // 2026-05-09 工具集、搜索优化
+        // 2026-05-09 工具集搜索优化
         'poetry': `
             <h3>新增诗词模块</h3>
             <p>在文艺里</p>
@@ -186,9 +186,9 @@ function getDetailedContent(detailId, title) {
                 <li>懒得写了orz<\li>
             </ul>   
             <p>诗人身份和思想比较杂，暂时没工夫管</p>
-            <p><a href="gallery/poetry.html" style="color:#c41e3a;">👉 立即体验</a></p>
+            <p><a href="gallery/poetry.html" style="color:#c41e3a;"> 立即体验</a></p>
         `,
-        // 2026-05-09 工具集、搜索优化
+        // 2026-05-09 工具集搜索优化
         'article-update1': `
             <h3>实装一批文章</h3>
             <p>比如反杜林论</p>
@@ -196,18 +196,18 @@ function getDetailedContent(detailId, title) {
                 <li>懒得写了orz<\li>
             </ul>
             <p>其他也有很多</p>
-            <p><a href="../articles/Engels/fan-du-lin-lun.html" style="color:#c41e3a;">👉 立即体验</a></p>
+            <p><a href="../articles/Engels/fan-du-lin-lun.html" style="color:#c41e3a;"> 立即体验</a></p>
         `,
 
-        // 2026-05-09 工具集、搜索优化
+        // 2026-05-09 工具集搜索优化
         'toolkit': `
-            <h3>工具集、搜索优化、杂七杂八的优化</h3>
+            <h3>工具集搜索优化杂七杂八的优化</h3>
             <p>啥也不懂上来可以逛逛工具集</p>
             <ul>
                 <li>懒得写了orz<\li>
             </ul>
-            <p>大量占位符，是对的。</p>
-            <p><a href="../toolkit/toolkit.html" style="color:#c41e3a;">👉 立即体验新版工具集</a></p>
+            <p>大量占位符，是对的</p>
+            <p><a href="../toolkit/toolkit.html" style="color:#c41e3a;"> 立即体验新版工具集</a></p>
         `,
         // 2026-05-09 实验性工具
         'experimental': `
@@ -216,28 +216,28 @@ function getDetailedContent(detailId, title) {
             <ul>
                 <li>如何在互联网上大量的群体实践？这个问题留给读者<\li>
             </ul>
-            <p>在构思了。在构思</p>
+            <p>在构思了在构思</p>
         `,
         // 2026-05-09 子板块
         'three-new': `
-            <h3>新增“国际共运”三个子板块、新增留言板（占位符）、科普模块（工具集里）和更新日志</h3>
+            <h3>新增“国际共运”三个子板块新增留言板（占位符）科普模块（工具集里）和更新日志</h3>
             <p>理论拼图将所有经典文章按照马哲体系分为六大板块：</p>
             <ul>
                 懒得写了orz
             </ul>
-            <p><a href="../international/international.html" style="color:#c41e3a;">👉 立即体验国际共运子模块</a></p>
+            <p><a href="../international/international.html" style="color:#c41e3a;"> 立即体验国际共运子模块</a></p>
         `,
 
         // 2026-05-08 文章修复
         'article-update': `
-            <h3>《国家与革命》等文章修复、统一样式；新增马恩著作（提取出正文但尚未实装）、新增拓展阅读（空壳子）</h3>
-            <p>文章的格式逐渐确定。后续添加书签功能。</p>
+            <h3>国家与革命等文章修复统一样式；新增马恩著作（提取出正文但尚未实装）新增拓展阅读（空壳子）</h3>
+            <p>文章的格式逐渐确定后续添加书签功能</p>
             <ul>
-                <li><strong>短、中、长篇</strong>：长篇优先配置书签和目录以及其他便于阅读功能</li>
+                <li><strong>短中长篇</strong>：长篇优先配置书签和目录以及其他便于阅读功能</li>
                 <li><strong>六大分类</strong> ......</li>
                 <li>懒得写了orz</li>
             </ul>
-            <p><a href="../articles/Lenin/guo-jia-yu-ge-ming.html" style="color:#c41e3a;">👉 立即体验《国家与革命》</a></p>
+            <p><a href="../articles/Lenin/guo-jia-yu-ge-ming.html" style="color:#c41e3a;"> 立即体验国家与革命</a></p>
         `,
 
         // 2026-05-05 手机适配
@@ -256,9 +256,9 @@ function getDetailedContent(detailId, title) {
     // 如果找不到对应 ID，返回默认模板（方便您后续补充）
     if (!contents[detailId]) {
         return `
-            <h3>📌 更新详情</h3>
-            <p>本次更新为“${escapeHtml(title)}”，具体内容正在补充中。</p>
-            <p><em>💡 提示：请在 changelog-detail.html 的 getDetailedContent() 函数中为 detailId="${escapeHtml(detailId)}" 添加详细内容。</em></p>
+            <h3> 更新详情</h3>
+            <p>本次更新为“${escapeHtml(title)}”，具体内容正在补充中</p>
+            <p><em> 提示：请在 changelog-detail.html 的 getDetailedContent() 函数中为 detailId="${escapeHtml(detailId)}" 添加详细内容</em></p>
         `;
     }
 
@@ -277,6 +277,7 @@ function getDetailedContent(detailId, title) {
 
         loadDetail();
     </script>
+    <script src="../../js/site-data.js"></script>
     <script src="../../js/main.js"></script>
 
 <script src="../../js/darkmode.js"></script>

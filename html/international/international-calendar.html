@@ -464,7 +464,7 @@
 
     <main>
         <section class="page-header">
-            <h1>☭ 国际共运日历</h1>
+            <h1> 国际共运日历</h1>
             <p>国际共产主义运动历史上的今天 | 1848-1991</p>
         </section>
 
@@ -518,6 +518,7 @@
         </div>
     </footer>
 
+    <script src="../../js/site-data.js"></script>
     <script src="../../js/main.js"></script>
     <script>
         function toggleDarkMode(){
@@ -525,12 +526,12 @@
             var isDark = document.body.classList.contains('dark-mode');
             localStorage.setItem('darkMode', isDark ? 'true' : 'false');
             var btn = document.querySelector('.dark-mode-toggle');
-            if(btn) btn.textContent = isDark ? '☀️' : '🌙';
+            if(btn) btn.textContent = isDark ? '' : '';
         }
         if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
         if(document.body.classList.contains('dark-mode')) {
             var btn = document.querySelector('.dark-mode-toggle');
-            if(btn) btn.textContent = '☀️';
+            if(btn) btn.textContent = '';
         }
     </script>
     <script src="../../data/history-events.js"></script>
@@ -625,7 +626,7 @@
             title.textContent = `${currentMonth}月${day}日`;
             
             if (events.length === 0) {
-                body.innerHTML = '<div class="popup-empty"><div class="popup-empty-icon">📭</div>这一天没有记录</div>';
+                body.innerHTML = '<div class="popup-empty"><div class="popup-empty-icon"></div>这一天没有记录</div>';
             } else {
                 body.innerHTML = events.map(e => `
                     <div class="popup-event">

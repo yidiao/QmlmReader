@@ -214,8 +214,10 @@
     },
 
     _getApiBase() {
-      // 如需本地调试 Vercel Function，运行 `vercel dev` 后取消下一行注释
-      // return 'http://localhost:3000';
+      var configured = window.QMLM_API_BASE;
+      if (typeof configured === 'string' && configured.trim()) {
+        return configured.trim().replace(/\/$/, '');
+      }
       return 'https://qmlmreader-api.vercel.app';
     }
   };
@@ -2064,7 +2066,7 @@
       MarxistStyleEngine.loaded = true;
     } else {
       // 回退：尝试 fetch JSON 文件
-      var paths = ['../../js/marxist-style-rules.json', '../js/marxist-style-rules.json'];
+      var paths = ['../../js/marxist/marxist-style-rules.json', '../js/marxist/marxist-style-rules.json'];
       for (var i = 0; i < paths.length; i++) {
         var ok = await MarxistStyleEngine._tryLoad(paths[i]);
         if (ok) break;

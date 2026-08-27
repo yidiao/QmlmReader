@@ -1,0 +1,358 @@
+/* ============================================================
+   小册子 — 工具壳 + 分页纸页
+   底座负责「结构 + 纸张 + 排版」，风格负责「个性」。
+   ============================================================ */
+
+/* ---- 默认变量（风格会覆盖） ---- */
+body {
+  --paper: #ffffff;
+  --ink: #2b2b2b;
+  --accent: #c41e3a;
+  --accent2: #2f54a0;
+  --line: #e5e5e5;
+  --muted: #888888;
+}
+
+/* ---- 工具壳 ---- */
+.xc-app {
+  padding: 40px 20px 96px;
+  min-height: 100vh;
+}
+
+.xc-header {
+  max-width: 760px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+
+.xc-title {
+  margin: 0 0 8px;
+  font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+  font-size: 1.9rem;
+  letter-spacing: 10px;
+  font-weight: 900;
+  color: var(--ink);
+}
+
+.xc-desc {
+  margin: 0 0 28px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ---- 元数据输入 ---- */
+.xc-meta {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 0 0 22px;
+}
+
+.xc-meta-input {
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 4px 8px;
+  outline: none;
+  transition: border-color 0.15s ease;
+  min-width: 120px;
+}
+
+.xc-meta-input:focus {
+  border-bottom-color: var(--accent);
+}
+
+.xc-meta-input::placeholder {
+  color: var(--muted);
+}
+
+.xc-meta-title {
+  min-width: 200px;
+  font-weight: 700;
+}
+
+/* ---- 工具条 ---- */
+.xc-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.xc-btn {
+  font: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.xc-btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+}
+
+.xc-btn-primary:hover {
+  filter: brightness(0.9);
+}
+
+.xc-btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.xc-btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.xc-style-switch {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.xc-style-btn {
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 8px 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  transition: all 0.15s ease;
+}
+
+.xc-style-btn + .xc-style-btn {
+  border-left: 1px solid var(--line);
+}
+
+.xc-style-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ---- 桌面 ---- */
+.xc-booklet-wrap {
+  background: #e9e6e0;
+  padding: 36px 0;
+}
+body.dark-mode .xc-booklet-wrap {
+  background: #141414;
+}
+
+/* ---- 分页纸页 ---- */
+.xc-pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.xc-page {
+  width: 148mm;
+  height: 210mm;
+  background: var(--paper);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* 页眉（书名） */
+.xc-page-header {
+  flex-shrink: 0;
+  height: 11mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7.5pt;
+  letter-spacing: 2px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  padding: 0 14mm;
+}
+
+/* 正文区 */
+.xc-page-content {
+  flex: 1;
+  min-height: 0;
+  padding: 12mm 14mm 0;
+  overflow: hidden;
+}
+
+/* 页脚（页码） */
+.xc-page-footer {
+  flex-shrink: 0;
+  height: 11mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8pt;
+  color: var(--muted);
+}
+
+/* 封面/尾页：整页，无页眉页脚 */
+.xc-page-plain {
+  padding: 16mm 14mm;
+}
+
+/* ---- 源内容样式（测量用，148mm 宽） ---- */
+.xc-booklet {
+  margin: 0;
+}
+
+.xc-section {
+  background: transparent;
+  padding: 0 14mm;
+  margin: 0;
+  box-shadow: none;
+}
+
+/* ---- 封面 ---- */
+.xc-cover {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.xc-cover-badge {
+  font-size: 0.72rem;
+  letter-spacing: 4px;
+  color: var(--muted);
+}
+
+.xc-cover-title {
+  margin: 64px 0 0;
+  font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.xc-cover-subtitle {
+  margin: 18px 0 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.xc-cover-author {
+  margin: auto 0 0;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+/* ---- 目录 ---- */
+.xc-toc-heading {
+  margin: 0 0 28px;
+  font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+  font-size: 1.2rem;
+  letter-spacing: 8px;
+  color: var(--ink);
+}
+
+.xc-toc-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.xc-toc-item {
+  padding: 10px 2px;
+  border-bottom: 1px dotted var(--line);
+  color: var(--ink);
+}
+
+/* ---- 序言 / 正文 排版 ---- */
+.xc-body-content {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+.xc-body-content h1 { font-size: 1.7rem; margin: 1.3em 0 0.6em; }
+.xc-body-content h2 { font-size: 1.35rem; margin: 1.2em 0 0.5em; }
+.xc-body-content h3 { font-size: 1.15rem; margin: 1.1em 0 0.4em; }
+.xc-body-content p { margin: 0 0 0.9em; }
+.xc-body-content ul, .xc-body-content ol { margin: 0 0 0.9em; padding-left: 1.6em; }
+.xc-body-content li { margin: 0.3em 0; }
+.xc-body-content blockquote { margin: 1.1em 0; padding: 0.5em 1.2em; }
+.xc-body-content table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+.xc-body-content td, .xc-body-content th { border: 1px solid var(--line); padding: 8px 12px; }
+.xc-body-content img { max-width: 100%; }
+.xc-body-content hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+.xc-body-content a { color: var(--accent2); }
+
+/* ---- 尾页 ---- */
+.xc-back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  height: 100%;
+  min-height: 0;
+}
+
+.xc-back-ornament {
+  font-size: 2.4rem;
+  color: var(--accent);
+}
+
+.xc-back-text {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 4px;
+  color: var(--muted);
+}
+
+/* ---- @page：A5 纸页 ---- */
+@page {
+  size: A5;
+  margin: 0;
+}
+
+/* ---- 打印：导出 PDF ---- */
+@media print {
+  .site-header, .xc-header, .site-footer, .breadcrumb {
+    display: none !important;
+  }
+  .xc-app {
+    padding: 0 !important;
+  }
+  .xc-booklet-wrap {
+    background: #fff !important;
+    padding: 0 !important;
+  }
+  .xc-pages {
+    gap: 0 !important;
+  }
+  .xc-page {
+    box-shadow: none !important;
+    page-break-after: always;
+  }
+  .xc-page:last-child {
+    page-break-after: auto;
+  }
+  body, body * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

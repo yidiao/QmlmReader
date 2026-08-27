@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【文章标题】 - 青年马列毛主义驿站</title>
+    <title>文章标题 - 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/articles-detail.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -22,7 +22,7 @@
         }
 
         /* ===== 本文特有样式（可选）===== */
-        /* 例：正文内注释块、特殊标注颜色等 */
+        /* 例：正文内注释块特殊标注颜色等 */
     </style>
 </head>
 <!-- data-category 填: philosophy / economics / politics / party / military / culture -->
@@ -43,27 +43,27 @@
 
         <!-- ───── 头部 ───── -->
         <header class="article-header">
-            <div class="importance-badge">【⭐⭐⭐⭐⭐ 核心必读 / ✨✨✨✨ 重点推荐】</div>
-            <h1>【文章标题】</h1>
-            <div class="article-subtitle">【副标题，可选】</div>
+            <div class="importance-badge"> 核心必读 /  重点推荐</div>
+            <h1>文章标题</h1>
+            <div class="article-subtitle">副标题，可选</div>
             <div class="article-meta">
-                <span class="author">【作者】</span>
-                <span class="date">【写作日期】</span>
-                <span class="category">【分类标签】</span>
-                <span class="word-count">【约XXX字】</span>
-                <span class="length-tag">【📄 短篇 / 📄 中篇 / 📚 长篇】</span>
+                <span class="author">作者</span>
+                <span class="date">写作日期</span>
+                <span class="category">分类标签</span>
+                <span class="word-count">约XXX字</span>
+                <span class="length-tag"> 短篇 /  中篇 /  长篇</span>
             </div>
         </header>
 
         <!-- ───── Tab 导航 ───── -->
         <div class="tab-nav">
-            <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
-            <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
-            <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
-            <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
-            <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
-            <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
-            <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
+            <button class="tab-btn active" onclick="switchTab('original', this)">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
         </div>
 
         <!-- ═══════════════════════════════════════ -->
@@ -72,7 +72,7 @@
         <div class="tab-content active" id="original">
             <div class="original-text">
                 <div class="text-intro">
-                    <p><strong>阅读提示：</strong>【简要介绍文章背景、章节结构、建议重点阅读的章节】</p>
+                    <p><strong>阅读提示：</strong>简要介绍文章背景章节结构建议重点阅读的章节</p>
                 </div>
 
                 <div style="text-align:right;">
@@ -82,11 +82,11 @@
                 <!-- 章节模板：复制此块 -->
                 <div class="chapter">
                     <h3 class="chapter-title" onclick="toggleChapter(this)">
-                        <span class="toggle-icon">▼</span>
-                        【章节序号、标题】
+                        <span class="toggle-icon"></span>
+                        章节序号标题
                     </h3>
                     <div class="chapter-content">
-                        <p>【正文段落】</p>
+                        <p>正文段落</p>
                     </div>
                 </div>
                 <!-- 章节模板结束 -->
@@ -99,10 +99,10 @@
         <!-- ═══════════════════════════════════════ -->
         <div class="tab-content" id="reading">
             <div class="reading-guide">
-                <h2 class="tab-heading">💡 如何阅读本文</h2>
+                <h2 class="tab-heading"> 如何阅读本文</h2>
                 <div class="guide-block">
-                    <h3>① 【标题】</h3>
-                    <p>【阅读建议】</p>
+                    <h3>① 标题</h3>
+                    <p>阅读建议</p>
                 </div>
                 <!-- 可继续添加 guide-block -->
             </div>
@@ -113,10 +113,10 @@
         <!-- ═══════════════════════════════════════ -->
         <div class="tab-content" id="difficulty">
             <div class="difficulty-section">
-                <h2 class="tab-heading">🔍 容易读错的地方</h2>
+                <h2 class="tab-heading"> 容易读错的地方</h2>
                 <div class="diff-item">
-                    <div class="wrong">❌ 常见误读：【错误理解】</div>
-                    <div class="correct">✅ 正解：【正确理解】</div>
+                    <div class="wrong"> 常见误读：错误理解</div>
+                    <div class="correct"> 正解：正确理解</div>
                 </div>
                 <!-- 可继续添加 diff-item -->
             </div>
@@ -127,18 +127,18 @@
         <!-- ═══════════════════════════════════════ -->
         <div class="tab-content" id="dialogue">
             <div class="dialogue-section">
-                <h2 class="tab-heading">💬 这篇文章在回应谁？</h2>
+                <h2 class="tab-heading"> 这篇文章在回应谁？</h2>
                 <div class="dialogue-block">
                     <h3>它在回应的问题</h3>
-                    <ul><li>【问题1】</li></ul>
+                    <ul><li>问题1</li></ul>
                 </div>
                 <div class="dialogue-block">
                     <h3>它在问每一个读者</h3>
-                    <ul><li>【问题】</li></ul>
+                    <ul><li>问题</li></ul>
                 </div>
                 <div class="dialogue-block">
                     <h3>它在等你的回应</h3>
-                    <p>【引导读者行动的提示】</p>
+                    <p>引导读者行动的提示</p>
                 </div>
             </div>
         </div>
@@ -148,11 +148,11 @@
         <!-- ═══════════════════════════════════════ -->
         <div class="tab-content" id="action">
             <div class="action-section">
-                <h2 class="tab-heading">⚡ 读完之后可以做什么</h2>
+                <h2 class="tab-heading"> 读完之后可以做什么</h2>
                 <div class="action-item">
-                    <h3>实验一：【标题】</h3>
-                    <p>【任务描述】</p>
-                    <ul><li>【具体步骤】</li></ul>
+                    <h3>实验一：标题</h3>
+                    <p>任务描述</p>
+                    <ul><li>具体步骤</li></ul>
                 </div>
                 <!-- 可继续添加 action-item -->
             </div>
@@ -163,9 +163,9 @@
         <!-- ═══════════════════════════════════════ -->
         <div class="tab-content" id="visual">
             <div class="visualization-section">
-                <h2 class="tab-heading">📊 一目了然</h2>
+                <h2 class="tab-heading"> 一目了然</h2>
 
-                <!-- 【固定图表1】文章特征雷达图 -->
+                <!-- 固定图表1文章特征雷达图 -->
                 <div class="chart-block">
                     <h3>文章特征雷达图</h3>
                     <p class="chart-desc">六个维度衡量本文的"性格"</p>
@@ -174,28 +174,28 @@
                     </div>
                 </div>
 
-                <!-- 【固定图表2】论证节奏曲线 -->
+                <!-- 固定图表2论证节奏曲线 -->
                 <div class="chart-block">
                     <h3>论证节奏曲线</h3>
                     <p class="chart-desc">展示文章各章节的论证强度</p>
                     <div class="chart-container" style="max-width:700px;margin:0 auto;">
                         <canvas id="argumentCurve"></canvas>
                     </div>
-                    <!-- 【固定】结构分析 -->
+                    <!-- 固定结构分析 -->
                     <div class="structure-analysis">
-                        <h4>📝 结构分析（对应曲线各波段）</h4>
+                        <h4> 结构分析（对应曲线各波段）</h4>
                         <div class="analysis-item">
-                            <span class="analysis-label">【章节名】（【强度/10】）</span>
-                            <p>【分析说明】</p>
+                            <span class="analysis-label">章节名（强度/10）</span>
+                            <p>分析说明</p>
                         </div>
                         <!-- 继续添加 analysis-item -->
                     </div>
                 </div>
 
-                <!-- 【可选】额外自定义图表 -->
+                <!-- 可选额外自定义图表 -->
                 <div class="chart-block">
-                    <h3>【自定义图表标题】</h3>
-                    <p class="chart-desc">【图表说明】</p>
+                    <h3>自定义图表标题</h3>
+                    <p class="chart-desc">图表说明</p>
                     <div class="chart-container">
                         <canvas id="customChart1"></canvas>
                     </div>
@@ -208,11 +208,11 @@
         <!-- ═══════════════════════════════════════ -->
         <div class="tab-content" id="puzzle">
             <div class="puzzle-section">
-                <h2 class="tab-heading">🧩 在马哲体系中的位置</h2>
+                <h2 class="tab-heading"> 在马哲体系中的位置</h2>
 
                 <!-- 体系定位 -->
                 <div class="puzzle-intro">
-                    <p>【这篇文章解决了什么真实问题、在理论体系中处于什么位置】</p>
+                    <p>这篇文章解决了什么真实问题在理论体系中处于什么位置</p>
                 </div>
 
                 <div class="puzzle-position">
@@ -221,10 +221,10 @@
                         <div class="theory-node root">马克思主义哲学</div>
                         <div class="theory-branches">
                             <div class="theory-branch">
-                                <div class="theory-node branch">【分支一】</div>
+                                <div class="theory-node branch">分支一</div>
                                 <div class="theory-sub">
-                                    <div class="theory-node related">【子项】</div>
-                                    <div class="theory-node current">【本文位置】</div>
+                                    <div class="theory-node related">子项</div>
+                                    <div class="theory-node current">本文位置</div>
                                 </div>
                             </div>
                         </div>
@@ -235,8 +235,8 @@
                 <div class="puzzle-connection">
                     <h3>与其他经典的联结</h3>
                     <ul>
-                        <li>→ 【相关文章1】：【关联说明】</li>
-                        <li>→ 【相关文章2】：【关联说明】</li>
+                        <li> 相关文章1：关联说明</li>
+                        <li> 相关文章2：关联说明</li>
                     </ul>
                 </div>
 
@@ -246,14 +246,14 @@
                     <div class="timeline-track">
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
-                            <div class="timeline-year">【年份】</div>
-                            <div class="timeline-label">【事件】</div>
+                            <div class="timeline-year">年份</div>
+                            <div class="timeline-label">事件</div>
                         </div>
                         <div class="timeline-item active">
                             <div class="timeline-dot-active"></div>
-                            <div class="timeline-year">【本文年份】</div>
-                            <div class="timeline-label">【上下文】</div>
-                            <div class="timeline-here">◀ 本文</div>
+                            <div class="timeline-year">本文年份</div>
+                            <div class="timeline-label">上下文</div>
+                            <div class="timeline-here"> 本文</div>
                         </div>
                         <!-- 继续添加 timeline-item -->
                     </div>
@@ -262,13 +262,13 @@
                 <!-- 联结卡片网络 -->
                 <div class="puzzle-links">
                     <h3>文章联结网络</h3>
-                    <p class="puzzle-links-note">点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（→ 输出影响 · ← 理论来源 · ↔ 相互支撑）</p>
+                    <p class="puzzle-links-note">点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（ 输出影响 ·  理论来源 ·  相互支撑）</p>
                     <div class="conn-grid">
-                        <a href="【slug】.html" class="conn-card" style="border-left-color:【色值】;">
-                            <span class="conn-dir" style="color:【色值】;">【箭头】</span>
-                            <span class="conn-title">《【文章名】》</span>
-                            <span class="conn-label">【分类标签】</span>
-                            <span class="conn-relation">【关联说明】</span>
+                        <a href="slug.html" class="conn-card" style="border-left-color:色值;">
+                            <span class="conn-dir" style="color:色值;">箭头</span>
+                            <span class="conn-title">文章名</span>
+                            <span class="conn-label">分类标签</span>
+                            <span class="conn-relation">关联说明</span>
                         </a>
                         <!-- 继续添加 conn-card -->
                     </div>
@@ -279,9 +279,9 @@
     </main>
 
     <!-- ========== 下载浮动按钮 ========== -->
-    <button class="download-fab" id="downloadFab" title="下载原文">⬇</button>
+    <button class="download-fab" id="downloadFab" title="下载原文"></button>
     <div class="download-menu" id="downloadMenu">
-        <h4>📥 下载原文</h4>
+        <h4> 下载原文</h4>
         <div id="downloadLinks"></div>
     </div>
 
@@ -298,7 +298,7 @@
                     data: {
                         labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
                         datasets: [{
-                            label: '【文章名】',
+                            label: '文章名',
                             data: [/* 填入 6 个数值 0-10 */],
                             borderColor: getComputedStyle(document.documentElement).getPropertyValue('--cat-secondary').trim(),
                             backgroundColor: 'rgba(196,30,58,0.15)',
@@ -342,9 +342,10 @@
 
         // ===== 下载链接 =====
         var DOWNLOAD_LINKS = [
-            { href: '../../../data/【文章slug】.txt', label: '📝 下载 TXT' }
+            { href: '../../../data/文章slug.txt', label: ' 下载 TXT' }
         ];
     </script>
+    <script src="../../js/site-data.js"></script>
     <script src="../../../js/main.js"></script>
     <script src="../../../js/darkmode.js"></script>
     <script src="../../../js/cursor.js"></script>

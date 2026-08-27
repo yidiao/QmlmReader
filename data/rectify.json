@@ -1,0 +1,58 @@
+[
+  {
+    "title": "历史的审判台：苏联七十年兴亡再思考",
+    "file": "rectify/leaders/stalin-era.html",
+    "type": "rectify",
+    "category": "领导人正名",
+    "summary": "驳斥\"生于不义，死于耻辱\"的简化叙事，深入苏联七十年兴亡的结构性困境，还原大清洗真实数据、1991年公投真相。",
+    "keywords": ["斯大林", "苏联", "大清洗", "正名", "苏联解体", "七十年", "历史"]
+  },
+  {
+    "title": "高尔基与列宁决裂，因为列宁滥杀知识分子、破坏文化？",
+    "file": "rectify/leaders/gorky-lenin.html",
+    "type": "rectify",
+    "category": "领导人正名",
+    "summary": "解析列宁与高尔基决裂的真正根源：两种革命路线的碰撞，驳斥列宁\"摧毁文化\"之说。",
+    "keywords": ["列宁", "高尔基", "知识分子", "正名", "决裂", "文化", "暴君"]
+  },
+  {
+    "title": "苏联攻打芬兰是侵略？过当防卫！",
+    "file": "rectify/military/finland-war.html",
+    "type": "rectify",
+    "category": "军事行动正名",
+    "summary": "1939年苏芬战争的真相：芬兰白卫军的反苏挑衅、列宁格勒的安全威胁、苏联的自卫反击。",
+    "keywords": ["苏芬战争", "芬兰", "苏联", "自卫", "正名", "军事", "侵略", "列宁格勒"]
+  },
+  {
+    "title": "苏联\"入侵\"阿富汗？还原1979年出兵决策的真实逻辑",
+    "file": "rectify/military/soviet-afghanistan.html",
+    "type": "rectify",
+    "category": "军事行动正名",
+    "summary": "解密档案揭示：苏联最初三次拒绝出兵；美国在苏军入境前五个月已秘密扶植反政府武装。",
+    "keywords": ["阿富汗", "苏联", "1979", "出兵", "正名", "军事", "美国", "入侵"]
+  },
+  {
+    "title": "农业集体化的历史再评价",
+    "file": "rectify/economy/soviet-agriculture.html",
+    "type": "rectify",
+    "category": "经济模式正名",
+    "summary": "重新评价苏联农业集体化政策的历史必要性与实际成就，驳斥单纯否定的叙事。",
+    "keywords": ["集体化", "苏联农业", "经济", "正名", "人民公社", "农村", "集体农庄"]
+  },
+  {
+    "title": "\"人性本善\"还是阶级分析——批判人性论",
+    "file": "rectify/myths/human-nature.html",
+    "type": "rectify",
+    "category": "思想辩护",
+    "summary": "批判\"人性自私\"等形而上学观点，以唯物辩证法还原人的社会本质。",
+    "keywords": ["人性论", "人性", "阶级", "唯物主义", "正名", "批判", "自私"]
+  },
+  {
+    "title": "精英智慧——革命需要精英领导？",
+    "file": "rectify/myths/wisdom-of-elites.html",
+    "type": "rectify",
+    "category": "思想辩护",
+    "summary": "破除\"精英主义\"迷信，从群众史观出发批判精英治理论。",
+    "keywords": ["精英", "群众", "领导", "正名", "精英主义", "群众路线", "智慧"]
+  }
+]

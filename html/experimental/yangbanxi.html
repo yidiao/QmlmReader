@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>赛博样板戏 | Qmlm Reader</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/yangbanxi-style.css">
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main class="yb-app">
+  <div class="yb-stage-wrap">
+    <div class="yb-side yb-side-l"></div>
+    <div class="yb-side yb-side-r"></div>
+
+    <!-- 横额 -->
+    <div class="yb-banner">
+      <span class="yb-lantern yb-lantern-l"></span>
+      <span class="yb-lantern yb-lantern-r"></span>
+      <h1 class="yb-title">赛博样板戏</h1>
+    </div>
+
+    <!-- 帷幕 -->
+    <div class="yb-curtain"></div>
+
+    <!-- 舞台 -->
+    <div class="yb-hero">
+
+      <!-- 阶段一：定框架 -->
+      <section class="yb-step" id="stage-1">
+        <div class="yb-badge">阶段一 · 定框架</div>
+        <p class="yb-sub">挑矛盾类型定剧种和幕数，搭好骨架再和 AI 逐幕写戏</p>
+
+        <div class="yb-badge">矛盾类型</div>
+        <div id="theme-picker" class="yb-picker"></div>
+
+        <div class="yb-badge">剧种</div>
+        <div id="genre-picker" class="yb-picker yb-picker-genre"></div>
+
+        <div class="yb-badge">幕数</div>
+        <div class="yb-actcount">
+          <input id="act-count" type="range" min="6" max="10" value="8">
+          <span id="act-count-val" class="yb-actcount-val">8 幕</span>
+        </div>
+
+        <div class="yb-badge">角色</div>
+        <div id="roles-box" class="yb-roles"></div>
+
+        <div class="yb-badge">核心唱段主题</div>
+        <input id="aria-input" class="yb-input" type="text" placeholder="一句话主张，如劳动者的尊严">
+
+        <div class="yb-badge">API Key</div>
+        <input id="api-key" class="yb-input" type="password" placeholder="sk-...（与马列体同一个 DeepSeek key）">
+
+        <div>
+          <button id="btn-stage1" class="yb-btn">生成幕弧线 </button>
+        </div>
+      </section>
+
+      <!-- 阶段二：逐幕协作 -->
+      <section class="yb-step" id="stage-2" hidden>
+        <div class="yb-badge">阶段二 · 逐幕协作</div>
+        <p class="yb-sub">一幕一幕往下钻：点AI 写这幕生成唱词，改到你满意可反复重新生成</p>
+        <div id="acts-list" class="yb-acts"></div>
+
+        <div class="yb-actions">
+          <button id="btn-ai-all" class="yb-btn">AI 一键写全部</button>
+          <button id="btn-stage2" class="yb-btn">生成提示词 </button>
+          <button id="btn-back1" class="yb-btn-ghost"> 返回改框架</button>
+        </div>
+      </section>
+
+      <!-- 阶段三：提示词 -->
+      <section class="yb-step" id="stage-3" hidden>
+        <div class="yb-badge">阶段三 · 提示词</div>
+        <div class="yb-tabs">
+          <button class="yb-tab active" data-view="shot">分镜脚本</button>
+          <button class="yb-tab" data-view="prompt">Prompt 包</button>
+        </div>
+        <div id="view-shot" class="yb-view"></div>
+        <div id="view-prompt" class="yb-view" hidden></div>
+
+        <div class="yb-actions">
+          <button id="btn-export" class="yb-btn">导出 Prompt 包</button>
+          <button id="btn-back2" class="yb-btn-ghost"> 返回改剧本</button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>青年马列毛主义驿站 | Qmlm Reader</p>
+    <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+  </div>
+</footer>
+
+<script src="../../js/yangbanxi/yangbanxi-prompt.js"></script>
+<script src="../../js/yangbanxi/yangbanxi.js"></script>
+<script src="../../js/site-data.js"></script>
+    <script src="../../js/main.js"></script>
+<script src="../../js/darkmode.js"></script>
+<script src="../../js/cursor.js"></script>
+</body>
+</html>

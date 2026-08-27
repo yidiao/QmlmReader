@@ -4,8 +4,7 @@
   "functions": {
     "api/translate.js": {
       "memory": 512,
-      "maxDuration": 30,
-      "runtime": "nodejs20.x"
+      "maxDuration": 30
     }
   },
   "headers": [
@@ -18,8 +17,5 @@
         { "key": "Access-Control-Max-Age", "value": "86400" }
       ]
     }
-  ],
-  "rewrites": [
-    { "source": "/api/translate", "destination": "/api/translate" }
   ]
 }

@@ -1,0 +1,106 @@
+/* ================================================================
+   小册子 — 黑板报 / 手抄报红刊风
+   纸张米白 · 朱红大字报 · 虚线裁切框 · 花边
+   ================================================================ */
+
+:root {
+  --bk-bg: #f7f2e7;
+  --bk-paper: #fffdf5;
+  --bk-red: #d4380d;
+  --bk-ink: #2b2b2b;
+  --bk-blue: #2f54a0;
+  --bk-brown: #c9b79c;
+  --bk-muted: #7a6f5f;
+}
+body.dark-mode {
+  --bk-bg: #1a1815;
+  --bk-paper: #242019;
+  --bk-red: #e0523d;
+  --bk-ink: #ece4d4;
+  --bk-blue: #6b8ac4;
+  --bk-brown: #6b5f4a;
+  --bk-muted: #a89c86;
+}
+
+.bk-app {
+  background: var(--bk-bg);
+  min-height: 100vh;
+  padding: 48px 20px 72px;
+}
+
+.bk-hero {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--bk-paper);
+  border: 3px solid var(--bk-ink);
+  padding: 44px 40px;
+  position: relative;
+  box-shadow: 8px 8px 0 var(--bk-red);
+}
+/* 虚线裁切内框 */
+.bk-hero::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 2px dashed var(--bk-brown);
+  pointer-events: none;
+}
+
+.bk-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 4px;
+  color: var(--bk-blue);
+  border: 1px solid var(--bk-blue);
+  padding: 2px 12px;
+  margin-bottom: 20px;
+}
+
+.bk-title {
+  font-family: "STSong", "SimSun", "Noto Serif SC", serif;
+  font-size: clamp(36px, 6vw, 60px);
+  font-weight: 900;
+  color: var(--bk-red);
+  letter-spacing: 8px;
+  margin: 0 0 8px;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.18);
+}
+
+.bk-sub {
+  font-size: 1rem;
+  color: var(--bk-ink);
+  line-height: 1.8;
+  margin: 0 0 28px;
+}
+
+/* 新红歌创作公式预览 */
+.bk-formula {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.bk-step {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--bk-ink);
+}
+.bk-step-num {
+  font-family: "STSong", "SimSun", serif;
+  font-weight: 900;
+  color: var(--bk-red);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.bk-step small { color: var(--bk-muted); }
+
+.bk-status {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: var(--bk-blue);
+  border: 1px dashed var(--bk-blue);
+  padding: 4px 14px;
+  letter-spacing: 2px;
+}

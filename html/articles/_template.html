@@ -26,7 +26,7 @@
             <!-- 渐变头部 - 颜色由内容类型决定 -->
             <header class="article-header" data-category="政治理论">
                 <div class="header-decoration"></div>
-                <div class="importance-badge">⭐⭐⭐⭐⭐ 核心必读</div>
+                <div class="importance-badge"> 核心必读</div>
                 <h1>文章标题</h1>
                 <div class="article-subtitle">副标题/说明</div>
                 <div class="article-meta">
@@ -39,27 +39,27 @@
 
             <!-- Tab导航 -->
             <div class="tab-nav">
-                <button class="tab-btn active" onclick="switchTab('original', this)">📖 原文</button>
-                <button class="tab-btn" onclick="switchTab('reading', this)">💡 读法提示</button>
-                <button class="tab-btn" onclick="switchTab('difficulty', this)">🔍 难点解析</button>
-                <button class="tab-btn" onclick="switchTab('dialogue', this)">💬 对话空间</button>
-                <button class="tab-btn" onclick="switchTab('action', this)">⚡ 行动实验</button>
-                <button class="tab-btn" onclick="switchTab('visual', this)">📊 一目了然</button>
-                <button class="tab-btn" onclick="switchTab('puzzle', this)">🧩 理论拼图</button>
-                <button class="tab-btn" onclick="switchTab('further', this)">📚 延伸阅读</button>
+                <button class="tab-btn active" onclick="switchTab('original', this)"> 原文</button>
+                <button class="tab-btn" onclick="switchTab('reading', this)"> 读法提示</button>
+                <button class="tab-btn" onclick="switchTab('difficulty', this)"> 难点解析</button>
+                <button class="tab-btn" onclick="switchTab('dialogue', this)"> 对话空间</button>
+                <button class="tab-btn" onclick="switchTab('action', this)"> 行动实验</button>
+                <button class="tab-btn" onclick="switchTab('visual', this)"> 一目了然</button>
+                <button class="tab-btn" onclick="switchTab('puzzle', this)"> 理论拼图</button>
+                <button class="tab-btn" onclick="switchTab('further', this)"> 延伸阅读</button>
             </div>
 
             <!-- 原文Tab -->
             <div class="tab-content active" id="original">
                 <div class="original-text">
                     <div class="text-intro">
-                        <p><strong>阅读提示：</strong>本文约X万字，是......的核心著作。全文X章，逐层深入。点击章节标题可展开/折叠。建议重点阅读第X章（......）。</p>
+                        <p><strong>阅读提示：</strong>本文约X万字，是......的核心著作全文X章，逐层深入点击章节标题可展开/折叠建议重点阅读第X章（......）</p>
                     </div>
 
                     <div class="chapter">
                         <h3 class="chapter-title" onclick="toggleChapter(this)">
-                            <span class="toggle-icon">▼</span>
-                            一、第一章标题
+                            <span class="toggle-icon"></span>
+                            一第一章标题
                         </h3>
                         <div class="chapter-content">
                             <p>正文内容...</p>
@@ -68,8 +68,8 @@
 
                     <div class="chapter">
                         <h3 class="chapter-title" onclick="toggleChapter(this)">
-                            <span class="toggle-icon">▼</span>
-                            二、第二章标题
+                            <span class="toggle-icon"></span>
+                            二第二章标题
                         </h3>
                         <div class="chapter-content">
                             <p>正文内容...</p>
@@ -80,23 +80,23 @@
 
             <!-- 其他Tab内容保持原有结构 -->
             <div class="tab-content" id="reading">
-                <h2 class="tab-heading">💡 如何阅读本文</h2>
+                <h2 class="tab-heading"> 如何阅读本文</h2>
                 <div class="reading-tip">
-                    <h4>📌 历史背景</h4>
+                    <h4> 历史背景</h4>
                     <p>内容...</p>
                 </div>
             </div>
 
             <div class="tab-content" id="difficulty">
-                <h2 class="tab-heading">🔍 难点解析</h2>
+                <h2 class="tab-heading"> 难点解析</h2>
                 <div class="difficulty-item">
-                    <h4>❓ 问题标题</h4>
+                    <h4> 问题标题</h4>
                     <p><strong>解析：</strong>解析内容...</p>
                 </div>
             </div>
 
             <div class="tab-content" id="dialogue">
-                <h2 class="tab-heading">💬 对话空间</h2>
+                <h2 class="tab-heading"> 对话空间</h2>
                 <div class="dialogue-item">
                     <div class="dialogue-q"><strong>问题：</strong>问题内容</div>
                     <div class="dialogue-a"><strong>思考方向：</strong>思考方向...</div>
@@ -104,7 +104,7 @@
             </div>
 
             <div class="tab-content" id="action">
-                <h2 class="tab-heading">⚡ 行动实验</h2>
+                <h2 class="tab-heading"> 行动实验</h2>
                 <div class="action-item">
                     <div class="action-num">1</div>
                     <div>
@@ -115,7 +115,7 @@
             </div>
 
             <div class="tab-content" id="visual">
-                <h2 class="tab-heading">📊 一目了然</h2>
+                <h2 class="tab-heading"> 一目了然</h2>
                 <div class="chart-container">
                     <h4>图表标题</h4>
                     <canvas id="mainChart"></canvas>
@@ -123,16 +123,16 @@
             </div>
 
             <div class="tab-content" id="puzzle">
-                <h2 class="tab-heading">🧩 理论拼图</h2>
+                <h2 class="tab-heading"> 理论拼图</h2>
                 <div class="puzzle-intro">
                     <p>本文的核心贡献...</p>
                 </div>
             </div>
 
             <div class="tab-content" id="further">
-                <h2 class="tab-heading">📚 延伸阅读</h2>
+                <h2 class="tab-heading"> 延伸阅读</h2>
                 <div class="further-item">
-                    <h4>📕 文章标题</h4>
+                    <h4> 文章标题</h4>
                     <p>推荐理由...</p>
                 </div>
             </div>
@@ -142,9 +142,9 @@
         <aside class="chapter-nav" id="chapterNav">
             <div class="chapter-nav-title">目录</div>
             <nav class="chapter-nav-list">
-                <a href="#chapter1" class="chapter-nav-item active">一、第一章</a>
-                <a href="#chapter2" class="chapter-nav-item">二、第二章</a>
-                <a href="#chapter3" class="chapter-nav-item">三、第三章</a>
+                <a href="#chapter1" class="chapter-nav-item active">一第一章</a>
+                <a href="#chapter2" class="chapter-nav-item">二第二章</a>
+                <a href="#chapter3" class="chapter-nav-item">三第三章</a>
             </nav>
         </aside>
     </div>
@@ -156,6 +156,7 @@
         </div>
     </footer>
 
+    <script src="../../js/site-data.js"></script>
     <script src="../../js/main.js"></script>
     <script>
         // ==================== 核心功能 ====================

@@ -1,0 +1,109 @@
+/* ================================================================
+   万物皆可红 — 暗房冲印红调风
+   暗房安全灯红 · 深灰工作台 · 照片纸米白 · 取景框
+   ================================================================ */
+
+:root {
+  --rd-bg: #e8e4dc;
+  --rd-panel: #ffffff;
+  --rd-red: #c0392b;
+  --rd-ink: #2a2a2c;
+  --rd-metal: #8a8a8e;
+  --rd-muted: #6a6a6e;
+}
+body.dark-mode {
+  --rd-bg: #1c1c1e;
+  --rd-panel: #2a2a2c;
+  --rd-red: #ff3b30;
+  --rd-ink: #e8e6e0;
+  --rd-metal: #4a4a4e;
+  --rd-muted: #9a9a9e;
+}
+
+.rd-app {
+  background: var(--rd-bg);
+  min-height: 100vh;
+  padding: 48px 20px 72px;
+  position: relative;
+}
+/* 暗房安全灯红晕 */
+.rd-app::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255,59,48,0.12), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rd-hero {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--rd-panel);
+  padding: 44px 40px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.28);
+}
+/* 取景框四角 */
+.rd-hero::before,
+.rd-hero::after {
+  content: '';
+  position: absolute;
+  width: 26px; height: 26px;
+  border: 3px solid var(--rd-red);
+}
+.rd-hero::before { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+.rd-hero::after { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+.rd-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 4px;
+  color: var(--rd-red);
+  border: 1px solid var(--rd-red);
+  padding: 2px 12px;
+  margin-bottom: 20px;
+}
+
+.rd-title {
+  font-family: "STSong", "SimSun", "Noto Serif SC", serif;
+  font-size: clamp(32px, 5.5vw, 56px);
+  font-weight: 900;
+  color: var(--rd-red);
+  letter-spacing: 6px;
+  margin: 0 0 8px;
+}
+
+.rd-sub {
+  font-size: 1rem;
+  color: var(--rd-ink);
+  line-height: 1.8;
+  margin: 0 0 28px;
+}
+
+/* 冲印药水（风格预设） */
+.rd-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.rd-preset {
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  color: var(--rd-red);
+  border: 2px solid var(--rd-red);
+  background: transparent;
+  letter-spacing: 1px;
+  box-shadow: 3px 3px 0 var(--rd-metal);
+}
+
+.rd-status {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: var(--rd-muted);
+  border: 1px dashed var(--rd-metal);
+  padding: 4px 14px;
+  letter-spacing: 2px;
+}

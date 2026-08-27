@@ -173,12 +173,12 @@
 
     <main>
         <section class="page-header">
-            <h1>📷 老照片</h1>
+            <h1> 老照片</h1>
             <p style="font-size:0.9rem;opacity:0.7;margin-top:0.3rem;">摄影作品收录 · 岁月留影 · 时代见证</p>
         </section>
 
         <div class="gallery-container">
-            <a href="gallery.html" class="back-link">← 返回文艺首页</a>
+            <a href="gallery.html" class="back-link"> 返回文艺首页</a>
 
             <div class="stats-bar">
                 <div class="stat-item">
@@ -202,7 +202,7 @@
 
             <div class="gallery-grid" id="galleryGrid">
                 <div class="empty-hint" id="emptyHint" style="grid-column:1/-1;">
-                    <p style="font-size:1.2rem;">📷 暂无照片</p>
+                    <p style="font-size:1.2rem;"> 暂无照片</p>
                     <p>将摄影作品放入以下路径即可自动显示：</p>
                     <div class="path-info">assets/photos/</div>
                     <p style="font-size:0.8rem;margin-top:0.8rem;">文件命名建议：<code>序号_年份_描述_摄影师.jpg</code></p>
@@ -237,6 +237,7 @@
         </div>
     </footer>
 
+    <script src="../../js/site-data.js"></script>
     <script src="../../js/main.js"></script>
     <script>
     const BASE = '../assets/photos/';
@@ -409,12 +410,12 @@
         document.body.classList.toggle('dark-mode');
         localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
         document.querySelector('.dark-mode-toggle').textContent =
-            document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            document.body.classList.contains('dark-mode') ? '' : '';
     }
     if (localStorage.getItem('darkMode') === 'true') {
         document.body.classList.add('dark-mode');
         const btn = document.querySelector('.dark-mode-toggle');
-        if (btn) btn.textContent = '☀️';
+        if (btn) btn.textContent = '';
     }
 
     initLazyLoader();

@@ -76,23 +76,23 @@
     <div id="nav-placeholder"></div>
     <main>
         <section class="page-header">
-            <h1>💬 留言板（注意，本模块是占位符！！！目前无法评论！！！）</h1>
+            <h1> 留言板（注意，本模块是占位符！！！目前无法评论！！！）</h1>
             <p>唯有广泛的讨论才能促进理论进步</p>
         </section>
         
         <div class="content-wrapper">
             <div class="message-list">
                 <div class="message-item">
-                    <p class="message-text">读完《实践论》深受启发！“实践、认识、再实践、再认识”——这种螺旋上升的认识论让我重新理解了学习的方法。</p>
-                    <div class="message-meta"><span>📅 2026-05-09</span><span>❤️ 3</span><span>💬 2</span></div>
+                    <p class="message-text">读完实践论深受启发！“实践认识再实践再认识”——这种螺旋上升的认识论让我重新理解了学习的方法</p>
+                    <div class="message-meta"><span> 2026-05-09</span><span> 3</span><span> 2</span></div>
                 </div>
             </div>
             
             <div class="form-card">
-                <h3>📝 发表留言</h3>
-                <textarea id="msgContent" placeholder="分享你的思考、提问或建议..."></textarea>
-                <button onclick="submitMessage()">✉️ 提交留言</button>
-                <div class="rules">📋 留言需审核 | 理性讨论，互相尊重</div>
+                <h3> 发表留言</h3>
+                <textarea id="msgContent" placeholder="分享你的思考提问或建议..."></textarea>
+                <button onclick="submitMessage()"> 提交留言</button>
+                <div class="rules"> 留言需审核 | 理性讨论，互相尊重</div>
             </div>
             <div class="placeholder-note">—— 更多留言审核后展示 ——</div>
         </div>
@@ -100,20 +100,21 @@
     
     <footer class="site-footer"><div class="container"><p>青年马列毛主义驿站 | Qmlm Reader</p><p class="footer-note">学习他 · 成为他 · 然后超越他</p></div></footer>
     
+    <script src="../../js/site-data.js"></script>
     <script src="../../js/main.js"></script>
     <script>
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
             localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'true' : 'false');
             var btn = document.querySelector('.dark-mode-toggle');
-            if (btn) btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            if (btn) btn.textContent = document.body.classList.contains('dark-mode') ? '' : '';
         }
         if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
         
         function submitMessage() {
             var content = document.getElementById('msgContent').value.trim();
             if (!content) { alert('请输入留言内容'); return; }
-            alert('留言已提交，审核通过后显示。\n\n内容：' + content);
+            alert('留言已提交，审核通过后显示\n\n内容：' + content);
             document.getElementById('msgContent').value = '';
         }
         

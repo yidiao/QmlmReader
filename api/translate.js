@@ -1,12 +1,17 @@
 /**
- * 马列体生成器 — Vercel Serverless Function (V2.0)
- * DeepSeek API 代理层 + 文体知识注入
+ * 马列体生成器 — Vercel Serverless Function
+ * DeepSeek API 代理层 + 多导师文体转换入口
  *
- * V2.0 更新：
- * - 斯大林文体 System Prompt 基于《斯大林选集》7篇核心文章的实际句式分析
- * - 每条句式规则附带原文证据引用
- * - 支持接收规则引擎预处理结果（featureTags）作为 Prompt 上下文
- * - 分层 Prompt 架构：角色定义 → 句式规则 → 论证框架 → Few-shot示例 → 禁止事项
+ * 当前职责：
+ * - 为前端 `js/marxist/marxist-style.js` 提供 `/api/translate` 接口
+ * - 代理 DeepSeek Chat Completions，并注入导师文风 System Prompt
+ * - 支持马克思、恩格斯、列宁、斯大林、毛泽东五位导师
+ * - 接收规则引擎预处理特征（featureTags）作为提示上下文
+ * - 提供基础的 CORS、限流、超时和注入防护
+ *
+ * 说明：
+ * - 斯大林文风 Prompt 目前最细化，其他导师已可用，但仍可继续补充证据驱动的专属 Prompt
+ * - 本文件是部署到 Vercel 的后端入口，不负责静态站点页面托管
  */
 
 // ---- 配置 ----
