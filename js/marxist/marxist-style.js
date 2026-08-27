@@ -192,7 +192,8 @@
         });
         if (!resp.ok) {
           var errData = await resp.json().catch(function () { return {}; });
-          throw new Error(errData.error || 'Vercel 返回 ' + resp.status);
+          var message = errData.error || 'Vercel 返回 ' + resp.status;
+          throw new Error('[API ' + resp.status + '] ' + message);
         }
         var data = await resp.json();
         // 标准化为 _renderResult 期望的格式
@@ -218,7 +219,7 @@
       if (typeof configured === 'string' && configured.trim()) {
         return configured.trim().replace(/\/$/, '');
       }
-      return 'https://qmlmreader-api.vercel.app';
+      return 'https://qmlm-reader.vercel.app';
     }
   };
 

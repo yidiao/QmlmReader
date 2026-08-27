@@ -80,6 +80,10 @@ Vercel 后端入口位于：
 
 前端通过 `window.QMLM_API_BASE` 读取后端基地址；若未配置，则回退到默认值。
 
+当前正式 API 域名：
+
+- `https://qmlm-reader.vercel.app`
+
 当前默认回退值位于：
 
 - `js/marxist/marxist-style.js`
