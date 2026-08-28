@@ -27,6 +27,9 @@
  M html/articles/Stalin/dao-lunen.html
  M html/articles/Stalin/lun-lunen-zhu-yi-ji-chu.html
  M html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
+ M js/article-common.js
  M tmp_status.txt
-?? _tools/build_article_originals.cjs
-?? data/articles-json/
+?? _tools/fix_visible_chapters.cjs
+?? _tools/normalize_chapters.cjs
+?? _tools/rebuild_articles.cjs
+?? _tools/restore_multi_chapter_nav.cjs

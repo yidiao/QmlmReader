@@ -42,6 +42,15 @@ function getChapterTitleLabel(titleEl) {
     return text;
 }
 
+function syncChapterToggleIcon(chapter, expanded) {
+    if (!chapter) return;
+    var titleEl = chapter.querySelector('.chapter-title');
+    var icon = titleEl ? titleEl.querySelector('.toggle-icon') : null;
+    if (!icon) return;
+    icon.textContent = expanded ? '▾' : '▸';
+    icon.setAttribute('aria-hidden', 'true');
+}
+
 function updateToggleAllButton() {
     var btn = document.getElementById('chapterToggleBtn');
     if (!btn) return;
@@ -96,6 +105,7 @@ function setChapterState(chapter, expanded, animate) {
         titleEl.setAttribute('aria-expanded', expanded ? 'true' : 'false');
         titleEl.setAttribute('data-chapter-label', getChapterTitleLabel(titleEl));
     }
+    syncChapterToggleIcon(chapter, expanded);
     if (contentEl) {
         contentEl.setAttribute('aria-hidden', expanded ? 'false' : 'true');
         setChapterContentState(contentEl, expanded, animate);
@@ -124,6 +134,7 @@ function bindChapterAccordion() {
         titleEl.setAttribute('data-chapter-label', getChapterTitleLabel(titleEl));
         titleEl.style.cursor = 'pointer';
         titleEl.style.touchAction = 'manipulation';
+        titleEl.style.userSelect = 'none';
         setChapterState(chapter, !chapter.classList.contains('collapsed'), false);
     });
 
