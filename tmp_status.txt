@@ -1,35 +1,32 @@
- M css/articles-detail.css
- M downloads/manifest.unified.json
+ M html/articles/Engels/fan-du-lin-lun.html
+ M html/articles/Engels/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html
+ M html/articles/Lenin/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html
+ M html/articles/Lenin/guo-jia-yu-ge-ming.html
+ M html/articles/Lenin/lun-wo-guo-ge-ming.html
+ M html/articles/Lenin/ma-ke-si-zhu-yi-de-san-ge-lai-yuan.html
+ M html/articles/Lenin/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html
+ M html/articles/Lenin/zen-me-ban.html
+ M html/articles/Mao/lun-chi-jiu-zhan.html
+ M html/articles/Mao/lun-shi-da-guan-xi.html
+ M html/articles/Mao/mao-dun-lun.html
+ M html/articles/Mao/nong-min-yun-dong.html
+ M html/articles/Mao/ren-min-nei-bu-mao-dun.html
  M html/articles/Mao/shi-jian-lun.html
- M html/downloads/downloads.html
- M js/article-common.js
- M js/main.js
+ M html/articles/Mao/wen-yi-zuo-tan.html
+ M html/articles/Mao/xin-min-zhu.html
+ M html/articles/Mao/xue-xi-shi-ju.html
+ M html/articles/Mao/you-ji-zhan.html
+ M html/articles/Mao/zhan-lue-wen-ti.html
+ M html/articles/Mao/zhan-zheng-zhan-lue.html
+ M html/articles/Marx/1844-nian-jing-ji-xue-zhe-xue-shou-gao.html
+ M html/articles/Marx/de-yi-zhi-yi-xing-tai.html
+ M html/articles/Marx/ge-da-gang-ling.html
+ M html/articles/Marx/gongchan-dan-yuan.html
+ M html/articles/Marx/guan-yu-fei-er-ba-ha-de-ti-gang.html
+ M html/articles/Marx/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.html
+ M html/articles/Stalin/dao-lunen.html
+ M html/articles/Stalin/lun-lunen-zhu-yi-ji-chu.html
+ M html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
  M tmp_status.txt
- D 设计文档/万物皆可红/万物皆可红-设计文档.md
- D 设计文档/小册子/小册子-设计文档.md
- D 设计文档/赛博样板戏/样板戏研究-八部总结.md
- D 设计文档/赛博样板戏/样板戏研究-奇袭白虎团.md
- D 设计文档/赛博样板戏/样板戏研究-文体Prompt.md
- D 设计文档/赛博样板戏/样板戏研究-智取威虎山.md
- D 设计文档/赛博样板戏/样板戏研究-沙家浜.md
- D 设计文档/赛博样板戏/样板戏研究-沙家浜交响乐.md
- D 设计文档/赛博样板戏/样板戏研究-海港.md
- D 设计文档/赛博样板戏/样板戏研究-白毛女.md
- D 设计文档/赛博样板戏/样板戏研究-红灯记.md
- D 设计文档/赛博样板戏/样板戏研究-红色娘子军.md
- D 设计文档/赛博样板戏/赛博样板戏-设计文档.md
- D 设计文档/青马/青马的奇妙冒险-实际进度.md
- D 设计文档/青马/青马的奇妙冒险设计大纲.md
- M 设计文档/项目维护.md
- D 设计文档/马列体/马列体生成器-大纲架构.md
- D 设计文档/马列体/马列体生成器-开发进度.md
- D 设计文档/马列体/马列体生成器-美术设计.md
-?? _restore_shi_jian_lun.html
-?? scripts/
-?? 设计文档/experimental（武器库）/
-?? 设计文档/下载中心维护规范.md
-?? 设计文档/数据源维护规范.md
-?? 设计文档/文档体系说明.md
-?? 设计文档/文章页维护规范.md
-?? 设计文档/架构问题清单.md
-?? 设计文档/母站架构维护.md
+?? _tools/build_article_originals.cjs
+?? data/articles-json/
