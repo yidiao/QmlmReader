@@ -1,17 +1,50 @@
-/* ===================================================================
-   articles-detail.css — 文章详情页共享样式
-   基准：实践论 / 矛盾论（2026-06-20 恢复版本）
-   每篇文章仅需 4行 :root 覆盖类别色值
-   =================================================================== */
+﻿/* ===================================================================
+   articles-detail.css 鈥?鏂囩珷璇︽儏椤靛叡浜牱寮?   鍩哄噯锛氬疄璺佃 / 鐭涚浘璁猴紙2026-06-20 鎭㈠鐗堟湰锛?   姣忕瘒鏂囩珷浠呴渶 4琛?:root 瑕嗙洊绫诲埆鑹插€?   =================================================================== */
 
-/* ==================== 类别色值（占位，由各文章 <style> 覆盖） ==================== */
+/* ==================== 绫诲埆鑹插€硷紙鍗犱綅锛岀敱鍚勬枃绔?<style> 瑕嗙洊锛?==================== */
 :root {
     --cat-primary: #8b0000;
     --cat-secondary: #c41e3a;
     --cat-gradient: linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
 }
 
-/* ==================== 文章头部 ==================== */
+body[data-category="philosophy"], body[data-category="鏀挎不鐞嗚"] {
+    --cat-primary: #8b0000;
+    --cat-secondary: #c41e3a;
+    --cat-gradient: linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
+}
+body[data-category="politics"] {
+    --cat-primary: #1a237e;
+    --cat-secondary: #283593;
+    --cat-gradient: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+}
+body[data-category="military"] {
+    --cat-primary: #1a4d7a;
+    --cat-secondary: #2b6cb0;
+    --cat-gradient: linear-gradient(135deg, #1a4d7a 0%, #2b6cb0 100%);
+}
+body[data-category="economics"] {
+    --cat-primary: #2e7d32;
+    --cat-secondary: #43a047;
+    --cat-gradient: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+}
+body[data-category="party"] {
+    --cat-primary: #5c3d99;
+    --cat-secondary: #7e57c2;
+    --cat-gradient: linear-gradient(135deg, #4527a0 0%, #5c3d99 100%);
+}
+body[data-category="culture"] {
+    --cat-primary: #c2185b;
+    --cat-secondary: #d81b60;
+    --cat-gradient: linear-gradient(135deg, #880e4f 0%, #c2185b 100%);
+}
+body[data-category="economy"] {
+    --cat-primary: #2e7d32;
+    --cat-secondary: #43a047;
+    --cat-gradient: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+}
+
+/* ==================== 鏂囩珷澶撮儴 ==================== */
 .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
 
 .article-header {
@@ -62,26 +95,36 @@
     flex-wrap: wrap;
     margin-top: 1.2rem;
     font-size: 0.95rem;
+    align-items: center;
 }
 .article-meta span {
-    background: rgba(0,0,0,0.45);
+    background: rgba(0,0,0,0.28);
     padding: 5px 14px;
     border-radius: 18px;
     backdrop-filter: blur(4px);
     border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.88);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
 }
-.article-meta .author { font-weight: 600; }
-.article-meta .category { color: rgba(255,215,0,0.9); }
+.article-meta .author { font-weight: 600; color: rgba(255,255,255,0.92); }
+.article-meta .date { color: rgba(255,255,255,0.86); }
+.article-meta .category { color: rgba(255,215,0,0.95); }
+.article-meta .word-count { color: rgba(255,255,255,0.86); }
 .article-meta .length-tag {
-    background: rgba(255,215,0,0.25);
-    color: rgba(255,215,0,0.95);
+    background: rgba(255,215,0,0.24);
+    color: rgba(255,215,0,0.98);
     border: 1px solid rgba(255,215,0,0.5);
     font-size: 0.8em;
     padding: 3px 10px;
     border-radius: 12px;
+    min-height: 1.8em;
+    line-height: 1;
 }
 
-/* ==================== 返回导航 ==================== */
+/* ==================== 杩斿洖瀵艰埅 ==================== */
 .back-nav { background: #f8f8f8; border-bottom: 1px solid #e0e0e0; padding: 12px 0; }
 .back-nav a, .back-link {
     display: inline-flex;
@@ -94,19 +137,22 @@
 }
 .back-nav a:hover, .back-link:hover { color: var(--cat-secondary); }
 
-/* ==================== Tab导航 ==================== */
+/* ==================== Tab瀵艰埅 ==================== */
 .tab-nav {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: stretch;
     gap: 4px;
     background: #f8f8f8;
     padding: 0.6rem 0.8rem;
     border-radius: 12px 12px 0 0;
     border-bottom: 2px solid #e0e0e0;
     overflow-x: auto;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    scroll-behavior: smooth;
 }
 .tab-nav::-webkit-scrollbar { display: none; }
 .tab-btn {
@@ -117,14 +163,19 @@
     cursor: pointer;
     font-size: 0.88rem;
     border-radius: 8px;
-    transition: all 0.25s;
+    transition: color 0.2s, background-color 0.2s;
     white-space: nowrap;
     flex-shrink: 0;
+    position: relative;
+    top: 0;
+    transform: translateY(0);
 }
-.tab-btn:hover { background: #e8e8e8; color: #333; }
-.tab-btn.active { background: var(--cat-primary); color: white; font-weight: 600; }
+.tab-btn:active { top: 0; transform: translateY(0); }
+.tab-btn:focus { outline: none; }
+.tab-btn:hover { background: #e8e8e8; color: #333; transform: translateY(0); }
+.tab-btn.active { background: var(--cat-primary); color: white; font-weight: 600; transform: translateY(0); }
 
-/* ==================== Tab内容 ==================== */
+/* ==================== Tab鍐呭 ==================== */
 .tab-content {
     display: none;
     background: white;
@@ -142,7 +193,7 @@
     font-size: 1.3rem;
 }
 
-/* ==================== 原文 ==================== */
+/* ==================== 鍘熸枃 ==================== */
 .original-text { line-height: 1.9; font-size: 1.05rem; }
 .text-intro {
     background: linear-gradient(135deg, #fff8f0, #ffe8d6);
@@ -152,41 +203,81 @@
     border-radius: 0 8px 8px 0;
 }
 
-/* 章节 */
+/* 绔犺妭 */
 .chapter {
     margin-bottom: 1.5rem;
     border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    overflow: hidden;
+    border-radius: 12px;
+    overflow: clip;
+    scroll-margin-top: 110px;
 }
 .chapter-title {
     background: linear-gradient(135deg, var(--cat-primary), var(--cat-secondary));
     color: white;
-    padding: 1rem 1.3rem;
+    padding: 1rem 1.25rem;
     margin: 0;
     cursor: pointer;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
     align-items: center;
-    gap: 10px;
-    font-size: 1.1rem;
+    column-gap: 0.8rem;
+    font-size: 1.05rem;
     user-select: none;
+    line-height: 1.35;
+    transform: none;
+    position: relative;
+    z-index: 1;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
-.chapter-title:hover { filter: brightness(1.1); }
+.chapter-title:hover { filter: brightness(1.08); transform: none; }
+.chapter-title:active { transform: none; }
+.chapter-title:focus-visible {
+    outline: 3px solid rgba(255,255,255,0.65);
+    outline-offset: -3px;
+}
 .toggle-icon {
-    font-size: 0.8rem;
-    transition: transform 0.25s;
+    width: 1rem;
+    height: 1rem;
+    display: inline-grid;
+    place-items: center;
     flex-shrink: 0;
+    line-height: 1;
+    font-size: 1rem;
+    color: inherit;
+    transform: none;
 }
-.chapter.collapsed .toggle-icon { transform: rotate(-90deg); }
+.toggle-icon::before {
+    content: '鈻?;
+    display: block;
+    line-height: 1;
+    transform: translateY(-1px);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+}
+.chapter.collapsed .toggle-icon::before {
+    content: '鈻?;
+    transform: translateY(-1px);
+}
 .chapter-content {
     padding: 1.3rem;
     background: #fafafa;
-    transition: max-height 0.4s ease, padding 0.3s ease;
+    overflow: hidden;
+    opacity: 1;
+    max-height: none;
+    transition: max-height 0.35s ease, padding 0.25s ease, opacity 0.2s ease;
+    will-change: max-height, padding, opacity;
+    overflow-anchor: none;
 }
-.chapter.collapsed .chapter-content { max-height: 0; padding: 0 1.3rem; overflow: hidden; }
+.chapter.collapsed .chapter-content {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+}
 .chapter-content p { text-indent: 2em; margin-bottom: 1em; text-align: justify; }
 
-/* 章节全部展开/收起按钮 */
+/* 绔犺妭鍏ㄩ儴灞曞紑/鏀惰捣鎸夐挳 */
 .chapter-toggle-all {
     display: inline-block;
     margin: 0 0 0.8rem 0;
@@ -194,16 +285,24 @@
     background: var(--cat-primary);
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 0.85rem;
-    transition: all 0.2s;
+    line-height: 1;
+    transition: filter 0.2s, background-color 0.2s, transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 .chapter-toggle-all:hover { filter: brightness(1.15); }
+.chapter-toggle-all:active { transform: translateY(1px); }
+.chapter-toggle-all:focus-visible {
+    outline: 3px solid rgba(139,0,0,0.25);
+    outline-offset: 2px;
+}
 body.dark-mode .chapter-toggle-all { background: #555; }
 body.dark-mode .chapter-toggle-all:hover { background: #777; }
 
-/* 引用/高亮/警告 */
+/* 寮曠敤/楂樹寒/璀﹀憡 */
 .quote {
     background: #f5f5f5;
     border-left: 4px solid var(--cat-primary);
@@ -227,8 +326,8 @@ body.dark-mode .chapter-toggle-all:hover { background: #777; }
     border-radius: 0 6px 6px 0;
 }
 
-/* ==================== 读法提示 / 难点解析 / 对话空间 / 行动实验 / 延伸阅读 ==================== */
-/* 统一内容块样式（基准模式） */
+/* ==================== 璇绘硶鎻愮ず / 闅剧偣瑙ｆ瀽 / 瀵硅瘽绌洪棿 / 琛屽姩瀹為獙 / 寤朵几闃呰 ==================== */
+/* 缁熶竴鍐呭鍧楁牱寮忥紙鍩哄噯妯″紡锛?*/
 .reading-guide, .difficulty-section, .dialogue-section,
 .action-section, .visualization-section, .puzzle-section, .further-reading { line-height: 1.9; }
 
@@ -246,7 +345,7 @@ body.dark-mode .chapter-toggle-all:hover { background: #777; }
     font-size: 1.05em;
 }
 
-/* 正误对照（难点解析内） */
+/* 姝ｈ瀵圭収锛堥毦鐐硅В鏋愬唴锛?*/
 .wrong {
     background: #fff5f5;
     border-left: 4px solid #fc8181;
@@ -263,19 +362,19 @@ body.dark-mode .chapter-toggle-all:hover { background: #777; }
     color: #1a4731;
 }
 
-/* 图表 */
+/* 鍥捐〃 */
 .chart-container { position: relative; }
 .chart-block h3 { color: var(--cat-primary); margin-bottom: 8px; }
 .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
 
-/* 延伸阅读标题 */
+/* 寤朵几闃呰鏍囬 */
 .further-reading .reading-item h3 {
     color: var(--cat-primary);
     margin-bottom: 8px;
     font-size: 1em;
 }
 
-/* ==================== 理论拼图 ==================== */
+/* ==================== 鐞嗚鎷煎浘 ==================== */
 .puzzle-intro {
     background: linear-gradient(135deg, #fff8f0, #ffe8d6);
     padding: 1.5rem;
@@ -295,7 +394,7 @@ body.dark-mode .chapter-toggle-all:hover { background: #777; }
 .theory-node.current { background: #38a169; color: white; font-weight: bold; }
 .theory-node.related { background: #e2e8f0; color: #333; }
 
-/* 时间轴 */
+/* 鏃堕棿杞?*/
 .puzzle-timeline, .puzzle-links {
     margin-bottom: 24px;
     padding: 18px 22px;
@@ -351,7 +450,7 @@ body.dark-mode .chapter-toggle-all:hover { background: #777; }
 .timeline-here { font-size: 0.7em; color: var(--cat-primary); font-weight: bold; margin-top: 2px; white-space: nowrap; }
 .timeline-item.active .timeline-year { color: var(--cat-primary); font-weight: bold; }
 
-/* 文章联结网络卡片 */
+/* 鏂囩珷鑱旂粨缃戠粶鍗＄墖 */
 .puzzle-links-note { color: #888; font-size: 0.85em; margin-bottom: 16px; line-height: 1.6; }
 .conn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
 .conn-card {
@@ -383,7 +482,7 @@ a.conn-card:hover {
     padding-top: 4px;
 }
 
-/* 拼图-现代意义 */
+/* 鎷煎浘-鐜颁唬鎰忎箟 */
 .puzzle-modern {
     background: linear-gradient(135deg, #fff8f0, #ffe8d6);
     padding: 1.2rem;
@@ -403,7 +502,7 @@ a.conn-card:hover {
 .puzzle-connection ul { margin-left: 1.2rem; }
 .puzzle-connection li { margin-bottom: 0.5rem; line-height: 1.7; }
 
-/* ==================== 结构分析（一目了然Tab内） ==================== */
+/* ==================== 缁撴瀯鍒嗘瀽锛堜竴鐩簡鐒禩ab鍐咃級 ==================== */
 .structure-analysis {
     margin-top: 20px;
     padding: 16px 20px;
@@ -424,7 +523,7 @@ a.conn-card:hover {
 .analysis-label.highlight { color: var(--cat-secondary); font-size: 0.96em; }
 .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
 
-/* ==================== 下载浮动按钮 ==================== */
+/* ==================== 涓嬭浇娴姩鎸夐挳 ==================== */
 .download-fab {
     position: fixed;
     bottom: 30px;
@@ -471,7 +570,7 @@ a.conn-card:hover {
 }
 .dl-link:hover { background: var(--cat-primary); color: white; }
 
-/* ==================== 文章尾部 ==================== */
+/* ==================== 鏂囩珷灏鹃儴 ==================== */
 .article-footer {
     margin-top: 3rem;
     padding-top: 1.5rem;
@@ -482,7 +581,7 @@ a.conn-card:hover {
 }
 .article-footer p { text-align: center !important; margin-bottom: 0.3rem; }
 
-/* ==================== 合集弹窗（与 articles.html 同款） ==================== */
+/* ==================== 鍚堥泦寮圭獥锛堜笌 articles.html 鍚屾锛?==================== */
 .modal-overlay {
     position: fixed; inset: 0;
     background: rgba(0,0,0,0.55);
@@ -549,7 +648,7 @@ a.conn-card:hover {
 .ma-status.ready { background: #e8f5e9; color: #2e7d32; }
 .ma-status.wip { background: #fff3e0; color: #e65100; }
 
-/* 弹窗黑夜模式 */
+/* 寮圭獥榛戝妯″紡 */
 body.dark-mode .modal-dialog { background: #2a2a2a; }
 body.dark-mode .modal-article { border-bottom-color: #3a3a3a; }
 body.dark-mode .modal-article:hover { background: #3a2020; }
@@ -559,7 +658,7 @@ body.dark-mode .ma-status.ready { background: #1a2a1a; color: #66bb6a; }
 body.dark-mode .ma-status.wip { background: #2a2015; color: #ffb74d; }
 body.dark-mode .modal-desc { color: #aaa; }
 
-/* ==================== 动态章节导航（main.js 自动生成） ==================== */
+/* ==================== 鍔ㄦ€佺珷鑺傚鑸紙main.js 鑷姩鐢熸垚锛?==================== */
 .dynamic-chapter-nav {
     position: fixed;
     right: 0; top: 50%;
@@ -579,7 +678,7 @@ body.dark-mode .modal-desc { color: #aaa; }
 }
 .dynamic-chapter-nav.visible { transform: translateY(-50%) translateX(0); }
 
-/* 侧边栏切换手柄 */
+/* 渚ц竟鏍忓垏鎹㈡墜鏌?*/
 .dcn-toggle {
     position: fixed;
     right: 0; top: 50%;
@@ -629,8 +728,8 @@ body.dark-mode .modal-desc { color: #aaa; }
     background: #fef5f5;
 }
 
-/* ==================== 黑夜模式 ==================== */
-/* 头部 & 返回 */
+/* ==================== 榛戝妯″紡 ==================== */
+/* 澶撮儴 & 杩斿洖 */
 body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
 body.dark-mode .back-nav { background: #2a2a2a; border-color: #444; }
 body.dark-mode .back-nav a, body.dark-mode .back-link { color: #7986cb; }
@@ -643,7 +742,7 @@ body.dark-mode .tab-btn.active { background: var(--cat-primary); color: white; }
 body.dark-mode .tab-content { background: #1a1a1a; }
 body.dark-mode .tab-heading { color: #7986cb; border-color: #7986cb; }
 
-/* 原文 */
+/* 鍘熸枃 */
 body.dark-mode .text-intro { background: linear-gradient(135deg, #2d2015, #3d2a1a); border-color: var(--cat-secondary); }
 body.dark-mode .chapter { border-color: #444; }
 body.dark-mode .chapter-content { background: #222; }
@@ -652,7 +751,7 @@ body.dark-mode .quote { background: #2a2a2a; }
 body.dark-mode .highlight-box { background: linear-gradient(135deg, #2d2015, #3d2a1a); }
 body.dark-mode .warning-box { background: #2d1a1a; }
 
-/* 内容块 */
+/* 鍐呭鍧?*/
 body.dark-mode .guide-block, body.dark-mode .diff-item,
 body.dark-mode .dialogue-block, body.dark-mode .action-item,
 body.dark-mode .chart-block, body.dark-mode .reading-item {
@@ -667,7 +766,7 @@ body.dark-mode .chart-block h3 { color: #7986cb; }
 body.dark-mode .chart-desc { color: #aaa; }
 body.dark-mode .further-reading .reading-item h3 { color: #7986cb; }
 
-/* 拼图 */
+/* 鎷煎浘 */
 body.dark-mode .puzzle-intro { background: linear-gradient(135deg, #2d2015, #3d2a1a); }
 body.dark-mode .theory-node.related { background: #444; color: #e0e0e0; }
 body.dark-mode .puzzle-timeline, body.dark-mode .puzzle-links { background: #2a2a2a; border-color: #444; }
@@ -687,14 +786,14 @@ body.dark-mode .puzzle-position h3, body.dark-mode .puzzle-connection h3,
 body.dark-mode .puzzle-modern h3 { color: #7986cb; border-left-color: #7986cb; }
 body.dark-mode .puzzle-connection li { color: #bbb; }
 
-/* 结构分析 */
+/* 缁撴瀯鍒嗘瀽 */
 body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
 body.dark-mode .structure-analysis h4 { color: var(--cat-secondary); }
 body.dark-mode .analysis-item { border-color: #444; }
 body.dark-mode .analysis-label { color: var(--cat-secondary); }
 body.dark-mode .analysis-item p { color: #ccc; }
 
-/* 下载 & 章节导航 */
+/* 涓嬭浇 & 绔犺妭瀵艰埅 */
 body.dark-mode .download-menu { background: #2a2a2a; color: white; }
 body.dark-mode .download-menu h4 { color: #ccc; }
 body.dark-mode .dl-link { background: #3a3a3a; color: #eee; }
@@ -707,10 +806,10 @@ body.dark-mode .dcn-item.active { color: #7986cb; border-left-color: #7986cb; ba
 body.dark-mode .dcn-toggle { background: #555; }
 body.dark-mode .dcn-toggle:hover { background: #666; }
 
-/* 文章尾部 */
+/* 鏂囩珷灏鹃儴 */
 body.dark-mode .article-footer { border-top-color: #444; color: #888; }
 
-/* ==================== 兼容旧类名（与标准类视觉一致） ==================== */
+/* ==================== 鍏煎鏃х被鍚嶏紙涓庢爣鍑嗙被瑙嗚涓€鑷达級 ==================== */
 .reading-tip, .difficulty-item, .dialogue-item {
     margin-bottom: 28px;
     padding: 20px 24px;
@@ -760,18 +859,116 @@ body.dark-mode .further-item { background: #2a2a2a; border-color: #444; }
 body.dark-mode .further-item h4 { color: #7986cb; }
 body.dark-mode .further-item p { color: #bbb; }
 
-/* 兼容：理论树（非基准文章可能使用） */
+/* 鍏煎锛氱悊璁烘爲锛堥潪鍩哄噯鏂囩珷鍙兘浣跨敤锛?*/
 .theory-tree { text-align: center; padding: 1.2rem 0; }
 .theory-branches { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.5rem; }
 .theory-sub { display: flex; flex-direction: column; gap: 0.4rem; align-items: center; margin-top: 0.3rem; }
 
-/* ==================== 响应式 ==================== */
+/* ==================== 宸ュ叿绫伙細鍐呰仈鏍峰紡鏇夸唬 ==================== */
+.u-text-right { text-align: right; }
+.u-mx-auto { margin-left: auto; margin-right: auto; }
+.u-max-500 { max-width: 500px; }
+.u-max-550 { max-width: 550px; }
+.u-max-600 { max-width: 600px; }
+.u-max-650 { max-width: 650px; }
+.u-max-700 { max-width: 700px; }
+.u-max-900 { max-width: 900px; }
+.u-px-20 { padding-left: 20px; padding-right: 20px; }
+.u-display-none { display: none; }
+.u-display-grid { display: grid; }
+.u-flex { display: flex; }
+.u-inline-flex { display: inline-flex; }
+.u-grid-auto-fit-200 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.u-gap-05 { gap: 0.5rem; }
+.u-gap-08 { gap: 0.8rem; }
+.u-gap-1rem { gap: 1rem; }
+.u-mt-12 { margin-top: 12px; }
+.u-mt-20 { margin-top: 20px; }
+.u-mt-1rem { margin-top: 1rem; }
+.u-mt-1_5rem { margin-top: 1.5rem; }
+.u-mb-1_5rem { margin-bottom: 1.5rem; }
+.u-mb-0 { margin-bottom: 0; }
+.u-mb-05 { margin-bottom: 0.5rem; }
+.u-mb-08 { margin-bottom: 0.8rem; }
+.u-p-1rem { padding: 1rem; }
+.u-p-2rem { padding: 2rem; }
+.u-p-40y { padding: 40px 0; }
+.u-radius-8 { border-radius: 8px; }
+.u-radius-12 { border-radius: 12px; }
+.u-color-muted { color: #666; }
+.u-color-subtle { color: #999; }
+.u-color-333 { color: #333; }
+.u-color-white { color: white; }
+.u-color-gold { color: #ffd700; }
+.u-color-gold2 { color: #ffd700; }
+.u-bg-soft-warm { background: linear-gradient(135deg, #fff8f0, #ffe8d6); }
+.u-bg-soft-blue { background: #e8eaf6; }
+.u-bg-soft-green { background: #e8f5e9; }
+.u-bg-soft-orange { background: #fff3e0; }
+.u-bg-soft-pink { background: #fce4ec; }
+.u-bg-soft-purple { background: #ede7f6; }
+.u-border-left-primary { border-left: 4px solid var(--cat-primary); }
+.u-border-left-secondary { border-left: 4px solid var(--cat-secondary); }
+.u-border-left-blue { border-left: 4px solid #2b6cb0; }
+.u-border-left-indigo { border-left: 4px solid #1a237e; }
+.u-border-left-orange { border-left: 4px solid #e65100; }
+.u-border-left-purple { border-left: 4px solid #5c3d99; }
+.u-border-left-red { border-left: 4px solid #8b0000; }
+.u-border-left-green { border-left: 4px solid #38a169; }
+.u-border-left-deepgreen { border-left: 4px solid #1b5e20; }
+.u-border-left-slate { border-left: 4px solid #3d6b4f; }
+.u-border-left-navy { border-left: 4px solid #1a4d7a; }
+.u-border-left-magenta { border-left: 4px solid #c41e3a; }
+.u-border-left-blue-3182ce { border-left: 4px solid #3182ce; }
+.u-color-indigo { color: #1a237e; }
+.u-color-blue { color: #2b6cb0; }
+.u-color-orange { color: #e65100; }
+.u-color-purple { color: #553c9a; }
+.u-color-green { color: #38a169; }
+.u-color-deepgreen { color: #2e7d32; }
+.u-color-pink { color: #c2185b; }
+.u-grid-3-up { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.u-line-height-2 { line-height: 2; }
+.u-mt-2rem { margin-top: 2rem; }
+.u-font-11em { font-size: 1.1em; }
+.u-font-09rem { font-size: 0.9rem; }
+.u-font-085rem { font-size: 0.85rem; }
+.u-font-078rem { font-size: 0.78rem; }
+.u-mb-04 { margin-bottom: 0.4rem; }
+.u-mb-06 { margin-bottom: 0.6rem; }
+.u-mb-1rem { margin-bottom: 1rem; }
+.u-mt-n05rem { margin-top: -0.5rem; }
+.u-opacity-05 { opacity: 0.5; }
+.u-bg-gradient-blue { background: linear-gradient(135deg,#1a237e,#283593); }
+.u-color-ffd700 { color: #ffd700; }
+.u-color-2e7d32 { color: #2e7d32; }
+.u-color-1a237e { color: #1a237e; }
+.u-color-2b6cb0 { color: #2b6cb0; }
+.u-color-38a169 { color: #38a169; }
+.u-color-e65100 { color: #e65100; }
+.u-line-height-16 { line-height: 1.6; }
+.u-border-none { border: none; }
+.u-opacity-50 { opacity: 0.5; }
+.u-bg-666 { background: #666; }
+.u-text-center { text-align: center; }
+.u-m-0 { margin: 0; }
+.u-mt-0 { margin-top: 0; }
+.u-mt-05 { margin-top: 0.5rem; }
+.u-p-40y { padding: 40px 0; }
+.u-font-09rem { font-size: 0.9rem; }
+.u-font-11em { font-size: 1.1em; }
+.u-fw-bold { font-weight: bold; }
+.u-mb-04 { margin-bottom: 0.4rem; }
+.u-line-height-16 { line-height: 1.6; }
+/* ==================== 鍝嶅簲寮?==================== */
 @media (max-width: 768px) {
-    .tab-nav { padding: 0.5rem 0.6rem; }
-    .tab-btn { padding: 8px 12px; font-size: 0.85em; }
+    .tab-nav { padding: 0.5rem 0.6rem; justify-content: center; align-items: center; }
+    .tab-btn { padding: 8px 12px; font-size: 0.85em; line-height: 1; }
     .article-header { padding: 2rem 1rem; }
     .article-header h1 { font-size: 1.8rem; }
     .article-meta { gap: 0.5rem; }
+    .article-meta span { font-size: 0.9rem; }
+    .article-meta .length-tag { display: inline-flex; align-items: center; justify-content: center; min-height: 2rem; }
     .tab-content { padding: 1.25rem; }
     .chapter-content { padding: 1rem; }
     .article-detail { margin: 1rem auto 2rem; }
@@ -779,11 +976,11 @@ body.dark-mode .further-item p { color: #bbb; }
     .action-item, .chart-block, .reading-item { padding: 14px 16px; }
     .download-fab { width: 48px; height: 48px; bottom: 20px; left: 20px; font-size: 18px; }
     .download-menu { bottom: 80px; left: 20px; }
-    .dynamic-chapter-nav { min-width: 110px; max-width: 140px; }
+    .dynamic-chapter-nav { min-width: 110px; max-width: 140px; box-sizing: border-box; }
     .dcn-item { font-size: 0.72rem; padding: 4px 8px; }
 }
 
-/* ==================== 打印 ==================== */
+/* ==================== 鎵撳嵃 ==================== */
 @media print {
     .site-header, .back-nav, .tab-nav, .chapter-nav,
     .download-fab, .download-menu, .dark-mode-toggle,
@@ -791,3 +988,6 @@ body.dark-mode .further-item p { color: #bbb; }
     .tab-content { display: block !important; padding: 0; }
     .chapter-content { max-height: none !important; padding: 1rem !important; }
 }
+
+
+

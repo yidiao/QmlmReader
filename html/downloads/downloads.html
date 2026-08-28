@@ -234,11 +234,20 @@
                 <div class="dl-grid" id="rectifyGrid"></div>
             </section>
 
-            <!-- ========== 宣传画图包 ========== -->
+            <!-- ========== 单篇文章 Word ========== -->
+            <section class="dl-section" data-section="articles-word">
+                <div class="dl-section-title">
+                     单篇文章 Word
+                    <span class="dl-section-count">待重构</span>
+                </div>
+                <div class="dl-grid" id="articlesWordGrid"></div>
+            </section>
+
+            <!-- ========== 宣传画外链 ========== -->
             <section class="dl-section" data-section="posters">
                 <div class="dl-section-title">
-                     宣传画图包 ZIP
-                    <span class="dl-section-count">14 个</span>
+                     宣传画网盘链接
+                    <span class="dl-section-count">14 项</span>
                 </div>
                 <div class="dl-grid" id="postersGrid"></div>
             </section>
@@ -258,7 +267,11 @@
     <script>
     // ========== 数据 ==========
 
-    // -- 经典著作 PDF --
+    // 下载中心重构方向：
+    // - 单篇文章统一 Word（docx/doc）
+    // - 著作类统一 PDF
+    // - 体积过大的宣传画改为百度网盘外链
+    // 当前页面仍保留旧数据兜底，后续应改为完全由 SITE_DATA 驱动
     var articlePDFs = [
         { title:'共产党宣言', author:'马克思 恩格斯', cat:'marx', slug:'gongchan-dan-yuan', year:1848 },
         { title:'怎么办？', author:'列宁', cat:'lenin', slug:'zen-me-ban', year:1902 },
@@ -298,11 +311,11 @@
         { title:'驳人性论互联网第二春', cat:'rectify', slug:'rectify-human-nature', section:'myths' }
     ];
 
-    // -- 宣传画图包 --
+    // -- 宣传画网盘外链 --
     var posterZIPs = [
-        { label:'中国宣传画·第一辑', size:'425 MB', cat:'posters', file:'chinese-posters-V01.zip' },
-        { label:'中国宣传画·第二辑', size:'596 MB', cat:'posters', file:'chinese-posters-V02.zip' },
-        { label:'中国宣传画·第三辑（里斯本博物馆藏）', size:'117 MB', cat:'posters', file:'chinese-posters-V03.zip' },
+        { label:'中国宣传画·第一辑', size:'425 MB', cat:'posters', link:'https://pan.baidu.com/' },
+        { label:'中国宣传画·第二辑', size:'596 MB', cat:'posters', link:'https://pan.baidu.com/' },
+        { label:'中国宣传画·第三辑（里斯本博物馆藏）', size:'117 MB', cat:'posters', link:'https://pan.baidu.com/' },
         { label:'苏联宣传画·共青团', size:'1.1 MB', cat:'posters', file:'soviet-posters-共青团.zip' },
         { label:'苏联宣传画·十月革命', size:'4.2 MB', cat:'posters', file:'soviet-posters-十月革命.zip' },
         { label:'苏联宣传画·卫国战争', size:'7.7 MB', cat:'posters', file:'soviet-posters-卫国战争.zip' },
@@ -365,11 +378,11 @@
             '<div class="dl-info">' +
                 '<div class="dl-title">' + esc(item.label) + '</div>' +
                 '<div class="dl-meta">' +
-                    '<span class="dl-badge badge-zip">ZIP</span>' +
+                    '<span class="dl-badge badge-zip">' + (item.link ? '网盘外链' : 'ZIP') + '</span>' +
                     '<span class="dl-badge badge-size">' + esc(item.size) + '</span>' +
                 '</div>' +
             '</div>' +
-            '<a class="dl-btn" href="../../downloads/posters/' + item.file + '" download>下载</a>' +
+            '<a class="dl-btn" href="' + esc(item.link || ('../../downloads/posters/' + item.file)) + '" target="_blank" rel="noopener">打开</a>' +
         '</div>';
     }
 
@@ -382,12 +395,13 @@
     // 渲染全部
     document.getElementById('articlesGrid').innerHTML = articlePDFs.map(renderArticleCard).join('');
     document.getElementById('rectifyGrid').innerHTML = rectifyPDFs.map(renderRectifyCard).join('');
+    document.getElementById('articlesWordGrid').innerHTML = '';
     document.getElementById('postersGrid').innerHTML = posterZIPs.map(renderPosterCard).join('');
 
     // 更新统计
     document.getElementById('countPdf').textContent = articlePDFs.length;
     document.getElementById('countRectify').textContent = rectifyPDFs.length;
-    document.getElementById('countZip').textContent = posterZIPs.length;
+    document.getElementById('countWord').textContent = 0;
     document.getElementById('countTotal').textContent = articlePDFs.length + rectifyPDFs.length + posterZIPs.length;
 
     // ========== 筛选 ==========

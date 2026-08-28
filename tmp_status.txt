@@ -1,5 +1,35 @@
- M DEPLOY.md
- M html/experimental/marxist-style.html
- M html/toolkit/marxist-style.html
- M js/marxist/marxist-style.js
+ M css/articles-detail.css
+ M downloads/manifest.unified.json
+ M html/articles/Mao/shi-jian-lun.html
+ M html/downloads/downloads.html
+ M js/article-common.js
+ M js/main.js
  M tmp_status.txt
+ D 设计文档/万物皆可红/万物皆可红-设计文档.md
+ D 设计文档/小册子/小册子-设计文档.md
+ D 设计文档/赛博样板戏/样板戏研究-八部总结.md
+ D 设计文档/赛博样板戏/样板戏研究-奇袭白虎团.md
+ D 设计文档/赛博样板戏/样板戏研究-文体Prompt.md
+ D 设计文档/赛博样板戏/样板戏研究-智取威虎山.md
+ D 设计文档/赛博样板戏/样板戏研究-沙家浜.md
+ D 设计文档/赛博样板戏/样板戏研究-沙家浜交响乐.md
+ D 设计文档/赛博样板戏/样板戏研究-海港.md
+ D 设计文档/赛博样板戏/样板戏研究-白毛女.md
+ D 设计文档/赛博样板戏/样板戏研究-红灯记.md
+ D 设计文档/赛博样板戏/样板戏研究-红色娘子军.md
+ D 设计文档/赛博样板戏/赛博样板戏-设计文档.md
+ D 设计文档/青马/青马的奇妙冒险-实际进度.md
+ D 设计文档/青马/青马的奇妙冒险设计大纲.md
+ M 设计文档/项目维护.md
+ D 设计文档/马列体/马列体生成器-大纲架构.md
+ D 设计文档/马列体/马列体生成器-开发进度.md
+ D 设计文档/马列体/马列体生成器-美术设计.md
+?? _restore_shi_jian_lun.html
+?? scripts/
+?? 设计文档/experimental（武器库）/
+?? 设计文档/下载中心维护规范.md
+?? 设计文档/数据源维护规范.md
+?? 设计文档/文档体系说明.md
+?? 设计文档/文章页维护规范.md
+?? 设计文档/架构问题清单.md
+?? 设计文档/母站架构维护.md

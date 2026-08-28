@@ -378,7 +378,8 @@ document.addEventListener('DOMContentLoaded', function() {
     chapters.forEach(function(ch, i) {
         var titleEl = ch.querySelector('.chapter-title');
         if (!titleEl) return;
-        var text = titleEl.textContent.replace(/[▼▶]/g, '').trim();
+        var text = titleEl.getAttribute('data-chapter-label') || titleEl.textContent.replace(/[▼▶▾▸]/g, '').trim();
+        text = text.replace(/\s+/g, ' ').trim();
         if (text.length > 22) text = text.substring(0, 22) + '…';
         var id = 'ch-nav-' + i;
         ch.id = id;
