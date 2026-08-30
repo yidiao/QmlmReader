@@ -321,6 +321,54 @@
         }
         
         /* ========== 拓展阅读模块 ========== */
+        .imported-section {
+            margin: 2rem 0 3rem;
+        }
+
+        .imported-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem 1.2rem;
+            background: rgba(255,255,255,0.7);
+            border-radius: 18px;
+        }
+
+        body.dark-mode .imported-header {
+            background: rgba(0,0,0,0.22);
+        }
+
+        .imported-header h3 {
+            margin: 0;
+            color: #8b0000;
+        }
+
+        body.dark-mode .imported-header h3 {
+            color: #ff8a8a;
+        }
+
+        .imported-header p {
+            margin: 0.2rem 0 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        body.dark-mode .imported-header p {
+            color: #aaa;
+        }
+
+        .imported-count {
+            font-size: 0.85rem;
+            color: #8b0000;
+            white-space: nowrap;
+        }
+
+        body.dark-mode .imported-count {
+            color: #ff8a8a;
+        }
+
         .expand-section {
             margin: 3rem 0 2rem;
             border-radius: 24px;
@@ -1251,6 +1299,17 @@
                 </article>
             </div>
 
+            <section class="imported-section">
+                <div class="imported-header">
+                    <div>
+                        <h3>原始资料补充入库</h3>
+                        <p>自动补齐未纳入站内的原文资料；保留现有重点精读页，不覆盖原有页面。</p>
+                    </div>
+                    <div class="imported-count" id="importedCount">0 篇</div>
+                </div>
+                <div class="article-grid" id="importedArticlesGrid"></div>
+            </section>
+
             <!-- ========= 拓展阅读模块 ========= -->
             <div class="expand-section" id="expandSection">
                 <div class="expand-header" onclick="toggleExpand()">
@@ -1363,6 +1422,7 @@
           }
 
         renderCollections(collectionsData);
+        renderImportedArticles();
 
         function renderCollections(data) {
             const grid = document.getElementById('collectionsGrid');
@@ -1378,6 +1438,41 @@
                         <div class="coll-count"> ${ready}/${total} 篇已收录</div>
                     </div>
                 </div>`;
+            }).join('');
+        }
+
+        function renderImportedArticles() {
+            const grid = document.getElementById('importedArticlesGrid');
+            const countEl = document.getElementById('importedCount');
+            if (!grid || !window.SITE_DATA || !Array.isArray(window.SITE_DATA.articles)) return;
+            const imported = window.SITE_DATA.articles
+                .filter(a => a && a.source === '金星与赤旗/著作提取')
+                .sort((a, b) => {
+                    const ayMatch = String(a.year || '').match(/\d{4}/);
+                    const byMatch = String(b.year || '').match(/\d{4}/);
+                    const ay = parseInt(ayMatch ? ayMatch[0] : '9999', 10);
+                    const by = parseInt(byMatch ? byMatch[0] : '9999', 10);
+                    if (ay !== by) return ay - by;
+                    return String(a.title || '').localeCompare(String(b.title || ''), 'zh-Hans-CN');
+                });
+            countEl.textContent = imported.length + ' 篇';
+            grid.innerHTML = imported.map(a => {
+                const href = a.file || ('imported/' + a.authorKey + '/' + a.slug + '.html');
+                const date = a.date || a.year || '年份待补';
+                const desc = a.sourceFile ? ('来源：' + a.sourceFile) : '来源：原始资料补充入库';
+                return `<article class="article-card priority-${a.priority || 3}" data-category="${a.type || 'politics'}" data-priority="${a.priority || 3}" data-author="${a.authorKey || 'mao'}">
+                    <div class="card-header">
+                        <span class="priority-badge" ${a.priority === 4 ? 'style="background: #666;"' : ''}>${a.priority === 5 ? '五星' : a.priority === 4 ? '四星' : '补充入库'}</span>
+                        <span class="article-date">${date}</span>
+                    </div>
+                    <h4 class="article-title"><a href="${href}">${a.title}</a></h4>
+                    <p class="article-author">${a.author}</p>
+                    <p class="article-desc">${desc}</p>
+                    <div class="card-footer">
+                        <span class="article-category">${a.category || '经典文献'}</span>
+                        <a href="${href}" class="read-more">阅读全文 </a>
+                    </div>
+                </article>`;
             }).join('');
         }
 

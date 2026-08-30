@@ -220,7 +220,11 @@ function initDownloads() {
 
     if (linksDiv && typeof DOWNLOAD_LINKS !== 'undefined' && DOWNLOAD_LINKS.length) {
         linksDiv.innerHTML = DOWNLOAD_LINKS.map(function(l) {
-            return '<a class="dl-link" href="' + l.href + '" download>' + l.label + '</a>';
+            var attrs = '';
+            if (l.format) attrs += ' data-download-format="' + l.format + '"';
+            if (l.source) attrs += ' data-download-source="' + l.source + '"';
+            var downloadAttr = l.format ? '' : ' download';
+            return '<a class="dl-link" href="' + l.href + '"' + downloadAttr + attrs + '>' + l.label + '</a>';
         }).join('');
     }
 

@@ -428,6 +428,7 @@
     </div>
 
     <!-- ========== JS 脚本 ========== -->
+    <script src="../../../js/download-export.js"></script>
     <script src="../../../js/article-common.js"></script>
     <script>
         // ===== 本文图表配置 =====
@@ -520,9 +521,7 @@
         ];
 
         // ===== 下载链接 =====
-        var DOWNLOAD_LINKS = [
-            { href: '../../../data/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.txt', label: ' 下载 TXT' }
-        ];
+        var DOWNLOAD_LINKS = window.buildStandardDownloadLinks ? window.buildStandardDownloadLinks() : [];
     </script>
     <script src="../../../js/site-data.js"></script>
     <script src="../../../js/main.js"></script>

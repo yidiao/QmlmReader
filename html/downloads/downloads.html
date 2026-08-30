@@ -14,96 +14,30 @@
         }
         .page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
         .page-header p { font-size: 1.05rem; opacity: 0.88; }
-
         .dl-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-
-        /* 统计条 */
-        .dl-stats {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
+        .dl-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
         .dl-stat {
-            flex: 1;
-            min-width: 140px;
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 1rem 1.25rem;
-            box-shadow: var(--shadow);
-            text-align: center;
-            border-top: 3px solid #1f6f8b;
+            flex: 1; min-width: 140px; background: var(--card-bg); border-radius: 10px;
+            padding: 1rem 1.25rem; box-shadow: var(--shadow); text-align: center; border-top: 3px solid #1f6f8b;
         }
-        .dl-stat .num {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1a5276;
-        }
-        .dl-stat .lbl {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-top: 0.15rem;
-        }
-
-        /* 筛选 */
-        .dl-filters {
-            display: flex;
-            gap: 0.6rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
+        .dl-stat .num { font-size: 1.8rem; font-weight: 700; color: #1a5276; }
+        .dl-stat .lbl { font-size: 0.85rem; color: var(--text-light); margin-top: 0.15rem; }
+        .dl-filters { display: flex; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap; }
         .dl-filter-btn {
-            padding: 0.45rem 1rem;
-            border: 2px solid #e0e0e0;
-            background: white;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.88rem;
-            transition: all 0.2s;
+            padding: 0.45rem 1rem; border: 2px solid #e0e0e0; background: white; border-radius: 20px;
+            cursor: pointer; font-size: 0.88rem; transition: all 0.2s;
         }
-        .dl-filter-btn:hover, .dl-filter-btn.active {
-            background: #1a5276;
-            border-color: #1a5276;
-            color: white;
-        }
-
-        /* 分区 */
-        .dl-section {
-            margin-bottom: 2.5rem;
-        }
+        .dl-filter-btn:hover, .dl-filter-btn.active { background: #1a5276; border-color: #1a5276; color: white; }
+        .dl-section { margin-bottom: 2.5rem; }
         .dl-section-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #1f6f8b;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; padding-bottom: 0.5rem;
+            border-bottom: 2px solid #1f6f8b; display: flex; align-items: center; gap: 0.5rem;
         }
-        .dl-section-count {
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: var(--text-light);
-            margin-left: auto;
-        }
-
-        /* 卡片 */
-        .dl-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1rem;
-        }
+        .dl-section-count { font-size: 0.85rem; font-weight: 400; color: var(--text-light); margin-left: auto; }
+        .dl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
         .dl-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 1rem 1.25rem;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-            border-left: 4px solid #ddd;
+            background: var(--card-bg); border-radius: 10px; padding: 1rem 1.25rem; box-shadow: var(--shadow);
+            display: flex; align-items: center; gap: 1rem; transition: transform 0.2s, box-shadow 0.2s; border-left: 4px solid #ddd;
         }
         .dl-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
         .dl-card.cat-mao    { border-left-color: #c41e3a; }
@@ -113,70 +47,36 @@
         .dl-card.cat-engels { border-left-color: #4a5568; }
         .dl-card.cat-rectify{ border-left-color: #6b2fa0; }
         .dl-card.cat-posters{ border-left-color: #e65100; }
-
-        .dl-icon {
-            font-size: 1.6rem;
-            flex-shrink: 0;
-            width: 40px;
-            text-align: center;
-        }
+        .dl-icon { font-size: 1.6rem; flex-shrink: 0; width: 40px; text-align: center; }
         .dl-info { flex: 1; min-width: 0; }
-        .dl-info .dl-title {
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 0.2rem;
-            color: var(--text-color);
-        }
+        .dl-info .dl-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem; color: var(--text-color); }
         .dl-info .dl-meta {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-            align-items: center;
+            font-size: 0.8rem; color: var(--text-light); display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;
         }
-        .dl-badge {
-            display: inline-block;
-            padding: 0.1rem 0.45rem;
-            border-radius: 8px;
-            font-size: 0.72rem;
-            font-weight: 600;
-        }
-        .badge-pdf  { background: #fef3c7; color: #92400e; }
+        .dl-badge { display: inline-block; padding: 0.1rem 0.45rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; }
         .badge-zip  { background: #fce7f3; color: #9d174d; }
         .badge-txt  { background: #e0e7ff; color: #3730a3; }
         .badge-size { background: #f3f4f6; color: #6b7280; }
-
         .dl-btn {
-            flex-shrink: 0;
-            padding: 0.45rem 1rem;
-            background: #1a5276;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: background 0.2s;
-            white-space: nowrap;
+            flex-shrink: 0; padding: 0.45rem 1rem; background: #1a5276; color: white; text-decoration: none;
+            border-radius: 6px; font-size: 0.85rem; font-weight: 600; transition: background 0.2s; white-space: nowrap; border: none; cursor: pointer;
         }
         .dl-btn:hover { background: #1f6f8b; }
-
-        /* 暗黑模式 */
-        body.dark-mode .dl-filter-btn {
-            background: #3a3a3a;
-            border-color: #555;
-            color: #ddd;
+        .dl-modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; align-items: center; justify-content: center;
+            z-index: 9999; padding: 1rem;
         }
-        body.dark-mode .dl-filter-btn:hover,
-        body.dark-mode .dl-filter-btn.active {
-            background: #1a5276;
-            border-color: #1a5276;
-        }
-        body.dark-mode .badge-pdf  { background: #3d3000; color: #fbbf24; }
+        .dl-modal.show { display: flex; }
+        .dl-modal-card { width: min(460px, 100%); background: var(--card-bg); border-radius: 14px; box-shadow: var(--shadow-hover); padding: 1.2rem; }
+        .dl-modal-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .dl-modal-meta { color: var(--text-light); font-size: 0.88rem; margin-bottom: 1rem; }
+        .dl-modal-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .dl-modal-close { margin-top: 0.9rem; background: transparent; border: none; color: var(--text-light); cursor: pointer; padding: 0; }
+        body.dark-mode .dl-filter-btn { background: #3a3a3a; border-color: #555; color: #ddd; }
+        body.dark-mode .dl-filter-btn:hover, body.dark-mode .dl-filter-btn.active { background: #1a5276; border-color: #1a5276; }
         body.dark-mode .badge-zip  { background: #3d1a2e; color: #f472b6; }
         body.dark-mode .badge-txt  { background: #1e2440; color: #a5b4fc; }
         body.dark-mode .badge-size { background: #333; color: #aaa; }
-
         @media (max-width: 768px) {
             .dl-grid { grid-template-columns: 1fr; }
             .page-header h1 { font-size: 1.8rem; }
@@ -192,20 +92,17 @@
     <main>
         <section class="page-header">
             <h1> 下载中心</h1>
-            <p>经典著作 PDF · 宣传画高清图包 · 原始文本 —— 统一收纳，一站下载</p>
+            <p>经典著作与专题文章统一导出为 TXT / DOCX，宣传画资源继续集中收纳</p>
         </section>
 
         <div class="dl-container">
-
-            <!-- 统计 -->
             <div class="dl-stats">
-                <div class="dl-stat"><div class="num" id="countPdf">24</div><div class="lbl">经典著作 PDF</div></div>
-                <div class="dl-stat"><div class="num" id="countRectify">7</div><div class="lbl">正名文章 PDF</div></div>
-                <div class="dl-stat"><div class="num" id="countZip">14</div><div class="lbl">宣传画图包 ZIP</div></div>
-                <div class="dl-stat"><div class="num" id="countTotal">45</div><div class="lbl">全部资源</div></div>
+                <div class="dl-stat"><div class="num" id="countArticles">0</div><div class="lbl">经典著作</div></div>
+                <div class="dl-stat"><div class="num" id="countRectify">0</div><div class="lbl">专题文章</div></div>
+                <div class="dl-stat"><div class="num" id="countZip">0</div><div class="lbl">宣传画图包 ZIP</div></div>
+                <div class="dl-stat"><div class="num" id="countTotal">0</div><div class="lbl">全部资源</div></div>
             </div>
 
-            <!-- 筛选 -->
             <div class="dl-filters">
                 <button class="dl-filter-btn active" data-filter="all">全部</button>
                 <button class="dl-filter-btn" data-filter="mao">毛泽东</button>
@@ -216,44 +113,43 @@
                 <button class="dl-filter-btn" data-filter="posters">宣传画</button>
             </div>
 
-            <!-- ========== 经典著作 PDF ========== -->
             <section class="dl-section" data-section="articles">
                 <div class="dl-section-title">
-                     经典著作 PDF
-                    <span class="dl-section-count">24 篇</span>
+                     经典著作
+                    <span class="dl-section-count" id="articlesSectionCount">0 篇</span>
                 </div>
                 <div class="dl-grid" id="articlesGrid"></div>
             </section>
 
-            <!-- ========== 正名文章 PDF ========== -->
             <section class="dl-section" data-section="rectify">
                 <div class="dl-section-title">
-                     正名文章 PDF
-                    <span class="dl-section-count">7 篇</span>
+                     专题文章
+                    <span class="dl-section-count" id="rectifySectionCount">0 篇</span>
                 </div>
                 <div class="dl-grid" id="rectifyGrid"></div>
             </section>
 
-            <!-- ========== 单篇文章 Word ========== -->
-            <section class="dl-section" data-section="articles-word">
-                <div class="dl-section-title">
-                     单篇文章 Word
-                    <span class="dl-section-count">待重构</span>
-                </div>
-                <div class="dl-grid" id="articlesWordGrid"></div>
-            </section>
-
-            <!-- ========== 宣传画外链 ========== -->
             <section class="dl-section" data-section="posters">
                 <div class="dl-section-title">
                      宣传画网盘链接
-                    <span class="dl-section-count">14 项</span>
+                    <span class="dl-section-count" id="postersSectionCount">0 项</span>
                 </div>
                 <div class="dl-grid" id="postersGrid"></div>
             </section>
-
         </div>
     </main>
+
+    <div class="dl-modal" id="downloadChoiceModal">
+        <div class="dl-modal-card">
+            <div class="dl-modal-title" id="downloadChoiceTitle">选择下载格式</div>
+            <div class="dl-modal-meta" id="downloadChoiceMeta"></div>
+            <div class="dl-modal-actions">
+                <button class="dl-btn" id="downloadTxtBtn" type="button">下载 TXT</button>
+                <button class="dl-btn" id="downloadDocxBtn" type="button">下载 DOCX</button>
+            </div>
+            <button class="dl-modal-close" id="downloadChoiceClose" type="button">关闭</button>
+        </div>
+    </div>
 
     <footer class="site-footer">
         <div class="container">
@@ -262,86 +158,38 @@
         </div>
     </footer>
 
+    <script src="../../js/download-export.js"></script>
     <script src="../../js/site-data.js"></script>
     <script src="../../js/main.js"></script>
     <script>
-    // ========== 数据 ==========
+    var downloadData = (window.SITE_DATA && window.SITE_DATA.downloadData) || { articles: [], rectify: [], posters: [] };
+    var articleDocs = downloadData.articles || [];
+    var rectifyDocs = downloadData.rectify || [];
+    var posterZIPs = downloadData.posters || [];
+    var currentDownloadItem = null;
+    var authorIcons = { mao: '', marx: '', lenin: '', stalin: '', engels: '', rectify: '', posters: '' };
 
-    // 下载中心重构方向：
-    // - 单篇文章统一 Word（docx/doc）
-    // - 著作类统一 PDF
-    // - 体积过大的宣传画改为百度网盘外链
-    // 当前页面仍保留旧数据兜底，后续应改为完全由 SITE_DATA 驱动
-    var articlePDFs = [
-        { title:'共产党宣言', author:'马克思 恩格斯', cat:'marx', slug:'gongchan-dan-yuan', year:1848 },
-        { title:'怎么办？', author:'列宁', cat:'lenin', slug:'zen-me-ban', year:1902 },
-        { title:'国家与革命', author:'列宁', cat:'lenin', slug:'guo-jia-yu-ge-ming', year:1917 },
-        { title:'唯物主义和经验批判主义', author:'列宁', cat:'lenin', slug:'wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi', year:1908 },
-        { title:'论列宁主义基础', author:'斯大林', cat:'stalin', slug:'lun-lunen-zhu-yi-ji-chu', year:1924 },
-        { title:'论中国革命的前途', author:'斯大林', cat:'stalin', slug:'lun-zhongguo-ge-ming-de-qiantu', year:1926 },
-        { title:'论列宁', author:'斯大林', cat:'stalin', slug:'lun-lunen', year:1924 },
-        { title:'论列宁主义的几个问题', author:'斯大林', cat:'stalin', slug:'lun-lunen-zhu-yi-jige-wenti', year:1926 },
-        { title:'悼列宁', author:'斯大林', cat:'stalin', slug:'dao-lunen', year:1924 },
-        { title:'十月革命和俄国共产党人的策略', author:'斯大林', cat:'stalin', slug:'shiyue-geming-celue', year:1924 },
-        { title:'十月革命的国际性质', author:'斯大林', cat:'stalin', slug:'shiyue-geming-guoji', year:1927 },
-        { title:'十月革命和民族问题', author:'斯大林', cat:'stalin', slug:'shiyue-geming-minzu', year:1918 },
-        { title:'马克思主义和民族问题', author:'斯大林', cat:'stalin', slug:'makesi-zhuyi-minzu', year:1913 },
+    function esc(s) {
+        var d = document.createElement('div');
+        d.appendChild(document.createTextNode(s || ''));
+        return d.innerHTML;
+    }
 
-        { title:'论持久战', author:'毛泽东', cat:'mao', slug:'lun-chi-jiu-zhan', year:1938 },
-        { title:'实践论', author:'毛泽东', cat:'mao', slug:'shi-jian-lun', year:1937 },
-        { title:'矛盾论', author:'毛泽东', cat:'mao', slug:'mao-dun-lun', year:1937 },
-        { title:'中国革命战争的战略问题', author:'毛泽东', cat:'mao', slug:'zhan-lue-wen-ti', year:1936 },
-        { title:'抗日游击战争的战略问题', author:'毛泽东', cat:'mao', slug:'you-ji-zhan', year:1938 },
-        { title:'战争和战略问题', author:'毛泽东', cat:'mao', slug:'zhan-zheng-zhan-lue', year:1938 },
-        { title:'新民主主义论', author:'毛泽东', cat:'mao', slug:'xin-min-zhu', year:1940 },
-        { title:'在延安文艺座谈会上的讲话', author:'毛泽东', cat:'mao', slug:'wen-yi-zuo-tan', year:1942 },
-        { title:'学习和时局', author:'毛泽东', cat:'mao', slug:'xue-xi-shi-ju', year:1944 },
-        { title:'关于正确处理人民内部矛盾的问题', author:'毛泽东', cat:'mao', slug:'ren-min-nei-bu-mao-dun', year:1957 },
-        { title:'湖南农民运动考察报告', author:'毛泽东', cat:'mao', slug:'nong-min-yun-dong', year:1927 }
-    ];
+    function articleHtmlPath(item) {
+        return '../../html/' + item.file;
+    }
 
-    // -- 正名文章 PDF --
-    var rectifyPDFs = [
-        { title:'历史的审判台：苏联七十年兴亡再思考', cat:'rectify', slug:'rectify-stalin-era', section:'leaders' },
-        { title:'高尔基与列宁决裂真相', cat:'rectify', slug:'rectify-gorky-lenin', section:'leaders' },
-        { title:'苏联攻打芬兰是侵略？过当防卫！', cat:'rectify', slug:'rectify-finland-war', section:'military' },
-        { title:'苏联入侵阿富汗真实逻辑', cat:'rectify', slug:'rectify-soviet-afghanistan', section:'military' },
-        { title:'苏联农业社会主义探索', cat:'rectify', slug:'rectify-soviet-agriculture', section:'economy' },
-        { title:'驳精英统治的当代翻版', cat:'rectify', slug:'rectify-wisdom-of-elites', section:'myths' },
-        { title:'驳人性论互联网第二春', cat:'rectify', slug:'rectify-human-nature', section:'myths' }
-    ];
+    function openDownloadChoice(item, metaText) {
+        currentDownloadItem = item;
+        document.getElementById('downloadChoiceTitle').textContent = item.title;
+        document.getElementById('downloadChoiceMeta').textContent = metaText || '';
+        document.getElementById('downloadChoiceModal').classList.add('show');
+    }
 
-    // -- 宣传画网盘外链 --
-    var posterZIPs = [
-        { label:'中国宣传画·第一辑', size:'425 MB', cat:'posters', link:'https://pan.baidu.com/' },
-        { label:'中国宣传画·第二辑', size:'596 MB', cat:'posters', link:'https://pan.baidu.com/' },
-        { label:'中国宣传画·第三辑（里斯本博物馆藏）', size:'117 MB', cat:'posters', link:'https://pan.baidu.com/' },
-        { label:'苏联宣传画·共青团', size:'1.1 MB', cat:'posters', file:'soviet-posters-共青团.zip' },
-        { label:'苏联宣传画·十月革命', size:'4.2 MB', cat:'posters', file:'soviet-posters-十月革命.zip' },
-        { label:'苏联宣传画·卫国战争', size:'7.7 MB', cat:'posters', file:'soviet-posters-卫国战争.zip' },
-        { label:'苏联宣传画·反帝国际主义', size:'2.9 MB', cat:'posters', file:'soviet-posters-反帝国际主义.zip' },
-        { label:'苏联宣传画·和平建设', size:'3.4 MB', cat:'posters', file:'soviet-posters-和平建设.zip' },
-        { label:'苏联宣传画·国内战争', size:'1.2 MB', cat:'posters', file:'soviet-posters-国内战争.zip' },
-        { label:'苏联宣传画·太空探索', size:'6.2 MB', cat:'posters', file:'soviet-posters-太空探索.zip' },
-        { label:'苏联宣传画·社会主义', size:'2.1 MB', cat:'posters', file:'soviet-posters-社会主义.zip' },
-        { label:'苏联宣传画·社会宣传', size:'2.5 MB', cat:'posters', file:'soviet-posters-社会宣传.zip' },
-        { label:'苏联宣传画·领袖人物', size:'1.8 MB', cat:'posters', file:'soviet-posters-领袖人物.zip' },
-        { label:'苏联宣传画·其他', size:'3.7 MB', cat:'posters', file:'soviet-posters-其他.zip' }
-    ];
-
-      // 统一数据源：优先使用 site-data.js 生成的下载数据
-      if (window.SITE_DATA && window.SITE_DATA.downloadData) {
-          articlePDFs = window.SITE_DATA.downloadData.articles || [];
-          rectifyPDFs = window.SITE_DATA.downloadData.rectify || [];
-          posterZIPs = window.SITE_DATA.downloadData.posters || [];
-      }
-
-
-    // ========== 渲染 ==========
-    var authorIcons = {
-        mao: '', marx: '', lenin: '', stalin: '', engels: '',
-        rectify: '', posters: ''
-    };
+    function closeDownloadChoice() {
+        currentDownloadItem = null;
+        document.getElementById('downloadChoiceModal').classList.remove('show');
+    }
 
     function renderArticleCard(item) {
         return '<div class="dl-card cat-' + item.cat + '" data-cat="' + item.cat + '">' +
@@ -350,11 +198,11 @@
                 '<div class="dl-title">' + esc(item.title) + '</div>' +
                 '<div class="dl-meta">' +
                     '<span>' + esc(item.author) + '</span>' +
-                    '<span>' + item.year + '年</span>' +
-                    '<span class="dl-badge badge-pdf">PDF</span>' +
+                    '<span>' + esc(String(item.year || '')) + '</span>' +
+                    '<span class="dl-badge badge-txt">TXT / DOCX</span>' +
                 '</div>' +
             '</div>' +
-            '<a class="dl-btn" href="../../downloads/articles/' + item.slug + '.pdf" download>下载</a>' +
+            '<button class="dl-btn" type="button" data-download-kind="article" data-slug="' + esc(item.slug) + '">下载</button>' +
         '</div>';
     }
 
@@ -364,11 +212,11 @@
             '<div class="dl-info">' +
                 '<div class="dl-title">' + esc(item.title) + '</div>' +
                 '<div class="dl-meta">' +
-                    '<span>正名 · ' + esc(item.section) + '</span>' +
-                    '<span class="dl-badge badge-pdf">PDF</span>' +
+                    '<span>专题 · ' + esc(item.section) + '</span>' +
+                    '<span class="dl-badge badge-txt">TXT / DOCX</span>' +
                 '</div>' +
             '</div>' +
-            '<a class="dl-btn" href="../../downloads/rectify/' + item.slug + '.pdf" download>下载</a>' +
+            '<button class="dl-btn" type="button" data-download-kind="rectify" data-slug="' + esc(item.slug) + '">下载</button>' +
         '</div>';
     }
 
@@ -386,48 +234,72 @@
         '</div>';
     }
 
-    function esc(s) {
-        var d = document.createElement('div');
-        d.appendChild(document.createTextNode(s));
-        return d.innerHTML;
+    function bindDownloadButtons() {
+        document.querySelectorAll('[data-download-kind]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var kind = btn.getAttribute('data-download-kind');
+                var slug = btn.getAttribute('data-slug');
+                var list = kind === 'rectify' ? rectifyDocs : articleDocs;
+                var item = list.find(function(x) { return x.slug === slug; });
+                if (!item) return;
+                var meta = kind === 'rectify'
+                    ? ('专题文章 · ' + (item.section || 'rectify'))
+                    : ((item.author || '') + (item.year ? ' · ' + item.year : ''));
+                openDownloadChoice(item, meta);
+            });
+        });
     }
 
-    // 渲染全部
-    document.getElementById('articlesGrid').innerHTML = articlePDFs.map(renderArticleCard).join('');
-    document.getElementById('rectifyGrid').innerHTML = rectifyPDFs.map(renderRectifyCard).join('');
-    document.getElementById('articlesWordGrid').innerHTML = '';
+    document.getElementById('articlesGrid').innerHTML = articleDocs.map(renderArticleCard).join('');
+    document.getElementById('rectifyGrid').innerHTML = rectifyDocs.map(renderRectifyCard).join('');
     document.getElementById('postersGrid').innerHTML = posterZIPs.map(renderPosterCard).join('');
+    bindDownloadButtons();
 
-    // 更新统计
-    document.getElementById('countPdf').textContent = articlePDFs.length;
-    document.getElementById('countRectify').textContent = rectifyPDFs.length;
-    document.getElementById('countWord').textContent = 0;
-    document.getElementById('countTotal').textContent = articlePDFs.length + rectifyPDFs.length + posterZIPs.length;
+    document.getElementById('countArticles').textContent = articleDocs.length;
+    document.getElementById('countRectify').textContent = rectifyDocs.length;
+    document.getElementById('countZip').textContent = posterZIPs.length;
+    document.getElementById('countTotal').textContent = articleDocs.length + rectifyDocs.length + posterZIPs.length;
+    document.getElementById('articlesSectionCount').textContent = articleDocs.length + ' 篇';
+    document.getElementById('rectifySectionCount').textContent = rectifyDocs.length + ' 篇';
+    document.getElementById('postersSectionCount').textContent = posterZIPs.length + ' 项';
 
-    // ========== 筛选 ==========
+    document.getElementById('downloadChoiceClose').addEventListener('click', closeDownloadChoice);
+    document.getElementById('downloadChoiceModal').addEventListener('click', function(e) {
+        if (e.target === this) closeDownloadChoice();
+    });
+    document.getElementById('downloadTxtBtn').addEventListener('click', async function() {
+        if (!currentDownloadItem) return;
+        try {
+            var payload = await window.DownloadExport.fetchArticlePayload(articleHtmlPath(currentDownloadItem), currentDownloadItem.title);
+            await window.DownloadExport.downloadArticleAsTxt(payload);
+            closeDownloadChoice();
+        } catch (err) {
+            alert(err && err.message ? err.message : '下载失败');
+        }
+    });
+    document.getElementById('downloadDocxBtn').addEventListener('click', async function() {
+        if (!currentDownloadItem) return;
+        try {
+            var payload = await window.DownloadExport.fetchArticlePayload(articleHtmlPath(currentDownloadItem), currentDownloadItem.title);
+            await window.DownloadExport.downloadArticleAsDocx(payload);
+            closeDownloadChoice();
+        } catch (err) {
+            alert(err && err.message ? err.message : '下载失败');
+        }
+    });
+
     document.querySelectorAll('.dl-filter-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
             var filter = this.dataset.filter;
             document.querySelectorAll('.dl-filter-btn').forEach(function(b) { b.classList.remove('active'); });
             this.classList.add('active');
-
             document.querySelectorAll('.dl-card').forEach(function(card) {
-                if (filter === 'all' || card.dataset.cat === filter) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = (filter === 'all' || card.dataset.cat === filter) ? 'flex' : 'none';
             });
-
-            // 隐藏空的 section
             document.querySelectorAll('.dl-section').forEach(function(sec) {
-                var visible = sec.querySelectorAll('.dl-card[style*="display: flex"], .dl-card:not([style*="display"])').length;
-                // 重新检查
                 var cards = sec.querySelectorAll('.dl-card');
                 var anyVisible = false;
-                cards.forEach(function(c) {
-                    if (c.style.display !== 'none') anyVisible = true;
-                });
+                cards.forEach(function(c) { if (c.style.display !== 'none') anyVisible = true; });
                 sec.style.display = anyVisible || filter === 'all' ? 'block' : 'none';
             });
         });

@@ -127,6 +127,7 @@
     <button class="download-fab" id="downloadFab" title="下载原文"></button>
     <div class="download-menu" id="downloadMenu"><h4> 下载原文</h4><div id="downloadLinks"></div></div>
 
+    <script src="../../../js/download-export.js"></script>
     <script src="../../../js/article-common.js"></script>
     <script>
         var ARTICLE_CHARTS = [
@@ -177,7 +178,7 @@
                 }
             }
         ];
-        var DOWNLOAD_LINKS = [{ href: '../../../data/xin-min-zhu.txt', label: ' 下载 TXT' }];
+        var DOWNLOAD_LINKS = window.buildStandardDownloadLinks ? window.buildStandardDownloadLinks() : [];
     </script>
     <script src="../../../js/site-data.js"></script>
     <script src="../../../js/main.js"></script>
