@@ -2,8 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const root = 'D:\\AI Pj\\Qmlmreader';
-const manifest = JSON.parse(fs.readFileSync(path.join(root, 'data', 'articles-json', 'manifest.json'), 'utf8').replace(/^\uFEFF/, ''));
 const dataRoot = path.join(root, 'data', 'articles-json');
+const metaRoot = path.join(dataRoot, '_meta');
+const manifest = JSON.parse(fs.readFileSync(path.join(metaRoot, 'manifest.json'), 'utf8').replace(/^\uFEFF/, ''));
 const htmlRoot = path.join(root, 'html', 'articles');
 
 function readUtf8(file) { return fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''); }

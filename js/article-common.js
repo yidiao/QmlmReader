@@ -12,6 +12,13 @@ window.switchTab = function(tabId, btn) {
     if (target) target.classList.add('active');
     if (btn) btn.classList.add('active');
 
+    if (tabId === 'original') {
+        refreshChapterSizing();
+    }
+    if (window.syncDynamicChapterNavVisibility) {
+        window.syncDynamicChapterNavVisibility();
+    }
+
     if (tabId === 'visual') {
         requestAnimationFrame(function() {
             requestAnimationFrame(function() {
@@ -120,7 +127,7 @@ function refreshChapterSizing() {
     });
 }
 
-function bindChapterAccordion() {
+function hydrateChapterAccordion() {
     var chapters = document.querySelectorAll('.chapter');
     chapters.forEach(function(chapter, index) {
         var titleEl = chapter.querySelector('.chapter-title');
@@ -139,6 +146,10 @@ function bindChapterAccordion() {
     });
 
     updateToggleAllButton();
+}
+
+function bindChapterAccordion() {
+    hydrateChapterAccordion();
     if (chapterAccordionBound) return;
     chapterAccordionBound = true;
 
@@ -195,21 +206,35 @@ window.toggleAllChapters = function() {
     updateToggleAllButton();
 };
 
+window.refreshArticleChapters = function() {
+    hydrateChapterAccordion();
+    refreshChapterSizing();
+};
+
 document.addEventListener('DOMContentLoaded', bindChapterAccordion);
 
 // ==================== 图表初始化 ====================
 var chartsInited = false;
 function initArticleCharts() {
     if (chartsInited) return;
-    chartsInited = true;
+    if (typeof Chart === 'undefined') return;
     if (typeof ARTICLE_CHARTS === 'undefined' || !ARTICLE_CHARTS.length) return;
+
+    var renderedCount = 0;
     ARTICLE_CHARTS.forEach(function(cfg) {
         var canvas = document.getElementById(cfg.id);
         if (!canvas) return;
         var ctx = canvas.getContext('2d');
+        if (!ctx) return;
         new Chart(ctx, cfg.config);
+        renderedCount += 1;
     });
+
+    if (renderedCount > 0) {
+        chartsInited = true;
+    }
 }
+window.initArticleChartsNow = initArticleCharts;
 
 // ==================== 下载浮动按钮 ====================
 function initDownloads() {

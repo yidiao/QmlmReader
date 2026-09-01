@@ -1,0 +1,172 @@
+{
+  "title": "国家与革命",
+  "mentor": "Lenin",
+  "slug": "guo-jia-yu-ge-ming",
+  "version": 2,
+  "reading": [
+    {
+      "title": "先抓住国家问题",
+      "content": "列宁不是在讲一般政治制度，而是在追问国家的阶级本质。先看国家从哪里来、为谁服务，再看无产阶级为什么必须对它采取革命态度。"
+    },
+    {
+      "title": "再看无产阶级专政",
+      "content": "这本书的核心不是抽象‘民主’，而是无产阶级专政与国家消亡的辩证关系。要把这两者当作一个过渡过程来看。"
+    },
+    {
+      "title": "重点读第四章",
+      "content": "第四章对《哥达纲领批判》的解读，是全书最密集的理论段落。它把国家消亡的经济基础讲得最清楚。"
+    }
+  ],
+  "difficulty": [
+    {
+      "wrong": "无产阶级专政就是简单的‘党专政’",
+      "correct": "正解：列宁说的是阶级统治关系的变化，党是先锋队，不是概念本身。"
+    },
+    {
+      "wrong": "国家消亡就是立刻废除国家",
+      "correct": "正解：列宁强调过渡时期仍需要国家，只是国家的阶级性质和功能会逐步变化。"
+    },
+    {
+      "wrong": "这本书只适用于1917年俄国",
+      "correct": "正解：它讲的是国家的阶级本质与革命转换逻辑，具有跨时代的理论意义。"
+    }
+  ],
+  "dialogue": [
+    {
+      "title": "它在回应的问题",
+      "items": [
+        "考茨基等第二国际机会主义者——回避无产阶级专政。",
+        "无政府主义者——否认过渡时期国家的必要性。",
+        "资产阶级民主派——把现成国家形式神圣化。"
+      ]
+    },
+    {
+      "title": "它在问每一个读者",
+      "items": [
+        "你看到的是国家形式，还是阶级内容？",
+        "你理解的民主，究竟是谁的民主？"
+      ]
+    },
+    {
+      "title": "它在等你的回应",
+      "content": "拿一个现实国家机关，分析它的权力来源、服务对象和控制方式。"
+    }
+  ],
+  "action": [
+    {
+      "title": "实验一：分析一个国家机器部件",
+      "content": "选法院、军队、警察或财政机关之一，说明它在阶级关系中的位置。"
+    },
+    {
+      "title": "实验二：区分不同民主概念",
+      "content": "对比资产阶级民主和无产阶级民主的目标、对象与限制条件。"
+    }
+  ],
+  "further": {
+    "title": "文章联结网络",
+    "note": "点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（输出影响 · 理论来源 · 相互支撑）",
+    "items": [
+      {
+        "title": "家庭私有制和国家的起源",
+        "href": "../Engels/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html",
+        "label": "历史唯物主义",
+        "direction": "source",
+        "relation": "理论来源：国家起源与本质的历史论证"
+      },
+      {
+        "title": "帝国主义是资本主义的最高阶段",
+        "href": "di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html",
+        "label": "政治经济学",
+        "direction": "source",
+        "relation": "政治经济学前提：帝国主义时代的国家变成了垄断资本的工具"
+      },
+      {
+        "title": "新民主主义论",
+        "href": "../Mao/xin-min-zhu.html",
+        "label": "政治理论",
+        "direction": "output",
+        "relation": "中国化：国家理论在半殖民地中国的应用"
+      }
+    ]
+  },
+  "visual": {
+    "charts": [
+      {
+        "id": "radarChart",
+        "config": {
+          "type": "radar",
+          "data": {
+            "labels": ["理论深度", "现实针对性", "时间跨度", "行动指导性", "情感强度", "结构复杂度"],
+            "datasets": [
+              {
+                "label": "国家与革命",
+                "data": [10, 10, 9, 10, 8, 9],
+                "borderColor": "#7c4dff",
+                "backgroundColor": "rgba(92,61,153,0.12)",
+                "pointBackgroundColor": "#7c4dff"
+              }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "scales": { "r": { "min": 0, "max": 10, "ticks": { "stepSize": 2 } } },
+            "plugins": { "legend": { "display": false } }
+          }
+        }
+      },
+      {
+        "id": "argumentCurve",
+        "config": {
+          "type": "line",
+          "data": {
+            "labels": ["第一章\n国家本质", "第二三章\n无产阶级专政", "第四章\n国家消亡", "第五章\n经济基础", "第六章\n批判机会主义"],
+            "datasets": [
+              {
+                "label": "论证强度",
+                "data": [8, 10, 9, 10, 7],
+                "borderColor": "#5c3d99",
+                "backgroundColor": "rgba(92,61,153,0.08)",
+                "fill": true,
+                "tension": 0.35,
+                "pointRadius": 7,
+                "pointHoverRadius": 9,
+                "borderWidth": 2.5
+              }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "plugins": { "legend": { "display": false } },
+            "scales": { "y": { "min": 0, "max": 10 } }
+          }
+        }
+      },
+      {
+        "id": "partsChart",
+        "config": {
+          "type": "line",
+          "data": {
+            "labels": ["原始社会\n无国家", "阶级社会\n国家产生", "资本主义\n国家强化", "无产阶级专政\n国家转型", "共产主义\n国家消亡"],
+            "datasets": [
+              {
+                "label": "国家权力强度",
+                "data": [0, 6, 10, 8, 0],
+                "borderColor": "#7c4dff",
+                "backgroundColor": "rgba(92,61,153,0.08)",
+                "fill": true,
+                "tension": 0.4,
+                "pointRadius": 6,
+                "borderWidth": 2.5
+              }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "plugins": { "legend": { "display": false } },
+            "scales": { "y": { "min": 0, "max": 10 } }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -71,6 +71,23 @@
     var html = await resp.text();
     var parser = new DOMParser();
     var doc = parser.parseFromString(html, 'text/html');
+    var jsonPath = doc.body && doc.body.getAttribute('data-article-json');
+    if (jsonPath) {
+      var resolved = new URL(jsonPath, relativeHtmlPath).toString();
+      var jsonResp = await fetch(resolved, { cache: 'no-store' });
+      if (!jsonResp.ok) throw new Error('无法读取文章 JSON：' + jsonPath);
+      var article = await jsonResp.json();
+      var original = article.original || {};
+      var paragraphs = Array.isArray(original.paragraphs) ? original.paragraphs : [];
+      return {
+        title: article.title || fallbackTitle || relativeHtmlPath,
+        author: article.meta && article.meta.author || '',
+        date: article.meta && article.meta.date || '',
+        category: article.meta && article.meta.category || '',
+        paragraphs: paragraphs,
+        fileName: filenameSafe(article.title || fallbackTitle || 'article')
+      };
+    }
     return extractArticlePayloadFromDocument(doc, fallbackTitle || relativeHtmlPath);
   }
 

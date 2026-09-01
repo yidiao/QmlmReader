@@ -1,123 +1,45 @@
- D DEPLOY.md
- D _restore_shi_jian_lun.html
- D check_original_status.py
- D data/1844-nian-jing-ji-xue-zhe-xue-shou-gao.txt
- M data/articles.json
- D data/dao-lunen.txt
- D data/ge-da-gang-ling.txt
- D data/gongchan-dan-yuan.txt
- D data/guo-jia-yu-ge-ming.txt
- D data/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.txt
- D data/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.txt
- D data/lun-chi-jiu-zhan.txt
- D data/lun-lunen-zhu-yi-ji-chu.txt
- D data/lun-lunen-zhu-yi-jige-wenti.txt
- D data/lun-lunen.txt
- D data/lun-shi-da-guan-xi.txt
- D data/lun-zhongguo-ge-ming-de-qiantu.txt
- D data/makesi-zhuyi-minzu.txt
- D data/mao-dun-lun.txt
- D data/nong-min-yun-dong.txt
- D data/ren-min-nei-bu-mao-dun.txt
- D data/shi-jian-lun.txt
- D data/shiyue-geming-celue.txt
- D data/shiyue-geming-guoji.txt
- D data/shiyue-geming-minzu.txt
- D data/wei-wu-zhu-yi.txt
- D data/wen-yi-zuo-tan.txt
- D data/xin-min-zhu.txt
- D data/xue-xi-shi-ju.txt
- D data/you-ji-zhan.txt
- D data/zen-me-ban.txt
- D data/zhan-lue-wen-ti.txt
- D data/zhan-zheng-zhan-lue.txt
- D data/中国革命战争的战略问题_extracted.txt
- D data/关于正确处理人民内部矛盾的问题_extracted.txt
- D data/在延安文艺座谈会上的讲话_extracted.txt
- D data/学习和时局_extracted.txt
- D data/实践论_extracted.txt
- D data/战争和战略问题_extracted.txt
- D data/抗日游击战争的战略问题_extracted.txt
- D data/新民主主义论_extracted.txt
- D data/湖南农民运动考察报告_extracted.txt
- D data/矛盾论_extracted.txt
- D data/论持久战_extracted.txt
- D debug_feuerbach.py
- D downloads/articles/dao-lunen.pdf
- D downloads/articles/gongchan-dan-yuan.pdf
- D downloads/articles/guo-jia-yu-ge-ming.pdf
- D downloads/articles/lun-chi-jiu-zhan.pdf
- D downloads/articles/lun-lunen-zhu-yi-ji-chu.pdf
- D downloads/articles/lun-lunen-zhu-yi-jige-wenti.pdf
- D downloads/articles/lun-lunen.pdf
- D downloads/articles/lun-zhongguo-ge-ming-de-qiantu.pdf
- D downloads/articles/makesi-zhuyi-minzu.pdf
- D downloads/articles/mao-dun-lun.pdf
- D downloads/articles/nong-min-yun-dong.pdf
- D downloads/articles/ren-min-nei-bu-mao-dun.pdf
- D downloads/articles/shi-jian-lun.pdf
- D downloads/articles/shiyue-geming-celue.pdf
- D downloads/articles/shiyue-geming-guoji.pdf
- D downloads/articles/shiyue-geming-minzu.pdf
- D downloads/articles/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.pdf
- D downloads/articles/wen-yi-zuo-tan.pdf
- D downloads/articles/xin-min-zhu.pdf
- D downloads/articles/xue-xi-shi-ju.pdf
- D downloads/articles/you-ji-zhan.pdf
- D downloads/articles/zen-me-ban.pdf
- D downloads/articles/zhan-lue-wen-ti.pdf
- D downloads/articles/zhan-zheng-zhan-lue.pdf
- M downloads/manifest.json
- M downloads/manifest.unified.json
- D downloads/rectify/rectify-finland-war.pdf
- D downloads/rectify/rectify-gorky-lenin.pdf
- D downloads/rectify/rectify-human-nature.pdf
- D downloads/rectify/rectify-soviet-afghanistan.pdf
- D downloads/rectify/rectify-soviet-agriculture.pdf
- D downloads/rectify/rectify-stalin-era.pdf
- D downloads/rectify/rectify-wisdom-of-elites.pdf
- D extract_texts.py
- D fix_all_nav.py
- D fix_missing_opening_tag.py
- D generate_pdfs.py
+ M _tools/build_article_originals.cjs
+ M _tools/normalize_chapters.cjs
+ M _tools/rebuild_articles.cjs
+ M _tools/restore_multi_chapter_nav.cjs
+ M css/articles-detail.css
+ M data/articles-json/Engels/★★★★★/fan-du-lin-lun.json
+ M data/articles-json/Lenin/★★★★★/guo-jia-yu-ge-ming.json
+ M data/articles-json/Mao/★★★★★/shi-jian-lun.json
+ D data/articles-json/Marx/★★★★★/fan-du-lin-lun.json
+ M data/articles-json/Marx/★★★★★/gongchan-dan-yuan.json
+ D data/articles-json/Marx/★★★★★/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.json
+ M data/articles-json/Stalin/★★★★★/lun-lunen-zhu-yi-ji-chu.json
+ D data/articles-json/manifest.generated.json
+ D data/articles-json/manifest.json
+ D data/articles-json/validation-final.json
+ D data/articles-json/validation.json
+ D data/articles-json/★★★★★/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.json
+ D data/articles-json/★★★★☆/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.json
+ D data/articles-json/★★★☆☆/1844-nian-jing-ji-xue-zhe-xue-shou-gao.json
  M html/articles/Engels/fan-du-lin-lun.html
- M html/articles/Engels/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html
- M html/articles/Lenin/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html
  M html/articles/Lenin/guo-jia-yu-ge-ming.html
- M html/articles/Lenin/lun-wo-guo-ge-ming.html
- M html/articles/Lenin/ma-ke-si-zhu-yi-de-san-ge-lai-yuan.html
- M html/articles/Lenin/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html
- M html/articles/Lenin/zen-me-ban.html
- M html/articles/Mao/lun-chi-jiu-zhan.html
- M html/articles/Mao/lun-shi-da-guan-xi.html
- M html/articles/Mao/mao-dun-lun.html
- M html/articles/Mao/nong-min-yun-dong.html
- M html/articles/Mao/ren-min-nei-bu-mao-dun.html
  M html/articles/Mao/shi-jian-lun.html
- M html/articles/Mao/wen-yi-zuo-tan.html
- M html/articles/Mao/xin-min-zhu.html
- M html/articles/Mao/xue-xi-shi-ju.html
- M html/articles/Mao/you-ji-zhan.html
- M html/articles/Mao/zhan-lue-wen-ti.html
- M html/articles/Mao/zhan-zheng-zhan-lue.html
- M html/articles/Marx/1844-nian-jing-ji-xue-zhe-xue-shou-gao.html
- M html/articles/Marx/de-yi-zhi-yi-xing-tai.html
- M html/articles/Marx/ge-da-gang-ling.html
  M html/articles/Marx/gongchan-dan-yuan.html
- M html/articles/Marx/guan-yu-fei-er-ba-ha-de-ti-gang.html
- M html/articles/Marx/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.html
- M html/articles/Stalin/dao-lunen.html
  M html/articles/Stalin/lun-lunen-zhu-yi-ji-chu.html
- M html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
- M html/articles/_template-v2.html
  M html/articles/articles.html
- M html/downloads/downloads.html
  M js/article-common.js
- M js/site-data.js
- D setup_downloads.py
- D sync_manifest.py
+ M js/download-export.js
+ M js/main.js
  M tmp_status.txt
-?? _tools/import_source_articles.py
-?? data-management-inventory.md
-?? html/articles/imported/
-?? js/download-export.js
+ M 设计文档/下载中心维护规范.md
+ D 设计文档/数据源统一改造方案.md
+ M 设计文档/数据源维护规范.md
+ M 设计文档/文档体系说明.md
+ M 设计文档/文章页维护规范.md
+ M 设计文档/架构问题清单.md
+ D 设计文档/武器库-总览.md
+ D 设计文档/武器库-我的更新大纲.md
+ M 设计文档/母站架构维护.md
+ M 设计文档/项目维护.md
+?? data/articles-json/_meta/
+?? data/study-json/
+?? js/article-json.js
+?? js/article-study.js
+?? 设计文档/articles-json正文维护规范.md
+?? 设计文档/study-json精读层方案草案.md

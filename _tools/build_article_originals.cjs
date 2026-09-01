@@ -2,9 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const root = 'D:\\AI Pj\\Qmlmreader';
-const manifestPath = path.join(root, 'data', 'articles-json', 'manifest.json');
+const manifestPath = path.join(root, 'data', 'articles-json', '_meta', 'manifest.json');
 const sourceRoot = 'D:\\AI Pj\\金星与赤旗\\著作提取\\_txt';
 const dataRoot = path.join(root, 'data', 'articles-json');
+const metaRoot = path.join(dataRoot, '_meta');
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8').replace(/^\uFEFF/, ''));
 
 function readUtf8(file) { return fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''); }
@@ -68,5 +69,5 @@ for (const row of manifest) {
   fs.writeFileSync(htmlPath, html, 'utf8');
   results.push(updated);
 }
-fs.writeFileSync(path.join(dataRoot, 'manifest.generated.json'), JSON.stringify(results, null, 2), 'utf8');
+fs.writeFileSync(path.join(metaRoot, 'manifest.generated.json'), JSON.stringify(results, null, 2), 'utf8');
 console.log(JSON.stringify({ pages: results.length, matched: results.filter(r => r.status === 'matched').length, missing: results.filter(r => r.status !== 'matched').map(r => r.html) }, null, 2));

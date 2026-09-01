@@ -1441,39 +1441,48 @@
             }).join('');
         }
 
-        function renderImportedArticles() {
+        async function renderImportedArticles() {
             const grid = document.getElementById('importedArticlesGrid');
             const countEl = document.getElementById('importedCount');
-            if (!grid || !window.SITE_DATA || !Array.isArray(window.SITE_DATA.articles)) return;
-            const imported = window.SITE_DATA.articles
-                .filter(a => a && a.source === '金星与赤旗/著作提取')
-                .sort((a, b) => {
-                    const ayMatch = String(a.year || '').match(/\d{4}/);
-                    const byMatch = String(b.year || '').match(/\d{4}/);
-                    const ay = parseInt(ayMatch ? ayMatch[0] : '9999', 10);
-                    const by = parseInt(byMatch ? byMatch[0] : '9999', 10);
-                    if (ay !== by) return ay - by;
-                    return String(a.title || '').localeCompare(String(b.title || ''), 'zh-Hans-CN');
-                });
-            countEl.textContent = imported.length + ' 篇';
-            grid.innerHTML = imported.map(a => {
-                const href = a.file || ('imported/' + a.authorKey + '/' + a.slug + '.html');
-                const date = a.date || a.year || '年份待补';
-                const desc = a.sourceFile ? ('来源：' + a.sourceFile) : '来源：原始资料补充入库';
-                return `<article class="article-card priority-${a.priority || 3}" data-category="${a.type || 'politics'}" data-priority="${a.priority || 3}" data-author="${a.authorKey || 'mao'}">
-                    <div class="card-header">
-                        <span class="priority-badge" ${a.priority === 4 ? 'style="background: #666;"' : ''}>${a.priority === 5 ? '五星' : a.priority === 4 ? '四星' : '补充入库'}</span>
-                        <span class="article-date">${date}</span>
-                    </div>
-                    <h4 class="article-title"><a href="${href}">${a.title}</a></h4>
-                    <p class="article-author">${a.author}</p>
-                    <p class="article-desc">${desc}</p>
-                    <div class="card-footer">
-                        <span class="article-category">${a.category || '经典文献'}</span>
-                        <a href="${href}" class="read-more">阅读全文 </a>
-                    </div>
-                </article>`;
-            }).join('');
+            if (!grid) return;
+            try {
+                const resp = await fetch('../../data/articles.json', { cache: 'no-store' });
+                if (!resp.ok) throw new Error('导入文章索引加载失败');
+                const allArticles = await resp.json();
+                const imported = allArticles
+                    .filter(a => a && a.source === '金星与赤旗/著作提取')
+                    .sort((a, b) => {
+                        const ayMatch = String(a.year || '').match(/\d{4}/);
+                        const byMatch = String(b.year || '').match(/\d{4}/);
+                        const ay = parseInt(ayMatch ? ayMatch[0] : '9999', 10);
+                        const by = parseInt(byMatch ? byMatch[0] : '9999', 10);
+                        if (ay !== by) return ay - by;
+                        return String(a.title || '').localeCompare(String(b.title || ''), 'zh-Hans-CN');
+                    });
+                countEl.textContent = imported.length + ' 篇';
+                grid.innerHTML = imported.map(a => {
+                    const href = a.file || ('imported/' + a.authorKey + '/' + a.slug + '.html');
+                    const date = a.date || a.year || '年份待补';
+                    const desc = a.sourceFile ? ('来源：' + a.sourceFile) : '来源：原始资料补充入库';
+                    return `<article class="article-card priority-${a.priority || 3}" data-category="${a.type || 'politics'}" data-priority="${a.priority || 3}" data-author="${a.authorKey || 'mao'}">
+                        <div class="card-header">
+                            <span class="priority-badge" ${a.priority === 4 ? 'style="background: #666;"' : ''}>${a.priority === 5 ? '五星' : a.priority === 4 ? '四星' : '补充入库'}</span>
+                            <span class="article-date">${date}</span>
+                        </div>
+                        <h4 class="article-title"><a href="${href}">${a.title}</a></h4>
+                        <p class="article-author">${a.author}</p>
+                        <p class="article-desc">${desc}</p>
+                        <div class="card-footer">
+                            <span class="article-category">${a.category || '经典文献'}</span>
+                            <a href="${href}" class="read-more">阅读全文 </a>
+                        </div>
+                    </article>`;
+                }).join('');
+            } catch (err) {
+                console.error(err);
+                if (countEl) countEl.textContent = '加载失败';
+                grid.innerHTML = '<div class="article-card"><div class="card-header"><span class="priority-badge" style="background:#666;">提示</span></div><h4 class="article-title">补充入库文章暂未加载成功</h4><p class="article-desc">请检查 articles.json 是否可访问。</p></div>';
+            }
         }
 
         function openCollection(index) {

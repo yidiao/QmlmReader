@@ -7,267 +7,12 @@
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/articles-detail.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* ===== 渐变头部 - 哲学基础类 ===== */
-        .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
-
-.article-header {
-            position: relative;
-            overflow: hidden;
-            padding: 3rem 2rem;
-            text-align: center;
-            color: white;
-            background: linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
-        }
-        .article-header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='0.5'/%3E%3C/svg%3E");
-            background-size: 120px;
-            pointer-events: none;
-        }
-        .importance-badge {
-            display: inline-block;
-            background: rgba(255,215,0,0.9);
-            color: #4a0000;
-            padding: 6px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-        .article-header h1 {
-            font-size: 2.5rem;
-            margin: 0.5rem 0;
-            text-shadow: 2px 3px 6px rgba(0,0,0,0.4);
-            position: relative;
-            z-index: 1;
-            font-family: 'STSong', 'SimSun', serif;
-        }
-        .article-subtitle {
-            font-size: 1.15rem;
-            opacity: 0.9;
-            margin: 0.5rem 0;
-            position: relative;
-            z-index: 1;
-            font-style: italic;
-        }
-        .article-meta {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1.2rem;
-            font-size: 0.95rem;
-            position: relative;
-            z-index: 1;
-        }
-        .article-meta span {
-            background: rgba(0,0,0,0.25);
-            padding: 5px 14px;
-            border-radius: 18px;
-            backdrop-filter: blur(4px);
-        }
-        .article-meta .author { font-weight: 600; }
-        .article-meta .category { color: rgba(255,215,0,0.9); }
-        .article-meta .length-tag { background: rgba(255,215,0,0.25); color: rgba(255,215,0,0.95); border: 1px solid rgba(255,215,0,0.5); font-size: 0.8em; padding: 3px 10px; border-radius: 12px; }
-        body.dark-mode .article-meta .length-tag { background: rgba(255,215,0,0.15); color: #ffd700; }
-
-        /* ===== 返回导航 ===== */
-        .back-nav { background: #f8f8f8; border-bottom: 1px solid #e0e0e0; padding: 12px 0; }
-        .back-nav a { display:inline-flex;align-items:center;gap:6px;color:#8b0000;text-decoration:none;font-size:0.95rem;font-weight:500; }
-        .back-nav a:hover { color: #c41e3a; }
-        body.dark-mode .back-nav { background: #2a2a2a; border-color: #444; }
-        body.dark-mode .back-nav a { color: #7986cb; }
-
-        /* ===== Tab导航 ===== */
-        .tab-nav { display:flex;flex-wrap:nowrap;justify-content:flex-start;gap:4px;background:#f8f8f8;padding:0.6rem 0.8rem;border-radius:12px 12px 0 0;border-bottom:2px solid #e0e0e0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none; }
-        .tab-nav::-webkit-scrollbar { display:none; }
-        body.dark-mode .tab-nav { background:#2a2a2a;border-color:#444; }
-        .tab-btn { padding:8px 14px;border:none;background:transparent;color:#666;cursor:pointer;font-size:0.88rem;border-radius:8px;transition:all 0.25s;white-space:nowrap;flex-shrink:0; }
-        .tab-btn:hover { background:#e8e8e8;color:#333; }
-        body.dark-mode .tab-btn:hover { background:#3a3a3a;color:#fff; }
-        .tab-btn.active { background:#8b0000;color:white;font-weight:600; }
-
-        /* ===== Tab内容 ===== */
-        .tab-content { display:none;background:white;padding:2rem;border-radius:0 0 12px 12px;min-height:60vh; }
-        body.dark-mode .tab-content { background:#1a1a1a; }
-        .tab-content.active { display:block; }
-        .tab-heading { text-align:center;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:2px solid #8b0000;color:#8b0000;font-size:1.3rem; }
-        body.dark-mode .tab-heading { color:#7986cb;border-color:#7986cb; }
-
-        /* ===== 原文 ===== */
-        .original-text { line-height:1.9;font-size:1.05rem; }
-        .text-intro { background:linear-gradient(135deg,#fff8f0,#ffe8d6);border-left:4px solid #c41e3a;padding:1.2rem;margin-bottom:2rem;border-radius:0 8px 8px 0; }
-        body.dark-mode .text-intro { background:linear-gradient(135deg,#2d2015,#3d2a1a);border-color:#c41e3a; }
-
-        /* ===== 章节 ===== */
-        .chapter { margin-bottom:1.5rem;border:1px solid #e0e0e0;border-radius:10px;overflow:hidden; }
-        body.dark-mode .chapter { border-color:#444; }
-        .chapter-title { background:linear-gradient(135deg,#8b0000,#c41e3a);color:white;padding:1rem 1.3rem;margin:0;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:1.1rem;user-select:none; }
-        .chapter-title:hover { filter:brightness(1.1); }
-        .toggle-icon { font-size:0.8rem;transition:transform 0.25s; }
-        .chapter.collapsed .toggle-icon { transform:rotate(-90deg); }
-        .chapter-content { padding:1.3rem;background:#fafafa;max-height:5000px;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s ease; }
-        body.dark-mode .chapter-content { background:#222; }
-        .chapter.collapsed .chapter-content { max-height:0;padding:0 1.3rem; }
-        .chapter-content p { text-indent:2em;margin-bottom:1em;text-align:justify; }
-        body.dark-mode .chapter-content p { color:#e0e0e0; }
-
-        .quote { background:#f5f5f5;border-left:4px solid #8b0000;padding:1rem;margin:1.2rem 0;font-style:italic;border-radius:0 6px 6px 0; }
-        body.dark-mode .quote { background:#2a2a2a; }
-        .highlight-box { background:linear-gradient(135deg,#fff8f0,#ffe8d6);border-left:4px solid #ffc107;padding:1.2rem;margin:1.2rem 0;border-radius:0 8px 8px 0; }
-        body.dark-mode .highlight-box { background:linear-gradient(135deg,#2d2015,#3d2a1a); }
-
-        /* ===== 读法提示 ===== */
-        .reading-guide, .difficulty-section, .dialogue-section, .action-section, .visualization-section, .puzzle-section, .further-reading { line-height:1.9; }
-        .guide-block, .diff-item, .dialogue-block, .action-item, .chart-block, .reading-item { margin-bottom:28px;padding:20px 24px;background:#fafafa;border-radius:8px;border:1px solid #eee; }
-        .guide-block h3, .dialogue-block h3, .action-item h3 { color:#8b0000;margin-bottom:12px;font-size:1.05em; }
-        .wrong { background:#fff5f5;border-left:4px solid #fc8181;padding:10px 16px;margin-bottom:10px;border-radius:0 4px 4px 0;color:#742a2a; }
-        .correct { background:#f0fff4;border-left:4px solid #68d391;padding:10px 16px;border-radius:0 4px 4px 0;color:#1a4731; }
-        body.dark-mode .guide-block, body.dark-mode .diff-item, body.dark-mode .dialogue-block, body.dark-mode .action-item, body.dark-mode .chart-block, body.dark-mode .reading-item { background:#2a2a2a;border-color:#444; }
-        body.dark-mode .guide-block h3, body.dark-mode .dialogue-block h3, body.dark-mode .action-item h3 { color:#7986cb; }
-        body.dark-mode .wrong { background:#2d1a1a;color:#ef5350; }
-        body.dark-mode .correct { background:#1a2a1a;color:#66bb6a; }
-
-        /* ===== 图表 ===== */
-        .chart-container { position:relative; }
-        .chart-block h3 { color:#8b0000;margin-bottom:8px; }
-        body.dark-mode .chart-block h3 { color:#7986cb; }
-        .chart-desc { color:#666;font-size:0.9em;margin-bottom:16px; }
-        body.dark-mode .chart-desc { color:#aaa; }
-
-        /* ===== 理论拼图 ===== */
-        .theory-node { display:inline-block;padding:8px 16px;border-radius:6px;font-size:0.9em;margin:6px; }
-        .theory-node.root { background:#8b0000;color:white;font-weight:bold; }
-        .theory-node.branch { background:#2d3748;color:white; }
-        .theory-node.current { background:#38a169;color:white;font-weight:bold; }
-        .theory-node.related { background:#e2e8f0;color:#333; }
-        body.dark-mode .theory-node.related { background:#444;color:#e0e0e0; }
-
-        /* ===== 延伸阅读 ===== */
-        .further-reading .reading-item h3 { color:#8b0000;margin-bottom:8px;font-size:1em; }
-        body.dark-mode .further-reading .reading-item h3 { color:#7986cb; }
-
-        /* ===== 理论拼图增强 ===== */
-        .puzzle-intro { background:linear-gradient(135deg,#fff8f0,#ffe8d6);padding:1.5rem;border-radius:10px;margin-bottom:1.5rem; }
-        body.dark-mode .puzzle-intro { background:linear-gradient(135deg,#2d2015,#3d2a1a); }
-        .puzzle-timeline, .puzzle-links { margin-bottom:24px;padding:18px 22px;background:#fafafa;border-radius:8px;border:1px solid #eee; }
-        .puzzle-timeline h3, .puzzle-links h3 { color:#8b0000;margin-bottom:16px; }
-        body.dark-mode .puzzle-timeline, body.dark-mode .puzzle-links { background:#2a2a2a;border-color:#444; }
-        body.dark-mode .puzzle-timeline h3, body.dark-mode .puzzle-links h3 { color:#7986cb; }
-        .puzzle-links-note { color:#888;font-size:0.85em;margin-bottom:16px;line-height:1.6; }
-        body.dark-mode .puzzle-links-note { color:#aaa; }
-        .conn-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px; }
-        .conn-card { display:flex;flex-direction:column;gap:3px;padding:12px 14px;background:white;border-radius:8px;border:1px solid #e8e8e8;border-left:4px solid #8b0000;text-decoration:none;color:inherit;transition:box-shadow 0.2s,transform 0.15s; }
-        body.dark-mode .conn-card { background:#333;border-color:#444; }
-        a.conn-card:hover { box-shadow:0 4px 16px rgba(0,0,0,0.1);transform:translateY(-2px); }
-        .conn-dir { font-size:1.1em;font-weight:bold;line-height:1; }
-        .conn-title { font-weight:600;color:#1a1a1a;font-size:0.9em;margin-top:2px; }
-        body.dark-mode .conn-title { color:#e0e0e0; }
-        .conn-label { font-size:0.76em;color:#888; }
-        .conn-relation { font-size:0.82em;color:#555;line-height:1.5;margin-top:3px;border-top:1px solid #f0f0f0;padding-top:4px; }
-        body.dark-mode .conn-relation { color:#aaa;border-color:#444; }
-
-        /* ===== 时间线 ===== */
-        .timeline-track { display:flex;gap:0;overflow-x:auto;padding-bottom:8px;align-items:flex-start; }
-        .timeline-item { display:flex;flex-direction:column;align-items:center;min-width:76px;position:relative;flex:1; }
-        .timeline-item::after { content:'';position:absolute;top:9px;left:50%;width:100%;height:2px;background:#ddd;z-index:0; }
-        body.dark-mode .timeline-item::after { background:#555; }
-        .timeline-item:last-child::after { display:none; }
-        .timeline-dot { width:18px;height:18px;border-radius:50%;background:#ddd;border:2px solid #bbb;z-index:1;position:relative; }
-        body.dark-mode .timeline-dot { background:#555;border-color:#666; }
-        .timeline-dot-active { width:22px;height:22px;border-radius:50%;background:#8b0000;border:3px solid #c41e3a;z-index:1;position:relative;box-shadow:0 0 8px rgba(139,0,0,0.4); }
-        .timeline-year { font-size:0.75em;color:#555;margin-top:6px;font-weight:500; }
-        body.dark-mode .timeline-year { color:#aaa; }
-        .timeline-label { font-size:0.68em;color:#888;text-align:center;margin-top:2px;line-height:1.3; }
-        body.dark-mode .timeline-label { color:#999; }
-        .timeline-here { font-size:0.7em;color:#8b0000;font-weight:bold;margin-top:2px;white-space:nowrap; }
-        body.dark-mode .timeline-here { color:#c41e3a; }
-        .timeline-item.active .timeline-year { color:#8b0000;font-weight:bold; }
-        body.dark-mode .timeline-item.active .timeline-year { color:#7986cb; }
-
-        /* ===== 响应式 ===== */
-        @media(max-width:768px) {
-            .tab-nav { padding:0.5rem 0.6rem; }
-            .tab-btn { padding:8px 12px;font-size:0.85em; }
-            .article-header { padding:2rem 1rem; }
-            .article-header h1 { font-size:1.8rem; }
-            .article-meta { gap:0.5rem; }
-            .tab-content { padding:1.25rem; }
-            .chapter-content { padding:1rem; }
-        }
-        /* ===== 结构分析样式 ===== */
-        .structure-analysis { margin-top: 20px; padding: 16px 20px; background: #f9f9f9; border-radius: 8px; border: 1px solid #e8e8e8; }
-        body.dark-mode .structure-analysis { background: #2a2a2a; border-color: #444; }
-        .structure-analysis h4 { color: #8b0000; margin-bottom: 12px; font-size: 1em; }
-        body.dark-mode .structure-analysis h4 { color: #c41e3a; }
-        .analysis-item { padding: 10px 0; border-bottom: 1px solid #eee; }
-        body.dark-mode .analysis-item { border-color: #444; }
-        .analysis-label { font-weight: 600; color: #8b0000; font-size: 0.92em; display: block; margin-bottom: 4px; }
-        body.dark-mode .analysis-label { color: #c41e3a; }
-        .analysis-label.highlight { color: #c41e3a; font-size: 0.96em; }
-        .analysis-item p { margin: 0; font-size: 0.88em; color: #444; line-height: 1.7; }
-        body.dark-mode .analysis-item p { color: #ccc; }
-    </style>
-    <style>
-        /* ===== 下载按钮 - 左下角 ===== */
-    .download-fab {
-        position: fixed;
-        bottom: 30px;
-        left: 30px;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        background: var(--party-primary, #c41e3a);
-        color: white;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        font-size: 22px;
-        z-index: 1000;
-        transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .download-fab:hover { transform: scale(1.1); box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
-        .download-menu {
-        position: fixed;
-        bottom: 96px;
-        left: 30px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        padding: 1rem 1.2rem;
-        min-width: 180px;
-        display: none;
-        z-index: 1001;
-    }
-    body.dark-mode .download-menu { background: #2a2a2a; color: white; }
-    .download-menu.show { display: block; }
-    .download-menu h4 { margin: 0 0 0.6rem 0; font-size: 0.95rem; }
-    body.dark-mode .download-menu h4 { color: #ccc; }
-    .dl-link {
-        display: block; padding: 7px 10px; margin: 4px 0;
-        background: #f5f5f5; border-radius: 6px;
-        text-decoration: none; color: #333; font-size: 0.9rem;
-        transition: all 0.2s;
-    }
-    body.dark-mode .dl-link { background: #3a3a3a; color: #eee; }
-    .dl-link:hover { background: var(--party-primary, #c41e3a); color: white; }
-</style>
 </head>
-<body data-category="philosophy">
-    <!-- 导航栏 -->
+<body data-category="philosophy" data-article-json="../../../data/articles-json/Mao/★★★★★/shi-jian-lun.json" data-study-json="../../../data/study-json/Mao/shi-jian-lun.json">
     <div id="nav-placeholder"></div>
 
-    <!-- 合集上下文导航（自动注入） -->
-    <div class="back-nav" style="display:none;">
-        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+    <div class="back-nav u-display-none">
+        <div class="container u-max-900 u-mx-auto u-px-20">
             <a href="../../articles/articles.html" class="back-link"></a>
         </div>
     </div>
@@ -294,109 +39,39 @@
             <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
             <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
             <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
-            <button class="tab-btn" onclick="switchTab('further', this)">延伸阅读</button>
         </div>
 
-        <!-- 原文 -->
-                <div class="tab-content active" id="original">
+        <div class="tab-content active" id="original">
             <div class="original-text">
-                <div class="text-intro"><p><strong>原文：</strong>实践论 ——论认识和实践的关系——知和行的关系</p></div>
-                <div style="text-align:right;"><button class="chapter-toggle-all" onclick="toggleAllChapters()" id="chapterToggleBtn">收起全部</button></div>
-                <div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon"></span>一 认识和实践</h3><div class="chapter-content"><p>马克思以前的唯物论，离开人的社会性，离开人的历史发展，去观察认识问题，因此不能了解认识对社会实践的依赖关系，即认识对生产和阶级斗争的依赖关系。</p><p>首先，马克思主义者认为人类的生产活动是最基本的实践活动，是决定其他一切活动的东西。人的认识，主要地依赖于物质的生产活动，逐渐地了解自然的现象、自然的性质、自然的规律性、人和自然的关系；而且经过生产活动，也在各种不同程度上逐渐地认识了人和人的一定的相互关系。一切这些知识，离开生产活动是不能得到的。</p></div></div>
-<div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon"></span>二 认识的来源</h3><div class="chapter-content"><p>人的社会实践，不限于生产活动一种形式，还有多种其他的形式，阶级斗争，政治生活，科学和艺术的活动，总之社会实际生活的一切领域都是社会的人所参加的。</p><p>马克思主义者认为人类社会的生产活动，是一步又一步地由低级向高级发展，因此，人们的认识，不论对于自然界方面，对于社会方面，也都是一步又一步地由低级向高级发展，即由浅入深，由片面到更多的方面。</p></div></div>
-<div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon"></span>三 真理的标准</h3><div class="chapter-content"><p>马克思主义者认为，只有人们的社会实践，才是人们对于外界认识的真理性的标准。</p><p>然而人的认识究竟怎样从实践发生，而又服务于实践呢？这只要看一看认识的发展过程就会明了的。</p></div></div>
-<div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon"></span>四 从感性到理性</h3><div class="chapter-content"><p>原来人在实践过程中，开始只是看到过程中各个事物的现象方面，看到各个事物的片面，看到各个事物之间的外部联系。</p><p>社会实践的继续，使人们在实践中引起感觉和印象的东西反复了多次，于是在人们的脑里生起了一个认识过程中的突变（即飞跃），产生了概念。</p></div></div>
-<div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon"></span>五 论理认识</h3><div class="chapter-content"><p>认识的真正任务在于经过感觉而到达于思维，到达于逐步了解客观事物的内部矛盾，了解它的规律性，了解这一过程和那一过程间的内部联系，即到达于论理的认识。</p><p>这种基于实践的由浅入深的辩证唯物论的关于认识发展过程的理论，在马克思主义以前，是没有一个人这样解决过的。</p></div></div>
-<div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon"></span>六 知识与实践</h3><div class="chapter-content"><p>我们的实践证明：感觉到了的东西，我们不能立刻理解它，只有理解了的东西才更深刻地感觉它。</p><p>知识的问题是一个科学问题，来不得半点的虚伪和骄傲，决定地需要的倒是其反面——诚实和谦逊的态度。</p></div></div>
-<div class="chapter"><h3 class="chapter-title" onclick="toggleChapter(this)"><span class="toggle-icon"></span>七 具体例子与结论</h3><div class="chapter-content"><p>为了明了基于变革现实的实践而产生的辩证唯物论的认识运动——认识的逐渐深化的运动，下面再举出几个具体的例子。</p><p>我们再来看战争。战争的领导者，如果他们是一些没有战争经验的人，对于一个具体的战争，在开始阶段是不了解的。</p></div></div>
+                <div class="text-intro"><p><strong>原文：</strong>正在加载文章数据…</p></div>
             </div>
         </div>
 
-                <div class="tab-content" id="reading">
+        <div class="tab-content" id="reading">
             <div class="reading-guide">
                 <h2 class="tab-heading"> 如何阅读本文</h2>
-                <div class="guide-block">
-                    <h3>① 先抓住“实践”</h3>
-                    <p>《实践论》的起点不是抽象概念，而是人的社会实践。毛泽东从生产活动、阶级斗争、科学实验和社会生活出发，说明认识不是凭空产生的，而是在实践中生成、积累并展开的。</p>
-                </div>
-                <div class="guide-block">
-                    <h3>② 再看“从感性到理性”</h3>
-                    <p>文章最关键的推进，是从感觉、印象、片面认识，走到概念、判断、推理，再进一步把握事物的本质和规律。这个过程不是跳跃式的灵感，而是反复实践中的认识深化。</p>
-                </div>
-                <div class="guide-block">
-                    <h3>③ 理解“真理要经过实践检验”</h3>
-                    <p>毛泽东强调，真理不是主观上觉得对就算对，而是要看能不能在实践中达到预想结果。读到这里，要特别注意“失败—教训—改正—再实践”的循环，这正是全文的方法论核心。</p>
-                </div>
-                <div class="guide-block">
-                    <h3>④ 重点读“再实践、再认识”</h3>
-                    <p>《实践论》的最后落点不是停在认识上，而是回到改造世界。认识要回到实践中去接受检验，并在新的实践中继续发展。整篇文章真正要建立的，是一种不断循环上升的认识路线。</p>
-                </div>
+                <div class="guide-block"><p>正在加载精读数据…</p></div>
             </div>
         </div>
 
         <div class="tab-content" id="difficulty">
             <div class="difficulty-section">
                 <h2 class="tab-heading"> 容易读错的地方</h2>
-                <div class="diff-item">
-                    <div class="wrong"> 常见误读：实践论只是讲“多去做事”</div>
-                    <div class="correct"> 正解：《实践论》不是普通意义上的经验主义口号。它讲的是认识论：人的认识从实践中来，又回到实践中去，实践既是认识的来源，也是检验认识真假的标准。</div>
-                </div>
-                <div class="diff-item">
-                    <div class="wrong"> 常见误读：感性认识和理性认识是彼此割裂的两套东西</div>
-                    <div class="correct"> 正解：毛泽东并不是把感性和理性对立起来，而是说明它们是一个统一认识过程的两个阶段。没有感性材料，理性认识就成了空想；没有理性提升，感性材料就停留在零碎印象。</div>
-                </div>
-                <div class="diff-item">
-                    <div class="wrong"> 常见误读：“真理的标准只能是社会实践”就是否认理论作用</div>
-                    <div class="correct"> 正解：毛泽东不是否定理论，而是指出理论必须经过实践检验。理论如果不能在实际中说明问题、解决问题，就不能算是真理；但正确理论一旦形成，又能反过来指导实践。</div>
-                </div>
-                <div class="diff-item">
-                    <div class="wrong"> 常见误读：实践论讲的是一次性“认识正确”</div>
-                    <div class="correct"> 正解：《实践论》最重要的地方，恰恰在于它承认认识的反复性。实践—认识—再实践—再认识，不是绕圈子，而是不断把认识推进到更深层、更全面、更接近真理的过程。</div>
-                </div>
+                <div class="diff-item"><div class="correct">正在加载精读数据…</div></div>
             </div>
         </div>
 
         <div class="tab-content" id="dialogue">
             <div class="dialogue-section">
                 <h2 class="tab-heading"> 这篇文章在回应谁？</h2>
-                <div class="dialogue-block">
-                    <h3>它在回应的问题</h3>
-                    <ul>
-                        <li>教条主义者——把书本结论当成万能公式，不结合实际情况。</li>
-                        <li>经验主义者——满足于零碎经验，不上升到理论认识。</li>
-                        <li>主观主义者——不从实践出发，而从先入为主的想法出发。</li>
-                    </ul>
-                </div>
-                <div class="dialogue-block">
-                    <h3>它在问每一个读者</h3>
-                    <ul>
-                        <li>你判断一件事时，是凭感觉，还是经过了实践检验？</li>
-                        <li>你积累经验后，有没有进一步上升为概念、判断和推理？</li>
-                        <li>你有没有把认识当成终点，而不是回到实践中去继续修正它？</li>
-                    </ul>
-                </div>
-                <div class="dialogue-block">
-                    <h3>它在等你的回应</h3>
-                    <p>找一件你最近正在处理的事情，写下你目前的“感觉—判断—行动”三个阶段，然后回头检查：哪些只是表面印象，哪些已经上升为理性认识，哪些还需要回到实践中继续修正？</p>
-                </div>
+                <div class="dialogue-block"><p>正在加载精读数据…</p></div>
             </div>
         </div>
 
         <div class="tab-content" id="action">
             <div class="action-section">
                 <h2 class="tab-heading"> 读完之后可以做什么</h2>
-                <div class="action-item">
-                    <h3>实验一：做一次小型实践记录</h3>
-                    <p>选一个你正在观察的问题，连续记录三轮：第一次写“我看到什么”，第二次写“我理解了什么”，第三次写“我准备怎么再试一次”。</p>
-                </div>
-                <div class="action-item">
-                    <h3>实验二：检查一个判断有没有经过实践</h3>
-                    <p>找一个你最近下过的判断，追问它的依据是什么：是直接经验、间接经验，还是从别人那里听来的？这个判断有没有在行动中得到验证？</p>
-                </div>
-                <div class="action-item">
-                    <h3>实验三：画出认识循环</h3>
-                    <p>把一件事的过程画成“实践—认识—再实践—再认识”的循环图，看看自己卡在哪一环。很多问题不是“不会想”，而是没有把想法带回实践去检验。</p>
-                </div>
+                <div class="action-item"><p>正在加载精读数据…</p></div>
             </div>
         </div>
 
@@ -407,7 +82,7 @@
                 <div class="chart-block">
                     <h3>文章特征雷达图</h3>
                     <p class="chart-desc">六个维度衡量《实践论》的理论气质</p>
-                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                    <div class="chart-container u-max-500 u-mx-auto">
                         <canvas id="radarChart"></canvas>
                     </div>
                 </div>
@@ -415,7 +90,7 @@
                 <div class="chart-block">
                     <h3>认识推进曲线</h3>
                     <p class="chart-desc">从感性认识到理性认识，再回到实践检验与再认识</p>
-                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                    <div class="chart-container u-max-700 u-mx-auto">
                         <canvas id="argumentCurve"></canvas>
                     </div>
                     <div class="structure-analysis">
@@ -442,7 +117,7 @@
                 <div class="chart-block">
                     <h3>认识循环示意</h3>
                     <p class="chart-desc">实践—认识—再实践—再认识：不是绕圈子，而是上升</p>
-                    <div class="chart-container" style="max-width:600px;margin:0 auto;">
+                    <div class="chart-container u-max-600 u-mx-auto">
                         <canvas id="customChart1"></canvas>
                     </div>
                 </div>
@@ -485,9 +160,9 @@
                 <div class="puzzle-connection">
                     <h3>与其他经典的联结</h3>
                     <ul>
-                        <li> 《实践论》与《矛盾论》互为表里：前者回答“怎样认识”，后者回答“怎样分析事物内部矛盾”。</li>
-                        <li> 《中国革命战争的战略问题》：把认识方法推进到军事战略，强调从实际出发分析战争规律。</li>
-                        <li> 《关于正确处理人民内部矛盾的问题》：把认识论方法运用于社会主义建设中的矛盾处理。</li>
+                        <li>《实践论》与《矛盾论》互为表里：前者回答“怎样认识”，后者回答“怎样分析事物内部矛盾”。</li>
+                        <li>《中国革命战争的战略问题》：把认识方法推进到军事战略，强调从实际出发分析战争规律。</li>
+                        <li>《关于正确处理人民内部矛盾的问题》：把认识论方法运用于社会主义建设中的矛盾处理。</li>
                     </ul>
                 </div>
 
@@ -517,19 +192,29 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="puzzle-links">
+                    <h3>延伸阅读</h3>
+                    <div class="reading-item">
+                        <h3><a href="mao-dun-lun.html">继续看《矛盾论》</a></h3>
+                        <p>如果说《实践论》回答“怎样认识”，那么《矛盾论》更集中地回答“怎样分析事物内部的矛盾”。</p>
+                    </div>
+                    <div class="reading-item">
+                        <h3><a href="zhan-lue-wen-ti.html">联读《中国革命战争的战略问题》</a></h3>
+                        <p>这篇文章可以帮助理解实践方法如何推进到军事战略层面。</p>
+                    </div>
+                    <div class="reading-item">
+                        <h3><a href="ren-min-nei-bu-mao-dun.html">联读《关于正确处理人民内部矛盾的问题》</a></h3>
+                        <p>这篇文章展示了同一套认识论方法如何用于社会主义建设中的矛盾处理。</p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <button class="download-fab" id="downloadFab" title="下载原文"></button>
-    <div class="download-menu" id="downloadMenu">
-        <h4> 下载原文</h4>
-        <div id="downloadLinks"></div>
-    </div>
-
-    <script src="../../../js/download-export.js"></script>
     <script src="../../../js/article-common.js"></script>
-    <script>var DOWNLOAD_LINKS = window.buildStandardDownloadLinks ? window.buildStandardDownloadLinks() : [];</script>
+    <script src="../../../js/article-json.js"></script>
+    <script src="../../../js/article-study.js"></script>
     <script src="../../../js/site-data.js"></script>
     <script src="../../../js/main.js"></script>
     <script src="../../../js/darkmode.js"></script>

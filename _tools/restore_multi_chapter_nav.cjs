@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const root = 'D:\\AI Pj\\Qmlmreader';
-const manifest = JSON.parse(fs.readFileSync(path.join(root,'data','articles-json','manifest.json'),'utf8').replace(/^\uFEFF/,''));
+const manifest = JSON.parse(fs.readFileSync(path.join(root,'data','articles-json','_meta','manifest.json'),'utf8').replace(/^\uFEFF/,''));
 
 function read(f){return fs.readFileSync(f,'utf8').replace(/^\uFEFF/,'');}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}

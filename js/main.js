@@ -347,26 +347,27 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==================== 文章页：章节导航 + Tab记忆 ====================
-document.addEventListener('DOMContentLoaded', function() {
-    // ---- Tab 状态记忆 ----
-    var tabBtns = document.querySelectorAll('.tab-btn');
-    if (tabBtns.length > 0) {
-        var pagePath = window.location.pathname;
-        var savedTab = sessionStorage.getItem('tab-' + pagePath);
-        if (savedTab) {
-            var targetBtn = document.querySelector('.tab-btn[onclick*="' + savedTab + '"]');
-            if (targetBtn) targetBtn.click();
-        }
-        tabBtns.forEach(function(btn) {
-            btn.addEventListener('click', function() {
-                var match = this.getAttribute('onclick').match(/switchTab\('(\w+)'/);
-                if (match) sessionStorage.setItem('tab-' + pagePath, match[1]);
-            });
-        });
+function syncDynamicChapterNavVisibility() {
+    var nav = document.getElementById('dynamicChapterNav');
+    var toggle = document.querySelector('.dcn-toggle');
+    if (!nav || !toggle) return;
+    var originalTab = document.getElementById('original');
+    var originalActive = !!(originalTab && originalTab.classList.contains('active'));
+    nav.style.display = originalActive ? '' : 'none';
+    toggle.style.display = originalActive ? '' : 'none';
+}
+
+function initDynamicChapterNav() {
+    var oldNav = document.getElementById('dynamicChapterNav');
+    if (oldNav) oldNav.remove();
+    var oldToggle = document.querySelector('.dcn-toggle');
+    if (oldToggle) oldToggle.remove();
+    if (window.__dcnScrollHandler) {
+        window.removeEventListener('scroll', window.__dcnScrollHandler);
+        window.__dcnScrollHandler = null;
     }
 
-    // ---- 动态章节侧边导航 ----
-    var chapters = document.querySelectorAll('#original .chapter');
+    var chapters = Array.prototype.slice.call(document.querySelectorAll('#original .chapter'));
     if (chapters.length < 3) return;
 
     var nav = document.createElement('nav');
@@ -395,7 +396,8 @@ document.addEventListener('DOMContentLoaded', function() {
         list.appendChild(a);
     });
 
-    // 侧边栏切换手柄
+    if (!list.children.length) return;
+
     var toggle = document.createElement('button');
     toggle.className = 'dcn-toggle';
     toggle.title = '显示/隐藏章节导航';
@@ -409,8 +411,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(nav);
     document.body.appendChild(toggle);
 
-    // 恢复用户偏好：如果之前手动关闭过，则不自动展开
-    // 在 timeout 内部重新检查，防止用户在 300ms 内手动关闭后被强制打开
     var savedVis;
     try { savedVis = sessionStorage.getItem('dcn-visible'); } catch(e) {}
     if (savedVis !== '0') {
@@ -424,9 +424,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
 
-    // 滚动高亮
     var ticking = false;
-    window.addEventListener('scroll', function() {
+    window.__dcnScrollHandler = function() {
         if (!ticking) {
             requestAnimationFrame(function() {
                 var scrollPos = window.scrollY + 120;
@@ -441,7 +440,33 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             ticking = true;
         }
-    });
+    };
+    window.addEventListener('scroll', window.__dcnScrollHandler);
+    window.__dcnScrollHandler();
+    syncDynamicChapterNavVisibility();
+}
+window.initDynamicChapterNav = initDynamicChapterNav;
+window.syncDynamicChapterNavVisibility = syncDynamicChapterNavVisibility;
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ---- Tab 状态记忆 ----
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    if (tabBtns.length > 0) {
+        var pagePath = window.location.pathname;
+        var savedTab = sessionStorage.getItem('tab-' + pagePath);
+        if (savedTab) {
+            var targetBtn = document.querySelector('.tab-btn[onclick*="' + savedTab + '"]');
+            if (targetBtn) targetBtn.click();
+        }
+        tabBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var match = this.getAttribute('onclick').match(/switchTab\('(\w+)'/);
+                if (match) sessionStorage.setItem('tab-' + pagePath, match[1]);
+            });
+        });
+    }
+
+    initDynamicChapterNav();
 });
 
 // ==================== 合集上下文导航（面包屑 + 上/下一章） ====================

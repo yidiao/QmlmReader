@@ -31,8 +31,15 @@ for (const file of htmlFiles) {
   }
 
   // normalize chapter titles for pages that still say 第x部分 where we can infer better from data json
-  const jsonPath = path.join(root, 'data', 'articles-json', path.basename(path.dirname(file)), path.basename(file, '.html') + '.json');
-  if (fs.existsSync(jsonPath)) {
+  const mentorDir = path.basename(path.dirname(file));
+  const mentorRoot = path.join(root, 'data', 'articles-json', mentorDir);
+  const candidates = fs.existsSync(mentorRoot)
+    ? fs.readdirSync(mentorRoot, { withFileTypes: true })
+        .filter(d => d.isDirectory())
+        .map(d => path.join(mentorRoot, d.name, path.basename(file, '.html') + '.json'))
+    : [];
+  const jsonPath = candidates.find(p => fs.existsSync(p));
+  if (jsonPath) {
     const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8').replace(/^\uFEFF/, ''));
     if (data.title === '论我国革命') {
       html = html.replace(/<h3 class="chapter-title" onclick="toggleChapter\(this\)"><span class="toggle-icon"><\/span>第1部分<\/h3>/g,

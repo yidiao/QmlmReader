@@ -1,4 +1,4 @@
-﻿/* ===================================================================
+/* ===================================================================
    articles-detail.css 鈥?鏂囩珷璇︽儏椤靛叡浜牱寮?   鍩哄噯锛氬疄璺佃 / 鐭涚浘璁猴紙2026-06-20 鎭㈠鐗堟湰锛?   姣忕瘒鏂囩珷浠呴渶 4琛?:root 瑕嗙洊绫诲埆鑹插€?   =================================================================== */
 
 /* ==================== 绫诲埆鑹插€硷紙鍗犱綅锛岀敱鍚勬枃绔?<style> 瑕嗙洊锛?==================== */
@@ -364,14 +364,24 @@ body.dark-mode .chapter-toggle-all:hover { background: #777; }
 
 /* 鍥捐〃 */
 .chart-container { position: relative; }
+.chart-container canvas { display: block; max-width: 100%; }
 .chart-block h3 { color: var(--cat-primary); margin-bottom: 8px; }
 .chart-desc { color: #666; font-size: 0.9em; margin-bottom: 16px; }
 
 /* 寤朵几闃呰鏍囬 */
-.further-reading .reading-item h3 {
+.further-reading .reading-item h3,
+.puzzle-links .reading-item h3 {
     color: var(--cat-primary);
     margin-bottom: 8px;
     font-size: 1em;
+}
+.puzzle-links .reading-item h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+.puzzle-links .reading-item h3 a:hover {
+    color: var(--cat-secondary);
+    text-decoration: underline;
 }
 
 /* ==================== 鐞嗚鎷煎浘 ==================== */
@@ -456,30 +466,51 @@ body.dark-mode .chapter-toggle-all:hover { background: #777; }
 .conn-card {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    padding: 12px 14px;
+    gap: 6px;
+    padding: 14px 16px;
     background: white;
     border-radius: 8px;
     border: 1px solid #e8e8e8;
     border-left: 4px solid var(--cat-primary);
     text-decoration: none;
     color: inherit;
-    transition: box-shadow 0.2s, transform 0.15s;
+    transition: box-shadow 0.2s, transform 0.15s, border-color 0.2s;
 }
+.conn-card[data-category="philosophy"] { border-left-color: #8b0000; }
+.conn-card[data-category="economics"] { border-left-color: #e65100; }
+.conn-card[data-category="politics"] { border-left-color: #5c3d99; }
+.conn-card[data-category="party"] { border-left-color: #3d6b4f; }
+.conn-card[data-category="military"] { border-left-color: #1a4d7a; }
+.conn-card[data-category="culture"] { border-left-color: #9a7b0a; }
 a.conn-card:hover {
     box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     transform: translateY(-2px);
 }
-.conn-dir { font-size: 1.1em; font-weight: bold; line-height: 1; }
-.conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.9em; margin-top: 2px; }
-.conn-label { font-size: 0.76em; color: #888; }
-.conn-relation {
-    font-size: 0.82em;
+.conn-dir {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.72em;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+    background: #f4f4f4;
     color: #555;
-    line-height: 1.5;
-    margin-top: 3px;
+}
+.conn-dir[data-direction="source"] { background: #fff3e0; color: #b26a00; }
+.conn-dir[data-direction="output"] { background: #e8f5e9; color: #2f6f44; }
+.conn-dir[data-direction="mutual"] { background: #ede7f6; color: #5c3d99; }
+.conn-title { font-weight: 600; color: #1a1a1a; font-size: 0.95em; line-height: 1.45; }
+.conn-label { font-size: 0.78em; color: #888; }
+.conn-relation {
+    font-size: 0.84em;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 2px;
     border-top: 1px solid #f0f0f0;
-    padding-top: 4px;
+    padding-top: 6px;
 }
 
 /* 鎷煎浘-鐜颁唬鎰忎箟 */
