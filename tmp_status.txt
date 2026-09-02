@@ -1,45 +1,84 @@
- M _tools/build_article_originals.cjs
- M _tools/normalize_chapters.cjs
- M _tools/rebuild_articles.cjs
- M _tools/restore_multi_chapter_nav.cjs
- M css/articles-detail.css
  M data/articles-json/Engels/★★★★★/fan-du-lin-lun.json
+ M data/articles-json/Engels/★★★★★/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.json
+ M data/articles-json/Lenin/★★★★★/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.json
  M data/articles-json/Lenin/★★★★★/guo-jia-yu-ge-ming.json
+ M data/articles-json/Lenin/★★★★★/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.json
+ M data/articles-json/Lenin/★★★★★/zen-me-ban.json
+ M data/articles-json/Lenin/★★☆☆☆/lun-wo-guo-ge-ming.json
+ M data/articles-json/Lenin/★★☆☆☆/ma-ke-si-zhu-yi-de-san-ge-lai-yuan.json
+ M data/articles-json/Mao/★★★★★/lun-chi-jiu-zhan.json
+ M data/articles-json/Mao/★★★★★/mao-dun-lun.json
+ M data/articles-json/Mao/★★★★★/nong-min-yun-dong.json
+ M data/articles-json/Mao/★★★★★/ren-min-nei-bu-mao-dun.json
  M data/articles-json/Mao/★★★★★/shi-jian-lun.json
- D data/articles-json/Marx/★★★★★/fan-du-lin-lun.json
+ M data/articles-json/Mao/★★★★★/wen-yi-zuo-tan.json
+ M data/articles-json/Mao/★★★★★/xin-min-zhu.json
+ M data/articles-json/Mao/★★★★★/you-ji-zhan.json
+ M data/articles-json/Mao/★★★★★/zhan-lue-wen-ti.json
+ M data/articles-json/Mao/★★★★☆/lun-shi-da-guan-xi.json
+ M data/articles-json/Mao/★★★★☆/zhan-zheng-zhan-lue.json
+ M data/articles-json/Mao/★★★☆☆/xue-xi-shi-ju.json
+ M data/articles-json/Marx/★★★★★/de-yi-zhi-yi-xing-tai.json
+ M data/articles-json/Marx/★★★★★/ge-da-gang-ling.json
  M data/articles-json/Marx/★★★★★/gongchan-dan-yuan.json
- D data/articles-json/Marx/★★★★★/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.json
+ M data/articles-json/Marx/★★★★★/guan-yu-fei-er-ba-ha-de-ti-gang.json
+ M data/articles-json/Marx/★★★★☆/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.json
+ M data/articles-json/Marx/★★★☆☆/1844-nian-jing-ji-xue-zhe-xue-shou-gao.json
  M data/articles-json/Stalin/★★★★★/lun-lunen-zhu-yi-ji-chu.json
- D data/articles-json/manifest.generated.json
- D data/articles-json/manifest.json
- D data/articles-json/validation-final.json
- D data/articles-json/validation.json
- D data/articles-json/★★★★★/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.json
- D data/articles-json/★★★★☆/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.json
- D data/articles-json/★★★☆☆/1844-nian-jing-ji-xue-zhe-xue-shou-gao.json
- M html/articles/Engels/fan-du-lin-lun.html
- M html/articles/Lenin/guo-jia-yu-ge-ming.html
- M html/articles/Mao/shi-jian-lun.html
- M html/articles/Marx/gongchan-dan-yuan.html
+ M data/articles-json/Stalin/★★★☆☆/lun-zhongguo-ge-ming-de-qiantu.json
+ M data/articles-json/Stalin/★★☆☆☆/dao-lunen.json
+ M data/articles-json/_meta/manifest.generated.json
+ M html/articles/Engels/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html
+ M html/articles/Lenin/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html
+ M html/articles/Lenin/lun-wo-guo-ge-ming.html
+ M html/articles/Lenin/ma-ke-si-zhu-yi-de-san-ge-lai-yuan.html
+ M html/articles/Lenin/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html
+ M html/articles/Lenin/zen-me-ban.html
+ M html/articles/Mao/lun-chi-jiu-zhan.html
+ M html/articles/Mao/lun-shi-da-guan-xi.html
+ M html/articles/Mao/mao-dun-lun.html
+ M html/articles/Mao/nong-min-yun-dong.html
+ M html/articles/Mao/ren-min-nei-bu-mao-dun.html
+ M html/articles/Mao/wen-yi-zuo-tan.html
+ M html/articles/Mao/xin-min-zhu.html
+ M html/articles/Mao/xue-xi-shi-ju.html
+ M html/articles/Mao/you-ji-zhan.html
+ M html/articles/Mao/zhan-lue-wen-ti.html
+ M html/articles/Mao/zhan-zheng-zhan-lue.html
+ M html/articles/Marx/1844-nian-jing-ji-xue-zhe-xue-shou-gao.html
+ M html/articles/Marx/de-yi-zhi-yi-xing-tai.html
+ M html/articles/Marx/ge-da-gang-ling.html
+ M html/articles/Marx/guan-yu-fei-er-ba-ha-de-ti-gang.html
+ M html/articles/Marx/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.html
+ M html/articles/Stalin/dao-lunen.html
  M html/articles/Stalin/lun-lunen-zhu-yi-ji-chu.html
- M html/articles/articles.html
- M js/article-common.js
- M js/download-export.js
- M js/main.js
+ M html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
  M tmp_status.txt
- M 设计文档/下载中心维护规范.md
- D 设计文档/数据源统一改造方案.md
- M 设计文档/数据源维护规范.md
- M 设计文档/文档体系说明.md
+ M 设计文档/study-json精读层方案草案.md
  M 设计文档/文章页维护规范.md
- M 设计文档/架构问题清单.md
- D 设计文档/武器库-总览.md
- D 设计文档/武器库-我的更新大纲.md
- M 设计文档/母站架构维护.md
  M 设计文档/项目维护.md
-?? data/articles-json/_meta/
-?? data/study-json/
-?? js/article-json.js
-?? js/article-study.js
-?? 设计文档/articles-json正文维护规范.md
-?? 设计文档/study-json精读层方案草案.md
+?? _tools/refine_marx_articles_json.cjs
+?? data/study-json/Engels/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.json
+?? data/study-json/Lenin/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.json
+?? data/study-json/Lenin/lun-wo-guo-ge-ming.json
+?? data/study-json/Lenin/ma-ke-si-zhu-yi-de-san-ge-lai-yuan.json
+?? data/study-json/Lenin/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.json
+?? data/study-json/Lenin/zen-me-ban.json
+?? data/study-json/Mao/lun-chi-jiu-zhan.json
+?? data/study-json/Mao/lun-shi-da-guan-xi.json
+?? data/study-json/Mao/mao-dun-lun.json
+?? data/study-json/Mao/nong-min-yun-dong.json
+?? data/study-json/Mao/ren-min-nei-bu-mao-dun.json
+?? data/study-json/Mao/wen-yi-zuo-tan.json
+?? data/study-json/Mao/xin-min-zhu.json
+?? data/study-json/Mao/xue-xi-shi-ju.json
+?? data/study-json/Mao/you-ji-zhan.json
+?? data/study-json/Mao/zhan-lue-wen-ti.json
+?? data/study-json/Mao/zhan-zheng-zhan-lue.json
+?? data/study-json/Marx/1844-nian-jing-ji-xue-zhe-xue-shou-gao.json
+?? data/study-json/Marx/de-yi-zhi-yi-xing-tai.json
+?? data/study-json/Marx/ge-da-gang-ling.json
+?? data/study-json/Marx/guan-yu-fei-er-ba-ha-de-ti-gang.json
+?? data/study-json/Marx/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.json
+?? data/study-json/Stalin/dao-lunen.json
+?? data/study-json/Stalin/lun-zhongguo-ge-ming-de-qiantu.json

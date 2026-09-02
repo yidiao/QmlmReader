@@ -26,7 +26,7 @@
     </style>
 </head>
 <!-- data-category 填: philosophy / economics / politics / party / military / culture -->
-<body data-category="politics">
+<body data-category="politics" data-article-json="../../../data/articles-json/Engels/★★★★★/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.json" data-study-json="../../../data/study-json/Engels/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.json">
 
     <!-- ========== 导航栏（不动）========== -->
     <div id="nav-placeholder"></div>
@@ -420,16 +420,10 @@
 
         </main>
 
-    <!-- ========== 下载浮动按钮 ========== -->
-    <button class="download-fab" id="downloadFab" title="下载原文"></button>
-    <div class="download-menu" id="downloadMenu">
-        <h4> 下载原文</h4>
-        <div id="downloadLinks"></div>
-    </div>
-
     <!-- ========== JS 脚本 ========== -->
-    <script src="../../../js/download-export.js"></script>
     <script src="../../../js/article-common.js"></script>
+    <script src="../../../js/article-json.js"></script>
+    <script src="../../../js/article-study.js"></script>
     <script>
         // ===== 本文图表配置 =====
         // 每篇文章在这里定义自己的 Chart.js 配置
@@ -519,9 +513,6 @@
                 }
             },
         ];
-
-        // ===== 下载链接 =====
-        var DOWNLOAD_LINKS = window.buildStandardDownloadLinks ? window.buildStandardDownloadLinks() : [];
     </script>
     <script src="../../../js/site-data.js"></script>
     <script src="../../../js/main.js"></script>

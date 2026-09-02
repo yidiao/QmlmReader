@@ -8,42 +8,25 @@
     <link rel="stylesheet" href="../../../css/articles-detail.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* ===== 类别色值（必填，六选一）===== */
         :root {
-            /* 哲学基础:   #8b0000 / #c41e3a */
-            /* 政治经济学: #e65100 / #ff8f00 */
-            /* 政治理论:   #805ad5 / #9f7aea */
-            /* 党的建设:   #38a169 / #68d391 */
-            /* 军事战略:   #3182ce / #63b3ed */
-            /* 思想文化:   #e6b800 / #ffd700 */
-            --cat-primary:   #3d6b4f;
+            --cat-primary: #3d6b4f;
             --cat-secondary: #4a7c59;
-            --cat-gradient:  linear-gradient(135deg, #1c3a28 0%, #3d6b4f 50%, #4a7c59 100%);
+            --cat-gradient: linear-gradient(135deg, #1c3a28 0%, #3d6b4f 50%, #4a7c59 100%);
         }
-
-        /* ===== 本文特有样式（可选）===== */
-        /* 例：正文内注释块特殊标注颜色等 */
     </style>
 </head>
-<!-- data-category 填: philosophy / economics / politics / party / military / culture -->
 <body data-category="party" data-article-json="../../../data/articles-json/Stalin/★★★★★/lun-lunen-zhu-yi-ji-chu.json" data-study-json="../../../data/study-json/Stalin/lun-lunen-zhu-yi-ji-chu.json">
-
-    <!-- ========== 导航栏（不动）========== -->
     <div id="nav-placeholder"></div>
 
-    <!-- 合集上下文导航（自动注入） -->
-    <div class="back-nav" style="display:none;">
-        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+    <div class="back-nav u-display-none">
+        <div class="container u-max-900 u-mx-auto u-px-20">
             <a href="../../articles/articles.html" class="back-link"></a>
         </div>
     </div>
 
-    <!-- ========== 文章主体 ========== -->
     <main class="article-detail">
-
-        <!-- ───── 头部 ───── -->
         <header class="article-header">
-            <div class="importance-badge"> 核心必读</div>
+            <div class="importance-badge">核心必读</div>
             <h1>论列宁主义基础</h1>
             <div class="article-subtitle">在斯维尔德洛夫大学的讲演</div>
             <div class="article-meta">
@@ -51,79 +34,62 @@
                 <span class="date">1924年4月</span>
                 <span class="category">党的建设 · 列宁主义</span>
                 <span class="word-count">约55,000字</span>
-                <span class="length-tag"> 长篇</span>
+                <span class="length-tag">长篇</span>
             </div>
         </header>
 
-        <!-- ───── Tab 导航 ───── -->
         <div class="tab-nav">
-            <button class="tab-btn active" onclick="switchTab('original', this)"> 原文</button>
-            <button class="tab-btn" onclick="switchTab('reading', this)"> 读法提示</button>
-            <button class="tab-btn" onclick="switchTab('difficulty', this)"> 难点解析</button>
-            <button class="tab-btn" onclick="switchTab('dialogue', this)"> 对话空间</button>
-            <button class="tab-btn" onclick="switchTab('action', this)"> 行动实验</button>
-            <button class="tab-btn" onclick="switchTab('visual', this)"> 一目了然</button>
-            <button class="tab-btn" onclick="switchTab('puzzle', this)"> 理论拼图</button>
+            <button class="tab-btn active" onclick="switchTab('original', this)">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
         </div>
 
-        <!-- ═══════════════════════════════════════ -->
-        <!-- Tab 1: 原文                              -->
-        <!-- ═══════════════════════════════════════ -->
-                <div class="tab-content active" id="original">
+        <div class="tab-content active" id="original">
             <div class="original-text">
                 <div class="text-intro"><p><strong>原文：</strong>正在加载文章数据…</p></div>
             </div>
         </div>
 
-
         <div class="tab-content" id="reading">
             <div class="reading-guide">
-                <h2 class="tab-heading"> 如何阅读本文</h2>
+                <h2 class="tab-heading">如何阅读本文</h2>
                 <div class="guide-block"><p>正在加载精读数据…</p></div>
             </div>
         </div>
 
-        <!-- ═══════════════════════════════════════ -->
-        <!-- Tab 3: 难点解析                           -->
-        <!-- ═══════════════════════════════════════ -->
         <div class="tab-content" id="difficulty">
             <div class="difficulty-section">
-                <h2 class="tab-heading"> 容易读错的地方</h2>
+                <h2 class="tab-heading">容易读错的地方</h2>
                 <div class="diff-item"><div class="correct">正在加载精读数据…</div></div>
             </div>
         </div>
 
-        <!-- ═══════════════════════════════════════ -->
-        <!-- Tab 4: 对话空间                           -->
-        <!-- ═══════════════════════════════════════ -->
         <div class="tab-content" id="dialogue">
             <div class="dialogue-section">
-                <h2 class="tab-heading"> 这篇文章在回应谁？</h2>
+                <h2 class="tab-heading">这篇文章在回应谁？</h2>
                 <div class="dialogue-block"><p>正在加载精读数据…</p></div>
             </div>
         </div>
 
-        <!-- ═══════════════════════════════════════ -->
-        <!-- Tab 5: 行动实验                           -->
-        <!-- ═══════════════════════════════════════ -->
         <div class="tab-content" id="action">
             <div class="action-section">
-                <h2 class="tab-heading"> 读完之后可以做什么</h2>
+                <h2 class="tab-heading">读完之后可以做什么</h2>
                 <div class="action-item"><p>正在加载精读数据…</p></div>
             </div>
         </div>
 
-        <!-- ═══════════════════════════════════════ -->
-        <!-- Tab 6: 一目了然（核心）                    -->
-        <!-- ═══════════════════════════════════════ -->
         <div class="tab-content" id="visual">
             <div class="visualization-section">
-                <h2 class="tab-heading"> 一目了然</h2>
+                <h2 class="tab-heading">一目了然</h2>
 
                 <div class="chart-block">
                     <h3>文章特征雷达图</h3>
-                    <p class="chart-desc">六个维度衡量本文的"性格"</p>
-                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                    <p class="chart-desc">六个维度衡量本文的“性格”</p>
+                    <div class="chart-container u-max-500 u-mx-auto">
                         <canvas id="radarChart"></canvas>
                     </div>
                 </div>
@@ -131,116 +97,122 @@
                 <div class="chart-block">
                     <h3>论证节奏曲线</h3>
                     <p class="chart-desc">展示文章各章节的论证强度</p>
-                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                    <div class="chart-container u-max-700 u-mx-auto">
                         <canvas id="argumentCurve"></canvas>
                     </div>
                     <div class="structure-analysis">
-                        <h4> 结构分析（对应曲线各波段）</h4>
+                        <h4>结构分析（对应曲线各波段）</h4>
                         <div class="analysis-item">
                             <span class="analysis-label">定义与历史（6/10）</span>
-                            <p>列宁主义的科学定义，回顾其历史背景与形成过程，为后续展开奠定基础，节奏平稳</p>
+                            <p>列宁主义的科学定义，回顾其历史背景与形成过程，为后续展开奠定基础。</p>
                         </div>
                         <div class="analysis-item">
                             <span class="analysis-label">思想来源（8/10）</span>
-                            <p>阐述列宁主义的理论来源——马克思主义三个来源与三个组成部分，思想脉络清晰</p>
+                            <p>阐述列宁主义的理论来源——马克思主义三个来源与三个组成部分。</p>
                         </div>
                         <div class="analysis-item">
                             <span class="analysis-label">列宁主义特征（7/10）</span>
-                            <p>系统归纳列宁主义的时代特征，理论建构逐步推进，但尚在铺垫阶段</p>
+                            <p>系统归纳列宁主义的时代特征，理论建构逐步推进。</p>
                         </div>
                         <div class="analysis-item">
-                            <span class="analysis-label highlight"> 理论核心（9/10）</span>
-                            <p>深入阐释列宁主义与马克思主义的关系，这是全文的理论制高点，论证最为充分</p>
+                            <span class="analysis-label highlight">理论核心（9/10）</span>
+                            <p>深入阐释列宁主义与马克思主义的关系，这是全文的理论制高点。</p>
                         </div>
                         <div class="analysis-item">
-                            <span class="analysis-label highlight"> 战略与策略（10/10）</span>
-                            <p>将理论转化为行动指南，战略与策略的统一是列宁主义的实践精髓，论证达到最高潮</p>
+                            <span class="analysis-label highlight">战略与策略（10/10）</span>
+                            <p>将理论转化为行动指南，战略与策略的统一是列宁主义的实践精髓。</p>
                         </div>
                         <div class="analysis-item">
                             <span class="analysis-label">组织问题（8/10）</span>
-                            <p>论述新型无产阶级政党的组织原则，民主集中制是列宁主义组织理论的核心</p>
+                            <p>论述新型无产阶级政党的组织原则，民主集中制是列宁主义组织理论的核心。</p>
                         </div>
                         <div class="analysis-item">
                             <span class="analysis-label">结论（6/10）</span>
-                            <p>总结全文，强调学习列宁主义的现实意义，节奏趋于平缓收束</p>
+                            <p>总结全文，强调学习列宁主义的现实意义。</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 九章内容权重分布 -->
                 <div class="chart-block">
                     <h3>九章内容权重分布</h3>
                     <p class="chart-desc">论列宁主义基础各章节在全书中的理论权重与篇幅占比</p>
-                    <div class="chart-container" style="max-width:650px;margin:0 auto;">
+                    <div class="chart-container u-max-650 u-mx-auto">
                         <canvas id="chapterWeightChart"></canvas>
                     </div>
                 </div>
 
-                <!-- 帝国主义三大矛盾对比 -->
                 <div class="chart-block">
                     <h3>帝国主义三大矛盾对比</h3>
                     <p class="chart-desc">列宁主义所揭示的帝国主义时代三大核心矛盾的强度与革命潜力对比</p>
-                    <div class="chart-container" style="max-width:550px;margin:0 auto;">
+                    <div class="chart-container u-max-550 u-mx-auto">
                         <canvas id="contradictionsChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ═══════════════════════════════════════ -->
-        <!-- Tab 7: 理论拼图（含原延伸阅读）            -->
-        <!-- ═══════════════════════════════════════ -->
         <div class="tab-content" id="puzzle">
-            <div class="puzzle-intro">
-            <p><strong>本文的核心贡献：</strong>斯大林在本文中系统阐述了列宁主义的基本问题，为后来的社会主义国家建设提供了理论基础本文是学习列宁主义的入门必读</p>
-        </div>
-
-        <h3 style="color:#1a237e;margin:1.5rem 0 1rem;"> 理论传承</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem;">
-            <div style="background:#fff3e0;padding:1rem;border-radius:8px;">
-                <h4 style="color:#e65100;margin:0 0 0.5rem;"> 理论来源</h4>
-                <p style="margin:0;font-size:0.9rem;color:#666;">马克思恩格斯学说 · 列宁帝国主义理论</p>
+            <div class="puzzle-section">
+                <h2 class="tab-heading">理论拼图</h2>
+                <div class="puzzle-intro">
+                    <p>本文系统阐述列宁主义的基本问题，是理解其国家观、组织观与革命策略的重要入口。</p>
+                </div>
+                <div class="puzzle-position">
+                    <h3>本文在理论体系中的坐标</h3>
+                    <div class="theory-tree">
+                        <div class="theory-node root">马克思主义</div>
+                        <div class="theory-branches">
+                            <div class="theory-branch">
+                                <div class="theory-node branch">党和组织</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">先锋队</div>
+                                    <div class="theory-node related">民主集中制</div>
+                                    <div class="theory-node current">列宁主义基础</div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">革命策略</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">帝国主义时代</div>
+                                    <div class="theory-node related">无产阶级专政</div>
+                                    <div class="theory-node related">世界革命</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="puzzle-timeline">
+                    <h3>在思想发展时间轴上的位置</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">1902</div>
+                            <div class="timeline-label">怎么办？</div>
+                        </div>
+                        <div class="timeline-item active">
+                            <div class="timeline-dot-active"></div>
+                            <div class="timeline-year">1924</div>
+                            <div class="timeline-label">论列宁主义基础</div>
+                            <div class="timeline-here">本文</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">1924</div>
+                            <div class="timeline-label">悼列宁</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="puzzle-links">
+                    <h3>文章联结网络</h3>
+                </div>
             </div>
-            <div style="background:#e8eaf6;padding:1rem;border-radius:8px;">
-                <h4 style="color:#1a237e;margin:0 0 0.5rem;"> 本文贡献</h4>
-                <p style="margin:0;font-size:0.9rem;color:#666;">系统化列宁主义 · 帝国主义矛盾分析</p>
-            </div>
-            <div style="background:#e8f5e9;padding:1rem;border-radius:8px;">
-                <h4 style="color:#2e7d32;margin:0 0 0.5rem;"> 后续发展</h4>
-                <p style="margin:0;font-size:0.9rem;color:#666;">各国共产党 · 社会主义建设</p>
-            </div>
         </div>
-
-        <h3 style="color:#1a237e;margin:1.5rem 0 1rem;"> 关联文章</h3>
-        <div class="further-item">
-            <h4> 列宁帝国主义是资本主义的最高阶段</h4>
-            <p>帝国主义理论的奠基之作，理解本文第一章的必读文献</p>
-        </div>
-        <div class="further-item">
-            <h4> 列宁国家与革命</h4>
-            <p>无产阶级专政理论的经典，系统学习第四章的必读</p>
-        </div>
-        <div class="further-item">
-            <h4> 毛泽东矛盾论</h4>
-            <p>对立统一规律的中国化发展，理论传承的典范</p>
-        </div>
-
-<div class="puzzle-timeline"><h3>在思想发展时间轴上的位置</h3><div class="timeline-track"><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1903</div><div class="timeline-label">布尔什维克成立</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1917</div><div class="timeline-label">十月革命</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1924</div><div class="timeline-label">列宁逝世</div></div><div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1924</div><div class="timeline-label">斯维尔德洛夫大学演讲</div><div class="timeline-here"> 本文</div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1928</div><div class="timeline-label">第一个五年计划</div></div></div></div>
-<div class="puzzle-links"><h3>文章联结网络</h3><p class="puzzle-links-note">点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（ 输出影响 ·  理论来源 ·  相互支撑）</p><div class="conn-grid"><a href="zen-me-ban.html" class="conn-card" style="border-left-color:#553c9a;"><span class="conn-dir" style="color:#276749;"></span><span class="conn-title">怎么办？</span><span class="conn-label">党的建设</span><span class="conn-relation">列宁主义的建党学说源头</span></a><a href="guo-jia-yu-ge-ming.html" class="conn-card" style="border-left-color:#1a237e;"><span class="conn-dir" style="color:#276749;"></span><span class="conn-title">国家与革命</span><span class="conn-label">政治理论</span><span class="conn-relation">列宁主义的国家学说基础</span></a><a href="lun-wo-guo-ge-ming.html" class="conn-card" style="border-left-color:#2b6cb0;"><span class="conn-dir" style="color:#276749;"></span><span class="conn-title">论我国革命</span><span class="conn-label">政治理论</span><span class="conn-relation">列宁对俄国革命道路的总结</span></a></div></div>
-        </div>
-
     </main>
 
-    <!-- ========== 下载浮动按钮 ========== -->
-</div>
-
-    <!-- ========== JS 脚本 ========== -->
-        <script src="../../../js/article-common.js"></script>
+    <script src="../../../js/article-common.js"></script>
     <script src="../../../js/article-json.js"></script>
     <script src="../../../js/article-study.js"></script>
     <script>
-        // ===== 本文图表配置 =====
-        // 每篇文章在这里定义自己的 Chart.js 配置
         var ARTICLE_CHARTS = [
             {
                 id: 'radarChart',
@@ -340,4 +312,3 @@
     <script src="../../../js/cursor.js"></script>
 </body>
 </html>
-

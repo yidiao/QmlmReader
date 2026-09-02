@@ -65,7 +65,7 @@
 2. `difficulty` 难点解析
 3. `dialogue` 对话空间
 4. `action` 行动实验
-5. `further` 延伸阅读
+5. `further` 延伸阅读 / 文章联结网络
 
 这些部分大多可以抽象成：
 
@@ -168,6 +168,8 @@ data/study-json/Mao/shi-jian-lun.json
 - `difficulty` 保留正误对照结构
 - `dialogue` 可以允许 `items` 数组
 - `further` 可带 `href`
+- 如果 `further` 升级成文章关系网络，推荐改成对象：`{ title, note, items[] }`
+- `items[]` 推荐补充：`label`、`direction`、`relation`
 
 如果未来 `visual` / `puzzle` 也要数据化，建议单独再加对象字段，而不是现在先把它们硬塞进通用数组模型。
 
