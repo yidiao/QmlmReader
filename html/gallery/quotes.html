@@ -327,6 +327,7 @@
                 <button class="category-btn" data-filter="lenin">列宁</button>
                 <button class="category-btn" data-filter="stalin">斯大林</button>
                 <button class="category-btn" data-filter="mao">毛泽东</button>
+                <button class="category-btn" data-filter="mao-book">毛主席语录</button>
             </div>
 
             <div class="quotes-detail-grid" id="quotesGrid">
@@ -1031,10 +1032,11 @@
             }
 
         };
+        window.quotesData = quotesData;
 
         // ========== Modal 功能 ==========
         function openQuote(id) {
-            const q = quotesData[id];
+            const q = window.quotesData[id];
             if (!q) return;
             
             document.getElementById('modalText').textContent = q.text;
@@ -1065,6 +1067,10 @@
             }
         }
 
+        window.openQuote = openQuote;
+        window.closeQuote = closeQuote;
+        window.closeModalOnOverlay = closeModalOnOverlay;
+
         // ESC 键关闭
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeQuote();
@@ -1090,14 +1096,17 @@
 
 
 
-        // 从首页跳转过来时，自动打开对应语录的简析卡片
+        // 从首页跳转过来时，自动打开对应语录的简析卡片；动态加载的毛主席语录由外部脚本处理
         if (sessionStorage.getItem('openQuote')) {
             const targetId = sessionStorage.getItem('openQuote');
-            sessionStorage.removeItem('openQuote');
-            setTimeout(function() { openQuote(targetId); }, 300);
+            if (!targetId.startsWith('mao-book-')) {
+                sessionStorage.removeItem('openQuote');
+                setTimeout(function() { openQuote(targetId); }, 300);
+            }
         }
     
 </script>
+<script src="../../js/mao-quotes-gallery.js"></script>
 
 <script src="../../js/darkmode.js"></script>
 <script src="../../js/cursor.js"></script>

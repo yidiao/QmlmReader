@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>毛泽东诗词及语录专栏 | 青年马列毛主义驿站</title>
+  <link rel="stylesheet" href="../../css/mao-column.css">
+</head>
+<body class="with-gallery-back">
+  <div class="shell">
+    <nav class="corner-nav" aria-label="专栏切换与返回">
+      <a class="home-link" href="gallery.html">返回文艺首页</a>
+      <button type="button" data-mode-button="poetry">诗词</button>
+      <button type="button" data-mode-button="quotes">语录</button>
+    </nav>
+
+    <header class="masthead">
+      <div class="hero-inner">
+        <div class="kicker" id="hero-kicker">诗词 · 笺译 · 文献导读</div>
+        <h1 id="hero-title">毛泽东诗词及语录专栏</h1>
+        <p class="hero-copy" id="hero-copy">载入整理数据中……</p>
+        <div class="hero-stats" id="hero-stats" aria-label="统计信息"></div>
+      </div>
+    </header>
+
+    <nav class="topbar" aria-label="内容筛选">
+      <div class="controls">
+        <input class="search" id="search" type="search" placeholder="搜索内容">
+        <select class="select" id="filter-a" aria-label="筛选一"></select>
+        <select class="select" id="filter-b" aria-label="筛选二"></select>
+        <select class="select" id="filter-c" aria-label="筛选三"></select>
+        <select class="select" id="filter-d" aria-label="排序"></select>
+      </div>
+    </nav>
+
+    <main class="layout">
+      <aside class="rail" aria-label="目录列表">
+        <p class="rail-title" id="rail-title">0 项</p>
+        <div class="list" id="list"></div>
+      </aside>
+
+      <div class="content-stack">
+        <section class="panel" id="overview-panel" aria-label="概论导读">
+          <div class="panel-head">
+            <h2>概论导读</h2>
+            <span id="overview-count">0 篇</span>
+          </div>
+          <div class="overview-list" id="overview-list"></div>
+        </section>
+
+        <article class="reader mode-panel" id="poetry-reader" aria-live="polite">
+          <div class="reader-head">
+            <h2 id="title">载入中</h2>
+            <div class="meta-row" id="meta"></div>
+            <a class="download" id="download" href="#">下载 docx</a>
+          </div>
+          <div class="reader-body">
+            <div class="main-text">
+              <section id="original-section">
+                <h3>原文</h3>
+                <div class="poem-text" id="original"></div>
+              </section>
+              <section id="translation-section">
+                <h3>译文</h3>
+                <div class="body-text" id="translation"></div>
+              </section>
+            </div>
+            <aside class="side-text">
+              <section class="side-section" id="self-note-section">
+                <button class="section-toggle" type="button" data-toggle="self-note"><span>自注</span><span class="toggle-icon">-</span></button>
+                <div class="section-content"><div class="body-text" id="self-note"></div></div>
+              </section>
+              <section class="side-section" id="note-section">
+                <button class="section-toggle" type="button" data-toggle="note"><span>题解</span><span class="toggle-icon">-</span></button>
+                <div class="section-content"><div class="body-text" id="note"></div></div>
+              </section>
+              <section class="side-section" id="annotation-section">
+                <button class="section-toggle" type="button" data-toggle="annotation"><span>笺注</span><span class="toggle-icon">-</span></button>
+                <div class="section-content"><div class="body-text" id="annotation"></div></div>
+              </section>
+            </aside>
+          </div>
+        </article>
+
+        <article class="quote-reader mode-panel" id="quote-reader" aria-live="polite">
+          <div class="reader-head">
+            <h2 id="quote-title">载入中</h2>
+            <div class="meta-row" id="quote-meta"></div>
+            <p class="chapter-note" id="quote-chapter-note"></p>
+          </div>
+          <div class="quote-reader-body">
+            <div class="quote-grid" id="quote-grid"></div>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <script src="../../js/mao-column.js"></script>
+</body>
+</html>

@@ -1,2 +1,9 @@
- M js/main.js
+ M html/gallery/gallery.html
+ M html/gallery/quotes.html
  M tmp_status.txt
+?? css/mao-column.css
+?? data/mao-poetry-data.json
+?? data/mao-quotes.json
+?? html/gallery/mao-poetry-quotes.html
+?? js/mao-column.js
+?? js/mao-quotes-gallery.js
