@@ -368,7 +368,7 @@ function initDynamicChapterNav() {
     }
 
     var chapters = Array.prototype.slice.call(document.querySelectorAll('#original .chapter'));
-    if (chapters.length < 3) return;
+    if (chapters.length < 1) return;
 
     var nav = document.createElement('nav');
     nav.id = 'dynamicChapterNav';

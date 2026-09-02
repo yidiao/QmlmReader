@@ -1,6 +1,2 @@
- M html/articles/Marx/1844-nian-jing-ji-xue-zhe-xue-shou-gao.html
- M html/articles/Marx/de-yi-zhi-yi-xing-tai.html
- M html/articles/Marx/ge-da-gang-ling.html
- M html/articles/Marx/guan-yu-fei-er-ba-ha-de-ti-gang.html
- M html/articles/Marx/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan.html
+ M js/main.js
  M tmp_status.txt
