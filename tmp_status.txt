@@ -1,9 +1,32 @@
- M html/gallery/gallery.html
- M html/gallery/quotes.html
  M tmp_status.txt
-?? css/mao-column.css
-?? data/mao-poetry-data.json
-?? data/mao-quotes.json
-?? html/gallery/mao-poetry-quotes.html
-?? js/mao-column.js
-?? js/mao-quotes-gallery.js
+ D 设计文档/articles-json正文维护规范.md
+ D 设计文档/experimental（武器库）/万物皆可红/万物皆可红-设计文档.md
+ D 设计文档/experimental（武器库）/小册子/小册子-设计文档.md
+ D 设计文档/experimental（武器库）/赛博样板戏/八大戏研究/样板戏研究-八部总结.md
+ D 设计文档/experimental（武器库）/赛博样板戏/八大戏研究/样板戏研究-奇袭白虎团.md
+ D 设计文档/experimental（武器库）/赛博样板戏/八大戏研究/样板戏研究-智取威虎山.md
+ D 设计文档/experimental（武器库）/赛博样板戏/八大戏研究/样板戏研究-沙家浜.md
+ D 设计文档/experimental（武器库）/赛博样板戏/八大戏研究/样板戏研究-沙家浜交响乐.md
+ D 设计文档/experimental（武器库）/赛博样板戏/八大戏研究/样板戏研究-海港.md
+ D 设计文档/experimental（武器库）/赛博样板戏/八大戏研究/样板戏研究-白毛女.md
+ D 设计文档/experimental（武器库）/赛博样板戏/八大戏研究/样板戏研究-红灯记.md
+ D 设计文档/experimental（武器库）/赛博样板戏/八大戏研究/样板戏研究-红色娘子军.md
+ D 设计文档/experimental（武器库）/赛博样板戏/样板戏研究-文体Prompt.md
+ D 设计文档/experimental（武器库）/赛博样板戏/赛博样板戏-设计文档.md
+ D 设计文档/experimental（武器库）/青马/青马的奇妙冒险-实际进度.md
+ D 设计文档/experimental（武器库）/青马/青马的奇妙冒险设计大纲.md
+ D 设计文档/experimental（武器库）/马列体/马列体生成器-大纲架构.md
+ D 设计文档/experimental（武器库）/马列体/马列体生成器-开发进度.md
+ D 设计文档/experimental（武器库）/马列体/马列体生成器-美术设计.md
+ D 设计文档/study-json精读层方案草案.md
+ D 设计文档/下载中心维护规范.md
+ D 设计文档/数据源维护规范.md
+ D 设计文档/文档体系说明.md
+ D 设计文档/文章页维护规范.md
+ D 设计文档/架构问题清单.md
+ D 设计文档/母站架构维护.md
+ M 设计文档/项目维护.md
+?? 设计文档/README.md
+?? 设计文档/architecture/
+?? 设计文档/data/
+?? 设计文档/pages/
