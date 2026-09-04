@@ -36,6 +36,7 @@
 |---|---|---|---|
 | 首页 | `html/index.html` | `设计文档/pages/home/README.md` | 首页、站点入口、今日内容、搜索入口 |
 | 关于 | `html/about/` | `设计文档/pages/about/README.md` | 关于页、更新日志 |
+| 个人偏好 | `html/preferences/` | `设计文档/pages/preferences/README.md` | 本地收藏、阅读历史、视图设置入口 |
 | 文章 | `html/articles/` | `设计文档/pages/articles/README.md` | 文章列表、导师文章页、精读页壳 |
 | 下载 | `html/downloads/` | `设计文档/pages/downloads/README.md` | TXT / DOCX 导出入口、资源聚合 |
 | experimental | `html/experimental/` | `设计文档/pages/experimental/README.md` | 实验工具入口及子工具 |
@@ -96,10 +97,11 @@
 | 精读层渲染 | `js/article-study.js` |
 | 文章页公共交互 | `js/article-common.js` |
 | 下载导出 | `js/download-export.js` |
+| 个人偏好 | `html/preferences/preferences.html` + `js/preferences.js` |
 
 ### 4. 当前代码事实快照
 
-- `html/` 下主要模块：`about`、`articles`、`downloads`、`experimental`、`gallery`、`international`、`masters`、`puzzle`、`rectify`、`toolkit`。
+- `html/` 下主要模块：`about`、`articles`、`downloads`、`experimental`、`gallery`、`international`、`masters`、`preferences`、`puzzle`、`rectify`、`toolkit`。
 - 非 imported 的正式文章详情页：29 篇。
 - `data/articles-json/` 当前约 33 个 JSON 文件。
 - `data/study-json/` 当前约 29 个 JSON 文件。

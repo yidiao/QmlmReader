@@ -15,6 +15,7 @@ index.html
       -> css/style.css
       -> js/site-data.js
       -> js/main.js
+      -> js/preferences.js
       -> js/search.js
       -> js/darkmode.js
       -> js/cursor.js
@@ -27,6 +28,7 @@ index.html
 <div id="nav-placeholder"></div>
 <script src="相对路径/js/site-data.js"></script>
 <script src="相对路径/js/main.js"></script>
+<!-- main.js 会按当前层级自动加载 js/preferences.js -->
 <script src="相对路径/js/darkmode.js"></script>
 <script src="相对路径/js/cursor.js"></script>
 ```
@@ -46,6 +48,7 @@ index.html
 | `js/site-data.js` | 站点聚合数据 | 生成产物，不要手改 |
 | `_tools/build_data.py` | 聚合数据构建 | 改数据源后运行它更新 `site-data.js` |
 | `js/search.js` | 搜索索引读取与结果渲染 | 基于索引层，不应塞正文全文 |
+| `js/preferences.js` | 本地偏好、文章收藏、阅读历史、视图设置接口 | 只做浏览器本地能力，不接后端；现阶段优先文章页最小闭环 |
 | `js/darkmode.js` | 暗色模式 | 与页面私有 localStorage 切换逻辑后续需统一 |
 | `js/cursor.js` | 自定义光标 | 公共视觉增强 |
 

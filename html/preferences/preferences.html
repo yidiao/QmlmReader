@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人偏好 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        :root {
+            --prefs-bg: linear-gradient(180deg, #f8f4ef 0%, #f3efe8 100%);
+            --prefs-surface: rgba(255, 255, 255, 0.82);
+            --prefs-border: rgba(196, 30, 58, 0.12);
+            --prefs-muted: #6b7280;
+            --prefs-shadow: 0 18px 40px rgba(26, 26, 26, 0.08);
+            --prefs-shadow-hover: 0 22px 50px rgba(26, 26, 26, 0.12);
+        }
+        body { background: var(--prefs-bg); }
+        .prefs-page { position: relative; }
+        .prefs-page::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 12% 14%, rgba(196, 30, 58, 0.08), transparent 28%),
+                radial-gradient(circle at 88% 8%, rgba(212, 160, 23, 0.08), transparent 22%),
+                linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0));
+            z-index: 0;
+        }
+        .prefs-page > * { position: relative; z-index: 1; }
+        .prefs-hero {
+            position: relative;
+            margin: 1.25rem 20px 0;
+            padding: 2.2rem 0;
+            background: linear-gradient(135deg, rgba(139,0,0,0.96) 0%, rgba(196,30,58,0.96) 52%, rgba(109,12,27,0.98) 100%);
+            color: #fff;
+            border-radius: 28px;
+            box-shadow: 0 20px 45px rgba(139, 0, 0, 0.24);
+            overflow: hidden;
+        }
+        .prefs-hero::after {
+            content: '';
+            position: absolute;
+            inset: auto -12% -45% auto;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,215,0,0.22) 0%, rgba(255,215,0,0.06) 38%, transparent 72%);
+        }
+        .prefs-hero .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .prefs-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.35rem 0.8rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.14);
+            backdrop-filter: blur(8px);
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.9rem;
+        }
+        .prefs-hero h1 { font-size: clamp(2rem, 4vw, 2.7rem); margin-bottom: 0.45rem; letter-spacing: 0.05em; }
+        .prefs-hero p { opacity: 0.9; max-width: 52rem; line-height: 1.7; }
+        .prefs-hero-cta { display: flex; gap: 0.7rem; flex-wrap: wrap; align-items: center; }
+        .prefs-container { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 1.25rem 20px 3rem; }
+        .prefs-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.9rem; margin: 1rem 0 1.25rem; }
+        .prefs-stat {
+            background: var(--prefs-surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--prefs-border);
+            border-radius: 20px;
+            box-shadow: var(--prefs-shadow);
+            padding: 1rem 1.05rem;
+        }
+        .prefs-stat-label { color: var(--prefs-muted); font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .prefs-stat-value { font-size: 1.8rem; font-weight: 800; color: #1f2937; line-height: 1; margin-bottom: 0.35rem; }
+        .prefs-stat-desc { color: var(--prefs-muted); font-size: 0.88rem; }
+        .prefs-shell {
+            display: grid;
+            grid-template-columns: 260px minmax(0, 1fr);
+            gap: 1rem;
+            align-items: start;
+        }
+        .prefs-sidebar,
+        .prefs-main {
+            background: var(--prefs-surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--prefs-border);
+            border-radius: 24px;
+            box-shadow: var(--prefs-shadow);
+        }
+        .prefs-sidebar {
+            padding: 1rem;
+            position: sticky;
+            top: 92px;
+        }
+        .prefs-sidebar-top {
+            padding: 0.25rem 0.25rem 0.9rem;
+            border-bottom: 1px solid rgba(17,24,39,0.06);
+            margin-bottom: 0.9rem;
+        }
+        .prefs-sidebar-kicker {
+            display: inline-flex;
+            padding: 0.28rem 0.65rem;
+            border-radius: 999px;
+            background: rgba(196,30,58,0.08);
+            color: #8b0000;
+            font-size: 0.76rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+        .prefs-sidebar-title { font-size: 1.25rem; font-weight: 800; color: #1f2937; margin-bottom: 0.35rem; }
+        .prefs-sidebar-desc { color: var(--prefs-muted); font-size: 0.9rem; line-height: 1.6; }
+        .prefs-nav { display: flex; flex-direction: column; gap: 0.55rem; }
+        .prefs-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            width: 100%;
+            padding: 0.8rem 0.9rem;
+            border-radius: 16px;
+            border: 1px solid transparent;
+            background: rgba(255,255,255,0.68);
+            color: #1f2937;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+            text-align: left;
+            transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+        }
+        .prefs-nav-item:hover { transform: translateY(-1px); border-color: rgba(196,30,58,0.18); box-shadow: 0 10px 20px rgba(26,26,26,0.06); }
+        .prefs-nav-item.active {
+            background: linear-gradient(135deg, #c41e3a, #8b0000);
+            color: #fff;
+            box-shadow: 0 12px 24px rgba(196,30,58,0.18);
+        }
+        .prefs-nav-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(196,30,58,0.08);
+            color: inherit;
+            flex-shrink: 0;
+        }
+        .prefs-nav-item.active .prefs-nav-icon { background: rgba(255,255,255,0.16); }
+        .prefs-nav-meta { display: flex; align-items: center; gap: 0.5rem; margin-left: auto; }
+        .prefs-nav-count {
+            min-width: 2rem;
+            padding: 0.18rem 0.45rem;
+            border-radius: 999px;
+            background: rgba(196,30,58,0.08);
+            color: inherit;
+            font-size: 0.76rem;
+            text-align: center;
+        }
+        .prefs-nav-item.active .prefs-nav-count { background: rgba(255,255,255,0.18); }
+        .prefs-sidebar-foot {
+            margin-top: 1rem;
+            padding-top: 0.9rem;
+            border-top: 1px solid rgba(17,24,39,0.06);
+            color: var(--prefs-muted);
+            font-size: 0.84rem;
+            line-height: 1.55;
+        }
+        .prefs-main { padding: 1.1rem; min-width: 0; }
+        .prefs-panel-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .prefs-panel-kicker {
+            display: inline-flex;
+            padding: 0.28rem 0.65rem;
+            border-radius: 999px;
+            background: rgba(196,30,58,0.08);
+            color: #8b0000;
+            font-size: 0.76rem;
+            font-weight: 700;
+            margin-bottom: 0.55rem;
+        }
+        .prefs-panel-title { font-size: 1.6rem; font-weight: 800; color: #1f2937; margin-bottom: 0.35rem; }
+        .prefs-panel-desc { color: var(--prefs-muted); line-height: 1.65; max-width: 52rem; }
+        .prefs-panel-tools {
+            flex: 1;
+            min-width: min(100%, 340px);
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            align-items: stretch;
+        }
+        .prefs-toolbar {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .prefs-search {
+            flex: 1;
+            min-width: 240px;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1rem;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.78);
+            border: 1px solid rgba(17,24,39,0.08);
+            box-shadow: 0 8px 24px rgba(26,26,26,0.04);
+        }
+        .prefs-search span { color: var(--prefs-muted); font-size: 1rem; flex-shrink: 0; }
+        .prefs-search input {
+            border: none;
+            background: transparent;
+            padding: 0;
+            min-width: 0;
+            flex: 1;
+            color: #111827;
+            font: inherit;
+        }
+        .prefs-search input:focus { outline: none; box-shadow: none; }
+        .prefs-mini-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .prefs-content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0.95rem;
+            margin-top: 1rem;
+        }
+        .prefs-entry-card,
+        .prefs-panel-card,
+        .prefs-empty-card {
+            background: rgba(255,255,255,0.76);
+            border: 1px solid rgba(196,30,58,0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 24px rgba(26,26,26,0.05);
+            padding: 1rem;
+        }
+        .prefs-entry-card:hover,
+        .prefs-panel-card:hover { box-shadow: 0 16px 30px rgba(26,26,26,0.08); }
+        .prefs-entry-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.85rem;
+            align-items: flex-start;
+        }
+        .prefs-entry-title { font-weight: 800; color: #1f2937; margin-bottom: 0.32rem; line-height: 1.4; }
+        .prefs-entry-sub { color: var(--prefs-muted); font-size: 0.85rem; line-height: 1.55; }
+        .prefs-chip-row { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.75rem; }
+        .prefs-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.65rem;
+            border-radius: 999px;
+            background: rgba(196,30,58,0.08);
+            color: #8b0000;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .prefs-item-tools { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; }
+        .prefs-item-tools .prefs-btn { padding: 0.48rem 0.78rem; font-size: 0.82rem; }
+        .prefs-actions { display: flex; gap: 0.55rem; flex-wrap: wrap; margin-top: 0.95rem; }
+        .prefs-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.35rem;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, opacity 0.18s ease;
+        }
+        .prefs-btn:hover { transform: translateY(-1px); }
+        .prefs-btn.primary { background: linear-gradient(135deg, #c41e3a, #8b0000); color: #fff; box-shadow: 0 10px 20px rgba(196,30,58,0.18); }
+        .prefs-btn.secondary { background: rgba(255,255,255,0.82); color: #1f2937; border: 1px solid rgba(17,24,39,0.08); }
+        .prefs-empty-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            align-items: flex-start;
+            color: var(--prefs-muted);
+        }
+        .prefs-empty-card strong { color: #1f2937; }
+        .prefs-field { display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.75rem; }
+        .prefs-field label { font-size: 0.88rem; font-weight: 700; color: #374151; }
+        .prefs-field select,
+        .prefs-field input,
+        .prefs-field textarea {
+            padding: 0.75rem 0.8rem;
+            border: 1px solid rgba(17,24,39,0.10);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.9);
+            color: #111827;
+            font: inherit;
+        }
+        .prefs-field select:focus,
+        .prefs-field input:focus,
+        .prefs-field textarea:focus {
+            outline: none;
+            border-color: rgba(196,30,58,0.35);
+            box-shadow: 0 0 0 3px rgba(196,30,58,0.12);
+        }
+        .prefs-field textarea { min-height: 140px; resize: vertical; }
+        .prefs-help { color: var(--prefs-muted); font-size: 0.84rem; line-height: 1.5; }
+        .prefs-setting-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-top: 0.9rem; }
+        .prefs-setting-tile {
+            padding: 0.85rem 0.9rem;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.66);
+            border: 1px solid rgba(17,24,39,0.06);
+        }
+        .prefs-setting-label { color: var(--prefs-muted); font-size: 0.8rem; margin-bottom: 0.3rem; }
+        .prefs-setting-value { font-weight: 700; color: #1f2937; }
+        .prefs-setting-note {
+            margin-top: 0.85rem;
+            color: var(--prefs-muted);
+            font-size: 0.84rem;
+            line-height: 1.6;
+        }
+        body.dark-mode {
+            --prefs-bg: linear-gradient(180deg, #101010 0%, #151515 100%);
+            --prefs-surface: rgba(28, 28, 28, 0.86);
+            --prefs-border: rgba(255, 255, 255, 0.08);
+            --prefs-muted: #9ca3af;
+            --prefs-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+            --prefs-shadow-hover: 0 22px 50px rgba(0, 0, 0, 0.42);
+            color: #f3f4f6;
+        }
+        body.dark-mode .prefs-sidebar-title,
+        body.dark-mode .prefs-panel-title,
+        body.dark-mode .prefs-entry-title,
+        body.dark-mode .prefs-setting-value,
+        body.dark-mode .prefs-field label { color: #f9fafb; }
+        body.dark-mode .prefs-nav-item,
+        body.dark-mode .prefs-entry-card,
+        body.dark-mode .prefs-panel-card,
+        body.dark-mode .prefs-empty-card { background: rgba(20,20,20,0.8); border-color: rgba(255,255,255,0.08); }
+        body.dark-mode .prefs-search { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+        body.dark-mode .prefs-search input { color: #f3f4f6; }
+        body.dark-mode .prefs-btn.secondary { background: rgba(255,255,255,0.06); color: #f3f4f6; border-color: rgba(255,255,255,0.08); }
+        body.dark-mode .prefs-field select,
+        body.dark-mode .prefs-field input,
+        body.dark-mode .prefs-field textarea { background: rgba(17,17,17,0.95); color: #f3f4f6; border-color: rgba(255,255,255,0.08); }
+        body.dark-mode .prefs-setting-tile { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+        body.dark-mode .prefs-chip { background: rgba(255,215,0,0.12); color: #ffd700; }
+        body.dark-mode .prefs-nav-item.active { color: #fff; }
+        @media (max-width: 1080px) {
+            .prefs-shell { grid-template-columns: 1fr; }
+            .prefs-sidebar { position: static; }
+        }
+        @media (max-width: 980px) {
+            .prefs-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 720px) {
+            .prefs-hero { margin-inline: 12px; border-radius: 22px; }
+            .prefs-summary { grid-template-columns: 1fr; }
+            .prefs-panel-head { flex-direction: column; }
+            .prefs-toolbar { flex-direction: column; align-items: stretch; }
+            .prefs-mini-actions { width: 100%; }
+            .prefs-mini-actions .prefs-btn { flex: 1; }
+            .prefs-content-grid { grid-template-columns: 1fr; }
+            .prefs-setting-grid { grid-template-columns: 1fr; }
+            .prefs-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); display: grid; }
+            .prefs-nav-item { flex-direction: column; align-items: flex-start; }
+            .prefs-nav-meta { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main class="prefs-page">
+        <section class="prefs-hero">
+            <div class="container">
+                <div>
+                    <div class="prefs-badge">注意，仅本地浏览器可见，迁移需导出json</div>
+                    <h1>个人偏好</h1>
+                    <p>收藏、阅读历史、视图设置与本地数据管理，统一收纳在这里。左侧切换分类，右侧以卡片方式展示内容，操作更顺手也更清晰。</p>
+                    <div class="prefs-hero-cta">
+                        <a class="prefs-btn secondary" href="../index.html">返回首页</a>
+                        <a class="prefs-btn secondary" href="../articles/articles.html">前往文章</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="prefs-container">
+            <div class="prefs-summary">
+                <div class="prefs-stat">
+                    <div class="prefs-stat-label">收藏</div>
+                    <div class="prefs-stat-value" id="favoriteCount">0</div>
+                    <div class="prefs-stat-desc">当前浏览器保存的文章收藏</div>
+                </div>
+                <div class="prefs-stat">
+                    <div class="prefs-stat-label">历史</div>
+                    <div class="prefs-stat-value" id="historyCount">0</div>
+                    <div class="prefs-stat-desc">最近阅读与继续阅读记录</div>
+                </div>
+                <div class="prefs-stat">
+                    <div class="prefs-stat-label">视图</div>
+                    <div class="prefs-stat-value" id="viewModeLabel">卡片</div>
+                    <div class="prefs-stat-desc" id="densityLabel">标准密度</div>
+                </div>
+                <div class="prefs-stat">
+                    <div class="prefs-stat-label">数据</div>
+                    <div class="prefs-stat-value" id="dataStateLabel">本地</div>
+                    <div class="prefs-stat-desc">支持导出 / 导入 / 重置</div>
+                </div>
+            </div>
+
+            <div class="prefs-shell">
+                <aside class="prefs-sidebar">
+                    <div class="prefs-sidebar-top">
+                        <div class="prefs-sidebar-kicker">导航</div>
+                        <div class="prefs-sidebar-title">查看偏好</div>
+                        <div class="prefs-sidebar-desc">点击左侧即可切换右侧内容，收藏、历史和设置都会以卡片方式刷新展示。</div>
+                    </div>
+                    <nav class="prefs-nav" aria-label="偏好分类导航">
+                        <button class="prefs-nav-item active" type="button" data-prefs-section="favorites">
+                            <span class="prefs-nav-icon">★</span>
+                            <span>收藏</span>
+                            <span class="prefs-nav-meta"><span class="prefs-nav-count" id="navFavoritesCount">0</span></span>
+                        </button>
+                        <button class="prefs-nav-item" type="button" data-prefs-section="history">
+                            <span class="prefs-nav-icon">↺</span>
+                            <span>历史</span>
+                            <span class="prefs-nav-meta"><span class="prefs-nav-count" id="navHistoryCount">0</span></span>
+                        </button>
+                        <button class="prefs-nav-item" type="button" data-prefs-section="settings">
+                            <span class="prefs-nav-icon">⚙</span>
+                            <span>设置</span>
+                            <span class="prefs-nav-meta"><span class="prefs-nav-count">配置</span></span>
+                        </button>
+                    </nav>
+                    <div class="prefs-sidebar-foot" id="prefsSidebarNote">切换分类后，右侧会刷新出对应卡片。</div>
+                </aside>
+
+                <section class="prefs-main">
+                    <div class="prefs-panel-head">
+                        <div class="prefs-panel-copy">
+                            <div class="prefs-panel-kicker" id="prefsSectionKicker">本地收藏</div>
+                            <div class="prefs-panel-title" id="prefsSectionTitle">收藏</div>
+                            <div class="prefs-panel-desc" id="prefsSectionDesc">查看你在当前浏览器保存的文章收藏，并可直接打开或删除单条记录。</div>
+                        </div>
+                        <div class="prefs-panel-tools">
+                            <div class="prefs-toolbar">
+                                <div class="prefs-search" id="prefsSearchWrap">
+                                    <span>⌕</span>
+                                    <input id="prefsSearchInput" type="search" placeholder="搜索收藏、历史、URL、章节或标签…">
+                                </div>
+                                <div class="prefs-mini-actions">
+                                    <button class="prefs-btn secondary" id="refreshPrefsBtn">刷新列表</button>
+                                    <button class="prefs-btn secondary" id="exportQuickBtn">导出 JSON</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="prefsSectionBody" class="prefs-content-grid"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../js/site-data.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/darkmode.js"></script>
+    <script src="../../js/cursor.js"></script>
+</body>
+</html>

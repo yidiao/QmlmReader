@@ -1,6 +1,6 @@
 # 文章模块 README
 
-> 对应源码：`html/articles/`、`data/articles.json`、`data/articles-json/`、`data/study-json/`、`js/article-common.js`、`js/article-json.js`、`js/article-study.js`、`css/articles-detail.css`。  
+> 对应源码：`html/articles/`、`data/articles.json`、`data/articles-json/`、`data/study-json/`、`js/article-common.js`、`js/article-json.js`、`js/article-study.js`、`js/preferences.js`、`css/articles-detail.css`。  
 > 作用：管理文章列表页、正式文章详情页、正文层、精读层和渲染接入边界。
 
 ---
@@ -38,6 +38,7 @@ html/articles/imported/...                  # 批量导入页，暂不按精读�
 | 列表/索引 | `html/articles/articles.html` + `data/articles.json` | 文章卡片、筛选、合集入口 |
 | 正文 | `data/articles-json/{Mentor}/{Star}/{slug}.json` | 原文正文、段落、章节、下载正文源 |
 | 精读 | `html/articles/{Mentor}/{slug}.html` + 可选 `data/study-json/{Mentor}/{slug}.json` | Tab、读法、难点、对话、行动、视觉、拼图、延伸 |
+| 偏好 | `js/preferences.js` | 文章收藏、阅读历史、继续阅读位置记录 |
 
 核心原则：
 

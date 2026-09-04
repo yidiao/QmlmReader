@@ -6,6 +6,7 @@
 |---|---|---|
 | `html/index.html` | `home/README.md` | 首页与根入口 |
 | `html/about/` | `about/README.md` | 关于页、更新日志 |
+| `html/preferences/` | `preferences/README.md` | 个人偏好、收藏、历史、视图设置 |
 | `html/articles/` | `articles/README.md` | 文章列表、详情页、正文/精读接入 |
 | `html/downloads/` | `downloads/README.md` | 下载中心和导出入口 |
 | `html/experimental/` | `experimental/README.md` | 实验工具和研究资料 |

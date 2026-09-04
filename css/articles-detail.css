@@ -65,6 +65,35 @@ body[data-category="economy"] {
 }
 .article-header > * { position: relative; z-index: 1; }
 
+.article-preference-controls {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.article-preference-controls .prefs-btn {
+    min-width: 7.2rem;
+}
+
+.article-preference-controls .prefs-btn.secondary {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.24);
+    color: #fff;
+}
+
+.article-preference-controls .prefs-btn.secondary:hover {
+    background: rgba(255,255,255,0.28);
+}
+
+.article-preference-controls .article-favorite-btn.is-active {
+    background: linear-gradient(135deg, #ffd54f, #ffb300);
+    color: #4a0000;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+}
+
 .importance-badge {
     display: inline-block;
     background: rgba(255,215,0,0.9);

@@ -707,7 +707,10 @@
                     <p class="article-desc">分析抗日战争的发展规律，阐明持久战是争取最后胜利的必由之路</p>
                     <div class="card-footer">
                         <span class="article-category">军事战略</span>
-                        <a href="Mao/lun-chi-jiu-zhan.html" class="read-more">阅读全文 </a>
+                        <div class="card-footer-actions">
+                            <button type="button" class="qmlm-favorite-btn article-card-favorite" data-qmlm-favorite-btn="/html/articles/Mao/lun-chi-jiu-zhan.html">收藏本文</button>
+                            <a href="Mao/lun-chi-jiu-zhan.html" class="read-more">阅读全文 </a>
+                        </div>
                     </div>
                 </article>
 
@@ -1423,6 +1426,27 @@
 
         renderCollections(collectionsData);
         renderImportedArticles();
+        syncArticleListFavorites();
+
+        function resolveArticleKey(href) {
+            try {
+                const url = new URL(href, window.location.href);
+                return url.pathname;
+            } catch (err) {
+                return href || '';
+            }
+        }
+
+        function getFavoriteButtonMarkup(href) {
+            const key = resolveArticleKey(href);
+            return `<button type="button" class="qmlm-favorite-btn article-card-favorite" data-qmlm-favorite-btn="${key}">收藏本文</button>`;
+        }
+
+        function syncArticleListFavorites() {
+            if (window.QMLMPreferences && typeof window.QMLMPreferences.syncArticleFavoriteButtons === 'function') {
+                window.QMLMPreferences.syncArticleFavoriteButtons(document);
+            }
+        }
 
         function renderCollections(data) {
             const grid = document.getElementById('collectionsGrid');
@@ -1439,6 +1463,7 @@
                     </div>
                 </div>`;
             }).join('');
+            syncArticleListFavorites();
         }
 
         async function renderImportedArticles() {
@@ -1474,10 +1499,14 @@
                         <p class="article-desc">${desc}</p>
                         <div class="card-footer">
                             <span class="article-category">${a.category || '经典文献'}</span>
-                            <a href="${href}" class="read-more">阅读全文 </a>
+                            <div class="card-footer-actions">
+                                ${getFavoriteButtonMarkup(href)}
+                                <a href="${href}" class="read-more">阅读全文 </a>
+                            </div>
                         </div>
                     </article>`;
                 }).join('');
+                syncArticleListFavorites();
             } catch (err) {
                 console.error(err);
                 if (countEl) countEl.textContent = '加载失败';

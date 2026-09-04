@@ -138,6 +138,8 @@
                 if (window.refreshArticleChapters) window.refreshArticleChapters();
                 if (window.initDynamicChapterNav) window.initDynamicChapterNav();
                 if (window.syncDynamicChapterNavVisibility) window.syncDynamicChapterNavVisibility();
+                window.__QMLMArticleRendered = true;
+                window.dispatchEvent(new Event('qmlm:article-rendered'));
             })
             .catch(function (error) {
                 console.error(error);

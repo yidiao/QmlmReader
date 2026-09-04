@@ -10,7 +10,7 @@
     for (var i = 0; i < depth; i++) p += '../';
 
     var nav = '<header class="site-header"><div class="container">' +
-        '<div class="logo"><span class="logo-icon">☭</span><div class="logo-text"><h1>青年马列毛主义驿站</h1><span class="logo-sub">Qmlm Reader</span></div></div>' +
+        '<a class="logo" href="' + p + 'preferences/preferences.html" aria-label="进入个人偏好"><span class="logo-icon">☭</span><div class="logo-text"><h1>青年马列毛主义驿站</h1><span class="logo-sub">Qmlm Reader</span></div></a>' +
         '<button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单"><span></span><span></span><span></span></button>' +
         '<nav class="main-nav">' +
         '<button class="nav-close-btn" aria-label="关闭菜单">✕</button>' +
@@ -32,12 +32,18 @@
     if (ph) {
         ph.outerHTML = nav;
 
+        if (!document.querySelector('script[src$="/js/preferences.js"]')) {
+            var prefScript = document.createElement('script');
+            prefScript.src = p + '../js/preferences.js';
+            document.head.appendChild(prefScript);
+        }
+
         // ---- 面包屑自动生成 ----
         var PATH_LABELS = {
             // Top-level nav
             'index': '首页', 'articles': '文章', 'masters': '导师', 'toolkit': '工具集',
             'experimental': '武器库', 'gallery': '文艺', 'puzzle': '理论拼图',
-            'international': '国际共运', 'rectify': '正名', 'about': '关于', 'downloads': '下载',
+            'international': '国际共运', 'rectify': '正名', 'about': '关于', 'downloads': '下载', 'preferences': '个人偏好',
             // Master names
             'marx': '马克思', 'engels': '恩格斯', 'lenin': '列宁', 'stalin': '斯大林', 'mao': '毛泽东',
             // Gallery sub-pages
