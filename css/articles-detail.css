@@ -47,6 +47,44 @@ body[data-category="economy"] {
 /* ==================== 鏂囩珷澶撮儴 ==================== */
 .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
 
+.reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    z-index: 12000;
+    background: rgba(139, 0, 0, 0.12);
+}
+
+.reading-progress-fill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--cat-secondary), #ffd54f);
+    transition: width 0.18s ease;
+}
+
+.reading-progress-label {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    max-width: min(70vw, 520px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0.28rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--cat-primary);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    font-size: 0.72rem;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+body.dark-mode .reading-progress-bar { background: rgba(255,255,255,0.12); }
+body.dark-mode .reading-progress-label { background: rgba(31,31,31,0.9); color: #ffd54f; }
+
 .article-header {
     position: relative;
     overflow: hidden;

@@ -1462,11 +1462,41 @@
             }
         }
 
+        function appendResumeParam(url) {
+            if (!url) return url;
+            try {
+                const parsed = new URL(url, window.location.href);
+                parsed.searchParams.set('resume', '1');
+                return parsed.href;
+            } catch (err) {
+                return url;
+            }
+        }
+
+        function applyContinueLink(link, href, hasHistory) {
+            if (!link) return;
+            if (hasHistory) {
+                link.textContent = '继续阅读';
+                link.title = '继续上次阅读';
+                link.href = appendResumeParam(href);
+            } else {
+                link.textContent = '阅读全文';
+                link.title = '阅读全文';
+                link.href = href;
+            }
+        }
+
         function getHistoryEntryForHref(href) {
             const key = resolveArticleKey(href);
             const state = readPreferencesState();
             if (!state || !Array.isArray(state.history)) return null;
-            return state.history.find(item => item && (item.key === key || item.path === key || item.url === new URL(key, window.location.href).href));
+            let absolute = '';
+            try {
+                absolute = new URL(href, window.location.href).href;
+            } catch (err) {
+                absolute = href || '';
+            }
+            return state.history.find(item => item && (item.key === key || item.path === key || item.url === absolute));
         }
 
         function syncArticleListHistory() {
@@ -1474,15 +1504,16 @@
                 const readMore = card.querySelector('.read-more');
                 if (!readMore) return;
                 const titleLink = card.querySelector('.article-title a');
-                const href = readMore.getAttribute('href') || (titleLink ? titleLink.getAttribute('href') : '') || '';
+                const baseHref = readMore.getAttribute('data-qmlm-base-href') || (titleLink ? titleLink.getAttribute('href') : '') || readMore.getAttribute('href') || '';
+                if (!readMore.getAttribute('data-qmlm-base-href')) readMore.setAttribute('data-qmlm-base-href', baseHref);
+                const href = baseHref;
                 const entry = getHistoryEntryForHref(href);
                 let marker = card.querySelector('.history-marker');
                 if (entry) {
-                    const percent = entry.position && typeof entry.position.percent === 'number' ? ` · 约${entry.position.percent}%` : '';
+                    const percent = entry.progress && typeof entry.progress.pagePercent === 'number' ? ` · 约${entry.progress.pagePercent}%` : (entry.position && typeof entry.position.percent === 'number' ? ` · 约${entry.position.percent}%` : '');
                     const chapter = entry.chapter ? ` · ${entry.chapter}` : '';
                     const markerText = `上次阅读${chapter}${percent}`;
-                    readMore.textContent = '继续阅读';
-                    readMore.title = `继续上次阅读${chapter}${percent}`;
+                    applyContinueLink(readMore, href, true);
                     card.classList.add('has-history');
                     if (!marker) {
                         marker = document.createElement('div');
@@ -1498,8 +1529,7 @@
                     }
                     marker.textContent = markerText;
                 } else {
-                    readMore.textContent = '阅读全文';
-                    readMore.title = '阅读全文';
+                    applyContinueLink(readMore, href, false);
                     card.classList.remove('has-history');
                     if (marker && marker.parentNode) marker.parentNode.removeChild(marker);
                 }

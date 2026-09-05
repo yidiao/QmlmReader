@@ -1,4 +1,21 @@
- M css/style.css
+ M css/articles-detail.css
+ M html/articles/Lenin/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html
+ M html/articles/Lenin/lun-wo-guo-ge-ming.html
+ M html/articles/Lenin/ma-ke-si-zhu-yi-de-san-ge-lai-yuan.html
+ M html/articles/Lenin/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi.html
+ M html/articles/Lenin/zen-me-ban.html
+ M html/articles/Mao/lun-chi-jiu-zhan.html
+ M html/articles/Mao/lun-shi-da-guan-xi.html
+ M html/articles/Mao/mao-dun-lun.html
+ M html/articles/Mao/nong-min-yun-dong.html
+ M html/articles/Mao/ren-min-nei-bu-mao-dun.html
+ M html/articles/Mao/wen-yi-zuo-tan.html
+ M html/articles/Mao/xin-min-zhu.html
+ M html/articles/Mao/xue-xi-shi-ju.html
+ M html/articles/Mao/you-ji-zhan.html
+ M html/articles/Mao/zhan-lue-wen-ti.html
+ M html/articles/Mao/zhan-zheng-zhan-lue.html
  M html/articles/articles.html
  M js/preferences.js
  M tmp_status.txt
+ M 设计文档/pages/preferences/README.md

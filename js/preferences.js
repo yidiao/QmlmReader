@@ -66,9 +66,18 @@
         return body.getAttribute('data-preference-key') || window.location.pathname || body.getAttribute('data-article-json') || '';
     }
 
+    function clampPercent(value) {
+        return Math.max(0, Math.min(100, Math.round(value || 0)));
+    }
+
+    function getActiveTabContent() {
+        return document.querySelector('.tab-content.active') || document.querySelector('.tab-content');
+    }
+
     function getCurrentChapterInfo() {
-        var chapters = document.querySelectorAll('.chapter');
-        if (!chapters.length) return { id: '', label: '' };
+        var activeContent = getActiveTabContent();
+        var chapters = activeContent ? activeContent.querySelectorAll('.chapter') : document.querySelectorAll('.chapter');
+        if (!chapters.length) return { id: '', label: '', offset: 0, percent: 0, height: 0 };
         var scrollTop = window.pageYOffset || (document.documentElement && document.documentElement.scrollTop) || 0;
         var probe = scrollTop + 140;
         var picked = null;
@@ -81,15 +90,25 @@
         if (!picked) picked = chapters[0];
         var titleEl = picked.querySelector('.chapter-title');
         var label = titleEl ? titleEl.textContent.replace(/\s+/g, ' ').trim() : (picked.id || '');
+        var chapterHeight = Math.max(picked.offsetHeight || 0, 1);
+        var chapterOffset = Math.max(0, Math.round(probe - (picked.offsetTop || 0)));
         return {
             id: picked.id || '',
-            label: label
+            label: label,
+            offset: chapterOffset,
+            percent: clampPercent(chapterOffset / chapterHeight * 100),
+            height: chapterHeight
         };
     }
 
     function getActiveTab() {
         var active = document.querySelector('.tab-btn.active');
-        return active ? (active.dataset.tab || active.textContent.trim()) : '';
+        if (!active) return '';
+        if (active.dataset && active.dataset.tab) return active.dataset.tab;
+        var onclick = active.getAttribute('onclick') || '';
+        var match = onclick.match(/switchTab\(['\"]([^'\"]+)['\"]/);
+        if (match && match[1]) return match[1];
+        return active.textContent.trim();
     }
 
     function getScrollPosition() {
@@ -98,21 +117,64 @@
         var height = Math.max(body.scrollHeight - window.innerHeight, 1);
         return {
             y: scrollTop,
-            percent: Math.max(0, Math.min(100, Math.round(scrollTop / height * 100)))
+            percent: clampPercent(scrollTop / height * 100),
+            height: height
+        };
+    }
+
+    function getActiveTabInfo() {
+        var tabContent = getActiveTabContent();
+        if (!tabContent) return { id: '', offset: 0, percent: 0, height: 0 };
+        var scrollTop = window.pageYOffset || (document.documentElement && document.documentElement.scrollTop) || 0;
+        var probe = scrollTop + 140;
+        var top = tabContent.offsetTop || 0;
+        var height = Math.max(tabContent.offsetHeight || 0, 1);
+        var offset = Math.max(0, Math.round(probe - top));
+        return {
+            id: tabContent.id || '',
+            offset: offset,
+            percent: clampPercent(offset / height * 100),
+            height: height
+        };
+    }
+
+    function getReadingProgress() {
+        var page = getScrollPosition();
+        var tab = getActiveTabInfo();
+        var chapter = getCurrentChapterInfo();
+        return {
+            pagePercent: page.percent,
+            scrollY: page.y,
+            tab: getActiveTab(),
+            tabId: tab.id,
+            tabOffset: tab.offset,
+            tabPercent: tab.percent,
+            chapterId: chapter.id,
+            chapter: chapter.label,
+            chapterOffset: chapter.offset || 0,
+            chapterPercent: chapter.percent || 0
         };
     }
 
     function getArticleMeta() {
-        var chapterInfo = getCurrentChapterInfo();
+        var progress = getReadingProgress();
         return {
             title: document.title.replace(/\s*[-|]\s*青年马列毛主义驿站.*$/, '').trim(),
             url: window.location.href,
             path: window.location.pathname,
             key: articleKeyFromBody(),
-            tab: getActiveTab(),
-            chapter: chapterInfo.label,
-            chapterId: chapterInfo.id,
-            position: getScrollPosition(),
+            tab: progress.tab,
+            tabOffset: progress.tabOffset,
+            tabPercent: progress.tabPercent,
+            chapter: progress.chapter,
+            chapterId: progress.chapterId,
+            chapterOffset: progress.chapterOffset || 0,
+            chapterPercent: progress.chapterPercent || 0,
+            position: {
+                y: progress.scrollY,
+                percent: progress.pagePercent
+            },
+            progress: progress,
             updatedAt: new Date().toISOString()
         };
     }
@@ -152,32 +214,71 @@
 
     function restoreReadingState() {
         var key = articleKeyFromBody();
-        if (!key) return;
+        if (!key || window.__QMLMHistoryRestoreDone || window.__QMLMHistoryRestoring) return;
         var entry = getStoredEntry('history', key);
         if (!entry) return;
+        window.__QMLMHistoryRestoring = true;
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
         var attempts = 0;
+        var targetY = null;
+
+        function finishRestore() {
+            updateReadingProgressBar();
+            window.__QMLMHistoryRestoring = false;
+            window.__QMLMHistoryRestoreDone = true;
+            scheduleArticleHistorySave(180);
+            upsertHistory(getArticleMeta());
+        }
+
+        function computeTargetY() {
+            var scrollTarget = entry.chapterId ? document.getElementById(entry.chapterId) : null;
+            var activeTabContent = getActiveTabContent();
+            var progress = entry.progress || {};
+            var chapterPercent = typeof progress.chapterPercent === 'number' ? progress.chapterPercent : entry.chapterPercent;
+            var tabPercent = typeof progress.tabPercent === 'number' ? progress.tabPercent : entry.tabPercent;
+            if (scrollTarget && scrollTarget.nodeType === 1 && typeof chapterPercent === 'number') {
+                return Math.max(0, (scrollTarget.offsetTop || 0) + (scrollTarget.offsetHeight || 1) * chapterPercent / 100 - 140);
+            }
+            if (scrollTarget && scrollTarget.nodeType === 1 && typeof entry.chapterOffset === 'number') {
+                return Math.max(0, (scrollTarget.offsetTop || 0) + entry.chapterOffset - 140);
+            }
+            if (activeTabContent && activeTabContent.nodeType === 1 && typeof tabPercent === 'number') {
+                return Math.max(0, (activeTabContent.offsetTop || 0) + (activeTabContent.offsetHeight || 1) * tabPercent / 100 - 140);
+            }
+            if (entry.position && typeof entry.position.y === 'number') return entry.position.y;
+            if (scrollTarget && scrollTarget.nodeType === 1) return scrollTarget.offsetTop || 0;
+            return null;
+        }
+
+        function applyScroll() {
+            if (targetY == null) targetY = computeTargetY();
+            if (typeof targetY === 'number') window.scrollTo(0, targetY);
+        }
+
         var run = function () {
             attempts += 1;
-            var tabBtn = findTabButton(entry.tab);
-            if (!tabBtn) {
-                if (attempts < 10) window.setTimeout(run, 200);
+            var tabBtn = entry.tab ? findTabButton(entry.tab) : null;
+            if (entry.tab && !tabBtn) {
+                if (attempts < 12) window.setTimeout(run, 180);
+                else finishRestore();
                 return;
             }
-            tabBtn.click();
-            var scrollTarget = null;
-            if (entry.chapterId) scrollTarget = document.getElementById(entry.chapterId);
-            if (!scrollTarget && typeof entry.position === 'object' && entry.position && typeof entry.position.y === 'number') {
-                scrollTarget = { y: entry.position.y };
-            }
-            if (!scrollTarget) return;
+            if (tabBtn) tabBtn.click();
             window.setTimeout(function () {
-                if (scrollTarget && scrollTarget.nodeType === 1 && scrollTarget.scrollIntoView) {
-                    scrollTarget.scrollIntoView({ behavior: 'auto', block: 'start' });
-                } else if (typeof scrollTarget.y === 'number') {
-                    window.scrollTo(0, scrollTarget.y);
-                }
-                upsertHistory(getArticleMeta());
-            }, 180);
+                var delays = [120, 260, 520, 900, 1500];
+                var step = 0;
+                var doScroll = function () {
+                    targetY = computeTargetY();
+                    applyScroll();
+                    if (step < delays.length) {
+                        window.setTimeout(doScroll, delays[step]);
+                        step += 1;
+                    } else {
+                        finishRestore();
+                    }
+                };
+                doScroll();
+            }, 260);
         };
         window.setTimeout(run, 250);
     }
@@ -224,9 +325,14 @@
             url: article.url,
             path: article.path,
             tab: article.tab,
+            tabOffset: article.tabOffset || 0,
+            tabPercent: article.tabPercent || 0,
             chapter: article.chapter,
             chapterId: article.chapterId || '',
+            chapterOffset: article.chapterOffset || 0,
+            chapterPercent: article.chapterPercent || 0,
             position: article.position,
+            progress: article.progress || null,
             updatedAt: article.updatedAt
         };
         if (idx >= 0) state.history.splice(idx, 1);
@@ -479,10 +585,21 @@
         var currentSection = state.ui.section || 'favorites';
         var query = searchInput ? searchInput.value.trim() : '';
 
+        function appendResumeParam(url) {
+            if (!url) return url;
+            try {
+                var parsed = new URL(url, window.location.href);
+                parsed.searchParams.set('resume', '1');
+                return parsed.href;
+            } catch (err) {
+                return url;
+            }
+        }
+
         function renderItemTools(item, kind) {
             var actions = [];
             if (item.url) actions.push('<a class="prefs-btn secondary" href="' + escapeHtml(item.url) + '">打开</a>');
-            if (kind === 'history' && item.url) actions.push('<a class="prefs-btn primary" href="' + escapeHtml(item.url) + '">继续</a>');
+            if (kind === 'history' && item.url) actions.push('<a class="prefs-btn primary" href="' + escapeHtml(appendResumeParam(item.url)) + '">继续</a>');
             actions.push('<button class="prefs-btn secondary" data-item-delete="' + escapeHtml(item.key) + '" data-item-kind="' + kind + '">删除</button>');
             return '<div class="prefs-item-tools">' + actions.join('') + '</div>';
         }
@@ -533,7 +650,13 @@
                 var tab = item.tab ? ('Tab：' + item.tab) : 'Tab：未记录';
                 var chapter = item.chapter ? ('章节：' + item.chapter) : '章节：未记录';
                 var chapterId = item.chapterId ? (' · #' + item.chapterId) : '';
-                return '<article class="prefs-entry-card"><div class="prefs-entry-head"><div><div class="prefs-entry-title">' + escapeHtml(item.title) + '</div><div class="prefs-entry-sub">' + escapeHtml(tab) + ' · ' + escapeHtml(chapter + chapterId) + ' · ' + escapeHtml(pos) + '</div><div class="prefs-entry-sub">' + escapeHtml(item.updatedAt || '') + '</div></div>' + renderItemTools(item, 'history') + '</div><div class="prefs-chip-row">' + renderMetaChips(item, 'history') + '</div></article>';
+                var progress = item.progress || {};
+                var progressText = [];
+                if (typeof progress.pagePercent === 'number') progressText.push('整页 ' + progress.pagePercent + '%');
+                if (typeof progress.tabPercent === 'number') progressText.push('分区 ' + progress.tabPercent + '%');
+                if (typeof progress.chapterPercent === 'number') progressText.push('章节 ' + progress.chapterPercent + '%');
+                var progressLine = progressText.length ? '<div class="prefs-entry-sub">进度：' + escapeHtml(progressText.join(' · ')) + '</div>' : '';
+                return '<article class="prefs-entry-card"><div class="prefs-entry-head"><div><div class="prefs-entry-title">' + escapeHtml(item.title) + '</div><div class="prefs-entry-sub">' + escapeHtml(tab) + ' · ' + escapeHtml(chapter + chapterId) + ' · ' + escapeHtml(pos) + '</div>' + progressLine + '<div class="prefs-entry-sub">' + escapeHtml(item.updatedAt || '') + '</div></div>' + renderItemTools(item, 'history') + '</div><div class="prefs-chip-row">' + renderMetaChips(item, 'history') + '</div></article>';
             }).join('') + '</div>';
         }
 
@@ -768,6 +891,47 @@
         });
     }
 
+    function ensureReadingProgressBar() {
+        if (!document.querySelector('.article-detail')) return null;
+        var existing = document.getElementById('readingProgressBar');
+        if (existing) return existing;
+        var bar = document.createElement('div');
+        bar.id = 'readingProgressBar';
+        bar.className = 'reading-progress-bar';
+        bar.innerHTML = '<div class="reading-progress-fill" id="readingProgressFill"></div><div class="reading-progress-label" id="readingProgressLabel">阅读进度 0%</div>';
+        document.body.appendChild(bar);
+        return bar;
+    }
+
+    function updateReadingProgressBar() {
+        var bar = ensureReadingProgressBar();
+        if (!bar) return;
+        var progress = getReadingProgress();
+        var fill = document.getElementById('readingProgressFill');
+        var label = document.getElementById('readingProgressLabel');
+        if (fill) fill.style.width = progress.pagePercent + '%';
+        if (label) {
+            var tabText = progress.tab ? ' · ' + progress.tab : '';
+            var chapterText = progress.chapter ? ' · ' + progress.chapter : '';
+            label.textContent = '阅读进度 ' + progress.pagePercent + '%' + tabText + chapterText;
+        }
+        window.QMLMReadingProgress = window.QMLMReadingProgress || {};
+        window.QMLMReadingProgress.current = progress;
+        window.dispatchEvent(new CustomEvent('qmlm:reading-progress', { detail: progress }));
+    }
+
+    function scheduleArticleHistorySave(delay) {
+        updateReadingProgressBar();
+        if (window.__QMLMHistoryRestoring) return;
+        if (document.body && document.body.getAttribute('data-article-json') && !window.__QMLMArticleRendered) return;
+        if (window.__QMLMHistorySaveTimer) window.clearTimeout(window.__QMLMHistorySaveTimer);
+        window.__QMLMHistorySaveTimer = window.setTimeout(function () {
+            window.__QMLMHistorySaveTimer = 0;
+            updateReadingProgressBar();
+            if (!window.__QMLMHistoryRestoring) upsertHistory(getArticleMeta());
+        }, typeof delay === 'number' ? delay : 450);
+    }
+
     function injectArticleControls() {
         var header = document.querySelector('.article-header');
         if (!header) return;
@@ -776,36 +940,28 @@
         controls.id = 'articlePreferenceControls';
         controls.className = 'prefs-actions article-preference-controls';
         controls.style.marginTop = '0.85rem';
-        controls.innerHTML = '<button type="button" class="prefs-btn primary article-favorite-btn" data-qmlm-favorite-btn="" data-qmlm-favorite-mode="text">收藏本文</button><button type="button" class="prefs-btn secondary" id="recordReadingBtn">记录当前位置</button>';
+        controls.innerHTML = '<button type="button" class="prefs-btn primary article-favorite-btn" data-qmlm-favorite-btn="" data-qmlm-favorite-mode="text">收藏本文</button>';
         header.appendChild(controls);
         var favoriteBtn = controls.querySelector('.article-favorite-btn');
-        var recordBtn = document.getElementById('recordReadingBtn');
         var articleInfo = getArticleMeta();
         if (favoriteBtn) {
             favoriteBtn.setAttribute('data-qmlm-favorite-btn', articleInfo.key || articleKeyFromBody());
             favoriteBtn.setAttribute('data-qmlm-favorite-mode', 'text');
             bindFavoriteButton(favoriteBtn, getArticleMeta);
         }
-        if (recordBtn) {
-            recordBtn.addEventListener('click', function () {
-                upsertHistory(getArticleMeta());
-                recordBtn.textContent = '已记录';
-            });
-        }
         var updateAndSave = function () {
-            upsertHistory(getArticleMeta());
+            if (window.__QMLMHistorySaveTimer) {
+                window.clearTimeout(window.__QMLMHistorySaveTimer);
+                window.__QMLMHistorySaveTimer = 0;
+            }
+            if (!document.body || !document.body.getAttribute('data-article-json') || window.__QMLMArticleRendered) {
+                upsertHistory(getArticleMeta());
+            }
         };
         window.addEventListener('beforeunload', updateAndSave);
+        window.addEventListener('pagehide', updateAndSave);
         if (articleInfo && articleInfo.key) {
             updateFavoriteButtonState(favoriteBtn, articleInfo.key);
-        }
-        var restoreOnce = function () {
-            restoreReadingState();
-        };
-        if (window.__QMLMArticleRendered) {
-            restoreOnce();
-        } else {
-            window.addEventListener('qmlm:article-rendered', restoreOnce, { once: true });
         }
     }
 
@@ -816,16 +972,41 @@
         }
         if (document.querySelector('.article-header')) {
             injectArticleControls();
+            ensureReadingProgressBar();
+            updateReadingProgressBar();
             var saveArticleHistory = function () {
-                upsertHistory(getArticleMeta());
+                scheduleArticleHistorySave(650);
                 syncArticleFavoriteButtons(document);
             };
+            window.addEventListener('scroll', function () {
+                scheduleArticleHistorySave(650);
+            }, { passive: true });
+            window.addEventListener('resize', function () {
+                updateReadingProgressBar();
+                scheduleArticleHistorySave(650);
+            });
+            document.addEventListener('click', function (e) {
+                if (e.target && e.target.closest && e.target.closest('.tab-btn')) {
+                    window.setTimeout(updateReadingProgressBar, 80);
+                    scheduleArticleHistorySave(260);
+                }
+            });
             if (window.__QMLMArticleRendered) {
-                window.setTimeout(saveArticleHistory, 0);
+                restoreReadingState();
+                window.setTimeout(saveArticleHistory, 1200);
             } else {
-                window.addEventListener('qmlm:article-rendered', saveArticleHistory, { once: true });
+                window.addEventListener('qmlm:article-rendered', function () {
+                    restoreReadingState();
+                    window.setTimeout(saveArticleHistory, 1200);
+                }, { once: true });
             }
-            window.setTimeout(saveArticleHistory, 1200);
+            window.addEventListener('pageshow', function (e) {
+                if (e && e.persisted) {
+                    window.__QMLMHistoryRestoreDone = false;
+                    restoreReadingState();
+                }
+            });
+            window.setTimeout(saveArticleHistory, 2200);
         }
         syncArticleFavoriteButtons(document);
         installFavoriteObserver();
@@ -849,6 +1030,7 @@
         upsertFavorite: upsertFavorite,
         upsertHistory: upsertHistory,
         getArticleMeta: getArticleMeta,
-        syncArticleFavoriteButtons: syncArticleFavoriteButtons
+        syncArticleFavoriteButtons: syncArticleFavoriteButtons,
+        getReadingProgress: getReadingProgress
     };
 })();
