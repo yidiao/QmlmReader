@@ -18,7 +18,7 @@
     // 光标容器
     var cursor = document.createElement('div');
     cursor.className = 'custom-cursor';
-    cursor.style.cssText = 'position:fixed;width:36px;height:36px;pointer-events:none;z-index:10001;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;filter:drop-shadow(0 0 8px rgba(255,215,0,0.6));';
+    cursor.style.cssText = 'position:fixed;width:36px;height:36px;pointer-events:none;z-index:12010;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;filter:drop-shadow(0 0 8px rgba(255,215,0,0.6));';
 
     if (isStar) {
         // 红五星：直接用 SVG

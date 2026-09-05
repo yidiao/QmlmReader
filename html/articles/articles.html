@@ -1475,14 +1475,16 @@
 
         function applyContinueLink(link, href, hasHistory) {
             if (!link) return;
+            if (!link.getAttribute('data-qmlm-base-href') && href) link.setAttribute('data-qmlm-base-href', href);
+            const baseHref = link.getAttribute('data-qmlm-base-href') || href;
             if (hasHistory) {
                 link.textContent = '继续阅读';
                 link.title = '继续上次阅读';
-                link.href = appendResumeParam(href);
+                link.href = appendResumeParam(baseHref);
             } else {
                 link.textContent = '阅读全文';
                 link.title = '阅读全文';
-                link.href = href;
+                link.href = baseHref;
             }
         }
 

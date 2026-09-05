@@ -214,26 +214,66 @@
 
     function restoreReadingState() {
         var key = articleKeyFromBody();
-        if (!key || window.__QMLMHistoryRestoreDone || window.__QMLMHistoryRestoring) return;
+        if (!key || window.__QMLMHistoryRestoreDone || window.__QMLMHistoryRestoring || window.__QMLMHistoryRestorePending) return;
         var entry = getStoredEntry('history', key);
         if (!entry) return;
-        window.__QMLMHistoryRestoring = true;
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        var attempts = 0;
-        var targetY = null;
 
-        function finishRestore() {
-            updateReadingProgressBar();
-            window.__QMLMHistoryRestoring = false;
+        var progress = entry.progress || {};
+        var pagePercent = typeof progress.pagePercent === 'number' ? progress.pagePercent : (entry.position && typeof entry.position.percent === 'number' ? entry.position.percent : 0);
+        if (pagePercent >= 100) {
             window.__QMLMHistoryRestoreDone = true;
-            scheduleArticleHistorySave(180);
-            upsertHistory(getArticleMeta());
+            window.__QMLMHistoryRestorePending = false;
+            if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+            var originalBtn = findTabButton('original');
+            if (originalBtn && !originalBtn.classList.contains('active')) originalBtn.click();
+            window.scrollTo(0, 0);
+            window.setTimeout(updateReadingProgressBar, 80);
+            return;
         }
 
-        function computeTargetY() {
+        window.__QMLMHistoryRestoreCancelled = false;
+        window.__QMLMHistoryRestorePromptActive = false;
+        window.__QMLMHistoryRestorePending = true;
+        window.__QMLMHistoryRestoring = true;
+        window.__QMLMHistoryRestoreDone = false;
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        updateReadingProgressBar();
+
+        var countdownMs = 5000;
+        var remainingMs = countdownMs;
+        var timerId = 0;
+        var promptVisible = false;
+        var promptEl = null;
+        var meterFill = null;
+        var countdownText = null;
+        var confirmBtn = null;
+        var dismissBtn = null;
+
+        function clearTimer() {
+            if (timerId) {
+                window.clearTimeout(timerId);
+                timerId = 0;
+            }
+        }
+
+        function destroyPrompt() {
+            if (promptEl && promptEl.parentNode) promptEl.parentNode.removeChild(promptEl);
+            promptEl = null;
+            meterFill = null;
+            countdownText = null;
+            confirmBtn = null;
+            dismissBtn = null;
+            promptVisible = false;
+        }
+
+        function updatePrompt() {
+            if (countdownText) countdownText.textContent = Math.max(0, Math.ceil(remainingMs / 1000)) + 's';
+            if (meterFill) meterFill.style.width = Math.max(0, Math.min(100, remainingMs / countdownMs * 100)) + '%';
+        }
+
+        function getTargetY() {
             var scrollTarget = entry.chapterId ? document.getElementById(entry.chapterId) : null;
             var activeTabContent = getActiveTabContent();
-            var progress = entry.progress || {};
             var chapterPercent = typeof progress.chapterPercent === 'number' ? progress.chapterPercent : entry.chapterPercent;
             var tabPercent = typeof progress.tabPercent === 'number' ? progress.tabPercent : entry.tabPercent;
             if (scrollTarget && scrollTarget.nodeType === 1 && typeof chapterPercent === 'number') {
@@ -251,36 +291,126 @@
         }
 
         function applyScroll() {
-            if (targetY == null) targetY = computeTargetY();
+            var targetY = getTargetY();
             if (typeof targetY === 'number') window.scrollTo(0, targetY);
         }
 
-        var run = function () {
-            attempts += 1;
-            var tabBtn = entry.tab ? findTabButton(entry.tab) : null;
-            if (entry.tab && !tabBtn) {
-                if (attempts < 12) window.setTimeout(run, 180);
-                else finishRestore();
+        function waitForStudyReady(callback) {
+            if (entry.tab === 'original' || window.__QMLMStudyRendered || !document.body || !document.body.getAttribute('data-study-json')) {
+                callback();
                 return;
             }
-            if (tabBtn) tabBtn.click();
+            var settled = false;
+            var studyTimerId = 0;
+            function cleanup() {
+                if (settled) return;
+                settled = true;
+                if (studyTimerId) {
+                    window.clearTimeout(studyTimerId);
+                    studyTimerId = 0;
+                }
+                window.removeEventListener('qmlm:article-study-rendered', onStudyRendered);
+                callback();
+            }
+            function onStudyRendered() {
+                cleanup();
+            }
+            window.addEventListener('qmlm:article-study-rendered', onStudyRendered);
+            studyTimerId = window.setTimeout(cleanup, 2500);
+        }
+
+        function closePrompt(saveCurrent) {
+            clearTimer();
+            destroyPrompt();
+            window.__QMLMHistoryRestorePromptActive = false;
+            window.__QMLMHistoryRestoring = false;
+            window.__QMLMHistoryRestorePending = false;
+            window.__QMLMHistoryRestoreDone = true;
+            updateReadingProgressBar();
+            if (saveCurrent) scheduleArticleHistorySave(80);
+        }
+
+        function confirmReturnTop() {
+            if (!promptVisible) return;
+            closePrompt(false);
             window.setTimeout(function () {
-                var delays = [120, 260, 520, 900, 1500];
-                var step = 0;
-                var doScroll = function () {
-                    targetY = computeTargetY();
-                    applyScroll();
-                    if (step < delays.length) {
-                        window.setTimeout(doScroll, delays[step]);
-                        step += 1;
-                    } else {
-                        finishRestore();
-                    }
-                };
-                doScroll();
-            }, 260);
-        };
-        window.setTimeout(run, 250);
+                window.requestAnimationFrame(function () {
+                    window.requestAnimationFrame(function () {
+                        window.scrollTo(0, 0);
+                        updateReadingProgressBar();
+                        scheduleArticleHistorySave(80);
+                    });
+                });
+            }, 60);
+        }
+
+        function dismissPrompt() {
+            if (!promptVisible) return;
+            closePrompt(true);
+        }
+
+        function buildPrompt() {
+            if (promptEl) return promptEl;
+            promptEl = document.createElement('div');
+            promptEl.id = 'historyReturnTopPrompt';
+            promptEl.className = 'history-resume-prompt';
+            promptEl.innerHTML = '<div class="history-resume-head"><div class="history-resume-title">是否返回顶部？</div><div class="history-resume-desc">5 秒内可选择返回顶部；不操作则关闭提示并停留在当前位置。</div></div><div class="history-resume-meter"><div class="history-resume-meter-fill"></div></div><div class="history-resume-foot"><span class="history-resume-count">5s</span><button type="button" class="prefs-btn primary history-resume-confirm">返回顶部</button><button type="button" class="prefs-btn secondary history-resume-dismiss">取消</button></div>';
+            document.body.appendChild(promptEl);
+            meterFill = promptEl.querySelector('.history-resume-meter-fill');
+            countdownText = promptEl.querySelector('.history-resume-count');
+            confirmBtn = promptEl.querySelector('.history-resume-confirm');
+            dismissBtn = promptEl.querySelector('.history-resume-dismiss');
+            if (confirmBtn) confirmBtn.addEventListener('click', confirmReturnTop);
+            if (dismissBtn) dismissBtn.addEventListener('click', dismissPrompt);
+            promptVisible = true;
+            window.__QMLMHistoryRestorePromptActive = true;
+            return promptEl;
+        }
+
+        function showPrompt() {
+            if (promptVisible) return;
+            remainingMs = countdownMs;
+            buildPrompt();
+            updatePrompt();
+            clearTimer();
+            timerId = window.setTimeout(function tick() {
+                if (!promptVisible) return;
+                remainingMs -= 100;
+                if (remainingMs <= 0) {
+                    updatePrompt();
+                    dismissPrompt();
+                    return;
+                }
+                updatePrompt();
+                timerId = window.setTimeout(tick, 100);
+            }, 100);
+        }
+
+        function completeRestore() {
+            window.__QMLMHistoryRestoring = false;
+            window.__QMLMHistoryRestorePending = false;
+            window.__QMLMHistoryRestoreDone = true;
+            updateReadingProgressBar();
+            showPrompt();
+        }
+
+        function beginRestore() {
+            if (window.__QMLMHistoryRestoreDone) return;
+            waitForStudyReady(function () {
+                var tabBtn = entry.tab ? findTabButton(entry.tab) : null;
+                if (tabBtn) tabBtn.click();
+                window.requestAnimationFrame(function () {
+                    window.requestAnimationFrame(function () {
+                        applyScroll();
+                        window.requestAnimationFrame(function () {
+                            completeRestore();
+                        });
+                    });
+                });
+            });
+        }
+
+        beginRestore();
     }
 
     function buildFavoriteEntry(article) {
@@ -922,13 +1052,13 @@
 
     function scheduleArticleHistorySave(delay) {
         updateReadingProgressBar();
-        if (window.__QMLMHistoryRestoring) return;
+        if (window.__QMLMHistoryRestoring || window.__QMLMHistoryRestorePending || window.__QMLMHistoryRestoreCancelled) return;
         if (document.body && document.body.getAttribute('data-article-json') && !window.__QMLMArticleRendered) return;
         if (window.__QMLMHistorySaveTimer) window.clearTimeout(window.__QMLMHistorySaveTimer);
         window.__QMLMHistorySaveTimer = window.setTimeout(function () {
             window.__QMLMHistorySaveTimer = 0;
             updateReadingProgressBar();
-            if (!window.__QMLMHistoryRestoring) upsertHistory(getArticleMeta());
+            if (!window.__QMLMHistoryRestoring && !window.__QMLMHistoryRestorePending && !window.__QMLMHistoryRestoreCancelled && !window.__QMLMHistoryRestorePromptActive) upsertHistory(getArticleMeta());
         }, typeof delay === 'number' ? delay : 450);
     }
 
@@ -954,7 +1084,7 @@
                 window.clearTimeout(window.__QMLMHistorySaveTimer);
                 window.__QMLMHistorySaveTimer = 0;
             }
-            if (!document.body || !document.body.getAttribute('data-article-json') || window.__QMLMArticleRendered) {
+            if (!window.__QMLMHistoryRestorePending && !window.__QMLMHistoryRestoreCancelled && !window.__QMLMHistoryRestorePromptActive && (!document.body || !document.body.getAttribute('data-article-json') || window.__QMLMArticleRendered)) {
                 upsertHistory(getArticleMeta());
             }
         };

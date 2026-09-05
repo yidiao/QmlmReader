@@ -82,8 +82,77 @@ body[data-category="economy"] {
     pointer-events: none;
 }
 
+.history-resume-prompt {
+    position: fixed;
+    top: 44px;
+    right: 14px;
+    left: auto;
+    transform: none;
+    width: min(248px, calc(100vw - 28px));
+    z-index: 9998;
+    padding: 0.48rem 0.56rem 0.42rem;
+    border-radius: 11px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(10px);
+    color: var(--cat-primary);
+}
+
+.history-resume-head {
+    display: grid;
+    gap: 0.08rem;
+    margin-bottom: 0.26rem;
+}
+
+.history-resume-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.history-resume-desc {
+    font-size: 0.68rem;
+    line-height: 1.28;
+    color: rgba(74, 0, 0, 0.74);
+}
+
+.history-resume-meter {
+    height: 3px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(139, 0, 0, 0.12);
+}
+
+.history-resume-meter-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #ffb300, var(--cat-secondary));
+    transition: width 0.1s linear;
+}
+
+.history-resume-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem;
+    margin-top: 0.22rem;
+}
+
+.history-resume-count {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: var(--cat-secondary);
+}
+
 body.dark-mode .reading-progress-bar { background: rgba(255,255,255,0.12); }
 body.dark-mode .reading-progress-label { background: rgba(31,31,31,0.9); color: #ffd54f; }
+body.dark-mode .history-resume-prompt {
+    background: rgba(31, 31, 31, 0.96);
+    color: #f9e3a8;
+}
+body.dark-mode .history-resume-desc { color: rgba(249, 227, 168, 0.8); }
+body.dark-mode .history-resume-meter { background: rgba(255,255,255,0.12); }
+body.dark-mode .history-resume-count { color: #ffd54f; }
 
 .article-header {
     position: relative;
@@ -114,6 +183,22 @@ body.dark-mode .reading-progress-label { background: rgba(31,31,31,0.9); color: 
 
 .article-preference-controls .prefs-btn {
     min-width: 7.2rem;
+}
+
+.history-resume-prompt .prefs-btn {
+    min-width: 0;
+    padding: 0.18rem 0.42rem;
+    font-size: 0.68rem;
+    border-radius: 8px;
+    flex: 0 0 auto;
+}
+
+.history-resume-prompt .prefs-btn.primary {
+    min-width: 4.9rem;
+}
+
+.history-resume-prompt .prefs-btn.secondary {
+    min-width: 3.4rem;
 }
 
 .article-preference-controls .prefs-btn.secondary {

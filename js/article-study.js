@@ -160,6 +160,11 @@
         applyVisualConfig(article.visual);
     }
 
+    function markStudyRendered() {
+        window.__QMLMStudyRendered = true;
+        window.dispatchEvent(new Event('qmlm:article-study-rendered'));
+    }
+
     function loadStudyJson() {
         var jsonPath = document.body.getAttribute('data-study-json');
         if (!jsonPath) return;
@@ -168,10 +173,14 @@
                 if (!response.ok) throw new Error('精读数据加载失败：' + jsonPath + '（HTTP ' + response.status + '）');
                 return response.json();
             })
-            .then(renderStudy)
+            .then(function (article) {
+                renderStudy(article);
+                markStudyRendered();
+            })
             .catch(function (error) {
                 console.error(error);
                 renderErrorState();
+                markStudyRendered();
             });
     }
 
