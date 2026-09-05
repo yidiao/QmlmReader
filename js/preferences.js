@@ -182,20 +182,37 @@
         window.setTimeout(run, 250);
     }
 
-    function upsertFavorite(article) {
-        var state = readState();
-        var idx = state.favorites.findIndex(function (item) { return item.key === article.key; });
-        var entry = {
+    function buildFavoriteEntry(article) {
+        return {
             key: article.key,
             title: article.title,
             url: article.url,
             path: article.path,
             updatedAt: article.updatedAt
         };
+    }
+
+    function upsertFavorite(article) {
+        var state = readState();
+        var idx = state.favorites.findIndex(function (item) { return item.key === article.key; });
+        var entry = buildFavoriteEntry(article);
         if (idx >= 0) state.favorites[idx] = entry;
         else state.favorites.unshift(entry);
         writeState(state);
         return state;
+    }
+
+    function toggleFavorite(article) {
+        var state = readState();
+        var idx = state.favorites.findIndex(function (item) { return item.key === article.key; });
+        if (idx >= 0) {
+            state.favorites.splice(idx, 1);
+            writeState(state);
+            return false;
+        }
+        state.favorites.unshift(buildFavoriteEntry(article));
+        writeState(state);
+        return true;
     }
 
     function upsertHistory(article) {
@@ -231,23 +248,40 @@
         writeState(state);
     }
 
+    function getHistoryEntry(key) {
+        if (!key) return null;
+        var state = readState();
+        for (var i = 0; i < state.history.length; i++) {
+            if (state.history[i] && state.history[i].key === key) return state.history[i];
+        }
+        return null;
+    }
+
     function isArticleFavorite(key) {
         if (!key) return false;
         var state = readState();
         return state.favorites.some(function (item) { return item.key === key; });
     }
 
+    function getFavoriteButtonMode(button) {
+        if (!button) return 'text';
+        return button.getAttribute('data-qmlm-favorite-mode') || (button.classList.contains('article-card-favorite') ? 'icon' : 'text');
+    }
+
     function updateFavoriteButtonState(button, key) {
         if (!button) return;
-        if (isArticleFavorite(key)) {
-            button.textContent = '已收藏';
-            button.classList.add('is-active');
-            button.setAttribute('aria-pressed', 'true');
+        var active = isArticleFavorite(key);
+        var mode = getFavoriteButtonMode(button);
+        var label = active ? '取消收藏' : '收藏本文';
+        if (mode === 'icon') {
+            button.textContent = active ? '★' : '☆';
         } else {
-            button.textContent = '收藏本文';
-            button.classList.remove('is-active');
-            button.setAttribute('aria-pressed', 'false');
+            button.textContent = active ? '已收藏' : '收藏本文';
         }
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        button.setAttribute('aria-label', label);
+        button.setAttribute('title', label);
     }
 
     function notifyPreferenceChange() {
@@ -269,7 +303,7 @@
         var button = document.createElement('button');
         button.type = 'button';
         button.className = 'qmlm-favorite-btn';
-        button.textContent = label || '收藏本文';
+        button.textContent = label || '☆';
         return button;
     }
 
@@ -283,11 +317,13 @@
             key = meta && meta.key ? meta.key : articleKeyFromBody();
             button.setAttribute('data-qmlm-favorite-btn', key);
         }
+        var mode = button.getAttribute('data-qmlm-favorite-mode') || (button.classList.contains('article-card-favorite') ? 'icon' : 'text');
+        button.setAttribute('data-qmlm-favorite-mode', mode);
         updateFavoriteButtonState(button, key);
         button.addEventListener('click', function () {
             var article = getMeta();
             if (!article.key) article.key = key;
-            upsertFavorite(article);
+            toggleFavorite(article);
             updateFavoriteButtonState(button, article.key || key);
             notifyPreferenceChange();
         });
@@ -350,14 +386,16 @@
         if (!actions) return;
         var button = actions.querySelector('[data-qmlm-favorite-btn]');
         if (!button) {
-            button = createFavoriteButton('收藏本文');
+            button = createFavoriteButton('☆');
             button.classList.add('article-card-favorite');
+            button.setAttribute('data-qmlm-favorite-mode', 'icon');
             button.setAttribute('data-qmlm-favorite-btn', meta.key);
             var readMore = actions.querySelector('.read-more');
             if (readMore) actions.insertBefore(button, readMore);
             else actions.appendChild(button);
         } else {
             button.setAttribute('data-qmlm-favorite-btn', meta.key);
+            button.setAttribute('data-qmlm-favorite-mode', 'icon');
         }
         bindFavoriteButton(button, function () { return getCardArticleMeta(card) || meta; });
         updateFavoriteButtonState(button, meta.key);
@@ -738,13 +776,14 @@
         controls.id = 'articlePreferenceControls';
         controls.className = 'prefs-actions article-preference-controls';
         controls.style.marginTop = '0.85rem';
-        controls.innerHTML = '<button type="button" class="prefs-btn primary article-favorite-btn" data-qmlm-favorite-btn="">收藏本文</button><button type="button" class="prefs-btn secondary" id="recordReadingBtn">记录当前位置</button>';
+        controls.innerHTML = '<button type="button" class="prefs-btn primary article-favorite-btn" data-qmlm-favorite-btn="" data-qmlm-favorite-mode="text">收藏本文</button><button type="button" class="prefs-btn secondary" id="recordReadingBtn">记录当前位置</button>';
         header.appendChild(controls);
         var favoriteBtn = controls.querySelector('.article-favorite-btn');
         var recordBtn = document.getElementById('recordReadingBtn');
         var articleInfo = getArticleMeta();
         if (favoriteBtn) {
             favoriteBtn.setAttribute('data-qmlm-favorite-btn', articleInfo.key || articleKeyFromBody());
+            favoriteBtn.setAttribute('data-qmlm-favorite-mode', 'text');
             bindFavoriteButton(favoriteBtn, getArticleMeta);
         }
         if (recordBtn) {

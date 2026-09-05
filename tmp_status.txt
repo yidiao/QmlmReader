@@ -1,17 +1,4 @@
- M css/articles-detail.css
  M css/style.css
  M html/articles/articles.html
- M html/experimental/experimental.html
- M html/index.html
- D html/toolkit/marxist-style.html
- M html/toolkit/toolkit.html
- M js/article-json.js
- M js/main.js
+ M js/preferences.js
  M tmp_status.txt
- M 设计文档/README.md
- M 设计文档/architecture/README.md
- M 设计文档/pages/README.md
- M 设计文档/pages/articles/README.md
-?? html/preferences/
-?? js/preferences.js
-?? 设计文档/pages/preferences/

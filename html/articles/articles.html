@@ -708,7 +708,6 @@
                     <div class="card-footer">
                         <span class="article-category">军事战略</span>
                         <div class="card-footer-actions">
-                            <button type="button" class="qmlm-favorite-btn article-card-favorite" data-qmlm-favorite-btn="/html/articles/Mao/lun-chi-jiu-zhan.html">收藏本文</button>
                             <a href="Mao/lun-chi-jiu-zhan.html" class="read-more">阅读全文 </a>
                         </div>
                     </div>
@@ -1426,7 +1425,13 @@
 
         renderCollections(collectionsData);
         renderImportedArticles();
-        syncArticleListFavorites();
+        syncArticleListStates();
+        window.addEventListener('pageshow', function () {
+            syncArticleListStates();
+        });
+        window.addEventListener('storage', function (e) {
+            if (e && e.key === 'qmlm:preferences:v1') syncArticleListStates();
+        });
 
         function resolveArticleKey(href) {
             try {
@@ -1439,13 +1444,71 @@
 
         function getFavoriteButtonMarkup(href) {
             const key = resolveArticleKey(href);
-            return `<button type="button" class="qmlm-favorite-btn article-card-favorite" data-qmlm-favorite-btn="${key}">收藏本文</button>`;
+            return `<button type="button" class="qmlm-favorite-btn article-card-favorite" data-qmlm-favorite-btn="${key}" data-qmlm-favorite-mode="icon" aria-label="收藏本文" title="收藏本文">☆</button>`;
         }
 
         function syncArticleListFavorites() {
             if (window.QMLMPreferences && typeof window.QMLMPreferences.syncArticleFavoriteButtons === 'function') {
                 window.QMLMPreferences.syncArticleFavoriteButtons(document);
             }
+        }
+
+        function readPreferencesState() {
+            try {
+                const raw = localStorage.getItem('qmlm:preferences:v1');
+                return raw ? JSON.parse(raw) : null;
+            } catch (err) {
+                return null;
+            }
+        }
+
+        function getHistoryEntryForHref(href) {
+            const key = resolveArticleKey(href);
+            const state = readPreferencesState();
+            if (!state || !Array.isArray(state.history)) return null;
+            return state.history.find(item => item && (item.key === key || item.path === key || item.url === new URL(key, window.location.href).href));
+        }
+
+        function syncArticleListHistory() {
+            document.querySelectorAll('.article-card').forEach(card => {
+                const readMore = card.querySelector('.read-more');
+                if (!readMore) return;
+                const titleLink = card.querySelector('.article-title a');
+                const href = readMore.getAttribute('href') || (titleLink ? titleLink.getAttribute('href') : '') || '';
+                const entry = getHistoryEntryForHref(href);
+                let marker = card.querySelector('.history-marker');
+                if (entry) {
+                    const percent = entry.position && typeof entry.position.percent === 'number' ? ` · 约${entry.position.percent}%` : '';
+                    const chapter = entry.chapter ? ` · ${entry.chapter}` : '';
+                    const markerText = `上次阅读${chapter}${percent}`;
+                    readMore.textContent = '继续阅读';
+                    readMore.title = `继续上次阅读${chapter}${percent}`;
+                    card.classList.add('has-history');
+                    if (!marker) {
+                        marker = document.createElement('div');
+                        marker.className = 'history-marker';
+                        const desc = card.querySelector('.article-desc');
+                        if (desc && desc.nextSibling) {
+                            desc.parentNode.insertBefore(marker, desc.nextSibling);
+                        } else if (desc && desc.parentNode) {
+                            desc.parentNode.appendChild(marker);
+                        } else {
+                            card.insertBefore(marker, readMore.parentNode || null);
+                        }
+                    }
+                    marker.textContent = markerText;
+                } else {
+                    readMore.textContent = '阅读全文';
+                    readMore.title = '阅读全文';
+                    card.classList.remove('has-history');
+                    if (marker && marker.parentNode) marker.parentNode.removeChild(marker);
+                }
+            });
+        }
+
+        function syncArticleListStates() {
+            syncArticleListFavorites();
+            syncArticleListHistory();
         }
 
         function renderCollections(data) {
@@ -1463,7 +1526,7 @@
                     </div>
                 </div>`;
             }).join('');
-            syncArticleListFavorites();
+            syncArticleListStates();
         }
 
         async function renderImportedArticles() {
@@ -1506,7 +1569,7 @@
                         </div>
                     </article>`;
                 }).join('');
-                syncArticleListFavorites();
+                syncArticleListStates();
             } catch (err) {
                 console.error(err);
                 if (countEl) countEl.textContent = '加载失败';

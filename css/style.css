@@ -726,6 +726,16 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
     white-space: nowrap;
 }
 
+.qmlm-favorite-btn.article-card-favorite {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 999px;
+    font-size: 1rem;
+    line-height: 1;
+    flex: 0 0 auto;
+}
+
 .qmlm-favorite-btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 6px 16px rgba(196, 30, 58, 0.12);
@@ -736,6 +746,31 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
     color: #fff;
     border-color: transparent;
     box-shadow: 0 8px 18px rgba(139, 0, 0, 0.18);
+}
+
+.qmlm-favorite-btn.article-card-favorite.is-active {
+    font-size: 1rem;
+}
+
+.article-card.has-history .read-more {
+    font-weight: 700;
+}
+
+.article-card.has-history .read-more::before {
+    content: '↺ ';
+}
+
+.history-marker {
+    margin: 0 1.2rem 0.45rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(196, 30, 58, 0.08);
+    color: #8b0000;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
 }
 
 .article-preference-controls {
