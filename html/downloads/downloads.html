@@ -160,6 +160,8 @@
 
     <script src="../../js/download-export.js"></script>
     <script src="../../js/site-data.js"></script>
+    <script src="../../js/state-center.js"></script>
+    <script src="../../js/page-state-adapter.js"></script>
     <script src="../../js/main.js"></script>
     <script>
     var downloadData = (window.SITE_DATA && window.SITE_DATA.downloadData) || { articles: [], rectify: [], posters: [] };
@@ -168,6 +170,68 @@
     var posterZIPs = downloadData.posters || [];
     var currentDownloadItem = null;
     var authorIcons = { mao: '', marx: '', lenin: '', stalin: '', engels: '', rectify: '', posters: '' };
+
+    function patchDownloadsState(patch) {
+        if (window.QMLMPageState && typeof window.QMLMPageState.patch === 'function') {
+            window.QMLMPageState.patch('pageDownloads', patch, 'downloads-page');
+        }
+    }
+
+    function applyDownloadFilter(filter) {
+        filter = filter || 'all';
+        document.querySelectorAll('.dl-filter-btn').forEach(function(b) {
+            b.classList.toggle('active', b.dataset.filter === filter);
+        });
+        document.querySelectorAll('.dl-card').forEach(function(card) {
+            card.style.display = (filter === 'all' || card.dataset.cat === filter) ? 'flex' : 'none';
+        });
+        document.querySelectorAll('.dl-section').forEach(function(sec) {
+            var cards = sec.querySelectorAll('.dl-card');
+            var anyVisible = false;
+            cards.forEach(function(c) { if (c.style.display !== 'none') anyVisible = true; });
+            sec.style.display = anyVisible || filter === 'all' ? 'block' : 'none';
+        });
+    }
+
+    function publishDownloadChoice(open, item, metaText) {
+        patchDownloadsState({
+            filter: getActiveDownloadFilter(),
+            choiceModal: {
+                open: !!open,
+                slug: item && item.slug || '',
+                title: item && item.title || '',
+                meta: metaText || ''
+            }
+        });
+    }
+
+    function getActiveDownloadFilter() {
+        var active = document.querySelector('.dl-filter-btn.active');
+        return active && active.dataset ? active.dataset.filter || 'all' : 'all';
+    }
+
+    function findDownloadItem(slug) {
+        var allItems = articleDocs.concat(rectifyDocs);
+        for (var i = 0; i < allItems.length; i++) {
+            if (allItems[i] && allItems[i].slug === slug) return allItems[i];
+        }
+        return null;
+    }
+
+    function applyDownloadChoiceState(modalState) {
+        var modal = document.getElementById('downloadChoiceModal');
+        if (!modalState || !modalState.open) {
+            currentDownloadItem = null;
+            if (modal) modal.classList.remove('show');
+            return;
+        }
+        var item = findDownloadItem(modalState.slug);
+        if (!item) return;
+        currentDownloadItem = item;
+        document.getElementById('downloadChoiceTitle').textContent = modalState.title || item.title;
+        document.getElementById('downloadChoiceMeta').textContent = modalState.meta || '';
+        if (modal) modal.classList.add('show');
+    }
 
     function esc(s) {
         var d = document.createElement('div');
@@ -184,11 +248,13 @@
         document.getElementById('downloadChoiceTitle').textContent = item.title;
         document.getElementById('downloadChoiceMeta').textContent = metaText || '';
         document.getElementById('downloadChoiceModal').classList.add('show');
+        publishDownloadChoice(true, item, metaText);
     }
 
     function closeDownloadChoice() {
         currentDownloadItem = null;
         document.getElementById('downloadChoiceModal').classList.remove('show');
+        publishDownloadChoice(false, null, '');
     }
 
     function renderArticleCard(item) {
@@ -290,20 +356,24 @@
 
     document.querySelectorAll('.dl-filter-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
-            var filter = this.dataset.filter;
-            document.querySelectorAll('.dl-filter-btn').forEach(function(b) { b.classList.remove('active'); });
-            this.classList.add('active');
-            document.querySelectorAll('.dl-card').forEach(function(card) {
-                card.style.display = (filter === 'all' || card.dataset.cat === filter) ? 'flex' : 'none';
-            });
-            document.querySelectorAll('.dl-section').forEach(function(sec) {
-                var cards = sec.querySelectorAll('.dl-card');
-                var anyVisible = false;
-                cards.forEach(function(c) { if (c.style.display !== 'none') anyVisible = true; });
-                sec.style.display = anyVisible || filter === 'all' ? 'block' : 'none';
-            });
+            var filter = this.dataset.filter || 'all';
+            applyDownloadFilter(filter);
+            patchDownloadsState({ filter: filter });
         });
     });
+
+    if (window.QMLMPageState && typeof window.QMLMPageState.subscribe === 'function') {
+        var initialDownloadsState = window.QMLMPageState.get('pageDownloads') || {};
+        if (initialDownloadsState.filter) applyDownloadFilter(initialDownloadsState.filter);
+        if (initialDownloadsState.choiceModal) applyDownloadChoiceState(initialDownloadsState.choiceModal);
+        window.QMLMPageState.subscribe('pageDownloads.filter', function(filter) {
+            if (filter) applyDownloadFilter(filter);
+        });
+        window.QMLMPageState.subscribe('pageDownloads.choiceModal', function(modalState, rootState, meta) {
+            if (meta && meta.source === 'downloads-page') return;
+            applyDownloadChoiceState(modalState);
+        });
+    }
     </script>
     <script src="../../js/darkmode.js"></script>
     <script src="../../js/cursor.js"></script>

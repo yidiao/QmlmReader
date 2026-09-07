@@ -22,8 +22,9 @@ var articleIndex = (window.SITE_DATA && window.SITE_DATA.articleIndex) ? window.
     // 五星 - 马克思恩格斯
     { title: '共产党宣言', file: 'articles/Marx/gongchan-dan-yuan.html', author: '马克思 · 恩格斯', authorKey: 'marx', year: '1848', priority: '5', category: '政治理论', keywords: ['科学社会主义', '阶级斗争', '无产阶级', '共产主义'] },
     // 五星 - 斯大林
-    { title: '论列宁主义基础', file: 'articles/Stalin/lun-lunen-zhu-yi-ji-chu.html', author: '斯大林', authorKey: 'stalin', year: '1924', priority: '5', category: '政治理论', keywords: ['列宁主义', '帝国主义', '无产阶级革命', '无产阶级专政'] },
-    { title: '论中国革命的前途', file: 'articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html', author: '斯大林', authorKey: 'stalin', year: '1926', priority: '5', category: '政治理论', keywords: ['中国革命', '农民问题', '无产阶级领导权', '非资本主义道路'] },
+    { title: 'The Basics of Leninism', file: 'articles/Stalin/★★★★★/lun-lunen-zhu-yi-ji-chu.html', author: '斯大林', authorKey: 'stalin', year: '1924', priority: '5', category: '政治理论', keywords: ['列宁主义', '帝国主义', '无产阶级革命', '无产阶级专政'] },
+    { title: 'Soviet Socialist Economy', file: 'articles/Stalin/★★★★★/soviet-socialist-economy.html', author: '斯大林', authorKey: 'stalin', year: '1952', priority: '5', category: '政治经济学', keywords: ['社会主义经济', '商品生产', '价值规律', '计划经济'] },
+    { title: 'The Future of the Chinese Revolution', file: 'articles/Stalin/★★★★★/lun-zhongguo-ge-ming-de-qiantu.html', author: '斯大林', authorKey: 'stalin', year: '1926', priority: '5', category: '政治理论', keywords: ['中国革命', '农民问题', '无产阶级领导权', '非资本主义道路'] },
     // 四星
     { title: '湖南农民运动考察报告', file: 'articles/Mao/nong-min-yun-dong.html', author: '毛泽东', authorKey: 'mao', year: '1927', priority: '4', category: '政治理论', keywords: ['农民运动', '阶级分析', '农村'] },
     // 五星 - 马克思恩格斯（补充）
@@ -148,16 +149,73 @@ let currentFilters = {
     priorities: []
 };
 
+function publishSearchState(query, resultCounts) {
+    if (!window.QMLMState || typeof window.QMLMState.dispatch !== 'function') return;
+    window.QMLMState.dispatch('search/patch', {
+        query: query || '',
+        filters: {
+            authors: currentFilters.authors.slice(),
+            categories: currentFilters.categories.slice(),
+            priorities: currentFilters.priorities.slice()
+        },
+        resultCounts: resultCounts || null
+    }, 'search');
+}
+
+function readSearchState() {
+    if (!window.QMLMState || typeof window.QMLMState.getSearch !== 'function') return null;
+    return window.QMLMState.getSearch();
+}
+
+function normalizeSearchFilters(filters) {
+    filters = filters && typeof filters === 'object' ? filters : {};
+    return {
+        authors: Array.isArray(filters.authors) ? filters.authors.slice() : [],
+        categories: Array.isArray(filters.categories) ? filters.categories.slice() : [],
+        priorities: Array.isArray(filters.priorities) ? filters.priorities.slice() : []
+    };
+}
+
+function applySearchStateToPage(searchState) {
+    if (!searchState || typeof searchState !== 'object') return;
+    const filters = normalizeSearchFilters(searchState.filters);
+    currentFilters = filters;
+
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput && typeof searchState.query === 'string' && searchInput.value !== searchState.query) {
+        searchInput.value = searchState.query;
+    }
+
+    document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+        const value = btn.dataset.filter;
+        if (['mao', 'lenin', 'marx', 'stalin', 'engels'].includes(value)) {
+            btn.classList.toggle('active', filters.authors.includes(value));
+        }
+    });
+
+    document.querySelectorAll('.filter-btn[data-priority]').forEach(btn => {
+        const value = btn.dataset.priority;
+        if (['5', '4', '3'].includes(value)) {
+            btn.classList.toggle('active', filters.priorities.includes(value));
+        }
+    });
+}
+
 function updateFilters(author) {
     if (author) {
         const idx = currentFilters.authors.indexOf(author);
         if (idx === -1) currentFilters.authors.push(author);
         else currentFilters.authors.splice(idx, 1);
     }
+    publishSearchState(document.getElementById('searchInput') ? document.getElementById('searchInput').value.trim().toLowerCase() : '', null);
 }
 
 function resetFilters() {
     currentFilters = { authors: [], categories: [], priorities: [] };
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) searchInput.value = '';
+    applySearchStateToPage({ query: '', filters: currentFilters, resultCounts: null });
+    publishSearchState('', null);
 }
 
 // ============================================================
@@ -170,6 +228,7 @@ function performSearch() {
     if (!query) {
         resultsContainer.innerHTML = '';
         resultsContainer.classList.remove('active');
+        publishSearchState('', null);
         return;
     }
 
@@ -236,6 +295,7 @@ function performSearch() {
 
     // ---- 渲染结果 ----
     if (allResults.length === 0) {
+        publishSearchState(query, { total: 0, article: 0, gallery: 0, rectify: 0, event: 0 });
         resultsContainer.innerHTML = `
             <div class="search-no-results">
                 <div style="font-size:2rem;margin-bottom:8px;">🔍</div>
@@ -250,6 +310,13 @@ function performSearch() {
     // 统计各类数量
     const counts = { article: 0, gallery: 0, rectify: 0, event: 0 };
     allResults.forEach(r => counts[r._type]++);
+    publishSearchState(query, {
+        total: allResults.length,
+        article: counts.article,
+        gallery: counts.gallery,
+        rectify: counts.rectify,
+        event: counts.event
+    });
     const summaryParts = [];
     if (counts.article) summaryParts.push(`文章 ${counts.article}`);
     if (counts.gallery) summaryParts.push(`文艺 ${counts.gallery}`);
@@ -374,6 +441,15 @@ function syncFiltersFromPage() {
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('searchInput');
     if (!searchInput) return;
+
+    applySearchStateToPage(readSearchState());
+    if (window.QMLMState && typeof window.QMLMState.subscribe === 'function') {
+        window.QMLMState.subscribe('search', function (searchState, rootState, meta) {
+            if (meta && meta.source === 'search') return;
+            applySearchStateToPage(searchState);
+            if (searchState && searchState.query) performSearch();
+        });
+    }
 
     // 回车搜索
     searchInput.addEventListener('keypress', function (e) {

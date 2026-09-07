@@ -12,6 +12,10 @@ window.switchTab = function(tabId, btn) {
     if (target) target.classList.add('active');
     if (btn) btn.classList.add('active');
 
+    if (window.QMLMState && typeof window.QMLMState.dispatch === 'function') {
+        window.QMLMState.dispatch('reader/patch', { activeTab: tabId }, 'article-tab');
+    }
+
     if (tabId === 'original') {
         refreshChapterSizing();
     }
@@ -30,6 +34,49 @@ window.switchTab = function(tabId, btn) {
 
 // ==================== 章节折叠 ====================
 var chapterAccordionBound = false;
+var chapterStateBound = false;
+var applyingChapterState = false;
+
+function getCollapsedChaptersState() {
+    var collapsed = {};
+    document.querySelectorAll('.chapter').forEach(function(chapter, index) {
+        if (!chapter.id) chapter.id = 'chapter-' + (index + 1);
+        collapsed[chapter.id] = chapter.classList.contains('collapsed');
+    });
+    return collapsed;
+}
+
+function publishCollapsedChaptersState() {
+    if (applyingChapterState) return;
+    if (window.QMLMState && typeof window.QMLMState.dispatch === 'function') {
+        window.QMLMState.dispatch('reader/patch', { collapsedChapters: getCollapsedChaptersState() }, 'chapter-accordion');
+    }
+}
+
+function applyCollapsedChaptersState(collapsed) {
+    if (!collapsed || typeof collapsed !== 'object') return;
+    applyingChapterState = true;
+    document.querySelectorAll('.chapter').forEach(function(chapter, index) {
+        if (!chapter.id) chapter.id = 'chapter-' + (index + 1);
+        if (Object.prototype.hasOwnProperty.call(collapsed, chapter.id)) {
+            setChapterState(chapter, !collapsed[chapter.id], false);
+        }
+    });
+    updateToggleAllButton();
+    applyingChapterState = false;
+}
+
+function bindChapterState() {
+    if (chapterStateBound || !window.QMLMState || typeof window.QMLMState.subscribe !== 'function') return;
+    chapterStateBound = true;
+    var current = window.QMLMState.getState ? window.QMLMState.getState() : null;
+    if (current && current.reader && current.reader.collapsedChapters) {
+        applyCollapsedChaptersState(current.reader.collapsedChapters);
+    }
+    window.QMLMState.subscribe('reader.collapsedChapters', function(collapsed) {
+        applyCollapsedChaptersState(collapsed);
+    });
+}
 
 function getChapterFromTarget(titleEl) {
     if (!titleEl) return null;
@@ -150,6 +197,8 @@ function hydrateChapterAccordion() {
 
 function bindChapterAccordion() {
     hydrateChapterAccordion();
+    bindChapterState();
+    window.addEventListener('qmlm:state-ready', bindChapterState);
     if (chapterAccordionBound) return;
     chapterAccordionBound = true;
 
@@ -191,6 +240,7 @@ window.toggleChapter = function(titleEl, forceState) {
     var shouldCollapse = typeof forceState === 'boolean' ? forceState : !chapter.classList.contains('collapsed');
     setChapterState(chapter, !shouldCollapse, true);
     updateToggleAllButton();
+    publishCollapsedChaptersState();
 };
 
 window.toggleAllChapters = function() {
@@ -204,10 +254,16 @@ window.toggleAllChapters = function() {
         setChapterState(chapter, !allExpanded, true);
     });
     updateToggleAllButton();
+    publishCollapsedChaptersState();
 };
 
 window.refreshArticleChapters = function() {
     hydrateChapterAccordion();
+    bindChapterState();
+    var current = window.QMLMState && window.QMLMState.getState ? window.QMLMState.getState() : null;
+    if (current && current.reader && current.reader.collapsedChapters) {
+        applyCollapsedChaptersState(current.reader.collapsedChapters);
+    }
     refreshChapterSizing();
 };
 

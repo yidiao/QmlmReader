@@ -89,6 +89,7 @@
 | 根跳转 | `index.html` -> `html/index.html` |
 | 全站公共样式 | `css/style.css` |
 | 公共导航/面包屑/章节导航 | `js/main.js` |
+| 响应式状态中心 | `js/state-center.js` + `js/page-state-adapter.js` |
 | 聚合数据 | `js/site-data.js`，由 `_tools/build_data.py` 生成 |
 | 搜索 | `js/search.js` |
 | 文章列表索引 | `data/articles.json` |

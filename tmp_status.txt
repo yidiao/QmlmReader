@@ -1,8 +1,22 @@
- M css/articles-detail.css
- M html/articles/articles.html
- M js/article-study.js
- M js/cursor.js
+ M data/articles.json
+ M html/downloads/downloads.html
+ M html/preferences/preferences.html
+ M js/article-common.js
+ M js/darkmode.js
+ M js/main.js
  M js/preferences.js
+ M js/search.js
+ M js/site-data.js
  M tmp_status.txt
  M 设计文档/README.md
+ M 设计文档/architecture/README.md
+ M 设计文档/data/README.md
+ M 设计文档/pages/articles/README.md
+ M 设计文档/pages/downloads/README.md
+ M 设计文档/pages/home/README.md
  M 设计文档/pages/preferences/README.md
+?? data/articles-json/Stalin/★★★★★/soviet-socialist-economy.json
+?? data/study-json/Stalin/★★★★★/
+?? html/articles/Stalin/★★★★★/
+?? js/page-state-adapter.js
+?? js/state-center.js

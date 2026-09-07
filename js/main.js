@@ -32,10 +32,36 @@
     if (ph) {
         ph.outerHTML = nav;
 
-        if (!document.querySelector('script[src$="/js/preferences.js"]')) {
+        function loadPreferencesScript() {
+            if (document.querySelector('script[src$="/js/preferences.js"]')) return;
             var prefScript = document.createElement('script');
             prefScript.src = p + '../js/preferences.js';
+            prefScript.async = false;
             document.head.appendChild(prefScript);
+        }
+
+        function loadPageStateAdapter(afterLoad) {
+            if (document.querySelector('script[src$="/js/page-state-adapter.js"]')) {
+                if (afterLoad) afterLoad();
+                return;
+            }
+            var adapterScript = document.createElement('script');
+            adapterScript.src = p + '../js/page-state-adapter.js';
+            adapterScript.async = false;
+            adapterScript.onload = function() { if (afterLoad) afterLoad(); };
+            document.head.appendChild(adapterScript);
+        }
+
+        if (!document.querySelector('script[src$="/js/state-center.js"]')) {
+            var stateScript = document.createElement('script');
+            stateScript.src = p + '../js/state-center.js';
+            stateScript.async = false;
+            stateScript.onload = function() {
+                loadPageStateAdapter(loadPreferencesScript);
+            };
+            document.head.appendChild(stateScript);
+        } else {
+            loadPageStateAdapter(loadPreferencesScript);
         }
 
         // ---- 面包屑自动生成 ----
@@ -295,13 +321,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('.main-nav');
     if (!hamburger || !nav) return;
 
+    let menuStateBound = false;
+
+    function applyMenuOpen(isOpen) {
+        nav.classList.toggle('open', !!isOpen);
+        hamburger.classList.toggle('open', !!isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    function publishMenuOpen(isOpen) {
+        if (window.QMLMState && typeof window.QMLMState.dispatch === 'function') {
+            window.QMLMState.dispatch('ui/patch', { navOpen: !!isOpen }, 'main-nav');
+        }
+    }
+
+    function setMenuOpen(isOpen, publish) {
+        applyMenuOpen(isOpen);
+        if (publish) publishMenuOpen(isOpen);
+    }
+
+    function bindMenuState() {
+        if (menuStateBound || !window.QMLMState || typeof window.QMLMState.subscribe !== 'function') return;
+        menuStateBound = true;
+        const state = window.QMLMState.getState ? window.QMLMState.getState() : null;
+        if (state && state.ui && typeof state.ui.navOpen === 'boolean') applyMenuOpen(state.ui.navOpen);
+        else publishMenuOpen(nav.classList.contains('open'));
+        window.QMLMState.subscribe('ui.navOpen', function(isOpen) {
+            if (typeof isOpen === 'boolean') applyMenuOpen(isOpen);
+        });
+    }
+
+    bindMenuState();
+    window.addEventListener('qmlm:state-ready', bindMenuState);
+
     // 点击汉堡按钮切换菜单
     hamburger.addEventListener('click', function(e) {
         e.stopPropagation();
-        const isOpen = nav.classList.toggle('open');
-        hamburger.classList.toggle('open', isOpen);
-        // 菜单打开时禁止背景滚动
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+        setMenuOpen(!nav.classList.contains('open'), true);
     });
 
     // 点击菜单内关闭按钮（X）关闭菜单
@@ -309,45 +365,35 @@ document.addEventListener('DOMContentLoaded', function() {
     if (closeBtn) {
         closeBtn.addEventListener('click', function(e) {
             e.stopPropagation();
-            nav.classList.remove('open');
-            hamburger.classList.remove('open');
-            document.body.style.overflow = '';
+            setMenuOpen(false, true);
         });
     }
 
     // 点击菜单内链接后自动关闭
     nav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function() {
-            nav.classList.remove('open');
-            hamburger.classList.remove('open');
-            document.body.style.overflow = '';
+            setMenuOpen(false, true);
         });
     });
 
     // 点击遮罩（菜单外区域）关闭
     document.addEventListener('click', function(e) {
         if (nav.classList.contains('open') && !nav.contains(e.target) && e.target !== hamburger) {
-            nav.classList.remove('open');
-            hamburger.classList.remove('open');
-            document.body.style.overflow = '';
+            setMenuOpen(false, true);
         }
     });
 
     // ESC 键关闭菜单
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && nav.classList.contains('open')) {
-            nav.classList.remove('open');
-            hamburger.classList.remove('open');
-            document.body.style.overflow = '';
+            setMenuOpen(false, true);
         }
     });
 
     // 窗口调整大小时，如果从移动端切换到桌面端，强制关闭菜单
     window.addEventListener('resize', function() {
         if (window.innerWidth >= 769) {
-            nav.classList.remove('open');
-            hamburger.classList.remove('open');
-            document.body.style.overflow = '';
+            setMenuOpen(false, true);
         }
     });
 });
@@ -408,10 +454,41 @@ function initDynamicChapterNav() {
     toggle.className = 'dcn-toggle';
     toggle.title = '显示/隐藏章节导航';
     toggle.textContent = '导航';
-    toggle.addEventListener('click', function() {
-        var visible = nav.classList.toggle('visible');
-        toggle.classList.toggle('shifted', visible);
+
+    function applyChapterNavVisible(visible) {
+        nav.classList.toggle('visible', !!visible);
+        toggle.classList.toggle('shifted', !!visible);
+    }
+
+    function publishChapterNavVisible(visible) {
+        if (window.QMLMState && typeof window.QMLMState.dispatch === 'function') {
+            window.QMLMState.dispatch('reader/patch', { chapterNavVisible: !!visible }, 'chapter-nav');
+        }
+    }
+
+    function setChapterNavVisible(visible, publish) {
+        applyChapterNavVisible(visible);
         try { sessionStorage.setItem('dcn-visible', visible ? '1' : '0'); } catch(e) {}
+        if (publish) publishChapterNavVisible(visible);
+    }
+
+    var chapterNavStateBound = false;
+    function bindChapterNavState() {
+        if (chapterNavStateBound || !window.QMLMState || typeof window.QMLMState.subscribe !== 'function') return;
+        chapterNavStateBound = true;
+        var current = window.QMLMState.getState ? window.QMLMState.getState() : null;
+        if (current && current.reader && typeof current.reader.chapterNavVisible === 'boolean') {
+            applyChapterNavVisible(current.reader.chapterNavVisible);
+        } else {
+            publishChapterNavVisible(nav.classList.contains('visible'));
+        }
+        window.QMLMState.subscribe('reader.chapterNavVisible', function(visible) {
+            if (typeof visible === 'boolean') applyChapterNavVisible(visible);
+        });
+    }
+
+    toggle.addEventListener('click', function() {
+        setChapterNavVisible(!nav.classList.contains('visible'), true);
     });
 
     document.body.appendChild(nav);
@@ -423,12 +500,13 @@ function initDynamicChapterNav() {
         setTimeout(function() {
             var cur;
             try { cur = sessionStorage.getItem('dcn-visible'); } catch(e) {}
-            if (cur !== '0') {
-                nav.classList.add('visible');
-                toggle.classList.add('shifted');
-            }
+            if (cur !== '0') setChapterNavVisible(true, true);
         }, 300);
+    } else {
+        setChapterNavVisible(false, true);
     }
+    bindChapterNavState();
+    window.addEventListener('qmlm:state-ready', bindChapterNavState);
 
     var ticking = false;
     window.__dcnScrollHandler = function() {
@@ -459,17 +537,57 @@ document.addEventListener('DOMContentLoaded', function() {
     var tabBtns = document.querySelectorAll('.tab-btn');
     if (tabBtns.length > 0) {
         var pagePath = window.location.pathname;
+        var readerTabStateBound = false;
+
+        function findTabButton(tabId) {
+            if (!tabId) return null;
+            var buttons = document.querySelectorAll('.tab-btn');
+            for (var i = 0; i < buttons.length; i++) {
+                var btn = buttons[i];
+                if (btn.dataset && btn.dataset.tab === tabId) return btn;
+                var onclick = btn.getAttribute('onclick') || '';
+                if (onclick.indexOf("'" + tabId + "'") >= 0 || onclick.indexOf('"' + tabId + '"') >= 0) return btn;
+            }
+            return null;
+        }
+
+        function publishActiveTab(tabId) {
+            if (window.QMLMState && typeof window.QMLMState.dispatch === 'function') {
+                window.QMLMState.dispatch('reader/patch', { activeTab: tabId }, 'main-tab-memory');
+            }
+        }
+
+        function applyActiveTab(tabId) {
+            var targetBtn = findTabButton(tabId);
+            if (targetBtn && !targetBtn.classList.contains('active')) targetBtn.click();
+        }
+
+        function bindReaderTabState() {
+            if (readerTabStateBound || !window.QMLMState || typeof window.QMLMState.subscribe !== 'function') return;
+            readerTabStateBound = true;
+            var current = window.QMLMState.getState ? window.QMLMState.getState() : null;
+            if (current && current.reader && current.reader.activeTab) applyActiveTab(current.reader.activeTab);
+            window.QMLMState.subscribe('reader.activeTab', function(tabId) {
+                if (tabId) applyActiveTab(tabId);
+            });
+        }
+
         var savedTab = sessionStorage.getItem('tab-' + pagePath);
         if (savedTab) {
-            var targetBtn = document.querySelector('.tab-btn[onclick*="' + savedTab + '"]');
-            if (targetBtn) targetBtn.click();
+            applyActiveTab(savedTab);
+            publishActiveTab(savedTab);
         }
         tabBtns.forEach(function(btn) {
             btn.addEventListener('click', function() {
-                var match = this.getAttribute('onclick').match(/switchTab\('(\w+)'/);
-                if (match) sessionStorage.setItem('tab-' + pagePath, match[1]);
+                var match = this.getAttribute('onclick').match(/switchTab\(['\"](\w+)['\"]/);
+                if (match) {
+                    sessionStorage.setItem('tab-' + pagePath, match[1]);
+                    publishActiveTab(match[1]);
+                }
             });
         });
+        bindReaderTabState();
+        window.addEventListener('qmlm:state-ready', bindReaderTabState);
     }
 
     initDynamicChapterNav();
@@ -501,10 +619,47 @@ function injectCollModal() {
 function closeCollModal() {
     var m = document.getElementById('collModal');
     if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
+    publishCollModalState(false, currentCollModalColl);
 }
-var currentCollModalColl = null, currentCollModalAll = null;
+var currentCollModalColl = null, currentCollModalAll = null, collModalStateBound = false;
+
+function findCollectionById(id) {
+    if (!id) return null;
+    for (var i = 0; i < COLLECTIONS.length; i++) {
+        if (COLLECTIONS[i] && COLLECTIONS[i].id === id) return COLLECTIONS[i];
+    }
+    return null;
+}
+
+function publishCollModalState(open, coll) {
+    if (!window.QMLMState || typeof window.QMLMState.dispatch !== 'function') return;
+    window.QMLMState.dispatch('ui/patch', {
+        collectionModal: {
+            open: !!open,
+            collectionId: coll && coll.id || '',
+            title: coll && coll.title || ''
+        }
+    }, 'collection-modal');
+}
+
+function bindCollModalState() {
+    if (collModalStateBound || !window.QMLMState || typeof window.QMLMState.subscribe !== 'function') return;
+    collModalStateBound = true;
+    window.QMLMState.subscribe('ui.collectionModal', function(modalState, rootState, meta) {
+        if (meta && meta.source === 'collection-modal') return;
+        if (!modalState || !modalState.open) {
+            var m = document.getElementById('collModal');
+            if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
+            return;
+        }
+        var coll = findCollectionById(modalState.collectionId);
+        if (coll) openCollModal(coll, [{ coll: coll, idx: 0 }]);
+    });
+}
+
 function openCollModal(coll, allMatches) {
     injectCollModal();
+    bindCollModalState();
     currentCollModalColl = coll;
     currentCollModalAll = allMatches || [coll];
     renderCollModalBody(coll);
@@ -545,9 +700,13 @@ function renderCollModalBody(coll) {
     }).join('');
     document.getElementById('collModal').classList.add('open');
     document.body.style.overflow = 'hidden';
+    publishCollModalState(true, coll);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    bindCollModalState();
+    window.addEventListener('qmlm:state-ready', bindCollModalState);
+
     var backNav = document.querySelector('.back-nav .back-link');
     if (!backNav) return;
 

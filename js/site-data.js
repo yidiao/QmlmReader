@@ -5138,22 +5138,27 @@ window.SITE_DATA = {
       "sourceFile": "斯大林/斯大林选集四卷/★★★★★-178-马克思主义和语言学问题.docx"
     },
     {
-      "slug": "su-lian-she-hui-zhu-yi-jing-ji-wen-ti-src-001-61dcc025",
-      "title": "苏联社会主义经济问题",
+      "slug": "soviet-socialist-economy",
+      "title": "Soviet Socialist Economy",
       "author": "斯大林",
       "authorKey": "stalin",
-      "date": "",
-      "year": "",
+      "date": "1952年2—9月",
+      "year": "1952",
       "priority": 5,
-      "category": "经典文献",
-      "type": "politics",
+      "category": "政治经济学",
+      "type": "economics",
       "keywords": [
-        "苏联社会主义经济问题",
-        "原文"
+        "社会主义经济",
+        "商品生产",
+        "价值规律",
+        "计划经济"
       ],
-      "file": "articles/imported/Stalin/su-lian-she-hui-zhu-yi-jing-ji-wen-ti-src-001-61dcc025.html",
+      "file": "articles/Stalin/★★★★★/soviet-socialist-economy.html",
       "ready": true,
-      "collections": [],
+      "collections": [
+        "stalin",
+        "political-economy"
+      ],
       "source": "金星与赤旗/著作提取",
       "sourceFile": "斯大林/斯大林选集四卷/★★★★★-181-苏联社会主义经济问题.docx"
     },
@@ -29337,16 +29342,18 @@ window.SITE_DATA = {
       ]
     },
     {
-      "title": "苏联社会主义经济问题",
-      "file": "articles/imported/Stalin/su-lian-she-hui-zhu-yi-jing-ji-wen-ti-src-001-61dcc025.html",
+      "title": "Soviet Socialist Economy",
+      "file": "articles/Stalin/★★★★★/soviet-socialist-economy.html",
       "author": "斯大林",
       "authorKey": "stalin",
-      "year": "",
+      "year": "1952",
       "priority": "5",
-      "category": "经典文献",
+      "category": "政治经济学",
       "keywords": [
-        "苏联社会主义经济问题",
-        "原文"
+        "社会主义经济",
+        "商品生产",
+        "价值规律",
+        "计划经济"
       ]
     },
     {

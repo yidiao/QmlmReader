@@ -13,7 +13,7 @@
 |---|---|---|---|
 | 索引层 | `data/articles.json`、`data/collections.json`、`data/gallery.json`、`data/rectify.json` | 列表、筛选、搜索基础信息、页面入口 | 不存文章全文 |
 | 正文层 | `data/articles-json/{Mentor}/{Star}/{slug}.json` | 文章正文、段落、章节、下载导出正文源 | 不存精读解释、不做全站索引 |
-| 精读层 | `data/study-json/{Mentor}/{slug}.json` | 读法、难点、对话、行动、延伸/联结等轻结构内容 | 不存权威正文 |
+| 精读层 | `data/study-json/{Mentor}/{Star}/{slug}.json` | 读法、难点、对话、行动、延伸/联结等轻结构内容 | 不存权威正文 |
 | 下载入口层 | `downloads/manifest.unified.json` + `window.SITE_DATA.downloadData` | 下载中心条目入口与资源类别 | 不存全文正文 |
 
 ---
@@ -116,7 +116,7 @@ _meta/
 路径：
 
 ```text
-data/study-json/{Mentor}/{slug}.json
+data/study-json/{Mentor}/{Star}/{slug}.json
 ```
 
 当前口径：
@@ -131,7 +131,7 @@ data/study-json/{Mentor}/{slug}.json
 - `difficulty`
 - `dialogue`
 - `action`
-- `further` / 文章联结网络
+- `further` / 文章联结网络（HTML 中对应 `#puzzle .puzzle-links`，历史命名兼容）
 
 暂不强推统一数据化：
 

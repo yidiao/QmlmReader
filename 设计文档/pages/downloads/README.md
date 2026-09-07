@@ -21,6 +21,8 @@ html/downloads/downloads.html
 <link rel="stylesheet" href="../../css/style.css">
 <script src="../../js/download-export.js"></script>
 <script src="../../js/site-data.js"></script>
+<script src="../../js/state-center.js"></script>
+<script src="../../js/page-state-adapter.js"></script>
 <script src="../../js/main.js"></script>
 <script src="../../js/darkmode.js"></script>
 <script src="../../js/cursor.js"></script>
@@ -56,3 +58,4 @@ var downloadData = (window.SITE_DATA && window.SITE_DATA.downloadData) || { arti
 2. 不要长期维护每篇文章的静态 TXT / DOCX / PDF 成品作为主方案。
 3. 改下载入口字段后，检查 `_tools/build_data.py` 和 `js/site-data.js` 生成结果。
 4. 下载按钮、弹窗、格式选择逻辑统一由 `js/download-export.js` 承担。
+5. 页面 filter 与选择弹窗状态已接入 `QMLMPageState` 的 `pageDownloads` domain；后续新增页内状态优先沿用该接口。

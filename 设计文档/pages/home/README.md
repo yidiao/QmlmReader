@@ -39,7 +39,7 @@ html/index.html  # 真正首页
 | 功能 | 数据/脚本 |
 |---|---|
 | 站点聚合数据 | `js/site-data.js` |
-| 搜索 | `js/search.js` + `window.SITE_DATA` |
+| 搜索 | `js/search.js` + `window.SITE_DATA`；运行态发布到 `QMLMState.search`，并可从该状态域恢复输入与筛选状态 |
 | 历史上的今天 | `data/history-events.js` |
 | 今日语录 | `js/daily-quote.js`，可能读取语录数据 |
 | 更新日志 | `data/updates.json` |

@@ -30,13 +30,14 @@ html/preferences/preferences.html
 
 | 键 | 用途 |
 |---|---|
-| `qmlm:preferences:v1` | 个人偏好总状态 |
-| `favorites` | 收藏文章列表 |
-| `history` | 历史列表，最多保留 50 条；包含 Tab、分区、偏移、整页进度、分区进度和时间 |
-| `view.mode` | 展示模式预留 |
-| `view.density` | 密度预留 |
+| `qmlm:state:v1` | 新统一状态中心，当前包含 `preferences` 与 `theme` 等状态域 |
+| `qmlm:preferences:v1` | 旧个人偏好状态键，当前保留兼容写入 |
+| `preferences.favorites` | 收藏文章列表 |
+| `preferences.history` | 历史列表，最多保留 50 条；包含 Tab、分区、偏移、整页进度、分区进度和时间 |
+| `preferences.view.mode` | 展示模式预留 |
+| `preferences.view.density` | 密度预留 |
 
-历史记录只保存在浏览器 `localStorage` 中，不需要后端，也不写回项目里的 JSON 数据文件。
+历史记录只保存在浏览器 `localStorage` 中，不需要后端，也不写回项目里的 JSON 数据文件。新代码优先通过 `window.QMLMState.preferences` 读写，偏好页已订阅 `preferences` 域并随状态变更自动刷新；旧键保留用于迁移和兼容。
 
 ---
 
@@ -47,7 +48,7 @@ html/preferences/preferences.html
 3. 收藏功能已接入文章列表卡片和文章详情页。
 4. 文章列表收藏按钮使用紧凑图标形态；详情页保留文本按钮。
 5. 历史列表能显示记录、进度、Tab、分区等信息。
-6. 文章详情页已注入顶部阅读进度条，并暴露 `window.QMLMReadingProgress.current`。
+6. 文章详情页已注入顶部阅读进度条，并暴露 `window.QMLMReadingProgress.current`；若 `window.QMLMState` 存在，也会同步发布到 `QMLMState.reader.progress`。
 7. 继续入口已开始接入 `resume=1` 参数。
 8. 详情页的手动“记录当前位置”按钮已移除，历史记录改为自动保存。
 
@@ -62,9 +63,10 @@ html/preferences/preferences.html
    - 用户取消或超时后仅关闭提示并保留当前位置；
    - 用户确认后返回顶部。
 2. `restoreReadingState()` 已补齐动态内容时机处理：
-   - 正文渲染完成后才启动恢复检测；
-   - 非原始 Tab 的恢复会等待精读区域渲染完成事件或短超时兜底；
-   - 恢复期间暂停自动历史覆盖，提示关闭后再恢复正常保存。
+   - 详情内容渲染完成后才启动恢复检测；
+   - 非初始 Tab 的恢复会等待辅助区域渲染完成事件或短超时兜底；
+   - 恢复期间暂停自动历史覆盖，提示关闭后再恢复正常保存；
+   - 恢复流程阶段状态已发布到 `QMLMState.reader.restore`，便于后续订阅和调试。
 3. 当前已通过本地静态服务 + Headless Chrome 烟测：进入后能跳到历史位置，提示出现，取消后保留当前位置，确认后返回顶部。
 4. 如果历史进度达到 100%，目标行为是视为已完成，不再恢复到末尾，进入页面时回到初始阅读入口。
 5. 章节导航暂不改，但阅读进度对象已预留给后续章节导航使用。
@@ -79,5 +81,5 @@ html/preferences/preferences.html
 4. 历史恢复必须避免页面刚加载时覆盖旧记录。
 5. 恢复定位应等待动态内容渲染完成后再执行。
 6. 用户可取消恢复，避免强制改变当前阅读起点。
-7. 章节导航后续可监听 `qmlm:reading-progress` 事件或读取 `window.QMLMReadingProgress.current`。
+7. 章节导航后续可监听 `qmlm:reading-progress` 事件或读取 `window.QMLMReadingProgress.current`；当前 Tab、章节导航显示状态和章节折叠状态已发布到 `QMLMState.reader`。
 8. 页面视觉以现代卡片 + 轻玻璃质感为主，保持与站点整体红色主调一致。

@@ -36,22 +36,38 @@
         };
     }
 
+    function toLegacyState(state) {
+        var next = cloneDefaults();
+        state = state && typeof state === 'object' ? state : {};
+        next.favorites = Array.isArray(state.favorites) ? state.favorites : [];
+        next.history = Array.isArray(state.history) ? state.history : [];
+        next.view = state.view && typeof state.view === 'object' ? {
+            mode: state.view.mode || DEFAULTS.view.mode,
+            density: state.view.density || DEFAULTS.view.density
+        } : cloneDefaults().view;
+        next.ui = state.ui && typeof state.ui === 'object' ? {
+            section: state.ui.section || DEFAULTS.ui.section
+        } : cloneDefaults().ui;
+        return next;
+    }
+
     function readState() {
+        if (window.QMLMState && typeof window.QMLMState.getPreferences === 'function') {
+            return toLegacyState(window.QMLMState.getPreferences());
+        }
         var raw = localStorage.getItem(STORAGE_KEY);
         var state = raw ? safeJsonParse(raw, null) : null;
         if (!state || typeof state !== 'object') return cloneDefaults();
-        state.favorites = Array.isArray(state.favorites) ? state.favorites : [];
-        state.history = Array.isArray(state.history) ? state.history : [];
-        state.view = state.view && typeof state.view === 'object' ? state.view : {};
-        state.view.mode = state.view.mode || DEFAULTS.view.mode;
-        state.view.density = state.view.density || DEFAULTS.view.density;
-        state.ui = state.ui && typeof state.ui === 'object' ? state.ui : {};
-        state.ui.section = state.ui.section || DEFAULTS.ui.section;
-        return state;
+        return toLegacyState(state);
     }
 
     function writeState(state) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        var next = toLegacyState(state);
+        if (window.QMLMState && typeof window.QMLMState.setPreferences === 'function') {
+            window.QMLMState.setPreferences(next, 'preferences-write');
+            return;
+        }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     }
 
     function escapeHtml(value) {
@@ -212,17 +228,47 @@
         return null;
     }
 
+    function publishReaderRestoreState(patch, source) {
+        if (!window.QMLMState || typeof window.QMLMState.dispatch !== 'function') return;
+        var restore = {
+            key: articleKeyFromBody(),
+            status: 'idle',
+            pending: false,
+            restoring: false,
+            promptActive: false,
+            done: false,
+            updatedAt: new Date().toISOString()
+        };
+        var current = window.QMLMState.getState ? window.QMLMState.getState() : null;
+        if (current && current.reader && current.reader.restore) {
+            restore = Object.assign(restore, current.reader.restore);
+        }
+        restore = Object.assign(restore, patch || {}, { updatedAt: new Date().toISOString() });
+        window.QMLMState.dispatch('reader/patch', { restore: restore }, source || 'reader-restore');
+    }
+
     function restoreReadingState() {
         var key = articleKeyFromBody();
-        if (!key || window.__QMLMHistoryRestoreDone || window.__QMLMHistoryRestoring || window.__QMLMHistoryRestorePending) return;
+        if (!key) {
+            publishReaderRestoreState({ status: 'skipped:no-key', pending: false, restoring: false, promptActive: false, done: false }, 'reader-restore');
+            return;
+        }
+        if (window.__QMLMHistoryRestoreDone || window.__QMLMHistoryRestoring || window.__QMLMHistoryRestorePending) {
+            publishReaderRestoreState({ status: 'skipped:busy', pending: !!window.__QMLMHistoryRestorePending, restoring: !!window.__QMLMHistoryRestoring, promptActive: !!window.__QMLMHistoryRestorePromptActive, done: !!window.__QMLMHistoryRestoreDone }, 'reader-restore');
+            return;
+        }
         var entry = getStoredEntry('history', key);
-        if (!entry) return;
+        if (!entry) {
+            publishReaderRestoreState({ status: 'skipped:no-history', pending: false, restoring: false, promptActive: false, done: false }, 'reader-restore');
+            return;
+        }
 
         var progress = entry.progress || {};
         var pagePercent = typeof progress.pagePercent === 'number' ? progress.pagePercent : (entry.position && typeof entry.position.percent === 'number' ? entry.position.percent : 0);
         if (pagePercent >= 100) {
             window.__QMLMHistoryRestoreDone = true;
             window.__QMLMHistoryRestorePending = false;
+            publishReaderRestoreState({ status: 'skipped:complete', pending: false, restoring: false, promptActive: false, done: true, entryKey: entry.key || key }, 'reader-restore');
             if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
             var originalBtn = findTabButton('original');
             if (originalBtn && !originalBtn.classList.contains('active')) originalBtn.click();
@@ -236,6 +282,7 @@
         window.__QMLMHistoryRestorePending = true;
         window.__QMLMHistoryRestoring = true;
         window.__QMLMHistoryRestoreDone = false;
+        publishReaderRestoreState({ status: 'restoring', pending: true, restoring: true, promptActive: false, done: false, entryKey: entry.key || key }, 'reader-restore');
         if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
         updateReadingProgressBar();
 
@@ -326,6 +373,7 @@
             window.__QMLMHistoryRestoring = false;
             window.__QMLMHistoryRestorePending = false;
             window.__QMLMHistoryRestoreDone = true;
+            publishReaderRestoreState({ status: saveCurrent ? 'dismissed' : 'closed', pending: false, restoring: false, promptActive: false, done: true, entryKey: entry.key || key }, 'reader-restore');
             updateReadingProgressBar();
             if (saveCurrent) scheduleArticleHistorySave(80);
         }
@@ -337,6 +385,7 @@
                 window.requestAnimationFrame(function () {
                     window.requestAnimationFrame(function () {
                         window.scrollTo(0, 0);
+                        publishReaderRestoreState({ status: 'returned-top', pending: false, restoring: false, promptActive: false, done: true, entryKey: entry.key || key }, 'reader-restore');
                         updateReadingProgressBar();
                         scheduleArticleHistorySave(80);
                     });
@@ -364,6 +413,7 @@
             if (dismissBtn) dismissBtn.addEventListener('click', dismissPrompt);
             promptVisible = true;
             window.__QMLMHistoryRestorePromptActive = true;
+            publishReaderRestoreState({ status: 'prompt', pending: false, restoring: false, promptActive: true, done: true, entryKey: entry.key || key }, 'reader-restore');
             return promptEl;
         }
 
@@ -390,12 +440,14 @@
             window.__QMLMHistoryRestoring = false;
             window.__QMLMHistoryRestorePending = false;
             window.__QMLMHistoryRestoreDone = true;
+            publishReaderRestoreState({ status: 'restored', pending: false, restoring: false, promptActive: false, done: true, entryKey: entry.key || key }, 'reader-restore');
             updateReadingProgressBar();
             showPrompt();
         }
 
         function beginRestore() {
             if (window.__QMLMHistoryRestoreDone) return;
+            publishReaderRestoreState({ status: 'waiting-render', pending: true, restoring: true, promptActive: false, done: false, entryKey: entry.key || key }, 'reader-restore');
             waitForStudyReady(function () {
                 var tabBtn = entry.tab ? findTabButton(entry.tab) : null;
                 if (tabBtn) tabBtn.click();
@@ -521,7 +573,20 @@
     }
 
     function notifyPreferenceChange() {
-        window.dispatchEvent(new CustomEvent('qmlm:preferences-changed', { detail: { key: articleKeyFromBody() } }));
+        if (!window.QMLMState) {
+            window.dispatchEvent(new CustomEvent('qmlm:preferences-changed', { detail: { key: articleKeyFromBody() } }));
+            var legacyKey = articleKeyFromBody();
+            if (legacyKey) {
+                window.dispatchEvent(new CustomEvent('qmlm:state-changed', {
+                    detail: {
+                        domain: 'preferences',
+                        source: 'preferences-legacy',
+                        state: readState(),
+                        previous: null
+                    }
+                }));
+            }
+        }
         syncArticleFavoriteButtons(document);
     }
 
@@ -886,19 +951,31 @@
         }
     }
 
+    function refreshPreferencesPageAfterWrite() {
+        if (!window.QMLMState) renderPreferencesPage();
+    }
+
     function bindPageActions() {
         var root = document.querySelector('.prefs-page');
         if (!root || root.__prefsBound) return;
         root.__prefsBound = true;
         var prefsSearchInput = document.getElementById('prefsSearchInput');
-        var prefsDataBox = document.getElementById('prefsDataBox');
-        var prefsDataMessage = document.getElementById('prefsDataMessage');
+
+        function getPrefsDataBox() {
+            return document.getElementById('prefsDataBox');
+        }
+
+        function getPrefsDataMessage() {
+            return document.getElementById('prefsDataMessage');
+        }
 
         function setMessage(text) {
+            var prefsDataMessage = getPrefsDataMessage();
             if (prefsDataMessage) prefsDataMessage.textContent = text || '';
         }
 
         function exportToBox() {
+            var prefsDataBox = getPrefsDataBox();
             if (!prefsDataBox) return;
             prefsDataBox.value = JSON.stringify(readState(), null, 2);
             setMessage('已导出当前偏好。');
@@ -915,7 +992,7 @@
                     var stateNav = readState();
                     stateNav.ui.section = section;
                     writeState(stateNav);
-                    renderPreferencesPage();
+                    refreshPreferencesPageAfterWrite();
                 }
                 return;
             }
@@ -927,7 +1004,7 @@
                 if (!key) return;
                 if (kind === 'favorite') removeFavoriteByKey(key);
                 if (kind === 'history') removeHistoryByKey(key);
-                renderPreferencesPage();
+                refreshPreferencesPageAfterWrite();
                 setMessage(kind === 'favorite' ? '已删除一条收藏。' : '已删除一条历史。');
                 return;
             }
@@ -936,7 +1013,7 @@
                 var stateFav = readState();
                 stateFav.favorites = [];
                 writeState(stateFav);
-                renderPreferencesPage();
+                refreshPreferencesPageAfterWrite();
                 setMessage('收藏已清空。');
                 return;
             }
@@ -945,7 +1022,7 @@
                 var stateHist = readState();
                 stateHist.history = [];
                 writeState(stateHist);
-                renderPreferencesPage();
+                refreshPreferencesPageAfterWrite();
                 setMessage('历史已清空。');
                 return;
             }
@@ -956,6 +1033,7 @@
             }
 
             if (target.id === 'importPrefsBtn') {
+                var prefsDataBox = getPrefsDataBox();
                 if (!prefsDataBox) return;
                 var parsed = safeJsonParse(prefsDataBox.value, null);
                 if (!parsed || typeof parsed !== 'object') {
@@ -968,14 +1046,15 @@
                 next.view = parsed.view && typeof parsed.view === 'object' ? parsed.view : cloneDefaults().view;
                 next.ui = parsed.ui && typeof parsed.ui === 'object' ? parsed.ui : cloneDefaults().ui;
                 writeState(next);
-                renderPreferencesPage();
+                refreshPreferencesPageAfterWrite();
                 setMessage('偏好已导入。');
                 return;
             }
 
             if (target.id === 'resetPrefsBtn') {
                 writeState(cloneDefaults());
-                renderPreferencesPage();
+                refreshPreferencesPageAfterWrite();
+                var prefsDataBox = getPrefsDataBox();
                 if (prefsDataBox) prefsDataBox.value = '';
                 setMessage('全部偏好已重置。');
                 return;
@@ -995,7 +1074,7 @@
                 var stateMode = readState();
                 stateMode.view.mode = target.value;
                 writeState(stateMode);
-                renderPreferencesPage();
+                refreshPreferencesPageAfterWrite();
                 setMessage('展示模式已保存。');
                 return;
             }
@@ -1003,7 +1082,7 @@
                 var stateDensity = readState();
                 stateDensity.view.density = target.value;
                 writeState(stateDensity);
-                renderPreferencesPage();
+                refreshPreferencesPageAfterWrite();
                 setMessage('显示密度已保存。');
             }
         });
@@ -1047,6 +1126,9 @@
         }
         window.QMLMReadingProgress = window.QMLMReadingProgress || {};
         window.QMLMReadingProgress.current = progress;
+        if (window.QMLMState && typeof window.QMLMState.dispatch === 'function') {
+            window.QMLMState.dispatch('reader/patch', { progress: progress }, 'reading-progress');
+        }
         window.dispatchEvent(new CustomEvent('qmlm:reading-progress', { detail: progress }));
     }
 
@@ -1096,7 +1178,8 @@
     }
 
     function boot() {
-        if (document.getElementById('favoritesList') || document.getElementById('prefsSectionBody')) {
+        var hasPreferencesPage = !!(document.getElementById('favoritesList') || document.getElementById('prefsSectionBody'));
+        if (hasPreferencesPage) {
             renderPreferencesPage();
             bindPageActions();
         }
@@ -1140,12 +1223,19 @@
         }
         syncArticleFavoriteButtons(document);
         installFavoriteObserver();
-        window.addEventListener('qmlm:preferences-changed', function () {
-            syncArticleFavoriteButtons(document);
-        });
-        window.addEventListener('storage', function (e) {
-            if (e && e.key === STORAGE_KEY) syncArticleFavoriteButtons(document);
-        });
+        if (window.QMLMState && typeof window.QMLMState.subscribe === 'function') {
+            window.QMLMState.subscribe('preferences', function () {
+                syncArticleFavoriteButtons(document);
+                if (hasPreferencesPage) renderPreferencesPage();
+            });
+        } else {
+            window.addEventListener('qmlm:preferences-changed', function () {
+                syncArticleFavoriteButtons(document);
+            });
+            window.addEventListener('storage', function (e) {
+                if (e && e.key === STORAGE_KEY) syncArticleFavoriteButtons(document);
+            });
+        }
     }
 
     if (document.readyState === 'loading') {

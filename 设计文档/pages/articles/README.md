@@ -8,11 +8,11 @@
 ## 1. 页面范围
 
 ```text
-html/articles/articles.html                 # 文章列表与合集页
-html/articles/_template.html                # 旧模板
-html/articles/_template-v2.html             # 推荐模板
-html/articles/{Mentor}/{slug}.html          # 正式文章详情页
-html/articles/imported/...                  # 批量导入页，暂不按精读页同标准管理
+html/articles/articles.html                          # 文章列表与合集页
+html/articles/_template.html                         # 旧模板
+html/articles/_template-v2.html                      # 推荐模板
+html/articles/{Mentor}/{Star}/{slug}.html            # 正式文章详情页
+html/articles/imported/...                           # 批量导入页，仍按旧抽取/迁移口径管理
 ```
 
 当前非 imported 正式文章详情页：29 篇。
@@ -27,6 +27,16 @@ html/articles/imported/...                  # 批量导入页，暂不按精读�
 | `Marx/` | 6 |
 | `Stalin/` | 3 |
 
+按导师 / 星级统计（以 `data/articles-json/` 当前文件为准）：
+
+| 导师 | 星级分布 |
+|---|---|
+| `Engels/` | `★★★★★:2` |
+| `Lenin/` | `★★☆☆☆:2`，`★★★★★:4` |
+| `Mao/` | `★★★☆☆:1`，`★★★★☆:2`，`★★★★★:9` |
+| `Marx/` | `★★★☆☆:1`，`★★★★☆:1`，`★★★★★:4` |
+| `Stalin/` | `★★☆☆☆:1`，`★★★☆☆:1`，`★★★★★:1` |
+
 ---
 
 ## 2. 页面职责
@@ -37,14 +47,15 @@ html/articles/imported/...                  # 批量导入页，暂不按精读�
 |---|---|---|
 | 列表/索引 | `html/articles/articles.html` + `data/articles.json` | 文章卡片、筛选、合集入口 |
 | 正文 | `data/articles-json/{Mentor}/{Star}/{slug}.json` | 原文正文、段落、章节、下载正文源 |
-| 精读 | `html/articles/{Mentor}/{slug}.html` + 可选 `data/study-json/{Mentor}/{slug}.json` | Tab、读法、难点、对话、行动、视觉、拼图、延伸 |
-| 偏好 | `js/preferences.js` | 文章收藏、阅读历史、继续阅读位置记录 |
+| 精读 | `html/articles/{Mentor}/{Star}/{slug}.html` + 可选 `data/study-json/{Mentor}/{slug}.json` | Tab、读法、难点、对话、行动、视觉、拼图、延伸 |
+| 偏好/阅读状态 | `js/preferences.js`、`js/main.js`、`js/article-common.js`、`js/state-center.js` | 文章收藏、阅读历史、继续阅读位置记录、恢复流程状态、当前 Tab、章节导航显示状态、章节折叠状态、合集弹窗状态 |
 
 核心原则：
 
 - HTML 详情页是“精读页壳 + 正文接入页”。
 - 正文不应长期硬编码在 HTML 中。
 - 精读内容可以先保留在 HTML；若数据化，应进入 `data/study-json/`，不要塞进正文 JSON。
+- 进入 `html/articles/{Mentor}/{Star}/` 后，页面内相对路径要比旧平铺目录多退一层。
 
 ---
 
@@ -54,8 +65,8 @@ html/articles/imported/...                  # 批量导入页，暂不按精读�
 
 ```html
 <body data-category="philosophy"
-      data-article-json="../../../data/articles-json/Mao/★★★★★/shi-jian-lun.json"
-      data-study-json="../../../data/study-json/Mao/shi-jian-lun.json">
+      data-article-json="../../../../data/articles-json/Mao/★★★★★/shi-jian-lun.json"
+      data-study-json="../../../../data/study-json/Mao/★★★★★/shi-jian-lun.json">
 ```
 
 推荐资源顺序：
@@ -91,7 +102,13 @@ html/articles/imported/...                  # 批量导入页，暂不按精读�
 | `action` | 行动实验 | 可进入 `study-json` |
 | `visual` | 可视化 | 复杂布局暂留 HTML |
 | `puzzle` | 理论拼图 | 复杂布局暂留 HTML，联结卡可由 `study-json.further` 接管 |
-| `further` | 延伸阅读 | 可合并到联结网络 |
+| `further` | 延伸阅读 | 旧字段名；与 HTML 的 `#puzzle .puzzle-links` 同一块联结网络 |
+
+补充说明：
+
+- `further` 是精读 JSON 的字段名，不是另一个页面模块。
+- HTML 中的 `puzzle-links` 是渲染容器名，和 `further` 不冲突。
+- 如果暂时只保留 HTML 内容，也可以继续沿用这两个名字的历史约定。
 
 ---
 
@@ -110,7 +127,11 @@ html/articles/Stalin/lun-lunen-zhu-yi-ji-chu.html
 html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
 ```
 
-旧文档中“只完成 5 篇试点”的说法已过时，以本 README 为准。
+说明：
+
+- 这些页面已经完成正文层 + 精读层的双 JSON 接入。
+- 但它们当前仍多处在旧的平铺 HTML 路径；后续推广新约定时，应逐步迁入 `html/articles/{Mentor}/{Star}/`。
+- 旧文档中“只完成 5 篇试点”的说法已过时，以本 README 为准。
 
 ---
 
@@ -119,6 +140,7 @@ html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
 当前事实：
 
 - 读取 `js/site-data.js` 和 `js/main.js`。
+- 搜索运行态已接入 `QMLMState.search`，支持发布与恢复查询/筛选状态。
 - 仍包含较大的 `collectionsData` 兜底数据。
 - 也会尝试读取 `../../data/articles.json`。
 
@@ -149,3 +171,5 @@ html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
 3. 把精读解释混入正文 JSON。
 4. `mentor`、目录、JSON 路径不一致。
 5. 复制某一篇页面作为模板时，把私有样式、私有图表和错误路径一起复制。
+6. 把 `further` 当作和 `puzzle-links` 两套不同系统。
+7. 忘记星级目录后导致相对路径退层不足。
