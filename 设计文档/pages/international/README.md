@@ -39,7 +39,7 @@ html/international/international-column/tieliu-yu-xianfeng.html
 | 功能 | 可能来源 |
 |---|---|
 | 历史日历/事件 | `data/history-events.js` |
-| 栏目与纪念页内容 | 当前多在 HTML 中维护 |
+| 栏目与纪念页内容 | 当前多在 HTML 中维护；现有三个国际专栏入口另由 `js/search.js` 的轻量索引提供全站检索 |
 | 公共导航与样式 | `js/main.js`、`css/style.css` |
 
 ---

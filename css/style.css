@@ -59,13 +59,18 @@ body {
     z-index: 100;
 }
 
-.site-header .container {
+.site-header-inner {
+    width: min(100% - 32px, 1440px);
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.85rem;
+    position: relative;
 }
 
 .logo {
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -125,7 +130,10 @@ body {
 
 .main-nav {
     display: flex;
-    gap: 1.5rem;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: auto;
+    min-width: 0;
 }
 
 .main-nav a {
@@ -140,6 +148,153 @@ body {
 .main-nav a:hover,
 .main-nav a.active {
     border-bottom-color: var(--secondary-color);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.main-nav a {
+    font-size: 0.96rem;
+}
+
+.site-header > .site-header-inner > .nav-search {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex: 0 0 auto;
+    z-index: 1002;
+}
+
+.nav-search {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.nav-search-toggle,
+.nav-search-submit,
+.nav-search-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.nav-search-toggle,
+.nav-search-close {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 999px;
+    font-size: 1rem;
+}
+
+.nav-search-submit {
+    display: none;
+    padding: 0 0.9rem;
+    height: 2.2rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    margin-left: 0.45rem;
+    white-space: nowrap;
+}
+
+.nav-search-toggle:hover,
+.nav-search-submit:hover,
+.nav-search-close:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-1px);
+}
+
+.nav-search-close {
+    display: none;
+}
+
+.nav-search-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-search-form input {
+    width: 0;
+    min-width: 0;
+    opacity: 0;
+    pointer-events: none;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.16);
+    color: #fff;
+    font-size: 0.92rem;
+    transition: width 0.2s ease, opacity 0.2s ease, padding 0.2s ease;
+}
+
+.nav-search-form input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.nav-search-results {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    width: min(560px, 78vw);
+    max-height: 60vh;
+    overflow-y: auto;
+    z-index: 1200;
+}
+
+.site-header.search-open > .site-header-inner > .nav-search {
+    position: absolute;
+    left: min(300px, 24vw);
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.25rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    box-shadow: -18px 0 24px rgba(139,0,0,0.35);
+}
+
+.site-header.search-open > .site-header-inner > .nav-search .nav-search-toggle {
+    display: none;
+}
+
+.site-header.search-open > .site-header-inner > .nav-search .nav-search-form {
+    width: 100%;
+}
+
+.site-header.search-open > .site-header-inner > .nav-search .nav-search-form input {
+    width: 100%;
+    opacity: 1;
+    pointer-events: auto;
+    padding: 0 0.9rem;
+    height: 2.2rem;
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+.site-header.search-open > .site-header-inner > .nav-search .nav-search-results.active {
+    display: block;
+}
+
+.site-header.search-open .main-nav .nav-links,
+.site-header.search-open .main-nav .dark-mode-toggle {
+    visibility: hidden;
+}
+
+.site-header.search-open > .site-header-inner > .nav-search .nav-search-submit,
+.site-header.search-open > .site-header-inner > .nav-search .nav-search-close {
+    display: inline-flex;
 }
 
 /* 搜索区域 */
@@ -1436,12 +1591,13 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
 /* ==================== 响应式设计 ==================== */
 @media (max-width: 768px) {
     /* --- 头部导航 --- */
-    .site-header .container {
+    .site-header-inner {
+        width: min(100% - 24px, 1440px);
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
-        gap: 0;
+        gap: 0.5rem;
     }
 
     .hamburger-btn {
@@ -1524,6 +1680,44 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
 
     .main-nav a:last-of-type {
         border-bottom: none;
+    }
+
+    .nav-search {
+        flex: 1 1 auto;
+        justify-content: center;
+        min-width: 0;
+    }
+
+    .nav-search-toggle {
+        margin-left: auto;
+    }
+
+    .nav-search-form {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .nav-search-form input {
+        max-width: 0;
+    }
+
+    .site-header.search-open > .site-header-inner > .nav-search {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        top: 12px;
+        transform: none;
+        z-index: 1002;
+    }
+
+    .site-header.search-open .main-nav .nav-links,
+    .site-header.search-open .main-nav .dark-mode-toggle {
+        visibility: hidden;
+    }
+
+    .site-header.search-open > .site-header-inner > .nav-search .nav-search-form input {
+        width: 100%;
+        max-width: none;
     }
 
     .dark-mode-toggle {
@@ -1825,26 +2019,30 @@ body.dark-mode .template-box pre {
 }
 
 /* ==================== 搜索结果样式 ==================== */
-#searchResults {
+#searchResults,
+.search-results {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     background: white;
+    color: var(--text-color);
     border: 1px solid #ddd;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
     max-height: 70vh;
     overflow-y: auto;
     z-index: 1000;
 }
 
-#searchResults.active {
+#searchResults.active,
+.search-results.active {
     display: block;
 }
 
-body.dark-mode #searchResults {
+body.dark-mode #searchResults,
+body.dark-mode .search-results {
     background: #2a2a2a;
     border-color: #444;
 }
@@ -1861,6 +2059,14 @@ body.dark-mode .search-results-header {
     background: #333;
     border-color: #444;
     color: #aaa;
+}
+
+.nav-search-results .search-results-header {
+    border-radius: 0;
+}
+
+.nav-search-results .search-result-item {
+    margin: 8px;
 }
 
 .filter-indicator {

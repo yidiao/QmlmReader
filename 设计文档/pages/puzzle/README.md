@@ -40,4 +40,5 @@ html/puzzle/puzzle.html
 1. `puzzle.html` 内联样式和脚本体量很大，后续应拆出模块 CSS/JS。
 2. 当前页面有私有 dark mode localStorage 逻辑，后续应和 `js/darkmode.js` 统一。
 3. 全局图谱数据如果继续扩展，应独立设计数据结构，不要直接复用单篇文章 `puzzle-links`。
-4. 注意源码中存在疑似 CSS 色值缺 `#` 的写法，如 `background: c0c1c3;`，后续做视觉修复时应核查。
+4. 全局拼图的泳道、文章节点、图例和弹窗徽标应统一使用 `css/category-theme.css` / `js/category-theme.js` 的六大类主题色；数据里优先保存分类 key，不再新增分散的 `badgeColor` 硬编码。
+5. 注意源码中存在疑似 CSS 色值缺 `#` 的写法，如 `background: c0c1c3;`，做视觉修复时必须一并核查。

@@ -137,7 +137,35 @@ var rectifyIndex = (window.SITE_DATA && window.SITE_DATA.rectifyIndex) ? window.
     },
 ];
 
-// ------ 4. 历史大事件索引（动态从 historyData 构建，若已加载） ------
+// ------ 4. 国际专栏索引 ------
+var columnIndex = (window.SITE_DATA && window.SITE_DATA.columnIndex) ? window.SITE_DATA.columnIndex : [
+    {
+        title: '铁流与先锋——中俄早期革命中的党与阶级',
+        file: 'international/international-column/tieliu-yu-xianfeng.html',
+        type: 'column',
+        category: '国际专栏',
+        summary: '从中俄早期革命经验考察政党、阶级与革命先锋之间的关系。',
+        keywords: ['中俄革命', '先锋队', '政党', '阶级', '国际共运']
+    },
+    {
+        title: '包围圈的破产——苏联反法西斯集体安全的失败（1921—1939）',
+        file: 'international/international-column/encirclement.html',
+        type: 'column',
+        category: '国际专栏',
+        summary: '回顾两次世界大战之间苏联集体安全政策及反法西斯包围圈的形成与破产。',
+        keywords: ['苏联', '反法西斯', '集体安全', '国际关系', '包围圈']
+    },
+    {
+        title: '地基——自然条件对社会制度的制约',
+        file: 'international/international-column/foundations.html',
+        type: 'column',
+        category: '国际专栏',
+        summary: '讨论自然条件、生产基础与社会制度形成之间的约束关系。',
+        keywords: ['自然条件', '社会制度', '生产力', '历史唯物主义', '地基']
+    }
+];
+
+// ------ 5. 历史大事件索引（动态从 historyData 构建，若已加载） ------
 // 这部分在 performSearch 中动态引用 historyData
 
 // ============================================================
@@ -148,6 +176,44 @@ let currentFilters = {
     categories: [],
     priorities: []
 };
+
+function getHtmlPrefix() {
+    var path = window.location.pathname;
+    var dir = path.replace(/\/[^\/]*\.html$/, '');
+    var parts = dir.split('/').filter(function (p) { return p.length > 0; });
+    var htmlIdx = parts.indexOf('html');
+    var depth = htmlIdx === -1 ? 0 : parts.length - htmlIdx - 1;
+    var p = '';
+    for (var i = 0; i < depth; i++) p += '../';
+    return p;
+}
+
+function resolveSearchHref(file) {
+    if (!file) return '';
+    var href = String(file).replace(/^\.\//, '');
+    if (/^(?:[a-z]+:)?\/\//i.test(href) || href.charAt(0) === '#') return href;
+    return getHtmlPrefix() + href;
+}
+
+function getSearchInputs() {
+    var inputs = Array.prototype.slice.call(document.querySelectorAll('[data-search-input]'));
+    var fallback = document.getElementById('searchInput');
+    if (fallback && inputs.indexOf(fallback) === -1) inputs.push(fallback);
+    return inputs;
+}
+
+function getSearchResultsContainer(inputEl) {
+    if (inputEl && inputEl.dataset && inputEl.dataset.resultsTarget) {
+        var target = document.getElementById(inputEl.dataset.resultsTarget);
+        if (target) return target;
+    }
+    return document.getElementById('searchResults');
+}
+
+function getSearchInputValue(inputEl) {
+    var input = inputEl || getSearchInputs()[0] || null;
+    return input ? input.value.trim().toLowerCase() : '';
+}
 
 function publishSearchState(query, resultCounts) {
     if (!window.QMLMState || typeof window.QMLMState.dispatch !== 'function') return;
@@ -181,10 +247,11 @@ function applySearchStateToPage(searchState) {
     const filters = normalizeSearchFilters(searchState.filters);
     currentFilters = filters;
 
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput && typeof searchState.query === 'string' && searchInput.value !== searchState.query) {
-        searchInput.value = searchState.query;
-    }
+    getSearchInputs().forEach(function (searchInput) {
+        if (typeof searchState.query === 'string' && searchInput.value !== searchState.query) {
+            searchInput.value = searchState.query;
+        }
+    });
 
     document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
         const value = btn.dataset.filter;
@@ -207,13 +274,12 @@ function updateFilters(author) {
         if (idx === -1) currentFilters.authors.push(author);
         else currentFilters.authors.splice(idx, 1);
     }
-    publishSearchState(document.getElementById('searchInput') ? document.getElementById('searchInput').value.trim().toLowerCase() : '', null);
+    publishSearchState(getSearchInputValue(), null);
 }
 
 function resetFilters() {
     currentFilters = { authors: [], categories: [], priorities: [] };
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) searchInput.value = '';
+    getSearchInputs().forEach(function (searchInput) { searchInput.value = ''; });
     applySearchStateToPage({ query: '', filters: currentFilters, resultCounts: null });
     publishSearchState('', null);
 }
@@ -221,9 +287,11 @@ function resetFilters() {
 // ============================================================
 // 执行搜索
 // ============================================================
-function performSearch() {
-    const query = document.getElementById('searchInput').value.trim().toLowerCase();
-    const resultsContainer = document.getElementById('searchResults');
+function performSearch(inputEl) {
+    const searchInput = inputEl || getSearchInputs()[0];
+    const query = getSearchInputValue(searchInput);
+    const resultsContainer = getSearchResultsContainer(searchInput);
+    if (!resultsContainer) return;
 
     if (!query) {
         resultsContainer.innerHTML = '';
@@ -264,6 +332,14 @@ function performSearch() {
         }
     });
 
+    // ---- 搜索国际专栏 ----
+    columnIndex.forEach(item => {
+        const text = [item.title, item.category, item.summary, item.keywords.join(' ')].join(' ').toLowerCase();
+        if (text.includes(query)) {
+            allResults.push({ _type: 'column', _score: 2, ...item });
+        }
+    });
+
     // ---- 搜索历史大事件 ----
     const eventResults = [];
     if (typeof historyData !== 'undefined') {
@@ -295,7 +371,7 @@ function performSearch() {
 
     // ---- 渲染结果 ----
     if (allResults.length === 0) {
-        publishSearchState(query, { total: 0, article: 0, gallery: 0, rectify: 0, event: 0 });
+        publishSearchState(query, { total: 0, article: 0, gallery: 0, rectify: 0, column: 0, event: 0 });
         resultsContainer.innerHTML = `
             <div class="search-no-results">
                 <div style="font-size:2rem;margin-bottom:8px;">🔍</div>
@@ -308,19 +384,21 @@ function performSearch() {
     }
 
     // 统计各类数量
-    const counts = { article: 0, gallery: 0, rectify: 0, event: 0 };
+    const counts = { article: 0, gallery: 0, rectify: 0, column: 0, event: 0 };
     allResults.forEach(r => counts[r._type]++);
     publishSearchState(query, {
         total: allResults.length,
         article: counts.article,
         gallery: counts.gallery,
         rectify: counts.rectify,
+        column: counts.column,
         event: counts.event
     });
     const summaryParts = [];
     if (counts.article) summaryParts.push(`文章 ${counts.article}`);
     if (counts.gallery) summaryParts.push(`文艺 ${counts.gallery}`);
     if (counts.rectify) summaryParts.push(`正名 ${counts.rectify}`);
+    if (counts.column) summaryParts.push(`专栏 ${counts.column}`);
     if (counts.event) summaryParts.push(`大事件 ${counts.event}`);
 
     let html = `<div class="search-results-header">共找到 ${allResults.length} 条结果（${summaryParts.join(' · ')}）</div>`;
@@ -333,6 +411,8 @@ function performSearch() {
             html += renderGalleryResult(item);
         } else if (item._type === 'rectify') {
             html += renderRectifyResult(item);
+        } else if (item._type === 'column') {
+            html += renderColumnResult(item);
         } else if (item._type === 'event') {
             html += renderEventResult(item);
         }
@@ -363,7 +443,7 @@ function renderArticleResult(item) {
                 <span class="result-category" style="background:${catColor}20;color:${catColor};border:1px solid ${catColor}40;">${item.category}</span>
                 <span class="result-type-tag" style="background:#f3f3f3;color:#888;font-size:0.75em;padding:2px 7px;border-radius:3px;">📖 文章</span>
             </div>
-            <h4 class="result-title"><a href="${item.file}">${item.title}</a></h4>
+            <h4 class="result-title"><a href="${resolveSearchHref(item.file)}">${item.title}</a></h4>
             <p class="result-meta">${item.author}</p>
             <p class="result-keywords">关键词：${item.keywords.slice(0, 4).join('、')}</p>
         </div>`;
@@ -379,7 +459,7 @@ function renderGalleryResult(item) {
                 <span class="result-type-tag" style="background:#fff0f3;color:#c41e3a;font-size:0.8em;padding:2px 8px;border-radius:3px;font-weight:600;">${typeIcon} ${typeName}</span>
                 <span class="result-year" style="color:#888;font-size:0.85em;">${item.category}${yearStr ? ' · ' + yearStr : ''}</span>
             </div>
-            <h4 class="result-title"><a href="${item.file}">${item.title}</a></h4>
+            <h4 class="result-title"><a href="${resolveSearchHref(item.file)}">${item.title}</a></h4>
             <p class="result-keywords" style="margin:0;font-size:0.8em;color:#999;">关键词：${item.keywords.slice(0, 4).join('、')}</p>
         </div>`;
 }
@@ -391,9 +471,22 @@ function renderRectifyResult(item) {
                 <span class="result-type-tag" style="background:#e3f2fd;color:#1565c0;font-size:0.8em;padding:2px 8px;border-radius:3px;font-weight:600;">⚖️ 正名</span>
                 <span class="result-year" style="color:#888;font-size:0.85em;">${item.category}</span>
             </div>
-            <h4 class="result-title"><a href="${item.file}">${item.title}</a></h4>
+            <h4 class="result-title"><a href="${resolveSearchHref(item.file)}">${item.title}</a></h4>
             <p class="result-meta" style="font-size:0.88em;color:#555;margin:4px 0;">${item.summary}</p>
             <p class="result-keywords" style="margin:0;font-size:0.8em;color:#999;">关键词：${item.keywords.slice(0, 4).join('、')}</p>
+        </div>`;
+}
+
+function renderColumnResult(item) {
+    return `
+        <div class="search-result-item search-result-column">
+            <div class="result-header">
+                <span class="result-type-tag result-type-column">专栏</span>
+                <span class="result-year">${item.category}</span>
+            </div>
+            <h4 class="result-title"><a href="${resolveSearchHref(item.file)}">${item.title}</a></h4>
+            <p class="result-meta">${item.summary}</p>
+            <p class="result-keywords">关键词：${item.keywords.slice(0, 4).join('、')}</p>
         </div>`;
 }
 
@@ -407,7 +500,7 @@ function renderEventResult(item) {
                 <span class="result-year" style="color:#e6a817;font-weight:bold;font-size:0.88em;">${item.year}年 · ${item.date}</span>
                 <span style="color:${natureColor};font-size:0.85em;font-weight:bold;">${natureIcon}</span>
             </div>
-            <h4 class="result-title"><a href="${item.file}">${item.title}</a></h4>
+            <h4 class="result-title"><a href="${resolveSearchHref(item.file)}">${item.title}</a></h4>
             <p class="result-meta" style="font-size:0.88em;color:#555;margin:4px 0;">${item.desc}</p>
         </div>`;
 }
@@ -438,42 +531,59 @@ function syncFiltersFromPage() {
 // ============================================================
 // 事件绑定
 // ============================================================
-document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.getElementById('searchInput');
-    if (!searchInput) return;
+function initSearchBindings() {
+    const searchInputs = getSearchInputs();
+    if (!searchInputs.length) return false;
 
     applySearchStateToPage(readSearchState());
-    if (window.QMLMState && typeof window.QMLMState.subscribe === 'function') {
+    if (window.QMLMState && typeof window.QMLMState.subscribe === 'function' && !window.__QMLM_SEARCH_SUBSCRIBED__) {
+        window.__QMLM_SEARCH_SUBSCRIBED__ = true;
         window.QMLMState.subscribe('search', function (searchState, rootState, meta) {
             if (meta && meta.source === 'search') return;
             applySearchStateToPage(searchState);
-            if (searchState && searchState.query) performSearch();
         });
     }
 
-    // 回车搜索
-    searchInput.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
+    searchInputs.forEach(function (searchInput) {
+        if (searchInput.__qmlmSearchBound) return;
+        searchInput.__qmlmSearchBound = true;
+
+        searchInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (typeof syncFiltersFromPage === 'function') syncFiltersFromPage();
+                performSearch(searchInput);
+            }
+        });
+
+        searchInput.addEventListener('input', debounce(function () {
             if (typeof syncFiltersFromPage === 'function') syncFiltersFromPage();
-            performSearch();
-        }
+            performSearch(searchInput);
+        }, 220));
+
+        searchInput.addEventListener('focus', function () {
+            const results = getSearchResultsContainer(searchInput);
+            if (results && results.innerHTML.trim()) results.classList.add('active');
+        });
     });
 
-    // 实时搜索（300ms 防抖）
-    searchInput.addEventListener('input', debounce(function () {
-        if (typeof syncFiltersFromPage === 'function') syncFiltersFromPage();
-        performSearch();
-    }, 300));
-
-    // 点击空白关闭
     document.addEventListener('click', function (e) {
-        const si = document.getElementById('searchInput');
-        const rc = document.getElementById('searchResults');
-        if (si && rc && !si.contains(e.target) && !rc.contains(e.target)) {
-            rc.classList.remove('active');
-        }
+        searchInputs.forEach(function (searchInput) {
+            const results = getSearchResultsContainer(searchInput);
+            if (results && !searchInput.contains(e.target) && !results.contains(e.target)) {
+                results.classList.remove('active');
+            }
+        });
     });
-});
+
+    return true;
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearchBindings);
+} else {
+    initSearchBindings();
+}
 
 // 防抖工具
 function debounce(func, wait) {

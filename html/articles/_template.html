@@ -6,9 +6,10 @@
     <title>文章标题 - 青年马列毛主义驿站</title>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/articles-detail.css">
+    <link rel="stylesheet" href="../../css/category-theme.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+<body data-category="politics">
     <!-- 导航栏（自动注入） -->
     <div id="nav-placeholder"></div>
 
@@ -24,7 +25,7 @@
         <!-- 文章主体 -->
         <main class="article-main">
             <!-- 渐变头部 - 颜色由内容类型决定 -->
-            <header class="article-header" data-category="政治理论">
+            <header class="article-header">
                 <div class="header-decoration"></div>
                 <div class="importance-badge"> 核心必读</div>
                 <h1>文章标题</h1>
@@ -247,17 +248,6 @@
         window.addEventListener('scroll', updateChapterNavHighlight);
     
 </script>
-
-    <style>
-        /* 军事战略 - 深绿系（模板默认，实际使用时应替换为对应类别色值） */
-        :root {
-            --cat-primary: #1b5e20;
-            --cat-secondary: #388e3c;
-            --cat-gradient: linear-gradient(135deg, #0a2910 0%, #1b5e20 50%, #388e3c 100%);
-            --cat-light: #e8f5e9;
-            --cat-dark: #0a1a0a;
-        }
-    </style>
 
 <script src="../../js/darkmode.js"></script>
 <script src="../../js/cursor.js"></script>

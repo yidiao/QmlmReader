@@ -1,18 +1,18 @@
 # 文章模块 README
 
-> 对应源码：`html/articles/`、`data/articles.json`、`data/articles-json/`、`data/study-json/`、`js/article-common.js`、`js/article-json.js`、`js/article-study.js`、`js/preferences.js`、`css/articles-detail.css`。  
-> 作用：管理文章列表页、正式文章详情页、正文层、精读层和渲染接入边界。
+> 对应源码：`html/articles/articles.html`、`css/articles-index.css`、`js/articles-index.js`、`data/articles.json`、`data/articles-json/`、`data/study-json/`、`js/article-common.js`、`js/article-json.js`、`js/article-study.js`、`js/preferences.js`、`css/articles-detail.css`。  
+> 作用：管理文章索引页、正式文章详情页、正文层、精读层和渲染接入边界。
 
 ---
 
 ## 1. 页面范围
 
 ```text
-html/articles/articles.html                          # 文章列表与合集页
+html/articles/articles.html                          # 文章索引页（展示页）
 html/articles/_template.html                         # 旧模板
 html/articles/_template-v2.html                      # 推荐模板
 html/articles/{Mentor}/{Star}/{slug}.html            # 正式文章详情页
-html/articles/imported/...                           # 批量导入页，仍按旧抽取/迁移口径管理
+html/articles/imported/...                           # 历史抽取页池，不再承担正式展示职责
 ```
 
 当前非 imported 正式文章详情页：29 篇。
@@ -41,25 +41,60 @@ html/articles/imported/...                           # 批量导入页，仍按�
 
 ## 2. 页面职责
 
-文章模块分三层：
+文章模块分四层：
 
 | 层 | 文件 | 职责 |
 |---|---|---|
-| 列表/索引 | `html/articles/articles.html` + `data/articles.json` | 文章卡片、筛选、合集入口 |
+| 索引/展示 | `html/articles/articles.html` + `css/articles-index.css` + `js/articles-index.js` + `data/articles.json` | 文章卡片、筛选、合集入口、布局切换的统一壳 |
 | 正文 | `data/articles-json/{Mentor}/{Star}/{slug}.json` | 原文正文、段落、章节、下载正文源 |
-| 精读 | `html/articles/{Mentor}/{Star}/{slug}.html` + 可选 `data/study-json/{Mentor}/{slug}.json` | Tab、读法、难点、对话、行动、视觉、拼图、延伸 |
+| 精读 | `html/articles/{Mentor}/{Star}/{slug}.html` + `data/study-json/{Mentor}/{Star}/{slug}.json` | Tab、读法、难点、对话、行动、视觉、拼图、延伸 |
 | 偏好/阅读状态 | `js/preferences.js`、`js/main.js`、`js/article-common.js`、`js/state-center.js` | 文章收藏、阅读历史、继续阅读位置记录、恢复流程状态、当前 Tab、章节导航显示状态、章节折叠状态、合集弹窗状态 |
 
 核心原则：
 
-- HTML 详情页是“精读页壳 + 正文接入页”。
+- 索引页只负责读索引、渲染卡片和入口，不承载正文与历史抽取页逻辑。
 - 正文不应长期硬编码在 HTML 中。
 - 精读内容可以先保留在 HTML；若数据化，应进入 `data/study-json/`，不要塞进正文 JSON。
 - 进入 `html/articles/{Mentor}/{Star}/` 后，页面内相对路径要比旧平铺目录多退一层。
+- `articles.html` 与详情页分工明确，便于未来做单列 / 双列 / 其他视图模式切换。
 
 ---
 
-## 3. 详情页标准接口
+## 3. 索引页标准接口
+
+推荐 body：
+
+```html
+<body data-page-type="articles"
+      data-source="../../data/articles.json"
+      data-view-mode="grid">
+```
+
+推荐资源顺序：
+
+```html
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/articles-index.css">
+
+<script src="../../js/site-data.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/darkmode.js"></script>
+<script src="../../js/cursor.js"></script>
+<script src="../../js/articles-index.js"></script>
+```
+
+说明：
+
+- `css/articles-index.css` 只承载文章索引页样式，尽量不和详情页共用私有选择器。
+- `css/category-theme.css` 统一维护六大类主题色；索引卡片分类标签使用 `article-category-tag[data-category]`。
+- `js/category-theme.js` 统一提供分类 key / label 归一化接口；页面不得在单个 HTML 中重新定义分类主色。
+- `js/articles-index.js` 只负责索引页的数据读取、筛选、卡片渲染、合集弹窗和布局切换。
+- 文章卡片收藏按钮沿用 `preferences.js` 的 `data-qmlm-favorite-btn` 与 `data-qmlm-favorite-mode="icon"` 协议，按钮位于“阅读全文”左侧。
+- 页面壳本身尽量薄，只保留挂载点和少量 data-attribute。
+
+---
+
+## 4. 详情页标准接口
 
 推荐 body：
 
@@ -72,24 +107,24 @@ html/articles/imported/...                           # 批量导入页，仍按�
 推荐资源顺序：
 
 ```html
-<link rel="stylesheet" href="../../../css/style.css">
-<link rel="stylesheet" href="../../../css/articles-detail.css">
+<link rel="stylesheet" href="../../../../css/style.css">
+<link rel="stylesheet" href="../../../../css/articles-detail.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script src="../../../js/article-common.js"></script>
-<script src="../../../js/article-json.js"></script>
-<script src="../../../js/article-study.js"></script>
-<script src="../../../js/site-data.js"></script>
-<script src="../../../js/main.js"></script>
-<script src="../../../js/darkmode.js"></script>
-<script src="../../../js/cursor.js"></script>
+<script src="../../../../js/article-common.js"></script>
+<script src="../../../../js/article-json.js"></script>
+<script src="../../../../js/article-study.js"></script>
+<script src="../../../../js/site-data.js"></script>
+<script src="../../../../js/main.js"></script>
+<script src="../../../../js/darkmode.js"></script>
+<script src="../../../../js/cursor.js"></script>
 ```
 
 若页面没有图表，不要无意义引入 Chart.js。
 
 ---
 
-## 4. Tab 约定
+## 5. Tab 约定
 
 标准 Tab：
 
@@ -112,7 +147,7 @@ html/articles/imported/...                           # 批量导入页，仍按�
 
 ---
 
-## 5. 当前 JSON 接入状态
+## 6. 当前 JSON 接入状态
 
 当前检测到 8 篇详情页同时声明 `data-article-json` 和 `data-study-json`：
 
@@ -135,24 +170,24 @@ html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
 
 ---
 
-## 6. `articles.html` 维护口径
+## 7. `articles.html` 的维护口径
 
 当前事实：
 
-- 读取 `js/site-data.js` 和 `js/main.js`。
-- 搜索运行态已接入 `QMLMState.search`，支持发布与恢复查询/筛选状态。
-- 仍包含较大的 `collectionsData` 兜底数据。
-- 也会尝试读取 `../../data/articles.json`。
+- 索引页应以 `data/articles.json` / `window.SITE_DATA.articles` 为权威来源。
+- `articles.html` 不再承担原始资料池展示职责。
+- 大块私有卡片数据、嵌套 fallback 和页面专有样式应逐步迁出到 `css/articles-index.css` 与 `js/articles-index.js`。
+- 页面内应只保留壳、挂载点和少量配置，不再塞全文和大段兜底数据。
 
 后续建议：
 
 1. 优先以 `data/articles.json` / `window.SITE_DATA.articles` 为权威索引。
 2. 以 `data/collections.json` / `window.SITE_DATA.collections` 为权威合集。
-3. 页面内大段兜底数据在确认稳定后逐步删除。
+3. 索引页采用统一的卡片渲染器后，再逐步把其它展示页也迁入同样的模式。
 
 ---
 
-## 7. 最近任务状态
+## 8. 最近任务状态
 
 “正文层、精读层、渲染层解耦”在本阶段视为**规范完成**：
 
@@ -160,11 +195,16 @@ html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
 - 精读层：`study-json`。
 - 渲染层：`article-json.js` / `article-study.js` / `article-common.js`。
 
-后续不是“继续完成旧任务”，而是另开任务逐步推广与清理。
+下一阶段重点是：
+
+- 索引页壳化
+- 通用卡片渲染器
+- 视图模式切换
+- 逐步清理旧 fallback 与历史抽取入口
 
 ---
 
-## 8. 常见错误
+## 9. 常见错误
 
 1. 页面里继续硬编码全文，同时又声明 `data-article-json`。
 2. 改正文只改 HTML，不改正文 JSON。
@@ -173,3 +213,4 @@ html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
 5. 复制某一篇页面作为模板时，把私有样式、私有图表和错误路径一起复制。
 6. 把 `further` 当作和 `puzzle-links` 两套不同系统。
 7. 忘记星级目录后导致相对路径退层不足。
+8. 让索引页继续承担原始资料池和展示页双重职责。

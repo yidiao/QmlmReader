@@ -34,7 +34,7 @@
 
 | 模块 | 页面路径 | 文档入口 | 当前用途 |
 |---|---|---|---|
-| 首页 | `html/index.html` | `设计文档/pages/home/README.md` | 首页、站点入口、今日内容、搜索入口 |
+| 首页 | `html/index.html` | `设计文档/pages/home/README.md` | 首页、站点入口、今日内容；全站搜索位于公共导航 |
 | 关于 | `html/about/` | `设计文档/pages/about/README.md` | 关于页、更新日志 |
 | 个人偏好 | `html/preferences/` | `设计文档/pages/preferences/README.md` | 本地收藏、阅读历史、视图设置入口 |
 | 文章 | `html/articles/` | `设计文档/pages/articles/README.md` | 文章列表、导师文章页、精读页壳 |
@@ -89,6 +89,7 @@
 | 根跳转 | `index.html` -> `html/index.html` |
 | 全站公共样式 | `css/style.css` |
 | 公共导航/面包屑/章节导航 | `js/main.js` |
+| 分类主题令牌 | `css/category-theme.css` + `js/category-theme.js` + `设计文档/design-tokens.md` |
 | 响应式状态中心 | `js/state-center.js` + `js/page-state-adapter.js` |
 | 聚合数据 | `js/site-data.js`，由 `_tools/build_data.py` 生成 |
 | 搜索 | `js/search.js` |
@@ -118,6 +119,8 @@
   - `html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html`
 - 许多 HTML 页面仍有内联 `<style>`；视觉规范后续应逐步下沉到 `css/`。
 - `articles.html` 仍有较大的内嵌合集兜底数据；后续应继续收敛到 `window.SITE_DATA.collections` / `data/collections.json`。
+- 公共导航以 `js/main.js` 为唯一来源，页面仅保留 `#nav-placeholder`；不得再在页面中硬编码 `site-header`、菜单项或黑夜模式按钮。
+- 全站搜索由公共导航提供，`js/main.js` 会自动加载 `js/search.js`；搜索覆盖文章、文艺、正名、国际专栏及已加载的历史事件，结果链接按当前页面层级自动修正。
 
 ### 5. 硬规则
 

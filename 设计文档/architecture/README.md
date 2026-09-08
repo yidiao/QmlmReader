@@ -28,12 +28,12 @@ index.html
 <div id="nav-placeholder"></div>
 <script src="相对路径/js/site-data.js"></script>
 <script src="相对路径/js/main.js"></script>
-<!-- main.js 会按当前层级自动加载 js/preferences.js -->
+<!-- main.js 会按当前层级自动加载 js/search.js、js/preferences.js -->
 <script src="相对路径/js/darkmode.js"></script>
 <script src="相对路径/js/cursor.js"></script>
 ```
 
-若页面使用 `main.js` 或 `search.js`，必须先加载 `site-data.js`。
+若页面使用 `main.js`，必须先加载 `site-data.js`。不要在普通页面重复显式加载 `search.js`，由 `main.js` 统一加载。
 
 ---
 
@@ -43,13 +43,13 @@ index.html
 |---|---|---|
 | `index.html` | 根跳转到 `html/index.html` | 不承载业务页面 |
 | `html/index.html` | 真正首页 | 首页模块细节见 `pages/home/README.md` |
-| `css/style.css` | 全站基础视觉、导航、卡片、暗色模式通用规则 | 不宜继续无限塞页面私有样式 |
-| `js/main.js` | 导航注入、面包屑、合集导航、章节导航、卡片动画 | 公共逻辑，不应塞具体页面的大段业务数据 |
+| `css/style.css` | 全站基础视觉、导航、卡片、暗色模式通用规则 | 公共导航容器使用 `.site-header-inner`，不得被页面私有 `.container` 重定义污染 |
+| `js/main.js` | 导航注入、导航搜索交互、面包屑、合集导航、章节导航、卡片动画 | 公共导航唯一来源；页面只放 `#nav-placeholder`，不硬编码 `site-header`、菜单项或黑夜模式按钮 |
 | `js/site-data.js` | 站点聚合数据 | 生成产物，不要手改 |
 | `js/state-center.js` | 轻量响应式状态中心 | 统一运行态读写、订阅、持久化；已接 `preferences`、`theme`，并提供 `reader`、`search`、`ui` 和通用 domain 内存态 |
 | `js/page-state-adapter.js` | 页面私有状态适配层 | 给内联脚本和页面私有 JS 提供 `QMLMPageState` 接口，先接入后迁移 |
 | `_tools/build_data.py` | 聚合数据构建 | 改数据源后运行它更新 `site-data.js` |
-| `js/search.js` | 搜索索引读取与结果渲染 | 基于索引层，不应塞正文全文；后续接入 `QMLMState.search` |
+| `js/search.js` | 全站搜索索引读取、输入绑定与结果渲染 | 由 `main.js` 自动加载；支持文章、文艺、正名、国际专栏和已加载历史事件，不应塞正文全文；查询和统计接入 `QMLMState.search` |
 | `js/preferences.js` | 本地偏好、文章收藏、阅读历史、视图设置接口 | 通过 `QMLMState.preferences` 读写，保留旧键兼容 |
 | `js/darkmode.js` | 暗色模式 | 通过 `QMLMState.theme` 读写，保留 `darkMode` 旧键兼容 |
 | `js/cursor.js` | 自定义光标 | 公共视觉增强 |

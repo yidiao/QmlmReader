@@ -48,3 +48,4 @@ html/masters/mao/mao.html
 2. 分导师页面如果展示文章，应尽量读取或对齐 `data/articles.json`。
 3. 导师头像/图片资源路径修改后，要同步检查总页与分页。
 4. 视觉走红黑金构成主义卡片风格，后续可抽成模块 CSS。
+5. 主入口必须仅保留 `#nav-placeholder` 接入公共导航；页面内可继续使用私有 `.container` 管理内容区，但不得影响公共 `.site-header-inner`。

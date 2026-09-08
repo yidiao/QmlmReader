@@ -632,7 +632,7 @@
 
     function getCardArticleMeta(card) {
         if (!card) return null;
-        var titleLink = card.querySelector('.article-title a');
+        var titleLink = card.querySelector('.article-title a, .card-title a');
         var readLink = card.querySelector('.read-more');
         var link = titleLink || readLink || card.querySelector('a[href]');
         if (!link) return null;
@@ -648,7 +648,8 @@
             resolvedUrl = rawHref;
             resolvedPath = rawHref;
         }
-        var title = titleLink ? titleLink.textContent.replace(/\s+/g, ' ').trim() : (card.querySelector('.article-title') ? card.querySelector('.article-title').textContent.replace(/\s+/g, ' ').trim() : link.textContent.replace(/\s+/g, ' ').trim());
+        var titleNode = card.querySelector('.article-title, .card-title');
+        var title = titleLink ? titleLink.textContent.replace(/\s+/g, ' ').trim() : (titleNode ? titleNode.textContent.replace(/\s+/g, ' ').trim() : link.textContent.replace(/\s+/g, ' ').trim());
         return {
             key: resolvedPath || articleKeyFromBody(),
             url: resolvedUrl,
@@ -1238,19 +1239,20 @@
         }
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', boot);
-    } else {
-        boot();
-    }
-
     window.QMLMPreferences = {
         readState: readState,
         writeState: writeState,
         upsertFavorite: upsertFavorite,
         upsertHistory: upsertHistory,
         getArticleMeta: getArticleMeta,
+        isArticleFavorite: isArticleFavorite,
         syncArticleFavoriteButtons: syncArticleFavoriteButtons,
         getReadingProgress: getReadingProgress
     };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', boot);
+    } else {
+        boot();
+    }
 })();

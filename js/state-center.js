@@ -106,8 +106,40 @@
         return state;
     }
 
+    function mergeUniqueByKey(primary, secondary) {
+        var output = [];
+        var seen = {};
+        function addList(list) {
+            if (!Array.isArray(list)) return;
+            list.forEach(function (item) {
+                if (!item || !item.key || seen[item.key]) return;
+                seen[item.key] = true;
+                output.push(clone(item));
+            });
+        }
+        addList(primary);
+        addList(secondary);
+        return output;
+    }
+
+    function mergePreferences(current, legacy) {
+        current = normalizePreferences(current);
+        legacy = normalizePreferences(legacy);
+        return normalizePreferences({
+            favorites: mergeUniqueByKey(current.favorites, legacy.favorites),
+            history: mergeUniqueByKey(current.history, legacy.history).slice(0, 50),
+            view: mergeDeep(legacy.view, current.view),
+            ui: mergeDeep(legacy.ui, current.ui)
+        });
+    }
+
     function loadState() {
-        return normalizeRoot(readJSON(STATE_KEY) || readJSON(LEGACY_PREFERENCES_KEY));
+        var root = normalizeRoot(readJSON(STATE_KEY));
+        var legacy = readJSON(LEGACY_PREFERENCES_KEY);
+        if (legacy) {
+            root.preferences = mergePreferences(root.preferences, legacy);
+        }
+        return root;
     }
 
     var state = loadState();

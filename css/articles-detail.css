@@ -1,47 +1,11 @@
 /* ===================================================================
    articles-detail.css 鈥?鏂囩珷璇︽儏椤靛叡浜牱寮?   鍩哄噯锛氬疄璺佃 / 鐭涚浘璁猴紙2026-06-20 鎭㈠鐗堟湰锛?   姣忕瘒鏂囩珷浠呴渶 4琛?:root 瑕嗙洊绫诲埆鑹插€?   =================================================================== */
 
-/* ==================== 绫诲埆鑹插€硷紙鍗犱綅锛岀敱鍚勬枃绔?<style> 瑕嗙洊锛?==================== */
+/* Category colors are centralized in css/category-theme.css. */
 :root {
-    --cat-primary: #8b0000;
-    --cat-secondary: #c41e3a;
-    --cat-gradient: linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
-}
-
-body[data-category="philosophy"], body[data-category="鏀挎不鐞嗚"] {
-    --cat-primary: #8b0000;
-    --cat-secondary: #c41e3a;
-    --cat-gradient: linear-gradient(135deg, #4a0000 0%, #8b0000 50%, #c41e3a 100%);
-}
-body[data-category="politics"] {
-    --cat-primary: #1a237e;
-    --cat-secondary: #283593;
-    --cat-gradient: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-}
-body[data-category="military"] {
-    --cat-primary: #1a4d7a;
-    --cat-secondary: #2b6cb0;
-    --cat-gradient: linear-gradient(135deg, #1a4d7a 0%, #2b6cb0 100%);
-}
-body[data-category="economics"] {
-    --cat-primary: #2e7d32;
-    --cat-secondary: #43a047;
-    --cat-gradient: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
-}
-body[data-category="party"] {
-    --cat-primary: #5c3d99;
-    --cat-secondary: #7e57c2;
-    --cat-gradient: linear-gradient(135deg, #4527a0 0%, #5c3d99 100%);
-}
-body[data-category="culture"] {
-    --cat-primary: #c2185b;
-    --cat-secondary: #d81b60;
-    --cat-gradient: linear-gradient(135deg, #880e4f 0%, #c2185b 100%);
-}
-body[data-category="economy"] {
-    --cat-primary: #2e7d32;
-    --cat-secondary: #43a047;
-    --cat-gradient: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+    --cat-primary: var(--theme-primary, #8b1e2d);
+    --cat-secondary: var(--theme-secondary, #b33a45);
+    --cat-gradient: linear-gradient(135deg, var(--theme-dark, #5a101b), var(--theme-primary, #8b1e2d) 55%, var(--theme-secondary, #b33a45));
 }
 
 /* ==================== 鏂囩珷澶撮儴 ==================== */

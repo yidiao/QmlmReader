@@ -9,11 +9,21 @@
     var p = '';
     for (var i = 0; i < depth; i++) p += '../';
 
-    var nav = '<header class="site-header"><div class="container">' +
+    var nav = '<header class="site-header"><div class="site-header-inner">' +
         '<a class="logo" href="' + p + 'preferences/preferences.html" aria-label="进入个人偏好"><span class="logo-icon">☭</span><div class="logo-text"><h1>青年马列毛主义驿站</h1><span class="logo-sub">Qmlm Reader</span></div></a>' +
+        '<div class="nav-search" id="navSearch">' +
+        '<button class="nav-search-toggle" type="button" aria-label="打开搜索" aria-expanded="false" title="搜索">⌕</button>' +
+        '<form class="nav-search-form" role="search" autocomplete="off">' +
+        '<input id="navSearchInput" type="search" placeholder="搜索文章、文艺、正名、历史..." data-search-input data-results-target="navSearchResults">' +
+        '<button class="nav-search-submit" type="submit">搜索</button>' +
+        '<button class="nav-search-close" type="button" aria-label="关闭搜索">✕</button>' +
+        '<div class="search-results nav-search-results" id="navSearchResults"></div>' +
+        '</form>' +
+        '</div>' +
         '<button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单"><span></span><span></span><span></span></button>' +
-        '<nav class="main-nav">' +
+        '<nav class="main-nav" id="mainNav">' +
         '<button class="nav-close-btn" aria-label="关闭菜单">✕</button>' +
+        '<div class="nav-links">' +
         '<a href="' + p + 'index.html">首页</a>' +
         '<a href="' + p + 'articles/articles.html">文章</a>' +
         '<a href="' + p + 'masters/masters.html">导师</a>' +
@@ -25,6 +35,7 @@
         '<a href="' + p + 'international/international.html">国际共运</a>' +
         '<a href="' + p + 'rectify/rectify.html">正名</a>' +
         '<a href="' + p + 'about/about.html">关于</a>' +
+        '</div>' +
         '<button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>' +
         '</nav></div></header>';
 
@@ -39,6 +50,16 @@
             prefScript.async = false;
             document.head.appendChild(prefScript);
         }
+
+        function loadSearchScript() {
+            if (document.querySelector('script[src$="/js/search.js"]')) return;
+            var searchScript = document.createElement('script');
+            searchScript.src = p + '../js/search.js';
+            searchScript.async = false;
+            document.head.appendChild(searchScript);
+        }
+
+        loadSearchScript();
 
         function loadPageStateAdapter(afterLoad) {
             if (document.querySelector('script[src$="/js/page-state-adapter.js"]')) {
@@ -354,9 +375,52 @@ document.addEventListener('DOMContentLoaded', function() {
     bindMenuState();
     window.addEventListener('qmlm:state-ready', bindMenuState);
 
+    var siteHeader = document.querySelector('.site-header');
+    var navSearch = document.getElementById('navSearch');
+    var navSearchToggle = navSearch ? navSearch.querySelector('.nav-search-toggle') : null;
+    var navSearchInput = navSearch ? navSearch.querySelector('[data-search-input]') : null;
+    var navSearchClose = navSearch ? navSearch.querySelector('.nav-search-close') : null;
+    var navSearchForm = navSearch ? navSearch.querySelector('.nav-search-form') : null;
+
+    function setSearchOpen(isOpen) {
+        if (!navSearch) return;
+        if (siteHeader) siteHeader.classList.toggle('search-open', !!isOpen);
+        nav.classList.toggle('search-open', !!isOpen);
+        navSearch.classList.toggle('open', !!isOpen);
+        if (navSearchToggle) navSearchToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (isOpen && navSearchInput) {
+            window.setTimeout(function() { navSearchInput.focus(); }, 0);
+        }
+    }
+
+    if (navSearchToggle) {
+        navSearchToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            setSearchOpen(!navSearch.classList.contains('open'));
+        });
+    }
+
+    if (navSearchClose) {
+        navSearchClose.addEventListener('click', function(e) {
+            e.stopPropagation();
+            setSearchOpen(false);
+        });
+    }
+
+    if (navSearchForm) {
+        navSearchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (typeof window.performSearch === 'function') window.performSearch(navSearchInput);
+        });
+        navSearchForm.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+
     // 点击汉堡按钮切换菜单
     hamburger.addEventListener('click', function(e) {
         e.stopPropagation();
+        if (nav.classList.contains('search-open')) setSearchOpen(false);
         setMenuOpen(!nav.classList.contains('open'), true);
     });
 
@@ -372,19 +436,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // 点击菜单内链接后自动关闭
     nav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function() {
+            setSearchOpen(false);
             setMenuOpen(false, true);
         });
     });
 
     // 点击遮罩（菜单外区域）关闭
     document.addEventListener('click', function(e) {
+        if (nav.classList.contains('search-open') && navSearch && !navSearch.contains(e.target)) {
+            setSearchOpen(false);
+        }
         if (nav.classList.contains('open') && !nav.contains(e.target) && e.target !== hamburger) {
             setMenuOpen(false, true);
         }
     });
 
-    // ESC 键关闭菜单
+    // ESC 键关闭菜单或搜索
     document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && nav.classList.contains('search-open')) {
+            setSearchOpen(false);
+            return;
+        }
         if (e.key === 'Escape' && nav.classList.contains('open')) {
             setMenuOpen(false, true);
         }

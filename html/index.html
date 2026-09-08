@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>青年马列毛主义驿站 | Qmlm Reader</title>
     <link rel="stylesheet" href="../css/style.css">
-    <script>
+    <!-- <script>
         (function () {
             var STORAGE_KEY = 'qmlm:home-opening:last-shown:v1';
             var MODE = 'daily'; // 可改为 'once' 仅首次播放
@@ -31,7 +31,7 @@
             }
             root.classList.add(shouldPlay ? 'home-opening-play' : 'home-opening-skip');
         })();
-    </script>
+    </script> -->
     <style>
         /* 历史上的今天卡片样式 */
         .history-today-section {
@@ -802,51 +802,6 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
     </div>
 </nav>
 
-    <div class="search-section">
-        <div class="container">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="搜索文章作者关键词...（现已支持文章外关键词搜索）" autocomplete="off">
-                <button onclick="performSearch()">搜索</button>
-                <div class="search-results" id="searchResults"></div>
-            </div>
-            <div class="category-toggle">
-                <button onclick="toggleCategories()">展开分类筛选 </button>
-            </div>
-            <div class="category-filters" id="categoryFilters">
-                <div class="filter-group">
-                    <h4>按重要性</h4>
-                    <label><input type="checkbox" value="5" class="filter-priority"> 五星必读</label>
-                    <label><input type="checkbox" value="4" class="filter-priority"> 四星重点</label>
-                    <label><input type="checkbox" value="3" class="filter-priority"> 三星推荐</label>
-                </div>
-                <div class="filter-group">
-                    <h4>按作者</h4>
-                    <label><input type="checkbox" value="marx" class="filter-author"> 马克思</label>
-                    <label><input type="checkbox" value="engels" class="filter-author"> 恩格斯</label>
-                    <label><input type="checkbox" value="lenin" class="filter-author"> 列宁</label>
-                    <label><input type="checkbox" value="stalin" class="filter-author"> 斯大林</label>
-                    <label><input type="checkbox" value="mao" class="filter-author"> 毛泽东</label>
-                </div>
-                <div class="filter-group">
-                    <h4>按类型</h4>
-                    <label><input type="checkbox" value="philosophy" class="filter-type"> 哲学基础</label>
-                    <label><input type="checkbox" value="political" class="filter-type"> 政治理论</label>
-                    <label><input type="checkbox" value="military" class="filter-type"> 军事战略</label>
-                    <label><input type="checkbox" value="economic" class="filter-type"> 政治经济学</label>
-                    <label><input type="checkbox" value="party" class="filter-type"> 党的建设</label>
-                    <label><input type="checkbox" value="culture" class="filter-type"> 思想文化</label>
-                </div>
-                <div class="filter-group">
-                    <h4>按历史时期</h4>
-                    <label><input type="checkbox" value="early" class="filter-period"> 早期革命</label>
-                    <label><input type="checkbox" value="ww2" class="filter-period"> 抗日战争</label>
-                    <label><input type="checkbox" value="civil" class="filter-period"> 解放战争</label>
-                    <label><input type="checkbox" value="socialist" class="filter-period"> 社会主义建设</label>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <main class="home-page">
         <div class="container">
             <!-- 开屏动画 -->
@@ -860,14 +815,7 @@ body.dark-mode .home-nav-panel a:hover { background: #ffffff12; color: #ff6b6b; 
                 <div class="shutter-indicators" id="shutterDots"></div>
             </section>
 
-            <section class="hero" id="hero" style="margin-top:0;padding-top:0;">
-                <p>青马驿旨在为同志们提供马克思恩格斯列宁斯大林毛泽东等革命导师的经典著作为深入理解马克思主义理论的精髓为当代斗争和建设社会主义提供解忧驿站之便</p>
-                <div class="hero-actions">
-                    <a href="articles/articles.html" class="btn-primary">开始阅读</a>
-                    <a href="masters/masters.html" class="btn-secondary">了解导师</a>
-                </div>
-            </section>
-
+           
             <!-- 历史上的今天 -->
             <section class="history-today-section" id="historyToday">
                 <div class="history-card">
@@ -1332,7 +1280,6 @@ function quickPostMessage() {
     <script src="../js/main.js"></script>
     <script src="../js/shutter.js"></script>
     <script src="../data/history-events.js"></script>
-    <script src="../js/search.js"></script>
 
     <script>
         // 历史上的今天功能
@@ -1390,23 +1337,6 @@ function quickPostMessage() {
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', initHistoryToday);
         
-        // 点击其他区域关闭搜索结果
-        document.addEventListener('click', function(e) {
-            const searchResults = document.getElementById('searchResults');
-            const searchInput = document.getElementById('searchInput');
-            if (searchResults && searchInput && !searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-                searchResults.classList.remove('active');
-            }
-        });
-        
-        // 搜索框获得焦点时显示结果（如果有）
-        document.getElementById('searchInput').addEventListener('focus', function() {
-            const results = document.getElementById('searchResults');
-            if (results.innerHTML && results.innerHTML.trim() !== '') {
-                results.classList.add('active');
-            }
-        });
-
         // 更新日志折叠/展开
         const changelogHeader = document.getElementById('changelogHeader');
         const changelogBody = document.getElementById('changelogBody');
