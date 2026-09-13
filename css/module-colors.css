@@ -1,0 +1,63 @@
+/* QmlmReader 常规模块主题色
+ * 页面可通过 body[data-module="..."] 选择模块强调色。
+ * 不影响 experimental 子工具私有主题。
+ */
+body[data-module="articles"] {
+  --module-accent: #b91c1c;
+  --module-accent-dark: #ff7b7b;
+}
+
+body[data-module="downloads"] {
+  --module-accent: #a85f16;
+  --module-accent-dark: #e7a85b;
+}
+
+body[data-module="experimental"] {
+  --module-accent: #68436f;
+  --module-accent-dark: #d4a8da;
+}
+
+body[data-module="gallery"] {
+  --module-accent: #aa791c;
+  --module-accent-dark: #e1bd66;
+}
+
+body[data-module="international"] {
+  --module-accent: #2e7180;
+  --module-accent-dark: #7bc2cf;
+}
+
+body[data-module="masters"] {
+  --module-accent: #8b0000;
+  --module-accent-dark: #ff9a9a;
+}
+
+body[data-module="toolkit"] {
+  --module-accent: #66703a;
+  --module-accent-dark: #b9c47d;
+}
+
+body[data-module="puzzle"] {
+  --module-accent: #68436f;
+  --module-accent-dark: #d4a8da;
+}
+
+body[data-module="rectify"] {
+  --module-accent: #8b1e2d;
+  --module-accent-dark: #e57373;
+}
+
+body[data-module="preferences"] {
+  --module-accent: #66703a;
+  --module-accent-dark: #b9c47d;
+}
+
+.module-hero h1,
+.module-title {
+  color: var(--module-accent, var(--app-primary));
+}
+
+body.dark-mode .module-hero h1,
+body.dark-mode .module-title {
+  color: var(--module-accent-dark, var(--app-accent));
+}

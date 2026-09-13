@@ -5,7 +5,7 @@
 
 /* ---- 默认变量（风格会覆盖） ---- */
 body {
-  --paper: #ffffff;
+  --paper: #fffaf0;
   --ink: #2b2b2b;
   --accent: #c41e3a;
   --accent2: #2f54a0;
@@ -338,7 +338,7 @@ body.dark-mode .xc-booklet-wrap {
     padding: 0 !important;
   }
   .xc-booklet-wrap {
-    background: #fff !important;
+    background: #fffdf7 !important;
     padding: 0 !important;
   }
   .xc-pages {

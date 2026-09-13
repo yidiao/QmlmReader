@@ -241,7 +241,7 @@
   border: 2px solid #1a1a1a;
   font-size: 0.9rem;
   font-family: inherit;
-  background: #fff;
+  background: var(--paper-card-strong, #fffdf7);
   color: #1a1a1a;
   cursor: pointer;
 }
@@ -262,14 +262,14 @@
   line-height: 1.8;
   font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
   resize: vertical;
-  background: #fff;
+  background: var(--paper-card-strong, #fffdf7);
   color: #1a1a1a;
   transition: border-color 0.12s;
 }
 .ms-textarea:focus {
   outline: none;
   border-color: #c41e3a;
-  background: #fff;
+  background: var(--paper-card-strong, #fffdf7);
 }
 .ms-textarea::placeholder { color: #999; }
 
@@ -336,7 +336,7 @@
 .ms-btn-secondary {
   display: inline-block;
   padding: 10px 24px;
-  background: #fff;
+  background: var(--paper-card-strong, #fffdf7);
   color: #1a1a1a;
   border: 2px solid #1a1a1a;
   font-size: 0.85rem;
@@ -424,7 +424,7 @@
 .ms-changes-list { display: flex; flex-direction: column; gap: 10px; }
 .ms-change-item {
   padding: 10px 14px;
-  background: #fff;
+  background: var(--paper-card-strong, #fffdf7);
   border-left: 4px solid #c41e3a;
   font-size: 0.88rem;
   line-height: 1.65;
@@ -1473,7 +1473,7 @@ body.dark-mode .ms-ap-header { border-bottom-color: #c41e3a; }
 .ms-ps-tag {
   padding: 6px 16px;
   border: 1px solid #ccc;
-  background: #fff;
+  background: var(--paper-card-strong, #fffdf7);
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.15s;
@@ -1620,7 +1620,7 @@ body.dark-mode .ms-ap-header { border-bottom-color: #c41e3a; }
 .ms-page-btn {
   width: 28px; height: 28px;
   border: 1px solid #ccc;
-  background: #fff;
+  background: var(--paper-card-strong, #fffdf7);
   cursor: pointer;
   font-size: 0.7rem;
   color: #666;
@@ -1765,7 +1765,7 @@ body.dark-mode .ms-ap-header { border-bottom-color: #c41e3a; }
 /* 导师气泡（左侧） */
 .ms-chat-bubble.mentor {
   align-self: flex-start;
-  background: #fff; color: #1a1a1a;
+  background: var(--paper-card-strong, #fffdf7); color: #1a1a1a;
   border: 2px solid #e0e0e0;
   border-radius: 4px 16px 16px 16px;
 }
@@ -1795,7 +1795,7 @@ body.dark-mode .ms-ap-header { border-bottom-color: #c41e3a; }
 }
 .ms-chat-input {
   flex: 1; padding: 12px 14px;
-  border: none; background: #fff;
+  border: none; background: var(--paper-card-strong, #fffdf7);
   font-size: 0.9rem; line-height: 1.5;
   font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", sans-serif;
   resize: none; outline: none;

@@ -1,10 +1,14 @@
 :root {
     --articles-accent: #b91c1c;
     --articles-accent-soft: rgba(185, 28, 28, 0.1);
-    --articles-surface: rgba(255, 255, 255, 0.82);
-    --articles-surface-strong: rgba(255, 255, 255, 0.95);
+    --articles-page-paper: var(--paper-page, #f3eadc);
+    --articles-section-paper: var(--paper-section, #f7f2e7);
+    --articles-card-paper: var(--paper-card, #fffaf0);
+    --articles-card-paper-strong: var(--paper-card-strong, #fffdf7);
+    --articles-surface: color-mix(in srgb, var(--articles-section-paper) 86%, transparent);
+    --articles-surface-strong: color-mix(in srgb, var(--articles-card-paper) 96%, transparent);
     --articles-surface-dark: rgba(18, 18, 24, 0.78);
-    --articles-border: rgba(0, 0, 0, 0.04);
+    --articles-border: rgba(78, 45, 20, 0.08);
 }
 
 .articles-page {
@@ -111,7 +115,7 @@ body.dark-mode .section-head h2 {
 
 .section-count {
     font-size: 0.85rem;
-    color: #7a7a7a;
+    color: var(--gray-600, #666666);
     white-space: nowrap;
 }
 
@@ -146,8 +150,8 @@ body.dark-mode .filter-input {
     border: 0;
     border-radius: 999px;
     padding: 0.48rem 0.95rem;
-    background: #ececec;
-    color: #444;
+    background: var(--paper-muted, #e8e4dc);
+    color: var(--gray-700, #555555);
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 0.85rem;
@@ -277,7 +281,7 @@ body.dark-mode .card-author {
 }
 
 .badge.gray {
-    background: linear-gradient(135deg, #6b7280, #9ca3af);
+    background: linear-gradient(135deg, var(--gray-600, #666666), var(--gray-300, #aaaaaa));
 }
 
 .card-date {
@@ -334,7 +338,7 @@ body.dark-mode .card-author {
     align-items: center;
     padding: 0.18rem 0.5rem;
     border-radius: 999px;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(78, 45, 20, 0.06);
     font-size: 0.72rem;
 }
 
@@ -396,7 +400,7 @@ body.dark-mode .article-card-favorite.is-active {
 }
 
 .read-more.disabled {
-    color: #999;
+    color: var(--gray-400, #999999);
     pointer-events: none;
     cursor: default;
 }
@@ -404,13 +408,13 @@ body.dark-mode .article-card-favorite.is-active {
 .article-note {
     margin-top: 0.65rem;
     font-size: 0.74rem;
-    color: #8c8c8c;
+    color: var(--gray-500, #888888);
 }
 
 .empty-state {
     padding: 2rem 1rem;
     text-align: center;
-    color: #7a7a7a;
+    color: var(--gray-600, #666666);
 }
 
 .mode-switch {
@@ -447,7 +451,7 @@ body.dark-mode .article-card-favorite.is-active {
     max-height: 82vh;
     overflow: auto;
     border-radius: 18px;
-    background: #fff;
+    background: var(--articles-card-paper-strong);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
 }
 

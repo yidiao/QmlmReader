@@ -1,0 +1,72 @@
+/* QmlmReader 导师主题色
+ * 页面可通过 body[data-master="..."] 选择导师色。
+ * 文章分类色仍由 category-theme.css 负责，二者不要混用。
+ */
+body[data-master="marx"] {
+  --master-primary: #8b1e2d;
+  --master-secondary: #1a1a1a;
+  --master-accent: #c49a3a;
+  --master-paper: #f7f2e7;
+  --master-ink: #2b2b2b;
+}
+
+body[data-master="engels"] {
+  --master-primary: #2e7180;
+  --master-secondary: #8b1e2d;
+  --master-accent: #c49a3a;
+  --master-paper: #f5f0e8;
+  --master-ink: #2b2b2b;
+}
+
+body[data-master="lenin"] {
+  --master-primary: #b91c1c;
+  --master-secondary: #111827;
+  --master-accent: #d9a000;
+  --master-paper: #f7f2e7;
+  --master-ink: #2b2b2b;
+}
+
+body[data-master="stalin"] {
+  --master-primary: #7f1d1d;
+  --master-secondary: #4b5563;
+  --master-accent: #c9a84c;
+  --master-paper: #f1eadc;
+  --master-ink: #252525;
+}
+
+body[data-master="mao"] {
+  --master-primary: #c41e3a;
+  --master-secondary: #3d6b4f;
+  --master-accent: #d9a000;
+  --master-paper: #f7f2e7;
+  --master-ink: #2b2b2b;
+}
+
+body.dark-mode[data-master="marx"],
+body.dark-mode[data-master="engels"],
+body.dark-mode[data-master="lenin"],
+body.dark-mode[data-master="mao"] {
+  --master-paper: var(--gray-dark-surface);
+  --master-ink: var(--gray-dark-text);
+}
+
+body.dark-mode[data-master="stalin"] {
+  --master-primary: #b33a45;
+  --master-secondary: #8b96a6;
+  --master-accent: #d7b65a;
+  --master-paper: #24211b;
+  --master-ink: #ece4d4;
+}
+
+.master-themed {
+  color: var(--master-ink, var(--app-text));
+  background: var(--master-paper, var(--app-surface));
+  border-color: var(--master-secondary, var(--app-border));
+}
+
+.master-themed .master-accent,
+.master-themed h1,
+.master-themed h2,
+.master-themed h3 {
+  color: var(--master-primary, var(--app-primary));
+}

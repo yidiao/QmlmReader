@@ -1,3 +1,9 @@
+/* 颜色管理层：原子令牌 -> 语义主题 -> 模块/导师映射 */
+@import url("./color-tokens.css");
+@import url("./theme-colors.css");
+@import url("./module-colors.css");
+@import url("./master-colors.css");
+
 /* 基础样式重置 */
 * {
     margin: 0;
@@ -23,16 +29,17 @@ body.dark-mode .cursor-glow {
 }
 
 :root {
-    --primary-color: #c41e3a;
-    --primary-dark: #8b0000;
-    --secondary-color: #ffd700;
-    --text-color: #333;
-    --text-light: #666;
-    --bg-color: #f5f5f5;
-    --card-bg: #fff;
-    --border-color: #ddd;
-    --shadow: 0 2px 8px rgba(0,0,0,0.1);
-    --shadow-hover: 0 4px 16px rgba(0,0,0,0.15);
+    /* 旧变量保持兼容，实际色值由 color-tokens/theme-colors 统一提供 */
+    --primary-color: var(--app-primary);
+    --primary-dark: var(--app-primary-dark);
+    --secondary-color: var(--app-accent);
+    --text-color: var(--app-text);
+    --text-light: var(--app-text-muted);
+    --bg-color: var(--app-bg);
+    --card-bg: var(--app-surface);
+    --border-color: var(--app-border);
+    --shadow: var(--app-shadow);
+    --shadow-hover: var(--app-shadow-hover);
 }
 
 body {
@@ -121,9 +128,9 @@ body {
     width: 100%;
     min-height: 140px;
     padding: 0.75rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--gray-150);
     border-radius: 8px;
-    background: #fff;
+    background: var(--paper-card-strong);
     font: inherit;
     resize: vertical;
 }
@@ -299,7 +306,7 @@ body {
 
 /* 搜索区域 */
 .search-section {
-    background: white;
+    background: var(--paper-card);
     padding: 1.5rem 0;
     border-bottom: 1px solid var(--border-color);
 }
@@ -393,7 +400,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+    background: linear-gradient(135deg, var(--paper-card-strong) 0%, var(--paper-section) 100%);
     animation: heroFadeOut 0.6s ease-in-out 2.8s forwards;
     pointer-events: none;
 }
@@ -428,7 +435,7 @@ html.home-opening-play .hero-opening {
     to { opacity: 0; visibility: hidden; }
 }
 body.dark-mode .hero-opening {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    background: linear-gradient(135deg, var(--gray-dark-bg) 0%, var(--gray-dark-surface) 100%);
 }
 body.dark-mode .hero-opening-text {
     color: #ffb0b0;
@@ -501,7 +508,7 @@ body.dark-mode .hero-opening-text {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #ccc;
+    background: var(--gray-200);
     border: 2px solid transparent;
     cursor: pointer;
     transition: all 0.3s;
@@ -513,7 +520,7 @@ body.dark-mode .hero-opening-text {
     transform: scale(1.2);
 }
 body.dark-mode .shutter-dot {
-    background: #555;
+    background: var(--gray-700);
 }
 body.dark-mode .shutter-dot.active {
     background: #ff6b6b;
@@ -539,7 +546,7 @@ body.dark-mode .shutter-container {
 .hero {
     text-align: center;
     padding: 4rem 0;
-    background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+    background: linear-gradient(135deg, var(--paper-card-strong) 0%, var(--paper-section) 100%);
 }
 
 .hero h2 {
@@ -580,7 +587,7 @@ body.dark-mode .shutter-container {
 }
 
 .btn-secondary {
-    background: white;
+    background: var(--paper-card);
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
 }
@@ -701,8 +708,8 @@ body.dark-mode .shutter-container {
 /* 工具预览 */
 
 /* ===== 返回按钮 ===== */
-.back-nav { background: #fafafa; border-bottom: 1px solid #e8e8e8; padding: 0.75rem 0; }
-body.dark-mode .back-nav { background: #1a1a1a; border-color: #333; }
+.back-nav { background: var(--paper-section); border-bottom: 1px solid var(--gray-100); padding: 0.75rem 0; }
+body.dark-mode .back-nav { background: var(--gray-dark-bg); border-color: var(--gray-dark-raised); }
 .back-link {
     display: inline-flex; align-items: center; gap: 6px; color: #c41e3a;
     text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 8px;
@@ -710,7 +717,7 @@ body.dark-mode .back-nav { background: #1a1a1a; border-color: #333; }
 }
 .back-link:hover { background: #c41e3a; color: white; }
 body.dark-mode .back-link { color: #e57373; border-color: #e57373; }
-body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
+body.dark-mode .back-link:hover { background: #e57373; color: var(--gray-950); }
 
 .tools-grid {
     display: grid;
@@ -750,7 +757,7 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
 .filter-btn {
     padding: 0.5rem 1rem;
     border: 1px solid var(--border-color);
-    background: white;
+    background: var(--paper-card);
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s;
@@ -1237,7 +1244,7 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
 }
 
 .template-box pre {
-    background: #f8f8f8;
+    background: var(--paper-section);
     padding: 1rem;
     border-radius: 4px;
     font-size: 0.85rem;
@@ -1572,7 +1579,7 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
     display: block;
     width: 22px;
     height: 2px;
-    background: white;
+    background: var(--paper-card);
     border-radius: 2px;
     margin: 4px 0;
     transition: all 0.3s;
@@ -1947,39 +1954,39 @@ body.dark-mode .back-link:hover { background: #e57373; color: #1a1a1a; }
 }
 
 .priority-4 .priority-badge {
-    background: #666;
+    background: var(--gray-600);
 }
 
 .priority-3 .priority-badge {
-    background: #888;
+    background: var(--gray-500);
 }
 
 .priority-2 .priority-badge {
-    background: #aaa;
+    background: var(--gray-300);
 }
 
 /* 黑夜模式 */
 body.dark-mode {
     --text-color: #e0e0e0;
-    --text-light: #aaa;
-    --bg-color: #1a1a1a;
-    --card-bg: #2a2a2a;
-    --border-color: #444;
+    --text-light: var(--gray-300);
+    --bg-color: var(--gray-dark-bg);
+    --card-bg: var(--gray-dark-surface);
+    --border-color: var(--gray-dark-border);
     --shadow: 0 2px 8px rgba(0,0,0,0.3);
     --shadow-hover: 0 4px 16px rgba(0,0,0,0.4);
 }
 
 body.dark-mode .site-header {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    background: linear-gradient(135deg, var(--gray-dark-bg) 0%, var(--gray-dark-surface) 100%);
 }
 
 body.dark-mode .search-section {
-    background: #2a2a2a;
-    border-bottom-color: #444;
+    background: var(--gray-dark-surface);
+    border-bottom-color: var(--gray-dark-border);
 }
 
 body.dark-mode .hero {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: linear-gradient(135deg, var(--gray-dark-surface) 0%, var(--gray-dark-bg) 100%);
 }
 
 body.dark-mode .featured-card,
@@ -1994,28 +2001,28 @@ body.dark-mode .video-card,
 body.dark-mode .poster-card,
 body.dark-mode .quote-card,
 body.dark-mode .article-body {
-    background: #2a2a2a;
-    border: 1px solid #444;
+    background: var(--gray-dark-surface);
+    border: 1px solid var(--gray-dark-border);
 }
 
 body.dark-mode .category-filters {
-    background: #333;
+    background: var(--gray-dark-raised);
 }
 
 body.dark-mode .search-box input {
-    background: #333;
-    border-color: #444;
-    color: #e0e0e0;
+    background: var(--gray-dark-raised);
+    border-color: var(--gray-dark-border);
+    color: var(--text-color);
 }
 
 body.dark-mode .btn-secondary {
-    background: #2a2a2a;
-    border-color: #c41e3a;
+    background: var(--gray-dark-surface);
+    border-color: var(--primary-color);
 }
 
 body.dark-mode .template-box pre {
-    background: #333;
-    color: #e0e0e0;
+    background: var(--gray-dark-raised);
+    color: var(--text-color);
 }
 
 /* ==================== 搜索结果样式 ==================== */
@@ -2026,9 +2033,9 @@ body.dark-mode .template-box pre {
     top: 100%;
     left: 0;
     right: 0;
-    background: white;
+    background: var(--paper-card);
     color: var(--text-color);
-    border: 1px solid #ddd;
+    border: 1px solid var(--gray-150);
     border-radius: 0 0 10px 10px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.2);
     max-height: 70vh;
@@ -2043,22 +2050,22 @@ body.dark-mode .template-box pre {
 
 body.dark-mode #searchResults,
 body.dark-mode .search-results {
-    background: #2a2a2a;
-    border-color: #444;
+    background: var(--gray-dark-surface);
+    border-color: var(--gray-dark-border);
 }
 
 .search-results-header {
     padding: 12px 16px;
-    background: #f8f8f8;
-    border-bottom: 1px solid #eee;
+    background: var(--paper-section);
+    border-bottom: 1px solid var(--gray-100);
     font-size: 0.9rem;
-    color: #666;
+    color: var(--gray-600);
 }
 
 body.dark-mode .search-results-header {
-    background: #333;
-    border-color: #444;
-    color: #aaa;
+    background: var(--gray-dark-raised);
+    border-color: var(--gray-dark-border);
+    color: var(--gray-300);
 }
 
 .nav-search-results .search-results-header {
@@ -2087,7 +2094,7 @@ body.dark-mode .filter-indicator {
     padding: 12px 16px;
     border-radius: 6px;
     margin-bottom: 8px;
-    background: #fafafa;
+    background: var(--paper-section);
     transition: all 0.2s;
 }
 
@@ -2096,15 +2103,15 @@ body.dark-mode .filter-indicator {
 }
 
 .search-result-item:hover {
-    background: #f0f0f0;
+    background: var(--paper-muted);
 }
 
 body.dark-mode .search-result-item {
-    background: #333;
+    background: var(--gray-dark-raised);
 }
 
 body.dark-mode .search-result-item:hover {
-    background: #3a3a3a;
+    background: var(--gray-dark-border);
 }
 
 .result-header {
@@ -2122,11 +2129,11 @@ body.dark-mode .search-result-item:hover {
 
 .result-year {
     font-size: 0.85rem;
-    color: #888;
+    color: var(--gray-500);
 }
 
 body.dark-mode .result-year {
-    color: #aaa;
+    color: var(--gray-300);
 }
 
 .result-category {
@@ -2152,21 +2159,21 @@ body.dark-mode .result-year {
 .result-meta {
     margin: 0 0 4px;
     font-size: 0.85rem;
-    color: #666;
+    color: var(--gray-600);
 }
 
 body.dark-mode .result-meta {
-    color: #aaa;
+    color: var(--gray-300);
 }
 
 .result-keywords {
     margin: 0;
     font-size: 0.8rem;
-    color: #999;
+    color: var(--gray-400);
 }
 
 body.dark-mode .result-keywords {
-    color: #888;
+    color: var(--gray-500);
 }
 
 /* 空结果样式 */
@@ -2183,57 +2190,57 @@ body.dark-mode .result-keywords {
 
 .no-results-title {
     font-size: 1.2rem;
-    color: #666;
+    color: var(--gray-600);
     margin-bottom: 8px;
     font-weight: 500;
 }
 
 body.dark-mode .no-results-title {
-    color: #aaa;
+    color: var(--gray-300);
 }
 
 .no-results-hint {
     font-size: 0.95rem;
-    color: #999;
+    color: var(--gray-400);
     margin-bottom: 20px;
     font-style: italic;
 }
 
 body.dark-mode .no-results-hint {
-    color: #777;
+    color: var(--gray-700);
 }
 
 .no-results-suggest {
     text-align: left;
     max-width: 300px;
     margin: 0 auto;
-    background: #f8f8f8;
+    background: var(--paper-section);
     padding: 16px;
     border-radius: 8px;
 }
 
 body.dark-mode .no-results-suggest {
-    background: #333;
+    background: var(--gray-dark-raised);
 }
 
 .no-results-suggest p {
     margin: 0 0 8px;
     font-weight: 500;
-    color: #666;
+    color: var(--gray-600);
 }
 
 body.dark-mode .no-results-suggest p {
-    color: #aaa;
+    color: var(--gray-300);
 }
 
 .no-results-suggest ul {
     margin: 0;
     padding-left: 20px;
-    color: #888;
+    color: var(--gray-500);
 }
 
 body.dark-mode .no-results-suggest ul {
-    color: #999;
+    color: var(--gray-400);
 }
 
 .no-results-suggest li {
@@ -2283,7 +2290,7 @@ body.dark-mode .no-results-suggest ul {
 }
 
 .breadcrumb .bc-sep {
-    color: #bbb;
+    color: var(--gray-200);
     font-weight: 300;
     user-select: none;
     margin: 0 3px;
@@ -2295,7 +2302,7 @@ body.dark-mode .no-results-suggest ul {
 }
 
 body.dark-mode .breadcrumb .bc-sep {
-    color: #555;
+    color: var(--gray-700);
 }
 
 /* ==================== 全局交互动画 ==================== */
@@ -2404,14 +2411,14 @@ a.underline-slide:hover {
 }
 
 .skeleton {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background: linear-gradient(90deg, var(--paper-muted) 25%, var(--paper-border) 50%, var(--paper-muted) 75%);
     background-size: 200px 100%;
     animation: shimmer 1.5s infinite;
     border-radius: 8px;
 }
 
 body.dark-mode .skeleton {
-    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background: linear-gradient(90deg, var(--gray-dark-surface) 25%, var(--gray-dark-border) 50%, var(--gray-dark-surface) 75%);
     background-size: 200px 100%;
 }
 
