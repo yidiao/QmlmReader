@@ -1,17 +1,10 @@
- M css/articles-detail.css
- M css/articles-index.css
- M css/marxist-style.css
- M css/qingma-style.css
- M css/redify-style.css
- M css/style.css
- M css/xiaocezi-style-book.css
- M css/xiaocezi-style.css
- D html/articles/article旧版本.html
- M html/index.html
+ M html/masters/stalin/stalin.html
+ M js/main.js
  M tmp_status.txt
- D 设计文档/项目维护.md
-?? css/color-tokens.css
-?? css/master-colors.css
-?? css/module-colors.css
-?? css/theme-colors.css
-?? 设计文档/color-system.md
+ M 设计文档/pages/masters/README.md
+?? css/mentor/
+?? data/masters/
+?? html/masters/stalin/biography.html
+?? html/masters/stalin/relations.html
+?? js/mentor/
+?? 设计文档/pages/international/people-starmap-plan.md

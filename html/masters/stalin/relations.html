@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斯大林局部恒星系 | 国际共运人物星图先锋 | 青年马列毛主义驿站</title>
+    <meta name="description" content="以斯大林为恒星的局部人物星系：行星、彗星、卫星、星带与星云共同构成未来国际共运人物大星图的先锋样板。">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/mentor/stalin/relations.css">
+</head>
+<body data-module="masters" data-master="stalin" data-graph-scope="mentor-local" data-graph-id="stalin-local-relations" data-starmap-prototype="true">
+    <div id="nav-placeholder"></div>
+
+    <main class="stalin-relations-page">
+        <section class="star-hero" aria-labelledby="relations-title">
+            <div class="star-hero-bg" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="star-hero-copy">
+                <span class="star-kicker">International Communist Movement · Local Star System 00</span>
+                <h1 id="relations-title">斯大林局部恒星系</h1>
+                <p>把斯大林视作一颗历史恒星：老近卫军与战时将领环绕为行星，托洛茨基等分歧者划出彗星轨迹，小人物与战士凝成星带，组织、战争、路线斗争与历史遗产化作星云。</p>
+            </div>
+            <div class="hero-dashboard" aria-label="星图入口与控制台">
+                <nav class="star-jump" aria-label="斯大林专题分卷">
+                    <a href="biography.html"><span>返回文本宇宙</span><strong>斯大林小传</strong></a>
+                    <a href="stalin.html"><span>资料入口</span><strong>旧版概览</strong></a>
+                </nav>
+                <div class="console-card console-primary">
+                    <span>Prototype Mission</span>
+                    <strong id="relations-count">观测中</strong>
+                    <p id="relations-status">正在校准恒星系数据……</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="starmap-console" aria-label="星图控制台">
+            <div class="console-card console-search">
+                <label for="relations-search">星体检索</label>
+                <input id="relations-search" type="search" placeholder="搜索：托洛茨基、卫国战争、legacy、共产国际……" autocomplete="off">
+            </div>
+            <div class="console-card console-actions">
+                <div class="starmap-modes" role="toolbar" aria-label="星图观测模式">
+                    <button class="is-active" type="button" data-relation-filter="all">全星系</button>
+                    <button type="button" data-relation-filter="inheritance">理论航线</button>
+                    <button type="button" data-relation-filter="conflict">彗星/斗争</button>
+                    <button type="button" data-relation-filter="organization">近轨行星</button>
+                    <button type="button" data-relation-filter="war">战争星云</button>
+                    <button type="button" data-relation-filter="legacy">遗产远轨</button>
+                </div>
+                <div class="starmap-switches">
+                    <button id="relations-reset" type="button">重置</button>
+                    <button id="relations-random" type="button">随机漫游</button>
+                    <button id="relations-dim" type="button" aria-pressed="false">深空模式</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="star-system-shell" aria-label="斯大林人物恒星系">
+            <aside class="route-panel" aria-label="探索航线">
+                <div class="panel-heading"><span>Explore Routes</span><h2>探索航线</h2></div>
+                <button class="route-card is-active" type="button" data-route="all"><span>00</span><strong>全星系观测</strong><small>恒星、行星、彗星、卫星、星带与星云全部可见。</small></button>
+                <button class="route-card" type="button" data-route="inheritance"><span>01</span><strong>理论继承航线</strong><small>马克思、恩格斯、列宁与斯大林之间的理论引力。</small></button>
+                <button class="route-card" type="button" data-route="conflict"><span>02</span><strong>路线斗争彗尾</strong><small>分歧者、老近卫军与清洗争议形成的高能轨迹。</small></button>
+                <button class="route-card" type="button" data-route="war"><span>03</span><strong>反法西斯战争星云</strong><small>战时将领、同盟外交与战争对手的巨大星云。</small></button>
+                <button class="route-card" type="button" data-route="legacy"><span>04</span><strong>后斯大林远轨</strong><small>继承、否定、停滞与解体在远轨上缓慢运行。</small></button>
+                <div class="legend-block">
+                    <span>Celestial Legend</span>
+                    <p><b class="dot star"></b>恒星　<b class="dot planet"></b>行星　<b class="dot comet"></b>彗星　<b class="dot belt"></b>星带　<b class="dot satellite"></b>卫星</p>
+                </div>
+            </aside>
+
+            <div class="starmap-stage">
+                <div class="stage-topline"><span>Stalin Local Star System</span><strong id="stage-caption">从一颗恒星出发，测试未来大星图的视觉语法。</strong></div>
+                <div id="relation-canvas" class="relations-canvas" tabindex="0" aria-describedby="relations-map-hint">
+                    <div class="nebula nebula-inheritance" aria-hidden="true"><span>理论继承星云</span></div>
+                    <div class="nebula nebula-conflict" aria-hidden="true"><span>路线斗争彗云</span></div>
+                    <div class="nebula nebula-war" aria-hidden="true"><span>战争与外交星云</span></div>
+                    <div class="nebula nebula-legacy" aria-hidden="true"><span>历史遗产远云</span></div>
+                    <div class="orbit orbit-1" aria-hidden="true"></div>
+                    <div class="orbit orbit-2" aria-hidden="true"></div>
+                    <div class="orbit orbit-3" aria-hidden="true"></div>
+                    <div class="orbit orbit-4" aria-hidden="true"></div>
+                    <div class="asteroid-belt" aria-hidden="true"></div>
+                    <svg id="relation-lines" aria-hidden="true"></svg>
+                    <button id="relation-center" class="relations-center celestial-star" type="button" data-node-id="stalin" aria-label="查看斯大林恒星节点">
+                        <span class="star-core"></span>
+                        <strong>斯大林</strong>
+                        <small>恒星 / 局部中心</small>
+                    </button>
+                    <div id="relation-nodes" class="relation-nodes" aria-label="人物星体节点"></div>
+                </div>
+                <p id="relations-map-hint" class="relations-map-hint">视觉优先原型：轨道表达关系距离，星体类型表达历史功能，星云表达组织、战争、路线与遗产场域。点击任一星体打开档案抽屉。</p>
+            </div>
+
+            <aside id="relation-detail" class="relation-detail" aria-live="polite" aria-label="人物星体档案">
+                <div class="detail-placeholder">
+                    <span>✦</span>
+                    <h2>等待观测目标</h2>
+                    <p>选择恒星、行星、彗星、卫星或星带节点，查看人物身份、轨道位置、历史关系与下一步探索路径。</p>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="site-footer"><div class="container"><p>青年马列毛主义驿站 | Qmlm Reader</p><p class="footer-note">学习他 · 成为他 · 然后超越他</p></div></footer>
+
+    <script src="../../../js/site-data.js"></script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+    <script src="../../../js/mentor/stalin/relations.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0",
+  "type": "mentor-profile",
+  "id": "stalin",
+  "slug": "stalin",
+  "status": "active-scaffold",
+  "name": "斯大林",
+  "fullName": "约瑟夫·维萨里奥诺维奇·朱加施维利",
+  "nativeName": "Иосиф Виссарионович Сталин",
+  "years": "1878–1953",
+  "birthDate": "1878-12-18",
+  "deathDate": "1953-03-05",
+  "page": {
+    "slug": "biography",
+    "title": "斯大林专题：生平与政治实践",
+    "path": "html/masters/stalin/biography.html",
+    "relationsPath": "html/masters/stalin/relations.html"
+  },
+  "theme": {
+    "master": "stalin",
+    "css": "css/mentor/stalin/biography.css",
+    "relationsCss": "css/mentor/stalin/relations.css"
+  },
+  "roles": [
+    "苏联社会主义建设领导者",
+    "反法西斯战争统帅",
+    "苏联工业化的重要组织者"
+  ],
+  "themes": [
+    "工业化",
+    "一国建成社会主义",
+    "官僚治理",
+    "卫国战争",
+    "反帝国主义"
+  ],
+  "quotes": [
+    {
+      "text": "你告诉我，除此之外，还有什么别的办法。",
+      "source": "斯大林传·尾声"
+    }
+  ],
+  "contentPolicy": {
+    "biographySource": "待导入作者修订稿",
+    "preserveAuthorVoice": true,
+    "editorialChanges": "不在专题页面实施阶段擅自修改原文",
+    "annotationReview": "事实、作者判断、历史演绎的最终标注待作者确认"
+  },
+  "relatedData": {
+    "biography": "data/masters/stalin/biography.json",
+    "relations": "data/masters/stalin/relations.json",
+    "relationsPage": "html/masters/stalin/relations.html"
+  }
+}

@@ -142,9 +142,14 @@
             breadcrumbHTML += ' <span class="bc-sep">/</span> <a href="' + p + 'articles/articles.html">文章</a>';
             var pageTitle = document.title.replace(/\s*[-|]\s*青年马列毛主义驿站.*$/, '').trim();
             breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + (pageTitle || bcLabel(segments[segments.length-1])) + '</span>';
-        } else if (segments.length >= 2 && segments[0] === 'masters' && segments.length === 2) {
+        } else if (segments.length >= 2 && segments[0] === 'masters') {
             breadcrumbHTML += ' <span class="bc-sep">/</span> <a href="' + p + 'masters/masters.html">导师</a>';
-            breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + bcLabel(segments[1]) + '</span>';
+            if (segments.length === 2) {
+                breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + bcLabel(segments[1]) + '</span>';
+            } else {
+                breadcrumbHTML += ' <span class="bc-sep">/</span> <a href="' + p + 'masters/' + segments[1] + '/' + segments[1] + '.html">' + bcLabel(segments[1]) + '</a>';
+                breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + bcLabel(segments[segments.length-1]) + '</span>';
+            }
         } else if (segments.length >= 2 && segments[0] === 'gallery') {
             breadcrumbHTML += ' <span class="bc-sep">/</span> <a href="' + p + 'gallery/gallery.html">文艺</a>';
             breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + bcLabel(segments[segments.length-1]) + '</span>';

@@ -109,6 +109,42 @@
             line-height: 1.6;
             opacity: 0.95;
         }
+        .stalin-volume-strip {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+            margin-top: 1.1rem;
+            max-width: 520px;
+        }
+        .stalin-volume-strip a {
+            display: block;
+            padding: 0.85rem 1rem;
+            color: #f5f0e8;
+            text-decoration: none;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-left: 4px solid #c41e3a;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.18);
+            transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+        }
+        .stalin-volume-strip a:hover {
+            transform: translateY(-2px);
+            background: rgba(196,30,58,0.2);
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.24);
+        }
+        .stalin-volume-strip span {
+            display: block;
+            color: #d69e2e;
+            font-size: 0.7rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+        }
+        .stalin-volume-strip strong {
+            display: block;
+            margin-top: 0.25rem;
+            color: #fff;
+            font-size: 0.95rem;
+        }
         
         .master-content-wrapper {
             max-width: 1000px;
@@ -419,6 +455,7 @@
             .master-hero-info h1 { font-size: 1.5rem; }
             .master-hero-info .years { font-size: 0.95rem; }
             .master-hero-info .title { font-size: 0.85rem; line-height: 1.5; }
+            .stalin-volume-strip { grid-template-columns: 1fr; margin-left: auto; margin-right: auto; }
             .master-content-wrapper { padding: 1rem 0.6rem; }
             .tab-nav {
                 flex-wrap: nowrap;
@@ -532,6 +569,10 @@
                     <h1>约瑟夫·斯大林</h1>
                     <p class="years">1878年12月18日 — 1953年3月5日</p>
                     <p class="title">苏联社会主义建设领导者 · 反法西斯战争统帅 · 苏联工业化奠基人 · 列宁事业的继承者</p>
+                    <nav class="stalin-volume-strip" aria-label="斯大林专题分卷">
+                        <a href="biography.html"><span>正名小传</span><strong>生平与政治实践</strong></a>
+                        <a href="relations.html"><span>关系展板</span><strong>人物关系网</strong></a>
+                    </nav>
                 </div>
             </div>
         </section>
