@@ -614,7 +614,6 @@ const historyData = {
         { date: "11月29日", year: 1948, title: "平津战役开始", category: "war", nature: "positive", desc: "东北野战军和华北军区部队发起平津战役。" },
         { date: "11月29日", year: 1943, title: "德黑兰会议闭幕", category: "political", nature: "neutral", desc: "德黑兰会议发表宣言，确定战后安排。" },
         { date: "11月29日", year: 1975, title: "东帝汶独立革命阵线胜利", category: "revolution", nature: "positive", desc: "东帝汶独立革命阵线宣布东帝汶独立。" },
-        { date: "11月30日", year: 1922, title: "苏维埃社会主义共和国联盟成立", category: "revolution", nature: "positive", desc: "苏联正式成立。" }
     ],
     12: [
         { date: "12月1日", year: 1955, title: "美国黑人民权运动", category: "revolution", nature: "positive", desc: "罗莎·帕克斯拒绝让座事件，蒙哥马利公交抵制运动开始。" },
@@ -658,7 +657,7 @@ const historyData = {
         { date: "12月27日", year: 1991, title: "苏联解体后续", category: "political", nature: "neutral", desc: "原苏联各加盟共和国陆续宣布独立。" },
         { date: "12月28日", year: 1945, title: "越南抗法战争", category: "war", nature: "positive", desc: "越南人民继续进行抗法斗争。" },
         { date: "12月29日", year: 1945, title: "战后重建开始", category: "political", nature: "neutral", desc: "欧洲各国开始战后重建工作。" },
-        { date: "12月30日", year: 1922, title: "苏联成立", category: "political", nature: "positive", desc: "苏维埃社会主义共和国联盟正式成立。" },
+        { date: "12月30日", year: 1922, title: "苏联成立", category: "political", nature: "positive", desc: "苏联首次苏维埃代表大会在莫斯科召开，通过《苏联成立宣言》和《苏联成立条约》，由俄罗斯、乌克兰、白俄罗斯、外高加索联邦四个共和国正式组建苏维埃社会主义共和国联盟。" },
         { date: "12月31日", year: 1991, title: "苏联正式消亡", category: "political", nature: "neutral", desc: "苏联国旗从克里姆林宫降下，一个时代结束。" }
     ]
 };

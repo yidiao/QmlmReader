@@ -4,109 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>斯大林局部恒星系 | 国际共运人物星图先锋 | 青年马列毛主义驿站</title>
-    <meta name="description" content="以斯大林为恒星的局部人物星系：行星、彗星、卫星、星带与星云共同构成未来国际共运人物大星图的先锋样板。">
+    <meta name="description" content="以斯大林为恒星的局部人物星系：行星、彗星、卫星、星带与星云构成可导航的三维历史星图，为未来国际共运人物大星图提供先锋样板。">
     <link rel="stylesheet" href="../../../css/style.css">
-    <link rel="stylesheet" href="../../../css/mentor/stalin/relations.css">
+    <link rel="stylesheet" href="../../../css/mentor/stalin/stellar.css">
+    <link rel="stylesheet" href="../../../css/mentor/stalin/stellar-masters.css">
 </head>
 <body data-module="masters" data-master="stalin" data-graph-scope="mentor-local" data-graph-id="stalin-local-relations" data-starmap-prototype="true">
     <div id="nav-placeholder"></div>
 
-    <main class="stalin-relations-page">
-        <section class="star-hero" aria-labelledby="relations-title">
-            <div class="star-hero-bg" aria-hidden="true"><span></span><span></span><span></span></div>
-            <div class="star-hero-copy">
-                <span class="star-kicker">International Communist Movement · Local Star System 00</span>
-                <h1 id="relations-title">斯大林局部恒星系</h1>
-                <p>把斯大林视作一颗历史恒星：老近卫军与战时将领环绕为行星，托洛茨基等分歧者划出彗星轨迹，小人物与战士凝成星带，组织、战争、路线斗争与历史遗产化作星云。</p>
-            </div>
-            <div class="hero-dashboard" aria-label="星图入口与控制台">
-                <nav class="star-jump" aria-label="斯大林专题分卷">
-                    <a href="biography.html"><span>返回文本宇宙</span><strong>斯大林小传</strong></a>
-                    <a href="stalin.html"><span>资料入口</span><strong>旧版概览</strong></a>
-                </nav>
-                <div class="console-card console-primary">
-                    <span>Prototype Mission</span>
-                    <strong id="relations-count">观测中</strong>
-                    <p id="relations-status">正在校准恒星系数据……</p>
-                </div>
-            </div>
-        </section>
+    <!-- 斯大林局部恒星系：整页三维星图应用（源自 stalin-stellar-test，接入层见 stellar-masters.css） -->
+    <main class="stellar-page">
+      <canvas id="cosmos" aria-label="斯大林局部恒星系三维星图"></canvas>
 
-        <section class="starmap-console" aria-label="星图控制台">
-            <div class="console-card console-search">
-                <label for="relations-search">星体检索</label>
-                <input id="relations-search" type="search" placeholder="搜索：托洛茨基、卫国战争、legacy、共产国际……" autocomplete="off">
-            </div>
-            <div class="console-card console-actions">
-                <div class="starmap-modes" role="toolbar" aria-label="星图观测模式">
-                    <button class="is-active" type="button" data-relation-filter="all">全星系</button>
-                    <button type="button" data-relation-filter="inheritance">理论航线</button>
-                    <button type="button" data-relation-filter="conflict">彗星/斗争</button>
-                    <button type="button" data-relation-filter="organization">近轨行星</button>
-                    <button type="button" data-relation-filter="war">战争星云</button>
-                    <button type="button" data-relation-filter="legacy">遗产远轨</button>
-                </div>
-                <div class="starmap-switches">
-                    <button id="relations-reset" type="button">重置</button>
-                    <button id="relations-random" type="button">随机漫游</button>
-                    <button id="relations-dim" type="button" aria-pressed="false">深空模式</button>
-                </div>
-            </div>
-        </section>
+      <header class="topbar" aria-label="全局导航">
+        <button class="brand" id="homeView" type="button"><i></i><span><small>ICM ATLAS · 00</small><b>斯大林局部恒星系</b></span></button>
+        <div class="global-search"><label class="sr-only" for="searchBox">检索星图实体</label><input id="searchBox" type="search" placeholder="检索人物、组织、事件、文本、地点" autocomplete="off" /><kbd>／</kbd></div>
+        <div class="top-actions">
+          <button id="eraToggle" class="mode-button" type="button" aria-expanded="false"><i></i><span>时代区域</span></button>
+          <button id="historyToggle" class="mode-button" type="button" aria-pressed="false"><i></i><span>历史观测</span></button>
+          <button id="missionLaunch" class="mode-button" type="button" aria-expanded="false"><i></i><span>任务</span></button>
+          <button id="deepMode" class="icon-action" type="button" aria-pressed="false" title="深空模式">深空</button>
+          <button id="resetView" class="icon-action" type="button" title="重置视图">重置</button>
+        </div>
+      </header>
 
-        <section class="star-system-shell" aria-label="斯大林人物恒星系">
-            <aside class="route-panel" aria-label="探索航线">
-                <div class="panel-heading"><span>Explore Routes</span><h2>探索航线</h2></div>
-                <button class="route-card is-active" type="button" data-route="all"><span>00</span><strong>全星系观测</strong><small>恒星、行星、彗星、卫星、星带与星云全部可见。</small></button>
-                <button class="route-card" type="button" data-route="inheritance"><span>01</span><strong>理论继承航线</strong><small>马克思、恩格斯、列宁与斯大林之间的理论引力。</small></button>
-                <button class="route-card" type="button" data-route="conflict"><span>02</span><strong>路线斗争彗尾</strong><small>分歧者、老近卫军与清洗争议形成的高能轨迹。</small></button>
-                <button class="route-card" type="button" data-route="war"><span>03</span><strong>反法西斯战争星云</strong><small>战时将领、同盟外交与战争对手的巨大星云。</small></button>
-                <button class="route-card" type="button" data-route="legacy"><span>04</span><strong>后斯大林远轨</strong><small>继承、否定、停滞与解体在远轨上缓慢运行。</small></button>
-                <div class="legend-block">
-                    <span>Celestial Legend</span>
-                    <p><b class="dot star"></b>恒星　<b class="dot planet"></b>行星　<b class="dot comet"></b>彗星　<b class="dot belt"></b>星带　<b class="dot satellite"></b>卫星</p>
-                </div>
-            </aside>
+      <nav class="space-nav" id="spaceNav" aria-label="空间层级"><button type="button" id="spaceHome">斯大林局部恒星系</button><span>›</span><strong id="spaceTitle">总览</strong><small id="spaceCount">46 个实体</small><button type="button" id="spaceExit" hidden>返回母星系</button></nav><section class="field-heading" id="fieldHeading" hidden><small>LOCAL FIELD</small><h1 id="fieldTitle"></h1><p id="fieldSubtitle"></p></section><div class="belt-key" id="beltKey" hidden><span>理论文本</span><span>建设与争议</span><span>战争与外交</span><span>战后生活</span></div>
 
-            <div class="starmap-stage">
-                <div class="stage-topline"><span>Stalin Local Star System</span><strong id="stage-caption">从一颗恒星出发，测试未来大星图的视觉语法。</strong></div>
-                <div id="relation-canvas" class="relations-canvas" tabindex="0" aria-describedby="relations-map-hint">
-                    <div class="nebula nebula-inheritance" aria-hidden="true"><span>理论继承星云</span></div>
-                    <div class="nebula nebula-conflict" aria-hidden="true"><span>路线斗争彗云</span></div>
-                    <div class="nebula nebula-war" aria-hidden="true"><span>战争与外交星云</span></div>
-                    <div class="nebula nebula-legacy" aria-hidden="true"><span>历史遗产远云</span></div>
-                    <div class="orbit orbit-1" aria-hidden="true"></div>
-                    <div class="orbit orbit-2" aria-hidden="true"></div>
-                    <div class="orbit orbit-3" aria-hidden="true"></div>
-                    <div class="orbit orbit-4" aria-hidden="true"></div>
-                    <div class="asteroid-belt" aria-hidden="true"></div>
-                    <svg id="relation-lines" aria-hidden="true"></svg>
-                    <button id="relation-center" class="relations-center celestial-star" type="button" data-node-id="stalin" aria-label="查看斯大林恒星节点">
-                        <span class="star-core"></span>
-                        <strong>斯大林</strong>
-                        <small>恒星 / 局部中心</small>
-                    </button>
-                    <div id="relation-nodes" class="relation-nodes" aria-label="人物星体节点"></div>
-                </div>
-                <p id="relations-map-hint" class="relations-map-hint">视觉优先原型：轨道表达关系距离，星体类型表达历史功能，星云表达组织、战争、路线与遗产场域。点击任一星体打开档案抽屉。</p>
-            </div>
+      <section class="field-portals" id="fieldPortals" aria-label="可进入场域"><button type="button" data-enter-space="war"><i></i><span><b>战争与外交</b><small>进入战争星云</small></span></button><button type="button" data-enter-space="conflict"><i></i><span><b>路线斗争</b><small>进入斗争彗云</small></span></button><button type="button" data-enter-space="legacy"><i></i><span><b>后斯大林遗产</b><small>进入遗产远云</small></span></button><button type="button" data-enter-space="belt"><i></i><span><b>知识与群体带</b><small>展开节点群</small></span></button></section>
 
-            <aside id="relation-detail" class="relation-detail" aria-live="polite" aria-label="人物星体档案">
-                <div class="detail-placeholder">
-                    <span>✦</span>
-                    <h2>等待观测目标</h2>
-                    <p>选择恒星、行星、彗星、卫星或星带节点，查看人物身份、轨道位置、历史关系与下一步探索路径。</p>
-                </div>
-            </aside>
-        </section>
+      <section class="era-browser" id="eraBrowser" aria-label="时代区域浏览" hidden>
+        <header><div><small>ERA REGIONS</small><strong>先遣层时代区域</strong></div><button id="eraClose" type="button" aria-label="关闭时代区域">×</button></header>
+        <div id="eraRegions" class="era-regions"></div>
+        <footer><button id="eraReset" type="button">返回全部时代</button><p>时代区域改变观测范围，但人物及其长期关系仍保留。</p></footer>
+      </section>
+
+      <section class="search-popover" id="searchPopover" aria-label="检索结果">
+        <div class="result-heading"><strong id="resultCount">全部实体</strong><span id="resultHint">按类别筛选或检索</span></div>
+        <div id="searchResults" class="search-results" role="list"></div>
+      </section>
+
+      <nav class="tool-dock" aria-label="星图工具">
+        <button type="button" data-tool="layers" aria-pressed="false"><span>◫</span><b>图层</b></button>
+        <button type="button" data-tool="life" aria-pressed="false"><span>⌁</span><b>生平</b></button>
+        <button type="button" data-tool="compare" aria-pressed="false"><span>⇄</span><b>对照</b></button>
+        <button type="button" data-tool="path" aria-pressed="false"><span>⌘</span><b>路径</b></button>
+      </nav>
+
+      <section class="tool-window" data-tool-window="layers" hidden aria-label="图层与关系">
+        <header><div><small>OBSERVATION LAYERS</small><strong>图层与关系光谱</strong></div><button type="button" data-tool-close>×</button></header>
+        <div class="tool-content">
+          <div class="legend" id="legend" aria-label="星图分类筛选"></div>
+          <p class="hint" id="caption">人物、组织、事件、文本与地点共同导航。</p>
+          <section class="relation-panel" aria-label="关系层观测器"><div class="relation-heading"><strong>关系光谱</strong><button id="relationReset" type="button">全部关系</button></div><div id="relationLayers" class="relation-layers"></div><p id="relationStatus">显示全部历史关系</p></section>
+        </div>
+      </section>
+
+      <section class="tool-window" data-tool-window="life" hidden aria-label="斯大林生平轨迹">
+        <header><div><small>PERSONAL TIMELINE</small><strong>斯大林生平轨迹</strong></div><button type="button" data-tool-close>×</button></header>
+        <div class="tool-content"><div class="life-track-heading"><span id="lifeTrackState">随时间轴联动</span></div><div id="lifeTrack" class="life-track"></div></div>
+      </section>
+
+      <section class="tool-window" data-tool-window="compare" hidden aria-label="实体对照观测">
+        <header><div><small>COMPARATIVE VIEW</small><strong>双实体对照</strong></div><button type="button" data-tool-close>×</button></header>
+        <div class="tool-content compare-panel"><div class="compare-heading"><p>并置现有字段，不建立能力排行。</p><button id="compareUseCurrent" type="button">加入当前天体</button></div><div class="compare-pickers"><select id="compareA" aria-label="对照实体一"></select><span>⇄</span><select id="compareB" aria-label="对照实体二"></select></div><div id="compareOutput" class="compare-output"><p>选择两个实体比较时期、类型、场域和关系交集。</p></div></div>
+      </section>
+
+      <section class="tool-window" data-tool-window="path" hidden aria-label="关系路径探索">
+        <header><div><small>RELATION ROUTE</small><strong>六人路径</strong></div><button type="button" data-tool-close>×</button></header>
+        <div class="tool-content path-panel"><div class="path-heading"><span>最多 6 个中间节点</span></div><div class="path-pickers"><label>起点<select id="pathStart" aria-label="路径起点"></select></label><button id="pathSwap" type="button" aria-label="交换起点和终点">⇄</button><label>终点<select id="pathEnd" aria-label="路径终点"></select></label></div><div class="path-actions"><button id="pathFind" type="button">寻找联系</button><button id="pathUseSelected" type="button">以当前天体为起点</button><button id="pathClear" type="button">清除</button></div><div id="pathOutput" class="path-output" aria-live="polite"><p>选择两个实体，寻找不超过六个中间节点的历史联系。</p></div></div>
+      </section>
+
+      <section class="time-drawer" id="timeDrawer" aria-label="历史时间轴" hidden>
+        <div class="time-context"><small>HISTORICAL OBSERVATION</small><strong id="timeLabel">观测年份：1953</strong><span id="timeState">历史导航视图</span></div>
+        <button id="timeBack" type="button" aria-label="后退十年">−10</button>
+        <div class="time-rail"><input id="timeSlider" type="range" min="1878" max="1991" value="1953" step="1" aria-label="选择历史年份" /><div><span>1878</span><span>1917</span><span>1941</span><span>1953</span><span>1991</span></div></div>
+        <button id="timeForward" type="button" aria-label="前进十年">+10</button>
+        <button id="timePlay" type="button" aria-pressed="false">▶</button>
+        <button id="timeReset" type="button">1953</button>
+      </section>
+
+      <div class="target-pointer" id="targetPointer" hidden aria-hidden="true"><i>➤</i><span id="targetPointerName"></span></div>
+      <section class="nav-target" id="navTarget" aria-label="空间导航目标" hidden><div class="nav-target-mark"><i></i></div><div class="nav-target-copy"><small id="navTargetScope">CURRENT SPACE</small><strong id="navTargetName">未选择目标</strong><span id="navTargetDistance">远距观测</span></div><div class="nav-target-actions"><button id="navTargetLocate" type="button">定位</button><button id="navTargetEnter" type="button" hidden disabled>继续接近</button><button id="navTargetClear" type="button" aria-label="清除导航目标">×</button></div></section>
+      <nav class="nav-pad" id="navPad" aria-label="视角导航控制器"><button type="button" data-nav-command="pitch-up" aria-label="向上观察">↑</button><button type="button" data-nav-command="zoom-in" aria-label="接近目标">＋</button><button type="button" data-nav-command="yaw-left" aria-label="向左观察">←</button><button type="button" data-nav-command="yaw-right" aria-label="向右观察">→</button><button type="button" data-nav-command="pitch-down" aria-label="向下观察">↓</button><button type="button" data-nav-command="zoom-out" aria-label="远离目标">−</button></nav>
+
+      <button class="archive-handle" id="archiveHandle" type="button" aria-expanded="false" title="打开当前档案"><span>档案</span></button>
+      <aside class="info-panel archive-drawer" id="infoPanel" aria-live="polite" aria-label="实体档案" aria-hidden="true">
+        <button class="archive-close" id="archiveClose" type="button" aria-label="关闭实体档案">×</button>
+        <div class="detail-placeholder"><span>✦</span><h2>星图总览</h2><p>选择天体后打开分层档案。</p></div>
+      </aside>
+
+      <section class="mission-window" id="missionWindow" aria-label="任务探索" hidden>
+        <header class="mission-window-head" id="missionDragHandle"><div><small>MISSION WORKSPACE</small><strong>探索任务</strong></div><span id="missionProgress">选择一条路线</span><div><button id="missionMinimize" type="button" aria-label="最小化任务面板">—</button><button id="missionClose" type="button" aria-label="关闭任务面板">×</button></div></header>
+        <div class="mission-window-body">
+          <section class="mission-route-column"><small>01 · 路线</small><div id="missionRoutes" class="mission-routes"></div></section>
+          <section class="mission-step-column"><small>02 · 步骤</small><div id="missionSteps" class="mission-steps"><p>选择路线后查看探索步骤。</p></div></section>
+          <aside class="mission-target-column"><small>03 · 当前目标</small><div id="missionTarget"><p>尚未选择任务。</p></div></aside>
+        </div>
+      </section>
+
+      <div class="vignette"></div>
     </main>
-
-    <footer class="site-footer"><div class="container"><p>青年马列毛主义驿站 | Qmlm Reader</p><p class="footer-note">学习他 · 成为他 · 然后超越他</p></div></footer>
 
     <script src="../../../js/site-data.js"></script>
     <script src="../../../js/main.js"></script>
     <script src="../../../js/darkmode.js"></script>
     <script src="../../../js/cursor.js"></script>
-    <script src="../../../js/mentor/stalin/relations.js"></script>
+    <script src="../../../js/mentor/stalin/stellar-data.js"></script>
+    <script src="../../../js/mentor/stalin/stellar-cosmos.js"></script>
+    <script src="../../../js/mentor/stalin/stellar-app.js"></script>
+    <script src="../../../js/mentor/stalin/stellar-boot.js"></script>
 </body>
 </html>

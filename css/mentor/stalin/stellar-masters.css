@@ -1,0 +1,80 @@
+/* ============================================================
+   斯大林局部恒星系 · 母站接入层
+   stellar.css 为整页 fixed 布局；母站 .site-header 为 sticky 常驻顶栏。
+   本文件只做共存适配：把星图顶部锚定的 UI 整体下移到母站导航之下，
+   不改动 stellar.css 本体，便于后续从 stalin-stellar-test 同步升级。
+   --masthead-h 由 js/mentor/stalin/stellar-boot.js 实测写入。
+   ============================================================ */
+
+/* 星图页固定为深空底色，不受母站明暗模式影响 */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--void, #05070c);
+}
+
+body.dark-mode {
+    background: var(--void, #05070c);
+}
+
+/* ---- 桌面端：顶部锚定元素下移 ---- */
+.stellar-page .topbar {
+    top: calc(var(--masthead-h, 72px) + 10px);
+}
+
+.stellar-page .space-nav {
+    top: calc(var(--masthead-h, 72px) + 74px);
+}
+
+.stellar-page .field-heading {
+    top: calc(var(--masthead-h, 72px) + 108px);
+}
+
+.stellar-page .belt-key {
+    top: calc(var(--masthead-h, 72px) + 170px);
+}
+
+.stellar-page .search-popover {
+    top: calc(var(--masthead-h, 72px) + 72px);
+}
+
+.stellar-page .era-browser {
+    top: calc(var(--masthead-h, 72px) + 74px);
+}
+
+.stellar-page .archive-drawer {
+    top: calc(var(--masthead-h, 72px) + 10px);
+}
+
+/* ---- 移动端（≤760px，对应 stellar.css 同断点的原始偏移）---- */
+@media (max-width: 760px) {
+    .stellar-page .topbar {
+        top: calc(var(--masthead-h, 72px) + 6px);
+    }
+
+    .stellar-page .space-nav {
+        top: calc(var(--masthead-h, 72px) + 105px);
+    }
+
+    .stellar-page .field-heading {
+        top: calc(var(--masthead-h, 72px) + 145px);
+    }
+
+    .stellar-page .belt-key {
+        top: calc(var(--masthead-h, 72px) + 198px);
+    }
+
+    .stellar-page .search-popover {
+        top: calc(var(--masthead-h, 72px) + 105px);
+    }
+
+    .stellar-page .era-browser {
+        top: calc(var(--masthead-h, 72px) + 105px);
+    }
+
+    .stellar-page .archive-drawer {
+        top: calc(var(--masthead-h, 72px) + 6px);
+    }
+}

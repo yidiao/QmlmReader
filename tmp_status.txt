@@ -1,10 +1,16 @@
- M html/masters/stalin/stalin.html
- M js/main.js
+ D css/mentor/stalin/relations.css
+ M data/history-events.js
+ M html/masters/stalin/relations.html
+ D js/mentor/stalin/relations.js
  M tmp_status.txt
- M 设计文档/pages/masters/README.md
-?? css/mentor/
-?? data/masters/
-?? html/masters/stalin/biography.html
-?? html/masters/stalin/relations.html
-?? js/mentor/
-?? 设计文档/pages/international/people-starmap-plan.md
+?? css/mentor/stalin/relations.css.bak
+?? css/mentor/stalin/stellar-masters.css
+?? css/mentor/stalin/stellar.css
+?? images/masters/stalin-star.jpg
+?? js/mentor/stalin/relations.js.bak
+?? js/mentor/stalin/stellar-app.js
+?? js/mentor/stalin/stellar-boot.js
+?? js/mentor/stalin/stellar-cosmos.js
+?? js/mentor/stalin/stellar-data.js
+?? 设计文档/pages/masters/stalin-stellar-EXPLORATION_DESIGN.md
+?? 设计文档/pages/masters/stalin-stellar-README.md
