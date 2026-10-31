@@ -59,9 +59,9 @@
         </div>
       </section>
 
-      <section class="tool-window" data-tool-window="life" hidden aria-label="斯大林生平轨迹">
-        <header><div><small>PERSONAL TIMELINE</small><strong>斯大林生平轨迹</strong></div><button type="button" data-tool-close>×</button></header>
-        <div class="tool-content"><div class="life-track-heading"><span id="lifeTrackState">随时间轴联动</span></div><div id="lifeTrack" class="life-track"></div></div>
+      <section class="tool-window" data-tool-window="life" hidden aria-label="人物生平轨迹">
+        <header><div><small>PERSONAL TIMELINE</small><strong>人物生平轨迹</strong></div><button type="button" data-tool-close>×</button></header>
+        <div class="tool-content"><div class="life-track-heading"><select id="lifePerson" aria-label="选择生平人物"></select><span id="lifeTrackState">随时间轴联动</span></div><div id="lifeTrack" class="life-track"></div></div>
       </section>
 
       <section class="tool-window" data-tool-window="compare" hidden aria-label="实体对照观测">
@@ -102,6 +102,7 @@
         </div>
       </section>
 
+      <div class="obs-toast" id="obsToast" hidden aria-live="polite"></div>
       <div class="vignette"></div>
     </main>
 

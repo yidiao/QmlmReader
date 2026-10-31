@@ -41,7 +41,7 @@
         '</div>' +
         '<button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>' +
         '</nav></div></header>' +
-        '<button class="nav-ball" id="navBall" aria-label="展开导航" title="展开导航" hidden><span aria-hidden="true">☭</span></button>';
+        '<button class="nav-ball" id="navBall" aria-label="展开导航" title="展开导航"><span aria-hidden="true">☭</span></button>';
 
     var ph = document.getElementById('nav-placeholder');
     if (ph) {
@@ -517,9 +517,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function applyBallVisibility() {
-        ball.hidden = !isCollapsed();
+    var leaveTimer = null;
+
+    // 收起后球"弹出"出现；animate=false 用于页面加载时已处于收起态（不重播动画）
+    function showBall(animate) {
+        if (leaveTimer) { clearTimeout(leaveTimer); leaveTimer = null; }
+        ball.classList.remove('leaving');
+        ball.classList.add('active');
+        ball.classList.toggle('still', !animate);
     }
+
+    // 展开时球放大上飞淡出（视觉上展开为导航栏），动画结束后再移除
+    function hideBallAfterLeave() {
+        if (!ball.classList.contains('active') || ball.classList.contains('leaving')) return;
+        ball.classList.add('leaving');
+        if (leaveTimer) clearTimeout(leaveTimer);
+        leaveTimer = setTimeout(removeBall, 340);
+    }
+
+    function removeBall() {
+        if (leaveTimer) { clearTimeout(leaveTimer); leaveTimer = null; }
+        ball.classList.remove('active');
+        ball.classList.remove('leaving');
+        ball.classList.remove('still');
+    }
+
+    ball.addEventListener('animationend', function(e) {
+        if (e.animationName === 'nav-ball-leave') removeBall();
+    });
 
     function clampBallPosition(pos) {
         var size = ball.offsetWidth || 48;
@@ -564,12 +589,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function applyCollapsed(value, publish) {
+    function applyCollapsed(value, publish, opts) {
+        opts = opts || {};
         collapsed = !!value;
         document.body.classList.toggle('nav-collapsed', collapsed);
         syncHeaderOffset();
-        applyBallVisibility();
-        if (collapsed) restoreBallPosition();
+        if (collapsed) {
+            restoreBallPosition();
+            showBall(opts.animate !== false);
+        } else {
+            hideBallAfterLeave();
+        }
         if (publish) publishState({ navCollapsed: collapsed });
     }
 
@@ -656,8 +686,10 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('qmlm:state-ready', bindCollapseState);
 
     // ---- 初始化与持续同步 ----
-    applyBallVisibility();
-    if (collapsed) restoreBallPosition();
+    if (collapsed) {
+        restoreBallPosition();
+        showBall(false); // 加载时已收起：直接显示球，不重播弹出动画
+    }
     syncHeaderOffset();
     if (typeof ResizeObserver === 'function') {
         new ResizeObserver(function() { syncHeaderOffset(); }).observe(header);

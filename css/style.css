@@ -2591,7 +2591,7 @@ body.nav-collapsed .site-header {
     box-shadow: none;
 }
 
-/* 悬浮球 */
+/* 悬浮球：默认不显示（展开态无球），收起后才出现 */
 .nav-ball {
     position: fixed;
     top: 18px;
@@ -2605,7 +2605,7 @@ body.nav-collapsed .site-header {
     color: #fff;
     font-size: 1.4rem;
     line-height: 1;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     cursor: grab;
@@ -2615,6 +2615,28 @@ body.nav-collapsed .site-header {
     z-index: 9500;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.nav-ball.active {
+    display: flex;
+    animation: nav-ball-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+/* 页面加载时已处于收起态：不出弹出动画 */
+.nav-ball.active.still {
+    animation: none;
+}
+/* 轻点展开：球放大上飞淡出，视觉上"融进"滑下的导航栏 */
+.nav-ball.leaving {
+    animation: nav-ball-leave 0.3s ease forwards;
+    pointer-events: none;
+}
+@keyframes nav-ball-pop {
+    from { transform: scale(0); opacity: 0; }
+    60% { opacity: 1; }
+    to { transform: scale(1); opacity: 1; }
+}
+@keyframes nav-ball-leave {
+    0% { transform: scale(1) translateY(0); opacity: 1; }
+    100% { transform: scale(1.7) translateY(-46px); opacity: 0; }
 }
 .nav-ball:hover {
     transform: scale(1.08);
@@ -2659,5 +2681,9 @@ body.dark-mode .nav-ball {
     .nav-collapse-btn,
     .nav-ball {
         transition: none;
+    }
+    .nav-ball.active,
+    .nav-ball.leaving {
+        animation: none;
     }
 }
