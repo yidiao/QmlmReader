@@ -8,6 +8,23 @@ body[data-master="marx"] {
   --master-accent: #c49a3a;
   --master-paper: #f7f2e7;
   --master-ink: #2b2b2b;
+
+  /* —— 主页主题色（masters-common.css 消费）—— */
+  --master-theme-accent: #c41e3a;
+  --master-theme-accent-rgb: 196,30,58;
+  --master-theme-accent-light: #ff6b6b;
+  --master-theme-accent-grad2: #ff6b6b;
+  --master-theme-accent-deep: #8b0000;
+  --master-theme-accent-deep-rgb: 139,0,0;
+  --master-theme-accent-deep-text: #8b0000;
+  --master-theme-accent-deep2: #a52a2a;
+  --master-theme-accent-glow: #ff6b6b;
+  --master-theme-accent-glow-rgb: 255,107,107;
+  --master-theme-accent-glow2: #e53e3e;
+  --master-theme-soft-1: #fff5f5;
+  --master-theme-soft-2: #fef2f2;
+  --master-theme-dark-1: #2d1a1a;
+  --master-theme-dark-2: #3a2020;
 }
 
 body[data-master="engels"] {
@@ -16,6 +33,23 @@ body[data-master="engels"] {
   --master-accent: #c49a3a;
   --master-paper: #f5f0e8;
   --master-ink: #2b2b2b;
+
+  /* —— 主页主题色（masters-common.css 消费）—— */
+  --master-theme-accent: #4a5568;
+  --master-theme-accent-rgb: 74,85,104;
+  --master-theme-accent-light: #a0aec0;
+  --master-theme-accent-grad2: #718096;
+  --master-theme-accent-deep: #4a5568;
+  --master-theme-accent-deep-rgb: 74,85,104;
+  --master-theme-accent-deep-text: #4a5568;
+  --master-theme-accent-deep2: #718096;
+  --master-theme-accent-glow: #a0aec0;
+  --master-theme-accent-glow-rgb: 160,174,192;
+  --master-theme-accent-glow2: #718096;
+  --master-theme-soft-1: #f0f4f8;
+  --master-theme-soft-2: #edf2f7;
+  --master-theme-dark-1: #1a2a2a;
+  --master-theme-dark-2: #202a2a;
 }
 
 body[data-master="lenin"] {
@@ -24,6 +58,23 @@ body[data-master="lenin"] {
   --master-accent: #d9a000;
   --master-paper: #f7f2e7;
   --master-ink: #2b2b2b;
+
+  /* —— 主页主题色（masters-common.css 消费）—— */
+  --master-theme-accent: #c41e3a;
+  --master-theme-accent-rgb: 196,30,58;
+  --master-theme-accent-light: #ff6b6b;
+  --master-theme-accent-grad2: #ff6b6b;
+  --master-theme-accent-deep: #d4a017;
+  --master-theme-accent-deep-rgb: 212,160,23;
+  --master-theme-accent-deep-text: #b7791f;
+  --master-theme-accent-deep2: #b8860b;
+  --master-theme-accent-glow: #fbbf24;
+  --master-theme-accent-glow-rgb: 251,191,36;
+  --master-theme-accent-glow2: #d4a017;
+  --master-theme-soft-1: #fffbeb;
+  --master-theme-soft-2: #fef3c7;
+  --master-theme-dark-1: #2a2510;
+  --master-theme-dark-2: #302a15;
 }
 
 body[data-master="stalin"] {
@@ -32,6 +83,23 @@ body[data-master="stalin"] {
   --master-accent: #c9a84c;
   --master-paper: #f1eadc;
   --master-ink: #252525;
+
+  /* —— 主页主题色（masters-common.css 消费）—— */
+  --master-theme-accent: #744210;
+  --master-theme-accent-rgb: 116,66,16;
+  --master-theme-accent-light: #d69e2e;
+  --master-theme-accent-grad2: #975a16;
+  --master-theme-accent-deep: #744210;
+  --master-theme-accent-deep-rgb: 116,66,16;
+  --master-theme-accent-deep-text: #744210;
+  --master-theme-accent-deep2: #975a16;
+  --master-theme-accent-glow: #d69e2e;
+  --master-theme-accent-glow-rgb: 214,158,46;
+  --master-theme-accent-glow2: #b7791f;
+  --master-theme-soft-1: #fffaf0;
+  --master-theme-soft-2: #fef3c7;
+  --master-theme-dark-1: #2a2010;
+  --master-theme-dark-2: #302515;
 }
 
 body[data-master="mao"] {
@@ -40,6 +108,23 @@ body[data-master="mao"] {
   --master-accent: #d9a000;
   --master-paper: #f7f2e7;
   --master-ink: #2b2b2b;
+
+  /* —— 主页主题色（masters-common.css 消费）—— */
+  --master-theme-accent: #c41e3a;
+  --master-theme-accent-rgb: 196,30,58;
+  --master-theme-accent-light: #ff6b6b;
+  --master-theme-accent-grad2: #ff6b6b;
+  --master-theme-accent-deep: #e8192c;
+  --master-theme-accent-deep-rgb: 232,25,44;
+  --master-theme-accent-deep-text: #c53030;
+  --master-theme-accent-deep2: #c41e3a;
+  --master-theme-accent-glow: #fc8181;
+  --master-theme-accent-glow-rgb: 252,129,129;
+  --master-theme-accent-glow2: #e8192c;
+  --master-theme-soft-1: #fff5f5;
+  --master-theme-soft-2: #fee2e2;
+  --master-theme-dark-1: #2a1515;
+  --master-theme-dark-2: #301a1a;
 }
 
 body.dark-mode[data-master="marx"],
