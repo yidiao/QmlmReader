@@ -29,11 +29,16 @@ html/rectify/myths/young-october.html
 
 ```html
 <link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/rectify/rectify-common.css">
 <script src="../../js/site-data.js"></script>
 <script src="../../js/main.js"></script>
 <script src="../../js/darkmode.js"></script>
 <script src="../../js/cursor.js"></script>
 ```
+
+十篇子页同样引入 `rectify-common.css`（下载浮动按钮 + 多数派文章版式），
+页面差异与特有规则保留在各页 `<style>` 中（内联后加载、可覆盖公共规则）。
+主题红统一走 `css/color-tokens.css` 的 `--color-brand-red` / `--color-brand-red-dark`。
 
 ---
 

@@ -52,7 +52,7 @@
 当前不需要立刻重做已完成的解耦规范。更适合的后续顺序是：
 
 1. 补齐各页面模块的真实数据源、JS、CSS、页面职责说明。
-2. 继续减少页面内联样式和大段兜底数据。
+2. 继续减少剩余小页的内联样式和公共脚本兜底数据（大页与导师/rectify 已完成下沉）。
 3. 文章系统后续若继续做，再逐步推进正文结构化、精读轻结构数据化和渲染复用。
 4. 阅读历史恢复采用本地记录 + 可取消自动跳转的交互，章节导航暂不调整，后续只在模块文档中补充接口预留说明。
 5. experimental 模块的长篇研究稿继续放在 `设计文档/pages/experimental/research/`，总览只索引，不复制长文。
@@ -117,7 +117,7 @@
   - `html/articles/Stalin/dao-lunen.html`
   - `html/articles/Stalin/lun-lunen-zhu-yi-ji-chu.html`
   - `html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html`
-- 许多 HTML 页面仍有内联 `<style>`；视觉规范后续应逐步下沉到 `css/`。
+- 大页内联样式已下沉到 `css/<module>/`（导师页走 `masters-common.css` + `data-master` 变量、rectify 走 `rectify-common.css`、12 个 >10KB 页面原样外置）；剩余小页仍有个别内联 `<style>`，新页面不再新增内联样式。
 - `articles.html` 仍有较大的内嵌合集兜底数据；后续应继续收敛到 `window.SITE_DATA.collections` / `data/collections.json`。
 - 公共导航以 `js/main.js` 为唯一来源，页面仅保留 `#nav-placeholder`；不得再在页面中硬编码 `site-header`、菜单项或黑夜模式按钮。
 - 全站搜索由公共导航提供，`js/main.js` 会自动加载 `js/search.js`；搜索覆盖文章、文艺、正名、国际专栏及已加载的历史事件，结果链接按当前页面层级自动修正。

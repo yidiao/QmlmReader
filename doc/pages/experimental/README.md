@@ -33,11 +33,11 @@ html/experimental/yangbanxi.html      # 剧本/分镜/Prompt 生成工具
 
 | 子工具 | 页面 | 脚本 | 样式 | 状态 |
 |---|---|---|---|---|
-| 文体工具 | `html/experimental/marxist-style.html` / `html/toolkit/marxist-style.html` | `js/marxist/marxist-style.js`、`js/marxist/marxist-style-ai.js`、`js/marxist/mentors/*.js` | `css/marxist-style.css` | 已有复杂实现 |
-| 文字选项小游戏 | `html/experimental/qingma.html` | `js/qingma/data.js`、`engine.js`、`ui.js`、`main.js` | `css/qingma-style.css` | 已实装完整闭环 |
-| 小册子工具 | `html/experimental/xiaocezi.html` | `js/xiaocezi/xiaocezi.js`、`style-engine.js` | `css/xiaocezi-style*.css` | 已落地原型 |
-| 剧本/分镜工具 | `html/experimental/yangbanxi.html` | `js/yangbanxi/yangbanxi.js`、`yangbanxi-prompt.js` | `css/yangbanxi-style.css` | 已落地原型，仍有升级点 |
-| 图像风格化工具 | `html/experimental/redify.html` | 暂未发现独立核心 JS | `css/redify-style.css` | 概念/早期入口 |
+| 文体工具 | `html/experimental/marxist-style.html` / `html/toolkit/marxist-style.html` | `js/marxist/marxist-style.js`、`js/marxist/marxist-style-ai.js`、`js/marxist/mentors/*.js` | `css/marxist/style.css` | 已有复杂实现 |
+| 文字选项小游戏 | `html/experimental/qingma.html` | `js/qingma/data.js`、`engine.js`、`ui.js`、`main.js` | `css/qingma/style.css` | 已实装完整闭环 |
+| 小册子工具 | `html/experimental/xiaocezi.html` | `js/xiaocezi/xiaocezi.js`、`style-engine.js` | `css/xiaocezi/{style,mimeo,book}.css` | 已落地原型 |
+| 剧本/分镜工具 | `html/experimental/yangbanxi.html` | `js/yangbanxi/yangbanxi.js`、`yangbanxi-prompt.js` | `css/yangbanxi/style.css` | 已落地原型，仍有升级点 |
+| 图像风格化工具 | `html/experimental/redify.html` | 暂未发现独立核心 JS | `css/redify/style.css` | 概念/早期入口 |
 | 留言板 | `html/experimental/message-board.html` | 需后续核对 | 共享/内联 | 待整理 |
 
 ---

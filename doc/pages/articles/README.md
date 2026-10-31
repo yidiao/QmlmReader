@@ -9,8 +9,8 @@
 
 ```text
 html/articles/articles.html                          # 文章索引页（展示页）
-html/articles/_template.html                         # 旧模板
-html/articles/_template-v2.html                      # 推荐模板
+html/articles/_template.html                         # 旧模板（已废弃，仅历史参考）
+html/articles/_template-v2.html                      # 推荐模板（路径为 ../../ 两层；json 谱系需另引 article-json/article-study）
 html/articles/{Mentor}/{Star}/{slug}.html            # 正式文章详情页
 html/articles/imported/...                           # 历史抽取页池，不再承担正式展示职责
 ```

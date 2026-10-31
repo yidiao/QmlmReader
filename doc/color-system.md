@@ -26,7 +26,7 @@ QmlmReader 的主视觉应保持“红黑金 + 米白纸张 + 低饱和分类色
 | `css/color-tokens.css` | 品牌色、护眼纸色、灰阶、状态色、阴影原子值 | 只维护基础色值 |
 | `css/theme-colors.css` | `--app-*` 语义映射与明暗模式切换 | 常规组件优先使用 `--app-*` |
 | `css/module-colors.css` | `body[data-module]` 页面模块强调色 | 新常规页面可设置 `data-module` |
-| `css/master-colors.css` | `body[data-master]` 导师主题色 | 导师色不替代文章分类色 |
+| `css/master-colors.css` | `body[data-master]` 导师主题色；另含 `--master-theme-*` 主页主题色族（供 `css/masters/masters-common.css` 取色） | 导师色不替代文章分类色 |
 | `css/category-theme.css` | 六大文章分类色 | 通过 `data-category` 使用 |
 
 `css/style.css` 已通过顶部 `@import` 接入上述颜色管理文件；现有旧变量保留为兼容别名。新增常规页面应优先引入 `style.css`，不必重复引入令牌文件。

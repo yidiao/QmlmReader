@@ -68,12 +68,18 @@ data/masters/stalin/relations.json    # 人物关系网数据
 html/masters/stalin/biography.html    # 小传阅读页
 html/masters/stalin/relations.html    # 独立人物关系展板页
 
-css/mentor/stalin/biography.css       # 小传阅读页专属样式
-css/mentor/stalin/relations.css       # 关系展板页专属样式
+css/masters/masters-common.css        # 五位导师主页共用样式（主题色走 body[data-master] 的 --master-theme-* 变量）
+css/masters/stalin/biography.css      # 小传阅读页专属样式
+css/masters/stalin/stellar.css        # 关系展板页星图基础样式
+css/masters/stalin/stellar-masters.css # 关系展板页专属样式
 
 js/mentor/stalin/biography.js         # 小传页数据加载、导航、正文渲染
 js/mentor/stalin/relations.js         # 关系展板渲染与交互
 ```
+
+> 主页（marx/engels/lenin/mao/stalin.html）的版式来自 `masters-common.css`，
+> 页面只需在 `<body>` 上声明 `data-master="..."`，主题色由 `css/master-colors.css` 的
+> `--master-theme-*` 变量族提供；各页特有规则（如 stalin 的 `.stalin-volume-strip`）保留在页内。
 
 ### 5.2 小传页职责
 

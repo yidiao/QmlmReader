@@ -58,10 +58,16 @@ index.html
 
 ## 3. 当前维护风险
 
-1. **页面私有样式仍多**：许多 `html/**/*.html` 仍含 `<style>`，后续应逐步迁入 `css/` 中的模块样式。
+1. **页面私有样式已大幅收敛**：导师五页抽入 `css/masters/masters-common.css`（`body[data-master]` 变量取色），rectify 十页抽入 `css/rectify/rectify-common.css`，12 个 >10KB 大页内联样式已原样下沉到 `css/<module>/`。剩余小页仍有个别内联 `<style>`，新页面一律不再新增内联样式。
 2. **公共脚本仍有兜底数据**：`main.js`、`search.js`、部分页面内仍有大段 fallback 数据。
 3. **数据权威源需要持续强调**：列表/搜索/下载入口走索引层，正文走 `articles-json`，精读走 `study-json`。
 4. **不要默认存在前端构建链**：当前项目根目录未发现 `package.json`，不要按 Vite/React 等工程习惯操作。
+
+### 3.1 CSS 目录约定
+
+- **全局平铺**：`css/style.css`、4 个颜色令牌文件、`articles-detail.css`、`articles-index.css`、`category-theme.css`。
+- **模块子目录**（与 `js/<module>/` 对齐）：`css/masters/`、`css/rectify/`、`css/toolkit/`、`css/home/`、`css/international/`、`css/preferences/`、`css/gallery/`、`css/puzzle/`、`css/experimental/`、`css/marxist/`、`css/qingma/`、`css/xiaocezi/`、`css/yangbanxi/`、`css/redify/`。
+- **新增模块四件套**：`html/<module>/` 页面 + `js/<module>/` 脚本 + `css/<module>/` 样式 + `data/` 只读引用，并在 `doc/pages/<module>/README.md` 登记。
 
 ---
 
