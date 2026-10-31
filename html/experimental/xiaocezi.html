@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小册子 | Qmlm Reader</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/xiaocezi-style.css">
+    <link rel="stylesheet" href="../../css/xiaocezi-style-mimeo.css">
+    <link rel="stylesheet" href="../../css/xiaocezi-style-book.css">
+    <script src="https://unpkg.com/mammoth/mammoth.browser.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main class="xc-app">
+        <header class="xc-header">
+            <h1 class="xc-title">小 册 子</h1>
+            <p class="xc-desc">上传 Word，一键变红刊 PDF —— 写作留在 Word，美化交给工具</p>
+
+            <div class="xc-meta">
+                <input class="xc-meta-input xc-meta-title" id="xc-meta-title" placeholder="标题" />
+                <input class="xc-meta-input" id="xc-meta-subtitle" placeholder="副标题" />
+                <input class="xc-meta-input" id="xc-meta-author" placeholder="作者" />
+            </div>
+
+            <div class="xc-toolbar">
+                <label class="xc-btn xc-btn-ghost" for="xc-file-input">上传 Word</label>
+                <input type="file" id="xc-file-input" accept=".docx" hidden>
+
+                <div class="xc-style-switch" id="xc-style-switch">
+                    <button class="xc-style-btn active" data-style="mimeo">手作油印</button>
+                    <button class="xc-style-btn" data-style="book">精致书刊</button>
+                </div>
+
+                <button class="xc-btn xc-btn-primary" onclick="window.print()">导出 PDF</button>
+            </div>
+        </header>
+
+        <div class="xc-booklet-wrap">
+            <!-- 源内容（隐藏，供测量与克隆） -->
+            <div id="xc-src" style="position:absolute; visibility:hidden; width:148mm;">
+                <article class="xc-booklet">
+                    <section class="xc-section xc-cover">
+                        <span class="xc-cover-badge">小 册 子</span>
+                        <h1 class="xc-cover-title" id="xc-cover-title">未命名小册子</h1>
+                        <p class="xc-cover-subtitle" id="xc-cover-subtitle"></p>
+                        <p class="xc-cover-author" id="xc-cover-author"></p>
+                    </section>
+
+                    <section class="xc-section xc-preface" id="xc-preface" style="display:none;">
+                        <div class="xc-body-content" id="xc-preface-content"></div>
+                    </section>
+
+                    <section class="xc-section xc-toc">
+                        <h2 class="xc-toc-heading">目 录</h2>
+                        <ol class="xc-toc-list" id="xc-toc-list"></ol>
+                    </section>
+
+                    <section class="xc-section xc-body">
+                        <div class="xc-body-content" id="xc-body-content"></div>
+                    </section>
+
+                    <section class="xc-section xc-back">
+                        <span class="xc-back-ornament"></span>
+                        <p class="xc-back-text">—— 完 ——</p>
+                    </section>
+                </article>
+            </div>
+
+            <!-- 分页结果 -->
+            <div class="xc-pages" id="xc-pages"></div>
+        </div>
+    </main>
+
+    <script src="../../js/xiaocezi/xiaocezi.js"></script>
+    <script src="../../js/xiaocezi/style-engine.js"></script>
+    <script src="../../js/site-data.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/darkmode.js"></script>
+</body>
+</html>

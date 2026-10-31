@@ -1,0 +1,55 @@
+/* QmlmReader 色彩原子令牌
+ * 只在这里维护基础色值；组件应使用语义变量，避免直接引用色值。
+ */
+:root {
+  /* 品牌色 */
+  --color-brand-red: #c41e3a;
+  --color-brand-red-dark: #8b0000;
+  --color-brand-gold: #ffd700;
+
+  /* 护眼纸色：页面底 -> 区块 -> 卡片 -> 浮层 */
+  --paper-page: #f3eadc;
+  --paper-section: #f7f2e7;
+  --paper-card: #fffaf0;
+  --paper-card-strong: #fffdf7;
+  --paper-muted: #e8e4dc;
+  --paper-border: #ded2bd;
+
+  /* 中性灰阶：用于常规页面文字、边框、控件 */
+  --gray-950: #1a1a1a;
+  --gray-900: #2b2b2b;
+  --gray-800: #333333;
+  --gray-700: #555555;
+  --gray-600: #666666;
+  --gray-500: #888888;
+  --gray-400: #999999;
+  --gray-300: #aaaaaa;
+  --gray-200: #cccccc;
+  --gray-150: #dddddd;
+  --gray-100: #e8e8e8;
+  --gray-050: #f5f5f5;
+
+  /* 暗色灰阶：背景 -> 区块 -> 卡片 -> raised -> 边框 */
+  --gray-dark-bg: #171717;
+  --gray-dark-section: #1f1f1f;
+  --gray-dark-surface: #2a2a2a;
+  --gray-dark-raised: #333333;
+  --gray-dark-border: #444444;
+  --gray-dark-text: #e0e0e0;
+  --gray-dark-muted: #aaaaaa;
+
+  /* 通用状态色 */
+  --color-success: #2e7d32;
+  --color-success-soft: #e8f5e9;
+  --color-warning: #b45309;
+  --color-warning-soft: #fff3e0;
+  --color-danger: #d32f2f;
+  --color-danger-soft: #ffebee;
+  --color-info: #2b6cb0;
+  --color-info-soft: #e8eaf6;
+
+  /* 暖色阴影与遮罩 */
+  --shadow-color: rgba(78, 45, 20, 0.10);
+  --shadow-color-strong: rgba(78, 45, 20, 0.15);
+  --overlay-color: rgba(0, 0, 0, 0.55);
+}

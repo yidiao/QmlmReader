@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论中国革命的前途 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/articles-detail.css">
+    <link rel="stylesheet" href="../../../css/category-theme.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-category="politics" data-article-json="../../../data/articles-json/Stalin/★★★☆☆/lun-zhongguo-ge-ming-de-qiantu.json" data-study-json="../../../data/study-json/Stalin/lun-zhongguo-ge-ming-de-qiantu.json">
+    <div id="nav-placeholder"></div>
+
+    <div class="back-nav u-display-none">
+        <div class="container u-max-900 u-mx-auto u-px-20">
+            <a href="../../articles/articles.html" class="back-link"></a>
+        </div>
+    </div>
+
+    <main class="article-detail">
+        <header class="article-header">
+            <div class="importance-badge">核心必读</div>
+            <h1>论中国革命的前途</h1>
+            <div class="article-subtitle">在共产国际执行委员会中国委员会会议上的演说</div>
+            <div class="article-meta">
+                <span class="author">斯大林</span>
+                <span class="date">1926年11月30日</span>
+                <span class="category">政治理论 · 中国革命</span>
+                <span class="word-count">约6,500字</span>
+                <span class="length-tag">短篇</span>
+            </div>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
+        </div>
+
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro"><p><strong>原文：</strong>正在加载文章数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2 class="tab-heading">如何阅读本文</h2>
+                <div class="guide-block"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2 class="tab-heading">容易读错的地方</h2>
+                <div class="diff-item"><div class="correct">正在加载精读数据…</div></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2 class="tab-heading">这篇文章在回应谁？</h2>
+                <div class="dialogue-block"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2 class="tab-heading">读完之后可以做什么</h2>
+                <div class="action-item"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2 class="tab-heading">一目了然</h2>
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量本文的“性格”</p>
+                    <div class="chart-container u-max-500 u-mx-auto"><canvas id="radarChart"></canvas></div>
+                </div>
+                <div class="chart-block">
+                    <h3>论证节奏曲线</h3>
+                    <p class="chart-desc">展示文章各章节的论证强度</p>
+                    <div class="chart-container u-max-700 u-mx-auto"><canvas id="argumentCurve"></canvas></div>
+                    <div class="structure-analysis">
+                        <h4>结构分析（对应曲线各波段）</h4>
+                        <div class="analysis-item"><span class="analysis-label">革命形势（6/10）</span><p>分析中国革命的国际国内背景。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">两种前途（8/10）</span><p>深入分析中国革命可能走向的两种不同道路。</p></div>
+                        <div class="analysis-item"><span class="analysis-label highlight">我们的方针（9/10）</span><p>论证中国革命的非资本主义发展道路。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">具体路径（5/10）</span><p>论述实现革命目标的具体策略和方法。</p></div>
+                        <div class="analysis-item"><span class="analysis-label">结论（4/10）</span><p>总结全文要点，号召坚持正确路线。</p></div>
+                    </div>
+                </div>
+                <div class="chart-block">
+                    <h3>中国革命三大特点</h3>
+                    <p class="chart-desc">斯大林归纳的中国革命区别于1905年俄国革命的三个独有特点及其影响权重</p>
+                    <div class="chart-container u-max-550 u-mx-auto"><canvas id="featuresChart"></canvas></div>
+                </div>
+                <div class="chart-block">
+                    <h3>各阶级对中国革命的态度</h3>
+                    <p class="chart-desc">中国社会各阶级在革命中的立场与革命性强度对比（-5=反革命，+10=最革命）</p>
+                    <div class="chart-container u-max-650 u-mx-auto"><canvas id="classAttitudeChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2 class="tab-heading">理论拼图</h2>
+                <div class="puzzle-intro">
+                    <p>本文归纳中国革命的特殊道路，是理解中国革命民族解放性质的重要文本。</p>
+                </div>
+                <div class="puzzle-position">
+                    <h3>本文在理论体系中的坐标</h3>
+                    <div class="theory-tree">
+                        <div class="theory-node root">马克思主义</div>
+                        <div class="theory-branches">
+                            <div class="theory-branch">
+                                <div class="theory-node branch">中国革命问题</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">民族解放</div>
+                                    <div class="theory-node related">农民问题</div>
+                                    <div class="theory-node current">中国革命的前途</div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">革命道路</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">非资本主义道路</div>
+                                    <div class="theory-node related">无产阶级领导权</div>
+                                    <div class="theory-node related">世界革命</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="puzzle-timeline">
+                    <h3>在思想发展时间轴上的位置</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1921</div><div class="timeline-label">中共成立</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1925</div><div class="timeline-label">五卅运动</div></div>
+                        <div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1926</div><div class="timeline-label">共产国际执委会演讲</div><div class="timeline-here">本文</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1927</div><div class="timeline-label">四一二政变</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1949</div><div class="timeline-label">新中国成立</div></div>
+                    </div>
+                </div>
+                <div class="puzzle-links">
+                    <h3>文章联结网络</h3>
+                    <p class="puzzle-links-note">点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（输出影响 · 理论来源 · 相互支撑）</p>
+                    <div class="conn-grid">
+                        <a href="lun-wo-guo-ge-ming.html" class="conn-card" style="border-left-color:#2b6cb0;">
+                            <span class="conn-dir" style="color:#276749;"></span><span class="conn-title">论我国革命</span><span class="conn-label">政治理论</span><span class="conn-relation">列宁革命论的东方延伸</span>
+                        </a>
+                        <a href="xin-min-zhu.html" class="conn-card" style="border-left-color:#1a237e;">
+                            <span class="conn-dir" style="color:#276749;"></span><span class="conn-title">新民主主义论</span><span class="conn-label">政治理论</span><span class="conn-relation">毛泽东对中国革命道路的回答</span>
+                        </a>
+                        <a href="nong-min-yun-dong.html" class="conn-card" style="border-left-color:#1b5e20;">
+                            <span class="conn-dir" style="color:#276749;"></span><span class="conn-title">湖南农民运动考察报告</span><span class="conn-label">政治理论</span><span class="conn-relation">中国革命中农民问题的实践展开</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../../js/category-theme.js"></script>
+    <script src="../../../js/article-common.js"></script>
+    <script src="../../../js/article-json.js"></script>
+    <script src="../../../js/article-study.js"></script>
+    <script>
+        var ARTICLE_CHARTS = [
+            {
+                id: 'radarChart',
+                config: {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                        datasets: [{
+                            label: '论中国革命的前途',
+                            data: [8, 9, 6, 9, 6, 7],
+                            borderColor: '#5c3d99',
+                            backgroundColor: 'rgba(92,61,153,0.12)',
+                            pointBackgroundColor: '#5c3d99'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
+                        plugins: { legend: { display: false } }
+                    }
+                }
+            },
+            {
+                id: 'argumentCurve',
+                config: {
+                    type: 'line',
+                    data: {
+                        labels: ['革命形势', '两种前途', '我们的方针', '具体路径', '结论'],
+                        datasets: [{
+                            label: '论证强度',
+                            data: [6, 8, 9, 5, 4],
+                            borderColor: '#5c3d99',
+                            backgroundColor: 'rgba(92,61,153,0.08)',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            borderWidth: 2.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            },
+            {
+                id: 'featuresChart',
+                config: {
+                    type: 'bar',
+                    data: {
+                        labels: ['民族解放性', '资产阶级软弱性', '苏联助力'],
+                        datasets: [{
+                            label: '影响权重',
+                            data: [9, 7, 6],
+                            backgroundColor: ['rgba(92,61,153,0.7)', 'rgba(92,61,153,0.45)', 'rgba(92,61,153,0.3)'],
+                            borderColor: '#5c3d99',
+                            borderWidth: 1.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10, title: { display: true, text: '对中国革命方向的影响权重' } } }
+                    }
+                }
+            },
+            {
+                id: 'classAttitudeChart',
+                config: {
+                    type: 'bar',
+                    data: {
+                        labels: ['无产阶级', '农民阶级', '小资产阶级', '民族资产阶级', '买办阶级', '地主阶级', '帝国主义'],
+                        datasets: [{
+                            label: '革命性强度',
+                            data: [10, 8, 5, 2, -2, -4, -5],
+                            backgroundColor: [
+                                'rgba(92,61,153,0.85)', 'rgba(92,61,153,0.65)', 'rgba(180,160,100,0.5)',
+                                'rgba(180,160,100,0.3)', 'rgba(200,50,50,0.4)', 'rgba(200,50,50,0.6)', 'rgba(200,50,50,0.8)'
+                            ],
+                            borderColor: '#5c3d99',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { x: { min: -6, max: 10, title: { display: true, text: '反革命   最革命' } } }
+                    }
+                }
+            }
+        ];
+    </script>
+    <script src="../../../js/site-data.js"></script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+</body>
+</html>

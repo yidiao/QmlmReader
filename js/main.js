@@ -1,3 +1,182 @@
+// ==================== 导航栏自动注入 ====================
+// 替代所有页面的硬编码 site-header。每页只需 <div id="nav-placeholder"></div>
+(function(){
+    var path = window.location.pathname;
+    var dir = path.replace(/\/[^\/]*\.html$/, '');
+    var parts = dir.split('/').filter(function(p){return p.length>0;});
+    var htmlIdx = parts.indexOf('html');
+    var depth = htmlIdx === -1 ? 0 : parts.length - htmlIdx - 1;
+    var p = '';
+    for (var i = 0; i < depth; i++) p += '../';
+
+    var nav = '<header class="site-header"><div class="site-header-inner">' +
+        '<a class="logo" href="' + p + 'preferences/preferences.html" aria-label="进入个人偏好"><span class="logo-icon">☭</span><div class="logo-text"><h1>青年马列毛主义驿站</h1><span class="logo-sub">Qmlm Reader</span></div></a>' +
+        '<div class="nav-search" id="navSearch">' +
+        '<button class="nav-search-toggle" type="button" aria-label="打开搜索" aria-expanded="false" title="搜索">⌕</button>' +
+        '<form class="nav-search-form" role="search" autocomplete="off">' +
+        '<input id="navSearchInput" type="search" placeholder="搜索文章、文艺、正名、历史..." data-search-input data-results-target="navSearchResults">' +
+        '<button class="nav-search-submit" type="submit">搜索</button>' +
+        '<button class="nav-search-close" type="button" aria-label="关闭搜索">✕</button>' +
+        '<div class="search-results nav-search-results" id="navSearchResults"></div>' +
+        '</form>' +
+        '</div>' +
+        '<button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单"><span></span><span></span><span></span></button>' +
+        '<nav class="main-nav" id="mainNav">' +
+        '<button class="nav-close-btn" aria-label="关闭菜单">✕</button>' +
+        '<div class="nav-links">' +
+        '<a href="' + p + 'index.html">首页</a>' +
+        '<a href="' + p + 'articles/articles.html">文章</a>' +
+        '<a href="' + p + 'masters/masters.html">导师</a>' +
+        '<a href="' + p + 'toolkit/toolkit.html">工具集</a>' +
+        '<a href="' + p + 'experimental/experimental.html">武器库</a>' +
+        '<a href="' + p + 'gallery/gallery.html">文艺</a>' +
+        '<a href="' + p + 'downloads/downloads.html">下载</a>' +
+        '<a href="' + p + 'puzzle/puzzle.html">理论拼图</a>' +
+        '<a href="' + p + 'international/international.html">国际共运</a>' +
+        '<a href="' + p + 'rectify/rectify.html">正名</a>' +
+        '<a href="' + p + 'about/about.html">关于</a>' +
+        '</div>' +
+        '<button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>' +
+        '</nav></div></header>';
+
+    var ph = document.getElementById('nav-placeholder');
+    if (ph) {
+        ph.outerHTML = nav;
+
+        function loadPreferencesScript() {
+            if (document.querySelector('script[src$="/js/preferences.js"]')) return;
+            var prefScript = document.createElement('script');
+            prefScript.src = p + '../js/preferences.js';
+            prefScript.async = false;
+            document.head.appendChild(prefScript);
+        }
+
+        function loadSearchScript() {
+            if (document.querySelector('script[src$="/js/search.js"]')) return;
+            var searchScript = document.createElement('script');
+            searchScript.src = p + '../js/search.js';
+            searchScript.async = false;
+            document.head.appendChild(searchScript);
+        }
+
+        loadSearchScript();
+
+        function loadPageStateAdapter(afterLoad) {
+            if (document.querySelector('script[src$="/js/page-state-adapter.js"]')) {
+                if (afterLoad) afterLoad();
+                return;
+            }
+            var adapterScript = document.createElement('script');
+            adapterScript.src = p + '../js/page-state-adapter.js';
+            adapterScript.async = false;
+            adapterScript.onload = function() { if (afterLoad) afterLoad(); };
+            document.head.appendChild(adapterScript);
+        }
+
+        if (!document.querySelector('script[src$="/js/state-center.js"]')) {
+            var stateScript = document.createElement('script');
+            stateScript.src = p + '../js/state-center.js';
+            stateScript.async = false;
+            stateScript.onload = function() {
+                loadPageStateAdapter(loadPreferencesScript);
+            };
+            document.head.appendChild(stateScript);
+        } else {
+            loadPageStateAdapter(loadPreferencesScript);
+        }
+
+        // ---- 面包屑自动生成 ----
+        var PATH_LABELS = {
+            // Top-level nav
+            'index': '首页', 'articles': '文章', 'masters': '导师', 'toolkit': '工具集',
+            'experimental': '武器库', 'gallery': '文艺', 'puzzle': '理论拼图',
+            'international': '国际共运', 'rectify': '正名', 'about': '关于', 'downloads': '下载', 'preferences': '个人偏好',
+            // Master names
+            'marx': '马克思', 'engels': '恩格斯', 'lenin': '列宁', 'stalin': '斯大林', 'mao': '毛泽东',
+            // Gallery sub-pages
+            'quotes': '语录库', 'photos': '历史照片', 'propaganda': '宣传画', 'music': '革命音乐',
+            'videos': '影像资料', 'poetry': '诗歌', 'funfacts': '冷知识', 'soviet': '苏联印记',
+            // International sub-pages
+            'international-column': '专栏', 'international-calendar': '日历',
+            'international-memorial': '纪念', 'international-current': '当代共运',
+            'encirclement': '围剿与反围剿', 'foundations': '美共基础建设', 'tieliu-yu-xianfeng': '铁流与先锋',
+            // Rectify categories
+            'economy': '经济', 'leaders': '人物', 'military': '军事',
+            'myths': '迷思', 'political': '政治',
+            // Rectify articles
+            'soviet-agriculture': '苏联农业问题', 'gorky-lenin': '高尔基与列宁',
+            'stalin-era': '斯大林时代', 'pol-pot': '波尔布特',
+            'finland-war': '芬兰战争', 'soviet-afghanistan': '苏联阿富汗战争',
+            'human-nature': '人性论', 'power-illusion': '权力幻觉',
+            'wisdom-of-elites': '精英的智慧', 'young-october': '青年十月',
+            // Experimental tools
+            'marxist-style': '马列体生成器', 'message-board': '留言板', 'xiaocezi': '小册子',
+            // About
+            'changelog-archive': '更新日志存档', 'changelog-detail': '更新详情'
+        };
+
+        function bcLabel(seg) {
+            var key = seg.toLowerCase();
+            return PATH_LABELS[key] || PATH_LABELS[seg] || seg;
+        }
+
+        var fullPath = window.location.pathname;
+        var pathAfterHtml = fullPath.replace(/.*\/html\//, '').replace(/\.html$/, '');
+        var rawSegments = pathAfterHtml.split('/').filter(function(s) { return s.length > 0 && s !== 'index'; });
+
+        // Dedup consecutive equal segments (e.g. experimental/experimental → experimental)
+        var segments = [];
+        for (var si = 0; si < rawSegments.length; si++) {
+            if (si > 0 && rawSegments[si] === rawSegments[si-1]) continue;
+            segments.push(rawSegments[si]);
+        }
+
+        if (!pathAfterHtml || pathAfterHtml === 'index') {
+            segments = [];
+        }
+
+        var breadcrumbHTML = '<a href="' + p + 'index.html">首页</a>';
+
+        // For article detail pages, get the article title from <title>
+        if (segments.length >= 2 && segments[0] === 'articles') {
+            breadcrumbHTML += ' <span class="bc-sep">/</span> <a href="' + p + 'articles/articles.html">文章</a>';
+            var pageTitle = document.title.replace(/\s*[-|]\s*青年马列毛主义驿站.*$/, '').trim();
+            breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + (pageTitle || bcLabel(segments[segments.length-1])) + '</span>';
+        } else if (segments.length >= 2 && segments[0] === 'masters') {
+            breadcrumbHTML += ' <span class="bc-sep">/</span> <a href="' + p + 'masters/masters.html">导师</a>';
+            if (segments.length === 2) {
+                breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + bcLabel(segments[1]) + '</span>';
+            } else {
+                breadcrumbHTML += ' <span class="bc-sep">/</span> <a href="' + p + 'masters/' + segments[1] + '/' + segments[1] + '.html">' + bcLabel(segments[1]) + '</a>';
+                breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + bcLabel(segments[segments.length-1]) + '</span>';
+            }
+        } else if (segments.length >= 2 && segments[0] === 'gallery') {
+            breadcrumbHTML += ' <span class="bc-sep">/</span> <a href="' + p + 'gallery/gallery.html">文艺</a>';
+            breadcrumbHTML += ' <span class="bc-sep">/</span> <span class="bc-current">' + bcLabel(segments[segments.length-1]) + '</span>';
+        } else {
+            for (var i = 0; i < segments.length; i++) {
+                var label = bcLabel(segments[i]);
+                breadcrumbHTML += ' <span class="bc-sep">/</span> ';
+                if (i === segments.length - 1) {
+                    breadcrumbHTML += '<span class="bc-current">' + label + '</span>';
+                } else {
+                    breadcrumbHTML += '<a href="' + p + segments[i] + '/' + segments[i] + '.html">' + label + '</a>';
+                }
+            }
+        }
+
+        var bcEl = document.createElement('div');
+        bcEl.className = 'breadcrumb';
+        bcEl.innerHTML = breadcrumbHTML;
+
+        // Insert as first child of <main>, before any container
+        var mainEl = document.querySelector('main');
+        if (mainEl) {
+            mainEl.insertBefore(bcEl, mainEl.firstChild);
+        }
+    }
+})();
+
 // 标签切换功能
 document.addEventListener('DOMContentLoaded', function() {
     // 标签切换 - 支持两种模式：
@@ -86,12 +265,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // 导航高亮
 document.addEventListener('DOMContentLoaded', function() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('.main-nav a');
-    
-    navLinks.forEach(link => {
-        const linkPage = link.getAttribute('href');
-        if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
+    var fullPath = window.location.pathname;
+    var currentPage = fullPath.split('/').pop() || 'index.html';
+
+    // Also match parent directory for index pages (e.g. /experimental/ matches experimental.html)
+    var currentDir = fullPath.replace(/\/[^\/]*\.html$/, '').split('/').filter(function(p){return p.length>0;}).pop() || '';
+
+    var navLinks = document.querySelectorAll('.main-nav a');
+
+    navLinks.forEach(function(link) {
+        var href = link.getAttribute('href') || '';
+        // Match: the link ends with the current page filename, OR the link's
+        // last path segment matches the current directory (for index pages)
+        var linkLast = href.replace(/\/$/, '').split('/').pop();
+        if (linkLast === currentPage || (currentPage === 'index.html' && linkLast === 'index.html') || linkLast === currentDir) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
@@ -160,39 +347,633 @@ document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('.main-nav');
     if (!hamburger || !nav) return;
 
+    let menuStateBound = false;
+
+    function applyMenuOpen(isOpen) {
+        nav.classList.toggle('open', !!isOpen);
+        hamburger.classList.toggle('open', !!isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    function publishMenuOpen(isOpen) {
+        if (window.QMLMState && typeof window.QMLMState.dispatch === 'function') {
+            window.QMLMState.dispatch('ui/patch', { navOpen: !!isOpen }, 'main-nav');
+        }
+    }
+
+    function setMenuOpen(isOpen, publish) {
+        applyMenuOpen(isOpen);
+        if (publish) publishMenuOpen(isOpen);
+    }
+
+    function bindMenuState() {
+        if (menuStateBound || !window.QMLMState || typeof window.QMLMState.subscribe !== 'function') return;
+        menuStateBound = true;
+        const state = window.QMLMState.getState ? window.QMLMState.getState() : null;
+        if (state && state.ui && typeof state.ui.navOpen === 'boolean') applyMenuOpen(state.ui.navOpen);
+        else publishMenuOpen(nav.classList.contains('open'));
+        window.QMLMState.subscribe('ui.navOpen', function(isOpen) {
+            if (typeof isOpen === 'boolean') applyMenuOpen(isOpen);
+        });
+    }
+
+    bindMenuState();
+    window.addEventListener('qmlm:state-ready', bindMenuState);
+
+    var siteHeader = document.querySelector('.site-header');
+    var navSearch = document.getElementById('navSearch');
+    var navSearchToggle = navSearch ? navSearch.querySelector('.nav-search-toggle') : null;
+    var navSearchInput = navSearch ? navSearch.querySelector('[data-search-input]') : null;
+    var navSearchClose = navSearch ? navSearch.querySelector('.nav-search-close') : null;
+    var navSearchForm = navSearch ? navSearch.querySelector('.nav-search-form') : null;
+
+    function setSearchOpen(isOpen) {
+        if (!navSearch) return;
+        if (siteHeader) siteHeader.classList.toggle('search-open', !!isOpen);
+        nav.classList.toggle('search-open', !!isOpen);
+        navSearch.classList.toggle('open', !!isOpen);
+        if (navSearchToggle) navSearchToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (isOpen && navSearchInput) {
+            window.setTimeout(function() { navSearchInput.focus(); }, 0);
+        }
+    }
+
+    if (navSearchToggle) {
+        navSearchToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            setSearchOpen(!navSearch.classList.contains('open'));
+        });
+    }
+
+    if (navSearchClose) {
+        navSearchClose.addEventListener('click', function(e) {
+            e.stopPropagation();
+            setSearchOpen(false);
+        });
+    }
+
+    if (navSearchForm) {
+        navSearchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (typeof window.performSearch === 'function') window.performSearch(navSearchInput);
+        });
+        navSearchForm.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+
     // 点击汉堡按钮切换菜单
     hamburger.addEventListener('click', function(e) {
         e.stopPropagation();
-        const isOpen = nav.classList.toggle('open');
-        hamburger.classList.toggle('open', isOpen);
-        // 菜单打开时禁止背景滚动
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+        if (nav.classList.contains('search-open')) setSearchOpen(false);
+        setMenuOpen(!nav.classList.contains('open'), true);
     });
+
+    // 点击菜单内关闭按钮（X）关闭菜单
+    const closeBtn = nav.querySelector('.nav-close-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            setMenuOpen(false, true);
+        });
+    }
 
     // 点击菜单内链接后自动关闭
     nav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function() {
-            nav.classList.remove('open');
-            hamburger.classList.remove('open');
-            document.body.style.overflow = '';
+            setSearchOpen(false);
+            setMenuOpen(false, true);
         });
     });
 
     // 点击遮罩（菜单外区域）关闭
     document.addEventListener('click', function(e) {
+        if (nav.classList.contains('search-open') && navSearch && !navSearch.contains(e.target)) {
+            setSearchOpen(false);
+        }
         if (nav.classList.contains('open') && !nav.contains(e.target) && e.target !== hamburger) {
-            nav.classList.remove('open');
-            hamburger.classList.remove('open');
-            document.body.style.overflow = '';
+            setMenuOpen(false, true);
         }
     });
 
-    // ESC 键关闭菜单
+    // ESC 键关闭菜单或搜索
     document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && nav.classList.contains('search-open')) {
+            setSearchOpen(false);
+            return;
+        }
         if (e.key === 'Escape' && nav.classList.contains('open')) {
-            nav.classList.remove('open');
-            hamburger.classList.remove('open');
-            document.body.style.overflow = '';
+            setMenuOpen(false, true);
+        }
+    });
+
+    // 窗口调整大小时，如果从移动端切换到桌面端，强制关闭菜单
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 769) {
+            setMenuOpen(false, true);
         }
     });
 });
+
+// ==================== 文章页：章节导航 + Tab记忆 ====================
+function syncDynamicChapterNavVisibility() {
+    var nav = document.getElementById('dynamicChapterNav');
+    var toggle = document.querySelector('.dcn-toggle');
+    if (!nav || !toggle) return;
+    var originalTab = document.getElementById('original');
+    var originalActive = !!(originalTab && originalTab.classList.contains('active'));
+    nav.style.display = originalActive ? '' : 'none';
+    toggle.style.display = originalActive ? '' : 'none';
+}
+
+function initDynamicChapterNav() {
+    var oldNav = document.getElementById('dynamicChapterNav');
+    if (oldNav) oldNav.remove();
+    var oldToggle = document.querySelector('.dcn-toggle');
+    if (oldToggle) oldToggle.remove();
+    if (window.__dcnScrollHandler) {
+        window.removeEventListener('scroll', window.__dcnScrollHandler);
+        window.__dcnScrollHandler = null;
+    }
+
+    var chapters = Array.prototype.slice.call(document.querySelectorAll('#original .chapter'));
+    if (chapters.length < 1) return;
+
+    var nav = document.createElement('nav');
+    nav.id = 'dynamicChapterNav';
+    nav.className = 'dynamic-chapter-nav';
+    nav.innerHTML = '<div class="dcn-title">📑 章节导航</div><div class="dcn-list"></div>';
+    var list = nav.querySelector('.dcn-list');
+
+    chapters.forEach(function(ch, i) {
+        var titleEl = ch.querySelector('.chapter-title');
+        if (!titleEl) return;
+        var text = titleEl.getAttribute('data-chapter-label') || titleEl.textContent.replace(/[▼▶▾▸]/g, '').trim();
+        text = text.replace(/\s+/g, ' ').trim();
+        if (text.length > 22) text = text.substring(0, 22) + '…';
+        var id = 'ch-nav-' + i;
+        ch.id = id;
+        var a = document.createElement('a');
+        a.href = '#' + id;
+        a.textContent = text;
+        a.className = 'dcn-item';
+        a.addEventListener('click', function(e) {
+            e.preventDefault();
+            var target = document.getElementById(this.getAttribute('href').substring(1));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        list.appendChild(a);
+    });
+
+    if (!list.children.length) return;
+
+    var toggle = document.createElement('button');
+    toggle.className = 'dcn-toggle';
+    toggle.title = '显示/隐藏章节导航';
+    toggle.textContent = '导航';
+
+    function applyChapterNavVisible(visible) {
+        nav.classList.toggle('visible', !!visible);
+        toggle.classList.toggle('shifted', !!visible);
+    }
+
+    function publishChapterNavVisible(visible) {
+        if (window.QMLMState && typeof window.QMLMState.dispatch === 'function') {
+            window.QMLMState.dispatch('reader/patch', { chapterNavVisible: !!visible }, 'chapter-nav');
+        }
+    }
+
+    function setChapterNavVisible(visible, publish) {
+        applyChapterNavVisible(visible);
+        try { sessionStorage.setItem('dcn-visible', visible ? '1' : '0'); } catch(e) {}
+        if (publish) publishChapterNavVisible(visible);
+    }
+
+    var chapterNavStateBound = false;
+    function bindChapterNavState() {
+        if (chapterNavStateBound || !window.QMLMState || typeof window.QMLMState.subscribe !== 'function') return;
+        chapterNavStateBound = true;
+        var current = window.QMLMState.getState ? window.QMLMState.getState() : null;
+        if (current && current.reader && typeof current.reader.chapterNavVisible === 'boolean') {
+            applyChapterNavVisible(current.reader.chapterNavVisible);
+        } else {
+            publishChapterNavVisible(nav.classList.contains('visible'));
+        }
+        window.QMLMState.subscribe('reader.chapterNavVisible', function(visible) {
+            if (typeof visible === 'boolean') applyChapterNavVisible(visible);
+        });
+    }
+
+    toggle.addEventListener('click', function() {
+        setChapterNavVisible(!nav.classList.contains('visible'), true);
+    });
+
+    document.body.appendChild(nav);
+    document.body.appendChild(toggle);
+
+    var savedVis;
+    try { savedVis = sessionStorage.getItem('dcn-visible'); } catch(e) {}
+    if (savedVis !== '0') {
+        setTimeout(function() {
+            var cur;
+            try { cur = sessionStorage.getItem('dcn-visible'); } catch(e) {}
+            if (cur !== '0') setChapterNavVisible(true, true);
+        }, 300);
+    } else {
+        setChapterNavVisible(false, true);
+    }
+    bindChapterNavState();
+    window.addEventListener('qmlm:state-ready', bindChapterNavState);
+
+    var ticking = false;
+    window.__dcnScrollHandler = function() {
+        if (!ticking) {
+            requestAnimationFrame(function() {
+                var scrollPos = window.scrollY + 120;
+                var items = list.querySelectorAll('.dcn-item');
+                chapters.forEach(function(ch, i) {
+                    if (ch.offsetTop <= scrollPos && ch.offsetTop + ch.offsetHeight > scrollPos) {
+                        items.forEach(function(it) { it.classList.remove('active'); });
+                        if (items[i]) items[i].classList.add('active');
+                    }
+                });
+                ticking = false;
+            });
+            ticking = true;
+        }
+    };
+    window.addEventListener('scroll', window.__dcnScrollHandler);
+    window.__dcnScrollHandler();
+    syncDynamicChapterNavVisibility();
+}
+window.initDynamicChapterNav = initDynamicChapterNav;
+window.syncDynamicChapterNavVisibility = syncDynamicChapterNavVisibility;
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ---- Tab 状态记忆 ----
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    if (tabBtns.length > 0) {
+        var pagePath = window.location.pathname;
+        var readerTabStateBound = false;
+
+        function findTabButton(tabId) {
+            if (!tabId) return null;
+            var buttons = document.querySelectorAll('.tab-btn');
+            for (var i = 0; i < buttons.length; i++) {
+                var btn = buttons[i];
+                if (btn.dataset && btn.dataset.tab === tabId) return btn;
+                var onclick = btn.getAttribute('onclick') || '';
+                if (onclick.indexOf("'" + tabId + "'") >= 0 || onclick.indexOf('"' + tabId + '"') >= 0) return btn;
+            }
+            return null;
+        }
+
+        function publishActiveTab(tabId) {
+            if (window.QMLMState && typeof window.QMLMState.dispatch === 'function') {
+                window.QMLMState.dispatch('reader/patch', { activeTab: tabId }, 'main-tab-memory');
+            }
+        }
+
+        function applyActiveTab(tabId) {
+            var targetBtn = findTabButton(tabId);
+            if (targetBtn && !targetBtn.classList.contains('active')) targetBtn.click();
+        }
+
+        function bindReaderTabState() {
+            if (readerTabStateBound || !window.QMLMState || typeof window.QMLMState.subscribe !== 'function') return;
+            readerTabStateBound = true;
+            var current = window.QMLMState.getState ? window.QMLMState.getState() : null;
+            if (current && current.reader && current.reader.activeTab) applyActiveTab(current.reader.activeTab);
+            window.QMLMState.subscribe('reader.activeTab', function(tabId) {
+                if (tabId) applyActiveTab(tabId);
+            });
+        }
+
+        var savedTab = sessionStorage.getItem('tab-' + pagePath);
+        if (savedTab) {
+            applyActiveTab(savedTab);
+            publishActiveTab(savedTab);
+        }
+        tabBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var match = this.getAttribute('onclick').match(/switchTab\(['\"](\w+)['\"]/);
+                if (match) {
+                    sessionStorage.setItem('tab-' + pagePath, match[1]);
+                    publishActiveTab(match[1]);
+                }
+            });
+        });
+        bindReaderTabState();
+        window.addEventListener('qmlm:state-ready', bindReaderTabState);
+    }
+
+    initDynamicChapterNav();
+});
+
+// ==================== 合集上下文导航（面包屑 + 上/下一章） ====================
+var COLLECTIONS = [{"id":"mao-vol1","title":"毛泽东选集 · 第一卷","cover":"☭","articles":[{"title":"中国社会各阶级的分析","slug":null},{"title":"湖南农民运动考察报告","slug":"Mao/nong-min-yun-dong"},{"title":"中国的红色政权为什么能够存在？","slug":null},{"title":"井冈山的斗争","slug":null},{"title":"关于纠正党内的错误思想","slug":null},{"title":"星星之火，可以燎原","slug":null},{"title":"反对本本主义","slug":null},{"title":"必须注意经济工作","slug":null},{"title":"怎样分析农村阶级","slug":null},{"title":"我们的经济政策","slug":null},{"title":"关心群众生活，注意工作方法","slug":null},{"title":"论反对日本帝国主义的策略","slug":null},{"title":"中国革命战争的战略问题","slug":"Mao/zhan-lue-wen-ti"},{"title":"关于蒋介石声明的声明","slug":null},{"title":"中国共产党在抗日时期的任务","slug":null},{"title":"实践论","slug":"Mao/shi-jian-lun"},{"title":"矛盾论","slug":"Mao/mao-dun-lun"}]},{"id":"mao-vol2","title":"毛泽东选集 · 第二卷","cover":"☭","articles":[{"title":"反对日本进攻的方针、办法和前途","slug":null},{"title":"为动员一切力量争取抗战胜利而斗争","slug":null},{"title":"反对自由主义","slug":null},{"title":"上海太原失陷以后抗日战争的形势和任务","slug":null},{"title":"抗日游击战争的战略问题","slug":"Mao/you-ji-zhan"},{"title":"论持久战","slug":"Mao/lun-chi-jiu-zhan"},{"title":"中国共产党在民族战争中的地位","slug":null},{"title":"统一战线中的独立自主问题","slug":null},{"title":"战争和战略问题","slug":"Mao/zhan-zheng-zhan-lue"},{"title":"青年运动的方向","slug":null},{"title":"《共产党人》发刊词","slug":null},{"title":"中国革命和中国共产党","slug":null},{"title":"新民主主义论","slug":"Mao/xin-min-zhu"},{"title":"论政策","slug":null}]},{"id":"mao-military","title":"毛泽东军事思想","cover":"⚔️","articles":[{"title":"中国革命战争的战略问题","slug":"Mao/zhan-lue-wen-ti"},{"title":"抗日游击战争的战略问题","slug":"Mao/you-ji-zhan"},{"title":"论持久战","slug":"Mao/lun-chi-jiu-zhan"},{"title":"战争和战略问题","slug":"Mao/zhan-zheng-zhan-lue"}]},{"id":"mao-philosophy","title":"毛泽东哲学方法论","cover":"🧠","articles":[{"title":"实践论","slug":"Mao/shi-jian-lun"},{"title":"矛盾论","slug":"Mao/mao-dun-lun"}]},{"id":"marx-engels","title":"马克思恩格斯选集","cover":"📖","articles":[{"title":"1844年经济学哲学手稿","slug":"Marx/1844-nian-jing-ji-xue-zhe-xue-shou-gao"},{"title":"关于费尔巴哈的提纲","slug":"Marx/guan-yu-fei-er-ba-ha-de-ti-gang"},{"title":"德意志意识形态","slug":"Marx/de-yi-zhi-yi-xing-tai"},{"title":"共产党宣言","slug":"Marx/gongchan-dan-yuan"},{"title":"《政治经济学批判》序言","slug":null},{"title":"资本论（第一卷）","slug":null},{"title":"法兰西内战","slug":null},{"title":"哥达纲领批判","slug":"Marx/ge-da-gang-ling"},{"title":"反杜林论","slug":"Engels/fan-du-lin-lun"},{"title":"社会主义从空想到科学的发展","slug":null},{"title":"家庭、私有制和国家的起源","slug":"Engels/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan"},{"title":"费尔巴哈和德国古典哲学的终结","slug":"Marx/hei-ge-er-fa-zhe-xue-pi-pan-dao-yan"}]},{"id":"lenin","title":"列宁选集","cover":"🔴","articles":[{"title":"怎么办？","slug":"Lenin/zen-me-ban"},{"title":"唯物主义和经验批判主义","slug":"Lenin/wei-wu-zhu-yi-he-jing-yan-pi-pan-zhu-yi"},{"title":"马克思主义的三个来源和三个组成部分","slug":"Lenin/ma-ke-si-zhu-yi-de-san-ge-lai-yuan"},{"title":"帝国主义是资本主义的最高阶段","slug":"Lenin/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan"},{"title":"国家与革命","slug":"Lenin/guo-jia-yu-ge-ming"},{"title":"无产阶级革命和叛徒考茨基","slug":null},{"title":"共产主义运动中的'左派'幼稚病","slug":null}]},{"id":"stalin","title":"斯大林著作选","cover":"⭐","articles":[{"title":"论列宁主义基础","slug":"Stalin/lun-lunen-zhu-yi-ji-chu"},{"title":"论列宁主义的几个问题","slug":null},{"title":"关于苏联宪法草案","slug":null},{"title":"论辩证唯物主义和历史唯物主义","slug":"Mao/lun-shi-da-guan-xi"},{"title":"马克思主义和语言学问题","slug":null},{"title":"苏联社会主义经济问题","slug":null}]},{"id":"political-economy","title":"政治经济学经典","cover":"💰","articles":[{"title":"1844年经济学哲学手稿","slug":"Marx/1844-nian-jing-ji-xue-zhe-xue-shou-gao"},{"title":"雇佣劳动与资本","slug":null},{"title":"《政治经济学批判》序言","slug":null},{"title":"工资、价格和利润","slug":null},{"title":"资本论（第一卷）","slug":null},{"title":"哥达纲领批判","slug":"Marx/ge-da-gang-ling"},{"title":"帝国主义是资本主义的最高阶段","slug":"Lenin/di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan"},{"title":"苏联社会主义经济问题","slug":null}]},{"id":"party-building","title":"党的建设与组织理论","cover":"🏛️","articles":[{"title":"怎么办？","slug":"Lenin/zen-me-ban"},{"title":"共产主义运动中的'左派'幼稚病","slug":null},{"title":"论列宁主义基础","slug":"Stalin/lun-lunen-zhu-yi-ji-chu"},{"title":"关于纠正党内的错误思想","slug":null},{"title":"《共产党人》发刊词","slug":null},{"title":"改造我们的学习","slug":null},{"title":"整顿党的作风","slug":null},{"title":"学习和时局","slug":"Mao/xue-xi-shi-ju"}]}];
+// 统一数据源：若已加载 site-data.js，则使用生成数据覆盖硬编码合集
+if (window.SITE_DATA && window.SITE_DATA.collections) {
+    COLLECTIONS = window.SITE_DATA.collections;
+}
+
+
+// 合集弹窗 — 与 articles.html 同款
+function injectCollModal() {
+    if (document.getElementById('collModal')) return;
+    var modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.id = 'collModal';
+    modal.innerHTML =
+        '<div class="modal-dialog">' +
+        '<div class="modal-header"><div><h2 id="collModalTitle"></h2></div>' +
+        '<button class="modal-close" onclick="closeCollModal()">✕</button></div>' +
+        '<div class="modal-body" id="collModalBody"></div></div>';
+    document.body.appendChild(modal);
+    modal.addEventListener('click', function(e) { if (e.target === modal) closeCollModal(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeCollModal(); });
+}
+function closeCollModal() {
+    var m = document.getElementById('collModal');
+    if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
+    publishCollModalState(false, currentCollModalColl);
+}
+var currentCollModalColl = null, currentCollModalAll = null, collModalStateBound = false;
+
+function findCollectionById(id) {
+    if (!id) return null;
+    for (var i = 0; i < COLLECTIONS.length; i++) {
+        if (COLLECTIONS[i] && COLLECTIONS[i].id === id) return COLLECTIONS[i];
+    }
+    return null;
+}
+
+function publishCollModalState(open, coll) {
+    if (!window.QMLMState || typeof window.QMLMState.dispatch !== 'function') return;
+    window.QMLMState.dispatch('ui/patch', {
+        collectionModal: {
+            open: !!open,
+            collectionId: coll && coll.id || '',
+            title: coll && coll.title || ''
+        }
+    }, 'collection-modal');
+}
+
+function bindCollModalState() {
+    if (collModalStateBound || !window.QMLMState || typeof window.QMLMState.subscribe !== 'function') return;
+    collModalStateBound = true;
+    window.QMLMState.subscribe('ui.collectionModal', function(modalState, rootState, meta) {
+        if (meta && meta.source === 'collection-modal') return;
+        if (!modalState || !modalState.open) {
+            var m = document.getElementById('collModal');
+            if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
+            return;
+        }
+        var coll = findCollectionById(modalState.collectionId);
+        if (coll) openCollModal(coll, [{ coll: coll, idx: 0 }]);
+    });
+}
+
+function openCollModal(coll, allMatches) {
+    injectCollModal();
+    bindCollModalState();
+    currentCollModalColl = coll;
+    currentCollModalAll = allMatches || [coll];
+    renderCollModalBody(coll);
+}
+
+function renderCollModalBody(coll) {
+    currentCollModalColl = coll;
+    var titleEl = document.getElementById('collModalTitle');
+    var body = document.getElementById('collModalBody');
+
+    // Title with collection selector if multiple
+    var titleHTML = coll.cover + ' ' + coll.title;
+    if (currentCollModalAll && currentCollModalAll.length > 1) {
+        titleHTML += ' <span style="font-size:0.7rem;opacity:0.7;">(' + (currentCollModalAll.indexOf(coll) + 1) + '/' + currentCollModalAll.length + ')</span>';
+    }
+    titleEl.innerHTML = titleHTML;
+
+    // Collection tabs if multiple
+    var tabsHTML = '';
+    if (currentCollModalAll && currentCollModalAll.length > 1) {
+        tabsHTML = '<div style="display:flex;gap:4px;margin-bottom:1rem;flex-wrap:wrap;">';
+        currentCollModalAll.forEach(function(m) {
+            var active = m.coll.id === coll.id ? ' style="background:#c41e3a;color:white;font-weight:600;"' : ' style="background:#f0f0f0;color:#555;cursor:pointer;"';
+            tabsHTML += '<button onclick="renderCollModalBody(currentCollModalAll[' + currentCollModalAll.indexOf(m) + '].coll)"' + active + ' class="tab-btn" style="padding:4px 12px;font-size:0.8rem;border-radius:15px;border:none;">' + m.coll.cover + ' ' + m.coll.title + '</button>';
+        });
+        tabsHTML += '</div>';
+    }
+
+    body.innerHTML = tabsHTML + coll.articles.map(function(a, i) {
+        var href = a.slug ? '../articles/' + a.slug + '.html' : '#';
+        var cls = a.slug ? 'modal-article' : 'modal-article wip';
+        var badge = a.slug ? '<span class="ma-status ready">已收录</span>'
+                        : '<span class="ma-status wip">筹备中</span>';
+        return '<a href="' + href + '" class="' + cls + '">' +
+            '<span class="ma-num">' + (i+1) + '</span>' +
+            '<span class="ma-info"><span class="ma-title">' + a.title + '</span></span>' +
+            badge + '</a>';
+    }).join('');
+    document.getElementById('collModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    publishCollModalState(true, coll);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    bindCollModalState();
+    window.addEventListener('qmlm:state-ready', bindCollModalState);
+
+    var backNav = document.querySelector('.back-nav .back-link');
+    if (!backNav) return;
+
+    var path = window.location.pathname;
+    // Extract slug from path: /articles/xxx.html -> xxx
+    var slugMatch = path.match(/\/([^\/]+)\.html$/);
+    if (!slugMatch) return;
+    var currentSlug = slugMatch[1];
+
+    // Find ALL collections this article belongs to
+    var matches = [];
+    for (var ci = 0; ci < COLLECTIONS.length; ci++) {
+        var articles = COLLECTIONS[ci].articles;
+        for (var ai = 0; ai < articles.length; ai++) {
+            if (articles[ai].slug === currentSlug) {
+                matches.push({ coll: COLLECTIONS[ci], idx: ai });
+                break;
+            }
+        }
+    }
+    if (matches.length === 0) return;
+
+    // Use first match for breadcrumb, but track all for modal
+    var foundColl = matches[0].coll;
+    var foundIdx = matches[0].idx;
+    var allMatches = matches; // for quick-jump
+
+    var article = foundColl.articles[foundIdx];
+    var total = foundColl.articles.length;
+    var pos = foundIdx + 1;
+
+    var container = backNav.parentElement;
+    var bc = document.createElement('div');
+    bc.style.cssText = 'display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.6rem;width:100%;';
+
+    // Left: back + breadcrumb + quick-jump
+    var left = document.createElement('span');
+    left.style.cssText = 'display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;';
+    left.innerHTML = '<a href="../articles.html" class="back-link" style="margin:0;"><span>←</span> 返回文章列表</a>';
+
+    var sep = document.createElement('span');
+    sep.style.cssText = 'color:#ccc;font-size:1.2rem;';
+    sep.textContent = '|';
+    left.appendChild(sep);
+
+    var crumb = document.createElement('span');
+    crumb.style.cssText = 'font-size:0.88rem;color:#555;';
+    crumb.innerHTML = foundColl.cover + ' <strong>' + foundColl.title + '</strong> <span style="color:#aaa;">›</span> <em>' + article.title + '</em> <span style="font-size:0.78rem;color:#999;">(' + pos + '/' + total + ')</span>';
+    if (allMatches.length > 1) {
+        crumb.innerHTML += ' <span style="font-size:0.7rem;color:#999;">(+' + (allMatches.length - 1) + '个合集)</span>';
+    }
+    left.appendChild(crumb);
+    bc.appendChild(left);
+
+    // Right: prev/next + quick-jump
+    var right = document.createElement('span');
+    right.style.cssText = 'display:flex;align-items:center;gap:0.8rem;flex-shrink:0;';
+
+    if (foundIdx > 0) {
+        var prevA = foundColl.articles[foundIdx - 1];
+        var prevHref = prevA.slug ? '../articles/' + prevA.slug + '.html' : '#';
+        var prevDisabled = prevA.slug ? '' : ' style="opacity:0.35;pointer-events:none;"';
+        right.innerHTML += '<a href="' + prevHref + '" class="back-link" style="margin:0;font-size:0.88rem;"' + prevDisabled + '>← 上一章</a>';
+    } else {
+        right.innerHTML += '<span style="color:#ccc;font-size:0.88rem;">← 上一章</span>';
+    }
+
+    if (foundIdx < total - 1) {
+        var nextA = foundColl.articles[foundIdx + 1];
+        var nextHref = nextA.slug ? '../articles/' + nextA.slug + '.html' : '#';
+        var nextDisabled = nextA.slug ? '' : ' style="opacity:0.35;pointer-events:none;"';
+        right.innerHTML += '<a href="' + nextHref + '" class="back-link" style="margin:0;font-size:0.88rem;"' + nextDisabled + '>下一章 →</a>';
+    } else {
+        right.innerHTML += '<span style="color:#ccc;font-size:0.88rem;">下一章 →</span>';
+    }
+
+    // Quick-jump button — shows all collections if article belongs to multiple
+    var qjBtn = document.createElement('button');
+    qjBtn.textContent = '📚';
+    qjBtn.title = '浏览合集目录';
+    qjBtn.style.cssText = 'background:none;border:1px solid #ddd;border-radius:6px;padding:2px 8px;cursor:pointer;font-size:1rem;';
+    qjBtn.onclick = function(){ openCollModal(foundColl, allMatches); };
+    right.appendChild(qjBtn);
+
+    bc.appendChild(right);
+    container.innerHTML = '';
+    container.appendChild(bc);
+
+    // Show the back-nav container (hidden by default in new templates)
+    var backNavEl = container.parentElement;
+    if (backNavEl && backNavEl.classList.contains('back-nav')) {
+        backNavEl.style.display = 'block';
+    }
+
+    // Dark mode fix for new elements
+    if (document.body.classList.contains('dark-mode')) {
+        crumb.style.color = '#bbb';
+    }
+});
+
+// ==================== 全局卡片滚动入场动画 ====================
+// 自动检测页面上所有卡片类型，应用错峰淡入效果
+(function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var CARD_SELECTORS = [
+        '.article-card',
+        '.tool-card',
+        '.tool-card-large',
+        '.master-card',
+        '.featured-card',
+        '.music-card',
+        '.video-card',
+        '.poster-card',
+        '.quote-card',
+        '.funfact-card',
+        '.hero-card',
+        '.path-stage',
+        '.concept-item',
+        '.cornerstone-card'
+    ];
+
+    var allCards = [];
+    CARD_SELECTORS.forEach(function(sel) {
+        var nodes = document.querySelectorAll(sel);
+        for (var i = 0; i < nodes.length; i++) {
+            // Skip cards that are already being animated by page-specific scripts
+            if (nodes[i].style.opacity === '0') continue;
+            allCards.push(nodes[i]);
+        }
+    });
+
+    if (allCards.length === 0) return;
+
+    // Sort by DOM order so stagger follows visual reading order
+    var allPageCards = [];
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT);
+    while (walker.nextNode()) {
+        var el = walker.currentNode;
+        if (allCards.indexOf(el) !== -1) {
+            allPageCards.push(el);
+        }
+    }
+
+    // Apply initial hidden state
+    allPageCards.forEach(function(card) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.willChange = 'opacity, transform';
+    });
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                var card = entry.target;
+                var index = allPageCards.indexOf(card);
+                var delay = Math.min(index * 35, 500); // stagger 35ms each, max 500ms
+
+                card.style.transition = 'opacity 0.35s ease ' + delay + 'ms, transform 0.35s ease ' + delay + 'ms';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+
+                // Clean up will-change after animation completes
+                setTimeout(function() {
+                    card.style.willChange = 'auto';
+                }, 350 + delay);
+
+                observer.unobserve(card);
+            }
+        });
+    }, { threshold: 0, rootMargin: '0px 0px 60px 0px' });
+
+    allPageCards.forEach(function(card) {
+        observer.observe(card);
+    });
+
+    // ---- 图片渐进加载 ----
+    document.querySelectorAll('img[loading="lazy"]').forEach(function(img) {
+        if (img.complete) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', function() {
+                img.classList.add('loaded');
+            });
+            // Fallback: show after 3s even if load event doesn't fire
+            setTimeout(function() {
+                if (!img.classList.contains('loaded')) {
+                    img.classList.add('loaded');
+                }
+            }, 3000);
+        }
+    });
+})();

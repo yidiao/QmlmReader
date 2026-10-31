@@ -1,0 +1,188 @@
+{
+  "title": "论列宁主义基础",
+  "mentor": "Stalin",
+  "slug": "lun-lunen-zhu-yi-ji-chu",
+  "version": 2,
+  "reading": [
+    {
+      "title": "先看列宁主义的定义",
+      "content": "斯大林首先不是罗列观点，而是给出定义：列宁主义是帝国主义和无产阶级革命时代的马克思主义。"
+    },
+    {
+      "title": "再看帝国主义三大矛盾",
+      "content": "文章的历史根源部分，把劳动与资本、列强之间、宗主国与殖民地三组矛盾串起来，这是全文的历史背景底盘。"
+    },
+    {
+      "title": "重点读‘方法’和‘理论’",
+      "content": "这篇文章不是只讲结论，它在说明列宁主义为什么会形成、怎样形成，以及怎样指导革命实践。"
+    }
+  ],
+  "difficulty": [
+    {
+      "wrong": "列宁主义只是俄国经验",
+      "correct": "正解：斯大林强调列宁主义是帝国主义和无产阶级革命时代的马克思主义，具有时代普遍性。"
+    },
+    {
+      "wrong": "第二国际的问题只是观点不够新",
+      "correct": "正解：斯大林强调的是方法错误和路线错误，不是简单的观点更新不足。"
+    },
+    {
+      "wrong": "理论和实践可以分开看",
+      "correct": "正解：列宁主义的方法恰恰要求在实践中检验理论、用理论再回到实践。"
+    }
+  ],
+  "dialogue": [
+    {
+      "title": "它在回应的问题",
+      "items": [
+        "第二国际机会主义者——把革命理论庸俗化。",
+        "只看俄国局部经验的人——忽略时代性质。",
+        "把列宁主义当‘技术手册’的人——忽略其理论系统性。"
+      ]
+    },
+    {
+      "title": "它在问每一个读者",
+      "items": [
+        "你能否区分时代问题和地方经验？",
+        "你是把理论当口号，还是当方法？"
+      ]
+    },
+    {
+      "title": "它在等你的回应",
+      "content": "挑一条你熟悉的政治判断，看看它到底是时代分析，还是经验堆积。"
+    }
+  ],
+  "action": [
+    {
+      "title": "实验一：整理列宁主义的定义链",
+      "content": "把‘帝国主义’‘无产阶级革命’‘马克思主义’三者之间的逻辑关系写清楚。"
+    },
+    {
+      "title": "实验二：对照第二国际的错误方法",
+      "content": "找一个现实议题，试着分别用‘方法正确’和‘方法错误’的路径来分析。"
+    }
+  ],
+  "further": {
+    "title": "文章联结网络",
+    "note": "点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（输出影响 · 理论来源 · 相互支撑）",
+    "items": [
+      {
+        "title": "怎么办？",
+        "href": "../Lenin/zen-me-ban.html",
+        "label": "党的建设",
+        "direction": "source",
+        "relation": "建党方法的源头文本"
+      },
+      {
+        "title": "国家与革命",
+        "href": "../Lenin/guo-jia-yu-ge-ming.html",
+        "label": "政治理论",
+        "direction": "output",
+        "relation": "列宁主义国家学说的系统展开"
+      },
+      {
+        "title": "论我国革命",
+        "href": "../Lenin/lun-wo-guo-ge-ming.html",
+        "label": "政治理论",
+        "direction": "output",
+        "relation": "列宁道路在中国问题上的延伸参照"
+      }
+    ]
+  },
+  "visual": {
+    "charts": [
+      {
+        "id": "radarChart",
+        "config": {
+          "type": "radar",
+          "data": {
+            "labels": ["理论深度", "现实针对性", "时间跨度", "行动指导性", "情感强度", "结构复杂度"],
+            "datasets": [
+              {
+                "label": "论列宁主义基础",
+                "data": [9, 8, 7, 8, 5, 8],
+                "borderColor": "#38a169",
+                "backgroundColor": "rgba(56,161,105,0.12)",
+                "pointBackgroundColor": "#38a169"
+              }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "scales": { "r": { "min": 0, "max": 10, "ticks": { "stepSize": 2 } } },
+            "plugins": { "legend": { "display": false } }
+          }
+        }
+      },
+      {
+        "id": "argumentCurve",
+        "config": {
+          "type": "line",
+          "data": {
+            "labels": ["定义与历史", "思想来源", "特征归纳", "理论核心", "战略策略", "组织问题", "结论"],
+            "datasets": [
+              {
+                "label": "论证强度",
+                "data": [6, 8, 7, 9, 10, 8, 6],
+                "borderColor": "#3d6b4f",
+                "backgroundColor": "rgba(61,107,79,0.08)",
+                "fill": true,
+                "tension": 0.35,
+                "pointRadius": 7,
+                "pointHoverRadius": 9,
+                "borderWidth": 2.5
+              }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "plugins": { "legend": { "display": false } },
+            "scales": { "y": { "min": 0, "max": 10 } }
+          }
+        }
+      },
+      {
+        "id": "chapterWeightChart",
+        "config": {
+          "type": "bar",
+          "data": {
+            "labels": ["历史根源", "方法", "理论", "无产阶级专政", "农民问题", "民族问题", "战略策略", "党", "工作作风"],
+            "datasets": [
+              {
+                "label": "理论权重",
+                "data": [6, 9, 9, 10, 7, 6, 9, 8, 5],
+                "backgroundColor": ["rgba(61,107,79,0.4)", "rgba(61,107,79,0.6)", "rgba(61,107,79,0.65)", "rgba(180,40,40,0.7)", "rgba(61,107,79,0.5)", "rgba(61,107,79,0.45)", "rgba(61,107,79,0.65)", "rgba(61,107,79,0.55)", "rgba(61,107,79,0.35)"],
+                "borderColor": "#3d6b4f",
+                "borderWidth": 1.5
+              }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "plugins": { "legend": { "display": false } },
+            "scales": { "y": { "min": 0, "max": 10, "title": { "display": true, "text": "理论权重 (0-10)" } } }
+          }
+        }
+      },
+      {
+        "id": "contradictionsChart",
+        "config": {
+          "type": "radar",
+          "data": {
+            "labels": ["矛盾尖锐度", "历史影响力", "革命催化力", "波及范围", "不可调和性"],
+            "datasets": [
+              { "label": "劳动 vs 资本", "data": [10, 9, 10, 8, 10], "borderColor": "#c53030", "backgroundColor": "rgba(197,48,48,0.1)", "pointBackgroundColor": "#c53030" },
+              { "label": "列强之间", "data": [8, 7, 5, 9, 10], "borderColor": "#d69e2e", "backgroundColor": "rgba(214,158,46,0.1)", "pointBackgroundColor": "#d69e2e" },
+              { "label": "文明 vs 殖民地", "data": [7, 8, 8, 10, 7], "borderColor": "#3182ce", "backgroundColor": "rgba(49,130,206,0.1)", "pointBackgroundColor": "#3182ce" }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "scales": { "r": { "min": 0, "max": 10, "ticks": { "stepSize": 2 } } },
+            "plugins": { "legend": { "position": "bottom" } }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+:root {
+    /* Unified category palette: subdued, high-contrast classical tones. */
+    --category-philosophy-primary: #8b1e2d;
+    --category-philosophy-secondary: #b33a45;
+    --category-philosophy-dark: #5a101b;
+    --category-philosophy-soft: #f3dfe1;
+    --category-philosophy-ink: #651522;
+
+    --category-economics-primary: #a85f16;
+    --category-economics-secondary: #c9822b;
+    --category-economics-dark: #703b0b;
+    --category-economics-soft: #f5e7d1;
+    --category-economics-ink: #70400d;
+
+    --category-politics-primary: #68436f;
+    --category-politics-secondary: #8b638f;
+    --category-politics-dark: #452c4b;
+    --category-politics-soft: #e9e0eb;
+    --category-politics-ink: #503457;
+
+    --category-party-primary: #66703a;
+    --category-party-secondary: #879153;
+    --category-party-dark: #414822;
+    --category-party-soft: #e8ebdc;
+    --category-party-ink: #414a25;
+
+    --category-military-primary: #2e7180;
+    --category-military-secondary: #4b95a1;
+    --category-military-dark: #1e4d58;
+    --category-military-soft: #dcecef;
+    --category-military-ink: #205866;
+
+    --category-culture-primary: #aa791c;
+    --category-culture-secondary: #c49a3a;
+    --category-culture-dark: #72500d;
+    --category-culture-soft: #f4ead0;
+    --category-culture-ink: #6d4d0d;
+}
+
+[data-category="philosophy"] { --theme-primary: var(--category-philosophy-primary); --theme-secondary: var(--category-philosophy-secondary); --theme-dark: var(--category-philosophy-dark); --theme-soft: var(--category-philosophy-soft); --theme-ink: var(--category-philosophy-ink); }
+[data-category="economics"] { --theme-primary: var(--category-economics-primary); --theme-secondary: var(--category-economics-secondary); --theme-dark: var(--category-economics-dark); --theme-soft: var(--category-economics-soft); --theme-ink: var(--category-economics-ink); }
+[data-category="politics"] { --theme-primary: var(--category-politics-primary); --theme-secondary: var(--category-politics-secondary); --theme-dark: var(--category-politics-dark); --theme-soft: var(--category-politics-soft); --theme-ink: var(--category-politics-ink); }
+[data-category="party"] { --theme-primary: var(--category-party-primary); --theme-secondary: var(--category-party-secondary); --theme-dark: var(--category-party-dark); --theme-soft: var(--category-party-soft); --theme-ink: var(--category-party-ink); }
+[data-category="military"] { --theme-primary: var(--category-military-primary); --theme-secondary: var(--category-military-secondary); --theme-dark: var(--category-military-dark); --theme-soft: var(--category-military-soft); --theme-ink: var(--category-military-ink); }
+[data-category="culture"] { --theme-primary: var(--category-culture-primary); --theme-secondary: var(--category-culture-secondary); --theme-dark: var(--category-culture-dark); --theme-soft: var(--category-culture-soft); --theme-ink: var(--category-culture-ink); }
+
+.category-theme-tag,
+.article-category-tag {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid color-mix(in srgb, var(--theme-primary, #666) 45%, transparent);
+    border-radius: 999px;
+    padding: 0.16rem 0.55rem;
+    background: var(--theme-soft, #eee);
+    color: var(--theme-ink, #444);
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.article-category-tag[data-category="philosophy"], .category-theme-tag[data-category="philosophy"] { --theme-primary: var(--category-philosophy-primary); --theme-soft: var(--category-philosophy-soft); --theme-ink: var(--category-philosophy-ink); }
+.article-category-tag[data-category="economics"], .category-theme-tag[data-category="economics"] { --theme-primary: var(--category-economics-primary); --theme-soft: var(--category-economics-soft); --theme-ink: var(--category-economics-ink); }
+.article-category-tag[data-category="politics"], .category-theme-tag[data-category="politics"] { --theme-primary: var(--category-politics-primary); --theme-soft: var(--category-politics-soft); --theme-ink: var(--category-politics-ink); }
+.article-category-tag[data-category="party"], .category-theme-tag[data-category="party"] { --theme-primary: var(--category-party-primary); --theme-soft: var(--category-party-soft); --theme-ink: var(--category-party-ink); }
+.article-category-tag[data-category="military"], .category-theme-tag[data-category="military"] { --theme-primary: var(--category-military-primary); --theme-soft: var(--category-military-soft); --theme-ink: var(--category-military-ink); }
+.article-category-tag[data-category="culture"], .category-theme-tag[data-category="culture"] { --theme-primary: var(--category-culture-primary); --theme-soft: var(--category-culture-soft); --theme-ink: var(--category-culture-ink); }
+
+[data-category] {
+    --cat-primary: var(--theme-primary, #8b1e2d);
+    --cat-secondary: var(--theme-secondary, #b33a45);
+    --cat-gradient: linear-gradient(135deg, var(--theme-dark, #5a101b), var(--theme-primary, #8b1e2d) 55%, var(--theme-secondary, #b33a45));
+}
+
+body.dark-mode .article-category-tag,
+body.dark-mode .category-theme-tag {
+    background: color-mix(in srgb, var(--theme-primary, #666) 30%, #171717);
+    color: #fff8e8;
+    border-color: color-mix(in srgb, var(--theme-secondary, #999) 70%, transparent);
+}

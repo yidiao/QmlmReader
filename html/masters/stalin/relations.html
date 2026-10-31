@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>斯大林局部恒星系 | 国际共运人物星图先锋 | 青年马列毛主义驿站</title>
+    <meta name="description" content="以斯大林为恒星的局部人物星系：行星、彗星、卫星、星带与星云构成可导航的三维历史星图，为未来国际共运人物大星图提供先锋样板。">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/mentor/stalin/stellar.css">
+    <link rel="stylesheet" href="../../../css/mentor/stalin/stellar-masters.css">
+</head>
+<body data-module="masters" data-master="stalin" data-graph-scope="mentor-local" data-graph-id="stalin-local-relations" data-starmap-prototype="true">
+    <div id="nav-placeholder"></div>
+
+    <!-- 斯大林局部恒星系：整页三维星图应用（源自 stalin-stellar-test，接入层见 stellar-masters.css） -->
+    <main class="stellar-page">
+      <canvas id="cosmos" aria-label="斯大林局部恒星系三维星图"></canvas>
+
+      <header class="topbar" aria-label="全局导航">
+        <button class="brand" id="homeView" type="button"><i></i><span><small>ICM ATLAS · 00</small><b>斯大林局部恒星系</b></span></button>
+        <div class="global-search"><label class="sr-only" for="searchBox">检索星图实体</label><input id="searchBox" type="search" placeholder="检索人物、组织、事件、文本、地点" autocomplete="off" /><kbd>／</kbd></div>
+        <div class="top-actions">
+          <button id="eraToggle" class="mode-button" type="button" aria-expanded="false"><i></i><span>时代区域</span></button>
+          <button id="historyToggle" class="mode-button" type="button" aria-pressed="false"><i></i><span>历史观测</span></button>
+          <button id="missionLaunch" class="mode-button" type="button" aria-expanded="false"><i></i><span>任务</span></button>
+          <button id="deepMode" class="icon-action" type="button" aria-pressed="false" title="深空模式">深空</button>
+          <button id="resetView" class="icon-action" type="button" title="重置视图">重置</button>
+        </div>
+      </header>
+
+      <nav class="space-nav" id="spaceNav" aria-label="空间层级"><button type="button" id="spaceHome">斯大林局部恒星系</button><span>›</span><strong id="spaceTitle">总览</strong><small id="spaceCount">46 个实体</small><button type="button" id="spaceExit" hidden>返回母星系</button></nav><section class="field-heading" id="fieldHeading" hidden><small>LOCAL FIELD</small><h1 id="fieldTitle"></h1><p id="fieldSubtitle"></p></section><div class="belt-key" id="beltKey" hidden><span>理论文本</span><span>建设与争议</span><span>战争与外交</span><span>战后生活</span></div>
+
+      <section class="field-portals" id="fieldPortals" aria-label="可进入场域"><button type="button" data-enter-space="war"><i></i><span><b>战争与外交</b><small>进入战争星云</small></span></button><button type="button" data-enter-space="conflict"><i></i><span><b>路线斗争</b><small>进入斗争彗云</small></span></button><button type="button" data-enter-space="legacy"><i></i><span><b>后斯大林遗产</b><small>进入遗产远云</small></span></button><button type="button" data-enter-space="belt"><i></i><span><b>知识与群体带</b><small>展开节点群</small></span></button></section>
+
+      <section class="era-browser" id="eraBrowser" aria-label="时代区域浏览" hidden>
+        <header><div><small>ERA REGIONS</small><strong>先遣层时代区域</strong></div><button id="eraClose" type="button" aria-label="关闭时代区域">×</button></header>
+        <div id="eraRegions" class="era-regions"></div>
+        <footer><button id="eraReset" type="button">返回全部时代</button><p>时代区域改变观测范围，但人物及其长期关系仍保留。</p></footer>
+      </section>
+
+      <section class="search-popover" id="searchPopover" aria-label="检索结果">
+        <div class="result-heading"><strong id="resultCount">全部实体</strong><span id="resultHint">按类别筛选或检索</span></div>
+        <div id="searchResults" class="search-results" role="list"></div>
+      </section>
+
+      <nav class="tool-dock" aria-label="星图工具">
+        <button type="button" data-tool="layers" aria-pressed="false"><span>◫</span><b>图层</b></button>
+        <button type="button" data-tool="life" aria-pressed="false"><span>⌁</span><b>生平</b></button>
+        <button type="button" data-tool="compare" aria-pressed="false"><span>⇄</span><b>对照</b></button>
+        <button type="button" data-tool="path" aria-pressed="false"><span>⌘</span><b>路径</b></button>
+      </nav>
+
+      <section class="tool-window" data-tool-window="layers" hidden aria-label="图层与关系">
+        <header><div><small>OBSERVATION LAYERS</small><strong>图层与关系光谱</strong></div><button type="button" data-tool-close>×</button></header>
+        <div class="tool-content">
+          <div class="legend" id="legend" aria-label="星图分类筛选"></div>
+          <p class="hint" id="caption">人物、组织、事件、文本与地点共同导航。</p>
+          <section class="relation-panel" aria-label="关系层观测器"><div class="relation-heading"><strong>关系光谱</strong><button id="relationReset" type="button">全部关系</button></div><div id="relationLayers" class="relation-layers"></div><p id="relationStatus">显示全部历史关系</p></section>
+        </div>
+      </section>
+
+      <section class="tool-window" data-tool-window="life" hidden aria-label="斯大林生平轨迹">
+        <header><div><small>PERSONAL TIMELINE</small><strong>斯大林生平轨迹</strong></div><button type="button" data-tool-close>×</button></header>
+        <div class="tool-content"><div class="life-track-heading"><span id="lifeTrackState">随时间轴联动</span></div><div id="lifeTrack" class="life-track"></div></div>
+      </section>
+
+      <section class="tool-window" data-tool-window="compare" hidden aria-label="实体对照观测">
+        <header><div><small>COMPARATIVE VIEW</small><strong>双实体对照</strong></div><button type="button" data-tool-close>×</button></header>
+        <div class="tool-content compare-panel"><div class="compare-heading"><p>并置现有字段，不建立能力排行。</p><button id="compareUseCurrent" type="button">加入当前天体</button></div><div class="compare-pickers"><select id="compareA" aria-label="对照实体一"></select><span>⇄</span><select id="compareB" aria-label="对照实体二"></select></div><div id="compareOutput" class="compare-output"><p>选择两个实体比较时期、类型、场域和关系交集。</p></div></div>
+      </section>
+
+      <section class="tool-window" data-tool-window="path" hidden aria-label="关系路径探索">
+        <header><div><small>RELATION ROUTE</small><strong>六人路径</strong></div><button type="button" data-tool-close>×</button></header>
+        <div class="tool-content path-panel"><div class="path-heading"><span>最多 6 个中间节点</span></div><div class="path-pickers"><label>起点<select id="pathStart" aria-label="路径起点"></select></label><button id="pathSwap" type="button" aria-label="交换起点和终点">⇄</button><label>终点<select id="pathEnd" aria-label="路径终点"></select></label></div><div class="path-actions"><button id="pathFind" type="button">寻找联系</button><button id="pathUseSelected" type="button">以当前天体为起点</button><button id="pathClear" type="button">清除</button></div><div id="pathOutput" class="path-output" aria-live="polite"><p>选择两个实体，寻找不超过六个中间节点的历史联系。</p></div></div>
+      </section>
+
+      <section class="time-drawer" id="timeDrawer" aria-label="历史时间轴" hidden>
+        <div class="time-context"><small>HISTORICAL OBSERVATION</small><strong id="timeLabel">观测年份：1953</strong><span id="timeState">历史导航视图</span></div>
+        <button id="timeBack" type="button" aria-label="后退十年">−10</button>
+        <div class="time-rail"><input id="timeSlider" type="range" min="1878" max="1991" value="1953" step="1" aria-label="选择历史年份" /><div><span>1878</span><span>1917</span><span>1941</span><span>1953</span><span>1991</span></div></div>
+        <button id="timeForward" type="button" aria-label="前进十年">+10</button>
+        <button id="timePlay" type="button" aria-pressed="false">▶</button>
+        <button id="timeReset" type="button">1953</button>
+      </section>
+
+      <div class="target-pointer" id="targetPointer" hidden aria-hidden="true"><i>➤</i><span id="targetPointerName"></span></div>
+      <section class="nav-target" id="navTarget" aria-label="空间导航目标" hidden><div class="nav-target-mark"><i></i></div><div class="nav-target-copy"><small id="navTargetScope">CURRENT SPACE</small><strong id="navTargetName">未选择目标</strong><span id="navTargetDistance">远距观测</span></div><div class="nav-target-actions"><button id="navTargetLocate" type="button">定位</button><button id="navTargetEnter" type="button" hidden disabled>继续接近</button><button id="navTargetClear" type="button" aria-label="清除导航目标">×</button></div></section>
+      <nav class="nav-pad" id="navPad" aria-label="视角导航控制器"><button type="button" data-nav-command="pitch-up" aria-label="向上观察">↑</button><button type="button" data-nav-command="zoom-in" aria-label="接近目标">＋</button><button type="button" data-nav-command="yaw-left" aria-label="向左观察">←</button><button type="button" data-nav-command="yaw-right" aria-label="向右观察">→</button><button type="button" data-nav-command="pitch-down" aria-label="向下观察">↓</button><button type="button" data-nav-command="zoom-out" aria-label="远离目标">−</button></nav>
+
+      <button class="archive-handle" id="archiveHandle" type="button" aria-expanded="false" title="打开当前档案"><span>档案</span></button>
+      <aside class="info-panel archive-drawer" id="infoPanel" aria-live="polite" aria-label="实体档案" aria-hidden="true">
+        <button class="archive-close" id="archiveClose" type="button" aria-label="关闭实体档案">×</button>
+        <div class="detail-placeholder"><span>✦</span><h2>星图总览</h2><p>选择天体后打开分层档案。</p></div>
+      </aside>
+
+      <section class="mission-window" id="missionWindow" aria-label="任务探索" hidden>
+        <header class="mission-window-head" id="missionDragHandle"><div><small>MISSION WORKSPACE</small><strong>探索任务</strong></div><span id="missionProgress">选择一条路线</span><div><button id="missionMinimize" type="button" aria-label="最小化任务面板">—</button><button id="missionClose" type="button" aria-label="关闭任务面板">×</button></div></header>
+        <div class="mission-window-body">
+          <section class="mission-route-column"><small>01 · 路线</small><div id="missionRoutes" class="mission-routes"></div></section>
+          <section class="mission-step-column"><small>02 · 步骤</small><div id="missionSteps" class="mission-steps"><p>选择路线后查看探索步骤。</p></div></section>
+          <aside class="mission-target-column"><small>03 · 当前目标</small><div id="missionTarget"><p>尚未选择任务。</p></div></aside>
+        </div>
+      </section>
+
+      <div class="vignette"></div>
+    </main>
+
+    <script src="../../../js/site-data.js"></script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+    <script src="../../../js/mentor/stalin/stellar-data.js"></script>
+    <script src="../../../js/mentor/stalin/stellar-cosmos.js"></script>
+    <script src="../../../js/mentor/stalin/stellar-app.js"></script>
+    <script src="../../../js/mentor/stalin/stellar-boot.js"></script>
+</body>
+</html>

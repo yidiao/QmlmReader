@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实践论 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/articles-detail.css">
+    <link rel="stylesheet" href="../../../css/category-theme.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-category="philosophy" data-article-json="../../../data/articles-json/Mao/★★★★★/shi-jian-lun.json" data-study-json="../../../data/study-json/Mao/shi-jian-lun.json">
+    <div id="nav-placeholder"></div>
+
+    <div class="back-nav u-display-none">
+        <div class="container u-max-900 u-mx-auto u-px-20">
+            <a href="../../articles/articles.html" class="back-link"></a>
+        </div>
+    </div>
+
+    <main class="article-detail">
+        <header class="article-header">
+            <div class="importance-badge"> 核心必读</div>
+            <h1>实践论</h1>
+            <div class="article-subtitle">关于认识和实践的关系——知和行的关系</div>
+            <div class="article-meta">
+                <span class="author">毛泽东</span>
+                <span class="date">1937年7月</span>
+                <span class="category">哲学基础 · 辩证法</span>
+                <span class="word-count">约9,400字</span>
+                <span class="length-tag"> 中篇</span>
+            </div>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
+        </div>
+
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro"><p><strong>原文：</strong>正在加载文章数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2 class="tab-heading"> 如何阅读本文</h2>
+                <div class="guide-block"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2 class="tab-heading"> 容易读错的地方</h2>
+                <div class="diff-item"><div class="correct">正在加载精读数据…</div></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2 class="tab-heading"> 这篇文章在回应谁？</h2>
+                <div class="dialogue-block"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2 class="tab-heading"> 读完之后可以做什么</h2>
+                <div class="action-item"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2 class="tab-heading"> 一目了然</h2>
+
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量《实践论》的理论气质</p>
+                    <div class="chart-container u-max-500 u-mx-auto">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>认识推进曲线</h3>
+                    <p class="chart-desc">从感性认识到理性认识，再回到实践检验与再认识</p>
+                    <div class="chart-container u-max-700 u-mx-auto">
+                        <canvas id="argumentCurve"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4> 结构分析</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label">实践是认识的来源（10/10）</span>
+                            <p>开篇先立住根本前提：人的认识离不开生产、阶级斗争、科学实验等社会实践。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">感性到理性（9/10）</span>
+                            <p>通过“感觉—印象—概念—判断—推理”解释认识如何由浅入深地发展。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">真理标准（10/10）</span>
+                            <p>明确提出“社会实践是检验真理的标准”，把认识论落到实践检验上。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">再实践、再认识（10/10）</span>
+                            <p>全文不是终点式结论，而是循环上升的认识路线，强调认识的反复性和发展性。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>认识循环示意</h3>
+                    <p class="chart-desc">实践—认识—再实践—再认识：不是绕圈子，而是上升</p>
+                    <div class="chart-container u-max-600 u-mx-auto">
+                        <canvas id="customChart1"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2 class="tab-heading"> 在马哲体系中的位置</h2>
+
+                <div class="puzzle-intro">
+                    <p>《实践论》回答的是马克思主义认识论最根本的问题：认识从哪里来，怎样形成，又怎样检验和发展。它把“实践”确立为认识论的起点、中介与归宿，是毛泽东哲学体系中的方法论核心。</p>
+                </div>
+
+                <div class="puzzle-position">
+                    <h3>本文在理论体系中的坐标</h3>
+                    <div class="theory-tree">
+                        <div class="theory-node root">马克思主义哲学</div>
+                        <div class="theory-branches">
+                            <div class="theory-branch">
+                                <div class="theory-node branch">认识论</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">感性认识</div>
+                                    <div class="theory-node related">理性认识</div>
+                                    <div class="theory-node current">实践论</div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">方法论</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">实事求是</div>
+                                    <div class="theory-node related">调查研究</div>
+                                    <div class="theory-node related">群众路线</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puzzle-connection">
+                    <h3>与其他经典的联结</h3>
+                    <ul>
+                        <li>《实践论》与《矛盾论》互为表里：前者回答“怎样认识”，后者回答“怎样分析事物内部矛盾”。</li>
+                        <li>《中国革命战争的战略问题》：把认识方法推进到军事战略，强调从实际出发分析战争规律。</li>
+                        <li>《关于正确处理人民内部矛盾的问题》：把认识论方法运用于社会主义建设中的矛盾处理。</li>
+                    </ul>
+                </div>
+
+                <div class="puzzle-timeline">
+                    <h3>在思想发展时间轴上的位置</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">1937</div>
+                            <div class="timeline-label">实践论</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">1937</div>
+                            <div class="timeline-label">矛盾论</div>
+                        </div>
+                        <div class="timeline-item active">
+                            <div class="timeline-dot-active"></div>
+                            <div class="timeline-year">本文</div>
+                            <div class="timeline-label">认识论核心</div>
+                            <div class="timeline-here"> 本文</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">1957</div>
+                            <div class="timeline-label">人民内部矛盾</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puzzle-links">
+                    <h3>延伸阅读</h3>
+                    <div class="reading-item">
+                        <h3><a href="mao-dun-lun.html">继续看《矛盾论》</a></h3>
+                        <p>如果说《实践论》回答“怎样认识”，那么《矛盾论》更集中地回答“怎样分析事物内部的矛盾”。</p>
+                    </div>
+                    <div class="reading-item">
+                        <h3><a href="zhan-lue-wen-ti.html">联读《中国革命战争的战略问题》</a></h3>
+                        <p>这篇文章可以帮助理解实践方法如何推进到军事战略层面。</p>
+                    </div>
+                    <div class="reading-item">
+                        <h3><a href="ren-min-nei-bu-mao-dun.html">联读《关于正确处理人民内部矛盾的问题》</a></h3>
+                        <p>这篇文章展示了同一套认识论方法如何用于社会主义建设中的矛盾处理。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../../js/category-theme.js"></script>
+    <script src="../../../js/article-common.js"></script>
+    <script src="../../../js/article-json.js"></script>
+    <script src="../../../js/article-study.js"></script>
+    <script src="../../../js/site-data.js"></script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+</body>
+</html>

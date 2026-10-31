@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>武器库 | 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        /* ===== 武器库页面 — 构成主义设计语言 ===== */
+
+        body {
+            background: #f5f0e8;
+        }
+        body.dark-mode {
+            background: #121212;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---- Hero ---- */
+        .arsenal-hero {
+            position: relative;
+            background: #1a1a1a;
+            margin: 28px 0 36px;
+            padding: 52px 48px;
+            overflow: hidden;
+        }
+
+        /* 构成主义斜线背景 */
+        .arsenal-hero::before {
+            content: '';
+            position: absolute;
+            top: -30%; right: -10%;
+            width: 320px; height: 180%;
+            background: #c41e3a;
+            transform: rotate(14deg);
+            opacity: 0.12;
+            pointer-events: none;
+        }
+        .arsenal-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 4px;
+            background: #c41e3a;
+        }
+
+        .arsenal-hero-badge {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            border: 2px solid #c41e3a;
+            color: #c41e3a;
+            padding: 4px 18px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .arsenal-hero h1 {
+            position: relative;
+            z-index: 2;
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: #f5f0e8;
+            margin: 0 0 12px;
+            letter-spacing: 6px;
+            line-height: 1.15;
+        }
+
+        .arsenal-hero h1 span {
+            color: #ffd700;
+        }
+
+        .arsenal-hero p {
+            position: relative;
+            z-index: 2;
+            color: #a0a0a0;
+            font-size: 0.95rem;
+            max-width: 520px;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        body.dark-mode .arsenal-hero {
+            background: #0a0a10;
+        }
+        body.dark-mode .arsenal-hero h1 {
+            color: #e8e4dc;
+        }
+
+        /* ---- 工具卡片区 ---- */
+        .tools-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            margin: 0 0 48px;
+        }
+
+        .tool-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            box-shadow: 5px 5px 0 #1a1a1a;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 7px 7px 0 #1a1a1a;
+        }
+
+        body.dark-mode .tool-card {
+            background: #1e1e2a;
+            border-color: #333;
+            box-shadow: 5px 5px 0 #0a0a10;
+        }
+        body.dark-mode .tool-card:hover {
+            box-shadow: 7px 7px 0 #0a0a10;
+        }
+
+        /* 马列体卡片特殊样式 */
+        .tool-card.featured {
+            border-left: 5px solid #c41e3a;
+        }
+
+        .tool-card-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 22px 28px;
+            border-bottom: 1px solid #eee;
+        }
+
+        body.dark-mode .tool-card-header {
+            border-color: #2a2a38;
+        }
+
+        .tool-card-icon {
+            width: 48px; height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            color: #ffd700;
+            font-size: 1.4rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        body.dark-mode .tool-card-icon {
+            background: #333;
+        }
+
+        .tool-card-meta {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tool-card-meta h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0 0 4px;
+            letter-spacing: 0.5px;
+        }
+
+        body.dark-mode .tool-card-meta h2 {
+            color: #e0e0e0;
+        }
+
+        .tool-card-meta p {
+            font-size: 0.82rem;
+            color: #777;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        body.dark-mode .tool-card-meta p {
+            color: #999;
+        }
+
+        .tool-card-action {
+            flex-shrink: 0;
+        }
+
+        .btn-enter {
+            display: inline-block;
+            background: #8b0000;
+            color: #fff !important;
+            border: none;
+            padding: 10px 24px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .btn-enter:hover {
+            background: #5a0000;
+        }
+        .btn-enter:active {
+            transform: scale(0.97);
+        }
+
+        .tag-dev {
+            display: inline-block;
+            background: #d4d4d4;
+            color: #2a2a2a;
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        body.dark-mode .tag-dev {
+            background: #4a4a4a;
+            color: #e0e0e0;
+        }
+
+        .tool-card-body {
+            padding: 24px 28px;
+        }
+
+        /* 特性标签网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .feature-item {
+            padding: 14px 16px;
+            border-left: 3px solid;
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+
+        .feature-item strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 0.85rem;
+        }
+
+        .fi-gold   { border-color: #d97706; background: #fffbeb; }
+        .fi-pink   { border-color: #db2777; background: #fdf2f8; }
+        .fi-blue   { border-color: #2563eb; background: #eff6ff; }
+        .fi-green  { border-color: #059669; background: #ecfdf5; }
+        .fi-gold strong   { color: #92400e; }
+        .fi-pink strong   { color: #9d174d; }
+        .fi-blue strong   { color: #1e3a8a; }
+        .fi-green strong  { color: #064e3b; }
+        .fi-gold   .fi-sub { color: #a16207; font-size:0.78rem; }
+        .fi-pink   .fi-sub { color: #be185d; font-size:0.78rem; }
+        .fi-blue   .fi-sub { color: #1e40af; font-size:0.78rem; }
+        .fi-green  .fi-sub { color: #047857; font-size:0.78rem; }
+
+        body.dark-mode .fi-gold  { background: #1e1608; }
+        body.dark-mode .fi-pink  { background: #1e0a14; }
+        body.dark-mode .fi-blue  { background: #0a1428; }
+        body.dark-mode .fi-green { background: #081a12; }
+
+        /* 占位卡片 */
+        .placeholder-body {
+            padding: 32px 28px;
+            text-align: center;
+        }
+
+        .placeholder-body .ph-icon {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            opacity: 0.3;
+        }
+
+        .placeholder-body h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #555;
+            margin: 0 0 8px;
+        }
+
+        body.dark-mode .placeholder-body h3 {
+            color: #999;
+        }
+
+        .placeholder-body .ph-desc {
+            font-size: 0.85rem;
+            color: #999;
+            max-width: 380px;
+            margin: 0 auto 16px;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .placeholder-body .ph-desc {
+            color: #888;
+        }
+
+        .placeholder-body .ph-demo {
+            display: inline-block;
+            background: #e8e8e8;
+            border: 1px dashed #ccc;
+            padding: 6px 16px;
+            font-size: 0.75rem;
+            color: #555;
+            letter-spacing: 1px;
+        }
+
+        body.dark-mode .placeholder-body .ph-demo {
+            background: #2a2a34;
+            border-color: #444;
+            color: #aaa;
+        }
+
+        /* 开发计划条 */
+        .roadmap-bar {
+            background: #1a1a1a;
+            padding: 20px 28px;
+            margin: 0 0 48px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .roadmap-bar .rm-text {
+            color: #a0a0a0;
+            font-size: 0.82rem;
+            letter-spacing: 0.5px;
+        }
+
+        .roadmap-bar .rm-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .roadmap-bar .rm-tag {
+            color: #666;
+            border: 1px solid #444;
+            padding: 3px 12px;
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+        }
+
+        body.dark-mode .roadmap-bar {
+            background: #0a0a10;
+        }
+
+        /* ---- 响应式 ---- */
+        @media (max-width: 768px) {
+            .arsenal-hero {
+                padding: 36px 24px;
+                margin: 20px 0 24px;
+            }
+            .arsenal-hero h1 {
+                font-size: 1.8rem;
+                letter-spacing: 3px;
+            }
+            .arsenal-hero p {
+                font-size: 0.85rem;
+            }
+            .tool-card-header {
+                flex-wrap: wrap;
+                padding: 18px 20px;
+                gap: 12px;
+            }
+            .tool-card-body {
+                padding: 18px 20px;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .tool-card-action {
+                width: 100%;
+            }
+            .btn-enter {
+                display: block;
+                text-align: center;
+            }
+            .roadmap-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <div class="container">
+
+            <!-- Hero -->
+            <div class="arsenal-hero">
+                <div class="arsenal-hero-badge">ARSENAL</div>
+                <h1><span>武器</span>库</h1>
+                <p>思想建构是工具，取之即用的是武器这里汇聚了可直接投入使用的思想工具，每一件都经过锻造</p>
+            </div>
+
+            <!-- 工具列表 -->
+            <div class="tools-grid">
+
+                <!-- 马列体生成器 -->
+                <div class="tool-card featured">
+                    <div class="tool-card-header">
+                        <div class="tool-card-icon">&#9773;</div>
+                        <div class="tool-card-meta">
+                            <h2>马列体生成器</h2>
+                            <p>日常文本转换为革命导师的行文风格——五位导师多时期切换AI 深度润色微信风问答聊天</p>
+                        </div>
+                        <div class="tool-card-action">
+                            <a href="marxist-style.html" class="btn-enter">进入工具</a>
+                        </div>
+                    </div>
+                    <div class="tool-card-body">
+                        <div class="feature-grid">
+                            <div class="feature-item fi-gold">
+                                <strong>五位导师</strong>
+                                <span class="fi-sub">马克思 / 恩格斯 / 列宁 / 斯大林 / 毛泽东</span>
+                            </div>
+                            <div class="feature-item fi-pink">
+                                <strong>多时期切换</strong>
+                                <span class="fi-sub">每位导师 3 个历史时期，风格精准定位</span>
+                            </div>
+                            <div class="feature-item fi-blue">
+                                <strong>AI 深度润色</strong>
+                                <span class="fi-sub">证据驱动 System Prompt + 经典片段注入</span>
+                            </div>
+                            <div class="feature-item fi-green">
+                                <strong>问答聊天</strong>
+                                <span class="fi-sub">微信风对话 + 年代代入 + 口语质感</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 青马的奇妙冒险 -->
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-icon">青</div>
+                        <div class="tool-card-meta">
+                            <h2>青马的奇妙冒险</h2>
+                            <p>文字选项游戏——扮演青马，辩倒互联网上的错误思想</p>
+                        </div>
+                        <div class="tool-card-action">
+                            <a href="qingma.html" class="btn-enter">进入游戏</a>
+                        </div>
+                    </div>
+                    <div class="tool-card-body">
+                        <div class="feature-grid">
+                            <div class="feature-item fi-gold">
+                                <strong>15 类敌人</strong>
+                                <span class="fi-sub">六大阵营，现实原型</span>
+                            </div>
+                            <div class="feature-item fi-pink">
+                                <strong>50 道论战</strong>
+                                <span class="fi-sub">理性辩证 / 归谬反诘 / 感性批判</span>
+                            </div>
+                            <div class="feature-item fi-blue">
+                                <strong>三属性</strong>
+                                <span class="fi-sub">理论信心 / 辩证力 / 阶级觉悟</span>
+                            </div>
+                            <div class="feature-item fi-green">
+                                <strong>DLC 简答</strong>
+                                <span class="fi-sub">AI 裁判评分</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 小册子 -->
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-icon">册</div>
+                        <div class="tool-card-meta">
+                            <h2>小册子（开发中）</h2>
+                            <p>网页编辑 PDF 工具——内容与皮肤分离，同一份内容换肤即换脸</p>
+                        </div>
+                        <div class="tool-card-action">
+                            <a href="xiaocezi.html" class="btn-enter">预览</a>
+                        </div>
+                    </div>
+                    <div class="tool-card-body">
+                        <div class="feature-grid">
+                            <div class="feature-item fi-gold">
+                                <strong>内容零视觉</strong>
+                                <span class="fi-sub">只写结构，不管排版</span>
+                            </div>
+                            <div class="feature-item fi-pink">
+                                <strong>多皮肤引擎</strong>
+                                <span class="fi-sub">手作油印 / 精致书刊，可扩展</span>
+                            </div>
+                            <div class="feature-item fi-blue">
+                                <strong>换肤即换脸</strong>
+                                <span class="fi-sub">同一份内容，CSS 一键切换</span>
+                            </div>
+                            <div class="feature-item fi-green">
+                                <strong>首批两本</strong>
+                                <span class="fi-sub">共产主义一百问论新红歌的创作</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 赛博样板戏 -->
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-icon">戏</div>
+                        <div class="tool-card-meta">
+                            <h2>赛博样板戏（开发中）</h2>
+                            <p>老样板戏骨架 × 新时代内容——可读剧本 + AI 生图/音乐/视频 prompt</p>
+                        </div>
+                        <div class="tool-card-action">
+                            <a href="yangbanxi.html" class="btn-enter">预览</a>
+                        </div>
+                    </div>
+                    <div class="placeholder-body">
+                        <h3>剧本 + Prompt</h3>
+                        <p class="ph-desc">小说式阅读 / 分镜脚本 / 可投喂 prompt 包三种形态，AI 辅助生成下游生产 prompt</p>
+                        <span class="ph-demo">PREVIEW UNAVAILABLE</span>
+                    </div>
+                </div>
+
+                <!-- 万物皆可红 -->
+                <div class="tool-card">
+                    <div class="tool-card-header">
+                        <div class="tool-card-icon">红</div>
+                        <div class="tool-card-meta">
+                            <h2>万物皆可红（开发中）</h2>
+                            <p>照片红化特征重绘——宣传画 / 版画 / 剪纸 / 招贴</p>
+                        </div>
+                        <div class="tool-card-action">
+                            <a href="redify.html" class="btn-enter">预览</a>
+                        </div>
+                    </div>
+                    <div class="placeholder-body">
+                        <h3>照片特征重绘</h3>
+                        <p class="ph-desc">上传照片，保留人脸特征替换配色纹理，AI 重绘为红色美术风格</p>
+                        <span class="ph-demo">PREVIEW UNAVAILABLE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 开发路线
+            <div class="roadmap-bar">
+                <span class="rm-text">后续开发计划</span>
+                <div class="rm-tags">
+                    <span class="rm-tag">青马并入</span>
+                    <span class="rm-tag">小册子</span>
+                    <span class="rm-tag">样板戏</span>
+                    <span class="rm-tag">万物皆可红</span>
+                </div>
+            </div> -->
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>青年马列毛主义驿站 | Qmlm Reader</p>
+            <p class="footer-note">学习他 / 成为他 / 超越他</p>
+        </div>
+    </footer>
+
+    <script src="../../js/site-data.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/darkmode.js"></script>
+    <script src="../../js/cursor.js"></script>
+</body>
+</html>

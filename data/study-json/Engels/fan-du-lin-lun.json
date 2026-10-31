@@ -1,0 +1,220 @@
+{
+  "title": "反杜林论",
+  "mentor": "Engels",
+  "slug": "fan-du-lin-lun",
+  "version": 2,
+  "reading": [
+    {
+      "title": "先看它在回应什么",
+      "content": "《反杜林论》不是纯理论陈列，而是针对杜林主义在党内蔓延所做的系统批判。先抓住它的现实背景，再看它如何把批判和建构放在一起。"
+    },
+    {
+      "title": "再看三大组成部分",
+      "content": "全书把哲学、政治经济学、科学社会主义串成一条线。阅读时不要把它当成零散章节集合，而要看恩格斯怎样用同一本书搭出完整马克思主义框架。"
+    },
+    {
+      "title": "重点抓住‘地图’感",
+      "content": "这本书像一张马克思主义地图，不只是回答‘杜林错在哪’，也回答‘马克思主义整体怎么连起来’。"
+    }
+  ],
+  "difficulty": [
+    {
+      "wrong": "反杜林论只是反对一个人",
+      "correct": "正解：它针对的是杜林主义及其背后的小资产阶级改良倾向，批判对象是错误思潮，不是个人争执。"
+    },
+    {
+      "wrong": "三大规律只是抽象口号",
+      "correct": "正解：恩格斯是在系统说明辩证法的基本规律，这些表述后来成为马克思主义哲学的核心资源。"
+    },
+    {
+      "wrong": "科学社会主义只是道德上的更好方案",
+      "correct": "正解：恩格斯强调它建立在资本主义矛盾运动的科学分析上，不是诉诸道德愿望。"
+    }
+  ],
+  "dialogue": [
+    {
+      "title": "它在回应的问题",
+      "items": [
+        "杜林主义者——把小资产阶级观点包装成科学社会主义。",
+        "党内被‘体系’吸引的人——需要一个完整的反驳框架。"
+      ]
+    },
+    {
+      "title": "它在问每一个读者",
+      "items": [
+        "你是把马克思主义当口号，还是当完整体系？",
+        "你能不能分清‘科学分析’和‘道德愿望’？"
+      ]
+    },
+    {
+      "title": "它在等你的回应",
+      "content": "选一个看起来很完整、很‘体系化’的观点，检查它到底有没有历史依据和现实分析。"
+    }
+  ],
+  "action": [
+    {
+      "title": "实验一：拆解一段‘道德社会主义’论证",
+      "content": "找一段只讲公平、正义、不平等，但不谈生产关系和阶级矛盾的论述，按反杜林论的方法拆开。"
+    },
+    {
+      "title": "实验二：画出三大组成部分",
+      "content": "把哲学、政治经济学、科学社会主义各写成一句话，再画出它们之间如何互相支撑。"
+    }
+  ],
+  "further": {
+    "title": "文章联结网络",
+    "note": "点击已收录文章直接跳转阅读；箭头方向表示思想影响流向（输出影响 · 理论来源 · 相互支撑）",
+    "items": [
+      {
+        "title": "家庭私有制和国家的起源",
+        "href": "jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html",
+        "label": "历史唯物主义",
+        "direction": "source",
+        "relation": "理论来源：国家起源与本质的历史论证"
+      },
+      {
+        "title": "德意志意识形态",
+        "href": "../Marx/de-yi-zhi-yi-xing-tai.html",
+        "label": "哲学基础",
+        "direction": "source",
+        "relation": "理论来源：历史唯物主义的经典方法论"
+      },
+      {
+        "title": "共产党宣言",
+        "href": "../Marx/gongchan-dan-yuan.html",
+        "label": "科学社会主义",
+        "direction": "mutual",
+        "relation": "相互支撑：科学社会主义框架与阶级斗争方法的互证"
+      },
+      {
+        "title": "国家与革命",
+        "href": "../Lenin/guo-jia-yu-ge-ming.html",
+        "label": "政治理论",
+        "direction": "output",
+        "relation": "输出影响：国家学说在列宁那里得到系统推进"
+      },
+      {
+        "title": "实践论",
+        "href": "../Mao/shi-jian-lun.html",
+        "label": "哲学·认识论",
+        "direction": "output",
+        "relation": "输出影响：真理标准问题在实践论中得到集中展开"
+      }
+    ]
+  },
+  "visual": {
+    "charts": [
+      {
+        "id": "radarChart",
+        "config": {
+          "type": "radar",
+          "data": {
+            "labels": ["理论深度", "现实针对性", "时间跨度", "行动指导性", "情感强度", "结构复杂度"],
+            "datasets": [
+              {
+                "label": "反杜林论",
+                "data": [10, 8, 7, 7, 5, 10],
+                "borderColor": "#c41e3a",
+                "backgroundColor": "rgba(139,0,0,0.12)",
+                "pointBackgroundColor": "#c41e3a"
+              }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "scales": { "r": { "min": 0, "max": 10, "ticks": { "stepSize": 2 } } },
+            "plugins": { "legend": { "display": false } }
+          }
+        }
+      },
+      {
+        "id": "argumentCurve",
+        "config": {
+          "type": "line",
+          "data": {
+            "labels": ["序言·概论", "哲学编：\n唯物论与辩证法", "哲学编：\n认识论与真理观", "政治经济学编", "社会主义编：\n从空想到科学", "结束语"],
+            "datasets": [
+              {
+                "label": "论证强度",
+                "data": [6, 9, 8, 8, 10, 5],
+                "borderColor": "#8b0000",
+                "backgroundColor": "rgba(139,0,0,0.08)",
+                "fill": true,
+                "tension": 0.35,
+                "pointRadius": 7,
+                "pointHoverRadius": 9,
+                "borderWidth": 2.5
+              }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "plugins": { "legend": { "display": false } },
+            "scales": { "y": { "min": 0, "max": 10 } }
+          }
+        }
+      },
+      {
+        "id": "mainChart",
+        "config": {
+          "type": "bar",
+          "data": {
+            "labels": ["哲学编", "政治经济学编", "社会主义编"],
+            "datasets": [
+              {
+                "label": "内容比重",
+                "data": [4, 5, 3],
+                "backgroundColor": ["rgba(139,0,0,0.7)", "rgba(139,0,0,0.5)", "rgba(139,0,0,0.3)"],
+                "borderColor": "#8b0000",
+                "borderWidth": 1.5
+              }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "plugins": { "legend": { "display": false } },
+            "scales": { "y": { "min": 0, "max": 6 } }
+          }
+        }
+      },
+      {
+        "id": "threeLawsChart",
+        "config": {
+          "type": "radar",
+          "data": {
+            "labels": ["理论创新性", "批判力度", "体系完整性", "通俗性", "历史意义"],
+            "datasets": [
+              { "label": "辩证法规律", "data": [9, 10, 8, 6, 9], "borderColor": "#c53030", "backgroundColor": "rgba(197,48,48,0.1)", "pointBackgroundColor": "#c53030" },
+              { "label": "唯物史观", "data": [8, 7, 9, 5, 9], "borderColor": "#d69e2e", "backgroundColor": "rgba(214,158,46,0.1)", "pointBackgroundColor": "#d69e2e" },
+              { "label": "科学社会主义", "data": [7, 8, 8, 6, 10], "borderColor": "#2b6cb0", "backgroundColor": "rgba(43,108,176,0.1)", "pointBackgroundColor": "#2b6cb0" }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "scales": { "r": { "min": 0, "max": 10 } },
+            "plugins": { "legend": { "position": "bottom" } }
+          }
+        }
+      },
+      {
+        "id": "socialismChart",
+        "config": {
+          "type": "bar",
+          "data": {
+            "labels": ["空想社会主义", "科学社会主义"],
+            "datasets": [
+              { "label": "理论严密性", "data": [3, 9], "backgroundColor": "rgba(139,0,0,0.4)", "borderColor": "#8b0000", "borderWidth": 1.5 },
+              { "label": "实践指导力", "data": [2, 8], "backgroundColor": "rgba(196,30,58,0.6)", "borderColor": "#c41e3a", "borderWidth": 1.5 },
+              { "label": "历史解释力", "data": [4, 10], "backgroundColor": "rgba(180,40,40,0.8)", "borderColor": "#8b0000", "borderWidth": 1.5 }
+            ]
+          },
+          "options": {
+            "responsive": true,
+            "plugins": { "legend": { "position": "bottom" } },
+            "scales": { "y": { "min": 0, "max": 10 } }
+          }
+        }
+      }
+    ]
+  }
+}

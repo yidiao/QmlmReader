@@ -1,0 +1,99 @@
+/* 斯大林小传：正名长文 + 专题分卷入口 + 章节线索板 */
+.stalin-biography-page { min-height: 100vh; max-width: none; margin: 0; padding: 0; color: var(--master-ink, #252525); background: var(--app-bg, #f3eadc); --cat-primary: var(--master-primary, #7f1d1d); --cat-secondary: var(--master-accent, #c9a84c); }
+.stalin-story-header { overflow: visible; padding: 0; text-align: left; color: inherit; background: linear-gradient(180deg, rgba(127,29,29,.08), transparent); border-bottom: 1px solid rgba(127,29,29,.18); }
+.stalin-story-header::before { content: none; }
+.stalin-story-header-inner { width: min(100% - 40px, 1180px); margin: 0 auto; padding: 1.8rem 0 1.4rem; display: grid; grid-template-columns: minmax(0,1fr) minmax(360px, 480px); gap: 1.5rem; align-items: end; }
+.stalin-eyebrow, .stalin-card-kicker { color: var(--master-primary, #7f1d1d); font-size: .72rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+.stalin-title-block h1 { margin: .45rem 0 .35rem; color: var(--master-primary, #7f1d1d); font-size: clamp(2.2rem, 5vw, 3.8rem); letter-spacing: .08em; line-height: 1; text-shadow: none; }
+.stalin-title-block p { margin: 0; color: var(--app-text-muted, #666); font-size: .96rem; }
+.stalin-volume-strip { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.stalin-volume-strip a { display: block; padding: .9rem 1rem; color: inherit; text-decoration: none; background: var(--master-paper, #f1eadc); border: 1px solid rgba(75,85,99,.2); border-left: 4px solid var(--master-primary, #7f1d1d); box-shadow: 3px 3px 0 rgba(43,31,21,.08); transition: transform .15s, box-shadow .15s; }
+.stalin-volume-strip a:hover { transform: translateY(-2px); box-shadow: 5px 5px 0 rgba(127,29,29,.13); }
+.stalin-volume-strip span { display: block; color: var(--master-accent, #8a6a19); font-size: .7rem; font-weight: 900; letter-spacing: .08em; }
+.stalin-volume-strip strong { display: block; margin-top: .25rem; color: var(--master-primary, #7f1d1d); font-size: .95rem; }
+.stalin-reader-shell { width: min(100% - 40px, 1180px); margin: 0 auto; padding: 2.2rem 0 5rem; display: grid; grid-template-columns: minmax(230px, 310px) minmax(0, 820px); gap: clamp(1.5rem, 5vw, 3.8rem); }
+.stalin-thread-panel { align-self: start; position: sticky; top: 4.5rem; max-height: calc(100vh - 5.5rem); overflow: hidden; }
+.thread-board { position: relative; min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr); max-height: calc(100vh - 5.5rem); background: var(--master-paper, #f1eadc); border: 1px solid rgba(75,85,99,.2); box-shadow: 3px 3px 0 rgba(43,31,21,.08); }
+.thread-board::before, .thread-board::after { content: ''; position: absolute; left: 0; right: 0; height: 22px; z-index: 2; pointer-events: none; }
+.thread-board::before { top: 2.75rem; background: linear-gradient(var(--master-paper, #f1eadc), rgba(241,234,220,0)); }
+.thread-board::after { bottom: 0; background: linear-gradient(rgba(241,234,220,0), var(--master-paper, #f1eadc)); }
+.thread-board-head { display: flex; justify-content: space-between; align-items: center; gap: .7rem; padding: .85rem .95rem; border-bottom: 1px solid rgba(75,85,99,.16); }
+.thread-board-head p { margin: 0; color: var(--master-primary, #7f1d1d); font-size: .72rem; font-weight: 900; letter-spacing: .14em; }
+.thread-nav { min-height: 0; overflow: auto; padding: .65rem .6rem 1.1rem; scrollbar-width: thin; scrollbar-color: rgba(127,29,29,.16) transparent; }
+.thread-nav::-webkit-scrollbar { width: 4px; }
+.thread-nav::-webkit-scrollbar-track { background: transparent; }
+.thread-nav::-webkit-scrollbar-thumb { background: rgba(127,29,29,.12); border-radius: 999px; }
+.thread-nav:hover::-webkit-scrollbar-thumb { background: rgba(127,29,29,.28); }
+.chapter-thread-list { margin: 0; padding: 0; list-style: none; position: relative; }
+.chapter-thread-list::before { content: ''; position: absolute; left: 1.03rem; top: .6rem; bottom: .8rem; width: 2px; background: linear-gradient(var(--master-primary, #7f1d1d), rgba(201,168,76,.45)); }
+.chapter-thread-list li { position: relative; margin: 0; }
+.chapter-thread-link { display: grid; grid-template-columns: 2rem 1fr; gap: .58rem; padding: .42rem .35rem .42rem 0; color: var(--master-ink, #252525); text-decoration: none; border-radius: 3px; }
+.chapter-thread-num { position: relative; z-index: 1; display: grid; place-items: center; width: 2rem; height: 2rem; color: var(--master-paper, #f1eadc); background: var(--master-secondary, #4b5563); border: 2px solid var(--master-paper, #f1eadc); border-radius: 50%; font-size: .72rem; font-weight: 900; }
+.chapter-thread-text strong { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; color: var(--master-ink, #252525); font-size: .82rem; line-height: 1.35; }
+.chapter-thread-text em { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; margin-top: .18rem; color: var(--app-text-muted, #666); font-size: .68rem; line-height: 1.45; font-style: normal; }
+.chapter-thread-text small { display: inline-block; margin-top: .25rem; color: #8a6a19; font-size: .66rem; }
+.chapter-thread-link:hover, .chapter-thread-link.is-active { background: rgba(127,29,29,.07); }
+.chapter-thread-link.is-active .chapter-thread-num { background: var(--master-primary, #7f1d1d); border-color: var(--master-accent, #c9a84c); box-shadow: 0 0 0 3px rgba(201,168,76,.18); }
+.chapter-thread-link.major .chapter-thread-num { background: var(--master-primary, #7f1d1d); }
+.stalin-reader-main { min-width: 0; }
+.stalin-intro-card, .stalin-article-content { background: var(--master-paper, #f1eadc); border: 1px solid rgba(75,85,99,.19); box-shadow: 4px 4px 0 rgba(43,31,21,.08); }
+.stalin-intro-card { padding: 2rem; margin-bottom: 2.2rem; }
+.stalin-intro-card h2 { margin: .45rem 0 1rem; color: var(--master-primary, #7f1d1d); font-size: 1.55rem; }
+.stalin-intro-card p { line-height: 1.85; color: var(--master-ink, #252525); }
+.intro-lead { font-size: 1.05rem; }
+.stalin-muted { color: var(--app-text-muted, #666) !important; font-size: .84rem; }
+.stalin-declaration { margin-top: 1rem; padding: 1rem; background: rgba(201,168,76,.1); border-left: 3px solid var(--master-accent, #c9a84c); color: var(--app-text-muted, #666); font-size: .84rem; }
+.stalin-declaration strong { color: var(--master-primary, #7f1d1d); }
+.stalin-declaration p { margin: .35rem 0 0; color: inherit; }
+.stalin-section-heading { display: flex; align-items: baseline; gap: .75rem; margin: 0 0 1rem; }
+.stalin-section-heading span { color: var(--master-primary, #7f1d1d); font-size: .72rem; font-weight: 900; letter-spacing: .14em; }
+.stalin-section-heading h2 { margin: 0; color: var(--master-primary, #7f1d1d); font-size: 1.7rem; }
+.stalin-article-content { padding: clamp(1.4rem, 4vw, 2.8rem); }
+.stalin-article-section { margin-bottom: 4rem; scroll-margin-top: 5rem; }
+.article-chapter-head { display: grid; grid-template-columns: 3.4rem 1fr; gap: 1rem; margin-bottom: 1rem; padding-bottom: .9rem; border-bottom: 1px solid rgba(127,29,29,.22); }
+.article-chapter-num { display: grid; place-items: center; width: 3.1rem; height: 3.1rem; color: var(--master-paper, #f1eadc); background: var(--master-primary, #7f1d1d); border: 3px solid var(--master-accent, #c9a84c); border-radius: 50%; font-size: 1.25rem; font-weight: 900; }
+.article-chapter-head h3 { margin: 0 0 .35rem; color: var(--master-primary, #7f1d1d); font-size: clamp(1.25rem, 3vw, 1.75rem); }
+.article-chapter-head p { margin: 0; color: var(--app-text-muted, #666); line-height: 1.65; }
+.chapter-timechips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .65rem; }
+.chapter-timechips span { padding: .2rem .5rem; color: #755711; background: rgba(201,168,76,.16); font-size: .72rem; }
+.chapter-focus { margin: 1rem 0 1.1rem; padding: 1rem 1.2rem; color: #6d1a1a; background: linear-gradient(135deg, rgba(127,29,29,.07), rgba(201,168,76,.12)); border-left: 4px solid var(--master-primary, #7f1d1d); font: 600 .95rem/1.8 Georgia, "Noto Serif SC", serif; }
+.chapter-note-stack { display: grid; gap: .65rem; margin: 0 0 1.35rem; }
+.chapter-note { padding: .9rem 1rem; background: rgba(255,250,240,.65); border: 1px solid rgba(75,85,99,.16); border-left: 4px solid var(--master-secondary, #4b5563); }
+.chapter-note span { color: var(--app-text-muted, #666); font-size: .68rem; font-weight: 900; letter-spacing: .1em; }
+.chapter-note strong { display: block; margin: .25rem 0; color: var(--master-primary, #7f1d1d); }
+.chapter-note p { margin: 0; color: var(--app-text-muted, #666); font-size: .84rem; line-height: 1.7; }
+.note-controversy { border-left-color: #a85f16; background: rgba(168,95,22,.08); }
+.note-concept { border-left-color: var(--master-primary, #7f1d1d); }
+.note-interpretation { border-left-color: var(--master-accent, #c9a84c); }
+.stalin-article-paragraph { margin: 0 0 1rem; padding-left: 1rem; color: var(--master-ink, #252525); font: 1rem/2.05 Georgia, "Noto Serif SC", serif; text-align: justify; text-indent: 2em; }
+.annotation-historical-record { border-left: 1px solid rgba(75,85,99,.24); }
+.annotation-author-judgment { border-left: 3px solid rgba(127,29,29,.65); }
+.annotation-historical-dramatization { padding: .9rem 1rem; background: rgba(201,168,76,.12); border-left: 3px solid var(--master-accent, #c9a84c); }
+.stalin-article-paragraph.is-highlight { position: relative; background: linear-gradient(90deg, rgba(127,29,29,.08), transparent 70%); }
+.paragraph-highlight-mark { float: right; margin-left: .8rem; padding: .12rem .45rem; color: var(--master-paper, #f1eadc); background: var(--master-primary, #7f1d1d); font: 700 .68rem/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-indent: 0; opacity: .82; }
+.inline-mark { text-indent: 0; }
+.inline-mark-strong-red { color: var(--master-primary, #7f1d1d); font-weight: 900; }
+.inline-mark-strong { font-weight: 900; color: #2a2018; }
+.inline-mark-strong-italic { font-weight: 800; font-style: italic; color: #5d2b18; }
+.inline-mark-gold { color: #8a6a19; font-weight: 800; }
+.inline-mark-ending-seal { color: var(--master-primary, #7f1d1d); font-weight: 900; background: linear-gradient(transparent 58%, rgba(201,168,76,.26) 58%); }
+.reading-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 12000; background: rgba(127,29,29,.08); }
+.reading-progress-fill { width: 0; height: 100%; background: linear-gradient(90deg, var(--master-primary, #7f1d1d), var(--master-accent, #c9a84c)); transition: width .18s ease; }
+.reading-progress-label { position: absolute; right: 12px; top: 8px; max-width: min(70vw, 520px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: .28rem .65rem; border-radius: 999px; background: rgba(255,255,255,.92); color: var(--master-primary, #7f1d1d); box-shadow: 0 6px 18px rgba(0,0,0,.12); font-size: .72rem; font-weight: 700; pointer-events: none; }
+.history-resume-prompt { position: fixed; top: 44px; right: 14px; width: min(248px, calc(100vw - 28px)); z-index: 9998; padding: .48rem .56rem .42rem; border-radius: 11px; background: rgba(255,255,255,.96); box-shadow: 0 10px 22px rgba(0,0,0,.12); backdrop-filter: blur(10px); color: var(--master-primary, #7f1d1d); }
+.history-resume-head { display: grid; gap: .08rem; margin-bottom: .26rem; }
+.history-resume-title { font-size: .8rem; font-weight: 800; line-height: 1.15; }
+.history-resume-desc { font-size: .68rem; line-height: 1.28; color: rgba(74,0,0,.74); }
+.history-resume-meter { height: 3px; border-radius: 999px; overflow: hidden; background: rgba(127,29,29,.12); }
+.history-resume-meter-fill { width: 100%; height: 100%; background: linear-gradient(90deg, var(--master-accent, #c9a84c), var(--master-primary, #7f1d1d)); transition: width .1s linear; }
+.history-resume-foot { display: flex; align-items: center; justify-content: space-between; gap: .25rem; margin-top: .22rem; }
+.history-resume-count { font-size: .68rem; font-weight: 800; color: var(--master-primary, #7f1d1d); }
+.history-resume-prompt .prefs-btn { min-width: 0; padding: .18rem .42rem; font-size: .68rem; border-radius: 8px; flex: 0 0 auto; }
+.stalin-empty-state { display: flex; gap: .8rem; padding: 1rem; color: var(--app-text-muted, #666); }
+.stalin-empty-state span { display: grid; place-items: center; width: 2rem; height: 2rem; background: var(--master-primary, #7f1d1d); color: var(--master-paper, #f1eadc); }
+@media (max-width: 900px) { .stalin-story-header-inner, .stalin-reader-shell { grid-template-columns: 1fr; } .stalin-thread-panel { position: static; max-height: none; } .thread-board { max-height: none; } .thread-nav { max-height: 50vh; } }
+@media (max-width: 560px) { .stalin-story-header-inner, .stalin-reader-shell { width: min(100% - 28px, 1180px); } .stalin-volume-strip { grid-template-columns: 1fr; } .article-chapter-head { grid-template-columns: 1fr; } .stalin-article-content, .stalin-intro-card { padding: 1.2rem; } .stalin-article-paragraph { font-size: .96rem; padding-left: .75rem; } .reading-progress-label { display: none; } }
+body.dark-mode .stalin-intro-card, body.dark-mode .stalin-article-content, body.dark-mode .thread-board, body.dark-mode .stalin-volume-strip a, body.dark-mode .chapter-note { border-color: rgba(255,255,255,.13); }
+body.dark-mode .chapter-note { background: rgba(255,255,255,.05); }
+body.dark-mode .thread-board::before { background: linear-gradient(var(--master-paper, #1f1f1f), rgba(31,31,31,0)); }
+body.dark-mode .thread-board::after { background: linear-gradient(rgba(31,31,31,0), var(--master-paper, #1f1f1f)); }

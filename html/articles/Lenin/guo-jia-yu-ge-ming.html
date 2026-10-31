@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国家与革命 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/articles-detail.css">
+    <link rel="stylesheet" href="../../../css/category-theme.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-category="politics" data-article-json="../../../data/articles-json/Lenin/★★★★★/guo-jia-yu-ge-ming.json" data-study-json="../../../data/study-json/Lenin/guo-jia-yu-ge-ming.json">
+
+    <div id="nav-placeholder"></div>
+
+    <!-- 合集上下文导航（自动注入） -->
+    <div class="back-nav" style="display:none;">
+        <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
+            <a href="../../articles/articles.html" class="back-link"></a>
+        </div>
+    </div>
+
+    <main class="article-detail">
+
+        <header class="article-header">
+            <div class="importance-badge"> 核心必读</div>
+            <h1>国家与革命</h1>
+            <div class="article-subtitle">马克思主义国家学说的系统阐述</div>
+            <div class="article-meta">
+                <span class="author">列宁</span>
+                <span class="date">1917年8-9月</span>
+                <span class="category">政治理论 · 无产阶级专政</span>
+                <span class="word-count">约55,000字</span>
+                <span class="length-tag"> 长篇</span>
+            </div>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)"> 原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)"> 读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)"> 难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)"> 对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)"> 行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)"> 一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)"> 理论拼图</button>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 1: 原文                              -->
+        <!-- ═══════════════════════════════════════ -->
+                <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro"><p><strong>原文：</strong>正在加载文章数据…</p></div>
+            </div>
+        </div>
+
+
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2 class="tab-heading"> 如何阅读本文</h2>
+                <div class="guide-block"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 3: 难点解析                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2 class="tab-heading"> 容易读错的地方</h2>
+                <div class="diff-item"><div class="correct">正在加载精读数据…</div></div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 4: 对话空间                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2 class="tab-heading"> 这篇文章在回应谁？</h2>
+                <div class="dialogue-block"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 5: 行动实验                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2 class="tab-heading"> 读完之后可以做什么</h2>
+                <div class="action-item"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 6: 一目了然                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2 class="tab-heading"> 一目了然</h2>
+
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量本书的"性格"</p>
+                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>论证节奏曲线</h3>
+                    <p class="chart-desc">全书六章的论证强度——第二五章是双高峰</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="argumentCurve"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4> 结构分析（对应曲线各波段）</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label">第一章：国家的阶级本质（8/10）</span>
+                            <p>从恩格斯出发，论证国家是阶级矛盾不可调和的产物论证扎实，为全书打地基</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight"> 第二三章：无产阶级专政与巴黎公社经验（10/10）</span>
+                            <p>全书第一个高峰列宁提出无产阶级专政是马克思主义的试金石，并以巴黎公社为例论证必须打碎旧国家机器</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">第四章：共产主义两个阶段与国家消亡（9/10）</span>
+                            <p>逐段解读哥达纲领批判——理论最密集的章节阐明国家消亡的经济基础</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight"> 第五章：无产阶级专政的经济基础（10/10）</span>
+                            <p>全书第二个高峰从经济学角度论证为什么过渡时期必须有无产阶级专政，以及国家消亡的最终条件</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">第六章：批判机会主义（7/10）</span>
+                            <p>收尾——点名批判考茨基普列汉诺夫等对马克思主义国家学说的歪曲论证强度回升，带有鲜明的战斗性</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>国家产生发展与消亡的历史轨迹</h3>
+                    <p class="chart-desc">从无阶级社会到阶级社会再到无阶级社会——国家的生命周期</p>
+                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
+                        <canvas id="partsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- Tab 7: 理论拼图                           -->
+        <!-- ═══════════════════════════════════════ -->
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2 class="tab-heading"> 在马哲体系中的位置</h2>
+
+                <div class="puzzle-intro">
+                    <p>国家与革命是马克思主义国家学说的最高成就列宁在这个"理论上的极重要的部分"恢复了被机会主义者埋没的马克思和恩格斯的国家学说，将它系统化了本书对于"无产阶级革命对国家的态度"这个根本问题，给出了最彻底的回答</p>
+                </div>
+
+                <div class="puzzle-position">
+                    <h3>在马哲体系中的坐标</h3>
+                    <div class="theory-tree">
+                        <div class="theory-node root">马克思主义国家学说</div>
+                        <div class="theory-branches">
+                            <div class="theory-branch">
+                                <div class="theory-node branch">国家起源</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">阶级矛盾不可调和<br><small>家庭私有制和国家的起源</small></div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node current">无产阶级专政<br><small>本文核心</small></div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">打碎旧国家机器</div>
+                                    <div class="theory-node related">巴黎公社经验</div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">国家消亡</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">共产主义两个阶段<br><small>哥达纲领批判</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="puzzle-connection">
+                    <h3>与其他经典的联结</h3>
+                    <ul>
+                        <li> 恩格斯家庭私有制和国家的起源：国家学说的历史基础</li>
+                        <li> 马克思哥达纲领批判：共产主义两阶段理论——国家消亡的经济基础</li>
+                        <li> 列宁帝国主义论：本书的政治经济学前提——在帝国主义时代，资产阶级国家已经变成了垄断资本的直接工具</li>
+                        <li> 毛泽东论人民民主专政：国家与革命理论的中国化</li>
+                    </ul>
+                </div>
+
+                <div class="puzzle-timeline">
+                    <h3>在思想发展时间轴上的位置</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1871</div><div class="timeline-label">巴黎公社</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1875</div><div class="timeline-label">哥达纲领批判</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1916</div><div class="timeline-label">帝国主义论</div></div>
+                        <div class="timeline-item active"><div class="timeline-dot-active"></div><div class="timeline-year">1917</div><div class="timeline-label">国家与革命</div><div class="timeline-here"> 本文</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1917.10</div><div class="timeline-label">十月革命</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">1949</div><div class="timeline-label">论人民民主专政</div></div>
+                    </div>
+                    <p style="margin-top:12px;font-size:0.85em;color:#666;"><strong>历史位置：</strong>写于十月革命前两个月列宁在芬兰避难期间写成此书第七章未完成——因为"十月革命打断了写作"历史以最戏剧性的方式验证了这本书的理论</p>
+                </div>
+
+                <div class="puzzle-links">
+                    <h3>文章联结网络</h3>
+                    <p class="puzzle-links-note">点击已收录文章直接跳转阅读</p>
+                    <div class="conn-grid">
+                        <a href="../../articles/Engels/jia-ting-si-you-zhi-he-guo-jia-de-qi-yuan.html" class="conn-card" style="border-left-color:#8b0000;">
+                            <span class="conn-dir" style="color:#276749;"></span>
+                            <span class="conn-title">家庭私有制和国家的起源</span>
+                            <span class="conn-label">历史唯物主义</span>
+                            <span class="conn-relation">理论来源：国家起源与本质的历史论证</span>
+                        </a>
+                        <a href="di-guo-zhu-yi-shi-zi-ben-zhu-yi-de-zui-gao-jie-duan.html" class="conn-card" style="border-left-color:#e65100;">
+                            <span class="conn-dir" style="color:#276749;"></span>
+                            <span class="conn-title">帝国主义是资本主义的最高阶段</span>
+                            <span class="conn-label">政治经济学</span>
+                            <span class="conn-relation">政治经济学前提：帝国主义时代的国家变成了垄断资本的工具</span>
+                        </a>
+                        <a href="../../articles/Mao/xin-min-zhu.html" class="conn-card" style="border-left-color:#5c3d99;">
+                            <span class="conn-dir" style="color:#276749;"></span>
+                            <span class="conn-title">新民主主义论</span>
+                            <span class="conn-label">政治理论</span>
+                            <span class="conn-relation">中国化：国家理论在半殖民地中国的应用</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>延伸阅读建议</h3>
+                    <p><strong>想看国家学说的历史基础：</strong>读恩格斯家庭私有制和国家的起源</p>
+                    <p><strong>想看国家学说的中国发展：</strong>读毛泽东论人民民主专政——中国的无产阶级专政形式</p>
+                </div>
+
+                <div class="puzzle-modern">
+                    <h3>它解决的真实问题</h3>
+                    <p><strong>历史背景：</strong>1917年二月革命后，俄国出现了"两个政权并存"的罕见局面——资产阶级临时政府和工兵代表苏维埃共存列宁此时写国家与革命，直接目的是为即将到来的十月革命提供理论指导：工人阶级应该怎样对待资产阶级国家？答案是：打碎它，建立苏维埃式的新型国家1917年10月，列宁用行动回答了这个问题</p>
+                    <p><strong>现实意义：</strong>在民主制度被高度神圣化的今天，国家与革命仍然是一剂"解毒药"它提醒人们：任何国家都是阶级的国家，民主共和国不过是"资产阶级所能采用的最好的政治外壳"揭开这个外壳，才能看见国家真正的阶级内容</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+        <script src="../../../js/category-theme.js"></script>
+    <script src="../../../js/article-common.js"></script>
+    <script src="../../../js/article-json.js"></script>
+    <script src="../../../js/article-study.js"></script>
+    <script>
+        var ARTICLE_CHARTS = [
+            {
+                id: 'radarChart',
+                config: {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                        datasets: [{
+                            label: '国家与革命',
+                            data: [10, 10, 9, 10, 8, 9],
+                            borderColor: '#7c4dff',
+                            backgroundColor: 'rgba(92,61,153,0.12)',
+                            pointBackgroundColor: '#7c4dff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
+                        plugins: { legend: { display: false } }
+                    }
+                }
+            },
+            {
+                id: 'argumentCurve',
+                config: {
+                    type: 'line',
+                    data: {
+                        labels: ['第一章\n国家本质', '第二三章\n无产阶级专政', '第四章\n国家消亡', '第五章\n经济基础', '第六章\n批判机会主义'],
+                        datasets: [{
+                            label: '论证强度',
+                            data: [8, 10, 9, 10, 7],
+                            borderColor: '#5c3d99',
+                            backgroundColor: 'rgba(92,61,153,0.08)',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            borderWidth: 2.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            },
+            {
+                id: 'partsChart',
+                config: {
+                    type: 'line',
+                    data: {
+                        labels: ['原始社会\n无国家', '阶级社会\n国家产生', '资本主义\n国家强化', '无产阶级专政\n国家转型', '共产主义\n国家消亡'],
+                        datasets: [{
+                            label: '国家权力强度',
+                            data: [0, 6, 10, 8, 0],
+                            borderColor: '#7c4dff',
+                            backgroundColor: 'rgba(92,61,153,0.08)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 6,
+                            borderWidth: 2.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            }
+        ];
+    </script>
+    <script src="../../../js/site-data.js"></script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+</body>
+</html>
+

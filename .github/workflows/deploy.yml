@@ -1,0 +1,65 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare site directory
+        run: |
+          mkdir -p _site
+          cp -r html/* _site/
+          cp -r css _site/
+          cp -r js _site/
+          cp -r images _site/
+          cp -r assets _site/
+          cp -r data _site/
+
+      - name: Fix resource paths
+        run: |
+          python3 << 'PYEOF'
+          import os, re
+
+          def fix_file(filepath):
+              with open(filepath, 'r', encoding='utf-8') as f:
+                  content = f.read()
+
+              def reduce_dotdot(m):
+                  prefix = m.group(1)   # one or more "../"
+                  target = m.group(2)   # css/ js/ images/ assets/
+                  new_prefix = re.sub(r'\.\./', '', prefix, count=1)
+                  return new_prefix + target
+
+              content = re.sub(
+                  r'((?:\.\./)+)(css/|js/|images/|assets/|data/)',
+                  reduce_dotdot,
+                  content
+              )
+
+              with open(filepath, 'w', encoding='utf-8') as f:
+                  f.write(content)
+
+          for root, dirs, files in os.walk('_site'):
+              for f in files:
+                  if f.endswith('.html') or f.endswith('.css') or f.endswith('.js'):
+                      fix_file(os.path.join(root, f))
+          PYEOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

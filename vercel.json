@@ -1,29 +1,20 @@
 {
   "version": 2,
-  "public": true,
-  "github": {
-    "enabled": false
+  "buildCommand": null,
+  "functions": {
+    "api/translate.js": {
+      "memory": 512,
+      "maxDuration": 30
+    }
   },
   "headers": [
     {
-      "source": "/data/(.*)\\.txt",
+      "source": "/api/(.*)",
       "headers": [
-        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
-        { "key": "Content-Disposition", "value": "attachment" }
-      ]
-    },
-    {
-      "source": "/downloads/(.*)\\.pdf",
-      "headers": [
-        { "key": "Content-Type", "value": "application/pdf" },
-        { "key": "Content-Disposition", "value": "attachment" }
-      ]
-    },
-    {
-      "source": "/downloads/(.*)\\.txt",
-      "headers": [
-        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
-        { "key": "Content-Disposition", "value": "attachment" }
+        { "key": "Access-Control-Allow-Origin", "value": "https://qmlmreader.github.io" },
+        { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, x-client-id" },
+        { "key": "Access-Control-Max-Age", "value": "86400" }
       ]
     }
   ]

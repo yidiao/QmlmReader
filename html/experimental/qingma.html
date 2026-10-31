@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>青马的奇妙冒险 | Qmlm Reader</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/qingma-style.css?v=18">
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<div id="app">
+
+  <!-- ═══ 标题画面 ═══ -->
+  <div id="screen-title" class="screen title-screen">
+    <header class="title-banner">
+      <span class="title-emblem"></span>
+      <div class="title-banner-text">
+        <h1 class="title-main">青马的奇妙冒险</h1>
+        <p class="title-sub">你是一名坚守马克思主义的青年——互联网上，各路错误思潮蜂拥而至，用辩证的武器，击碎它们</p>
+      </div>
+    </header>
+
+    <div class="title-cta">
+      <button id="btn-start" class="btn btn-primary btn-big">开始冒险</button>
+      <div class="title-actions">
+        <button id="btn-dlc" class="btn btn-secondary">简答题模式</button>
+        <button id="btn-codex" class="btn btn-secondary">敌人图鉴</button>
+        <button id="btn-event-codex" class="btn btn-secondary">事件图鉴</button>
+        <button id="btn-debug" class="btn btn-secondary">测试台</button>
+      </div>
+    </div>
+
+    <p class="title-footer">纯前端小游戏 · 马列主义学习工具</p>
+  </div>
+
+  <!-- ═══ 战斗画面 ═══ -->
+  <div id="screen-battle" class="screen hidden">
+    <div class="battle-layout">
+
+      <!-- 中间：战斗区 -->
+      <main class="battle-main">
+        <!-- 顶部状态栏 -->
+        <div class="top-bar">
+          <div class="progress-wrap">
+            <span id="progress-text" class="progress-text">0 / 50</span>
+            <div class="progress-track"><div id="progress-bar-fill" class="progress-fill"></div></div>
+          </div>
+
+          <div class="stats-row">
+            <div id="stat-hp" class="stat-item">
+              <span class="stat-label">HP</span>
+              <div class="stat-track stat-track-hp"><div id="stat-hp-bar" class="stat-bar-fill"></div></div>
+              <span class="stat-val">10</span>
+            </div>
+            <div id="stat-confidence" class="stat-item">
+              <span class="stat-label">理论信心</span>
+              <div class="stat-track"><div id="stat-confidence-bar" class="stat-bar-fill"></div></div>
+              <span class="stat-val">5</span>
+            </div>
+            <div id="stat-dialectic" class="stat-item">
+              <span class="stat-label">辩证力</span>
+              <div class="stat-track"><div id="stat-dialectic-bar" class="stat-bar-fill"></div></div>
+              <span class="stat-val">5</span>
+            </div>
+            <div id="stat-classstand" class="stat-item">
+              <span class="stat-label">阶级觉悟</span>
+              <div class="stat-track"><div id="stat-classstand-bar" class="stat-bar-fill"></div></div>
+              <span class="stat-val">5</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 敌人卡片 -->
+        <div id="enemy-card" class="enemy-card">
+          <div class="enemy-stripe"></div>
+          <div class="enemy-body">
+            <div class="enemy-header">
+              <div id="enemy-avatar" class="enemy-avatar"></div>
+              <div class="enemy-info">
+                <span id="enemy-name" class="enemy-name"></span>
+                <span id="enemy-faction" class="enemy-faction"></span>
+              </div>
+              <span id="enemy-elite-tag" class="enemy-elite-tag hidden">精英</span>
+            </div>
+            <div id="enemy-elite-hp-wrap" class="enemy-elite-hp-wrap hidden">
+              <span id="enemy-elite-hp-label" class="enemy-elite-hp-label">血量</span>
+              <div class="enemy-elite-hp-track"><div id="enemy-elite-hp-bar" class="enemy-elite-hp-bar"></div></div>
+              <span id="enemy-elite-hp-val" class="enemy-elite-hp-val">2</span>
+            </div>
+            <div id="combo-indicator" class="combo-indicator hidden"></div>
+            <blockquote id="enemy-content" class="enemy-content"></blockquote>
+            <div id="enemy-weakness" class="enemy-weakness"></div>
+          </div>
+        </div>
+
+        <!-- 选项区域 -->
+        <div id="options-container" class="options-container"></div>
+      </main>
+
+      <!-- 右边：道具竖列 + 折叠图鉴 -->
+      <aside class="side-col side-right">
+        <div class="side-title">道具</div>
+        <div id="item-panel" class="item-panel">
+          <div id="item-list" class="item-list"></div>
+          <button id="btn-shop" class="item-shop-btn">＋ 书店</button>
+        </div>
+        <button class="side-codex-toggle" id="side-codex-toggle">敌人图鉴 </button>
+        <div id="side-codex" class="side-codex hidden"></div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ═══ 游戏结束画面 ═══ -->
+  <div id="screen-gameover" class="screen hidden">
+    <div class="gameover-card">
+      <h2 id="gameover-title" class="gameover-title"></h2>
+      <p id="gameover-sub" class="gameover-sub"></p>
+      <div id="gameover-stats" class="gameover-stats"></div>
+      <div id="gameover-log" class="gameover-log"></div>
+      <button id="btn-scorecard" class="btn btn-secondary">生成战绩卡</button>
+      <button id="btn-restart" class="btn btn-primary">再来一局</button>
+    </div>
+  </div>
+
+  <!-- ═══ 结果弹窗 ═══ -->
+  <div id="overlay-result" class="overlay hidden">
+    <div class="overlay-card">
+      <h3 id="result-title" class="result-title"></h3>
+      <div id="result-detail" class="result-detail"></div>
+      <div id="result-stats" class="result-stats"></div>
+      <p id="combo-text" class="combo-text hidden"></p>
+      <button id="result-continue" class="btn btn-primary">继续</button>
+    </div>
+  </div>
+
+  <!-- ═══ 商店 ═══ -->
+  <div id="overlay-shop" class="overlay hidden">
+    <div class="overlay-card shop-card">
+      <h3 class="shop-title">革命书店</h3>
+      <p class="shop-sub">消耗 HP 或三属性，换取作战道具</p>
+      <div id="shop-resources" class="shop-resources"></div>
+      <div id="shop-list" class="shop-list"></div>
+      <button id="shop-close" class="btn btn-skip">离开书店</button>
+    </div>
+  </div>
+
+  <!-- ═══ 测试台 ═══ -->
+  <div id="overlay-debug" class="overlay hidden">
+    <div class="overlay-card debug-card">
+      <h3 class="debug-title">测试台</h3>
+      <p class="debug-sub">直接调属性跳题触发商店/精英，专测新设定</p>
+      <div class="debug-group">
+        <div class="debug-row"><span>理论信心</span><input type="range" min="0" max="20" id="dbg-confidence"><b id="dbg-confidence-val">8</b></div>
+        <div class="debug-row"><span>辩证力</span><input type="range" min="0" max="20" id="dbg-dialectic"><b id="dbg-dialectic-val">8</b></div>
+        <div class="debug-row"><span>阶级觉悟</span><input type="range" min="0" max="20" id="dbg-classstand"><b id="dbg-classstand-val">8</b></div>
+        <div class="debug-row"><span>HP</span><input type="range" min="1" max="10" id="dbg-hp"><b id="dbg-hp-val">10</b></div>
+      </div>
+      <div class="debug-actions">
+        <button id="dbg-jump-kill" class="btn btn-skip">跳到蝗旱杀招题</button>
+        <button id="dbg-open-shop" class="btn btn-skip">打开书店</button>
+        <button id="dbg-elite" class="btn btn-skip">触发精英怪</button>
+        <button id="dbg-give-item" class="btn btn-skip">发一个道具</button>
+      </div>
+      <button id="dbg-close" class="btn btn-skip">关闭</button>
+    </div>
+  </div>
+
+  <!-- ═══ 图鉴 ═══ -->
+  <div id="overlay-codex" class="overlay hidden">
+    <div class="overlay-card codex-card codex-pvz">
+      <button id="codex-close" class="overlay-close" title="关闭">×</button>
+      <h3 class="codex-title">敌人图鉴</h3>
+      <div class="codex-layout">
+        <div id="codex-grid" class="codex-grid"></div>
+        <div id="codex-detail" class="codex-detail"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 事件 ═══ -->
+  <div id="overlay-event" class="overlay hidden">
+    <div class="overlay-card">
+      <span class="event-tag">事件</span>
+      <h3 id="event-title" class="event-title"></h3>
+      <p id="event-desc" class="event-desc"></p>
+      <div id="event-options" class="event-options"></div>
+    </div>
+  </div>
+
+  <!-- ═══ 事件图鉴 ═══ -->
+  <div id="overlay-event-codex" class="overlay hidden">
+    <div class="overlay-card codex-card codex-pvz">
+      <button id="event-codex-close" class="overlay-close" title="关闭">×</button>
+      <h3 class="codex-title">事件图鉴</h3>
+      <div class="codex-layout">
+        <div id="event-codex-grid" class="codex-grid"></div>
+        <div id="event-codex-detail" class="codex-detail"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 自制题 ═══ -->
+  <div id="overlay-custom" class="overlay hidden">
+    <div class="overlay-card">
+      <h3 class="custom-title">自制题（DLC）</h3>
+      <p class="custom-sub">提交你的题目，进入简答题题库供大家作答</p>
+      <div class="custom-group">
+        <label class="custom-label">敌人</label>
+        <select id="custom-enemy" class="custom-select"></select>
+      </div>
+      <div class="custom-group">
+        <label class="custom-label">敌人言论（题目）</label>
+        <textarea id="custom-content" class="custom-textarea" rows="3" placeholder="写一句该敌人会说的话"></textarea>
+      </div>
+      <div class="custom-group">
+        <label class="custom-label">最佳论证方式（参考答案）</label>
+        <select id="custom-weakness" class="custom-select">
+          <option value="理性辩证">理性辩证</option>
+          <option value="归谬反诘">归谬反诘</option>
+          <option value="感性批判">感性批判</option>
+        </select>
+      </div>
+      <button id="custom-submit" class="btn btn-primary">提交</button>
+      <button id="custom-close" class="btn btn-skip">取消</button>
+    </div>
+  </div>
+
+  <!-- ═══ DLC · 简答题模式（独立模式，与主游戏分离）═══ -->
+  <div id="screen-dlc" class="screen hidden">
+    <div class="dlc-card">
+      <div class="dlc-header">
+        <h3 class="dlc-title">DLC · 简答题模式</h3>
+        <p class="dlc-desc">不选选项，用自己的话写答案，AI 裁判评分<br>测试阶段请填写 DeepSeek API Key</p>
+      </div>
+
+      <div class="dlc-config">
+        <label class="dlc-label">API Key</label>
+        <input id="dlc-apikey" type="password" class="dlc-input" placeholder="sk-...">
+      </div>
+
+      <div id="dlc-question-display" class="dlc-question hidden">
+        <div class="dlc-enemy-info">
+          <span id="dlc-enemy-name"></span>
+          <span id="dlc-enemy-faction"></span>
+        </div>
+        <blockquote id="dlc-enemy-content" class="dlc-content"></blockquote>
+
+        <textarea id="dlc-answer" class="dlc-textarea" rows="5" placeholder="在此输入你的回答..."></textarea>
+
+        <div class="dlc-actions">
+          <button id="dlc-submit" class="btn btn-primary">提交裁判</button>
+          <button id="dlc-skip" class="btn btn-skip">换一题</button>
+        </div>
+
+        <div id="dlc-result" class="dlc-result hidden">
+          <div class="dlc-result-header">
+            <span id="dlc-result-type"></span>
+            <span id="dlc-result-stars"></span>
+          </div>
+          <p id="dlc-result-brief"></p>
+        </div>
+      </div>
+
+      <button id="dlc-back" class="btn btn-back">返回主游戏</button>
+      <button id="btn-custom-question" class="btn btn-back">自制题</button>
+      <p id="dlc-status" class="dlc-status"></p>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>青年马列毛主义驿站 | Qmlm Reader</p>
+    <p class="footer-note">学习他 · 成为他 · 然后超越他</p>
+  </div>
+</footer>
+
+<script src="../../js/qingma/data.js?v=3"></script>
+<script src="../../js/qingma/engine.js?v=3"></script>
+<script src="../../js/qingma/ui.js?v=3"></script>
+<script src="../../js/qingma/main.js"></script>
+<script src="../../js/site-data.js"></script>
+    <script src="../../js/main.js"></script>
+<script src="../../js/darkmode.js"></script>
+<script src="../../js/cursor.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+/* QmlmReader 语义主题映射
+ * 组件优先使用 --app-*，由本文件统一切换明暗主题。
+ */
+:root {
+  --app-bg: var(--paper-page);
+  --app-section: var(--paper-section);
+  --app-surface: var(--paper-card);
+  --app-surface-strong: var(--paper-card-strong);
+  --app-surface-muted: var(--paper-muted);
+  --app-border: var(--paper-border);
+
+  --app-text: var(--gray-800);
+  --app-text-strong: var(--gray-950);
+  --app-text-soft: var(--gray-700);
+  --app-text-muted: var(--gray-600);
+  --app-text-subtle: var(--gray-500);
+  --app-text-disabled: var(--gray-400);
+
+  --app-primary: var(--color-brand-red);
+  --app-primary-dark: var(--color-brand-red-dark);
+  --app-accent: var(--color-brand-gold);
+  --app-shadow: 0 2px 8px var(--shadow-color);
+  --app-shadow-hover: 0 4px 16px var(--shadow-color-strong);
+}
+
+body.dark-mode {
+  --app-bg: var(--gray-dark-bg);
+  --app-section: var(--gray-dark-section);
+  --app-surface: var(--gray-dark-surface);
+  --app-surface-strong: var(--gray-dark-raised);
+  --app-surface-muted: var(--gray-dark-raised);
+  --app-border: var(--gray-dark-border);
+
+  --app-text: var(--gray-dark-text);
+  --app-text-strong: #f0f0f0;
+  --app-text-soft: #cccccc;
+  --app-text-muted: var(--gray-dark-muted);
+  --app-text-subtle: #888888;
+  --app-text-disabled: #777777;
+
+  --app-shadow: 0 2px 8px rgba(0, 0, 0, 0.30);
+  --app-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.40);
+}

@@ -1,0 +1,74 @@
+/* ============================================================
+   风格一：手作油印（手抄报 / 油印小报风）
+   暖米白纸 · 朱红标题 · 墨黑正文 · 群青批注 · 虚线裁切框
+   作用域：body[data-style="mimeo"]
+   ============================================================ */
+
+body[data-style="mimeo"] {
+  --paper: #f7f2e7;
+  --ink: #2b2b2b;
+  --accent: #d4380d;
+  --accent2: #2f54a0;
+  --line: #b8a48a;
+  --muted: #7a6f5f;
+}
+
+body[data-style="mimeo"] .xc-page::after {
+  content: '';
+  position: absolute;
+  inset: 5mm;
+  border: 2px dashed var(--line);
+  pointer-events: none;
+}
+
+body[data-style="mimeo"] .xc-body-content {
+  font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+}
+
+body[data-style="mimeo"] .xc-cover-title {
+  color: var(--accent);
+}
+
+body[data-style="mimeo"] .xc-toc-heading {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 10px;
+}
+
+body[data-style="mimeo"] .xc-body-content h1,
+body[data-style="mimeo"] .xc-body-content h2,
+body[data-style="mimeo"] .xc-body-content h3 {
+  font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: 2px;
+}
+
+body[data-style="mimeo"] .xc-body-content h2 {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 6px;
+}
+
+body[data-style="mimeo"] .xc-body-content blockquote {
+  border-left: 3px solid var(--accent2);
+  color: var(--muted);
+  font-family: "KaiTi", "STKaiti", "楷体", serif;
+}
+
+body[data-style="mimeo"] .xc-body-content hr {
+  border-top: 1px dashed var(--line);
+}
+
+body[data-style="mimeo"] .xc-back-ornament {
+  color: var(--accent);
+}
+
+/* 暗色 */
+body.dark-mode[data-style="mimeo"] {
+  --paper: #242019;
+  --ink: #ece4d4;
+  --accent: #e0523d;
+  --accent2: #6b8ac4;
+  --line: #6b5f4a;
+  --muted: #a89c86;
+}

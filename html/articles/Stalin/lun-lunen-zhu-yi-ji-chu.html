@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论列宁主义基础 - 青年马列毛主义驿站</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../../../css/articles-detail.css">
+    <link rel="stylesheet" href="../../../css/category-theme.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-category="party" data-article-json="../../../data/articles-json/Stalin/★★★★★/lun-lunen-zhu-yi-ji-chu.json" data-study-json="../../../data/study-json/Stalin/lun-lunen-zhu-yi-ji-chu.json">
+    <div id="nav-placeholder"></div>
+
+    <div class="back-nav u-display-none">
+        <div class="container u-max-900 u-mx-auto u-px-20">
+            <a href="../../articles/articles.html" class="back-link"></a>
+        </div>
+    </div>
+
+    <main class="article-detail">
+        <header class="article-header">
+            <div class="importance-badge">核心必读</div>
+            <h1>论列宁主义基础</h1>
+            <div class="article-subtitle">在斯维尔德洛夫大学的讲演</div>
+            <div class="article-meta">
+                <span class="author">斯大林</span>
+                <span class="date">1924年4月</span>
+                <span class="category">党的建设 · 列宁主义</span>
+                <span class="word-count">约55,000字</span>
+                <span class="length-tag">长篇</span>
+            </div>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('original', this)">原文</button>
+            <button class="tab-btn" onclick="switchTab('reading', this)">读法提示</button>
+            <button class="tab-btn" onclick="switchTab('difficulty', this)">难点解析</button>
+            <button class="tab-btn" onclick="switchTab('dialogue', this)">对话空间</button>
+            <button class="tab-btn" onclick="switchTab('action', this)">行动实验</button>
+            <button class="tab-btn" onclick="switchTab('visual', this)">一目了然</button>
+            <button class="tab-btn" onclick="switchTab('puzzle', this)">理论拼图</button>
+        </div>
+
+        <div class="tab-content active" id="original">
+            <div class="original-text">
+                <div class="text-intro"><p><strong>原文：</strong>正在加载文章数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="reading">
+            <div class="reading-guide">
+                <h2 class="tab-heading">如何阅读本文</h2>
+                <div class="guide-block"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="difficulty">
+            <div class="difficulty-section">
+                <h2 class="tab-heading">容易读错的地方</h2>
+                <div class="diff-item"><div class="correct">正在加载精读数据…</div></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="dialogue">
+            <div class="dialogue-section">
+                <h2 class="tab-heading">这篇文章在回应谁？</h2>
+                <div class="dialogue-block"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="action">
+            <div class="action-section">
+                <h2 class="tab-heading">读完之后可以做什么</h2>
+                <div class="action-item"><p>正在加载精读数据…</p></div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="visual">
+            <div class="visualization-section">
+                <h2 class="tab-heading">一目了然</h2>
+
+                <div class="chart-block">
+                    <h3>文章特征雷达图</h3>
+                    <p class="chart-desc">六个维度衡量本文的“性格”</p>
+                    <div class="chart-container u-max-500 u-mx-auto">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>论证节奏曲线</h3>
+                    <p class="chart-desc">展示文章各章节的论证强度</p>
+                    <div class="chart-container u-max-700 u-mx-auto">
+                        <canvas id="argumentCurve"></canvas>
+                    </div>
+                    <div class="structure-analysis">
+                        <h4>结构分析（对应曲线各波段）</h4>
+                        <div class="analysis-item">
+                            <span class="analysis-label">定义与历史（6/10）</span>
+                            <p>列宁主义的科学定义，回顾其历史背景与形成过程，为后续展开奠定基础。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">思想来源（8/10）</span>
+                            <p>阐述列宁主义的理论来源——马克思主义三个来源与三个组成部分。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">列宁主义特征（7/10）</span>
+                            <p>系统归纳列宁主义的时代特征，理论建构逐步推进。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">理论核心（9/10）</span>
+                            <p>深入阐释列宁主义与马克思主义的关系，这是全文的理论制高点。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label highlight">战略与策略（10/10）</span>
+                            <p>将理论转化为行动指南，战略与策略的统一是列宁主义的实践精髓。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">组织问题（8/10）</span>
+                            <p>论述新型无产阶级政党的组织原则，民主集中制是列宁主义组织理论的核心。</p>
+                        </div>
+                        <div class="analysis-item">
+                            <span class="analysis-label">结论（6/10）</span>
+                            <p>总结全文，强调学习列宁主义的现实意义。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>九章内容权重分布</h3>
+                    <p class="chart-desc">论列宁主义基础各章节在全书中的理论权重与篇幅占比</p>
+                    <div class="chart-container u-max-650 u-mx-auto">
+                        <canvas id="chapterWeightChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-block">
+                    <h3>帝国主义三大矛盾对比</h3>
+                    <p class="chart-desc">列宁主义所揭示的帝国主义时代三大核心矛盾的强度与革命潜力对比</p>
+                    <div class="chart-container u-max-550 u-mx-auto">
+                        <canvas id="contradictionsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="puzzle">
+            <div class="puzzle-section">
+                <h2 class="tab-heading">理论拼图</h2>
+                <div class="puzzle-intro">
+                    <p>本文系统阐述列宁主义的基本问题，是理解其国家观、组织观与革命策略的重要入口。</p>
+                </div>
+                <div class="puzzle-position">
+                    <h3>本文在理论体系中的坐标</h3>
+                    <div class="theory-tree">
+                        <div class="theory-node root">马克思主义</div>
+                        <div class="theory-branches">
+                            <div class="theory-branch">
+                                <div class="theory-node branch">党和组织</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">先锋队</div>
+                                    <div class="theory-node related">民主集中制</div>
+                                    <div class="theory-node current">列宁主义基础</div>
+                                </div>
+                            </div>
+                            <div class="theory-branch">
+                                <div class="theory-node branch">革命策略</div>
+                                <div class="theory-sub">
+                                    <div class="theory-node related">帝国主义时代</div>
+                                    <div class="theory-node related">无产阶级专政</div>
+                                    <div class="theory-node related">世界革命</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="puzzle-timeline">
+                    <h3>在思想发展时间轴上的位置</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">1902</div>
+                            <div class="timeline-label">怎么办？</div>
+                        </div>
+                        <div class="timeline-item active">
+                            <div class="timeline-dot-active"></div>
+                            <div class="timeline-year">1924</div>
+                            <div class="timeline-label">论列宁主义基础</div>
+                            <div class="timeline-here">本文</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-year">1924</div>
+                            <div class="timeline-label">悼列宁</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="puzzle-links">
+                    <h3>文章联结网络</h3>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../../js/category-theme.js"></script>
+    <script src="../../../js/article-common.js"></script>
+    <script src="../../../js/article-json.js"></script>
+    <script src="../../../js/article-study.js"></script>
+    <script>
+        var ARTICLE_CHARTS = [
+            {
+                id: 'radarChart',
+                config: {
+                    type: 'radar',
+                    data: {
+                        labels: ['理论深度', '现实针对性', '时间跨度', '行动指导性', '情感强度', '结构复杂度'],
+                        datasets: [{
+                            label: '论列宁主义基础',
+                            data: [9, 8, 7, 8, 5, 8],
+                            borderColor: '#38a169',
+                            backgroundColor: 'rgba(56,161,105,0.12)',
+                            pointBackgroundColor: '#38a169'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
+                        plugins: { legend: { display: false } }
+                    }
+                }
+            },
+            {
+                id: 'argumentCurve',
+                config: {
+                    type: 'line',
+                    data: {
+                        labels: ['定义与历史', '思想来源', '特征归纳', '理论核心', '战略策略', '组织问题', '结论'],
+                        datasets: [{
+                            label: '论证强度',
+                            data: [6, 8, 7, 9, 10, 8, 6],
+                            borderColor: '#3d6b4f',
+                            backgroundColor: 'rgba(61,107,79,0.08)',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 7,
+                            pointHoverRadius: 9,
+                            borderWidth: 2.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10 } }
+                    }
+                }
+            },
+            {
+                id: 'chapterWeightChart',
+                config: {
+                    type: 'bar',
+                    data: {
+                        labels: ['历史根源', '方法', '理论', '无产阶级专政', '农民问题', '民族问题', '战略策略', '党', '工作作风'],
+                        datasets: [{
+                            label: '理论权重',
+                            data: [6, 9, 9, 10, 7, 6, 9, 8, 5],
+                            backgroundColor: [
+                                'rgba(61,107,79,0.4)', 'rgba(61,107,79,0.6)', 'rgba(61,107,79,0.65)',
+                                'rgba(180,40,40,0.7)', 'rgba(61,107,79,0.5)', 'rgba(61,107,79,0.45)',
+                                'rgba(61,107,79,0.65)', 'rgba(61,107,79,0.55)', 'rgba(61,107,79,0.35)'
+                            ],
+                            borderColor: '#3d6b4f',
+                            borderWidth: 1.5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { min: 0, max: 10, title: { display: true, text: '理论权重 (0-10)' } } }
+                    }
+                }
+            },
+            {
+                id: 'contradictionsChart',
+                config: {
+                    type: 'radar',
+                    data: {
+                        labels: ['矛盾尖锐度', '历史影响力', '革命催化力', '波及范围', '不可调和性'],
+                        datasets: [
+                            { label: '劳动 vs 资本', data: [10, 9, 10, 8, 10], borderColor: '#c53030', backgroundColor: 'rgba(197,48,48,0.1)', pointBackgroundColor: '#c53030' },
+                            { label: '列强之间', data: [8, 7, 5, 9, 10], borderColor: '#d69e2e', backgroundColor: 'rgba(214,158,46,0.1)', pointBackgroundColor: '#d69e2e' },
+                            { label: '文明 vs 殖民地', data: [7, 8, 8, 10, 7], borderColor: '#3182ce', backgroundColor: 'rgba(49,130,206,0.1)', pointBackgroundColor: '#3182ce' }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: { r: { min: 0, max: 10, ticks: { stepSize: 2 } } },
+                        plugins: { legend: { position: 'bottom' } }
+                    }
+                }
+            }
+        ];
+    </script>
+    <script src="../../../js/site-data.js"></script>
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/darkmode.js"></script>
+    <script src="../../../js/cursor.js"></script>
+</body>
+</html>
