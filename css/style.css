@@ -2552,3 +2552,112 @@ body.dark-mode textarea:focus {
 body.dark-mode ::selection {
     background: rgba(255, 107, 107, 0.3);
 }
+
+/* ==================== 导航收起 ⇄ 悬浮球 ==================== */
+/* 覆盖暗色区的 background 过渡，三者一起平滑 */
+.site-header {
+    transition: transform 0.35s ease, margin-bottom 0.35s ease, background 0.35s ease;
+    will-change: transform;
+}
+
+/* 收起按钮：桌面与移动端都显示，位于汉堡按钮旁 */
+.nav-collapse-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+.nav-collapse-btn:hover {
+    background: rgba(255, 255, 255, 0.24);
+    transform: translateY(-1px);
+}
+.nav-collapse-btn:active {
+    transform: translateY(0);
+}
+
+/* 收起态：header 上移离屏；负 margin 由 JS 按实际高度写入以收回占位 */
+body.nav-collapsed .site-header {
+    transform: translateY(-110%);
+    pointer-events: none;
+    box-shadow: none;
+}
+
+/* 悬浮球 */
+.nav-ball {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.55);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+    color: #fff;
+    font-size: 1.4rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    z-index: 9500;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.nav-ball:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.nav-ball:active {
+    cursor: grabbing;
+}
+.nav-ball.dragging {
+    transition: none;
+    cursor: grabbing;
+    transform: scale(1.1);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+}
+.nav-ball:focus-visible {
+    outline: 3px solid var(--color-brand-gold, #ffd700);
+    outline-offset: 2px;
+}
+
+body.dark-mode .nav-collapse-btn {
+    background: rgba(255, 255, 255, 0.14);
+}
+body.dark-mode .nav-ball {
+    border-color: rgba(255, 107, 107, 0.55);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+    .nav-collapse-btn {
+        width: 30px;
+        height: 30px;
+    }
+    .nav-ball {
+        width: 40px;
+        height: 40px;
+        font-size: 1.15rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-header,
+    .nav-collapse-btn,
+    .nav-ball {
+        transition: none;
+    }
+}

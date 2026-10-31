@@ -5,6 +5,9 @@
     var LEGACY_PREFERENCES_KEY = 'qmlm:preferences:v1';
     var LEGACY_DARK_MODE_KEY = 'darkMode';
 
+    // ui 域中需要跨会话持久化的键白名单；其余 ui 键（navOpen、collectionModal 等）仍为运行态
+    var UI_PERSIST_KEYS = ['navCollapsed', 'navBallPos'];
+
     function clone(value) {
         if (value == null || typeof value !== 'object') return value;
         return JSON.parse(JSON.stringify(value));
@@ -210,10 +213,20 @@
         }
     }
 
+    function persistentUiSnapshot() {
+        var out = {};
+        if (!isObject(state.ui)) return out;
+        UI_PERSIST_KEYS.forEach(function (key) {
+            if (key in state.ui) out[key] = clone(state.ui[key]);
+        });
+        return out;
+    }
+
     function persistentSnapshot() {
         return {
             preferences: clone(state.preferences),
-            theme: clone(state.theme)
+            theme: clone(state.theme),
+            ui: persistentUiSnapshot()
         };
     }
 

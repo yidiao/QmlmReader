@@ -21,6 +21,9 @@
         '</form>' +
         '</div>' +
         '<button class="hamburger-btn" id="hamburgerBtn" aria-label="打开菜单"><span></span><span></span><span></span></button>' +
+        '<button class="nav-collapse-btn" id="navCollapseBtn" aria-label="收起导航" title="收起导航为悬浮球">' +
+        '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M4 14 L12 6 L20 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '</button>' +
         '<nav class="main-nav" id="mainNav">' +
         '<button class="nav-close-btn" aria-label="关闭菜单">✕</button>' +
         '<div class="nav-links">' +
@@ -37,11 +40,24 @@
         '<a href="' + p + 'about/about.html">关于</a>' +
         '</div>' +
         '<button class="dark-mode-toggle" onclick="toggleDarkMode()" title="切换黑夜模式">🌙</button>' +
-        '</nav></div></header>';
+        '</nav></div></header>' +
+        '<button class="nav-ball" id="navBall" aria-label="展开导航" title="展开导航" hidden><span aria-hidden="true">☭</span></button>';
 
     var ph = document.getElementById('nav-placeholder');
     if (ph) {
         ph.outerHTML = nav;
+
+        // ---- 导航收起态：state-center 为动态加载，先同步还原，避免刷新时导航闪现 ----
+        (function restoreCollapsedNavEarly() {
+            try {
+                var rawState = localStorage.getItem('qmlm:state:v1');
+                if (!rawState) return;
+                var parsedState = JSON.parse(rawState);
+                if (parsedState && parsedState.ui && parsedState.ui.navCollapsed) {
+                    document.body.classList.add('nav-collapsed');
+                }
+            } catch (err) { /* localStorage 不可用时忽略 */ }
+        })();
 
         function loadPreferencesScript() {
             if (document.querySelector('script[src$="/js/preferences.js"]')) return;
@@ -472,6 +488,182 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth >= 769) {
             setMenuOpen(false, true);
         }
+    });
+});
+
+// ==================== 导航收起 ⇄ 悬浮球 ====================
+// 收起按钮在 header 内；收起后 header 上移让出占位，悬浮球成为唯一入口。
+// 状态与球位置走 QMLMState.ui 持久化白名单（state-center.js UI_PERSIST_KEYS）。
+document.addEventListener('DOMContentLoaded', function() {
+    var header = document.querySelector('.site-header');
+    var collapseBtn = document.getElementById('navCollapseBtn');
+    var ball = document.getElementById('navBall');
+    if (!header || !collapseBtn || !ball) return;
+
+    var DRAG_THRESHOLD = 6;
+    var collapsed = document.body.classList.contains('nav-collapsed');
+    var suppressNextClick = false;
+
+    function isCollapsed() {
+        return document.body.classList.contains('nav-collapsed');
+    }
+
+    function syncHeaderOffset() {
+        // sticky header 收起后要收回自身占位，内容才会上移补位
+        if (isCollapsed()) {
+            header.style.marginBottom = -header.offsetHeight + 'px';
+        } else {
+            header.style.marginBottom = '';
+        }
+    }
+
+    function applyBallVisibility() {
+        ball.hidden = !isCollapsed();
+    }
+
+    function clampBallPosition(pos) {
+        var size = ball.offsetWidth || 48;
+        var maxX = Math.max(0, window.innerWidth - size);
+        var maxY = Math.max(0, window.innerHeight - size);
+        return {
+            x: Math.min(Math.max(Math.round(pos.x), 0), maxX),
+            y: Math.min(Math.max(Math.round(pos.y), 0), maxY)
+        };
+    }
+
+    function storedBallPosition() {
+        if (window.QMLMState && typeof window.QMLMState.getDomain === 'function') {
+            var ui = window.QMLMState.getDomain('ui');
+            if (ui && ui.navBallPos && typeof ui.navBallPos.x === 'number') return ui.navBallPos;
+        }
+        try {
+            var rawState = localStorage.getItem('qmlm:state:v1');
+            var parsedState = rawState ? JSON.parse(rawState) : null;
+            if (parsedState && parsedState.ui && parsedState.ui.navBallPos &&
+                typeof parsedState.ui.navBallPos.x === 'number') {
+                return parsedState.ui.navBallPos;
+            }
+        } catch (err) { /* 忽略 */ }
+        return null;
+    }
+
+    function restoreBallPosition() {
+        var pos = clampBallPosition(storedBallPosition() || {
+            x: window.innerWidth - 76,
+            y: 18
+        });
+        ball.style.left = pos.x + 'px';
+        ball.style.top = pos.y + 'px';
+        ball.style.right = 'auto';
+        ball.style.bottom = 'auto';
+    }
+
+    function publishState(patch) {
+        if (window.QMLMState && typeof window.QMLMState.dispatch === 'function') {
+            window.QMLMState.dispatch('ui/patch', patch, 'nav-collapse');
+        }
+    }
+
+    function applyCollapsed(value, publish) {
+        collapsed = !!value;
+        document.body.classList.toggle('nav-collapsed', collapsed);
+        syncHeaderOffset();
+        applyBallVisibility();
+        if (collapsed) restoreBallPosition();
+        if (publish) publishState({ navCollapsed: collapsed });
+    }
+
+    collapseBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        applyCollapsed(true, true);
+    });
+
+    // ---- 悬浮球：拖拽移动 + 轻点展开 ----
+    var pointerActive = false;
+    var dragMoved = false;
+    var startPointer = { x: 0, y: 0 };
+    var startPos = { x: 0, y: 0 };
+
+    ball.addEventListener('pointerdown', function(e) {
+        if (e.button !== undefined && e.button !== 0) return;
+        pointerActive = true;
+        dragMoved = false;
+        startPointer = { x: e.clientX, y: e.clientY };
+        var rect = ball.getBoundingClientRect();
+        startPos = { x: rect.left, y: rect.top };
+        ball.classList.add('dragging');
+        try { ball.setPointerCapture(e.pointerId); } catch (err) { /* 忽略 */ }
+        e.preventDefault();
+    });
+
+    ball.addEventListener('pointermove', function(e) {
+        if (!pointerActive) return;
+        var dx = e.clientX - startPointer.x;
+        var dy = e.clientY - startPointer.y;
+        if (!dragMoved && Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
+        dragMoved = true;
+        var pos = clampBallPosition({ x: startPos.x + dx, y: startPos.y + dy });
+        ball.style.left = pos.x + 'px';
+        ball.style.top = pos.y + 'px';
+    });
+
+    function endPointer() {
+        if (!pointerActive) return;
+        pointerActive = false;
+        ball.classList.remove('dragging');
+        if (dragMoved) {
+            suppressNextClick = true;
+            var rect = ball.getBoundingClientRect();
+            var pos = clampBallPosition({ x: rect.left, y: rect.top });
+            ball.style.left = pos.x + 'px';
+            ball.style.top = pos.y + 'px';
+            publishState({ navBallPos: pos });
+        } else {
+            applyCollapsed(false, true); // 轻点展开导航
+        }
+    }
+    ball.addEventListener('pointerup', endPointer);
+    ball.addEventListener('pointercancel', function() {
+        pointerActive = false;
+        ball.classList.remove('dragging');
+    });
+
+    // 键盘 Enter（click 且 e.detail === 0）也能展开；拖拽后的 click 被吞掉
+    ball.addEventListener('click', function(e) {
+        if (suppressNextClick) {
+            suppressNextClick = false;
+            e.preventDefault();
+            return;
+        }
+        if (e.detail === 0) applyCollapsed(false, true);
+    });
+
+    // ---- 状态中心订阅（跨页/跨标签同步）----
+    var collapseStateBound = false;
+    function bindCollapseState() {
+        if (collapseStateBound || !window.QMLMState || typeof window.QMLMState.subscribe !== 'function') return;
+        collapseStateBound = true;
+        window.QMLMState.subscribe('ui.navCollapsed', function(value) {
+            if (typeof value === 'boolean' && value !== isCollapsed()) applyCollapsed(value, false);
+        });
+        window.QMLMState.subscribe('ui.navBallPos', function(pos) {
+            if (pos && typeof pos.x === 'number' && typeof pos.y === 'number' && isCollapsed()) {
+                restoreBallPosition();
+            }
+        });
+    }
+    bindCollapseState();
+    window.addEventListener('qmlm:state-ready', bindCollapseState);
+
+    // ---- 初始化与持续同步 ----
+    applyBallVisibility();
+    if (collapsed) restoreBallPosition();
+    syncHeaderOffset();
+    if (typeof ResizeObserver === 'function') {
+        new ResizeObserver(function() { syncHeaderOffset(); }).observe(header);
+    }
+    window.addEventListener('resize', function() {
+        if (isCollapsed()) restoreBallPosition();
     });
 });
 
