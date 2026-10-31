@@ -1,5 +1,5 @@
 // 母站接入层：实测 .site-header 高度写入 --masthead-h，
-// 供 css/mentor/stalin/stellar-masters.css 偏移星图顶部 UI 使用。
+// 供 css/masters/stalin/stellar-masters.css 偏移星图顶部 UI 使用。
 // 母站导航在窄屏/暗色切换下高度会变化，ResizeObserver 保证持续同步。
 (function () {
     var root = document.documentElement;
