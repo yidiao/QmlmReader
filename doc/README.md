@@ -119,7 +119,7 @@
   - `html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html`
 - 大页内联样式已下沉到 `css/<module>/`（导师页走 `masters-common.css` + `data-master` 变量、rectify 走 `rectify-common.css`、12 个 >10KB 页面原样外置）；剩余小页仍有个别内联 `<style>`，新页面不再新增内联样式。
 - `articles.html` 仍有较大的内嵌合集兜底数据；后续应继续收敛到 `window.SITE_DATA.collections` / `data/collections.json`。
-- 公共导航以 `js/main.js` 为唯一来源，页面仅保留 `#nav-placeholder`；不得再在页面中硬编码 `site-header`、菜单项或黑夜模式按钮。
+- 公共导航以 `js/main.js` 为唯一来源，页面仅保留 `#nav-placeholder`；不得再在页面中硬编码 `site-header`、菜单项或黑夜模式按钮。导航可经 header 右侧按钮收起为可拖拽悬浮球（状态存 `QMLMState.ui.navCollapsed`，位置存 `navBallPos`，全站记忆）。
 - 全站搜索由公共导航提供，`js/main.js` 会自动加载 `js/search.js`；搜索覆盖文章、文艺、正名、国际专栏及已加载的历史事件，结果链接按当前页面层级自动修正。
 
 ### 5. 硬规则

@@ -44,7 +44,7 @@ index.html
 | `index.html` | 根跳转到 `html/index.html` | 不承载业务页面 |
 | `html/index.html` | 真正首页 | 首页模块细节见 `pages/home/README.md` |
 | `css/style.css` | 全站基础视觉、导航、卡片、暗色模式通用规则 | 公共导航容器使用 `.site-header-inner`，不得被页面私有 `.container` 重定义污染 |
-| `js/main.js` | 导航注入、导航搜索交互、面包屑、合集导航、章节导航、卡片动画 | 公共导航唯一来源；页面只放 `#nav-placeholder`，不硬编码 `site-header`、菜单项或黑夜模式按钮 |
+| `js/main.js` | 导航注入、导航搜索交互、面包屑、合集导航、章节导航、卡片动画、导航收起 ⇄ 悬浮球（拖拽记忆位置） | 公共导航唯一来源；页面只放 `#nav-placeholder`，不硬编码 `site-header`、菜单项或黑夜模式按钮 |
 | `js/site-data.js` | 站点聚合数据 | 生成产物，不要手改 |
 | `js/state-center.js` | 轻量响应式状态中心 | 统一运行态读写、订阅、持久化；已接 `preferences`、`theme`，并提供 `reader`、`search`、`ui` 和通用 domain 内存态 |
 | `js/page-state-adapter.js` | 页面私有状态适配层 | 给内联脚本和页面私有 JS 提供 `QMLMPageState` 接口，先接入后迁移 |
@@ -119,7 +119,7 @@ python _tools/build_data.py --write
 | `reader` | 当前 Tab、章节、滚动位置、恢复提示、进度条；当前已接 `activeTab`、`chapterNavVisible`、`collapsedChapters`、`progress`、`restore` | 部分持久化 |
 | `theme` | 暗色模式 | 是，localStorage |
 | `search` | 查询词、筛选条件、结果统计 | 否或短期缓存 |
-| `ui` | 菜单、弹窗、折叠面板、导航显示状态；当前已接 `navOpen`、`collectionModal` | 通常否 |
+| `ui` | 菜单、弹窗、折叠面板、导航显示状态；当前已接 `navOpen`、`collectionModal`、`navCollapsed`、`navBallPos` | 白名单键 `navCollapsed`、`navBallPos` 持久化，其余运行态 |
 | `game` | 青马小游戏运行态 | 模块内维护，暂不强求全站共享 |
 
 原则：**正文、索引、生成产物不进入状态中心**；状态中心只管理“用户操作后会变化的运行态”。
@@ -195,7 +195,7 @@ window.QMLMState = {
 - 新增 `js/state-center.js`，暴露 `window.QMLMState`。
 - `QMLMState` 当前管理 `preferences`、`theme`、`reader`、`search`、`ui` 五个内置域，并支持通用 domain API；其中 `preferences` 与 `theme` 已接入持久化。
 - 新状态键为 `qmlm:state:v1`；同时继续写入旧键 `qmlm:preferences:v1` 与 `darkMode`，保证旧脚本和已保存数据可兼容。
-- `reader`、`search`、`ui` 当前按运行态处理，不写入本地存储，避免滚动和临时页面状态高频落库；全站移动菜单已发布到 `QMLMState.ui.navOpen`，合集弹窗已发布到 `QMLMState.ui.collectionModal`。
+- `reader`、`search`、`ui` 默认按运行态处理，不写入本地存储，避免滚动和临时页面状态高频落库；`ui` 域另设持久化白名单 `UI_PERSIST_KEYS`（`navCollapsed`、`navBallPos`），随 `qmlm:state:v1` 落库。全站移动菜单已发布到 `QMLMState.ui.navOpen`，合集弹窗已发布到 `QMLMState.ui.collectionModal`。
 - `js/main.js` 会优先加载 `state-center.js`，再加载 `page-state-adapter.js` 和 `preferences.js`。
 - `html/preferences/preferences.html` 已显式加载 `state-center.js` 和 `page-state-adapter.js`。
 - `js/preferences.js` 的 `readState()` / `writeState()` 已优先走 `QMLMState.preferences`，偏好页会订阅 `preferences` 域并自动刷新；阅读进度快照会发布到 `QMLMState.reader.progress`。
