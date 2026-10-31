@@ -324,6 +324,7 @@
     function setUi(nextUi, source) {
         var previous = clone(state);
         state.ui = isObject(nextUi) ? clone(nextUi) : {};
+        persist(); // ui 持久化白名单键（navCollapsed/navBallPos）随变更落库
         emitChange('ui', source || 'ui', previous);
         return clone(state.ui);
     }
