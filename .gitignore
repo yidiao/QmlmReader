@@ -41,3 +41,6 @@ _bak-*/
 # Large binary files (too big for GitHub, serve via external storage)
 # 只忽略苏联海报zip，中文海报zip需要上传
 downloads/posters/soviet-*.zip
+
+# ZCode 工具本地状态
+.zcode/
