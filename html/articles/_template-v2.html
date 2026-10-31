@@ -1,11 +1,17 @@
 <!DOCTYPE html>
+<!--
+  文章详情页模板 v2（本文件位于 html/articles/，所有资源路径均为 ../../ 两层）
+  说明：新式文章页（正文走 data/articles-json/{导师}/{星级}/{slug}.json、精读走 data/study-json/）
+  需要额外引入 ../../js/article-json.js 与 ../../js/article-study.js，
+  并在 <body> 上加 data-article-json / data-study-json 属性（参考 Marx/gongchan-dan-yuan.html 的写法）。
+-->
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文章标题 - 青年马列毛主义驿站</title>
-    <link rel="stylesheet" href="../../../css/style.css">
-    <link rel="stylesheet" href="../../../css/articles-detail.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/articles-detail.css">
     <link rel="stylesheet" href="../../css/category-theme.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -22,7 +28,7 @@
     <!-- ========== 合集上下文导航（自动注入）========== -->
     <div class="back-nav" style="display:none;">
         <div class="container" style="max-width:900px;margin:0 auto;padding:0 20px;">
-            <a href="../../articles/articles.html" class="back-link"></a>
+            <a href="articles.html" class="back-link"></a>
         </div>
     </div>
 
@@ -274,9 +280,9 @@
     </div>
 
     <!-- ========== JS 脚本 ========== -->
-    <script src="../../../js/download-export.js"></script>
+    <script src="../../js/download-export.js"></script>
     <script src="../../js/category-theme.js"></script>
-    <script src="../../../js/article-common.js"></script>
+    <script src="../../js/article-common.js"></script>
     <script>
         // ===== 本文图表配置 =====
         // 每篇文章在这里定义自己的 Chart.js 配置
@@ -334,8 +340,8 @@
         var DOWNLOAD_LINKS = window.buildStandardDownloadLinks ? window.buildStandardDownloadLinks() : [];
     </script>
     <script src="../../js/site-data.js"></script>
-    <script src="../../../js/main.js"></script>
-    <script src="../../../js/darkmode.js"></script>
-    <script src="../../../js/cursor.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/darkmode.js"></script>
+    <script src="../../js/cursor.js"></script>
 </body>
 </html>

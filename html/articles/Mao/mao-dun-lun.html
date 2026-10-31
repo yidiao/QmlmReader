@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../../../css/articles-detail.css">
     <link rel="stylesheet" href="../../../css/category-theme.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* ===== 渐变头部 - 哲学基础类 ===== */
         .article-detail { max-width: 900px; margin: 80px auto 60px; padding: 0 20px; }
@@ -442,22 +441,8 @@
                 <h2>一目了然</h2>
 
                 <div class="chart-block">
-                    <h3>文章特征雷达图</h3>
-                    <p class="chart-desc">六个维度衡量矛盾论的文章"性格"</p>
-                    <div class="chart-container" style="max-width:500px;margin:0 auto;">
-                        <canvas id="radarChart"></canvas>
-                    </div>
-                    <div class="chart-legend">
-                        <span style="color:#38a169">矛盾论</span>
-                    </div>
-                </div>
-
-                <div class="chart-block">
                     <h3>论证节奏曲线</h3>
                     <p class="chart-desc">展示文章各章节的论证强度——有高有低，清晰标注核心推进段落与过渡铺垫段落</p>
-                    <div class="chart-container" style="max-width:700px;margin:0 auto;">
-                        <canvas id="argumentCurve"></canvas>
-                    </div>
                     <div class="structure-analysis">
                         <h4> 结构分析（对应曲线各波段）</h4>
                         <div class="analysis-item">
@@ -488,22 +473,6 @@
                             <span class="analysis-label">结论（4/10）</span>
                             <p>最低点，但这是"总结式低调"毛泽东把全文要点压缩成几段话，没有新的论证推进强度最低，但意境最宽——他把矛盾法则从"一篇文章"变成"观察任何事物的方式"像音乐结尾的尾音，不是因为没话说了，而是说完了</p>
                         </div>
-                    </div>
-                </div>
-
-                <div class="chart-block">
-                    <h3>矛盾分析框架图</h3>
-                    <p class="chart-desc">矛盾论的核心分析工具——从普遍到特殊，从一般到主次</p>
-                    <div class="chart-container" style="max-width:600px;margin:0 auto;">
-                        <canvas id="structureChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="chart-block">
-                    <h3>对抗性 vs 非对抗性矛盾</h3>
-                    <p class="chart-desc">两类矛盾在各维度上的差异——决定了不同的应对策略</p>
-                    <div class="chart-container" style="max-width:600px;margin:0 auto;">
-                        <canvas id="antagonismChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -589,10 +558,8 @@
 
     </main>
 
-    <script src="../../../js/download-export.js"></script>
     <script src="../../../js/category-theme.js"></script>
     <script src="../../../js/article-common.js"></script>
-    <script>var DOWNLOAD_LINKS = window.buildStandardDownloadLinks ? window.buildStandardDownloadLinks() : [];</script>
     <script src="../../../js/site-data.js"></script>
     <script src="../../../js/main.js"></script>
     <script src="../../../js/darkmode.js"></script>
