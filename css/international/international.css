@@ -1,0 +1,508 @@
+/* html/international/international.html 页面样式（由页内 <style> 原样下沉，内容未修改）*/
+
+/* ===== 国际共运 — 图志风格，深海蓝 + 红金 ===== */
+        body { background: #f5f0e8; }
+        body.dark-mode { background: #121212; }
+
+        .page-header {
+            position: relative; background: linear-gradient(170deg, #0a1a2a 0%, #0d2035 40%, #0a1520 100%);
+            margin: 28px auto 0; padding: 48px 44px; overflow: hidden;
+            max-width: 1100px;
+            border-bottom: 3px solid #1a4a6a;
+        }
+        .page-header::before {
+            content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+            background:
+                radial-gradient(ellipse at 80% 20%, rgba(196,30,58,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(212,160,23,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        body.dark-mode .page-header { background: linear-gradient(170deg, #050d15 0%, #081520 40%, #040a10 100%); }
+
+        .page-header-badge {
+            position: relative; display: inline-block;
+            color: #4a8ab5; font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 5px; margin-bottom: 16px;
+        }
+        .page-header h1 {
+            position: relative; font-size: 2.4rem; font-weight: 900;
+            color: #d0dce8; margin: 0 0 10px; letter-spacing: 3px;
+        }
+        .page-header h1 span { color: #c41e3a; }
+        .page-header p {
+            position: relative; color: #6a8aa5; font-size: 0.9rem; max-width: 500px; line-height: 1.7;
+        }
+
+        /* 统计条 */
+        .stats-bar {
+            background: #0d2035; border: 1px solid #1a3a54;
+            border-radius: 0; padding: 1.2rem; margin-bottom: 1.5rem;
+            display: flex; justify-content: space-around; flex-wrap: wrap;
+        }
+        body.dark-mode .stats-bar { background: #081520; border-color: #152840; }
+        .stat-number { color: #c41e3a; font-size: 1.6rem; font-weight: 900; }
+        .stat-label { color: #6a8aa5; font-size: 0.78rem; }
+
+        /* 板块卡片 */
+        .intl-card {
+            background: #fff; border: 1px solid #d8dce2;
+            box-shadow: 3px 3px 0 #c0c8d0; padding: 1.5rem;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+        .intl-card:hover { border-color: #4a8ab5; box-shadow: 5px 5px 0 #b0b8c4; }
+        body.dark-mode .intl-card { background: #141a22; border-color: #1e2a38; box-shadow: 3px 3px 0 #0a1018; }
+        body.dark-mode .intl-card:hover { border-color: #3a6a95; box-shadow: 5px 5px 0 #080c14; }
+        
+        /* 主布局 */
+        .main-layout {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.5rem 24px;
+        }
+        
+        /* 地图容器 */
+        .map-container {
+            background: linear-gradient(135deg, #1a3a4a 0%, #0d2b3e 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        
+        .map-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #ffd700;
+            letter-spacing: 1px;
+        }
+        
+        .world-map {
+            width: 100%;
+            max-height: 500px;
+            display: block;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        
+        /* 图例 */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ccc;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        
+        .legend-color.red { background: #dc2626; box-shadow: 0 0 6px #dc2626; }
+        .legend-color.gold { background: #fbbf24; }
+        .legend-color.orange { background: #f97316; }
+        .legend-color.yellow { background: #eab308; }
+        
+        /* 统计栏 - 电脑端第一行3个，第二行4个 */
+.stats-bar {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* 底层用4列网格 */
+    gap: 1rem;
+    justify-items: center;
+    align-items: center;
+}
+
+/* 电脑端也是上三下四 */
+.stat-item:nth-child(1) { grid-column: 1 / 2; grid-row: 1; }
+.stat-item:nth-child(2) { grid-column: 2 / 3; grid-row: 1; }
+.stat-item:nth-child(3) { grid-column: 3 / 4; grid-row: 1; }
+.stat-item:nth-child(4) { grid-column: 1 / 2; grid-row: 2; }
+.stat-item:nth-child(5) { grid-column: 2 / 3; grid-row: 2; }
+.stat-item:nth-child(6) { grid-column: 3 / 4; grid-row: 2; }
+.stat-item:nth-child(7) { grid-column: 4 / 5; grid-row: 2; }
+
+.stat-item {
+    text-align: center;
+    width: 100%;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #c41e3a;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.stat-item a {
+    display: block;
+    text-decoration: none;
+    color: #c41e3a;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* 手机端同样上三下四（适配小屏） */
+@media (max-width: 768px) {
+    .stats-bar {
+        gap: 0.8rem !important;
+        padding: 1rem !important;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem !important;
+    }
+}
+        
+        /* 年代筛选 */
+        .era-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .era-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid #c41e3a;
+            background: white;
+            color: #c41e3a;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .era-btn:hover, .era-btn.active {
+            background: #c41e3a;
+            color: white;
+        }
+        
+        /* 时间轴容器 */
+        .timeline-wrapper {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+        
+        /* 横向滚动时间轴 */
+        .timeline-horizontal {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1.2rem 0.5rem;
+            scroll-behavior: smooth;
+            min-height: 200px;
+            cursor: grab;
+            user-select: none;
+        }
+        
+        .timeline-horizontal:active {
+            cursor: grabbing;
+        }
+        
+        .timeline-horizontal::-webkit-scrollbar {
+            height: 12px;
+        }
+        
+        .timeline-horizontal::-webkit-scrollbar-track {
+            background: #e0e0e0;
+            border-radius: 6px;
+        }
+        
+        .timeline-horizontal::-webkit-scrollbar-thumb {
+            background: linear-gradient(to right, #c41e3a, #e63950);
+            border-radius: 6px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .timeline-horizontal::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to right, #a01830, #c41e3a);
+        }
+        
+        .timeline-card {
+            min-width: 280px;
+            max-width: 280px;
+            background: #fafafa;
+            border-radius: 14px;
+            padding: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .timeline-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .timeline-card.violent { border-left-color: #dc2626; }
+        .timeline-card.parliament { border-left-color: #fbbf24; }
+        .timeline-card.guerrilla { border-left-color: #f97316; }
+        
+        .card-year {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            color: #333;
+        }
+        
+        .card-location {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-desc {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.4;
+        }
+        
+        .card-tags {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .card-tag {
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+        }
+        
+        .card-tag.victory { background: #d4edda; color: #155724; }
+        .card-tag.defeat { background: #f8d7da; color: #721c24; }
+        .card-tag.ongoing { background: #fff3cd; color: #856404; }
+        
+        /* 详细时间轴 */
+        .detailed-timeline {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+        }
+        
+        .detailed-timeline h2 {
+            text-align: center;
+            color: #c41e3a;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #c41e3a, #ff6b6b, #c41e3a);
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 0.3rem;
+            width: 16px;
+            height: 16px;
+            background: #c41e3a;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #c41e3a;
+        }
+        
+        .timeline-item.major::before {
+            width: 24px;
+            height: 24px;
+            left: -2.65rem;
+            background: #ffd700;
+            box-shadow: 0 0 0 4px #c41e3a;
+        }
+        
+        .timeline-year {
+            display: inline-block;
+            background: #c41e3a;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .timeline-item.major .timeline-year {
+            background: #ffd700;
+            color: #8b0000;
+            font-size: 1.2rem;
+        }
+        
+        .timeline-content {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .timeline-content h3 {
+            color: #c41e3a;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .timeline-location {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content p {
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 0.8rem;
+        }
+        
+        .timeline-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            padding: 0.3rem 0.8rem;
+            background: #eee;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        
+        .tag.victory { background: #d4edda; color: #155724; }
+        .tag.defeat { background: #f8d7da; color: #721c24; }
+        .tag.ongoing { background: #fff3cd; color: #856404; }
+        
+        /* 黑夜模式 */
+        body.dark-mode .timeline-wrapper {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode .timeline-card {
+            background: #3a3a3a;
+        }
+        
+        body.dark-mode .card-title {
+            color: #e0e0e0;
+        }
+        
+        body.dark-mode .card-desc {
+            color: #bbb;
+        }
+        
+        body.dark-mode .stats-bar {
+            background: #2a2a2a;
+        }
+        
+        body.dark-mode .era-btn {
+            background: #2a2a2a;
+            color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+        
+        body.dark-mode .era-btn:hover, body.dark-mode .era-btn.active {
+            background: #ff6b6b;
+            color: #1a1a1a;
+        }
+        
+        body.dark-mode .timeline-content {
+            background: #3a3a3a;
+            border-color: #444;
+        }
+        
+        body.dark-mode .timeline-content h3 {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .timeline-content p {
+            color: #ccc;
+        }
+        
+        body.dark-mode .tag {
+            background: #444;
+            color: #ccc;
+        }
+        
+        body.dark-mode .detailed-timeline h2 {
+            color: #ff6b6b;
+        }
+        
+        body.dark-mode .detailed-timeline {
+            border-color: #444;
+        }
+        
+        /* 手机端适配 */
+        @media (max-width: 768px) {
+            /* 时期分类：两个一行 */
+            .era-filter {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.5rem !important;
+                justify-items: stretch !important;
+            }
+            
+            .era-btn {
+                padding: 0.5rem 0.8rem !important;
+                font-size: 0.85rem !important;
+                text-align: center !important;
+            }
+            
+            /* 运动历史详览：正文超两行省略 */
+            .timeline-content p {
+                display: -webkit-box !important;
+                -webkit-line-clamp: 2 !important;
+                -webkit-box-orient: vertical !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                max-height: 3.2em !important;
+            }
+        }

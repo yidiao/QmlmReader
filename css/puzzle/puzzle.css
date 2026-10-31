@@ -1,0 +1,390 @@
+/* html/puzzle/puzzle.html 页面样式（由页内 <style> 原样下沉，内容未修改）*/
+
+* { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background:  #e8ecef;
+            color: #333;
+        }
+
+        .puzzle-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .puzzle-header {
+            padding: 16px 24px;
+            background: #c0c1c3;
+            border-bottom: 2px solid #8b1e2d;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .puzzle-header h1 {
+            font-size: 1.3em;
+            color: #8b1e2d;
+            margin: 0;
+        }
+
+        .puzzle-header p {
+            font-size: 0.85em;
+            color: #666;
+            margin: 0;
+        }
+
+        .puzzle-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .ctrl-btn {
+            background: #c0c1c3;
+            border: 1px solid #8b1e2d;
+            color: #8b1e2d;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.2s;
+        }
+        .ctrl-btn:hover { background: #8b1e2d; color: #c0c1c3; }
+
+        .puzzle-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            cursor: grab;
+            background: #c0c1c3;
+        }
+
+        .puzzle-container:active { cursor: grabbing; }
+
+        .puzzle-canvas {
+            position: absolute;
+            width: 2800px;
+            height: 1500px;
+            transform-origin: 0 0;
+        }
+
+        .tip-box {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.95);
+            border: 1px solid #8b1e2d;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 0.82em;
+            color: #666;
+            z-index: 100;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.95);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 14px 18px;
+            z-index: 100;
+            font-size: 0.82em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .legend h4 { margin: 0 0 10px; color: #333; font-size: 0.9em; }
+        .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+        .filter-section {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        .filter-section h4 { margin: 0 0 8px; color: #333; font-size: 0.85em; }
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .filter-btn {
+            background: white;
+            border: 1px solid #ccc;
+            color: #666;
+            padding: 4px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.78em;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover { border-color: #999; color: #333; }
+        .filter-btn.active { color: white; border-color: transparent; }
+        .filter-btn[data-author="marx"] { background: #8b0000; }
+        .filter-btn[data-author="lenin"] { background: #d4a017; }
+        .filter-btn[data-author="stalin"] { background: #4a5568; }
+        .filter-btn[data-author="mao"] { background: #8b1e2d; }
+
+        .card-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 2px solid #8b1e2d;
+            border-radius: 12px;
+            padding: 28px 32px;
+            max-width: 480px;
+            width: 90%;
+            z-index: 2000;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .card-popup.active { display: block; }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1999;
+        }
+        .popup-overlay.active { display: block; }
+
+        .popup-close {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.4em;
+            cursor: pointer;
+        }
+        .popup-close:hover { color: #8b1e2d; }
+
+        .popup-badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.78em;
+            margin-bottom: 10px;
+        }
+
+        .popup-title { font-size: 1.5em; color: #333; margin: 0 0 6px; }
+        .popup-meta { color: #888; font-size: 0.85em; margin-bottom: 16px; }
+        .popup-desc { color: #555; line-height: 1.8; margin-bottom: 20px; font-size: 0.95em; }
+        .popup-position { background: #f8f8f8; border-radius: 6px; padding: 12px 16px; margin-bottom: 20px; font-size: 0.88em; }
+        .popup-position h4 { color: #666; margin: 0 0 8px; font-size: 0.9em; }
+        .popup-position p { color: #333; margin: 0; line-height: 1.7; }
+        .popup-link {
+            display: inline-block;
+            background: #8b1e2d;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: background 0.2s;
+        }
+        .popup-link:hover { background: #8b0000; }
+
+        /* SVG节点样式 */
+        .node-group { cursor: pointer; }
+        .node-group .node-circle { transition: filter 0.18s; }
+        .node-group:hover .node-circle {
+            filter: brightness(1.15) drop-shadow(0 0 6px currentColor);
+        }
+        .node-group.dimmed .node-circle { opacity: 0.1 !important; }
+        .node-group.dimmed .node-ring { opacity: 0.05 !important; }
+        .node-group.dimmed text { opacity: 0.1 !important; }
+
+        .node-label {
+            font-size: 11px;
+            fill: white;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            pointer-events: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-weight: 500;
+        }
+
+        .node-year {
+            font-size: 9px;
+            fill: rgba(255,255,255,0.8);
+            text-anchor: middle;
+            pointer-events: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .lane-separator { stroke: rgba(0,0,0,0.08); stroke-width: 1; }
+        .category-label { font-size: 13px; font-weight: bold; fill: currentColor; text-anchor: middle; font-family: -apple-system, sans-serif; }
+        .lane-bg { opacity: 0.035; }
+
+        /* 连线样式 */
+        .line-internal { stroke-width: 1.2; stroke-dasharray: 4,4; fill: none; }
+        .line-cross { stroke-width: 1.5; stroke-dasharray: 6,4; fill: none; }
+        .line-major { stroke-width: 2; fill: none; }
+
+        /* ===== 手机端适配 ===== */
+        @media (max-width: 768px) {
+            /* header 改为两行 */
+            .puzzle-header {
+                padding: 10px 14px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .puzzle-header h1 { font-size: 1.05em; }
+            .puzzle-header p { display: none; }
+
+            /* 控制按钮横向滚动 */
+            .puzzle-controls {
+                overflow-x: auto;
+                white-space: nowrap;
+                width: 100%;
+                padding-bottom: 2px;
+                scrollbar-width: none;
+                gap: 6px;
+            }
+            .puzzle-controls::-webkit-scrollbar { display: none; }
+            .ctrl-btn {
+                padding: 5px 10px;
+                font-size: 0.78em;
+                flex-shrink: 0;
+            }
+            /* 隐藏"可拖拽/滚轮缩放"提示，换手机提示 */
+            .puzzle-controls span {
+                display: none;
+            }
+            .puzzle-controls::after {
+                content: ' 双指缩放 · 单指拖动';
+                color: #888;
+                font-size: 0.75em;
+                white-space: nowrap;
+                flex-shrink: 0;
+                align-self: center;
+            }
+
+            /* tip 提示位置调整 */
+            .tip-box {
+                top: 10px;
+                font-size: 0.72em;
+                padding: 6px 10px;
+                white-space: normal;
+                text-align: center;
+                max-width: 80vw;
+            }
+
+            /* 图例收起 */
+            .legend {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 0.75em;
+                max-width: 130px;
+            }
+            .legend-title { font-size: 0.8em; }
+
+            /* 筛选面板收起 */
+            .filter-panel {
+                bottom: 10px;
+                left: 10px;
+                padding: 8px 10px;
+                font-size: 0.75em;
+            }
+            .filter-panel h4 { font-size: 0.8em; margin-bottom: 6px; }
+            .filter-btn-small {
+                padding: 4px 8px;
+                font-size: 0.72em;
+            }
+        }
+/* ========== 黑夜模式背景色深度优化 ========== */
+/* 白天模式：略灰（更明显的灰色） */
+body {
+    background: #dce3e8 !important;   /* 更明显的柔和灰色，原 #f5f5f5 太白了 */
+}
+
+/* 黑夜模式：深黑但不刺眼 */
+body.dark-mode {
+    background: #0a0d12 !important;   /* 极深灰黑，不是纯黑 #000，保留一点质感 */
+}
+
+/* 拼图容器背景（中间那块大区域） */
+.puzzle-container {
+    background: #ffffff;   /* 白天保持白色 */
+}
+
+body.dark-mode .puzzle-container {
+    background: #0f1117 !important;   /* 深色背景，与外围协调 */
+}
+
+/* 顶部 header 区域 */
+.puzzle-header {
+    background: white;
+    transition: background 0.2s;
+}
+
+body.dark-mode .puzzle-header {
+    background: #141822 !important;   /* 深色 header */
+    border-bottom-color: #8b2c2c;
+}
+
+body.dark-mode .puzzle-header h1 {
+    color: #e05a5a;   /* 标题红色在黑夜模式下稍微柔和 */
+}
+
+body.dark-mode .puzzle-header p {
+    color: #9aa3b8;
+}
+
+/* 控制按钮黑夜模式适配 */
+body.dark-mode .ctrl-btn {
+    background: #1e2432;
+    border-color: #8b2c2c;
+    color: #e05a5a;
+}
+
+body.dark-mode .ctrl-btn:hover {
+    background: #8b2c2c;
+    color: white;
+}
+
+/* 图例面板黑夜模式 */
+body.dark-mode .legend {
+    background: rgba(20, 24, 34, 0.95);
+    border-color: #2a2f3f;
+    color: #ddd;
+}
+
+body.dark-mode .legend h4 {
+    color: #e0e0e0;
+}
+
+/* 提示框黑夜模式 */
+body.dark-mode .tip-box {
+    background: rgba(20, 24, 34, 0.95);
+    border-color: #8b2c2c;
+    color: #bbb;
+}
+
+/* 筛选按钮黑夜模式 */
+body.dark-mode .filter-btn {
+    background: #252c3d;
+    border-color: #3a4158;
+    color: #ccc;
+}
+
+body.dark-mode .filter-btn:hover {
+    border-color: #e05a5a;
+    color: #fff;
+}

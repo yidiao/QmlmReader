@@ -1,0 +1,456 @@
+/* html/toolkit/science.html 页面样式（由页内 <style> 原样下沉，内容未修改）*/
+
+.page-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #6a0000 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .page-header p {
+                opacity: 0.9;
+                font-size: 0.9rem;
+            }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 500px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: #c41e3a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .back-link:hover {
+                text-decoration: underline;
+            }
+
+        /* 标签页样式 */
+        .science-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #f0e6e6;
+            padding-bottom: 0.5rem;
+        }
+
+        .science-tab {
+            background: none;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: all 0.2s;
+        }
+
+            .science-tab:hover {
+                background: #fef3c7;
+                color: #d97706;
+            }
+
+            .science-tab.active {
+                background: #c41e3a;
+                color: white;
+            }
+
+        body.dark-mode .science-tab {
+            color: #aaa;
+        }
+
+            body.dark-mode .science-tab:hover {
+                background: #4a3a1a;
+                color: #fbbf24;
+            }
+
+            body.dark-mode .science-tab.active {
+                background: #ff6b6b;
+                color: #1a1a1a;
+            }
+
+        /* 内容卡片网格 */
+        .science-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .science-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            cursor: pointer;
+        }
+
+            .science-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 28px rgba(196,30,58,0.15);
+            }
+            /* 不同分类的卡片顶部颜色 */
+            .science-card.figures {
+                border-top: 4px solid #c41e3a;
+            }
+
+            .science-card.movements {
+                border-top: 4px solid #d97706;
+            }
+
+            .science-card.terms {
+                border-top: 4px solid #059669;
+            }
+
+            .science-card.texts {
+                border-top: 4px solid #7c3aed;
+            }
+
+        .science-card-header {
+            padding: 1rem 1.2rem 0.5rem;
+            background: linear-gradient(135deg, #fafafa, #fff);
+            border-bottom: 1px solid #f0e6e6;
+        }
+
+        body.dark-mode .science-card {
+            background: #2a2a2a;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+        body.dark-mode .science-card:hover {
+            box-shadow: 0 12px 28px rgba(0,0,0,0.4);
+        }
+        body.dark-mode .science-card-header {
+            background: #333;
+            border-color: #444;
+        }
+        body.dark-mode .science-card-body {
+            background: #2a2a2a;
+        }
+        body.dark-mode .science-card-body p {
+            color: #bbb;
+        }
+
+        .science-card-header h3 {
+            margin: 0;
+            font-size: 1.15rem;
+        }
+
+        .science-card.figures .science-card-header h3 {
+            color: #c41e3a;
+        }
+
+        .science-card.movements .science-card-header h3 {
+            color: #d97706;
+        }
+
+        .science-card.terms .science-card-header h3 {
+            color: #059669;
+        }
+
+        .science-card.texts .science-card-header h3 { color: #7c3aed; }
+        .science-card.term-philo { border-top: 4px solid #0891b2; } .science-card.term-philo h3 { color: #0891b2; }
+        .science-card.term-econ { border-top: 4px solid #059669; } .science-card.term-econ h3 { color: #059669; }
+        .science-card.term-org { border-top: 4px solid #7c3aed; } .science-card.term-org h3 { color: #7c3aed; }
+        .science-card.term-strategy { border-top: 4px solid #d97706; } .science-card.term-strategy h3 { color: #d97706; }
+        .science-card.term-west { border-top: 4px solid #a855f7; } .science-card.term-west h3 { color: #a855f7; }
+        .science-card.fig-west { border-top: 4px solid #c41e3a; } .science-card.fig-west h3 { color: #c41e3a; }
+        .science-card.fig-system { border-top: 4px solid #1e3a5f; } .science-card.fig-system h3 { color: #1e3a5f; }
+        .science-card.fig-culture { border-top: 4px solid #a855f7; } .science-card.fig-culture h3 { color: #a855f7; }
+        .science-card.fig-global { border-top: 4px solid #166534; } .science-card.fig-global h3 { color: #166534; }
+        .science-card.fig-critique { border-top: 4px solid #92400e; } .science-card.fig-critique h3 { color: #92400e; }
+        .science-card.fig-invert { border-top: 4px solid #374151; } .science-card.fig-invert h3 { color: #374151; }
+        .science-card.mov-spontaneous { border-top: 4px solid #f59e0b; } .science-card.mov-spontaneous h3 { color: #d97706; }
+        .science-card.mov-organized { border-top: 4px solid #dc2626; } .science-card.mov-organized h3 { color: #dc2626; }
+        .science-card.mov-china { border-top: 4px solid #b91c1c; } .science-card.mov-china h3 { color: #b91c1c; }
+        .science-card.mov-antiimp { border-top: 4px solid #1e40af; } .science-card.mov-antiimp h3 { color: #1e40af; }
+        .science-card.mov-turn { border-top: 4px solid #6b7280; } .science-card.mov-turn h3 { color: #6b7280; }
+        .science-card.txt-found { border-top: 4px solid #c41e3a; } .science-card.txt-found h3 { color: #c41e3a; }
+        .science-card.txt-lenin { border-top: 4px solid #d97706; } .science-card.txt-lenin h3 { color: #d97706; }
+        .science-card.txt-mao { border-top: 4px solid #b91c1c; } .science-card.txt-mao h3 { color: #b91c1c; }
+        .science-card.txt-west { border-top: 4px solid #7c3aed; } .science-card.txt-west h3 { color: #7c3aed; }
+        .science-card.txt-polemic { border-top: 4px solid #374151; } .science-card.txt-polemic h3 { color: #374151; }
+
+        .science-card-header .sub {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+
+        .science-card-body {
+            padding: 1rem 1.2rem 1.2rem;
+        }
+
+            .science-card-body p {
+                color: #555;
+                font-size: 0.85rem;
+                line-height: 1.7;
+                margin: 0 0 0.8rem 0;
+            }
+
+        body.dark-mode .science-card-header .sub { color: #aaa; }
+        body.dark-mode .science-card.figures h3,
+        body.dark-mode .science-card.fig-west h3,
+        body.dark-mode .science-card.txt-found h3,
+        body.dark-mode .science-card.mov-organized h3 { color: #ff8a8a; }
+        body.dark-mode .science-card.movements h3,
+        body.dark-mode .science-card.term-strategy h3,
+        body.dark-mode .science-card.mov-spontaneous h3,
+        body.dark-mode .science-card.txt-lenin h3 { color: #fbbf24; }
+        body.dark-mode .science-card.terms h3,
+        body.dark-mode .science-card.term-econ h3,
+        body.dark-mode .science-card.fig-global h3 { color: #6ee7b7; }
+        body.dark-mode .science-card.texts h3,
+        body.dark-mode .science-card.term-org h3,
+        body.dark-mode .science-card.txt-west h3,
+        body.dark-mode .science-card.fig-culture h3 { color: #c4b5fd; }
+        body.dark-mode .science-card.term-philo h3 { color: #67e8f9; }
+        body.dark-mode .science-card.fig-system h3 { color: #93c5fd; }
+        body.dark-mode .science-card.fig-critique h3 { color: #fcd34d; }
+        body.dark-mode .science-card.fig-invert h3,
+        body.dark-mode .science-card.txt-polemic h3,
+        body.dark-mode .science-card.mov-turn h3 { color: #d1d5db; }
+        body.dark-mode .science-card.mov-china h3,
+        body.dark-mode .science-card.txt-mao h3 { color: #fca5a5; }
+        body.dark-mode .science-card.mov-antiimp h3 { color: #93c5fd; }
+
+        .tag-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.8rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        body.dark-mode .tag {
+            background: #4a3a1a;
+            color: #fbbf24;
+        }
+
+        .read-link {
+            color: #c41e3a;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+            .read-link:hover {
+                text-decoration: underline;
+            }
+
+        .science-content { display: none; }
+        .science-content.active { display: block; }
+        .science-search { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.2rem; padding: 0.6rem 1rem; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; transition: border-color 0.2s; }
+        .science-search:focus-within { border-color: #c41e3a; box-shadow: 0 0 0 3px rgba(196,30,58,0.08); }
+        .science-search-icon { font-size: 0.95rem; opacity: 0.5; flex-shrink: 0; }
+        .science-search input { flex: 1; border: none; background: transparent; font-size: 0.85rem; outline: none; color: #333; font-family: inherit; }
+        .science-search input::placeholder { color: #aaa; }
+        body.dark-mode .science-search { background: #333; border-color: #444; }
+        body.dark-mode .science-search input { color: #ddd; }
+        .science-section-header { display: flex; align-items: center; gap: 0.55rem; padding: 0.6rem 0; margin: 1.8rem 0 0.9rem; border-bottom: 2px solid #eee; font-size: 0.9rem; font-weight: 700; grid-column: 1 / -1; color: #444; }
+        .science-section-header:first-child { margin-top: 0; }
+        body.dark-mode .science-section-header { border-bottom-color: #3a3a3a; color: #ccc; }
+        .science-section-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+        .science-section-count { font-size: 0.7rem; font-weight: 400; color: #999; margin-left: auto; }
+        body.dark-mode .science-section-count { color: #777; }
+        .science-filter { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+        .science-filter-btn { background: #f3f4f6; border: 1px solid #e5e7eb; padding: 0.35rem 0.9rem; font-size: 0.75rem; font-weight: 500; color: #666; cursor: pointer; border-radius: 20px; transition: all 0.15s; font-family: inherit; }
+        .science-filter-btn:hover { background: #fef3c7; color: #d97706; border-color: #fcd34d; }
+        .science-filter-btn.active { background: #c41e3a; color: white; border-color: #c41e3a; }
+        body.dark-mode .science-filter-btn { background: #333; border-color: #444; color: #aaa; }
+        body.dark-mode .science-filter-btn:hover { background: #4a3a1a; color: #fbbf24; }
+        body.dark-mode .science-filter-btn.active { background: #ff6b6b; color: #1a1a1a; }
+
+        /* ========== 浮窗弹窗样式 ========== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.25s ease;
+        }
+
+            .modal-overlay.active {
+                display: flex;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal {
+            background: white;
+            max-width: 700px;
+            width: 92%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #999;
+            line-height: 1;
+            z-index: 10;
+            padding: 4px 8px;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+            .modal-close:hover {
+                background: #f0f0f0;
+                color: #333;
+            }
+
+        body.dark-mode .modal-close:hover {
+            background: #444;
+            color: #eee;
+        }
+
+        .modal-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+            .modal-header h2 {
+                margin: 0 0 0.3rem 0;
+                font-size: 1.5rem;
+                color: #c41e3a;
+            }
+
+        .modal-sub {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .modal-body {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #c41e3a;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .modal-section-content {
+            font-size: 0.98rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .modal-warning {
+            background: #fff8e6;
+            border-left: 4px solid #f59e0b;
+            padding: 0.85rem 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.93rem;
+            color: #78350f;
+            line-height: 1.7;
+        }
+
+        body.dark-mode .modal {
+            background: #2a2a2a;
+            color: #ddd;
+        }
+
+        body.dark-mode .modal-header {
+            border-bottom-color: #444;
+        }
+
+            body.dark-mode .modal-header h2 {
+                color: #ff6b6b;
+            }
+
+        body.dark-mode .modal-sub {
+            color: #aaa;
+        }
+
+        body.dark-mode .modal-section-content {
+            color: #ccc;
+        }
+
+        body.dark-mode .modal-warning {
+            background: #3d3000;
+            border-left-color: #f59e0b;
+            color: #fbbf24;
+        }
+
+        @media (max-width: 768px) {
+            .science-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                width: 96%;
+                max-height: 85vh;
+            }
+
+            .modal-header, .modal-body {
+                padding: 1.2rem;
+            }
+        }
