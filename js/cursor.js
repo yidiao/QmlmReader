@@ -57,16 +57,18 @@
     styleEl.textContent = 'a,button,input,textarea,select,[role="button"],[onclick],.clickable{cursor:none!important}';
     document.head.appendChild(styleEl);
 
-    // 鼠标跟踪
+    // 鼠标跟踪（mouse + pointer 双通道：pointermove 在指针捕获/拖拽场景下仍会派发，保证自定义光标不冻结）
     var mouseX = 0, mouseY = 0;
-    document.addEventListener('mousemove', function(e) {
+    function trackPointer(e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
         cursor.style.left = mouseX + 'px';
         cursor.style.top = mouseY + 'px';
         glow.style.left = mouseX + 'px';
         glow.style.top = mouseY + 'px';
-    });
+    }
+    document.addEventListener('mousemove', trackPointer);
+    document.addEventListener('pointermove', trackPointer);
 
     // Hover 放大
     document.addEventListener('mouseover', function(e) {

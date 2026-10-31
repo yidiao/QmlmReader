@@ -614,19 +614,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var startPointer = { x: 0, y: 0 };
     var startPos = { x: 0, y: 0 };
 
-    ball.addEventListener('pointerdown', function(e) {
-        if (e.button !== undefined && e.button !== 0) return;
-        pointerActive = true;
-        dragMoved = false;
-        startPointer = { x: e.clientX, y: e.clientY };
-        var rect = ball.getBoundingClientRect();
-        startPos = { x: rect.left, y: rect.top };
-        ball.classList.add('dragging');
-        try { ball.setPointerCapture(e.pointerId); } catch (err) { /* 忽略 */ }
-        e.preventDefault();
-    });
-
-    ball.addEventListener('pointermove', function(e) {
+    // 拖拽期间在 window 上监听（不用 setPointerCapture）：
+    // 指针捕获会把事件重定向到球并抑制兼容鼠标事件，导致 cursor.js 的
+    // 自定义光标（监听 mousemove）在拖拽时冻结。window 监听下事件流完全正常。
+    function onDragMove(e) {
         if (!pointerActive) return;
         var dx = e.clientX - startPointer.x;
         var dy = e.clientY - startPointer.y;
@@ -635,10 +626,13 @@ document.addEventListener('DOMContentLoaded', function() {
         var pos = clampBallPosition({ x: startPos.x + dx, y: startPos.y + dy });
         ball.style.left = pos.x + 'px';
         ball.style.top = pos.y + 'px';
-    });
+    }
 
-    function endPointer() {
+    function onDragEnd() {
         if (!pointerActive) return;
+        window.removeEventListener('pointermove', onDragMove);
+        window.removeEventListener('pointerup', onDragEnd);
+        window.removeEventListener('pointercancel', onDragCancel);
         pointerActive = false;
         ball.classList.remove('dragging');
         if (dragMoved) {
@@ -652,10 +646,27 @@ document.addEventListener('DOMContentLoaded', function() {
             applyCollapsed(false, true); // 轻点展开导航
         }
     }
-    ball.addEventListener('pointerup', endPointer);
-    ball.addEventListener('pointercancel', function() {
+
+    function onDragCancel() {
+        window.removeEventListener('pointermove', onDragMove);
+        window.removeEventListener('pointerup', onDragEnd);
+        window.removeEventListener('pointercancel', onDragCancel);
         pointerActive = false;
         ball.classList.remove('dragging');
+    }
+
+    ball.addEventListener('pointerdown', function(e) {
+        if (e.button !== undefined && e.button !== 0) return;
+        pointerActive = true;
+        dragMoved = false;
+        startPointer = { x: e.clientX, y: e.clientY };
+        var rect = ball.getBoundingClientRect();
+        startPos = { x: rect.left, y: rect.top };
+        ball.classList.add('dragging');
+        window.addEventListener('pointermove', onDragMove);
+        window.addEventListener('pointerup', onDragEnd);
+        window.addEventListener('pointercancel', onDragCancel);
+        e.preventDefault();
     });
 
     // 键盘 Enter（click 且 e.detail === 0）也能展开；拖拽后的 click 被吞掉
