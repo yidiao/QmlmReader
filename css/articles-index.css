@@ -1,10 +1,10 @@
 :root {
     --articles-accent: #b91c1c;
     --articles-accent-soft: rgba(185, 28, 28, 0.1);
-    --articles-page-paper: var(--paper-page, #f3eadc);
-    --articles-section-paper: var(--paper-section, #f7f2e7);
-    --articles-card-paper: var(--paper-card, #fffaf0);
-    --articles-card-paper-strong: var(--paper-card-strong, #fffdf7);
+    --articles-page-paper: var(--paper-page, var(--paper-page));
+    --articles-section-paper: var(--paper-section, var(--paper-section));
+    --articles-card-paper: var(--paper-card, var(--paper-card));
+    --articles-card-paper-strong: var(--paper-card-strong, var(--paper-card-strong));
     --articles-surface: color-mix(in srgb, var(--articles-section-paper) 86%, transparent);
     --articles-surface-strong: color-mix(in srgb, var(--articles-card-paper) 96%, transparent);
     --articles-surface-dark: rgba(18, 18, 24, 0.78);
@@ -53,7 +53,7 @@ body.dark-mode .page-hero h1 {
 
 .page-hero p {
     margin: 0;
-    color: #666;
+    color: var(--gray-600);
     line-height: 1.6;
 }
 
@@ -115,7 +115,7 @@ body.dark-mode .section-head h2 {
 
 .section-count {
     font-size: 0.85rem;
-    color: var(--gray-600, #666666);
+    color: var(--gray-600, var(--gray-600));
     white-space: nowrap;
 }
 
@@ -150,8 +150,8 @@ body.dark-mode .filter-input {
     border: 0;
     border-radius: 999px;
     padding: 0.48rem 0.95rem;
-    background: var(--paper-muted, #e8e4dc);
-    color: var(--gray-700, #555555);
+    background: var(--paper-muted, var(--paper-muted));
+    color: var(--gray-700, var(--gray-700));
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 0.85rem;
@@ -281,7 +281,7 @@ body.dark-mode .card-author {
 }
 
 .badge.gray {
-    background: linear-gradient(135deg, var(--gray-600, #666666), var(--gray-300, #aaaaaa));
+    background: linear-gradient(135deg, var(--gray-600, var(--gray-600)), var(--gray-300, var(--gray-300)));
 }
 
 .card-date {
@@ -400,7 +400,7 @@ body.dark-mode .article-card-favorite.is-active {
 }
 
 .read-more.disabled {
-    color: var(--gray-400, #999999);
+    color: var(--gray-400, var(--gray-400));
     pointer-events: none;
     cursor: default;
 }
@@ -408,13 +408,13 @@ body.dark-mode .article-card-favorite.is-active {
 .article-note {
     margin-top: 0.65rem;
     font-size: 0.74rem;
-    color: var(--gray-500, #888888);
+    color: var(--gray-500, var(--gray-500));
 }
 
 .empty-state {
     padding: 2rem 1rem;
     text-align: center;
-    color: var(--gray-600, #666666);
+    color: var(--gray-600, var(--gray-600));
 }
 
 .mode-switch {
