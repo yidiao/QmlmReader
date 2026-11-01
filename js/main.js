@@ -111,7 +111,8 @@
             'marx': '马克思', 'engels': '恩格斯', 'lenin': '列宁', 'stalin': '斯大林', 'mao': '毛泽东',
             // Gallery sub-pages
             'quotes': '语录库', 'photos': '历史照片', 'propaganda': '宣传画', 'music': '革命音乐',
-            'videos': '影像资料', 'poetry': '诗歌', 'funfacts': '冷知识', 'soviet': '苏联印记',
+            'videos': '影像资料', 'poetry': '诗歌', 'anecdotes': '趣闻', 'soviet': '苏联印记',
+            'soviet-jokes': '苏联笑话档案馆',
             // International sub-pages
             'international-column': '专栏', 'international-calendar': '日历',
             'international-memorial': '纪念', 'international-current': '当代共运',

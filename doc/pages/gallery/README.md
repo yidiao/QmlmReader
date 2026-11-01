@@ -9,7 +9,7 @@
 
 ```text
 html/gallery/gallery.html
-html/gallery/funfacts.html
+html/gallery/anecdotes.html
 html/gallery/mao-poetry-quotes.html
 html/gallery/music.html
 html/gallery/photos.html
@@ -17,8 +17,11 @@ html/gallery/poetry.html
 html/gallery/propaganda.html
 html/gallery/quotes.html
 html/gallery/soviet.html
+html/gallery/soviet-jokes/index.html
 html/gallery/videos.html
 ```
+
+> `soviet-jokes/` 为独立视觉页（同 `mao-poetry-quotes.html` 先例）：不加载全站壳，自带顶栏、深浅色与页内数据，2026-11 由外部「苏联笑话工程」整体迁入，替代原 `funfacts.html` 的笑话部分；原趣闻/逸闻部分拆至 `anecdotes.html`。
 
 ---
 
@@ -42,6 +45,7 @@ html/gallery/videos.html
 |---|---|
 | `data/gallery.json` | 文艺资源索引、搜索基础数据 |
 | `js/site-data.js` | 聚合后的 `galleryIndex` |
+| `html/gallery/soviet-jokes/data/*.json` | 笑话档案馆页面自带数据（672 则/精注/修订），页面私有，不进生成管线 |
 | 图片/音视频资源目录 | 具体资源文件或外链 |
 
 ---

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "可靠性标签修订。立场（民间怨气/精英讽谏/疑似西方投放/族群刻板印象）与证据（有历史事件原型/纯虚构调侃）是两个层面，可同时标注；本文件只做可解释的增补与纠正，不猜测无法溯源的条目。",
+  "reliabilityGroups": {
+    "stance": ["popular-grievance", "elite-satire", "possible-western", "ethnic-stereotype"],
+    "evidence": ["historical-anchor", "pure-fantasy"]
+  },
+  "notes": {
+    "possible-western": "源数据缺少逐条来源与传播链，无法可靠增补；目前只保留 1 条有明确回流线索的标记，不臆测。",
+    "elite-satire": "本轮把以干部、厂长、中央机关为视角的条目补标为精英讽谏；它可与民众怨气并存，不互斥。"
+  },
+  "overrides": [
+    {
+      "recordKey": "joke-517",
+      "remove": ["popular-grievance"],
+      "add": ["historical-anchor"],
+      "note": "锚定 1930 年代配给制与“制度光芒”宣传语；与 #456 同母题。原标“民众怨气”过于笼统，改为事件/宣传语境锚定。"
+    },
+    {
+      "recordKey": "joke-009",
+      "add": ["historical-anchor"],
+      "note": "五位领导人的做派均有史实原型（赫鲁晓夫联合国敲鞋、勃列日涅夫停滞表演等）。"
+    },
+    {
+      "recordKey": "joke-043",
+      "add": ["historical-anchor"],
+      "note": "列宁—斯大林—赫鲁晓夫—勃列日涅夫的治理风格概括，人物与时代明确。"
+    },
+    {
+      "recordKey": "joke-159",
+      "add": ["historical-anchor"],
+      "note": "1936 年斯大林与《真理报》的谣言政治，有明确年份、机构与信件形式。"
+    },
+    {
+      "recordKey": "joke-637",
+      "add": ["historical-anchor"],
+      "note": "1937 年大清洗；伏罗希洛夫与布琼尼为真实元帅，清洗背景明确。"
+    },
+    {
+      "recordKey": "joke-509",
+      "add": ["historical-anchor"],
+      "note": "1961 年柏林墙；墙的实际功能是阻止东德人外逃。"
+    },
+    {
+      "recordKey": "joke-570",
+      "add": ["historical-anchor"],
+      "note": "1968 年华约入侵捷克斯洛伐克，“兄弟援助”话术有具体事件。"
+    },
+    {
+      "recordKey": "joke-557",
+      "add": ["historical-anchor"],
+      "note": "斯大林时期法外处决与大清洗；“宣判前枪决”指向真实的司法恐怖。"
+    },
+    {
+      "recordKey": "joke-083",
+      "add": ["historical-anchor"],
+      "note": "1956 年苏共二十大秘密报告后的反个人崇拜。"
+    },
+    {
+      "recordKey": "joke-667",
+      "add": ["historical-anchor"],
+      "note": "勃列日涅夫晚年的“亲自”话术与形象政治。"
+    },
+    {
+      "recordKey": "joke-080",
+      "add": ["historical-anchor"],
+      "note": "勃列日涅夫勋章癖；勋章通货膨胀有公开史实。"
+    },
+    {
+      "recordKey": "joke-078",
+      "add": ["historical-anchor"],
+      "note": "赫鲁晓夫“瞎说”与玉米运动的公开形象。"
+    },
+    {
+      "recordKey": "joke-253",
+      "add": ["historical-anchor"],
+      "note": "列宁遗体保存与列宁主义神圣化，是 1924 年后的制度事实。"
+    },
+    {
+      "recordKey": "joke-671",
+      "add": ["historical-anchor"],
+      "note": "苏联对列宁流亡地与国内纪念地的选择性开放，属冷战旅游政治。"
+    },
+    {
+      "recordKey": "joke-156",
+      "add": ["elite-satire"],
+      "note": "书记与群众的对话，复现指标汇报的干部口吻。"
+    },
+    {
+      "recordKey": "joke-515",
+      "add": ["elite-satire"],
+      "note": "厂长办公室的“交换意见”，体制内科层视角。"
+    },
+    {
+      "recordKey": "joke-266",
+      "add": ["elite-satire"],
+      "note": "中央全会密信，核心权力视角。"
+    },
+    {
+      "recordKey": "joke-071",
+      "add": ["elite-satire"],
+      "note": "以“养党”成本谈多党制，接近体制内抱怨。"
+    },
+    {
+      "recordKey": "joke-123",
+      "add": ["elite-satire"],
+      "note": "中央委员会内定选举结果，权力内部视角。"
+    },
+    {
+      "recordKey": "joke-443",
+      "add": ["elite-satire"],
+      "note": "权力交接的宫廷视角。"
+    },
+    {
+      "recordKey": "joke-341",
+      "add": ["elite-satire"],
+      "note": "军队高层晋升视角，讽刺干部子弟通道。"
+    },
+    {
+      "recordKey": "joke-540",
+      "add": ["elite-satire"],
+      "note": "统治家族与干部任命，权力集团视角。"
+    },
+    {
+      "recordKey": "joke-090",
+      "add": ["elite-satire"],
+      "note": "农庄党的会议程序，干部视角。"
+    }
+  ]
+}

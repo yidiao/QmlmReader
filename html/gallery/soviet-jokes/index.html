@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="苏联笑话档案馆：672 则民间笑话，按四维标签编目；60 则附写作向三层精注，另含 12 个制度诊断域、20 条术语与可靠性修订说明。">
+  <title>苏联笑话档案馆 · 笑中读史 | 青年马列毛主义驿站</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#archive">跳到档案索引</a>
+
+  <header class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="./" aria-label="苏联笑话档案馆首页">
+        <span class="brand-mark" aria-hidden="true">★</span>
+        <span class="brand-text">
+          <strong>苏联笑话档案馆</strong>
+          <small>笑中读史 · 口述史样本</small>
+        </span>
+      </a>
+
+      <nav class="mainnav" aria-label="主导航">
+        <a href="../gallery.html">文艺首页</a>
+        <a class="is-active" href="#archive">档案索引</a>
+        <button type="button" data-panel="diagnoses">制度诊断</button>
+        <button type="button" data-panel="glossary">术语表</button>
+        <button type="button" data-panel="writing">写作课</button>
+        <button type="button" data-panel="about">阅读说明</button>
+      </nav>
+
+      <div class="topbar-actions">
+        <button type="button" class="btn btn-quiet random-btn" data-random>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5M21 3l-7 7M8 21H3v-5M3 21l7-7M21 16v5h-5M14 14l7 7M3 8V3h5M10 10L3 3"/></svg>
+          <span>随机一则</span>
+        </button>
+        <button type="button" class="icon-btn" data-theme-toggle aria-label="切换深浅色" aria-pressed="false" title="切换深浅色">
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="kicker"><span class="kicker-rule"></span>档案 01 / 口述史</p>
+          <h1 id="hero-title">笑话是历史<br><em>留下的侧影</em></h1>
+          <p class="lede">672 则民间笑话，四种标签，十二个制度诊断域，<span data-classic-total>60</span> 则写作向精注。它们不证明数字，只记录人们在短缺、审查与排队之间，怎样用玩笑绕开真话的成本。</p>
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary" data-random>
+              随手翻一则
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </button>
+            <button type="button" class="btn btn-ghost" data-panel="glossary">先读术语表</button>
+            <button type="button" class="btn btn-ghost" data-panel="writing">写作课</button>
+          </div>
+        </div>
+
+        <aside class="hero-side" aria-label="馆藏统计">
+          <div class="stamp" aria-hidden="true"><span>公开</span><span>阅览</span></div>
+          <dl class="stats">
+            <div><dt>笑话</dt><dd data-stat="jokes">—</dd></div>
+            <div><dt>诊断域</dt><dd data-stat="diagnoses">—</dd></div>
+            <div><dt>术语</dt><dd data-stat="terms">—</dd></div>
+            <div><dt>精注经典</dt><dd data-stat="classic">—</dd></div>
+          </dl>
+          <p class="hero-note">笑话说的是感受，不是事实。<br>凡涉数字与史实，回到术语与诊断来源。</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 随机十则 -->
+    <section class="draw-section" aria-labelledby="draw-heading">
+      <div class="section-head">
+        <div>
+          <p class="kicker"><span class="kicker-rule"></span>RANDOM DRAW</p>
+          <h2 id="draw-heading">随手抽十则</h2>
+          <p class="section-sub">每次抽十则本轮没出现过的笑话。抽完一轮，自动重新洗牌。</p>
+        </div>
+        <div class="section-tools">
+          <span class="draw-progress" id="draw-progress" aria-live="polite">已抽 0 / 0</span>
+          <button type="button" class="btn btn-ghost" data-draw-refresh>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 6.3M20 5v6h-6"/></svg>
+            <span>换十则</span>
+          </button>
+        </div>
+      </div>
+      <div class="draw-grid" id="draw-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- 分类卡捆 -->
+    <section class="category-section" aria-labelledby="category-heading">
+      <div class="section-head">
+        <div>
+          <p class="kicker"><span class="kicker-rule"></span>BY CATEGORY</p>
+          <h2 id="category-heading">按类翻阅</h2>
+          <p class="section-sub">十二捆卡片对应十二个制度诊断域。翻开一捆，就地浏览该类的全部笑话。</p>
+        </div>
+        <span class="section-note">点击卡捆展开</span>
+      </div>
+
+      <div class="deck-grid" id="deck-grid"></div>
+
+      <div class="deck-viewer" id="deck-viewer" hidden>
+        <div class="deck-viewer-head">
+          <div class="deck-viewer-copy">
+            <p class="kicker" id="deck-kicker">CATEGORY</p>
+            <h3 id="deck-title">—</h3>
+            <p id="deck-meta" class="deck-meta"></p>
+          </div>
+          <div class="deck-viewer-actions">
+            <button type="button" class="btn btn-ghost" data-deck-filter>在索引中筛选 →</button>
+            <button type="button" class="icon-btn deck-close" data-deck-close aria-label="收起这类卡片">×</button>
+          </div>
+        </div>
+        <div class="deck-cards" id="deck-cards"></div>
+        <div class="deck-more-wrap">
+          <button type="button" class="btn btn-ghost" data-deck-more hidden>继续翻看</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="archive-zone">
+    <div class="control-bar" id="archive" aria-label="检索与标签筛选">
+      <div class="control-inner">
+        <div class="search-shell">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <input id="q" type="search" placeholder="检索正文、注释、人物或编号……" autocomplete="off" aria-label="检索档案">
+          <kbd class="search-kbd" aria-hidden="true">/</kbd>
+          <button type="button" class="search-clear" data-clear-search hidden aria-label="清除检索">×</button>
+        </div>
+        <div class="control-actions">
+          <button type="button" class="btn btn-ghost classic-btn" data-action="toggle-classic" aria-pressed="false" title="只看精注经典">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8z"/></svg>
+            <span>精注</span>
+            <span class="classic-count" data-classic-count>0</span>
+          </button>
+          <button type="button" class="btn btn-ghost filter-btn" data-action="toggle-filters" aria-expanded="true" aria-controls="filter-shell">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+            <span>标签筛选</span>
+            <span class="filter-badge" data-filter-count hidden>0</span>
+          </button>
+          <button type="button" class="btn btn-ghost sort-btn" data-action="toggle-sort" aria-pressed="false" title="切换编号顺序">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"/></svg>
+            <span data-sort-label>编号 ↑</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section class="control-deck" aria-label="标签筛选">
+      <div class="filter-shell is-open" id="filter-shell">
+        <div class="filter-inner" id="filter-rows"></div>
+      </div>
+    </section>
+
+    <section class="archive" aria-labelledby="index-heading">
+      <div class="archive-head">
+        <div>
+          <p class="kicker"><span class="kicker-rule"></span>ARCHIVE INDEX</p>
+          <h2 id="index-heading">档案索引</h2>
+          <p class="archive-sub">金色「精注」标记的 <span data-classic-total>60</span> 则附写作向三层精注；其余保留原文、标签与制度诊断，不硬做解释。</p>
+        </div>
+        <div class="archive-meta">
+          <p class="count" id="count" aria-live="polite">正在读取档案…</p>
+          <button type="button" class="btn btn-ghost reset-btn" data-action="reset" hidden>重置筛选</button>
+        </div>
+      </div>
+
+      <div class="active-term" id="active-term" hidden></div>
+
+      <div class="masonry" id="list"></div>
+
+      <div class="empty" id="empty" hidden>
+        <p class="empty-mark" aria-hidden="true">∅</p>
+        <h3>没有匹配的档案</h3>
+        <p>换一个关键词，或移除一两个标签。</p>
+        <button type="button" class="btn btn-primary" data-action="reset">重置筛选</button>
+      </div>
+
+      <div class="sentinel" id="sentinel" hidden>
+        <div class="skeleton-row" aria-hidden="true">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+        <p class="sentinel-text"><span class="spinner" aria-hidden="true"></span>正在翻阅下一页…</p>
+      </div>
+
+      <p class="load-end" id="load-end" hidden>档案已翻到末尾 · 共 <span data-end-count>0</span> 则</p>
+    </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark" aria-hidden="true">★</span>
+        <div><strong>苏联笑话档案馆</strong><span>青年马列毛主义驿站 · 文艺频道</span></div>
+      </div>
+      <p class="footer-note">文本来自民间收录编译本，无作者、无首发年代；术语与制度诊断复用同一来源库。60 则经典附写作向三层精注，其余保留原文、标签与诊断。引用编号请写作 <code>joke-083</code>，引用史实请回到诊断与术语来源。</p>
+      <p class="footer-meta">数据版本 <code>1.2.0</code> · 672 则 / 60 则精注 / 20 术语 / 12 诊断域</p>
+    </div>
+  </footer>
+
+  <!-- 详情抽屉 -->
+  <aside class="sheet drawer" id="drawer" aria-hidden="true">
+    <div class="sheet-scrim" data-close></div>
+    <div class="sheet-panel drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1">
+      <header class="sheet-head">
+        <div class="sheet-head-copy">
+          <p class="sheet-kicker" id="drawer-kicker">档案记录</p>
+          <h2 id="drawer-title">加载中</h2>
+        </div>
+        <button type="button" class="icon-btn" data-close aria-label="关闭详情">×</button>
+      </header>
+      <div class="sheet-body" id="drawer-body"></div>
+      <footer class="sheet-foot" id="drawer-foot"></footer>
+    </div>
+  </aside>
+
+  <!-- 宽幅面板：制度诊断 / 术语表 / 阅读说明 -->
+  <aside class="sheet panel" id="panel" aria-hidden="true">
+    <div class="sheet-scrim" data-close></div>
+    <div class="sheet-panel panel-panel" role="dialog" aria-modal="true" aria-labelledby="panel-title" tabindex="-1">
+      <header class="sheet-head">
+        <div class="sheet-head-copy">
+          <p class="sheet-kicker" id="panel-kicker">REFERENCE</p>
+          <h2 id="panel-title">参考资料</h2>
+        </div>
+        <button type="button" class="icon-btn" data-close aria-label="关闭面板">×</button>
+      </header>
+      <div class="sheet-body" id="panel-body"></div>
+    </div>
+  </aside>
+
+  <!-- 术语浮层 -->
+  <div class="popover" id="popover" role="dialog" aria-labelledby="popover-title" hidden>
+    <button type="button" class="popover-close" data-popover-close aria-label="关闭术语说明">×</button>
+    <p class="popover-kicker">术语</p>
+    <h3 id="popover-title"></h3>
+    <p class="popover-period" id="popover-period"></p>
+    <p class="popover-def" id="popover-def"></p>
+    <div class="popover-foot">
+      <span id="popover-count"></span>
+      <button type="button" class="link-btn" data-term-filter>查看相关笑话 →</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <noscript><p class="noscript-note">档案索引需要启用 JavaScript；数据文件仍可直接查看：<a href="data/app-data.json">data/app-data.json</a>。</p></noscript>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

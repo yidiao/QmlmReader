@@ -1,0 +1,154 @@
+/* 趣闻页（原 funfacts.html 趣闻/逸闻部分迁移）——样式自 funfacts 内联块抽取 */
+
+.page-header {
+    background: linear-gradient(135deg, #6b2fa0 0%, #4a1a6b 100%);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+}
+.page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.page-header p { font-size: 1.05rem; opacity: 0.88; }
+
+.gallery-container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+.back-link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: #6b2fa0; text-decoration: none; margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+.back-link:hover { text-decoration: underline; }
+
+/* 卡片网格 */
+.funfacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(460px, 1fr));
+    gap: 1.5rem;
+}
+
+.funfact-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.funfact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.funfact-card.anecdote { border-top: 4px solid #2e7d32; }
+
+.funfact-card-header {
+    padding: 1.25rem 1.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+.funfact-card-header .icon {
+    font-size: 1.4rem;
+}
+.funfact-card-header .title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text-color);
+}
+.funfact-card-header .badge {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 10px;
+    color: white;
+    margin-left: auto;
+}
+.badge-anecdote { background: #2e7d32; }
+
+.funfact-body {
+    padding: 0 1.5rem 1.25rem;
+    font-size: 0.98rem;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+.funfact-body blockquote {
+    border-left: 3px solid #e0e0e0;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: #fafafa;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+}
+
+.funfact-footer {
+    padding: 0.75rem 1.5rem;
+    background: #f9f9f9;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: var(--text-light);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    line-height: 1.6;
+}
+.funfact-footer .reflect-icon {
+    flex-shrink: 0;
+}
+
+/* 跳转苏联笑话档案馆 */
+.archive-crosslink {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--card-bg);
+    border-left: 4px solid #e65100;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: var(--text-color);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.archive-crosslink:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+.archive-crosslink .icon { font-size: 1.6rem; }
+.archive-crosslink .title {
+    display: block;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+.archive-crosslink p {
+    margin: 0.25rem 0 0;
+    font-size: 0.88rem;
+    color: var(--text-light);
+}
+.archive-crosslink .go {
+    margin-left: auto;
+    color: #e65100;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.anecdotes-note {
+    text-align: center;
+    color: #d97706;
+    font-size: 0.85rem;
+    margin-top: 2rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed #e0d0a0;
+}
+
+/* 黑暗模式 */
+body.dark-mode .funfact-body blockquote {
+    background: #2a2a2a;
+    border-left-color: #555;
+}
+body.dark-mode .funfact-footer {
+    background: #2a2a2a;
+}
+body.dark-mode .back-link { color: #b388ff; }
+
+@media (max-width: 768px) {
+    .funfacts-grid { grid-template-columns: 1fr; }
+    .page-header h1 { font-size: 1.8rem; }
+}
