@@ -114,7 +114,7 @@
             'videos': '影像资料', 'poetry': '诗歌', 'anecdotes': '趣闻', 'soviet': '苏联印记',
             'soviet-jokes': '苏联笑话档案馆',
             // Puzzle sub-pages
-            'theory-map': '理论图谱',
+            'theory-map': '理论图谱', 'capital-socialism': '资本主义与社会主义展览',
             // International sub-pages
             'international-column': '专栏', 'international-calendar': '日历',
             'international-memorial': '纪念', 'international-current': '当代共运',

@@ -10,6 +10,10 @@
 ```text
 html/puzzle/puzzle.html            # 模块首页（hub 跳转页），2026-11 起
 html/puzzle/theory-map.html        # 马哲理论拼图 · 理论图谱（六泳道画布，自 puzzle.html 迁入）
+html/puzzle/capital-socialism/     # 资本主义与社会主义展览（独立沉浸页，soviet-jokes 模式）
+├── index.html                     #    由 lineage-redesign.html 改名接入
+├── lineage-redesign.css / .js     #    展览样式与逻辑（含尾部「母站接入层」）
+└── lineage-data.js                #    6.1MB 数据（window.LINEAGE_DATA 全局注入，file:// 兼容）
 ```
 
 ---
@@ -41,6 +45,16 @@ theory-map（标准壳 + 模块 JS）：
 <script src="../../js/darkmode.js"></script>
 <script src="../../js/cursor.js"></script>
 ```
+
+---
+
+## 2.5 资本主义与社会主义展览（capital-socialism/）
+
+- 出处：独立项目 `D:\AI Pj\myProject\资本主义与社会主义展览\prototype\`（2026-11 接入），纯静态、无 CDN、无 fetch，数据经 `<script>` 全局注入（`window.LINEAGE_DATA`），file:// 可开。
+- 接入方式：soviet-jokes 模式——独立沉浸页，不挂全站导航壳；返回入口为工具栏左侧「← 返回驿站」（指向 `../puzzle.html`，.html 后缀不触发部署脚本的 `../` 改写）。
+- 数据体量：`lineage-data.js` 约 6.1MB（55 主干节点 + 1043 档案节点 + 关系 + 61 演绎文本），同步加载，首屏有封面过渡。
+- 未拷贝源仓库的 `archive/`（约 1GB 测试产物）、`scripts/`、`views/`、`data/`、`schemas/`、截图与 MD 文档；`assets/` 经 grep 确认无运行时引用，一并未拷。
+- 页面私有状态：sessionStorage `exhibitIntroSeen`（与站点 `qmlm:state:v1` / `darkMode` 无冲突）；不接全站暗色开关，保留展览自身的纸张美学。
 
 ---
 

@@ -1,0 +1,1547 @@
+:root {
+  /* 保持原有简约档案风格色彩 */
+  --paper: #f1eee5;
+  --surface: #fffdf7;
+  --surface-2: #e8e4d9;
+  --ink: #252822;
+  --muted: #6d736a;
+  --line: #d0cbbf;
+  --line-strong: #8b9084;
+  --capitalism: #9b6b2f;
+  --socialism: #9d4039;
+  --interface: #3f7966;
+  --context: #627389;
+  --reactionary: #6b4b68;
+  --focus: #1b64aa;
+  --shadow: 0 4px 12px rgba(48, 43, 31, .08);
+  --shadow-strong: 0 8px 24px rgba(48, 43, 31, .12);
+  
+  font-family: Inter, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+/* ===== 全画布布局 - 类似星图 ===== */
+.app-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+}
+
+/* ===== 顶部浮动工具栏 - 极简卡片式 ===== */
+.floating-toolbar {
+  position: fixed;
+  z-index: 100;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100vw - 32px);
+  padding: 8px 10px;
+  background: rgba(255, 253, 247, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(12px);
+  transition: border-radius .2s;
+}
+
+.toolbar-expandable {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 10px;
+  min-width: max-content;
+}
+
+.toolbar-drag,
+.toolbar-collapse,
+.toolbar-action {
+  flex: 0 0 auto;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.toolbar-drag {
+  cursor: grab;
+  font-size: 18px;
+  touch-action: none;
+}
+
+.floating-toolbar.dragging .toolbar-drag { cursor: grabbing; }
+
+.toolbar-action.active {
+  border-color: var(--interface);
+  background: rgba(63, 121, 102, .1);
+  color: var(--interface);
+}
+
+.toolbar-collapse {
+  min-width: 36px;
+  margin-left: 2px;
+  border-radius: 50%;
+  background: var(--paper);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.toolbar-collapse span { display: block; transform: translateY(-1px); }
+
+.floating-toolbar.collapsed .toolbar-expandable,
+.floating-toolbar.collapsed .toolbar-drag {
+  display: none;
+}
+
+.floating-toolbar.collapsed {
+  border-radius: 999px;
+}
+
+.floating-toolbar.collapsed .toolbar-brand {
+  border-right: 0;
+  padding-right: 2px;
+}
+
+.toolbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 12px;
+  border-right: 1px solid var(--line);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.toolbar-search-wrap {
+  min-width: 280px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.toolbar-search-wrap:focus-within {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 2px rgba(27, 100, 170, 0.1);
+}
+
+.search-icon {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.toolbar-search {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.toolbar-search-wrap kbd {
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--paper);
+  color: var(--muted);
+  font: 11px/1.5 "IBM Plex Mono", Consolas, monospace;
+}
+
+.toolbar-filters {
+  display: flex;
+  gap: 6px;
+}
+
+.filter-chip {
+  flex: 0 0 auto;
+  padding: 5px 12px;
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-chip:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.filter-chip.active {
+  background: var(--ink);
+  color: var(--surface);
+  border-color: var(--ink);
+}
+
+.canvas-status {
+  position: fixed;
+  z-index: 90;
+  top: 84px;
+  left: 80px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 1px solid rgba(208, 203, 191, .8);
+  border-radius: 7px;
+  background: rgba(255, 253, 247, .82);
+  box-shadow: 0 2px 8px rgba(48, 43, 31, .05);
+  backdrop-filter: blur(8px);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--interface);
+  box-shadow: 0 0 0 3px rgba(63, 121, 102, .12);
+}
+
+.status-coordinate,
+.status-hint {
+  display: inline-flex;
+  align-items: center;
+}
+
+.status-coordinate::before,
+.status-hint::before {
+  content: "";
+  display: inline-block;
+  height: 12px;
+  margin: 0 8px 0 2px;
+  border-left: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.status-coordinate {
+  color: var(--ink);
+  font-family: "IBM Plex Mono", Consolas, monospace;
+}
+
+/* ===== 主画布区域 ===== */
+.canvas-workspace {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.canvas-workspace.dragging {
+  cursor: grabbing;
+}
+
+.evolution-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* ===== 追踪坐标轴：刻度与画布使用同一组平移、缩放参数 ===== */
+.axis-horizontal {
+  position: fixed;
+  bottom: 0;
+  left: 60px;
+  right: 0;
+  height: 64px;
+  overflow: hidden;
+  background: rgba(241, 238, 229, .92);
+  border-top: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+  z-index: 80;
+}
+
+.axis-horizontal-viewport,
+.axis-vertical-viewport {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.axis-horizontal-ruler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.time-marker {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  padding: 10px 12px;
+  overflow: hidden;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  text-align: center;
+}
+
+.time-marker::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 8px;
+  background: var(--line-strong);
+}
+
+.time-marker-label {
+  display: inline-block;
+  max-width: 90%;
+  transform: scaleX(var(--label-scale, 1));
+  white-space: nowrap;
+  font: 11px/1.5 "IBM Plex Mono", Consolas, monospace;
+  letter-spacing: .04em;
+}
+
+.time-marker:hover,
+.time-marker.active {
+  color: var(--ink);
+  background: rgba(255, 253, 247, .58);
+}
+
+.time-marker.active::after {
+  width: 2px;
+  height: 13px;
+  background: var(--focus);
+}
+
+.axis-vertical {
+  position: fixed;
+  top: 0;
+  bottom: 64px;
+  left: 0;
+  width: 60px;
+  overflow: hidden;
+  background: rgba(241, 238, 229, .92);
+  border-right: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+  z-index: 80;
+}
+
+.axis-vertical-ruler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.lane-marker {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 12px 8px;
+  overflow: hidden;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-left: 3px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  writing-mode: vertical-rl;
+}
+
+.lane-marker-label {
+  display: inline-block;
+  max-height: 90%;
+  transform: scaleY(var(--label-scale, 1));
+  white-space: nowrap;
+  font: 10px/1.5 "IBM Plex Mono", Consolas, monospace;
+  letter-spacing: .08em;
+}
+
+.lane-marker:hover,
+.lane-marker.active {
+  color: var(--ink);
+  border-left-color: var(--lane-color);
+  background: rgba(255, 253, 247, .62);
+}
+
+.axis-cursor {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.axis-cursor-x {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: 1px solid rgba(27, 100, 170, .55);
+}
+
+.axis-cursor-y {
+  top: 50%;
+  left: 0;
+  right: 0;
+  border-top: 1px solid rgba(27, 100, 170, .55);
+}
+
+/* ===== 网格背景 - 固定在画布上 ===== */
+.canvas-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.canvas-grid-line-h,
+.canvas-grid-line-v {
+  position: absolute;
+  background: var(--line);
+}
+
+.canvas-grid-line-h {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.canvas-grid-line-v {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+/* ===== 节点卡片 - 改进防重叠 ===== */
+.node-card {
+  position: absolute;
+  width: 204px;
+  min-height: 108px;
+  padding: 12px;
+  border: 1px solid var(--line-strong);
+  border-left: 4px solid var(--accent);
+  border-radius: 4px;
+  background: rgba(255, 253, 247, 0.98);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.node-card:hover {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 2px rgba(27, 100, 170, 0.2), var(--shadow-strong);
+  transform: translate(-50%, -50%) scale(1.03);
+  z-index: 20;
+}
+
+.node-card.active {
+  border-color: var(--focus);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(27, 100, 170, 0.25), var(--shadow-strong);
+  z-index: 30;
+}
+
+.node-card.dimmed {
+  opacity: 0.25;
+  filter: grayscale(0.3);
+}
+
+.node-card.related {
+  box-shadow: 0 0 0 1px rgba(27, 100, 170, 0.15), var(--shadow);
+}
+
+.branch-toggle {
+  position: absolute;
+  right: -10px;
+  bottom: -10px;
+  min-width: 27px;
+  height: 24px;
+  padding: 0 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--surface);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  font: 10px/1 "IBM Plex Mono", Consolas, monospace;
+}
+.branch-toggle:hover { background: var(--focus); }
+
+.node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.node-title {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.node-summary { margin: -2px 0 8px; min-height: 28px; color: var(--muted); font-size: 10px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+.node-indicator {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-left: 8px;
+}
+
+.node-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.node-time {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.node-role {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ===== 重大转折：菱形事件 / 六边形组织，嵌入主干交汇处 ===== */
+.milestone-card {
+  position: absolute;
+  z-index: 16;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 170px;
+  padding: 5px 9px 5px 5px;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 253, 247, .92);
+  box-shadow: 0 2px 9px rgba(48, 43, 31, .12);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+.milestone-glyph {
+  display: grid;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  color: var(--socialism);
+  font-size: 18px;
+}
+.milestone-card.organization .milestone-glyph { color: var(--context); }
+.milestone-copy, .milestone-copy strong, .milestone-copy span { display: block; }
+.milestone-copy strong { font-size: 11px; line-height: 1.25; }
+.milestone-copy .milestone-year { color: var(--muted); font: 8px/1.3 "IBM Plex Mono", Consolas, monospace; }
+.milestone-card:hover { box-shadow: 0 0 0 2px var(--focus), var(--shadow-strong); }
+
+.edge-layer path.milestone-link {
+  stroke: var(--socialism);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 5;
+  opacity: .65;
+}
+
+/* ===== 连线层 ===== */
+.edge-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.edge-layer path {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  transition: opacity .25s, stroke-width .25s;
+}
+
+.edge-layer path.lineage {
+  stroke: #596d60;
+  stroke-width: 2.4;
+  opacity: .82;
+}
+
+.edge-layer path.lineage.curatorial {
+  stroke-dasharray: 6 5;
+  opacity: .55;
+  stroke-width: 2;
+}
+
+.edge-layer path.secondary {
+  stroke-width: 2;
+  stroke-dasharray: 7 5;
+  opacity: .78;
+}
+
+.edge-layer path.influence { stroke: #366c9a; }
+.edge-layer path.institutional { stroke: #8d6528; }
+.edge-layer path.conflict { stroke: #a33d45; stroke-dasharray: 3 4; }
+.edge-layer path.secondary.lineage { stroke: #5e4e83; }
+
+.edge-layer path.highlight {
+  stroke: var(--focus);
+  stroke-width: 3;
+  opacity: 1;
+}
+
+.edge-layer path.dimmed {
+  opacity: 0.1;
+}
+
+.edge-legend {
+  position: fixed;
+  z-index: 82;
+  left: 76px;
+  bottom: 78px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  max-width: 520px;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: rgba(255, 253, 247, .9);
+  box-shadow: var(--shadow);
+  color: var(--muted);
+  font-size: 10px;
+  pointer-events: none;
+}
+.edge-legend span { display: flex; align-items: center; gap: 5px; }
+.legend-line { display: inline-block; width: 22px; border-top: 2px solid; }
+.legend-line.lineage { border-color: #596d60; }
+.legend-line.influence { border-color: #366c9a; border-top-style: dashed; }
+.legend-line.institutional { border-color: #8d6528; border-top-style: dashed; }
+.legend-line.conflict { border-color: #a33d45; border-top-style: dotted; }
+.legend-event { width: 9px; height: 9px; background: var(--socialism); transform: rotate(45deg); }
+
+/* ===== 右下角控制面板 - 浮动卡片 ===== */
+.control-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 90;
+}
+
+.control-group {
+  background: rgba(255, 253, 247, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.control-button:hover:not(:disabled) {
+  border-color: var(--focus);
+  background: rgba(27, 100, 170, 0.08);
+}
+
+.control-button:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.zoom-display {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  padding: 4px 0;
+}
+
+/* ===== 侧边详情面板 - 滑出式 ===== */
+.detail-panel {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  bottom: 64px;
+  width: 400px;
+  background: rgba(255, 253, 247, 0.98);
+  border-left: 1px solid var(--line);
+  box-shadow: -4px 0 24px rgba(48, 43, 31, 0.08);
+  backdrop-filter: blur(12px);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 85;
+  overflow-y: auto;
+}
+
+.detail-panel.visible {
+  transform: translateX(0);
+}
+
+.detail-header {
+  position: sticky;
+  top: 0;
+  min-height: 64px;
+  padding: 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  z-index: 10;
+}
+
+.detail-header-label {
+  color: var(--muted);
+  font: 11px/1.5 "IBM Plex Mono", Consolas, monospace;
+  letter-spacing: .12em;
+}
+
+.detail-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.detail-close:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.detail-tabs {
+  position: sticky;
+  top: 64px;
+  z-index: 9;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 253, 247, .98);
+}
+.detail-tabs button { padding: 10px 4px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); cursor: pointer; font-size: 11px; }
+.detail-tabs button.active { border-bottom-color: var(--focus); color: var(--ink); font-weight: 600; }
+.detail-body { padding: 20px; }
+.detail-tab-panel[hidden] { display: none; }
+.source-list { display: flex; flex-direction: column; gap: 9px; }
+.source-card { display: block; padding: 12px; border: 1px solid var(--line); border-left: 3px solid var(--context); border-radius: 5px; background: var(--surface); color: inherit; text-decoration: none; }
+.source-card:hover { border-color: var(--focus); }
+.source-card span, .source-card strong, .source-card small, .source-card em { display: block; }
+.source-card span { color: var(--muted); font: 9px/1.4 "IBM Plex Mono", Consolas, monospace; }
+.source-card strong { margin: 5px 0; color: var(--ink); font-size: 12px; line-height: 1.45; }
+.source-card small { color: var(--muted); line-height: 1.5; }
+.source-card p { margin-top: 8px; font-size: 11px; }
+.source-card em { margin-top: 7px; color: var(--focus); font-size: 10px; font-style: normal; }
+.source-card.missing { border-style: dashed; }
+.curation-status { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+.curation-status span { padding: 5px 8px; border-radius: 4px; background: var(--paper); color: var(--muted); font-size: 10px; }
+
+.detail-section {
+  margin-bottom: 24px;
+}
+
+.detail-section-title {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.detail-section h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.detail-section p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.detail-english { margin: -6px 0 8px; font-size: 13px !important; }
+.detail-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.detail-tags span { padding: 4px 7px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 10px; }
+.detail-tag-chips { margin-top: 8px; }
+.detail-tag-chips .tag-chip { border-style: dashed; color: var(--ink); }
+.detail-tag-chips .tag-chip:hover { border-color: var(--accent); }
+.detail-inline { display: grid; grid-template-columns: 54px 1fr; gap: 8px; margin-top: 12px; padding: 10px 12px; border-left: 2px solid var(--context); background: var(--paper); color: var(--muted); font-size: 12px; }
+.detail-inline b { color: var(--ink); }
+.detail-link-list { display: flex; flex-direction: column; gap: 7px; }
+.detail-link-row { width: 100%; display: flex; justify-content: space-between; gap: 12px; padding: 10px 11px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); cursor: pointer; text-align: left; }
+.detail-link-row:hover { border-color: var(--focus); background: rgba(27, 100, 170, .035); }
+.detail-link-row span, .detail-link-row strong, .detail-link-row small { display: block; }
+.detail-link-row strong { color: var(--ink); font-size: 12px; }
+.detail-link-row small { margin-top: 3px; color: var(--muted); font-size: 9px; }
+.detail-link-row em { align-self: center; color: var(--muted); font-size: 9px; font-style: normal; text-align: right; }
+.detail-empty { padding: 14px; border: 1px dashed var(--line); text-align: center; font-size: 12px !important; }
+/* 史实关系与证据列表 */
+.detail-hint { margin: 0 0 10px; color: var(--muted); font-size: 10.5px !important; line-height: 1.6; }
+.relation-row { padding: 0 0 10px; border-bottom: 1px dashed var(--line); margin-bottom: 10px; }
+.relation-row:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.evidence-badge { display: inline-block; margin-top: 4px; padding: 1px 5px; border-radius: 999px; border: 1px solid var(--line); font-size: 9px; }
+.evidence-badge.ok { color: var(--focus); border-color: rgba(27, 100, 170, .35); background: rgba(27, 100, 170, .05); }
+.evidence-badge.none { color: #9a5a1f; border-color: rgba(154, 90, 31, .3); background: rgba(154, 90, 31, .05); }
+.evidence-list { list-style: none; margin: 8px 0 0; padding: 0 0 0 2px; display: grid; gap: 7px; }
+.evidence-row { display: flex; gap: 8px; align-items: flex-start; }
+.evidence-row p { margin: 0; color: var(--ink); font-size: 11.5px !important; line-height: 1.55; }
+.evidence-row small { display: block; margin-top: 2px; color: var(--muted); font-size: 9px; line-height: 1.5; }
+.evidence-mark { flex: none; width: 16px; height: 16px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-size: 9.5px; font-weight: 600; }
+.evidence-mark.pro { color: #1b644a; background: rgba(27, 100, 74, .1); border: 1px solid rgba(27, 100, 74, .3); }
+.evidence-mark.contra { color: #9c2f2f; background: rgba(156, 47, 47, .09); border: 1px solid rgba(156, 47, 47, .3); }
+.evidence-empty { margin: 7px 0 0; color: #9a5a1f; font-size: 10px !important; }
+.lineage-row { background: var(--paper); border-style: dashed; }
+.primary-action { width: 100%; margin-top: 10px; }
+.detail-source-summary { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+.detail-source-summary strong { color: var(--ink); font-size: 24px; }
+.detail-source-summary span { color: var(--muted); font-size: 11px; }
+
+.detail-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.detail-meta-item {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+}
+
+.detail-meta-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.detail-meta-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.detail-relations {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.relation-item {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.relation-item:hover {
+  border-color: var(--focus);
+  background: rgba(27, 100, 170, 0.04);
+}
+
+.relation-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.relation-type {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.directory-repository-note p { color: var(--muted); font-size: 10px; line-height: 1.65; }
+
+/* ===== 目录模式覆盖层 ===== */
+.directory-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(37, 40, 34, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.directory-overlay.visible {
+  display: flex;
+}
+
+.directory-modal {
+  width: min(1200px, calc(100vw - 80px));
+  max-height: calc(100vh - 80px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 24px 48px rgba(48, 43, 31, 0.16);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.directory-header {
+  position: relative;
+  padding: 24px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.directory-header .detail-close {
+  top: 18px;
+  right: 20px;
+}
+
+.directory-header h2 {
+  font-size: 20px;
+  color: var(--ink);
+}
+
+.directory-search-bar {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 12px;
+}
+
+.directory-search-bar input {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper);
+  font-size: 14px;
+}
+
+.directory-count {
+  align-self: center;
+  color: var(--muted);
+  font: 11px/1.5 "IBM Plex Mono", Consolas, monospace;
+  white-space: nowrap;
+}
+
+.directory-layout {
+  min-height: 0;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 230px 1fr;
+}
+
+.directory-sidebar {
+  overflow-y: auto;
+  padding: 20px 16px;
+  border-right: 1px solid var(--line);
+  background: rgba(241, 238, 229, .55);
+}
+
+.directory-filter-group + .directory-filter-group { margin-top: 22px; }
+.directory-filter-title {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font: 10px/1.5 "IBM Plex Mono", Consolas, monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.directory-nav-item,
+.topic-link {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 9px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  text-align: left;
+}
+
+.directory-nav-item:hover,
+.directory-nav-item.active,
+.topic-link:hover { background: var(--surface); color: var(--ink); }
+.directory-nav-item.active { box-shadow: inset 3px 0 var(--focus); }
+.directory-nav-item small { color: var(--muted); }
+.topic-link { font-size: 12px; line-height: 1.4; }
+.topic-link small { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; }
+
+#directorySort {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--surface);
+}
+
+.directory-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  align-content: start;
+}
+
+.directory-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 4px;
+  background: var(--paper);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  transition: all 0.2s;
+}
+
+.directory-card:hover {
+  border-color: var(--focus);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.directory-card-title,
+.directory-card-meta,
+.directory-card-summary {
+  display: block;
+}
+
+.directory-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.directory-card-meta {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.directory-card-summary {
+  display: -webkit-box;
+  margin-top: 10px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  align-self: center;
+  padding: 56px 24px;
+  color: var(--ink);
+  text-align: center;
+  font-size: 16px;
+}
+
+.empty-state span {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* 导览进行中：解说条在桌面端让开档案面板 */
+@media (min-width: 981px) {
+  body.tour-open .tour-bar {
+    left: calc((100vw - 400px) / 2);
+    width: min(720px, calc(100vw - 400px - 48px));
+  }
+}
+
+/* 导览进行中：图例让位给解说条 */
+body.tour-open .edge-legend {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 1180px) {
+  .floating-toolbar {
+    left: 60px;
+    right: 12px;
+    width: auto;
+    transform: none;
+  }
+  .toolbar-search-wrap { min-width: 0; flex: 1 1 160px; }
+  .toolbar-search-wrap kbd { display: none; }
+  .toolbar-filters { display: none; }
+}
+
+@media (max-width: 980px) {
+  .floating-toolbar {
+    left: 48px;
+    right: 12px;
+    transform: none;
+    flex-wrap: wrap;
+  }
+
+  .toolbar-brand { display: none; }
+
+  .toolbar-expandable {
+    min-width: 0;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+  }
+  
+  .toolbar-search-wrap {
+    min-width: 200px;
+    flex: 1;
+  }
+  
+  .detail-panel {
+    width: 100%;
+    top: auto;
+    bottom: 0;
+    height: 50vh;
+    border-left: none;
+    border-top: 1px solid var(--line);
+    transform: translateY(100%);
+  }
+  
+  .detail-panel.visible {
+    transform: translateY(0);
+  }
+  
+  .axis-horizontal {
+    left: 40px;
+    height: 52px;
+  }
+  
+  .axis-vertical {
+    width: 40px;
+    bottom: 52px;
+  }
+
+  .time-marker-label {
+    font-size: 10px;
+  }
+
+  .lane-marker-label {
+    font-size: 9px;
+  }
+  
+  .control-panel {
+    right: 12px;
+    bottom: 76px;
+  }
+
+  /* 小屏导览时，档案面板让位给解说条 */
+  body.tour-open .detail-panel { display: none; }
+  body.tour-open .control-panel { display: none; }
+}
+
+@media (max-width: 680px) {
+  .floating-toolbar {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    padding: 8px 12px;
+  }
+  
+  .toolbar-brand {
+    font-size: 12px;
+  }
+  
+  .toolbar-filters {
+    display: none;
+  }
+
+  .canvas-status {
+    top: 78px;
+    left: 52px;
+  }
+
+  .status-hint {
+    display: none;
+  }
+  
+  .directory-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .directory-sidebar {
+    max-height: 190px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .directory-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* ===== 辅助功能 ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+*:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ===== 展览层：封面 / 导览 / 方法说明 / 空状态 ===== */
+.exhibit-intro {
+  position: fixed; inset: 0; z-index: 300; display: grid; place-items: center;
+  padding: 32px; background: rgba(37, 40, 34, .42); backdrop-filter: blur(10px);
+}
+.exhibit-intro[hidden] { display: none; }
+.intro-card {
+  position: relative; width: min(760px, 100%); padding: 44px 48px 36px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: 0 32px 64px rgba(37, 40, 34, .22);
+}
+.intro-card::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px;
+  border-radius: 14px 14px 0 0;
+  background: linear-gradient(90deg, var(--capitalism), var(--interface), var(--socialism));
+}
+.intro-kicker { font: 10px/1.6 "IBM Plex Mono", Consolas, monospace; letter-spacing: .22em; color: var(--muted); }
+.intro-card h1 {
+  margin: 10px 0 6px; font-family: "Songti SC", "Noto Serif SC", STSong, SimSun, serif;
+  font-size: 42px; line-height: 1.15; letter-spacing: .02em; color: var(--ink); font-weight: 600;
+}
+.intro-subtitle { font-size: 15px; color: var(--muted); letter-spacing: .04em; }
+.intro-lede { margin-top: 18px; max-width: 56em; color: var(--ink); font-size: 14px; line-height: 1.9; }
+.intro-stats { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 4px; }
+.intro-stats span {
+  padding: 7px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper);
+  color: var(--muted); font: 11px/1.4 "IBM Plex Mono", Consolas, monospace;
+}
+.intro-stats b { color: var(--ink); font-weight: 600; }
+.intro-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.intro-primary, .intro-secondary {
+  height: 40px; padding: 0 20px; border-radius: 8px; font-size: 13px; cursor: pointer;
+  transition: background .18s, border-color .18s, color .18s;
+}
+.intro-primary { border: 1px solid var(--ink); background: var(--ink); color: var(--surface); font-weight: 600; }
+.intro-primary:hover { background: #3a3f36; }
+.intro-secondary { border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.intro-secondary:hover { border-color: var(--ink); }
+.intro-hint { margin-top: 22px; color: var(--muted); font-size: 11px; letter-spacing: .02em; }
+@media (max-width: 680px) {
+  .intro-card { padding: 28px 22px 24px; }
+  .intro-card h1 { font-size: 30px; }
+  .intro-lede { font-size: 13px; }
+}
+
+/* 导览路线 */
+.tour-bar {
+  position: fixed; z-index: 120; left: 50%; bottom: 84px; transform: translateX(-50%);
+  display: flex; gap: 18px; align-items: flex-start; width: min(720px, calc(100vw - 48px));
+  padding: 14px 18px; border: 1px solid var(--line-strong); border-radius: 12px;
+  background: rgba(255, 253, 247, .97); box-shadow: var(--shadow-strong); backdrop-filter: blur(14px);
+}
+.tour-bar[hidden] { display: none; }
+.tour-progress {
+  flex: 0 0 auto; padding-top: 2px; color: var(--muted);
+  font: 10px/1.6 "IBM Plex Mono", Consolas, monospace; letter-spacing: .08em; white-space: nowrap;
+}
+.tour-copy { flex: 1; min-width: 0; }
+.tour-copy strong { display: block; font-size: 14px; color: var(--ink); }
+.tour-copy p { margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.65; }
+.tour-actions { display: flex; flex: 0 0 auto; gap: 6px; }
+.tour-actions button {
+  height: 30px; padding: 0 12px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--surface); color: var(--ink); font-size: 11px; cursor: pointer;
+}
+.tour-actions button:hover:not(:disabled) { border-color: var(--focus); color: var(--focus); }
+.tour-actions button:disabled { opacity: .4; cursor: not-allowed; }
+.tour-actions #tourExit { color: var(--muted); }
+@media (max-width: 980px) {
+  .tour-bar { bottom: 64px; flex-wrap: wrap; }
+  .tour-actions { width: 100%; justify-content: flex-end; }
+}
+
+/* 关于本展 */
+.about-overlay {
+  position: fixed; inset: 0; z-index: 300; display: grid; place-items: center;
+  padding: 32px; background: rgba(37, 40, 34, .42); backdrop-filter: blur(10px);
+}
+.about-overlay[hidden] { display: none; }
+.about-modal {
+  display: flex; flex-direction: column; width: min(760px, 100%); max-height: calc(100vh - 64px);
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: 0 32px 64px rgba(37, 40, 34, .22); overflow: hidden;
+}
+.about-header { position: relative; display: flex; justify-content: space-between; padding: 22px 28px; border-bottom: 1px solid var(--line); }
+.about-header h2 { font-size: 20px; }
+.about-body { padding: 8px 28px 28px; overflow-y: auto; }
+.about-section { padding: 18px 0; border-bottom: 1px solid var(--line); }
+.about-section:last-child { border-bottom: 0; }
+.about-section h3 { margin-bottom: 9px; color: var(--muted); font: 10px/1.5 "IBM Plex Mono", Consolas, monospace; letter-spacing: .16em; text-transform: uppercase; }
+.about-section p { margin-bottom: 9px; color: var(--ink); font-size: 13px; line-height: 1.85; }
+.about-section p:last-child { margin-bottom: 0; }
+.about-section dl { display: grid; grid-template-columns: 128px 1fr; gap: 8px 14px; font-size: 12px; }
+.about-section dt { color: var(--muted); }
+.about-section dd { color: var(--ink); }
+.about-keys { display: flex; flex-wrap: wrap; gap: 8px; }
+.about-keys span {
+  display: flex; align-items: center; gap: 6px; padding: 6px 9px; border: 1px solid var(--line);
+  border-radius: 6px; color: var(--muted); font-size: 11px;
+}
+.about-keys kbd {
+  padding: 1px 6px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px;
+  background: var(--paper); font: 10px/1.5 "IBM Plex Mono", Consolas, monospace; color: var(--ink);
+}
+
+/* 空状态 */
+.canvas-empty {
+  position: absolute; z-index: 40; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 28px 34px; border: 1px dashed var(--line-strong); border-radius: 10px;
+  background: rgba(255, 253, 247, .94); box-shadow: var(--shadow); text-align: center;
+}
+.canvas-empty[hidden] { display: none; }
+.canvas-empty strong { font-size: 15px; color: var(--ink); }
+.canvas-empty span { color: var(--muted); font-size: 12px; }
+.canvas-empty button {
+  height: 32px; padding: 0 14px; border: 1px solid var(--ink); border-radius: 6px;
+  background: var(--ink); color: var(--surface); font-size: 12px; cursor: pointer;
+}
+
+/* 详情打开时，右下角控制面板向左让位，避免压住档案内容 */
+body.detail-open .control-panel { right: 416px; }
+body.detail-open .control-panel { transition: right .25s ease; }
+@media (max-width: 980px) {
+  body.detail-open .control-panel { display: none; }
+}
+
+/* 图例：策展父边 */
+.legend-line.curatorial { border-color: #596d60; border-top-style: dashed; opacity: .8; }
+
+/* ===== S4 缩放语义层级：远景结构 / 中景节点 / 近景档案 ===== */
+.node-heading { flex: 1; min-width: 0; }
+.node-english {
+  display: none;
+  margin-top: 2px;
+  color: var(--muted);
+  font: 9px/1.35 "IBM Plex Mono", Consolas, monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.evolution-canvas[data-zoom-level="far"] .node-card {
+  min-height: 0;
+  padding: 8px 10px;
+  border-left-width: 3px;
+  background: rgba(255, 253, 247, .96);
+}
+.evolution-canvas[data-zoom-level="far"] .node-header { margin-bottom: 0; }
+.evolution-canvas[data-zoom-level="far"] .node-title { font-size: 13px; line-height: 1.25; }
+.evolution-canvas[data-zoom-level="far"] .node-summary,
+.evolution-canvas[data-zoom-level="far"] .node-meta,
+.evolution-canvas[data-zoom-level="far"] .node-english { display: none; }
+.evolution-canvas[data-zoom-level="far"] .milestone-copy { display: none; }
+.evolution-canvas[data-zoom-level="far"] .milestone-card { max-width: none; padding: 3px; }
+
+.evolution-canvas[data-zoom-level="near"] .node-english { display: block; }
+.evolution-canvas[data-zoom-level="near"] .node-header { margin-bottom: 6px; }
+.evolution-canvas[data-zoom-level="near"] .node-summary {
+  -webkit-line-clamp: 3;
+  margin-bottom: 5px;
+  font-size: 10.5px;
+  line-height: 1.35;
+}
+.evolution-canvas[data-zoom-level="near"] .node-meta {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1px 9px;
+}
+.evolution-canvas[data-zoom-level="near"] .node-role { font-size: 10px; }
+
+.zoom-tier {
+  padding: 0 0 2px;
+  color: var(--muted);
+  font: 9px/1.4 "IBM Plex Mono", Consolas, monospace;
+  letter-spacing: .08em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ===== 深读 / DEEP DIVE ===== */
+.deep-intro { border-left: 3px solid var(--context); padding-left: 12px; }
+.deep-section p { color: var(--ink); font-size: 12.5px; line-height: 1.8; }
+.deep-section + .deep-section { border-top: 1px dashed var(--line); padding-top: 14px; }
+.deep-legacy-note { margin-top: 4px; }
+.detail-tabs button { letter-spacing: .02em; }
+
+.deep-jump { margin: 10px 0 2px; padding: 8px 10px; border: 1px solid var(--context); border-radius: 5px; background: transparent; color: var(--context); font: 11px/1.4 "IBM Plex Mono", Consolas, monospace; cursor: pointer; text-align: left; }
+.deep-jump:hover { border-color: var(--focus); color: var(--focus); }
+
+/* ===== 演绎面板（左侧，与右侧档案详情互斥） ===== */
+.lesson-panel {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  bottom: 64px;
+  width: 460px;
+  max-width: 96vw;
+  background: rgba(255, 253, 247, 0.985);
+  border-right: 1px solid var(--line);
+  box-shadow: 4px 0 24px rgba(48, 43, 31, 0.1);
+  backdrop-filter: blur(12px);
+  transform: translateX(-102%);
+  transition: transform 0.3s ease;
+  z-index: 88;
+  display: flex;
+  flex-direction: column;
+}
+.lesson-panel.visible { transform: translateX(0); }
+.lesson-body { flex: 1; overflow-y: auto; padding: 18px 22px 56px; }
+.lesson-head h2 { margin: 0 0 4px; font-size: 20px; color: var(--ink); }
+.lesson-head p { margin: 0 0 16px; color: var(--muted); font-size: 11px; }
+.lesson-section { margin: 0 0 22px; }
+.lesson-section h3 { margin: 0 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); font-size: 13px; letter-spacing: .04em; color: var(--ink); }
+.lesson-block { margin: 0 0 14px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.lesson-block.pro { border-left: 3px solid #1b644a; }
+.lesson-block.contra { border-left: 3px solid #9c2f2f; }
+.lesson-block.editorial { border-left: 3px solid var(--focus); background: rgba(27, 100, 170, .04); }
+.lesson-block-kind { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.lesson-block h4 { margin: 4px 0 6px; font-size: 13px; color: var(--ink); }
+.lesson-block p { margin: 0; font-size: 12.5px !important; line-height: 1.85; color: var(--ink); }
+.lesson-cites { margin: 8px 0 0; padding-left: 16px; color: var(--muted); font-size: 10px; line-height: 1.7; }
+.lesson-cites a { color: var(--focus); text-decoration: none; }
+.lesson-cites li { margin-bottom: 4px; }
+.lesson-cite-quote { margin: 0 0 3px; padding: 4px 0 4px 8px; border-left: 2px solid var(--line, #d8d2c4); color: var(--ink, #2b2b2b); font-size: 11px; line-height: 1.6; font-style: italic; }
+.lesson-falsify { margin-top: 8px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 6px; background: var(--paper); }
+.lesson-falsify b { font-size: 10px; letter-spacing: .08em; color: var(--muted); }
+.lesson-falsify p { margin: 6px 0 0; font-size: 12px !important; line-height: 1.8; }
+.lesson-jump { margin: 10px 10px 0 0; padding: 7px 11px; border: 1px solid var(--focus); border-radius: 4px; background: rgba(27, 100, 170, .06); color: var(--focus); font-size: 11px; cursor: pointer; }
+.lesson-jump:hover { background: rgba(27, 100, 170, .12); }
+body.lesson-open .detail-panel { transform: translateX(100%); }
+@media (max-width: 760px) {
+  .lesson-panel { top: 64px; bottom: 56px; width: 100vw; max-width: 100vw; }
+}
+
+/* 已核实过、确实找不到正文的关系：把核查结论直接写出来，不留空话 */
+.evidence-empty-checked {
+  border-left: 2px solid var(--focus);
+  padding-left: 8px;
+  color: var(--ink);
+  opacity: 0.78;
+}
+
+/* 演绎目录 */
+.lesson-index-list { display: flex; flex-direction: column; gap: 6px; }
+.lesson-index-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "title meta" "en meta";
+  gap: 2px 10px;
+  text-align: left;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  cursor: pointer;
+}
+.lesson-index-item:hover { border-color: var(--focus); background: rgba(27, 100, 170, .05); }
+.lesson-index-item strong { grid-area: title; font-size: 12.5px; color: var(--ink); }
+.lesson-index-item small { grid-area: en; font-size: 10px; color: var(--muted); }
+.lesson-index-item em { grid-area: meta; align-self: center; font-style: normal; font-size: 10px; color: var(--muted); white-space: nowrap; }
+
+/* ===== 母站接入层（QmlmReader · 2026-11）===== */
+/* 返回理论拼图模块首页的链接。href 用 ../puzzle.html（.html 后缀
+   不触发部署脚本的 ../ 路径改写规则）。窄屏只留 ← 箭头。 */
+.toolbar-back {
+  display: flex;
+  align-items: center;
+  padding-right: 12px;
+  border-right: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--interface);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.toolbar-back:hover { text-decoration: underline; }
+@media (max-width: 760px) {
+  .toolbar-back { padding-right: 8px; }
+  .toolbar-back .back-text { display: none; }
+}

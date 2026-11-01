@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>资本主义与社会主义 · 历史演化总图 - 青年马列毛主义驿站</title>
+  <meta name="description" content="一张把资本主义与社会主义放回时间与领域坐标的历史演化总图：55 个主干节点、1044 个档案节点、1020 条来源，实线为事实关系，虚线为策展结构。" />
+  <meta name="theme-color" content="#f1eee5" />
+  <link rel="stylesheet" href="lineage-redesign.css?v=20261031" />
+</head>
+<body>
+  <!-- 全画布容器 -->
+  <div class="app-container">
+    
+    <!-- 顶部浮动工具栏 -->
+    <div class="floating-toolbar" id="floatingToolbar">
+      <button class="toolbar-drag" id="toolbarDrag" title="拖动工具栏" aria-label="拖动工具栏">⠿</button>
+      <a class="toolbar-back" href="../puzzle.html" title="返回理论拼图模块首页"><span aria-hidden="true">←</span><span class="back-text">&nbsp;返回驿站</span></a>
+      <div class="toolbar-brand">
+        <span>资本主义与社会主义</span>
+      </div>
+      <div class="toolbar-expandable" id="toolbarExpandable">
+        <label class="toolbar-search-wrap">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input type="search" class="toolbar-search" placeholder="搜索主干节点…" id="globalSearch" aria-label="搜索主干节点" />
+          <kbd>/</kbd>
+        </label>
+        <div class="toolbar-filters" aria-label="领域筛选">
+          <button class="filter-chip" data-filter="all">全部</button>
+          <button class="filter-chip" data-filter="capitalism">资本主义</button>
+          <button class="filter-chip" data-filter="socialism">社会主义</button>
+          <button class="filter-chip" data-filter="interface">交错</button>
+          <button class="filter-chip" data-filter="context">条件</button>
+        </div>
+        <button class="toolbar-action active" id="milestoneToggle" title="显示或隐藏重要事件">事件</button>
+        <button class="toolbar-action" id="densityToggle" title="显示全部 55 个主干节点（含 4 个折叠末级节点）">全部节点</button>
+        <button class="toolbar-action" id="tourBtn" title="按策展路线参观展览">导览</button>
+        <button class="toolbar-action" id="lessonsBtn" title="打开演绎目录">演绎</button>
+        <button class="toolbar-action" id="aboutBtn" title="展览方法、数据与来源说明">关于</button>
+      </div>
+      <button class="toolbar-collapse" id="toolbarCollapse" title="折叠工具栏" aria-label="折叠工具栏"><span aria-hidden="true">‹</span></button>
+    </div>
+
+    <div class="canvas-status" aria-live="polite">
+      <span class="status-dot"></span>
+      <span id="resultCount">正在载入主干节点</span>
+      <span class="status-coordinate" id="currentCoordinate">定位坐标中</span>
+      <span class="status-hint">拖动画布 · 滚轮缩放 · 点击坐标轴定位</span>
+    </div>
+    
+    <!-- 主画布工作区 -->
+    <div class="canvas-workspace" id="workspace">
+      <div class="evolution-canvas" id="canvas">
+        <!-- 网格背景 -->
+        <div class="canvas-grid" id="grid"></div>
+        
+        <!-- SVG连线层 -->
+        <svg class="edge-layer" id="edgeLayer"></svg>
+        
+        <!-- 节点将动态插入这里 -->
+      </div>
+      <div class="canvas-empty" id="canvasEmpty" hidden>
+        <strong>没有匹配的主干节点</strong>
+        <span>换一个关键词，或清除当前筛选条件</span>
+        <button id="clearFilters" type="button">清除筛选</button>
+      </div>
+    </div>
+    
+    <!-- 追踪坐标轴：刻度由数据生成，并与画布同步平移缩放 -->
+    <div class="axis-horizontal" aria-label="时间坐标轴">
+      <div class="axis-horizontal-viewport">
+        <div class="axis-horizontal-ruler" id="timeAxis"></div>
+      </div>
+      <div class="axis-cursor axis-cursor-x" aria-hidden="true"></div>
+    </div>
+    
+    <div class="axis-vertical" aria-label="领域坐标轴">
+      <div class="axis-vertical-viewport">
+        <div class="axis-vertical-ruler" id="laneAxis"></div>
+      </div>
+      <div class="axis-cursor axis-cursor-y" aria-hidden="true"></div>
+    </div>
+    
+    <div class="edge-legend" aria-label="关系图例">
+      <span><i class="legend-line lineage"></i>主干演化</span>
+      <span><i class="legend-line influence"></i>思想影响</span>
+      <span><i class="legend-line institutional"></i>制度化</span>
+      <span><i class="legend-line conflict"></i>竞争/冲突</span>
+      <span><i class="legend-line curatorial"></i>策展父边（非事实因果）</span>
+      <span><i class="legend-event"></i>重大事件</span>
+    </div>
+
+    <!-- 右下角控制面板 -->
+    <div class="control-panel">
+      <div class="control-group">
+        <button class="control-button" id="zoomIn" title="放大">+</button>
+        <div class="zoom-display" id="zoomLevel">100%</div>
+        <div class="zoom-tier" id="zoomTier" aria-hidden="true">中景 · 节点</div>
+        <button class="control-button" id="zoomOut" title="缩小">−</button>
+      </div>
+      <div class="control-group">
+        <button class="control-button" id="fitView" title="适应全部内容" aria-label="适应全部内容">⊡</button>
+        <button class="control-button" id="focusSelected" title="定位当前节点" aria-label="定位当前节点" disabled>◎</button>
+        <button class="control-button" id="resetView" title="重置视图" aria-label="重置视图">⟲</button>
+        <button class="control-button" id="directoryBtn" title="完整档案目录" aria-label="完整档案目录">☰</button>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- 展览封面：首次进入时的导览入口 -->
+  <div class="exhibit-intro" id="exhibitIntro" role="dialog" aria-modal="true" aria-labelledby="introTitle" hidden>
+    <div class="intro-card">
+      <span class="intro-kicker">CURATED EXHIBITION · 2026</span>
+      <h1 id="introTitle">资本主义与社会主义</h1>
+      <p class="intro-subtitle">一部跨越五个世纪的历史演化总图</p>
+      <p class="intro-lede">把思想、制度与运动放回时间与领域的坐标中：时间从左向右，领域自上而下，实线表示事实关系，虚线表示策展结构。点击任意节点，可展开档案、关系与来源。</p>
+      <div class="intro-stats" id="introStats"></div>
+      <div class="intro-actions">
+        <button class="intro-primary" id="introEnter" type="button">进入总图</button>
+        <button class="intro-secondary" id="introTour" type="button">跟导览参观</button>
+        <button class="intro-secondary" id="introAbout" type="button">方法与来源</button>
+      </div>
+      <p class="intro-hint">拖动画布平移 · 滚轮缩放（远看结构、近看档案） · 点击节点打开档案 · 按 ? 随时查看说明</p>
+    </div>
+  </div>
+
+  <!-- 策展导览 -->
+  <section class="tour-bar" id="tourBar" aria-label="策展导览" hidden>
+    <span class="tour-progress" id="tourProgress">第 1 / 8 站</span>
+    <div class="tour-copy">
+      <strong id="tourTitle"></strong>
+      <p id="tourText"></p>
+    </div>
+    <div class="tour-actions">
+      <button id="tourPrev" type="button">上一站</button>
+      <button id="tourNext" type="button">下一站</button>
+      <button id="tourExit" type="button">结束导览</button>
+    </div>
+  </section>
+
+  <!-- 关于本展：方法、数据与操作说明 -->
+  <div class="about-overlay" id="aboutOverlay" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
+    <div class="about-modal">
+      <div class="about-header">
+        <h2 id="aboutTitle">关于本展</h2>
+        <button class="detail-close" id="closeAbout" type="button" aria-label="关闭说明">×</button>
+      </div>
+      <div class="about-body">
+        <section class="about-section">
+          <h3>展览说明 / ABOUT</h3>
+          <p>这是一张关于资本主义与社会主义的历史演化总图。主画布只保留 55 个主干节点，用时间带与领域泳道确定位置；人物、著作、组织与更细的争论收纳进完整档案目录。</p>
+          <p>主画布是展览主体，档案目录是检索仓库；两者可以互相跳转，但叙事只发生在主画布上。</p>
+          <p>每个词条分为概览、深读、关系、来源与策展说明五页；深读按「理论、实践、历史、贡献、批评、后世影响」六段展开，先覆盖全部主干词条，再分批扩展到档案层。</p>
+        </section>
+        <section class="about-section">
+          <h3>关系语义 / EDGE SEMANTICS</h3>
+          <dl>
+            <dt>实线</dt><dd>有来源支撑的事实关系（如发展自、变体、制度化、竞争等）</dd>
+            <dt>虚线</dt><dd>策展父边：为稳定阅读结构而保留，表示「在此叙述」，不表示唯一历史因果</dd>
+            <dt>颜色</dt><dd>蓝＝思想影响，棕＝制度化，红＝竞争/冲突，绿＝主干演化</dd>
+            <dt>菱形 / 六边形</dt><dd>重大转折事件 / 组织节点，附属于主干但不打断主线</dd>
+            <dt>缩放层级</dt><dd>远景（&lt;60%）只留标题看结构，中景（60%—120%）读摘要与出处，近景（&gt;120%）展开英文名、三行摘要与一行元信息</dd>
+          </dl>
+        </section>
+        <section class="about-section">
+          <h3>数据与来源 / DATA &amp; SOURCES</h3>
+          <p id="aboutStats"></p>
+          <p>来源分为原始文献、学术研究与公共资料三类；未实际核验的链接不会登记。关系证据逐步补齐，仍有部分关系标注为「有争议」或「待审校」，它们不代表价值判断。</p>
+        </section>
+        <section class="about-section">
+          <h3>学术讨论定位 / ACADEMIC FRAMING</h3>
+          <p>本展是历史社会学与政治经济学的学术讨论材料，用于教学、研究与公共讨论，不是政治宣传，也不代表任何政党、政府或组织的立场。</p>
+          <p>对革命、镇压、战争、饥荒与制度竞争等争议议题，页面并列不同史料与解释传统，并标注「已确认 / 较可信 / 有争议 / 推测」等证据状态；深读文本中的判断均为可追溯的学术综述，不是定论。读者应把它当作研究提纲，而不是立场声明。</p>
+        </section>
+        <section class="about-section">
+          <h3>操作 / CONTROLS</h3>
+          <div class="about-keys">
+            <span><kbd>拖动</kbd>平移画布</span>
+            <span><kbd>滚轮</kbd>缩放</span>
+            <span><kbd>/</kbd>搜索主干</span>
+            <span><kbd>?</kbd>本说明</span>
+            <span><kbd>Esc</kbd>关闭浮层</span>
+            <span><kbd>+</kbd> <kbd>−</kbd>缩放</span>
+          </div>
+        </section>
+        <section class="about-section">
+          <h3>版本与边界 / VERSION</h3>
+          <p>预览版 v1 · 2026-10 · 纯静态页面，无框架、无外部请求。数据中的时间标签为策展概览，精确年代以各来源为准；全库 1044 个节点均挂有来源目录，但不承诺每个节点都已有可核对的证据卡。</p>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- 侧边详情面板 -->
+  <aside class="detail-panel" id="detailPanel">
+    <div class="detail-header">
+      <span class="detail-header-label">档案详情</span>
+      <button class="detail-close" id="closeDetail" aria-label="关闭详情">×</button>
+    </div>
+    <nav class="detail-tabs" id="detailTabs" aria-label="档案详情分页">
+      <button class="active" data-detail-tab="overview">概览</button>
+      <button data-detail-tab="deep">深读</button>
+      <button data-detail-tab="relations">关系</button>
+      <button data-detail-tab="sources">来源</button>
+      <button data-detail-tab="curation">策展说明</button>
+    </nav>
+    <div class="detail-body" id="detailContent">
+      <!-- 详情内容将动态插入 -->
+    </div>
+  </aside>
+
+  <!-- 左侧「演绎」面板：与右侧档案详情互斥 -->
+  <aside class="lesson-panel" id="lessonPanel" aria-label="演绎">
+    <div class="detail-header">
+      <span class="detail-header-label">演绎 / INTERPRETATION</span>
+      <button class="detail-close" id="closeLesson" aria-label="关闭演绎">×</button>
+    </div>
+    <div class="lesson-body" id="lessonContent"><!-- 动态插入 --></div>
+  </aside>
+  <div class="directory-overlay" id="directoryOverlay">
+    <div class="directory-modal">
+      <div class="directory-header">
+        <h2>完整档案目录</h2>
+        <button class="detail-close" id="closeDirectory" aria-label="关闭目录">×</button>
+      </div>
+      <div class="directory-search-bar">
+        <input type="search" placeholder="搜索名称、英文名或摘要..." id="directorySearch" />
+        <span class="directory-count" id="directoryCount"></span>
+      </div>
+      <div class="directory-layout">
+        <aside class="directory-sidebar">
+          <div class="directory-filter-group">
+            <div class="directory-filter-title">专题视图</div>
+            <div id="directoryTopicFilters"></div>
+          </div>
+          <div class="directory-filter-group">
+            <div class="directory-filter-title">领域</div>
+            <div id="directorySphereFilters"></div>
+          </div>
+          <div class="directory-filter-group">
+            <div class="directory-filter-title">实体类型</div>
+            <div id="directoryTypeFilters"></div>
+          </div>
+          <div class="directory-filter-group">
+            <label class="directory-filter-title" for="directorySort">排序</label>
+            <select id="directorySort">
+              <option value="name">名称</option>
+              <option value="time">时间</option>
+              <option value="sources">来源数量</option>
+            </select>
+          </div>
+          <div class="directory-filter-group directory-repository-note">
+            <div class="directory-filter-title">仓库说明</div>
+            <p>目录收录完整节点资料，仅用于检索和打开档案；历史主线与策展关系以主画布为准。</p>
+          </div>
+        </aside>
+        <div class="directory-grid" id="directoryGrid">
+          <!-- 目录项将动态插入 -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="lineage-data.js?v=20261031"></script>
+  <script src="lineage-redesign.js?v=20261031"></script>
+</body>
+</html>
