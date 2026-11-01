@@ -1,0 +1,358 @@
+/* =====================================================================
+   马哲理论拼图（theory-map.html）泳道画布样式
+   2026-11 由原样下沉的 puzzle.css 重写清债：
+   - 六大泳道色以 css/category-theme.css 的 --category-* token 为唯一来源，
+     CSS 的 fill/stroke 属性覆盖 SVG 上的等值 presentation attribute（历史兜底）；
+   - 表面/文字色走 --app-* 语义 token，明暗模式随全局自动切换，不再硬编码；
+   - 布局修复：画布高度 = 100vh - var(--masthead-h)（由 js/puzzle/theory-map.js
+     实测 .site-header 写入，参照 stalin stellar-boot），导航收起态画布铺满全屏。
+   ===================================================================== */
+
+/* ---- 导师筛选色（无对应站点 token，定义一次）---- */
+.puzzle-page {
+    --tm-author-marx: #8b0000;
+    --tm-author-lenin: #d4a017;
+    --tm-author-stalin: #4a5568;
+    --tm-author-mao: var(--category-philosophy-primary);
+}
+
+/* ==================== 页面骨架 ==================== */
+
+.puzzle-page {
+    height: calc(100vh - var(--masthead-h, 0px));
+    display: flex;
+    flex-direction: column;
+}
+
+/* 收起态：header 只是 translateY 移出视野、仍占文档流，
+   用负 margin 把画布页拉回视口顶部（--masthead-flow-h 由 theory-map.js 实测写入） */
+body.nav-collapsed .puzzle-page {
+    margin-top: calc(-1 * var(--masthead-flow-h, 0px));
+}
+
+.puzzle-header {
+    padding: 16px 24px;
+    background: var(--app-surface);
+    border-bottom: 2px solid var(--category-philosophy-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.puzzle-header h1 {
+    font-size: 1.3em;
+    color: var(--category-philosophy-primary);
+    margin: 0;
+}
+
+.puzzle-header p {
+    font-size: 0.85em;
+    color: var(--app-text-muted);
+    margin: 0;
+}
+
+.puzzle-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.controls-hint {
+    color: var(--app-text-subtle);
+    font-size: 0.85em;
+}
+
+.ctrl-btn {
+    background: var(--app-surface-muted);
+    border: 1px solid var(--category-philosophy-primary);
+    color: var(--category-philosophy-primary);
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s;
+}
+.ctrl-btn:hover { background: var(--category-philosophy-primary); color: #fff; }
+
+.puzzle-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    background: var(--app-surface);
+}
+
+.puzzle-container:active { cursor: grabbing; }
+
+.puzzle-canvas {
+    position: absolute;
+    width: 2800px;
+    height: 1500px;
+    transform-origin: 0 0;
+}
+
+/* ==================== 图例与筛选 ==================== */
+
+.legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: var(--app-surface-strong);
+    border: 1px solid var(--app-border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    z-index: 100;
+    font-size: 0.82em;
+    box-shadow: var(--app-shadow);
+}
+
+.legend h4 { margin: 0 0 10px; color: var(--app-text); font-size: 0.9em; }
+.legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
+.filter-section {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--app-border);
+}
+.filter-section h4 { margin: 0 0 8px; color: var(--app-text); font-size: 0.85em; }
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.filter-btn {
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    color: var(--app-text-soft);
+    padding: 4px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.78em;
+    transition: all 0.2s;
+}
+.filter-btn:hover { border-color: var(--app-text-subtle); color: var(--app-text); }
+.filter-btn.active { color: white; border-color: transparent; }
+.filter-btn[data-author="marx"] { background: var(--tm-author-marx); }
+.filter-btn[data-author="lenin"] { background: var(--tm-author-lenin); }
+.filter-btn[data-author="stalin"] { background: var(--tm-author-stalin); }
+.filter-btn[data-author="mao"] { background: var(--tm-author-mao); }
+
+/* ==================== 弹出卡片 ==================== */
+
+.card-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--app-surface-strong);
+    border: 2px solid var(--category-philosophy-primary);
+    border-radius: 12px;
+    padding: 28px 32px;
+    max-width: 480px;
+    width: 90%;
+    z-index: 2000;
+    box-shadow: var(--app-shadow-hover);
+}
+.card-popup.active { display: block; }
+
+.popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1999;
+}
+.popup-overlay.active { display: block; }
+
+.popup-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    background: none;
+    border: none;
+    color: var(--app-text-subtle);
+    font-size: 1.4em;
+    cursor: pointer;
+}
+.popup-close:hover { color: var(--category-philosophy-primary); }
+
+.popup-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.78em;
+    margin-bottom: 10px;
+}
+
+.popup-title { font-size: 1.5em; color: var(--app-text); margin: 0 0 6px; }
+.popup-meta { color: var(--app-text-subtle); font-size: 0.85em; margin-bottom: 16px; }
+.popup-desc { color: var(--app-text-soft); line-height: 1.8; margin-bottom: 20px; font-size: 0.95em; }
+.popup-position { background: var(--app-surface-muted); border-radius: 6px; padding: 12px 16px; margin-bottom: 20px; font-size: 0.88em; }
+.popup-position h4 { color: var(--app-text-muted); margin: 0 0 8px; font-size: 0.9em; }
+.popup-position p { color: var(--app-text); margin: 0; line-height: 1.7; }
+.popup-link {
+    display: inline-block;
+    background: var(--category-philosophy-primary);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background 0.2s;
+}
+.popup-link:hover { background: var(--category-philosophy-dark); }
+.popup-link.is-wip {
+    background: var(--app-text-disabled);
+    cursor: default;
+}
+.popup-link.is-wip:hover { background: var(--app-text-disabled); }
+
+/* ==================== SVG 泳道与节点 ==================== */
+
+.node-group { cursor: pointer; }
+.node-group .node-circle { transition: filter 0.18s; }
+.node-group:hover .node-circle {
+    filter: brightness(1.15) drop-shadow(0 0 6px currentColor);
+}
+.node-group.dimmed .node-circle { opacity: 0.1 !important; }
+.node-group.dimmed .node-ring { opacity: 0.05 !important; }
+.node-group.dimmed text { opacity: 0.1 !important; }
+
+.node-label {
+    font-size: 11px;
+    fill: white;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 500;
+}
+
+.node-year {
+    font-size: 9px;
+    fill: rgba(255,255,255,0.8);
+    text-anchor: middle;
+    pointer-events: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.lane-separator { stroke: rgba(0,0,0,0.08); stroke-width: 1; }
+.category-label { font-size: 13px; font-weight: bold; text-anchor: middle; font-family: -apple-system, sans-serif; }
+.lane-bg { opacity: 0.035; }
+
+/* 连线样式 */
+.line-internal { stroke-width: 1.2; stroke-dasharray: 4,4; fill: none; }
+.line-cross { stroke-width: 1.5; stroke-dasharray: 6,4; fill: none; }
+.line-major { stroke-width: 2; fill: none; }
+
+/* ---- 六大泳道色：--category-* token 唯一来源 ----
+   fill 覆盖 lane-bg / 类别标题 / 节点圆 / 时间轴标记上的同名 SVG 属性；
+   stroke 覆盖连线（内线/跨线/主线）上的 stroke 属性。
+   SVG 里保留的等值十六进制属性仅作无 CSS 兜底。 */
+
+text[data-category="philosophy"],
+.lane-bg[data-category="philosophy"],
+circle[data-category="philosophy"] { fill: var(--category-philosophy-primary); }
+
+text[data-category="economics"],
+.lane-bg[data-category="economics"],
+circle[data-category="economics"] { fill: var(--category-economics-primary); }
+
+text[data-category="politics"],
+.lane-bg[data-category="politics"],
+circle[data-category="politics"] { fill: var(--category-politics-primary); }
+
+text[data-category="party"],
+.lane-bg[data-category="party"],
+circle[data-category="party"] { fill: var(--category-party-primary); }
+
+text[data-category="military"],
+.lane-bg[data-category="military"],
+circle[data-category="military"] { fill: var(--category-military-primary); }
+
+text[data-category="culture"],
+.lane-bg[data-category="culture"],
+circle[data-category="culture"] { fill: var(--category-culture-primary); }
+
+path.line-internal[stroke="#8b1e2d"],
+path.line-cross[stroke="#8b1e2d"],
+path.line-major[stroke="#8b1e2d"] { stroke: var(--category-philosophy-primary); }
+
+path.line-internal[stroke="#a85f16"],
+path.line-cross[stroke="#a85f16"],
+path.line-major[stroke="#a85f16"] { stroke: var(--category-economics-primary); }
+
+path.line-internal[stroke="#68436f"],
+path.line-cross[stroke="#68436f"],
+path.line-major[stroke="#68436f"] { stroke: var(--category-politics-primary); }
+
+path.line-internal[stroke="#66703a"],
+path.line-cross[stroke="#66703a"],
+path.line-major[stroke="#66703a"] { stroke: var(--category-party-primary); }
+
+path.line-internal[stroke="#2e7180"],
+path.line-cross[stroke="#2e7180"],
+path.line-major[stroke="#2e7180"] { stroke: var(--category-military-primary); }
+
+path.line-internal[stroke="#aa791c"],
+path.line-cross[stroke="#aa791c"],
+path.line-major[stroke="#aa791c"] { stroke: var(--category-culture-primary); }
+
+.legend-dot[data-category="philosophy"] { background: var(--category-philosophy-primary); }
+.legend-dot[data-category="economics"] { background: var(--category-economics-primary); }
+.legend-dot[data-category="politics"] { background: var(--category-politics-primary); }
+.legend-dot[data-category="party"] { background: var(--category-party-primary); }
+.legend-dot[data-category="military"] { background: var(--category-military-primary); }
+.legend-dot[data-category="culture"] { background: var(--category-culture-primary); }
+
+/* ==================== 手机端适配 ==================== */
+@media (max-width: 768px) {
+    /* header 改为两行 */
+    .puzzle-header {
+        padding: 10px 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .puzzle-header h1 { font-size: 1.05em; }
+    .puzzle-header p { display: none; }
+
+    /* 控制按钮横向滚动 */
+    .puzzle-controls {
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+        gap: 6px;
+    }
+    .puzzle-controls::-webkit-scrollbar { display: none; }
+    .ctrl-btn {
+        padding: 5px 10px;
+        font-size: 0.78em;
+        flex-shrink: 0;
+    }
+    /* 隐藏"可拖拽/滚轮缩放"提示，换手机提示 */
+    .controls-hint { display: none; }
+    .puzzle-controls::after {
+        content: ' 双指缩放 · 单指拖动';
+        color: var(--app-text-subtle);
+        font-size: 0.75em;
+        white-space: nowrap;
+        flex-shrink: 0;
+        align-self: center;
+    }
+
+    /* 图例收起 */
+    .legend {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 0.75em;
+        max-width: 130px;
+    }
+}

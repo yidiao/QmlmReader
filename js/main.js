@@ -113,6 +113,8 @@
             'quotes': '语录库', 'photos': '历史照片', 'propaganda': '宣传画', 'music': '革命音乐',
             'videos': '影像资料', 'poetry': '诗歌', 'anecdotes': '趣闻', 'soviet': '苏联印记',
             'soviet-jokes': '苏联笑话档案馆',
+            // Puzzle sub-pages
+            'theory-map': '理论图谱',
             // International sub-pages
             'international-column': '专栏', 'international-calendar': '日历',
             'international-memorial': '纪念', 'international-current': '当代共运',
@@ -1139,7 +1141,8 @@ document.addEventListener('DOMContentLoaded', function() {
         '.hero-card',
         '.path-stage',
         '.concept-item',
-        '.cornerstone-card'
+        '.cornerstone-card',
+        '.puzzle-entry-card'
     ];
 
     var allCards = [];
