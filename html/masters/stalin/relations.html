@@ -30,7 +30,7 @@
 
       <nav class="space-nav" id="spaceNav" aria-label="空间层级"><button type="button" id="spaceHome">斯大林局部恒星系</button><span>›</span><strong id="spaceTitle">总览</strong><small id="spaceCount">46 个实体</small><button type="button" id="spaceExit" hidden>返回母星系</button></nav><section class="field-heading" id="fieldHeading" hidden><small>LOCAL FIELD</small><h1 id="fieldTitle"></h1><p id="fieldSubtitle"></p></section><div class="belt-key" id="beltKey" hidden><span>理论文本</span><span>建设与争议</span><span>战争与外交</span><span>战后生活</span></div>
 
-      <section class="field-portals" id="fieldPortals" aria-label="可进入场域"><button type="button" data-enter-space="war"><i></i><span><b>战争与外交</b><small>进入战争星云</small></span></button><button type="button" data-enter-space="conflict"><i></i><span><b>路线斗争</b><small>进入斗争彗云</small></span></button><button type="button" data-enter-space="legacy"><i></i><span><b>后斯大林遗产</b><small>进入遗产远云</small></span></button><button type="button" data-enter-space="belt"><i></i><span><b>知识与群体带</b><small>展开节点群</small></span></button></section>
+      <section class="field-portals" id="fieldPortals" aria-label="可进入场域"><button type="button" data-enter-space="war"><i></i><span><b>战争与外交</b><small>进入战争星云</small></span></button><button type="button" data-enter-space="conflict"><i></i><span><b>路线斗争</b><small>进入斗争彗云</small></span></button><button type="button" data-enter-space="legacy"><i></i><span><b>后斯大林遗产</b><small>进入遗产远云</small></span></button><button type="button" data-enter-space="organization"><i></i><span><b>组织治理</b><small>进入组织暗云</small></span></button><button type="button" data-enter-space="inheritance"><i></i><span><b>理论继承</b><small>进入理论星云</small></span></button><button type="button" data-enter-space="belt"><i></i><span><b>知识与群体带</b><small>展开节点群</small></span></button></section>
 
       <section class="era-browser" id="eraBrowser" aria-label="时代区域浏览" hidden>
         <header><div><small>ERA REGIONS</small><strong>先遣层时代区域</strong></div><button id="eraClose" type="button" aria-label="关闭时代区域">×</button></header>
@@ -46,8 +46,7 @@
       <nav class="tool-dock" aria-label="星图工具">
         <button type="button" data-tool="layers" aria-pressed="false"><span>◫</span><b>图层</b></button>
         <button type="button" data-tool="life" aria-pressed="false"><span>⌁</span><b>生平</b></button>
-        <button type="button" data-tool="compare" aria-pressed="false"><span>⇄</span><b>对照</b></button>
-        <button type="button" data-tool="path" aria-pressed="false"><span>⌘</span><b>路径</b></button>
+        <button type="button" data-tool="relations" aria-pressed="false"><span>⇄</span><b>关系</b></button>
       </nav>
 
       <section class="tool-window" data-tool-window="layers" hidden aria-label="图层与关系">
@@ -61,17 +60,12 @@
 
       <section class="tool-window" data-tool-window="life" hidden aria-label="人物生平轨迹">
         <header><div><small>PERSONAL TIMELINE</small><strong>人物生平轨迹</strong></div><button type="button" data-tool-close>×</button></header>
-        <div class="tool-content"><div class="life-track-heading"><select id="lifePerson" aria-label="选择生平人物"></select><span id="lifeTrackState">随时间轴联动</span></div><div id="lifeTrack" class="life-track"></div></div>
+        <div class="tool-content"><div class="life-track-heading"><div id="lifePersonPicker" class="entity-picker"></div><span id="lifeTrackState">随时间轴联动</span></div><div id="lifeCurve" class="life-curve"></div><div id="lifeNotes" class="life-notes"></div></div>
       </section>
 
-      <section class="tool-window" data-tool-window="compare" hidden aria-label="实体对照观测">
-        <header><div><small>COMPARATIVE VIEW</small><strong>双实体对照</strong></div><button type="button" data-tool-close>×</button></header>
-        <div class="tool-content compare-panel"><div class="compare-heading"><p>并置现有字段，不建立能力排行。</p><button id="compareUseCurrent" type="button">加入当前天体</button></div><div class="compare-pickers"><select id="compareA" aria-label="对照实体一"></select><span>⇄</span><select id="compareB" aria-label="对照实体二"></select></div><div id="compareOutput" class="compare-output"><p>选择两个实体比较时期、类型、场域和关系交集。</p></div></div>
-      </section>
-
-      <section class="tool-window" data-tool-window="path" hidden aria-label="关系路径探索">
-        <header><div><small>RELATION ROUTE</small><strong>六人路径</strong></div><button type="button" data-tool-close>×</button></header>
-        <div class="tool-content path-panel"><div class="path-heading"><span>最多 6 个中间节点</span></div><div class="path-pickers"><label>起点<select id="pathStart" aria-label="路径起点"></select></label><button id="pathSwap" type="button" aria-label="交换起点和终点">⇄</button><label>终点<select id="pathEnd" aria-label="路径终点"></select></label></div><div class="path-actions"><button id="pathFind" type="button">寻找联系</button><button id="pathUseSelected" type="button">以当前天体为起点</button><button id="pathClear" type="button">清除</button></div><div id="pathOutput" class="path-output" aria-live="polite"><p>选择两个实体，寻找不超过六个中间节点的历史联系。</p></div></div>
+      <section class="tool-window" data-tool-window="relations" hidden aria-label="关系探索">
+        <header><div><small>RELATION EXPLORER</small><strong>关系探索</strong></div><button type="button" data-tool-close>×</button></header>
+        <div class="tool-content relations-panel"><div class="relations-heading"><p>任选两个实体，查看直接关系、共同关联与联系路径。</p><button id="relationsUseCurrent" type="button">加入当前天体</button></div><div class="relations-pickers"><div id="relationsAPicker" class="entity-picker"></div><button id="relationsSwap" type="button" aria-label="交换两端">⇄</button><div id="relationsBPicker" class="entity-picker"></div></div><div id="relationsOutput" class="relations-output" aria-live="polite"><p>选择两个实体后查看关系。</p></div></div>
       </section>
 
       <section class="time-drawer" id="timeDrawer" aria-label="历史时间轴" hidden>
@@ -85,7 +79,6 @@
 
       <div class="target-pointer" id="targetPointer" hidden aria-hidden="true"><i>➤</i><span id="targetPointerName"></span></div>
       <section class="nav-target" id="navTarget" aria-label="空间导航目标" hidden><div class="nav-target-mark"><i></i></div><div class="nav-target-copy"><small id="navTargetScope">CURRENT SPACE</small><strong id="navTargetName">未选择目标</strong><span id="navTargetDistance">远距观测</span></div><div class="nav-target-actions"><button id="navTargetLocate" type="button">定位</button><button id="navTargetEnter" type="button" hidden disabled>继续接近</button><button id="navTargetClear" type="button" aria-label="清除导航目标">×</button></div></section>
-      <nav class="nav-pad" id="navPad" aria-label="视角导航控制器"><button type="button" data-nav-command="pitch-up" aria-label="向上观察">↑</button><button type="button" data-nav-command="zoom-in" aria-label="接近目标">＋</button><button type="button" data-nav-command="yaw-left" aria-label="向左观察">←</button><button type="button" data-nav-command="yaw-right" aria-label="向右观察">→</button><button type="button" data-nav-command="pitch-down" aria-label="向下观察">↓</button><button type="button" data-nav-command="zoom-out" aria-label="远离目标">−</button></nav>
 
       <button class="archive-handle" id="archiveHandle" type="button" aria-expanded="false" title="打开当前档案"><span>档案</span></button>
       <aside class="info-panel archive-drawer" id="infoPanel" aria-live="polite" aria-label="实体档案" aria-hidden="true">
