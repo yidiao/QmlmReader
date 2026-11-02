@@ -4,34 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>国际共运日历 | 青年马列毛主义驿站</title>
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/international/international-calendar.css">
+    <link rel="stylesheet" href="../../css/international/international-calendar.css?v=20261101">
 </head>
-<body>
+<body data-module="international">
     <div id="nav-placeholder"></div>
 
-    <main>
+    <main class="cal-page">
         <section class="page-header">
-            <h1> 国际共运日历</h1>
-            <p>国际共产主义运动历史上的今天 | 1848-1991</p>
+            <h1>国际共运日历</h1>
+            <p>国际共产主义运动史上的今天 | 1789–1999</p>
+            <div class="cal-stats" id="calStats" aria-label="数据统计"></div>
         </section>
 
         <div class="calendar-layout">
-            <!-- 左侧：月份列表 -->
-            <div class="month-sidebar">
-                <h3>选择月份</h3>
-                <div class="month-list" id="monthList"></div>
-            </div>
-            
-            <!-- 右侧：日历内容 -->
-            <div class="calendar-content">
-                <div class="filter-section">
-                    <button class="filter-chip active" data-filter="all">全部</button>
-                    <button class="filter-chip" data-filter="revolution">革命事件</button>
-                    <button class="filter-chip" data-filter="war">战争军事</button>
-                    <button class="filter-chip" data-filter="political">政治事件</button>
-                    <button class="filter-chip" data-filter="person">人物</button>
+            <!-- 左侧：月份导航 -->
+            <aside class="month-sidebar">
+                <div class="month-sidebar-head">
+                    <h3>选择月份</h3>
+                    <button class="btn-today" id="backTodayBtn" type="button">回到今天</button>
                 </div>
+                <div class="month-list" id="monthList"></div>
+            </aside>
+
+            <!-- 右侧：筛选 + 日历 -->
+            <div class="calendar-content">
+                <div class="cal-toolbar">
+                    <div class="cal-search">
+                        <input type="search" id="calSearch" placeholder="搜索事件、年份、描述…" aria-label="搜索历史事件">
+                    </div>
+                    <button class="btn-random" id="randomBtn" type="button" title="随机抽取一条史实">随机回眸</button>
+                </div>
+
+                <div class="filter-section" id="categoryFilters" aria-label="分类筛选"></div>
+                <div class="era-section" id="eraFilters" aria-label="时代筛选"></div>
 
                 <div class="calendar-grid">
                     <div class="weekday-header">
@@ -47,16 +55,21 @@
                 </div>
             </div>
         </div>
-        
-        <!-- 日期弹窗 -->
-        <div class="popup-overlay" id="popupOverlay" onclick="closeDayPopup()"></div>
-        <div class="day-popup" id="dayPopup">
+
+        <!-- 日期抽屉 -->
+        <div class="popup-overlay" id="popupOverlay" hidden></div>
+        <aside class="day-popup" id="dayPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" hidden>
             <div class="popup-header">
-                <h3 id="popupTitle">日期事件</h3>
-                <button class="popup-close" onclick="closeDayPopup()">×</button>
+                <div>
+                    <h3 id="popupTitle">日期事件</h3>
+                    <p class="popup-sub" id="popupSub"></p>
+                </div>
+                <button class="popup-close" id="popupClose" type="button" aria-label="关闭">×</button>
             </div>
             <div class="popup-body" id="popupBody"></div>
-        </div>
+        </aside>
+
+        <div class="cal-sr-only" id="calA11y" aria-live="polite"></div>
     </main>
 
     <footer class="site-footer">
@@ -68,152 +81,9 @@
 
     <script src="../../js/site-data.js"></script>
     <script src="../../js/main.js"></script>
-    <script>
-        function toggleDarkMode(){
-            document.body.classList.toggle('dark-mode');
-            var isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', isDark ? 'true' : 'false');
-            var btn = document.querySelector('.dark-mode-toggle');
-            if(btn) btn.textContent = isDark ? '' : '';
-        }
-        if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
-        if(document.body.classList.contains('dark-mode')) {
-            var btn = document.querySelector('.dark-mode-toggle');
-            if(btn) btn.textContent = '';
-        }
-    </script>
-    <script src="../../data/history-events.js"></script>
-    <script>
-        const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-        
-        let currentMonth = new Date().getMonth() + 1;
-        let currentYear = new Date().getFullYear();
-        let currentFilter = 'all';
-
-        function initMonthList() {
-            const list = document.getElementById('monthList');
-            list.innerHTML = monthNames.map((m, i) => 
-                `<div class="month-list-item${i+1 === currentMonth ? ' active' : ''}" data-month="${i+1}">${m}</div>`
-            ).join('');
-            list.querySelectorAll('.month-list-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    currentMonth = parseInt(item.dataset.month);
-                    updateMonthDisplay();
-                    renderCalendar();
-                });
-            });
-        }
-
-        function updateMonthDisplay() {
-            document.querySelectorAll('.month-list-item').forEach(item => {
-                item.classList.toggle('active', parseInt(item.dataset.month) === currentMonth);
-            });
-        }
-
-        function renderCalendar() {
-            const grid = document.getElementById('daysGrid');
-            const firstDay = new Date(currentYear, currentMonth - 1, 1).getDay();
-            const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
-            const today = new Date();
-            
-            let html = '';
-            for (let i = 0; i < firstDay; i++) {
-                html += '<div class="day-cell empty"></div>';
-            }
-            
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayEvents = getEventsForDay(day);
-                const hasEvent = dayEvents.length > 0;
-                const isToday = today.getDate() === day && today.getMonth() + 1 === currentMonth && today.getFullYear() === currentYear;
-                
-                let previewHtml = '';
-                if (dayEvents.length > 0) {
-                    // 显示当天最著名的一个事件（取第一条）
-                    const topEvent = dayEvents[0];
-                    previewHtml = `
-                        <div class="event-preview-year">${topEvent.year}年</div>
-                        <div class="event-preview">${topEvent.title}</div>
-                    `;
-                }
-                
-                html += `
-                    <div class="day-cell${hasEvent ? ' has-event' : ''}" 
-                         data-day="${day}" onclick="showDayPopup(${day})">
-                        <div class="day-number"${isToday ? ' style="color:#ffd700;font-weight:bold;text-shadow:0 0 10px rgba(255,215,0,0.5);"' : ''}>${day}</div>
-                        ${previewHtml}
-                    </div>
-                `;
-            }
-            
-            grid.innerHTML = html;
-        }
-
-        function getEventsForDay(day) {
-            const events = historyData[currentMonth] || [];
-            return events.filter(e => {
-                // 从 "1月1日" 格式中提取月份和日期
-                const match = e.date.match(/(\d+)月(\d+)日/);
-                if (!match) return false;
-                const eventMonth = parseInt(match[1]);
-                const eventDay = parseInt(match[2]);
-                // 确保月份匹配且日期匹配
-                if (eventMonth !== currentMonth) return false;
-                if (eventDay !== day) return false;
-                if (currentFilter !== 'all' && e.category !== currentFilter) return false;
-                return true;
-            });
-        }
-
-        function showDayPopup(day) {
-            const events = getEventsForDay(day);
-            const popup = document.getElementById('dayPopup');
-            const overlay = document.getElementById('popupOverlay');
-            const title = document.getElementById('popupTitle');
-            const body = document.getElementById('popupBody');
-            
-            title.textContent = `${currentMonth}月${day}日`;
-            
-            if (events.length === 0) {
-                body.innerHTML = '<div class="popup-empty"><div class="popup-empty-icon"></div>这一天没有记录</div>';
-            } else {
-                body.innerHTML = events.map(e => `
-                    <div class="popup-event">
-                        <div class="popup-event-year">${e.year}年</div>
-                        <div class="popup-event-nature ${e.nature}"></div>
-                        <div class="popup-event-content">
-                            <div class="popup-event-title">${e.title}</div>
-                            <div class="popup-event-desc">${e.desc || ''}</div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-            
-            popup.classList.add('active');
-            overlay.classList.add('active');
-        }
-
-        function closeDayPopup() {
-            document.getElementById('dayPopup').classList.remove('active');
-            document.getElementById('popupOverlay').classList.remove('active');
-        }
-
-        // 事件筛选
-        document.querySelectorAll('.filter-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                currentFilter = chip.dataset.filter;
-                document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
-                renderCalendar();
-            });
-        });
-
-        // 初始化
-        initMonthList();
-        updateMonthDisplay();
-        renderCalendar();
-    </script>
-
-<script src="../../js/darkmode.js"></script>
-<script src="../../js/cursor.js"></script>
+    <script src="../../data/history-events.js?v=20261101"></script>
+    <script src="../../js/international/international-calendar.js?v=20261101"></script>
+    <script src="../../js/darkmode.js"></script>
+    <script src="../../js/cursor.js"></script>
 </body>
 </html>

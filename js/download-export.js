@@ -49,6 +49,34 @@
     return [];
   }
 
+  function stripMarks(text) {
+    return String(text == null ? '' : text).replace(/\*\*/g, '');
+  }
+
+  // rectify-style JSON: no original.paragraphs, rich blocks per chapter instead
+  function deriveParagraphs(chapters) {
+    var out = [];
+    (Array.isArray(chapters) ? chapters : []).forEach(function (ch) {
+      (Array.isArray(ch && ch.blocks) ? ch.blocks : []).forEach(function (b) {
+        if (!b || !b.t) return;
+        if (b.t === 'p' || b.t === 'quote' || b.t === 'h3' || b.t === 'h4') {
+          out.push(stripMarks(b.x));
+        } else if (b.t === 'ul' && Array.isArray(b.items)) {
+          b.items.forEach(function (i) { out.push(stripMarks(i.x)); });
+        } else if (b.t === 'box' && Array.isArray(b.children)) {
+          out = out.concat(deriveParagraphs([{ blocks: b.children }]));
+        } else if (b.t === 'timeline' && Array.isArray(b.items)) {
+          b.items.forEach(function (i) { out.push(stripMarks(i.x)); });
+        } else if (b.t === 'table' && Array.isArray(b.rows)) {
+          b.rows.forEach(function (row) {
+            (row.cells || []).forEach(function (c) { out.push(stripMarks(c)); });
+          });
+        }
+      });
+    });
+    return out.filter(Boolean);
+  }
+
   function extractArticlePayloadFromDocument(doc, fallbackFileName) {
     var title = textFromNode(doc.querySelector('h1')) || fallbackFileName || '未命名文章';
     var author = textFromNode(doc.querySelector('.article-meta .author')) || textFromNode(doc.querySelector('.article-author')) || '';
@@ -73,12 +101,14 @@
     var doc = parser.parseFromString(html, 'text/html');
     var jsonPath = doc.body && doc.body.getAttribute('data-article-json');
     if (jsonPath) {
-      var resolved = new URL(jsonPath, relativeHtmlPath).toString();
+      var resolved = new URL(jsonPath, new URL(relativeHtmlPath, window.location.href)).toString();
       var jsonResp = await fetch(resolved, { cache: 'no-store' });
       if (!jsonResp.ok) throw new Error('无法读取文章 JSON：' + jsonPath);
       var article = await jsonResp.json();
       var original = article.original || {};
-      var paragraphs = Array.isArray(original.paragraphs) ? original.paragraphs : [];
+      var paragraphs = Array.isArray(original.paragraphs)
+        ? original.paragraphs
+        : deriveParagraphs(original.chapters);
       return {
         title: article.title || fallbackTitle || relativeHtmlPath,
         author: article.meta && article.meta.author || '',

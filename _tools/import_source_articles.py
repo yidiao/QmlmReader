@@ -122,6 +122,8 @@ def render_page(entry: dict, paragraphs: list[str]) -> str:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title} - 青年马列毛主义驿站</title>
+    <link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="{prefix}favicon.ico">
     <link rel="stylesheet" href="{prefix}css/style.css">
     <link rel="stylesheet" href="{prefix}css/articles-detail.css">
     <style>:root {{ --cat-primary:#8b0000; --cat-secondary:#c41e3a; --cat-gradient:linear-gradient(135deg,#4a0000 0%,#8b0000 50%,#c41e3a 100%); }}</style>

@@ -51,3 +51,17 @@ html/index.html  # 真正首页
 2. 搜索相关改动先看 `js/main.js`、`js/search.js` 和 `data/*`；首页不再维护独立搜索 DOM。
 3. 更新日志改动优先维护 `data/updates.json`，不要把日志写死在页面里。
 4. 保持根 `index.html` 简洁跳转，不要在根页复制首页内容。
+
+---
+
+## 5. 桌面版 3D 展厅（规划中）
+
+路线、决策、物件映射与验收标准见 [`3d-hall-roadmap.md`](./3d-hall-roadmap.md)。
+
+摘要：
+
+- 桌面端特供，不替换 `html/index.html`；移动端继续走经典首页。
+- 运行时 = Blender 烘焙大图 + 三层视差 + DOM 热区，**不引入 three.js**。
+- 场景静态（无人、无相机运动），可点物件 ≤ 8。
+- 页面自包含在 `html/hall/`（`hall.html` / `hall.css` / `hall.js` / `scene-data.js` / `assets/`），不加载公共导航与首页脚本。
+- 视觉原则：**视觉重、交互轻**。

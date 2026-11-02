@@ -5139,7 +5139,7 @@ window.SITE_DATA = {
     },
     {
       "slug": "soviet-socialist-economy",
-      "title": "Soviet Socialist Economy",
+      "title": "苏联社会主义经济问题",
       "author": "斯大林",
       "authorKey": "stalin",
       "date": "1952年2—9月",
@@ -29342,7 +29342,7 @@ window.SITE_DATA = {
       ]
     },
     {
-      "title": "Soviet Socialist Economy",
+      "title": "苏联社会主义经济问题",
       "file": "articles/Stalin/★★★★★/soviet-socialist-economy.html",
       "author": "斯大林",
       "authorKey": "stalin",
@@ -43469,7 +43469,7 @@ window.SITE_DATA = {
       ]
     },
     {
-      "title": "高尔基与列宁决裂，因为列宁滥杀知识分子、破坏文化？",
+      "title": "高尔基与列宁决裂，因为列宁滥杀知识分子破坏文化？",
       "file": "rectify/leaders/gorky-lenin.html",
       "type": "rectify",
       "category": "领导人正名",
@@ -43502,7 +43502,7 @@ window.SITE_DATA = {
       ]
     },
     {
-      "title": "苏联\"入侵\"阿富汗？还原1979年出兵决策的真实逻辑",
+      "title": "苏联“入侵”阿富汗？还原1979年出兵决策的真实逻辑",
       "file": "rectify/military/soviet-afghanistan.html",
       "type": "rectify",
       "category": "军事行动正名",
@@ -43519,7 +43519,7 @@ window.SITE_DATA = {
       ]
     },
     {
-      "title": "农业集体化的历史再评价",
+      "title": "苏联农业社会主义的探索：饥荒集体化与面包队伍的真相",
       "file": "rectify/economy/soviet-agriculture.html",
       "type": "rectify",
       "category": "经济模式正名",
@@ -43535,7 +43535,7 @@ window.SITE_DATA = {
       ]
     },
     {
-      "title": "\"人性本善\"还是阶级分析——批判人性论",
+      "title": "驳“人性论”的互联网第二春",
       "file": "rectify/myths/human-nature.html",
       "type": "rectify",
       "category": "思想辩护",
@@ -43551,7 +43551,7 @@ window.SITE_DATA = {
       ]
     },
     {
-      "title": "精英智慧——革命需要精英领导？",
+      "title": "“你可以相信人民的力量，但不能相信他们的智慧”",
       "file": "rectify/myths/wisdom-of-elites.html",
       "type": "rectify",
       "category": "思想辩护",
@@ -43564,6 +43564,53 @@ window.SITE_DATA = {
         "精英主义",
         "群众路线",
         "智慧"
+      ]
+    },
+    {
+      "title": "从历史条件与主观主义实践看民主柬埔寨的形成与失败",
+      "file": "rectify/leaders/pol-pot.html",
+      "type": "rectify",
+      "category": "领导人正名",
+      "summary": "从殖民创伤、战争破坏与美国轰炸的历史条件出发，分析民主柬埔寨的形成逻辑与主观主义实践的失败根源，反对简化为“疯狂政权”的道德叙事。",
+      "keywords": [
+        "波尔布特",
+        "红色高棉",
+        "民主柬埔寨",
+        "正名",
+        "柬埔寨",
+        "大屠杀",
+        "历史分析"
+      ]
+    },
+    {
+      "title": "权的幻象与资本的真相",
+      "file": "rectify/myths/power-illusion.html",
+      "type": "rectify",
+      "category": "思想辩护",
+      "summary": "驳斥“剥削来自权力而非资本”的流行谬论：权力是资本喂养的守夜人，资产阶级法权把不平等包装成自由选择，新型工人的斗争矛头应指向资本本身。",
+      "keywords": [
+        "资本",
+        "权力",
+        "剥削",
+        "法权",
+        "外卖骑手",
+        "平台经济",
+        "阶级斗争"
+      ]
+    },
+    {
+      "title": "从“被嘲笑的理想”到“可操作的力量”",
+      "file": "rectify/myths/young-october.html",
+      "type": "rectify",
+      "category": "思想辩护",
+      "summary": "为网络左翼青年提供从话语传播、理论补课到落地行动的三阶段破局路径，回应“键盘左派”嘲讽并给出可立即上手的实践方案。",
+      "keywords": [
+        "左翼青年",
+        "网络话语权",
+        "实践行动",
+        "理论普及",
+        "平台合作制",
+        "组织"
       ]
     }
   ],
@@ -53907,6 +53954,27 @@ window.SITE_DATA = {
         "slug": "rectify-wisdom-of-elites",
         "section": "myths",
         "file": "rectify/myths/wisdom-of-elites.html"
+      },
+      {
+        "title": "从历史条件与主观主义实践看民主柬埔寨的形成与失败",
+        "cat": "rectify",
+        "slug": "rectify-pol-pot",
+        "section": "leaders",
+        "file": "rectify/leaders/pol-pot.html"
+      },
+      {
+        "title": "权的幻象与资本的真相",
+        "cat": "rectify",
+        "slug": "rectify-power-illusion",
+        "section": "myths",
+        "file": "rectify/myths/power-illusion.html"
+      },
+      {
+        "title": "从“被嘲笑的理想”到“可操作的力量”",
+        "cat": "rectify",
+        "slug": "rectify-young-october",
+        "section": "myths",
+        "file": "rectify/myths/young-october.html"
       }
     ],
     "posters": [
