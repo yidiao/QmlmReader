@@ -1,6 +1,13 @@
 /* QmlmReader 常规模块主题色
  * 页面可通过 body[data-module="..."] 选择模块强调色。
  * 不影响 experimental 子工具私有主题。
+ *
+ * 现状（2026-11-06 摸底）：
+ *  - 实际消费：puzzle（css/puzzle/puzzle.css 3 处）、international（css/international/international-calendar.css）
+ *  - 仅挂属性未消费：masters（biography/relations 两页，css 用 --master-* 体系）
+ *  - 预留（页面未挂 data-module，等待门户大标题激活 .module-hero 后启用）：
+ *    articles / downloads / experimental / gallery / toolkit / rectify / preferences
+ *    色值与 doc/color-system.md §5 设计表一一对应，激活前勿删；激活方案见 doc/README.md 更新计划 B5。
  */
 body[data-module="articles"] {
   --module-accent: #b91c1c;

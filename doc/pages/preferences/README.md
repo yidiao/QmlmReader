@@ -1,6 +1,6 @@
 # 个人偏好模块 README
 
-> 对应源码：`html/preferences/preferences.html`、`js/preferences.js`、文章页注入入口。  
+> 对应源码：`html/preferences/preferences.html`、`css/preferences/preferences.css`、`js/preferences.js`。  
 > 作用：承载本地收藏、阅读历史、视图设置预留与相关本地管理功能。
 
 ---
@@ -10,6 +10,13 @@
 ```text
 html/preferences/preferences.html
 ```
+
+> 边界说明：`js/preferences.js` 由 `js/main.js`（`main.js` L62-103）在**所有加载 main.js 的页面**自动注入，并非文章页专属；目前显式 `<script>` 引用它的页面只有 `html/articles/articles.html` 和 `html/masters/stalin/biography.html`。
+
+页面加载的模块资源（`preferences.html`）：
+
+- 私有样式：`css/preferences/preferences.css`（`preferences.html:10` 加载，约 16.2KB）
+- 页面显式依赖：`js/state-center.js`、`js/page-state-adapter.js`（`preferences.html:109-110`）；其余为 `js/site-data.js`、`js/main.js`、`js/darkmode.js`、`js/cursor.js` 等公共层脚本
 
 ---
 
@@ -82,4 +89,25 @@ html/preferences/preferences.html
 5. 恢复定位应等待动态内容渲染完成后再执行。
 6. 用户可取消恢复，避免强制改变当前阅读起点。
 7. 章节导航后续可监听 `qmlm:reading-progress` 事件或读取 `window.QMLMReadingProgress.current`；当前 Tab、章节导航显示状态和章节折叠状态已发布到 `QMLMState.reader`。
-8. 页面视觉以现代卡片 + 轻玻璃质感为主，保持与站点整体红色主调一致。
+8. 页面视觉以现代卡片 + 轻玻璃质感为主，保持与站点整体红色主调一致；全局样式/颜色/z-index 约束见 `doc/design-tokens.md`。
+
+---
+
+## 7. 权责边界
+
+**拥有（可自由修改）**：
+- `js/preferences.js`（**跨模块资产**：由 `js/main.js` 全站自动注入、被 articles / masters 显式消费，改动需评估外溢影响）
+- `css/preferences/preferences.css`（偏好页私有样式）
+- `html/preferences/preferences.html`
+- 本地存储键 `qmlm:preferences:v1` 及其兼容写入链（旧键保留用于迁移和兼容）
+
+**只读消费（禁改）**：
+- 公共层：`js/main.js`、`css/style.css`、`js/site-data.js`（生成物）、`js/darkmode.js`、`js/cursor.js` 等公共脚本（完整清单见 `doc/README.md` 模块权责矩阵脚注）
+- `js/state-center.js`、`js/page-state-adapter.js`：页面显式依赖的公共状态层
+
+**共享/跨界资产**：
+- `js/preferences.js` 的消费方：`html/articles/articles.html`（文章收藏按钮协议）与 `html/masters/stalin/biography.html`；改动前需过 `doc/pages/articles/README.md` 与 `doc/pages/masters/README.md`
+
+**改动前置条件**：
+- 调整自动注入逻辑时改动点在 `js/main.js`（L62-103），属公共层改动，需先过公共层评审再动
+- 存储结构变更必须保持 `qmlm:preferences:v1` 旧键兼容读取，避免已有用户本地数据丢失

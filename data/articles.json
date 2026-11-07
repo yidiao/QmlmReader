@@ -282,6 +282,28 @@
     ]
   },
   {
+    "slug": "lun-wo-guo-ge-ming",
+    "title": "论我国革命",
+    "author": "列宁",
+    "authorKey": "lenin",
+    "date": "1923年1月",
+    "year": "1923",
+    "priority": 5,
+    "category": "政治理论",
+    "type": "politics",
+    "keywords": [
+      "苏汉诺夫",
+      "革命辩证法",
+      "十月革命",
+      "新经济政策"
+    ],
+    "file": "articles/Lenin/lun-wo-guo-ge-ming.html",
+    "ready": true,
+    "collections": [
+      "lenin"
+    ]
+  },
+  {
     "slug": "gongchan-dan-yuan",
     "title": "共产党宣言",
     "author": "马克思 · 恩格斯",
@@ -4593,7 +4615,7 @@
       "价值规律",
       "计划经济"
     ],
-    "file": "articles/Stalin/★★★★★/soviet-socialist-economy.html",
+    "file": "articles/Stalin/soviet-socialist-economy.html",
     "ready": true,
     "collections": [
       "stalin",

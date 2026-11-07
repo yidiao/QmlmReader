@@ -92,20 +92,16 @@ def check_articles(articles, collections):
 
 
 def build_article_index(articles):
-    return [
-        {
-            "title": a["title"],
-            "file": a["file"],
-            "author": a["author"],
-            "authorKey": a["authorKey"],
-            "year": a["year"],
-            "priority": str(a["priority"]),
-            "category": a["category"],
-            "keywords": a["keywords"],
-        }
-        for a in articles
-        if a.get("ready")
-    ]
+    # 条目保留 articles.json 的全部字段（date/type/ready/collections 等），
+    # 既有 8 字段语义不变（priority 在索引中保持字符串）。
+    index = []
+    for a in articles:
+        if not a.get("ready"):
+            continue
+        entry = dict(a)
+        entry["priority"] = str(a["priority"])
+        index.append(entry)
+    return index
 
 
 def build_site_data(articles, collections, gallery, rectify, downloads):

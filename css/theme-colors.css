@@ -32,12 +32,12 @@ body.dark-mode {
   --app-border: var(--gray-dark-border);
 
   --app-text: var(--gray-dark-text);
-  --app-text-strong: #f0f0f0;
-  --app-text-soft: #cccccc;
+  --app-text-strong: var(--gray-dark-text-strong);
+  --app-text-soft: var(--gray-200);
   --app-text-muted: var(--gray-dark-muted);
-  --app-text-subtle: #888888;
-  --app-text-disabled: #777777;
+  --app-text-subtle: var(--gray-500);
+  --app-text-disabled: var(--gray-dark-text-faint);
 
-  --app-shadow: 0 2px 8px rgba(0, 0, 0, 0.30);
-  --app-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.40);
+  --app-shadow: 0 2px 8px var(--shadow-color-dark);
+  --app-shadow-hover: 0 4px 16px var(--shadow-color-dark-strong);
 }

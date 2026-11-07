@@ -38,7 +38,7 @@ a { color: inherit; }
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
 }
 .corner-nav a,
 .corner-nav button {
@@ -92,7 +92,7 @@ body.with-gallery-back .corner-nav .home-link { display: inline-flex; }
 }
 .kicker {
   color: var(--red-deep);
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
   font-size: 14px;
   margin-bottom: 18px;
 }
@@ -114,7 +114,7 @@ h1 {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 34px;
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
 }
 .stat {
   min-width: 112px;
@@ -141,7 +141,7 @@ h1 {
   gap: 12px;
   align-items: center;
   padding: 12px 0;
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
 }
 .search, .select {
   border: 1px solid var(--line);
@@ -167,7 +167,7 @@ h1 {
   padding-right: 4px;
 }
 .rail-title {
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
   font-size: 14px;
   color: var(--muted);
   margin: 0 0 10px;
@@ -197,7 +197,7 @@ h1 {
   margin-top: 5px;
   color: var(--muted);
   font-size: 13px;
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
 }
 mark {
   color: inherit;
@@ -222,7 +222,7 @@ mark {
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 12px;
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
 }
 .panel-head h2 { margin: 0; font-size: 18px; color: var(--red-deep); }
 .panel-head span { color: var(--muted); font-size: 13px; }
@@ -237,7 +237,7 @@ mark {
   cursor: pointer;
 }
 .overview-btn strong { display: block; line-height: 1.35; font-size: 15px; overflow-wrap: anywhere; }
-.overview-btn span { display: block; margin-top: 7px; color: var(--gold); font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; font-size: 13px; }
+.overview-btn span { display: block; margin-top: 7px; color: var(--gold); font-family: var(--font-sans-cjk); font-size: 13px; }
 
 .reader-head {
   padding: 30px 34px 24px;
@@ -251,7 +251,7 @@ mark {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 16px;
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
   color: var(--muted);
   font-size: 14px;
 }
@@ -268,14 +268,14 @@ mark {
   border-radius: 4px;
   padding: 8px 13px;
   text-decoration: none;
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
   font-size: 14px;
 }
 .reader-body { display: grid; grid-template-columns: minmax(0, 1fr) 340px; }
 .main-text { padding: 30px 34px 44px; min-width: 0; }
 .side-text { border-left: 1px solid var(--line); background: rgba(238,227,208,.42); padding: 18px; min-width: 0; }
 section + section { margin-top: 30px; }
-h3 { margin: 0; font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; font-size: 16px; color: var(--red-deep); }
+h3 { margin: 0; font-family: var(--font-sans-cjk); font-size: 16px; color: var(--red-deep); }
 .poem-text { font-size: 23px; line-height: 2; white-space: pre-wrap; }
 .body-text { white-space: pre-wrap; font-size: 16px; }
 .side-section { border: 1px solid rgba(216,203,184,.9); border-radius: 6px; background: rgba(255,250,240,.5); overflow: hidden; }
@@ -291,13 +291,13 @@ h3 { margin: 0; font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; font
   gap: 12px;
   cursor: pointer;
   color: var(--red-deep);
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
 }
 .toggle-icon { width: 22px; height: 22px; border: 1px solid var(--line); border-radius: 50%; display: inline-grid; place-items: center; color: var(--muted); }
 .section-content { padding: 12px; border-top: 1px solid rgba(216,203,184,.76); }
 .side-text .body-text { font-size: 14px; line-height: 1.75; max-height: 360px; overflow: auto; padding-right: 6px; }
 .side-section.collapsed .section-content { display: none; }
-.empty { color: var(--muted); font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; }
+.empty { color: var(--muted); font-family: var(--font-sans-cjk); }
 
 .quote-reader-body { padding: 24px 28px 34px; }
 .quote-grid { display: grid; gap: 14px; }
@@ -314,14 +314,14 @@ h3 { margin: 0; font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif; font
   margin-top: 12px;
   color: var(--muted);
   font-style: normal;
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
   font-size: 13px;
   line-height: 1.55;
 }
 .quote-card cite::before { content: "—— "; color: var(--gold); }
 .chapter-note {
   color: var(--muted);
-  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: var(--font-sans-cjk);
   font-size: 14px;
   margin-top: 12px;
 }

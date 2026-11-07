@@ -50,6 +50,13 @@ var downloadData = (window.SITE_DATA && window.SITE_DATA.downloadData) || { arti
 2. 从 `data/articles-json/...` 导出 TXT / DOCX。
 3. 未 JSON 化页面临时退回 HTML 抽取。
 
+补充：
+
+- `downloads/manifest.json`（旧版）保留（2026-11-07 E2 决策）：无运行时消费，但被导入/重建管线 6 个脚本读写，退役会断休眠工具链；运行时权威是 `manifest.unified.json`。
+- `downloads/` 下资源子目录：`articles/`、`posters/`、`rectify/`（`articles/`、`rectify/` 下 PDF 已清空）。
+
+全局样式/颜色/z-index 约束见 `doc/design-tokens.md`。
+
 ---
 
 ## 4. 维护规则
@@ -59,3 +66,23 @@ var downloadData = (window.SITE_DATA && window.SITE_DATA.downloadData) || { arti
 3. 改下载入口字段后，检查 `_tools/build_data.py` 和 `js/site-data.js` 生成结果。
 4. 下载按钮、弹窗、格式选择逻辑统一由 `js/download-export.js` 承担。
 5. 页面 filter 与选择弹窗状态已接入 `QMLMPageState` 的 `pageDownloads` domain；后续新增页内状态优先沿用该接口。
+
+---
+
+## 5. 权责边界
+
+**拥有（可自由修改）**：
+- `html/downloads/downloads.html`
+- `js/download-export.js`（下载按钮、弹窗、格式选择逻辑）
+- `downloads/` 目录（`manifest.unified.json`、`manifest.json` 与资源子目录）
+
+**只读消费（禁改）**：
+- 公共层：`js/main.js`、`css/style.css`、`js/site-data.js`（生成物）、`js/darkmode.js`、`js/cursor.js` 等公共脚本（完整清单见 `doc/README.md` 模块权责矩阵脚注）
+- `js/state-center.js`、`js/page-state-adapter.js`：页面状态公共层
+- `data/articles-json/`：导出正文来源，归文章模块 / 数据层管辖
+
+**共享/跨界资产**：
+- `window.SITE_DATA.downloadData`（由 `downloads/manifest.unified.json` 等经 `_tools/build_data.py` 聚合生成）：数据边界衔接 `doc/data/README.md` §7，改动前需过该文档
+
+**改动前置条件**：
+- 改下载入口字段（`downloads/manifest.unified.json` 或 `data/` 索引）后必须跑 `python _tools/build_data.py --write`，并检查 `js/site-data.js` 生成结果

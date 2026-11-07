@@ -1,11 +1,11 @@
 # 页面模块文档索引
 
-> 规则：`html/<module>/...` 对应 `设计文档/pages/<module>/README.md`。每个模块尽量只维护一个 README，复杂研究稿放模块下的 `research/`。
+> 规则：`html/<module>/...` 对应 `doc/pages/<module>/README.md`。每个模块尽量只维护一个 README，复杂研究稿放模块下的 `research/`。
 
 | html 模块 | 文档 | 说明 |
 |---|---|---|
 | `html/index.html` | `home/README.md` | 首页与根入口 |
-| `html/hall/`（规划） | `home/3d-hall-roadmap.md` | 桌面版 3D 展厅（自包含沉浸页，不套公共导航；规划中） |
+| `html/hall/`（规划） | [`preparing/3d-hall-roadmap.md`](../preparing/3d-hall-roadmap.md) | 桌面版 3D 展厅（自包含沉浸页，不套公共导航；规划中，文档属产品层③ 筹备与规划） |
 | `html/about/` | `about/README.md` | 关于页、更新日志 |
 | `html/preferences/` | `preferences/README.md` | 个人偏好、收藏、历史、视图设置 |
 | `html/articles/` | `articles/README.md` | 文章列表、详情页、正文/精读接入 |
@@ -21,5 +21,6 @@
 维护要求：
 
 1. 页面源码变动后，同步更新对应模块 README。
-2. 模块 README 只写：页面范围、数据源、脚本、样式、边界、当前状态。
-3. 不把长篇 Prompt、研究过程、历史争论写进页面 README；放入 `research/` 并在 README 摘要引用。
+2. 模块 README 必须包含统一小节：页面范围、数据源、脚本、样式、**权责边界**、当前状态；跨模块/共享资产以总览 `doc/README.md`「模块权责矩阵」为准，两处需保持一致。
+3. 模块 README 不得与全局约束（`doc/design-tokens.md`）冲突；模块私有的待办小项写在模块 README 内，跨模块或涉及公共层的写入`doc/PLAN.md`。
+4. 不把长篇 Prompt、研究过程、历史争论写进页面 README；放入 `research/` 并在 README 摘要引用。

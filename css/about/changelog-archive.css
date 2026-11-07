@@ -1,0 +1,112 @@
+/* 自 html/about/changelog-archive.html 内联样式迁出（更新计划 C2，2026-11-06） */
+        .archive-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        .archive-header {
+            margin-bottom: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #c41e3a;
+            text-decoration: none;
+        }
+
+        .archive-title {
+            font-size: 1.8rem;
+            border-left: 4px solid #c41e3a;
+            padding-left: 20px;
+            margin-bottom: 24px;
+        }
+
+        .archive-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .archive-item {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            border-left: 2px solid #e0e0e0;
+            padding-left: 24px;
+            padding-bottom: 16px;
+        }
+
+        body.dark-mode .archive-item {
+            border-left-color: #444;
+        }
+
+        .archive-date {
+            min-width: 100px;
+            font-weight: 700;
+            color: #c41e3a;
+        }
+
+        .archive-content {
+            flex: 1;
+        }
+
+        .archive-title-link {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+            .archive-title-link a {
+                color: var(--text-color, #1f2937);
+                text-decoration: none;
+            }
+
+                .archive-title-link a:hover {
+                    color: #c41e3a;
+                }
+
+        .archive-tag {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: 10px;
+        }
+
+            .archive-tag.tag-important {
+                background: #dc2626;
+                color: white;
+            }
+
+            .archive-tag.tag-new {
+                background: #10b981;
+                color: white;
+            }
+
+            .archive-tag.tag-optimize {
+                background: #3b82f6;
+                color: white;
+            }
+
+            .archive-tag.tag-fix {
+                background: #f59e0b;
+                color: white;
+            }
+
+            .archive-tag.tag-default {
+                background: #6b7280;
+                color: white;
+            }
+
+        .archive-desc {
+            color: var(--text-light, #666);
+            margin: 8px 0 0;
+            line-height: 1.5;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+        }

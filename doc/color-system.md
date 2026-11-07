@@ -31,23 +31,30 @@ QmlmReader 的主视觉应保持“红黑金 + 米白纸张 + 低饱和分类色
 
 `css/style.css` 已通过顶部 `@import` 接入上述颜色管理文件；现有旧变量保留为兼容别名。新增常规页面应优先引入 `style.css`，不必重复引入令牌文件。
 
-### 1.2 推荐全站基础令牌（由 `css/color-tokens.css` 维护）
+### 1.2 全站基础令牌（已由 `css/color-tokens.css` 实现）
+
+> 2026-11-06 审计更正：早期文档提议的 `--color-ink/--color-paper/--color-surface` 等命名从未落地，实际实现为 `--paper-*` / `--gray-*` 命名。以下面的真实令牌为准；`--color-ink`、`--dark-*` 等旧名视为废弃提案，不要再引用。
 
 ```css
 :root {
+  /* 品牌色 */
   --color-brand-red: #c41e3a;
   --color-brand-red-dark: #8b0000;
   --color-brand-gold: #ffd700;
-  --color-ink: #2b2b2b;
-  --color-ink-strong: #1a1a1a;
-  --color-paper: #f7f2e7;
-  --color-paper-soft: #fbf7ee;
-  --color-paper-deep: #e8e4dc;
-  --color-surface: #fffaf0;
-  --color-surface-strong: #fffdf7;
-  --color-border-warm: #ded2bd;
+
+  /* 护眼纸色四层 + 边框（注意：#f7f2e7 是区块层，页面底是 #f3eadc） */
+  --paper-page: #f3eadc;
+  --paper-section: #f7f2e7;
+  --paper-card: #fffaf0;
+  --paper-card-strong: #fffdf7;
+  --paper-muted: #e8e4dc;
+  --paper-border: #ded2bd;
+
+  /* 中性灰阶 --gray-950…050 与暗色灰阶 --gray-dark-*（见 §6、§8） */
 }
 ```
+
+排版令牌（`--font-sans/--font-serif/--font-kai`）与 z-index 阶梯（`--z-*`）也已进入该文件，规则见 `doc/design-tokens.md` §3/§5。
 
 ---
 
@@ -111,24 +118,25 @@ QmlmReader 的主视觉应保持“红黑金 + 米白纸张 + 低饱和分类色
 | 斯大林 | `#7f1d1d` | `#4b5563` / `#c9a84c` | `#f1eadc` | 深绛红、钢灰、旧金；建设、工业化、战争年代的厚重感 |
 | 毛泽东 | `#c41e3a` | `#d9a000` / `#3d6b4f` | `#f7f2e7` | 红、金、山河绿；群众路线、诗词、实践感 |
 
-### 4.1 斯大林新增内容的色彩建议
+### 4.1 斯大林令牌（已实现）
 
-下一步将为 `html/masters` 增添斯大林小传、斯大林人物关系网等内容，建议提前设定一组 Stalin 令牌：
+> 2026-11-06 审计更正：斯大林色已按统一的 `body[data-master]` 覆盖式结构落地在 `css/master-colors.css`（不是独立 `--master-stalin-*` 命名），暗色五值与下表一致。取色一律通过 `--master-*` 变量。
 
 ```css
-:root {
-  --master-stalin-primary: #7f1d1d;   /* 深绛红：政治与战争年代 */
-  --master-stalin-secondary: #4b5563; /* 钢灰：工业化、组织、档案感 */
-  --master-stalin-accent: #c9a84c;    /* 旧金：奖章、时间节点、重点徽章 */
-  --master-stalin-paper: #f1eadc;     /* 旧档案纸 */
-  --master-stalin-ink: #252525;
+/* 实际实现：css/master-colors.css 内 body[data-master="stalin"] 覆盖统一变量 */
+body[data-master="stalin"] {
+  --master-primary: #7f1d1d;   /* 深绛红：政治与战争年代 */
+  --master-secondary: #4b5563; /* 钢灰：工业化、组织、档案感 */
+  --master-accent: #c9a84c;    /* 旧金：奖章、时间节点、重点徽章 */
+  --master-paper: #f1eadc;     /* 旧档案纸 */
+  --master-ink: #252525;
 }
-body.dark-mode {
-  --master-stalin-primary: #b33a45;
-  --master-stalin-secondary: #8b96a6;
-  --master-stalin-accent: #d7b65a;
-  --master-stalin-paper: #24211b;
-  --master-stalin-ink: #ece4d4;
+body.dark-mode[data-master="stalin"] {
+  --master-primary: #b33a45;
+  --master-secondary: #8b96a6;
+  --master-accent: #d7b65a;
+  --master-paper: #24211b;
+  --master-ink: #ece4d4;
 }
 ```
 
@@ -159,6 +167,8 @@ body.dark-mode {
 - `html/toolkit/toolkit.html`
 
 这些页面的大标题建议统一使用“模块主题色 + 米白卡片/渐变背景 + 暗色模式柔化色”。不要每页随机使用过亮色。
+
+> 现状（2026-11-07，B5 完成）：七个门户页已挂 `data-module` + `module-title`（articles/downloads/experimental/gallery/rectify/toolkit/preferences）。真实消费方：puzzle（puzzle.css）与 international（international-calendar.css）经 `--module-accent` 取色；preferences 全量生效、各页暗色模式生效；多数门户 hero 为深底浅字设计，亮色文字色被各自 hero 规则压制（有意保留，见 `doc/PLAN.md` B5 备注）。
 
 | 页面 | 主题色 | 辅色/渐变 | 大标题建议 | 暗色模式标题 |
 |---|---:|---:|---|---:|
@@ -193,19 +203,21 @@ body.dark-mode .module-hero h1 {
 
 ## 6. 暗黑模式颜色切换原则
 
-现状：`css/style.css` 的暗色基础为 `#1a1a1a` 背景、`#2a2a2a` 卡片、`#444` 边框；`articles-index.css` 已有深蓝灰页面底。建议标准化为以下层级：
+现状：`css/style.css` 的暗色基础为 `#1a1a1a` 背景、`#2a2a2a` 卡片、`#444` 边框；`articles-index.css` 已有深蓝灰页面底。暗色灰阶已落地为 `css/color-tokens.css` 的 `--gray-dark-*` 七档（2026-11-06 审计更正：早期提议的 `--dark-*` 命名未采用；`--dark-gold #ffd54f` 无对应实现，暗色金继续用品牌金/柔化红方案）：
 
 | 令牌 | 色值 | 用途 |
 |---|---:|---|
-| `--dark-bg` | `#171717` | 全站深色背景最低层 |
-| `--dark-bg-soft` | `#1f1f1f` | 页面区域、阅读背景 |
-| `--dark-surface` | `#2a2a2a` | 卡片、弹窗、章节内容 |
-| `--dark-surface-raised` | `#333333` | 悬浮卡、输入区、hover |
-| `--dark-border` | `#444444` | 边框，不要低于 `#333` |
-| `--dark-text` | `#e0e0e0` | 正文 |
-| `--dark-muted` | `#aaaaaa` | 次要文字 |
-| `--dark-warm-text` | `#ece4d4` | 工具页纸张风格正文 |
-| `--dark-gold` | `#ffd54f` | 暗色强调金，替代纯黄大面积 |
+| `--gray-dark-bg` | `#171717` | 全站深色背景最低层 |
+| `--gray-dark-section` | `#1f1f1f` | 页面区域、阅读背景 |
+| `--gray-dark-surface` | `#2a2a2a` | 卡片、弹窗、章节内容 |
+| `--gray-dark-raised` | `#333333` | 悬浮卡、输入区、hover |
+| `--gray-dark-border` | `#444444` | 边框，不要低于 `#333` |
+| `--gray-dark-text` | `#e0e0e0` | 正文 |
+| `--gray-dark-muted` | `#aaaaaa` | 次要文字 |
+| `--gray-dark-text-strong` | `#f0f0f0` | 提亮文字（标题/强调，2026-11-06 自 theme-colors 下沉） |
+| `--gray-dark-text-faint` | `#777777` | 最弱文字/禁用态（同上） |
+
+暗色阴影令牌 `--shadow-color-dark`（rgba(0,0,0,0.30)）/ `--shadow-color-dark-strong`（0.40）同样在原子层维护。工具页纸张风格暗色正文 `#ece4d4` 由各工具自有令牌维护（见 §9），不进全站原子层。
 
 原则：
 
@@ -380,10 +392,153 @@ body.dark-mode .module-hero h1 {
 
 ## 11. 后续标准化清单
 
-1. 在 `css/style.css` 增补全站基础色令牌，逐步把 `--bg-color: #f5f5f5`、`--card-bg: #fff` 改为护眼纸色体系。
-2. 将大面积 `#fff` 替换为 `--color-surface/#fffaf0/#fbf7ee`，输入框使用 `#fffdf7`。
-3. 将 `articles-detail.css` 中分类硬编码联结卡颜色迁移到 `category-theme.css` 变量。
-4. 为七个导航展览页的大标题建立 `.module-hero` 或页面级 `--module-accent` 规范。
-5. 为 `html/masters` 建立导师色令牌，尤其先补 `--master-stalin-*`。
-6. 给 experimental 工具族增加文档化风格名：`constructivist`、`rural-stage`、`mimeo-paper`、`darkroom-red`、`minimal-paper`。
-7. 灰阶收敛：新增代码优先使用本文灰阶，不再随手添加 `#f7f7f7/#fafafa/#111/#000`。
+> 待办统一在 ``doc/PLAN.md`维护（本文不再另立台账），此处只标状态与去向。
+
+1. ~~在 `css/style.css` 增补全站基础色令牌~~ ✅ 已由 `css/color-tokens.css` + `theme-colors.css` 完成（2026-11-06 审计确认）。
+2. 大面积 `#fff` 替换为纸色四档 → PLAN B4/C2。
+3. `articles-detail.css` 分类硬编码联结卡颜色迁移到 `category-theme.css` 变量 → PLAN C5。
+4. ~~为七个导航展览页建立 `--module-accent` 规范~~ ✅ 已落地 `css/module-colors.css`（10 组定义与 §5 表一致）；剩余：5 个未触发 `data-module` 的页面补属性或删定义 → PLAN B5。
+5. ~~为 `html/masters` 建立导师色令牌~~ ✅ 已落地 `css/master-colors.css`（含斯大林，见 §4.1）。
+6. 给 experimental 工具族增加文档化风格名：`constructivist`、`rural-stage`、`mimeo-paper`、`darkroom-red`、`minimal-paper` ⬜（§9 已记录配色档案，风格名待挂）。
+7. 灰阶收敛：新增代码优先使用 `--gray-*`/`--gray-dark-*` 令牌，不再随手添加 `#f7f7f7/#fafafa/#111/#000` → 规则已进 `doc/design-tokens.md` §1.3，存量迁移走PLAN B4。
+
+---
+
+## 12. 常规层表外色值台账（2026-11-07）
+
+> 范围：`css/style.css`、`css/articles-detail.css`、`css/articles-index.css` 中不在令牌体系内的颜色字面量（PLAN B9）。此前批次已把与既有令牌**等值**的字面量全部 var 化；本节给剩余表外值逐组明确处置，并完成其中安全的等值替换。
+>
+> 处置口径：
+> - **升令牌**：红/金品牌族或中性灰族的语义变体，且三文件合计 ≥3 次、命名可与 `--color-*` 衔接 → 在 `css/color-tokens.css` 加原子定义，三文件全部替换为 `var()`（精确等值，零视觉变化）。本轮升格 3 个（见 §12.3）。
+> - **确认设计值**：组件特有颜色（图表 indigo `#7986cb`、u-* 工具类、detail 分类回退色、index 夜色/蓝灰盘、quiz 红绿对、暗色暖棕盘等）→ 保留字面量，登记在案。
+> - **待对齐**：与既有令牌语义重复但值不同 → 本轮不动（对齐属视觉变化），下批评估。
+> - **rgba 透明变体**：一律保留 + 登记（透明度令牌化收益低）；`#fff` 保留（纸色替换是有意视觉变化，走PLAN B4/C2）；`var()` 回退位中的字面量保留。
+>
+> 「文件/位置」为盘点时行号：style=`css/style.css`，detail=`css/articles-detail.css`，index=`css/articles-index.css`。
+
+### 12.1 hex 字面量（89 组 / 160 处）
+
+| 色值 | 次数 | 文件/位置 | 处置 | 备注 |
+|---|---|---|---|---|
+| `#121a2b` | 1 | index 20 | DESIGN | index articles-page 暗色渐变起（夜空底） |
+| `#15803d` | 1 | index 549 | ALIGN | index modal-status.ready 文字绿；与 --color-success(#2e7d32) 语义重复 |
+| `#16202c` | 1 | index 221 | DESIGN | index collection-title 深藏青 |
+| `#17212c` | 1 | index 531 | DESIGN | index modal-title 深藏青 |
+| `#181827` | 1 | index 20 | DESIGN | index articles-page 暗色渐变起（夜空底） |
+| `#18222d` | 1 | index 302 | DESIGN | index card-title span 深藏青 |
+| `#1a1a2a` | 1 | detail 954 | DESIGN | detail 暗色 dcn-item.active 底（藏蓝） |
+| `#1a237e` | 4 | detail 1062, detail 1072, detail 1091, detail 1094 | DESIGN | detail u-* 工具类 indigo（u-color-1a237e/u-border-left-indigo/u-bg-gradient-blue） |
+| `#1a2a1a` | 2 | detail 806, detail 913 | DESIGN | detail 暗色 correct/ready 底（绿调） |
+| `#1a4731` | 1 | detail 484 | DESIGN | detail correct 文字深绿 |
+| `#1a4d7a` | 1 | detail 1069 | DESIGN | detail u-border-left-navy |
+| `#1b5e20` | 1 | detail 1067 | DESIGN | detail u-border-left-deepgreen |
+| `#232838` | 2 | index 202, index 459 | DESIGN | index 暗色 article-card/modal-dialog 面 |
+| `#283593` | 1 | detail 1091 | DESIGN | detail u-bg-gradient-blue 渐变亮端 |
+| `#2a2015` | 1 | detail 807 | DESIGN | detail 暗色 wip 状态底（暖棕） |
+| `#2a2025` | 1 | detail 953 | DESIGN | detail 暗色 dcn-item:hover 底（紫调） |
+| `#2b3a4a` | 2 | index 109, index 139 | DESIGN | index 亮色 section-head h2/filter-input 文字（蓝灰盘） |
+| `#2c3442` | 1 | index 162 | DESIGN | index 暗色 filter-btn 底 |
+| `#2d1a1a` | 2 | detail 901, detail 912 | DESIGN | detail 暗色 warning/wrong 底（红调） |
+| `#2d2015` | 4 | detail 895, detail 900, detail 919, detail 933 | DESIGN | detail 暗色 intro/highlight/puzzle 底（暖棕盘） |
+| `#2d3748` | 1 | detail 525 | DESIGN | detail theory-node.branch 色 |
+| `#2f6f44` | 1 | detail 621 | DESIGN | detail conn-dir output 深绿 |
+| `#3182ce` | 1 | detail 1071 | DESIGN | detail u-border-left-blue-3182ce |
+| `#38a169` | 4 | detail 526, detail 1066, detail 1076, detail 1096 | DESIGN | detail theory-node.current + u-* 绿系（u-color-green 等） |
+| `#3a2020` | 1 | detail 803 | DESIGN | detail 暗色 modal-article:hover 底 |
+| `#3d2a1a` | 4 | detail 895, detail 900, detail 919, detail 933 | DESIGN | detail 暗色 intro/highlight/puzzle 文字（暖棕盘） |
+| `#3d6b4f` | 1 | detail 1068 | DESIGN | detail u-border-left-slate |
+| `#493b1b` | 1 | index 393 | DESIGN | index 暗色 favorite 激活文字（暗金） |
+| `#4a0000` | 2 | detail 186, detail 193 | DESIGN | detail favorite 激活/重要度徽章深红底（配金） |
+| `#4a3030` | 1 | detail 933 | DESIGN | detail 暗色 puzzle-modern h3（暖红） |
+| `#553c9a` | 1 | detail 1075 | DESIGN | detail u-color-purple |
+| `#5a101b` | 1 | detail 8 | DESIGN | detail --cat-gradient 暗端回退 |
+| `#5c3d99` | 2 | detail 622, detail 1064 | DESIGN | detail conn-dir mutual + u-border-left-purple 紫 |
+| `#66bb6a` | 2 | detail 806, detail 913 | ALIGN | detail 暗色 correct/ready 绿；与 --color-success 语义重复，对齐需另立暗色变体 |
+| `#67727e` | 1 | index 235 | DESIGN | index card-author 蓝灰 |
+| `#68d391` | 1 | detail 481 | DESIGN | detail correct 左边框绿（quiz 配色） |
+| `#742a2a` | 1 | detail 477 | DESIGN | detail wrong 文字深红 |
+| `#7986cb` | 18 | detail 884, detail 892, detail 892, detail 911, detail 914, detail 916, … | DESIGN | detail 页 indigo 强调主色（暗色标题/交互件/图表系） |
+| `#7f1d1d` | 1 | index 468 | DESIGN | index modal-header 渐变暗端（与 --articles-accent 搭配） |
+| `#8a8f98` | 1 | index 289 | DESIGN | index card-date 蓝灰 |
+| `#8b1e2d` | 2 | detail 6, detail 8 | DESIGN | detail --cat-primary/--cat-gradient 回退 |
+| `#9a7a22` | 1 | index 373 | DESIGN | index favorite 图标暗金 |
+| `#a8b0bc` | 1 | index 123 | DESIGN | index 暗色 section-count 蓝灰 |
+| `#b07c00` | 1 | index 381 | DESIGN | index favorite hover 金 |
+| `#b26a00` | 1 | detail 620 | DESIGN | detail conn-dir source 橙 |
+| `#b33a45` | 2 | detail 7, detail 8 | DESIGN | detail --cat-secondary/--cat-gradient 回退 |
+| `#b7c1ce` | 1 | index 243 | DESIGN | index 暗色 card-author 蓝灰 |
+| `#b91c1c` | 3 | index 2, index 280, index 468 | TOKEN | 升格 --color-brand-red-strong |
+| `#c1c7d0` | 1 | index 61 | DESIGN | index 暗色 page-hero p 蓝灰 |
+| `#c2185b` | 1 | detail 1078 | DESIGN | detail u-color-pink |
+| `#c9a64e` | 1 | index 383 | DESIGN | index favorite 激活金 |
+| `#d7b65a` | 1 | index 387 | DESIGN | index 暗色 favorite 金 |
+| `#d7dfeb` | 1 | index 113 | DESIGN | index 暗色 section-head h2 蓝灰 |
+| `#dbe3ef` | 1 | index 163 | DESIGN | index 暗色 filter-btn 文字 |
+| `#e2e8f0` | 1 | detail 527 | DESIGN | detail theory-node.related 灰蓝 |
+| `#e57373` | 3 | style 722, style 722, style 723 | TOKEN | 升格 --color-brand-red-soft-dark |
+| `#e65100` | 4 | detail 798, detail 1063, detail 1074, detail 1097 | DESIGN | detail ma-status.wip + u-* 橙系（u-color-orange 等） |
+| `#e6edf6` | 1 | index 146 | DESIGN | index 暗色 filter-input 底 |
+| `#e8eef8` | 1 | index 535 | DESIGN | index 暗色 modal-title 蓝灰 |
+| `#ede4d6` | 1 | index 16 | DESIGN | index articles-page 亮色渐变端（暖沙） |
+| `#ede7f6` | 2 | detail 622, detail 1058 | DESIGN | detail conn-dir mutual 底 + u-bg-soft-purple |
+| `#eef3fb` | 1 | index 227 | DESIGN | index 暗色 card-title span 蓝灰 |
+| `#ef4444` | 1 | index 280 | DESIGN | index badge 渐变亮端（与 --articles-accent 搭配） |
+| `#ef5350` | 1 | detail 912 | DESIGN | detail 暗色 wrong 左边框红 |
+| `#f0d0c0` | 1 | detail 640 | DESIGN | detail puzzle-modern 暖粉底 |
+| `#f0fff4` | 1 | detail 480 | DESIGN | detail correct 底淡绿 |
+| `#f4f4f4` | 1 | detail 617 | DESIGN | detail conn-dir 底灰 |
+| `#f6f0e8` | 1 | index 16 | DESIGN | index articles-page 亮色渐变起（暖沙） |
+| `#f9e3a8` | 1 | detail 121 | DESIGN | detail 暗色 history-resume-prompt 文字（奶油金） |
+| `#fc8181` | 1 | detail 473 | ALIGN | detail wrong 左边框柔化红；建议下批对齐 --color-brand-red-soft |
+| `#fce4ec` | 1 | detail 1057 | DESIGN | detail u-bg-soft-pink |
+| `#fdf0f0` | 2 | detail 783, detail 872 | DESIGN | detail modal-article/dcn-item hover 淡红底 |
+| `#fef5f5` | 1 | detail 877 | DESIGN | detail dcn-item.active 淡红底 |
+| `#ff6b6b` | 3 | style 529, style 2089, style 2516 | TOKEN | 升格 --color-brand-red-soft |
+| `#ff7b7b` | 1 | index 51 | ALIGN | index 暗色 hero h1 柔化红；建议下批对齐 --color-brand-red-soft |
+| `#ffadad` | 1 | index 83 | ALIGN | index 暗色 hero p 柔化红；建议下批对齐 --color-brand-red-soft |
+| `#ffb0b0` | 1 | style 444 | ALIGN | style 暗色 hero-opening-text 柔化红；建议下批对齐 --color-brand-red-soft |
+| `#ffb300` | 2 | detail 99, detail 185 | ALIGN | detail 回执条/favorite 渐变琥珀端；下批与 #ffd54f 一并评估 gold 系令牌 |
+| `#ffb74d` | 1 | detail 807 | DESIGN | detail 暗色 wip 状态文字琥珀 |
+| `#ffc107` | 1 | detail 438 | DESIGN | detail highlight-box 边框琥珀（明度与 --color-warning 不同） |
+| `#ffd54f` | 4 | detail 33, detail 118, detail 125, detail 185 | ALIGN | detail 进度条/回执计数/重要度徽章琥珀金；下批评估 gold-soft 令牌或对齐 --color-brand-gold |
+| `#ffd700` | 1 | style 2658 | FALLBACK | style nav-ball:focus-visible 的 var(--color-brand-gold,#ffd700) 回退位 |
+| `#ffe29a` | 1 | index 392 | DESIGN | index 暗色 favorite 激活淡金底 |
+| `#ffe8d6` | 5 | detail 321, detail 437, detail 511, detail 636, detail 1053 | DESIGN | detail intro/highlight/puzzle 暖底 + u-bg-soft-warm |
+| `#fff5f5` | 1 | detail 472 | DESIGN | detail wrong 底淡红 |
+| `#fff7dc` | 1 | index 382 | DESIGN | index favorite 激活淡金底 |
+| `#fff8f0` | 5 | detail 321, detail 437, detail 511, detail 636, detail 1053 | DESIGN | detail intro/highlight/puzzle 暖白底 + u-bg-soft-warm |
+| `#fff8f1` | 1 | style 114 | DESIGN | style logo 主标题暖白 |
+| `#fff` | 11 | style 198, style 247, style 911, style 2576, style 2608, detail 177, … | FFF | 亮色文字/图标/按钮字；纸色替换为有意视觉变化（PLAN B4/C2） |
+
+### 12.2 rgba 透明变体（17 基色组 / 77 档 / 115 处，全部保留）
+
+| 基色 | 处数 | 分布 | 档数 | α 档位 |
+|---|---|---|---|---|
+| `rgba(255,255,255, α)` | 40 | articles-detail×16/articles-index×5/style×19 | 21 | 0.08,0.1,0.12,0.14,0.15,0.16,0.18,0.2,0.24,0.28,0.3,0.35,0.4,0.5,0.65,0.7,0.85,0.86,0.88,0.92,0.96 |
+| `rgba(0,0,0, α)` | 28 | articles-index×8/style×10/articles-detail×10 | 15 | 0.05,0.06,0.08,0.1,0.12,0.15,0.16,0.18,0.2,0.25,0.28,0.35,0.45,0.5,0.6 |
+| `rgba(255,215,0, α)` | 10 | style×4/articles-detail×6 | 9 | 0.08,0.10,0.15,0.24,0.5,0.55,0.9,0.95,0.98 |
+| `rgba(196,30,58, α)` | 8 | style×8 | 6 | 0.08,0.1,0.12,0.18,0.2,0.25 |
+| `rgba(139,0,0, α)` | 7 | articles-detail×4/style×3 | 6 | 0.12,0.18,0.25,0.35,0.4,0.97 |
+| `rgba(26,26,26, α)` | 4 | style×4 | 3 | 0.08,0.10,0.18 |
+| `rgba(255,107,107, α)` | 3 | style×3 | 3 | 0.16,0.3,0.55 |
+| `rgba(18,18,24, α)` | 2 | articles-index×2 | 2 | 0.78,0.92 |
+| `rgba(185,28,28, α)` | 2 | articles-index×2 | 1 | 0.1 |
+| `rgba(255,180,0, α)` | 2 | style×2 | 2 | 0.03,0.04 |
+| `rgba(31,31,31, α)` | 2 | articles-detail×2 | 2 | 0.9,0.96 |
+| `rgba(78,45,20, α)` | 2 | articles-index×2 | 2 | 0.06,0.08 |
+| `rgba(245,158,11, α)` | 1 | articles-index×1 | 1 | 0.16 |
+| `rgba(249,227,168, α)` | 1 | articles-detail×1 | 1 | 0.8 |
+| `rgba(255,123,123, α)` | 1 | articles-index×1 | 1 | 0.14 |
+| `rgba(34,197,94, α)` | 1 | articles-index×1 | 1 | 0.14 |
+| `rgba(74,0,0, α)` | 1 | articles-detail×1 | 1 | 0.74 |
+
+### 12.3 统计
+
+- 盘点合计：**275 处**字面量，精确色值 **166 组**（hex 89 组 + rgba 77 档）。
+- **升令牌 3 个**（9 处替换，全部精确等值、零视觉变化）：
+  - `--color-brand-red-soft` = `#ff6b6b`（style 3 处：暗色 shutter-dot 激活 / filter-indicator / section-divider 渐变端）
+  - `--color-brand-red-soft-dark` = `#e57373`（style 3 处：暗色 back-link 文字/边框/hover）
+  - `--color-brand-red-strong` = `#b91c1c`（index 3 处：`--articles-accent` 定义 + badge/modal-header 渐变锚色）
+- **确认设计值 76 组**（126 处）：以 detail 的 indigo/琥珀/u-* 工具类、index 夜色蓝灰盘、双方暗色暖棕盘为主。
+- **待对齐 8 组**（13 处）：柔化红 4（`#ff7b7b/#ffadad/#ffb0b0/#fc8181` → 建议对齐 `--color-brand-red-soft`）、绿 2（`#15803d/#66bb6a` → 建议对齐 `--color-success`）、金/琥珀 2（`#ffd54f/#ffb300` → 下批评估 gold-soft 或对齐 `--color-brand-gold`）。
+- 保留：rgba 透明变体 17 基色组 115 处；`#fff` 11 处（B4/C2 纸色批次处理）；`var()` 回退位 `#ffd700` 1 处。

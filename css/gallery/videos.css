@@ -1,0 +1,283 @@
+/* 自 html/gallery/videos.html 内联样式迁出（更新计划 C1，2026-11-06） */
+
+        .page-header {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .page-header p { font-size: 1.05rem; opacity: 0.88; }
+
+        .gallery-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: #c41e3a; text-decoration: none; margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* 分类标签导航 */
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #c41e3a;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: #c41e3a;
+        }
+
+        .category-tab:hover {
+            background: #c41e3a;
+            color: white;
+        }
+
+        .category-tab.active {
+            background: #c41e3a;
+            color: white;
+        }
+
+        /* 分类内容区域 */
+        .category-section {
+            display: none;
+        }
+
+        .category-section.active {
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #c41e3a;
+        }
+
+        /* 视频网格 - 详细版 */
+        .video-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .video-detail-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .video-detail-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .video-detail-thumb {
+            height: 180px;
+            background: linear-gradient(135deg, #c41e3a, #8b0000);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-detail-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .video-detail-thumb::after {
+            content: '';
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .video-detail-content {
+            padding: 1.5rem;
+        }
+
+        .video-detail-content h3 {
+            margin: 0 0 0.75rem 0;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+
+        .video-detail-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* 正名分类标签 */
+        .rectify-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .rectify-tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .rectify-tag.leaders { background: #e3f2fd; color: #1976d2; }
+        .rectify-tag.military { background: #fff3e0; color: #f57c00; }
+        .rectify-tag.economy { background: #e8f5e9; color: #388e3c; }
+        .rectify-tag.political { background: #fce4ec; color: #c2185b; }
+
+        body.dark-mode .rectify-tag.leaders { background: #1565c0; color: white; }
+        body.dark-mode .rectify-tag.military { background: #ef6c00; color: white; }
+        body.dark-mode .rectify-tag.economy { background: #2e7d32; color: white; }
+        body.dark-mode .rectify-tag.political { background: #ad1457; color: white; }
+
+        .video-detail-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .video-detail-link:hover {
+            text-decoration: underline;
+        }
+
+        /* UP主推荐区域 */
+        .up-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+        }
+
+        .up-section h2 {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .up-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .up-card {
+            background: var(--card-bg);
+            padding: 1.25rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .up-card h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .up-card p {
+            margin: 0 0 0.75rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .up-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .up-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* 占位卡片样式 */
+        .placeholder-card {
+            background: var(--card-bg);
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            overflow: hidden;
+            color: #888;
+        }
+
+        .placeholder-card .icon {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, #c41e3a, #8b0000);
+            color: white;
+            overflow: hidden;
+        }
+
+        .placeholder-card .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .placeholder-card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        body.dark-mode .up-section {
+            border-top-color: #444;
+        }
+
+        body.dark-mode .placeholder-card {
+            border-color: #555;
+            color: #888;
+        }
+
+    @media (max-width: 768px) {
+        .music-detail-grid,
+        .video-detail-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.8rem;
+        }
+        .music-detail-card,
+        .video-detail-card {
+            padding: 0.8rem;
+        }
+        .music-detail-icon,
+        .video-detail-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 1.8rem;
+        }
+    }
+/* ==== 行内样式转类（更新计划 C6，2026-11-07）==== */
+.vd-i01.vd-i01{color:var(--text-light);margin-bottom:1.5rem;}
+.vd-i02.vd-i02{color:var(--text-light);margin-bottom:1.5rem;}
+.vd-i03.vd-i03{color:var(--text-light);margin-bottom:1.5rem;}
+.vd-i04.vd-i04{color:var(--text-light);margin-bottom:1.5rem;}
+.vd-i05.vd-i05{text-align:center;color:#d97706;font-size:0.85rem;margin-top:0.8rem;padding-top:0.5rem;border-top:1px dashed #fcd34d;}

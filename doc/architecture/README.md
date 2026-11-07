@@ -1,7 +1,8 @@
 # 全站架构维护 README
 
-> 对应源码：根入口、`html/index.html`、`css/style.css`、`js/main.js`、`js/site-data.js`、公共脚本。  
-> 作用：让 AI 和维护者快速判断“站点壳、公共导航、公共样式、聚合数据”该从哪里改。
+> 对应源码：根入口、`html/index.html`、`css/style.css`、`js/main.js`、`js/site-data.js`、公共脚本、`api/` + `vercel.json`（Vercel serverless）。  
+> 作用：让 AI 和维护者快速判断“站点壳、公共导航、公共样式、聚合数据”该从哪里改。  
+> 权责：本 README 管辖「公共层领地」（总览权责矩阵脚注清单）；任何模块改动这些文件前必须先读本文，并在`doc/PLAN.md`登记。`api/translate.js` 是全站唯一服务端代码（Vercel serverless 函数，由 `vercel.json` 配置），前端模块不得依赖它做本地运行。
 
 ---
 
@@ -15,8 +16,8 @@ index.html
       -> css/style.css
       -> js/site-data.js
       -> js/main.js
-      -> js/preferences.js
-      -> js/search.js
+      -> js/preferences.js   ┐ 由 main.js 运行时注入（main.js L63-94），
+      -> js/search.js        ┘ 页面无这两个显式 <script> 标签
       -> js/darkmode.js
       -> js/cursor.js
 ```
@@ -58,16 +59,18 @@ index.html
 
 ## 3. 当前维护风险
 
-1. **页面私有样式已大幅收敛**：导师五页抽入 `css/masters/masters-common.css`（`body[data-master]` 变量取色），rectify 十页抽入 `css/rectify/rectify-common.css`，12 个 >10KB 大页内联样式已原样下沉到 `css/<module>/`。剩余小页仍有个别内联 `<style>`，新页面一律不再新增内联样式。
+1. **页面私有样式已大幅收敛**：导师五页抽入 `css/masters/masters-common.css`（`body[data-master]` 变量取色），rectify 十页抽入 `css/rectify/rectify-common.css`，早期 12 个 >10KB 大页的内联样式已原样下沉到 `css/<module>/`（该计数为历史快照；当前仍有内联样式的存量页面见`doc/PLAN.md` C1/C2）。剩余小页仍有个别内联 `<style>`，新页面一律不再新增内联样式。
 2. **公共脚本仍有兜底数据**：`main.js`、`search.js`、部分页面内仍有大段 fallback 数据。
 3. **数据权威源需要持续强调**：列表/搜索/下载入口走索引层，正文走 `articles-json`，精读走 `study-json`。
 4. **不要默认存在前端构建链**：当前项目根目录未发现 `package.json`，不要按 Vite/React 等工程习惯操作。
 
 ### 3.1 CSS 目录约定
 
-- **全局平铺**：`css/style.css`、4 个颜色令牌文件、`articles-detail.css`、`articles-index.css`、`category-theme.css`。
-- **模块子目录**（与 `js/<module>/` 对齐）：`css/masters/`、`css/rectify/`、`css/toolkit/`、`css/home/`、`css/international/`、`css/preferences/`、`css/gallery/`、`css/puzzle/`、`css/experimental/`、`css/marxist/`、`css/qingma/`、`css/xiaocezi/`、`css/yangbanxi/`、`css/redify/`。
+- **全局平铺**：`css/style.css`、4 个颜色令牌文件（color-tokens / theme-colors / module-colors / master-colors）、`articles-detail.css`、`articles-index.css`、`category-theme.css`。
+- **模块子目录（16 个）**：`css/masters/`、`css/rectify/`、`css/toolkit/`、`css/home/`、`css/international/`、`css/preferences/`、`css/gallery/`、`css/puzzle/`、`css/experimental/`、`css/articles/`（仅 mao-dun-lun.css 单页样式）、`css/marxist/`、`css/qingma/`、`css/xiaocezi/`、`css/yangbanxi/`、`css/redify/`、`css/mentor/`。
+- **与 js 目录的关系**（2026-11-06 审计更正）：存量上 css 与 js 模块目录**并不对齐**——js 模块目录仅 7 个（international/marxist/mentor/puzzle/qingma/xiaocezi/yangbanxi），多数模块样式直接放模块目录而无模块 js。「对齐」只约束**新增**模块四件套（见下条）。
 - **新增模块四件套**：`html/<module>/` 页面 + `js/<module>/` 脚本 + `css/<module>/` 样式 + `data/` 只读引用，并在 `doc/pages/<module>/README.md` 登记。
+- **遗留物**（处置走`doc/PLAN.md` D4）：`css/style.css.bak`、`js/main.js.bak`、`css/masters/stalin/relations.css.bak`、`css/mentor/`（全库零引用的孤儿目录）。
 
 ---
 
@@ -86,151 +89,44 @@ python _tools/build_data.py --write
 
 ---
 
-## 5. 响应式状态管理中心草案
+## 5. 响应式状态中心（现状参考）
 
-> 目标：在不引入框架的前提下，把站点里分散的可变 UI 状态收拢到一个轻量、可订阅、可持久化的状态中心，逐步替代各文件里零散的 localStorage、全局变量和手工 DOM 同步。
+> 设计动机、草案演进与迁移史已收编至 [../learnings.md](../learnings.md) 条目 11；本节只保留维护所需的现状参考。
 
-### 5.1 设计目标
+### 5.1 五个内置域
 
-1. **统一状态来源**：收藏、历史、主题、阅读进度、搜索筛选、菜单/弹窗等可变状态尽量由同一处读写。
-2. **保留原生 JS**：不引入 React/Vue 等框架，继续沿用当前静态站点结构。
-3. **事件驱动但可订阅**：保留原有 custom event 思路，同时增加统一的订阅接口，方便模块局部刷新。
-4. **状态和渲染分层**：状态中心只管数据变更与通知，不直接承载复杂 DOM 业务。
-5. **可渐进迁移**：旧脚本可先继续运行，新中心通过适配层逐步接管。
-
-### 5.2 现有基础
-
-当前代码里已经出现了几块可复用的“状态雏形”，但它们还没有汇入同一中心：
-
-- `js/preferences.js`：已经有 `readState()` / `writeState()`、收藏、历史、阅读恢复和 `qmlm:preferences-changed`。
-- `js/article-json.js` / `js/article-study.js`：采用“加载 JSON → 渲染 → 派发事件”的链路。
-- `js/qingma/engine.js`：游戏内部已有完整 `state` 容器，但只服务单页模块。
-- `js/search.js`、`js/darkmode.js`：分别维护局部筛选状态和主题状态。
-
-这些代码说明项目已经不是纯静态拼页，但离“统一响应式状态中心”还有一层抽象。
-
-### 5.3 建议的状态域划分
-
-建议把状态分成几类：
-
-| 状态域 | 内容 | 是否持久化 |
+| 状态域 | 内容 | 持久化 |
 |---|---|---|
-| `preferences` | 收藏、历史、视图密度、偏好页导航 | 是，localStorage |
-| `reader` | 当前 Tab、章节、滚动位置、恢复提示、进度条；当前已接 `activeTab`、`chapterNavVisible`、`collapsedChapters`、`progress`、`restore` | 部分持久化 |
-| `theme` | 暗色模式 | 是，localStorage |
-| `search` | 查询词、筛选条件、结果统计 | 否或短期缓存 |
-| `ui` | 菜单、弹窗、折叠面板、导航显示状态；当前已接 `navOpen`、`collectionModal`、`navCollapsed`、`navBallPos` | 白名单键 `navCollapsed`、`navBallPos` 持久化，其余运行态 |
-| `game` | 青马小游戏运行态 | 模块内维护，暂不强求全站共享 |
+| `preferences` | 收藏、历史、视图密度、偏好页导航 | 是（`qmlm:state:v1`，兼容旧键 `qmlm:preferences:v1`） |
+| `theme` | 暗色模式 | 是（兼容旧键 `darkMode`） |
+| `reader` | 当前 Tab、章节、滚动位置、恢复提示、进度条（`activeTab`、`chapterNavVisible`、`collapsedChapters`、`progress`、`restore`） | 运行态 |
+| `search` | 查询词、筛选条件、结果统计 | 运行态 |
+| `ui` | 菜单、弹窗、折叠、导航显示（`navOpen`、`collectionModal`、`navCollapsed`、`navBallPos`） | 白名单键持久化 |
 
-原则：**正文、索引、生成产物不进入状态中心**；状态中心只管理“用户操作后会变化的运行态”。
+原则：**正文、索引、生成产物不进状态中心**；只管"用户操作后会变化的运行态"。
 
-### 5.4 草案 API
-
-可先设计成一个很轻的全局对象或模块：
+### 5.2 接口
 
 ```js
 window.QMLMState = {
-  getState(),
-  setState(patch, source),
-  subscribe(selector, callback),
-  unsubscribe(token),
-  dispatch(action),
-  hydrate(),
-  persist()
+  getState(), setState(patch, source),
+  subscribe(selector, cb), unsubscribe(token),
+  dispatch(action), hydrate(), persist()
 };
 ```
 
-建议行为：
+`dispatch` action 全集：`preferences/set|patch|section`、`theme/set|toggle`、`reader/set|patch`、`search/set|patch`、`ui/set|patch`、`domain/set|patch`、`state/set`。
+持久化：`qmlm:state:v1` 快照 = `{preferences, theme, ui}`，其中 `ui` 只落白名单 `UI_PERSIST_KEYS = ['navCollapsed', 'navBallPos']`；跨标签经 `storage` 事件同步。**修改白名单属公共架构改动，需在本文件登记。**
 
-- `getState()`：返回当前快照。
-- `setState()`：合并局部更新并触发通知。
-- `subscribe()`：允许按状态域或选择器订阅。
-- `dispatch()`：接收动作名和参数，统一走 reducer/handler。
-- `hydrate()`：从 localStorage 还原。
-- `persist()`：只保存白名单状态域。
+### 5.3 页面私有状态接入
 
-### 5.5 推荐实现原则
+1. 每个页面私有状态用独立 domain，命名 `pageDownloads`、`pageGallery` 这类页面级前缀。
+2. 新增功能优先从 `QMLMPageState.get()` 读初值、`QMLMPageState.subscribe()` 订阅；旧 DOM 行为先保留。
+3. 页面稳定后再删除重复私有变量、重复事件与直写 localStorage。
+4. 只有同一状态被多处重复写入或冲突时，才做强制覆盖式重构。
 
-1. **单一写入口**：尽量不要在业务脚本里直接改 localStorage。
-2. **先状态后 DOM**：UI 更新由订阅回调触发，而不是每个操作点手写同步。
-3. **派生状态不落库**：例如章节标签、当前可见项统计，优先从基础状态计算。
-4. **版本化存储**：`qmlm:state:v1` 这类键要有版本号，方便后续迁移。
-5. **兼容旧事件**：保留 `qmlm:preferences-changed`、`qmlm:article-rendered` 等事件，作为过渡层。
-6. **接口先行**：页内内联脚本和私有 JS 不强制一次性覆盖；先通过 `QMLMPageState` 接入状态中心，再逐页替换内部实现。
+### 5.4 已接入清单
 
-### 5.5.1 页内私有状态处理边界
-
-对于仍有内联脚本或页面私有逻辑的页面，采用以下策略：
-
-1. 页面局部状态先挂到独立 domain，例如 `pageGallery`、`pageDownloads`、`pageToolkit`。
-2. 只要状态需要跨组件、跨函数或被外部观察，就通过 `QMLMPageState.patch(domain, patch)` 发布。
-3. 旧 DOM 逻辑先保留，订阅回调只负责同步必要 class、输入值和开关态。
-4. 后续逐页处理时，再把私有变量、直接 DOM 写入和内联脚本逐步收拢。
-5. 除非页面已经明显冲突或重复写同一状态，不建议直接强制覆盖。
-
-### 5.6 迁移顺序建议
-
-**阶段 1：状态中心骨架**
-- 增加统一 store 文件或公共状态模块。
-- 先只放 `preferences` 和 `theme`。
-- 保持旧接口可用，做到“双写/适配”。
-
-**阶段 2：阅读器状态接管**
-- 把阅读位置、恢复提示、章节/Tab 记忆接入统一状态。
-- 让 `article-json.js` 和 `article-study.js` 只负责渲染与发事件。
-
-**阶段 3：搜索与页面 UI 状态**
-- 收拢搜索词、筛选器、菜单、弹窗、折叠状态。
-- 统一处理页面局部交互的开关逻辑。
-
-**阶段 4：清理散落逻辑**
-- 删除重复的 localStorage 读写。
-- 减少跨文件直接调用 DOM 刷新函数。
-- 把“状态变更 → UI 更新”的链路收束到订阅层。
-
-### 5.7 当前落地状态
-
-第一阶段已经开始落地：
-
-- 新增 `js/state-center.js`，暴露 `window.QMLMState`。
-- `QMLMState` 当前管理 `preferences`、`theme`、`reader`、`search`、`ui` 五个内置域，并支持通用 domain API；其中 `preferences` 与 `theme` 已接入持久化。
-- 新状态键为 `qmlm:state:v1`；同时继续写入旧键 `qmlm:preferences:v1` 与 `darkMode`，保证旧脚本和已保存数据可兼容。
-- `reader`、`search`、`ui` 默认按运行态处理，不写入本地存储，避免滚动和临时页面状态高频落库；`ui` 域另设持久化白名单 `UI_PERSIST_KEYS`（`navCollapsed`、`navBallPos`），随 `qmlm:state:v1` 落库。全站移动菜单已发布到 `QMLMState.ui.navOpen`，合集弹窗已发布到 `QMLMState.ui.collectionModal`。
-- `js/main.js` 会优先加载 `state-center.js`，再加载 `page-state-adapter.js` 和 `preferences.js`。
-- `html/preferences/preferences.html` 已显式加载 `state-center.js` 和 `page-state-adapter.js`。
-- `js/preferences.js` 的 `readState()` / `writeState()` 已优先走 `QMLMState.preferences`，偏好页会订阅 `preferences` 域并自动刷新；阅读进度快照会发布到 `QMLMState.reader.progress`。
-- `js/article-common.js` 与 `js/main.js` 已把阅读页 Tab 状态发布到 `QMLMState.reader.activeTab`，并保留原 sessionStorage 记忆。
-- `js/main.js` 已把章节导航显示状态发布到 `QMLMState.reader.chapterNavVisible`，并保留原 sessionStorage 兼容。
-- `js/article-common.js` 已把章节折叠状态发布到 `QMLMState.reader.collapsedChapters`，支持订阅后反向同步 DOM。
-- `js/preferences.js` 已把阅读位置恢复流程的阶段状态发布到 `QMLMState.reader.restore`，包括跳过、等待、恢复中、提示、关闭和返回入口等状态。
-- `js/darkmode.js` 已优先走 `QMLMState.theme`。
-- `js/search.js` 会把查询词、筛选器和结果统计发布到 `QMLMState.search`，并能从该状态域恢复输入框与筛选按钮状态。
-- 新增 `js/page-state-adapter.js`，为内联脚本和页面私有 JS 提供接口先行的接入方式。
-- `html/downloads/downloads.html` 已作为实际接入样例，使用 `pageDownloads` domain 管理页面 filter 和选择弹窗状态。
-
-### 5.8 当前收工状态
-
-本阶段目标已经完成到“统一状态中心可用 + 核心公共状态接入 + 页内私有状态有适配接口”的程度：
-
-1. `preferences`、`theme` 作为持久域接入 `QMLMState`。
-2. `reader`、`search`、`ui` 作为运行态接入 `QMLMState`，不写入本地存储。
-3. `page-state-adapter.js` 提供页面私有状态接入层。
-4. `downloads.html` 已作为页内私有状态接入示例，使用 `pageDownloads` domain 管理 filter 和选择弹窗。
-5. 后续页面如仍有内联脚本，不需要立即强制覆盖；先用 `QMLMPageState` 暴露状态，再逐页清理内部实现。
-
-### 5.9 后续逐页迁移规则
-
-1. 每个页面私有状态使用独立 domain，命名建议为 `pageDownloads`、`pageGallery`、`pageToolkit` 这种页面级前缀。
-2. 页面原有 DOM 行为先保留，只把可变状态发布到中心。
-3. 新增功能优先从 `QMLMPageState.get()` 读取初始状态，并用 `QMLMPageState.subscribe()` 订阅变化。
-4. 确认页面稳定后，再删除重复的私有变量、重复事件分发和直接存储写入。
-5. 只有在同一状态被多处重复写入或出现冲突时，才做强制覆盖式重构。
-
-### 5.10 验收标准
-
-1. 同一份状态不再被多个脚本各写一遍。
-2. 收藏、历史、主题至少能通过统一中心读写。
-3. 阅读页核心运行态能通过 `reader` 域观察。
-4. 搜索、导航、弹窗等局部状态可独立订阅更新。
-5. 页内私有脚本有统一适配接口和真实接入样例。
-6. 不引入框架也能保持清晰的单向数据流。
+- `js/main.js` 动态注入链：state-center → page-state-adapter → preferences（+search）。
+- `preferences.html` 显式加载 state-center + page-state-adapter；`downloads.html` 以 `pageDownloads` domain 为页内私有状态接入样例。
+- `article-common.js`/`main.js` 发布阅读页 Tab 与章节导航态；`preferences.js` 发布阅读恢复态；`darkmode.js` 走 `theme`；`search.js` 走 `search` 域并能从中恢复 UI。

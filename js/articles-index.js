@@ -3,7 +3,6 @@
 
     if (window.__QMLM_ARTICLES_INDEX_READY__) return;
 
-    var DATA_URL = '../../data/articles.json';
     var COLLECTIONS_URL = '../../data/collections.json';
     var VIEW_MODE_KEY = 'qmlm:articles:view-mode';
     var state = {
@@ -369,29 +368,20 @@
         }
     }
 
-    function getEmbeddedArticles() {
-        var dataEl = document.getElementById('articles-index-data');
-        if (!dataEl || !dataEl.textContent) return [];
-        try {
-            var articles = JSON.parse(dataEl.textContent);
-            return Array.isArray(articles) ? articles : [];
-        } catch (error) {
-            console.warn('内嵌文章索引数据无效，将回退到 articles.json。', error);
-            return [];
-        }
-    }
-
     function getArticlesSource() {
-        var embeddedArticles = getEmbeddedArticles();
-        if (embeddedArticles.length) return embeddedArticles;
-        if (window.SITE_DATA) {
-            if (Array.isArray(window.SITE_DATA.articleIndex) && window.SITE_DATA.articleIndex.length) return window.SITE_DATA.articleIndex.slice();
-            if (Array.isArray(window.SITE_DATA.articles) && window.SITE_DATA.articles.length) return window.SITE_DATA.articles.slice();
+        var siteData = window.SITE_DATA;
+        if (!siteData || !Array.isArray(siteData.articles) || !siteData.articles.length) {
+            console.error('[articles-index] 未找到 window.SITE_DATA.articles：请确认本页已在 js/articles-index.js 之前加载 js/site-data.js。');
+            return Promise.reject(new Error('文章索引数据缺失（window.SITE_DATA.articles 未定义或为空）'));
         }
-        return fetch(DATA_URL).then(function (response) {
-            if (!response.ok) throw new Error('文章索引加载失败');
-            return response.json();
+        var entries = siteData.articles.filter(function (article) {
+            return !!(article && article.file && String(article.file).indexOf('imported') === -1);
         });
+        if (!entries.length) {
+            console.error('[articles-index] window.SITE_DATA.articles 过滤 imported 后为 0 条，文章索引无法渲染。');
+            return Promise.reject(new Error('文章索引数据为空（window.SITE_DATA.articles 过滤后无条目）'));
+        }
+        return Promise.resolve(entries.slice());
     }
 
     function getCollectionsSource() {
@@ -434,7 +424,7 @@
         }).catch(function (error) {
             console.error(error);
             var grid = document.getElementById('articleGrid');
-            if (grid) grid.innerHTML = '<div class="empty-state">文章索引加载失败，请检查 `data/articles.json`。</div>';
+            if (grid) grid.innerHTML = '<div class="empty-state">文章索引加载失败：window.SITE_DATA.articles 缺失，请确认 js/site-data.js 已加载。</div>';
             var resultCount = document.getElementById('resultCount');
             if (resultCount) resultCount.textContent = '加载失败';
         });

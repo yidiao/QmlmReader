@@ -7,147 +7,7 @@
     <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="../../css/style.css">
-    <style>
-        .page-header {
-            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        .page-header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .page-header p { font-size: 1.05rem; opacity: 0.88; }
-
-        .gallery-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
-
-        .back-link {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            color: #c41e3a; text-decoration: none; margin-bottom: 1.5rem;
-            font-weight: bold;
-        }
-        .back-link:hover { text-decoration: underline; }
-
-        /* 音乐网格 - 详细版 */
-        .music-detail-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .music-detail-card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .music-detail-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .music-detail-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .music-detail-icon {
-            font-size: 3rem;
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #c41e3a, #8b0000);
-            border-radius: 12px;
-            color: white;
-        }
-
-        .music-detail-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-
-        .music-detail-title h3 {
-            margin: 0;
-            font-size: 1.3rem;
-            color: var(--text-color);
-        }
-
-        .music-detail-desc {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .music-versions-list {
-            background: #f8f8f8;
-            border-radius: 8px;
-            padding: 1rem;
-        }
-
-        .music-versions-list h4 {
-            margin: 0 0 0.75rem 0;
-            font-size: 0.9rem;
-            color: var(--text-color);
-        }
-
-        .music-versions-list ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .music-versions-list li {
-            margin: 0.5rem 0;
-        }
-
-        .music-versions-list a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .music-versions-list a:hover {
-            text-decoration: underline;
-        }
-
-        .music-versions-list a::before {
-            content: '';
-            font-size: 0.7rem;
-            color: var(--primary-color);
-        }
-
-        body.dark-mode .music-versions-list {
-            background: #3a3a3a;
-        }
-
-    @media (max-width: 768px) {
-        .music-detail-grid,
-        .video-detail-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 0.8rem;
-        }
-        .music-detail-card,
-        .video-detail-card {
-            padding: 0.8rem;
-        }
-        .music-detail-icon,
-        .video-detail-icon {
-            width: 50px;
-            height: 50px;
-            font-size: 1.8rem;
-        }
-    }
-    </style>
+    <link rel="stylesheet" href="../../css/gallery/music.css">
 </head>
 <body>
     <div id="nav-placeholder"></div>
@@ -492,7 +352,7 @@
 
             </div>
         </div>
-        <p style="text-align:center;color:#d97706;font-size:0.85rem;margin-top:0.8rem;padding-top:0.5rem;border-top:1px dashed #fcd34d;">——未完待续——</p>
+        <p class="ms-i01">——未完待续——</p>
     </main>
 
     <footer class="site-footer">

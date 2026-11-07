@@ -1,0 +1,82 @@
+/* 自 html/about/changelog-detail.html 内联样式迁出（更新计划 C2，2026-11-06） */
+        .detail-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 32px;
+            background: var(--card-bg, #fff);
+            border-radius: 20px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+        }
+
+        body.dark-mode .detail-container {
+            background: #1e1e2a;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #c41e3a;
+            text-decoration: none;
+        }
+
+        .detail-date {
+            color: #c41e3a;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .detail-title {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+        }
+
+        .detail-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+
+            .detail-tag.tag-important {
+                background: #dc2626;
+                color: white;
+            }
+
+            .detail-tag.tag-new {
+                background: #10b981;
+                color: white;
+            }
+
+            .detail-tag.tag-optimize {
+                background: #3b82f6;
+                color: white;
+            }
+
+            .detail-tag.tag-fix {
+                background: #f59e0b;
+                color: white;
+            }
+
+        .detail-content {
+            line-height: 1.8;
+            color: var(--text-color, #333);
+        }
+
+            .detail-content h3 {
+                margin-top: 24px;
+                color: #c41e3a;
+            }
+
+        .not-found {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #999;
+        }

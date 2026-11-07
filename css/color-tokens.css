@@ -5,6 +5,9 @@
   /* 品牌色 */
   --color-brand-red: #c41e3a;
   --color-brand-red-dark: #8b0000;
+  --color-brand-red-strong: #b91c1c;    /* 深一档品牌红：articles-index 主题强调/徽章与弹窗头渐变锚色（2026-11-07 B9 表外值批次升格，3 处） */
+  --color-brand-red-soft: #ff6b6b;      /* 柔化品牌红：暗色模式强调（shutter-dot 激活、filter-indicator）与 section-divider 渐变端色（2026-11-07 B9 表外值批次升格，3 处） */
+  --color-brand-red-soft-dark: #e57373; /* 柔化品牌红·沉一档：暗色模式 back-link 文字/边框/hover（2026-11-07 B9 表外值批次升格，3 处） */
   --color-brand-gold: #ffd700;
 
   /* 护眼纸色：页面底 -> 区块 -> 卡片 -> 浮层 */
@@ -37,6 +40,8 @@
   --gray-dark-border: #444444;
   --gray-dark-text: #e0e0e0;
   --gray-dark-muted: #aaaaaa;
+  --gray-dark-text-strong: #f0f0f0;
+  --gray-dark-text-faint: #777777;
 
   /* 通用状态色 */
   --color-success: #2e7d32;
@@ -52,4 +57,24 @@
   --shadow-color: rgba(78, 45, 20, 0.10);
   --shadow-color-strong: rgba(78, 45, 20, 0.15);
   --overlay-color: rgba(0, 0, 0, 0.55);
+
+  /* 深色阴影（浮层/悬浮件通用；theme-colors 暗色段消费） */
+  --shadow-color-dark: rgba(0, 0, 0, 0.30);
+  --shadow-color-dark-strong: rgba(0, 0, 0, 0.40);
+
+  /* 排版令牌：新代码 font-family 只允许引用这几个（规范见 doc/design-tokens.md §3） */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans-cjk: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-serif: "Noto Serif SC", "STSong", "SimSun", serif;
+  --font-kai: KaiTi, STKaiti, serif;
+
+  /* z-index 阶梯：新代码只允许从这里取值（规范见 doc/design-tokens.md §5） */
+  --z-content: 1;
+  --z-sticky: 100;
+  --z-nav: 999;
+  --z-overlay: 1000;
+  --z-modal: 1100;
+  --z-fx: 9500;
+  --z-cursor: 10000;      /* 全站特例，冻结现值 */
+  --z-progress: 12000;    /* 全站特例，冻结现值 */
 }

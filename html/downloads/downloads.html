@@ -7,155 +7,15 @@
     <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="../../css/style.css">
-    <style>
-        /* ===== 下载中心标题：资料档案风格 ===== */
-        .page-header {
-            position: relative;
-            max-width: 1100px;
-            margin: 28px auto 36px;
-            padding: 48px 44px 44px;
-            overflow: hidden;
-            background: #102a2a;
-            color: #f3ead7;
-            text-align: left;
-            border-left: 6px solid #d6a756;
-        }
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: -30%;
-            right: 8%;
-            width: 180px;
-            height: 170%;
-            background: #54b3a5;
-            opacity: 0.18;
-            transform: rotate(18deg);
-            pointer-events: none;
-        }
-        .page-header::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            height: 4px;
-            background: #d6a756;
-        }
-        .page-header-badge {
-            position: relative;
-            z-index: 1;
-            display: inline-block;
-            margin-bottom: 18px;
-            padding: 3px 14px;
-            border: 2px solid #54b3a5;
-            color: #73d1c2;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 4px;
-        }
-        .page-header h1 {
-            position: relative;
-            z-index: 1;
-            margin: 0 0 12px;
-            color: #f3ead7;
-            font-size: 2.8rem;
-            font-weight: 900;
-            letter-spacing: 6px;
-        }
-        .page-header h1 span { color: #f0c56e; }
-        .page-header p {
-            position: relative;
-            z-index: 1;
-            max-width: 560px;
-            margin: 0;
-            color: #b8c9c2;
-            font-size: 0.9rem;
-            line-height: 1.7;
-        }
-        body.dark-mode .page-header { background: #091c1c; }
-        @media (max-width: 768px) {
-            .page-header { margin: 20px 0 24px; padding: 32px 20px; }
-            .page-header h1 { font-size: 1.8rem; letter-spacing: 3px; }
-        }
-        .dl-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        .dl-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
-        .dl-stat {
-            flex: 1; min-width: 140px; background: var(--card-bg); border-radius: 10px;
-            padding: 1rem 1.25rem; box-shadow: var(--shadow); text-align: center; border-top: 3px solid #1f6f8b;
-        }
-        .dl-stat .num { font-size: 1.8rem; font-weight: 700; color: #1a5276; }
-        .dl-stat .lbl { font-size: 0.85rem; color: var(--text-light); margin-top: 0.15rem; }
-        .dl-filters { display: flex; gap: 0.6rem; margin-bottom: 2rem; flex-wrap: wrap; }
-        .dl-filter-btn {
-            padding: 0.45rem 1rem; border: 2px solid #e0e0e0; background: white; border-radius: 20px;
-            cursor: pointer; font-size: 0.88rem; transition: all 0.2s;
-        }
-        .dl-filter-btn:hover, .dl-filter-btn.active { background: #1a5276; border-color: #1a5276; color: white; }
-        .dl-section { margin-bottom: 2.5rem; }
-        .dl-section-title {
-            font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; padding-bottom: 0.5rem;
-            border-bottom: 2px solid #1f6f8b; display: flex; align-items: center; gap: 0.5rem;
-        }
-        .dl-section-count { font-size: 0.85rem; font-weight: 400; color: var(--text-light); margin-left: auto; }
-        .dl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; }
-        .dl-card {
-            background: var(--card-bg); border-radius: 10px; padding: 1rem 1.25rem; box-shadow: var(--shadow);
-            display: flex; align-items: center; gap: 1rem; transition: transform 0.2s, box-shadow 0.2s; border-left: 4px solid #ddd;
-        }
-        .dl-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-        .dl-card.cat-mao    { border-left-color: #c41e3a; }
-        .dl-card.cat-marx   { border-left-color: #8b0000; }
-        .dl-card.cat-lenin  { border-left-color: #d4a017; }
-        .dl-card.cat-stalin { border-left-color: #744210; }
-        .dl-card.cat-engels { border-left-color: #4a5568; }
-        .dl-card.cat-rectify{ border-left-color: #6b2fa0; }
-        .dl-card.cat-posters{ border-left-color: #e65100; }
-        .dl-icon { font-size: 1.6rem; flex-shrink: 0; width: 40px; text-align: center; }
-        .dl-info { flex: 1; min-width: 0; }
-        .dl-info .dl-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem; color: var(--text-color); }
-        .dl-info .dl-meta {
-            font-size: 0.8rem; color: var(--text-light); display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;
-        }
-        .dl-badge { display: inline-block; padding: 0.1rem 0.45rem; border-radius: 8px; font-size: 0.72rem; font-weight: 600; }
-        .badge-zip  { background: #fce7f3; color: #9d174d; }
-        .badge-txt  { background: #e0e7ff; color: #3730a3; }
-        .badge-size { background: #f3f4f6; color: #6b7280; }
-        .dl-btn {
-            flex-shrink: 0; padding: 0.45rem 1rem; background: #1a5276; color: white; text-decoration: none;
-            border-radius: 6px; font-size: 0.85rem; font-weight: 600; transition: background 0.2s; white-space: nowrap; border: none; cursor: pointer;
-        }
-        .dl-btn:hover { background: #1f6f8b; }
-        .dl-modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; align-items: center; justify-content: center;
-            z-index: 9999; padding: 1rem;
-        }
-        .dl-modal.show { display: flex; }
-        .dl-modal-card { width: min(460px, 100%); background: var(--card-bg); border-radius: 14px; box-shadow: var(--shadow-hover); padding: 1.2rem; }
-        .dl-modal-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; }
-        .dl-modal-meta { color: var(--text-light); font-size: 0.88rem; margin-bottom: 1rem; }
-        .dl-modal-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-        .dl-modal-close { margin-top: 0.9rem; background: transparent; border: none; color: var(--text-light); cursor: pointer; padding: 0; }
-        body.dark-mode .dl-filter-btn { background: #3a3a3a; border-color: #555; color: #ddd; }
-        body.dark-mode .dl-filter-btn:hover, body.dark-mode .dl-filter-btn.active { background: #1a5276; border-color: #1a5276; }
-        body.dark-mode .badge-zip  { background: #3d1a2e; color: #f472b6; }
-        body.dark-mode .badge-txt  { background: #1e2440; color: #a5b4fc; }
-        body.dark-mode .badge-size { background: #333; color: #aaa; }
-        @media (max-width: 768px) {
-            .dl-grid { grid-template-columns: 1fr; }
-            .page-header h1 { font-size: 1.8rem; }
-            .dl-stats { gap: 0.75rem; }
-            .dl-stat { min-width: 80px; padding: 0.75rem; }
-            .dl-stat .num { font-size: 1.3rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/downloads/downloads.css">
 </head>
-<body>
+<body data-module="downloads">
     <div id="nav-placeholder"></div>
 
     <main>
         <section class="page-header">
             <div class="page-header-badge">RESOURCE ARCHIVE</div>
-            <h1><span>下载</span>中心</h1>
+            <h1 class="module-title"><span>下载</span>中心</h1>
             <p>经典著作与专题文章统一导出为 TXT / DOCX，宣传画资源继续集中收纳</p>
         </section>
 

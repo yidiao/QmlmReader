@@ -1,10 +1,12 @@
 # Qmlmreader 数据与下载中心整理清单
 
+> 性质：历史快照（整理期工作记录），数字与状态以当时口径留档；现行数据规则以 `doc/data/README.md` 为权威。2026-11-06 审计附注见文末。
+
 ## 处理原则
 - 既有 `data/articles.json` 元数据和既有增强文章页优先保留，不以原始资料覆盖。
 - 原始资料只用于补齐网站缺失文章；内容写入生成的文章阅读页。
 - 下载中心不再保存文章 PDF/TXT，点击下载时由文章页正文即时生成 TXT 或 DOCX。
-- `data/rectify-*.txt` 属于正名专题正文，和经典著作数据分开，保留。
+- `data/rectify-*.txt` 属于正名专题正文，和经典著作数据分开，保留。（2026-11-06 审计附注：正名管线已迁至 `data/rectify-txt/` → `data/rectify-json/`；顶级 7 个 `data/rectify-*.txt` 已于 2026-11-07 删除，更新计划 D3 完成。）
 
 ## 数量总览
 - 原始资料 DOCX：1,357 个（排除 `_txt` 提取目录）
@@ -14,7 +16,7 @@
 - 新生成文章阅读页：1,258 个
 - 原始资料读取异常/空文档：0 个
 
-## `downloads/articles` PDF 清单（待删除，不再由页面引用）
+## `downloads/articles` PDF 清单（已删除——2026-11-06 审计确认目录已空，清单留档）
 - `dao-lunen.pdf`
 - `gongchan-dan-yuan.pdf`
 - `guo-jia-yu-ge-ming.pdf`
@@ -40,7 +42,7 @@
 - `zhan-lue-wen-ti.pdf`
 - `zhan-zheng-zhan-lue.pdf`
 
-## `downloads/rectify` PDF 清单（待删除，不再由页面引用）
+## `downloads/rectify` PDF 清单（已删除——2026-11-06 审计确认目录已空，清单留档）
 - `rectify-finland-war.pdf`
 - `rectify-gorky-lenin.pdf`
 - `rectify-human-nature.pdf`
@@ -100,3 +102,11 @@
 
 ## 原始资料同标题多版本提示
 没有检测到新增条目中的同标题多版本。
+
+---
+
+## 2026-11-06 文档审计附注
+
+- `downloads/articles/`、`downloads/rectify/` 下 PDF 已全部删除，上述两份「待删除」清单转为完成态留档。
+- 本文数量总览中「1,286 条 / 1,258 页」仍与代码一致（`articles.json` 1286 条、`html/articles/imported/` 1258 页）；「新增经典条目 1,258 条」按索引实测为 1257 条指向 imported，另有 1 页漏索引（`lun-wo-guo-ge-ming`，处置见 `doc/README.md` 更新计划 A4）。
+- 正名专题正文权威链路：`data/rectify-txt/`（源）→ `data/rectify-json/`（生成，禁手改）→ `js/rectify-json.js` 渲染；见 `doc/pages/rectify/README.md` 与 `doc/data/README.md` §7。

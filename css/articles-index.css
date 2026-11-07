@@ -1,5 +1,5 @@
 :root {
-    --articles-accent: #b91c1c;
+    --articles-accent: var(--color-brand-red-strong);
     --articles-accent-soft: rgba(185, 28, 28, 0.1);
     --articles-page-paper: var(--paper-page, var(--paper-page));
     --articles-section-paper: var(--paper-section, var(--paper-section));
@@ -277,7 +277,7 @@ body.dark-mode .card-author {
     font-size: 0.72rem;
     font-weight: 700;
     color: #fff;
-    background: linear-gradient(135deg, #b91c1c, #ef4444);
+    background: linear-gradient(135deg, var(--color-brand-red-strong), #ef4444);
 }
 
 .badge.gray {
@@ -430,8 +430,8 @@ body.dark-mode .article-card-favorite.is-active {
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 10000;
+    background: var(--overlay-color);
+    z-index: var(--z-cursor);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -465,7 +465,7 @@ body.dark-mode .modal-dialog {
     gap: 1rem;
     align-items: flex-start;
     padding: 1.1rem 1.2rem;
-    background: linear-gradient(135deg, #b91c1c, #7f1d1d);
+    background: linear-gradient(135deg, var(--color-brand-red-strong), #7f1d1d);
     color: #fff;
 }
 
@@ -551,7 +551,7 @@ body.dark-mode .modal-title {
 
 .modal-status.wip {
     background: rgba(245, 158, 11, 0.16);
-    color: #b45309;
+    color: var(--color-warning);
 }
 
 @media (max-width: 768px) {

@@ -30,6 +30,12 @@ html/masters/mao/mao.html
 <script src="../../js/cursor.js"></script>
 ```
 
+补充依赖（2026-11 审计核实）：
+
+- 五个导师主页（marx/engels/lenin/mao/stalin.html）均引入 `https://cdn.jsdelivr.net/npm/chart.js` 并实例化 Chart（每页 3 处图表）；升级或移除该 CDN 前需回归五个主页。
+- `js/preferences.js`：`stalin/biography.html` 显式引用（阅读进度与历史记录），复用约定见 5.6 节。
+- 全局样式/颜色/z-index 约束见 `doc/design-tokens.md`。
+
 ---
 
 ## 3. 数据关系
@@ -63,7 +69,7 @@ html/masters/mao/mao.html
 ```text
 data/masters/stalin/profile.json      # 导师元数据、页面路径、主题入口
 data/masters/stalin/biography.json    # 小传正文、章节、时间线、候选标注与阅读增强
-data/masters/stalin/relations.json    # 人物关系网数据
+（原 data/masters/stalin/relations.json 已于 2026-11-07 删除（PLAN D2），关系数据内联在 stellar-data.js）
 
 html/masters/stalin/biography.html    # 小传阅读页
 html/masters/stalin/relations.html    # 独立人物关系展板页
@@ -74,8 +80,16 @@ css/masters/stalin/stellar.css        # 关系展板页星图基础样式
 css/masters/stalin/stellar-masters.css # 关系展板页专属样式
 
 js/mentor/stalin/biography.js         # 小传页数据加载、导航、正文渲染
-js/mentor/stalin/relations.js         # 关系展板渲染与交互
+js/mentor/stalin/stellar-data.js      # 关系网数据（window.STELLAR_DATA 内联）
+js/mentor/stalin/stellar-cosmos.js    # 关系展板星图渲染
+js/mentor/stalin/stellar-app.js       # 关系展板应用逻辑
+js/mentor/stalin/stellar-boot.js      # 关系展板启动胶水
 ```
+
+> 注记（2026-11 审计）：旧方案中的 `js/mentor/stalin/relations.js` 已不存在（磁盘仅存
+> `.bak` 备份、未入 git）；`relations.html` 实际加载 stellar-data / stellar-cosmos /
+> stellar-app / stellar-boot 四件套（relations.html:104-111）。关系数据已内联进
+> `stellar-data.js` 的 `window.STELLAR_DATA`；原 `data/masters/stalin/relations.json` 已于 2026-11-07 删除（PLAN D2 完成）。
 
 > 主页（marx/engels/lenin/mao/stalin.html）的版式来自 `masters-common.css`，
 > 页面只需在 `<body>` 上声明 `data-master="..."`，主题色由 `css/master-colors.css` 的
@@ -181,6 +195,29 @@ js/mentor/stalin/relations.js         # 关系展板渲染与交互
 人物关系网不是小传的附属列表。它可以参考小传，但应作为独立页面与独立数据源维护：
 
 1. 小传页只保留入口，不内嵌完整关系网。
-2. 关系页使用独立 `relations.json`，预留肖像、别名、活动时间、组织、事件、关系强度、关系方向、证据和弹窗字段。
+2. 关系数据当前内联在 `js/mentor/stalin/stellar-data.js`（`window.STELLAR_DATA`）；原 `data/masters/stalin/relations.json` 已于 2026-11-07 删除（PLAN D2 完成）。后续需要肖像、别名、活动时间、组织、事件、关系强度、关系方向、证据和弹窗字段时，先在 5.1 的文件分层中确定数据落点，再动页面。
 3. 斯大林关系网当前是局部图谱，同时作为未来国际共运人物关系网的探路者。
 4. 关系网视觉与交互单独迭代，不应影响小传页阅读体验。
+
+---
+
+## 6. 权责边界
+
+**拥有（可自由修改）**：
+- `html/masters/`（总入口、五个导师主页、stalin 小传/关系页）
+- `js/mentor/`（biography.js 与 stellar 四件套等导师私有脚本）
+- `css/masters/`（masters-common.css 及各导师专属样式）
+- `data/masters/`（profile.json、biography.json 等）
+
+**只读消费（禁改）**：
+- 公共层：`js/main.js`、`css/style.css`、`js/site-data.js`（生成物）、`js/darkmode.js` 等公共脚本（完整清单见 `doc/README.md` 模块权责矩阵脚注）
+- `js/preferences.js`（biography 页复用其阅读进度与历史记录逻辑；禁复制其进度逻辑到导师私有脚本，现有 5.6 约定保留）
+
+**共享/跨界资产**：
+- `css/master-colors.css`（`--master-theme-*` 变量族，服务五位导师主页主题色；改动前需过 `doc/README.md` 权责矩阵）
+- `data/articles.json`（文章列表对齐口径，见第 3 节；改动前需过 `doc/README.md` 权责矩阵）
+- chart.js CDN（外部依赖，升级前需回归五个导师主页）
+
+**改动前置条件**：
+- 注记：原孤儿目录 `css/mentor/` 已于 2026-11-07 删除（PLAN D1 完成）；五导师页的行内样式已转类至 `css/masters/mentor-inline.css`（PLAN C6）
+- 调整导师主题色时改 `css/master-colors.css` 的变量族，不硬编码进页面

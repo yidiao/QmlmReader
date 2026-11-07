@@ -15,7 +15,7 @@ html/articles/{Mentor}/{Star}/{slug}.html            # 正式文章详情页
 html/articles/imported/...                           # 历史抽取页池，不再承担正式展示职责
 ```
 
-当前非 imported 正式文章详情页：29 篇。
+当前非 imported 正式文章详情页：30 篇，全部平铺在 `html/articles/{Mentor}/` 下（2026-11-07 A5 将 `soviet-socialist-economy` 迁回 flat，层级例外已清零；`{Mentor}/{Star}/` 四层为目标结构的新页不再使用）。
 
 按目录统计：
 
@@ -25,7 +25,7 @@ html/articles/imported/...                           # 历史抽取页池，不�
 | `Lenin/` | 6 |
 | `Mao/` | 12 |
 | `Marx/` | 6 |
-| `Stalin/` | 3 |
+| `Stalin/` | 4 |
 
 按导师 / 星级统计（以 `data/articles-json/` 当前文件为准）：
 
@@ -35,7 +35,7 @@ html/articles/imported/...                           # 历史抽取页池，不�
 | `Lenin/` | `★★☆☆☆:2`，`★★★★★:4` |
 | `Mao/` | `★★★☆☆:1`，`★★★★☆:2`，`★★★★★:9` |
 | `Marx/` | `★★★☆☆:1`，`★★★★☆:1`，`★★★★★:4` |
-| `Stalin/` | `★★☆☆☆:1`，`★★★☆☆:1`，`★★★★★:1` |
+| `Stalin/` | `★★☆☆☆:1`，`★★★☆☆:1`，`★★★★★:2` |
 
 ---
 
@@ -70,17 +70,20 @@ html/articles/imported/...                           # 历史抽取页池，不�
       data-view-mode="grid">
 ```
 
-推荐资源顺序：
+推荐资源顺序（与 `html/articles/articles.html` 实际加载一致）：
 
 ```html
 <link rel="stylesheet" href="../../css/style.css">
 <link rel="stylesheet" href="../../css/articles-index.css">
+<link rel="stylesheet" href="../../css/category-theme.css">
 
+<script src="../../js/state-center.js"></script>
+<script src="../../js/category-theme.js"></script>
 <script src="../../js/site-data.js"></script>
+<script src="../../js/articles-index.js"></script>
 <script src="../../js/main.js"></script>
 <script src="../../js/darkmode.js"></script>
-<script src="../../js/cursor.js"></script>
-<script src="../../js/articles-index.js"></script>
+<script src="../../js/preferences.js"></script>
 ```
 
 说明：
@@ -89,35 +92,45 @@ html/articles/imported/...                           # 历史抽取页池，不�
 - `css/category-theme.css` 统一维护六大类主题色；索引卡片分类标签使用 `article-category-tag[data-category]`。
 - `js/category-theme.js` 统一提供分类 key / label 归一化接口；页面不得在单个 HTML 中重新定义分类主色。
 - `js/articles-index.js` 只负责索引页的数据读取、筛选、卡片渲染、合集弹窗和布局切换。
+- 索引页自 2026-11-07（PLAN C3）起加载 `js/site-data.js`，索引数据统一来自 `window.SITE_DATA.articles`（过滤 `imported` 后的 29 条）；原内嵌兜底 JSON（`#articles-index-data`）与多级兜底链已移除，`SITE_DATA` 缺失时页面显式报错。不加载 `js/cursor.js`；显式引入 `js/state-center.js`、`js/category-theme.js` 与 `js/preferences.js`。
 - 文章卡片收藏按钮沿用 `preferences.js` 的 `data-qmlm-favorite-btn` 与 `data-qmlm-favorite-mode="icon"` 协议，按钮位于“阅读全文”左侧。
+- 全局样式/颜色/z-index 约束见 `doc/design-tokens.md`。
 - 页面壳本身尽量薄，只保留挂载点和少量 data-attribute。
 
 ---
 
 ## 4. 详情页标准接口
 
-推荐 body：
+推荐 body（以现有平铺页面 `html/articles/Mao/shi-jian-lun.html` 为参照）：
 
 ```html
 <body data-category="philosophy"
-      data-article-json="../../../../data/articles-json/Mao/★★★★★/shi-jian-lun.json"
-      data-study-json="../../../../data/study-json/Mao/★★★★★/shi-jian-lun.json">
+      data-article-json="../../../data/articles-json/Mao/★★★★★/shi-jian-lun.json"
+      data-study-json="../../../data/study-json/Mao/shi-jian-lun.json">
 ```
 
-推荐资源顺序：
+说明：
+
+- `data-article-json` 指向正文层，保留 `{Mentor}/{Star}/` 两层目录。
+- `data-study-json` 指向精读层，现存文件平铺在 `{Mentor}/` 下，**没有星级目录层**；旧示例中的 `study-json/Mao/★★★★★/...` 路径会 404。
+- 2026-11-07（A5）起 `soviet-socialist-economy` 页面已迁回 flat，全部详情页统一三层相对深度（`../../../`）；新页一律 flat。
+
+推荐资源顺序（所有详情页均加载 `css/category-theme.css` 与 `js/category-theme.js`）：
 
 ```html
-<link rel="stylesheet" href="../../../../css/style.css">
-<link rel="stylesheet" href="../../../../css/articles-detail.css">
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="../../../css/articles-detail.css">
+<link rel="stylesheet" href="../../../css/category-theme.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script src="../../../../js/article-common.js"></script>
-<script src="../../../../js/article-json.js"></script>
-<script src="../../../../js/article-study.js"></script>
-<script src="../../../../js/site-data.js"></script>
-<script src="../../../../js/main.js"></script>
-<script src="../../../../js/darkmode.js"></script>
-<script src="../../../../js/cursor.js"></script>
+<script src="../../../js/category-theme.js"></script>
+<script src="../../../js/article-common.js"></script>
+<script src="../../../js/article-json.js"></script>
+<script src="../../../js/article-study.js"></script>
+<script src="../../../js/site-data.js"></script>
+<script src="../../../js/main.js"></script>
+<script src="../../../js/darkmode.js"></script>
+<script src="../../../js/cursor.js"></script>
 ```
 
 若页面没有图表，不要无意义引入 Chart.js。
@@ -149,7 +162,7 @@ html/articles/imported/...                           # 历史抽取页池，不�
 
 ## 6. 当前 JSON 接入状态
 
-当前检测到 8 篇详情页同时声明 `data-article-json` 和 `data-study-json`：
+当前检测到 9 篇详情页同时声明 `data-article-json` 和 `data-study-json`：
 
 ```text
 html/articles/Engels/fan-du-lin-lun.html
@@ -160,12 +173,13 @@ html/articles/Marx/gongchan-dan-yuan.html
 html/articles/Stalin/dao-lunen.html
 html/articles/Stalin/lun-lunen-zhu-yi-ji-chu.html
 html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
+html/articles/Stalin/soviet-socialist-economy.html
 ```
 
 说明：
 
-- 这些页面已经完成正文层 + 精读层的双 JSON 接入。
-- 但它们当前仍多处在旧的平铺 HTML 路径；后续推广新约定时，应逐步迁入 `html/articles/{Mentor}/{Star}/`。
+- 这些页面已经完成正文层 + 精读层的双 JSON 接入，9 篇全部为平铺 HTML 路径（2026-11-07 A5 将 `soviet-socialist-economy` 迁回 flat）。
+- 正文 JSON 按惯例保留 `{Mentor}/{Star}/` 星级目录；精读 JSON 平铺于 `{Mentor}/`。
 - 旧文档中“只完成 5 篇试点”的说法已过时，以本 README 为准。
 
 ---
@@ -214,3 +228,23 @@ html/articles/Stalin/lun-zhongguo-ge-ming-de-qiantu.html
 6. 把 `further` 当作和 `puzzle-links` 两套不同系统。
 7. 忘记星级目录后导致相对路径退层不足。
 8. 让索引页继续承担原始资料池和展示页双重职责。
+
+---
+
+## 10. 权责边界
+
+**拥有（可自由修改）**：
+- `html/articles/`（索引页、详情页、模板与目录结构）
+- 脚本：`js/articles-index.js`、`js/article-json.js`、`js/article-study.js`、`js/article-common.js`
+- 样式：`css/articles-index.css`、`css/articles-detail.css`、`css/articles/mao-dun-lun.css`（《矛盾论》单页私有样式）
+
+**只读消费（禁改）**：
+- 公共层：`js/main.js`、`css/style.css`、`js/site-data.js`（生成物）、`js/darkmode.js`、`js/cursor.js` 等公共脚本（完整清单见 `doc/README.md` 模块权责矩阵脚注）
+- `data/articles-json/`、`data/study-json/`：数据层管线产物，`_meta` 等管线字段禁手改；数据层规则以 `doc/data/README.md` 为准
+
+**共享/跨界资产**：
+- `js/preferences.js`：归 preferences 模块所有，由本模块索引页显式消费（收藏按钮协议），改动前需过 `doc/pages/preferences/README.md`
+
+**改动前置条件**：
+- 改 `data/articles.json` / `data/collections.json` 等索引数据后必须跑 `python _tools/build_data.py --write` 重建 `js/site-data.js`
+- `data/articles-json/`、`data/study-json/` 由页面按 `data-article-json` / `data-study-json` 运行时直接 fetch，不走构建管线；新增/迁移页面时注意平铺与四层两种路径的相对退层数
