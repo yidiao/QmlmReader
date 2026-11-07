@@ -84,7 +84,7 @@
             grid-template-columns: 1fr 1fr;
             min-height: 380px;
         }
-        body.dark-mode .featured-hero { background: #2a2a2a; }
+        .dark-mode body .featured-hero { background: #2a2a2a; }
 
         .featured-visual {
             background: linear-gradient(160deg, #0d0d0d 0%, #3d0c0c 50%, #8b0000 100%);
@@ -149,21 +149,21 @@
             margin: 0 0 0.8rem;
             line-height: 1.4;
         }
-        body.dark-mode .featured-info h2 { color: #e0e0e0; }
+        .dark-mode body .featured-info h2 { color: #e0e0e0; }
         .featured-info .fi-desc {
             color: #666;
             line-height: 1.8;
             font-size: 0.95rem;
             margin-bottom: 0.8rem;
         }
-        body.dark-mode .featured-info .fi-desc { color: #aaa; }
+        .dark-mode body .featured-info .fi-desc { color: #aaa; }
         .featured-info .fi-chapters {
             font-size: 0.85rem;
             color: #888;
             line-height: 1.7;
             margin-bottom: 1.2rem;
         }
-        body.dark-mode .featured-info .fi-chapters { color: #999; }
+        .dark-mode body .featured-info .fi-chapters { color: #999; }
         .featured-info .fi-cta {
             display: inline-flex;
             align-items: center;
@@ -199,7 +199,7 @@
             color: #555;
             border-left: 3px solid #c41e3a;
         }
-        body.dark-mode .chapter-outline .ch-item { background: #333; color: #bbb; border-left-color: #ff6b6b; }
+        .dark-mode body .chapter-outline .ch-item { background: #333; color: #bbb; border-left-color: #ff6b6b; }
 
         /* ==================== 区域标题 ==================== */
         .section-heading {
@@ -213,13 +213,13 @@
             height: 1px;
             background: #e0e0e0;
         }
-        body.dark-mode .section-heading .sh-line { background: #444; }
+        .dark-mode body .section-heading .sh-line { background: #444; }
         .section-heading h3 {
             font-size: 1.3rem;
             color: #2c3e4e;
             white-space: nowrap;
         }
-        body.dark-mode .section-heading h3 { color: #c0d0e0; }
+        .dark-mode body .section-heading h3 { color: #c0d0e0; }
 
         /* ==================== 国家卡片 ==================== */
         .country-grid {
@@ -236,7 +236,7 @@
             transition: all 0.35s;
             border: 1px solid #eee;
         }
-        body.dark-mode .country-card { background: #2a2a2a; border-color: #3a3a3a; }
+        .dark-mode body .country-card { background: #2a2a2a; border-color: #3a3a3a; }
         .country-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 32px rgba(0,0,0,0.14);
@@ -264,7 +264,7 @@
             background: #f8f8f8;
             flex-wrap: wrap;
         }
-        body.dark-mode .country-stats { background: #333; }
+        .dark-mode body .country-stats { background: #333; }
         .stat-badge {
             font-size: 0.78rem;
             padding: 3px 10px;
@@ -273,13 +273,13 @@
             color: #555;
             border: 1px solid #e0e0e0;
         }
-        body.dark-mode .stat-badge { background: #444; color: #ccc; border-color: #555; }
+        .dark-mode body .stat-badge { background: #444; color: #ccc; border-color: #555; }
         .stat-badge.positive { color: #2d6a4f; border-color: #74c69d; }
         .stat-badge.negative { color: #c41e3a; border-color: #ff8a8a; }
         .stat-badge.unknown { color: #b8860b; border-color: #e6a817; }
-        body.dark-mode .stat-badge.positive { color: #74c69d; }
-        body.dark-mode .stat-badge.negative { color: #ff8a8a; }
-        body.dark-mode .stat-badge.unknown { color: #e6a817; }
+        .dark-mode body .stat-badge.positive { color: #74c69d; }
+        .dark-mode body .stat-badge.negative { color: #ff8a8a; }
+        .dark-mode body .stat-badge.unknown { color: #e6a817; }
 
         .country-content { padding: 1.2rem 1.5rem; }
         .cc-section {
@@ -292,7 +292,7 @@
             border-left: 3px solid #c41e3a;
             padding-left: 0.6rem;
         }
-        body.dark-mode .cc-section h4 { color: #ff6b6b; }
+        .dark-mode body .cc-section h4 { color: #ff6b6b; }
         .cc-list {
             font-size: 0.85rem;
             line-height: 1.7;
@@ -301,8 +301,8 @@
         }
         .cc-list.achievements li { color: #2d6a4f; }
         .cc-list.mistakes li { color: #c41e3a; }
-        body.dark-mode .cc-list.achievements li { color: #74c69d; }
-        body.dark-mode .cc-list.mistakes li { color: #ff8a8a; }
+        .dark-mode body .cc-list.achievements li { color: #74c69d; }
+        .dark-mode body .cc-list.mistakes li { color: #ff8a8a; }
         .cc-reflection {
             font-size: 0.85rem;
             color: #666;
@@ -313,7 +313,7 @@
             line-height: 1.7;
             margin-bottom: 0.8rem;
         }
-        body.dark-mode .cc-reflection { background: #3a3520; color: #ccc; }
+        .dark-mode body .cc-reflection { background: #3a3520; color: #ccc; }
         .cc-readmore {
             display: inline-block;
             color: #c41e3a;
@@ -335,13 +335,13 @@
             text-align: center;
             margin-top: 1rem;
         }
-        body.dark-mode .coming-section { background: linear-gradient(135deg, #222 0%, #2a2a2a 100%); }
+        .dark-mode body .coming-section { background: linear-gradient(135deg, #222 0%, #2a2a2a 100%); }
         .coming-section h3 {
             font-size: 1.3rem;
             color: #2c3e4e;
             margin-bottom: 1.5rem;
         }
-        body.dark-mode .coming-section h3 { color: #c0d0e0; }
+        .dark-mode body .coming-section h3 { color: #c0d0e0; }
         .coming-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -361,7 +361,7 @@
             align-items: center;
             gap: 0.6rem;
         }
-        body.dark-mode .coming-item { background: #333; color: #bbb; border-color: #444; }
+        .dark-mode body .coming-item { background: #333; color: #bbb; border-color: #444; }
         .coming-item .ci-dot {
             width: 8px;
             height: 8px;
@@ -373,7 +373,7 @@
             font-size: 0.9rem;
             color: #999;
         }
-        body.dark-mode .coming-note { color: #888; }
+        .dark-mode body .coming-note { color: #888; }
 
         /* ==================== 右侧悬停导航 ==================== */
         .side-float-nav {
@@ -454,10 +454,10 @@
             color: #999 !important;
             font-size: 0.82rem !important;
         }
-        body.dark-mode .sfn-panel { background: #2a2a2a; border-color: #444; }
-        body.dark-mode .sfn-panel a { color: #ddd; }
-        body.dark-mode .sfn-panel a:hover { background: #3a2020; color: #ff6b6b; }
-        body.dark-mode .sfn-divider { background: #444; }
+        .dark-mode body .sfn-panel { background: #2a2a2a; border-color: #444; }
+        .dark-mode body .sfn-panel a { color: #ddd; }
+        .dark-mode body .sfn-panel a:hover { background: #3a2020; color: #ff6b6b; }
+        .dark-mode body .sfn-divider { background: #444; }
 
         /* ==================== 响应式 ==================== */
         @media (max-width: 768px) {

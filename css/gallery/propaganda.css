@@ -154,31 +154,31 @@
         .modal-counter { color: #aaa; font-size: 0.85rem; margin-top: 0.3rem; }
 
         /* 黑夜模式 */
-        body.dark-mode .filter-bar,
-        body.dark-mode .gallery-item { background: #2a2a2a; }
-        body.dark-mode .stats-bar { background: #2a2a2a; }
-        body.dark-mode .filter-btn { background: #2a2a2a; border-color: #444; color: #ccc; }
-        body.dark-mode .filter-btn:hover { border-color: #ff6b6b; color: #ff6b6b; }
-        body.dark-mode .filter-btn.active { background: #c41e3a; border-color: #c41e3a; color: white; }
-        body.dark-mode .gallery-item-title { color: #e0e0e0; }
-        body.dark-mode .gallery-item-meta { color: #888; }
-        body.dark-mode .filter-label { color: #ff6b6b; }
-        body.dark-mode .back-link { color: #ff6b6b; }
-        body.dark-mode .search-box { background: #2a2a2a; color: #e0e0e0; border-color: #444; }
-        body.dark-mode .result-count { color: #777; }
-        body.dark-mode .stat-label { color: #aaa; }
+        .dark-mode body .filter-bar,
+        .dark-mode body .gallery-item { background: #2a2a2a; }
+        .dark-mode body .stats-bar { background: #2a2a2a; }
+        .dark-mode body .filter-btn { background: #2a2a2a; border-color: #444; color: #ccc; }
+        .dark-mode body .filter-btn:hover { border-color: #ff6b6b; color: #ff6b6b; }
+        .dark-mode body .filter-btn.active { background: #c41e3a; border-color: #c41e3a; color: white; }
+        .dark-mode body .gallery-item-title { color: #e0e0e0; }
+        .dark-mode body .gallery-item-meta { color: #888; }
+        .dark-mode body .filter-label { color: #ff6b6b; }
+        .dark-mode body .back-link { color: #ff6b6b; }
+        .dark-mode body .search-box { background: #2a2a2a; color: #e0e0e0; border-color: #444; }
+        .dark-mode body .result-count { color: #777; }
+        .dark-mode body .stat-label { color: #aaa; }
 
         /* 下载区块 */
         .download-section {
             background: white; border-radius: 12px; padding: 1.5rem;
             margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
-        body.dark-mode .download-section { background: #2a2a2a; }
+        .dark-mode body .download-section { background: #2a2a2a; }
         .download-section-title {
             margin: 0 0 1rem 0; font-size: 1.2rem; color: #c41e3a;
             border-bottom: 2px solid #c41e3a; padding-bottom: 0.5rem;
         }
-        body.dark-mode .download-section-title { color: #ff6b6b; border-color: #ff6b6b; }
+        .dark-mode body .download-section-title { color: #ff6b6b; border-color: #ff6b6b; }
         .download-tabs {
             display: flex; gap: 0.5rem; margin-bottom: 1rem;
         }
@@ -189,8 +189,8 @@
         }
         .download-tab:hover { border-color: #c41e3a; color: #c41e3a; }
         .download-tab.active { background: #c41e3a; border-color: #c41e3a; color: white; }
-        body.dark-mode .download-tab { background: #2a2a2a; border-color: #444; color: #ccc; }
-        body.dark-mode .download-tab.active { background: #c41e3a; border-color: #c41e3a; color: white; }
+        .dark-mode body .download-tab { background: #2a2a2a; border-color: #444; color: #ccc; }
+        .dark-mode body .download-tab.active { background: #c41e3a; border-color: #c41e3a; color: white; }
         .download-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 0.8rem;
@@ -202,8 +202,8 @@
             border: 1px solid #eee;
         }
         .dl-card:hover { background: #c41e3a; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(196,30,58,0.3); }
-        body.dark-mode .dl-card { background: #3a3a3a; border-color: #444; color: #e0e0e0; }
-        body.dark-mode .dl-card:hover { background: #c41e3a; color: white; }
+        .dark-mode body .dl-card { background: #3a3a3a; border-color: #444; color: #e0e0e0; }
+        .dark-mode body .dl-card:hover { background: #c41e3a; color: white; }
         .dl-card-icon { font-size: 1.8rem; flex-shrink: 0; }
         .dl-card-info { flex: 1; min-width: 0; }
         .dl-card-label { font-size: 0.9rem; font-weight: 600; line-height: 1.3; }

@@ -64,7 +64,7 @@ body[data-style="mimeo"] .xc-back-ornament {
 }
 
 /* 暗色 */
-body.dark-mode[data-style="mimeo"] {
+.dark-mode body[data-style="mimeo"] {
   --paper: #242019;
   --ink: #ece4d4;
   --accent: #e0523d;

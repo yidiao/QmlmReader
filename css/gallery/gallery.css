@@ -85,14 +85,14 @@
             color: #999 !important;
             font-size: 0.8rem !important;
         }
-        body.dark-mode .sfn-panel { background: #2a2a2a; border-color: #444; }
-        body.dark-mode .sfn-panel a { color: #ddd; }
-        body.dark-mode .sfn-panel a:hover { background: #3a2020; color: #ff6b6b; }
-        body.dark-mode .sfn-divider { background: #444; }
+        .dark-mode body .sfn-panel { background: #2a2a2a; border-color: #444; }
+        .dark-mode body .sfn-panel a { color: #ddd; }
+        .dark-mode body .sfn-panel a:hover { background: #3a2020; color: #ff6b6b; }
+        .dark-mode body .sfn-divider { background: #444; }
 
         /* ===== 文艺展厅 — 沉浸暗色，金色点缀 ===== */
         body { background: #f5f0e8; }
-        body.dark-mode { background: #121212; }
+        .dark-mode body { background: #121212; }
 
         .gallery-hero {
             background: linear-gradient(160deg, #1a1410 0%, #1a1a1a 40%, #14100a 100%);
@@ -106,7 +106,7 @@
             background: radial-gradient(circle, rgba(212,160,23,0.06) 0%, transparent 70%);
             pointer-events: none;
         }
-        body.dark-mode .gallery-hero { background: linear-gradient(160deg, #0a0804 0%, #0a0a10 40%, #080602 100%); }
+        .dark-mode body .gallery-hero { background: linear-gradient(160deg, #0a0804 0%, #0a0a10 40%, #080602 100%); }
 
         .gallery-hero-badge {
             position: relative; display: inline-block;
@@ -135,7 +135,7 @@
         .music-card img { width: 120px; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: 0.8rem; }
         .music-card h4 { color: #e0d8c8; font-size: 1rem; margin: 0 0 4px; }
         .music-desc { color: #888; font-size: 0.8rem; }
-        body.dark-mode .music-card { background: #14141a; border-color: #252530; }
+        .dark-mode body .music-card { background: #14141a; border-color: #252530; }
 
         .video-card {
             background: #1a1a1a; border: 1px solid #2a2a2a;
@@ -149,7 +149,7 @@
         .video-link { color: #d4a017; padding: 0 1rem 1rem; font-size: 0.82rem; text-decoration: none; }
         .video-thumb { height: 150px; overflow: hidden; }
         .video-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        body.dark-mode .video-card { background: #14141a; border-color: #252530; }
+        .dark-mode body .video-card { background: #14141a; border-color: #252530; }
 
         .poster-card {
             background: #1a1a1a; border: 1px solid #2a2a2a;
@@ -158,7 +158,7 @@
         }
         .poster-card:hover { border-color: #d4a017; }
         .poster-card img { width: 100%; height: 220px; object-fit: cover; }
-        body.dark-mode .poster-card { background: #14141a; border-color: #252530; }
+        .dark-mode body .poster-card { background: #14141a; border-color: #252530; }
 
         .quote-card {
             background: #1a1a1a; border: 1px solid #2a2a2a;
@@ -167,10 +167,10 @@
         }
         .quote-card:hover { border-color: #d4a017; }
         .quote-card p { color: #c0b8a8; line-height: 1.7; }
-        body.dark-mode .quote-card { background: #14141a; border-color: #252530; }
+        .dark-mode body .quote-card { background: #14141a; border-color: #252530; }
 
         .gallery-title { color: #e0d8c8 !important; font-size: 1.2rem; }
-        body.dark-mode .gallery-title { color: #ddd !important; }
+        .dark-mode body .gallery-title { color: #ddd !important; }
 
         @media (max-width: 768px) {
             .gallery-hero { padding: 32px 20px; margin: 16px 0 20px; }

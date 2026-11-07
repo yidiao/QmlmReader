@@ -149,10 +149,10 @@
         .rectify-tag.economy { background: #e8f5e9; color: #388e3c; }
         .rectify-tag.political { background: #fce4ec; color: #c2185b; }
 
-        body.dark-mode .rectify-tag.leaders { background: #1565c0; color: white; }
-        body.dark-mode .rectify-tag.military { background: #ef6c00; color: white; }
-        body.dark-mode .rectify-tag.economy { background: #2e7d32; color: white; }
-        body.dark-mode .rectify-tag.political { background: #ad1457; color: white; }
+        .dark-mode body .rectify-tag.leaders { background: #1565c0; color: white; }
+        .dark-mode body .rectify-tag.military { background: #ef6c00; color: white; }
+        .dark-mode body .rectify-tag.economy { background: #2e7d32; color: white; }
+        .dark-mode body .rectify-tag.political { background: #ad1457; color: white; }
 
         .video-detail-link {
             display: inline-flex;
@@ -249,11 +249,11 @@
             text-align: center;
         }
 
-        body.dark-mode .up-section {
+        .dark-mode body .up-section {
             border-top-color: #444;
         }
 
-        body.dark-mode .placeholder-card {
+        .dark-mode body .placeholder-card {
             border-color: #555;
             color: #888;
         }

@@ -23,7 +23,12 @@
   --app-shadow-hover: 0 4px 16px var(--shadow-color-strong);
 }
 
-body.dark-mode {
+/* 原生控件与滚动条随暗色主题（html/body 双挂点均可命中） */
+.dark-mode {
+  color-scheme: dark;
+}
+
+.dark-mode body {
   --app-bg: var(--gray-dark-bg);
   --app-section: var(--gray-dark-section);
   --app-surface: var(--gray-dark-surface);

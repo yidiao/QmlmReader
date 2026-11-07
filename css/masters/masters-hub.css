@@ -1,6 +1,6 @@
 /* 自 html/masters/masters.html 内联样式迁出（更新计划 C2，2026-11-06） */
         body { background: #f5f0e8; }
-        body.dark-mode { background: #121212; }
+        .dark-mode body { background: #121212; }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
@@ -54,7 +54,7 @@
             max-width: 480px;
             line-height: 1.7;
         }
-        body.dark-mode .masters-hero { background: #0a0a10; }
+        .dark-mode body .masters-hero { background: #0a0a10; }
 
         /* ---- Grid ---- */
         .masters-grid {
@@ -76,12 +76,12 @@
             transform: translateY(-3px);
             box-shadow: 7px 7px 0 #1a1a1a;
         }
-        body.dark-mode .master-card {
+        .dark-mode body .master-card {
             background: #1e1e2a;
             border-color: #333;
             box-shadow: 5px 5px 0 #0a0a10;
         }
-        body.dark-mode .master-card:hover {
+        .dark-mode body .master-card:hover {
             box-shadow: 7px 7px 0 #0a0a10;
         }
 
@@ -122,14 +122,14 @@
             color: #1a1a1a;
             margin: 0 0 4px;
         }
-        body.dark-mode .master-card-body h3 { color: #e0e0e0; }
+        .dark-mode body .master-card-body h3 { color: #e0e0e0; }
 
         .master-years {
             color: #888;
             font-size: 0.82rem;
             margin-bottom: 8px;
         }
-        body.dark-mode .master-years { color: #999; }
+        .dark-mode body .master-years { color: #999; }
 
         .master-desc {
             color: #555;
@@ -138,7 +138,7 @@
             margin-bottom: 12px;
             flex: 1;
         }
-        body.dark-mode .master-desc { color: #aaa; }
+        .dark-mode body .master-desc { color: #aaa; }
 
         .master-works {
             display: flex;
@@ -155,7 +155,7 @@
             font-weight: 500;
             border: 1px solid #d4c8c8;
         }
-        body.dark-mode .work-tag {
+        .dark-mode body .work-tag {
             background: #4a3030;
             color: #ffaaaa;
             border-color: #5a4040;
@@ -181,7 +181,7 @@
             font-size: 0.72rem;
             margin-top: 8px;
         }
-        body.dark-mode .master-note { color: #777; }
+        .dark-mode body .master-note { color: #777; }
 
         /* 后继有人 */
         .master-card.placeholder .master-card-header {

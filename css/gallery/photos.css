@@ -132,17 +132,17 @@
         .modal-next { right: 1rem; }
         .modal-counter { color: #aaa; font-size: 0.85rem; margin-top: 0.3rem; }
 
-        body.dark-mode .filter-bar,
-        body.dark-mode .gallery-item { background: #2a2a2a; }
-        body.dark-mode .stats-bar { background: #2a2a2a; }
-        body.dark-mode .gallery-item-title { color: #e0e0e0; }
-        body.dark-mode .gallery-item-meta { color: #888; }
-        body.dark-mode .filter-label { color: #c9a84c; }
-        body.dark-mode .back-link { color: #c9a84c; }
-        body.dark-mode .search-box { background: #2a2a2a; color: #e0e0e0; border-color: #444; }
-        body.dark-mode .result-count { color: #777; }
-        body.dark-mode .stat-label { color: #aaa; }
-        body.dark-mode .load-more-btn { background: #6b4f10; }
+        .dark-mode body .filter-bar,
+        .dark-mode body .gallery-item { background: #2a2a2a; }
+        .dark-mode body .stats-bar { background: #2a2a2a; }
+        .dark-mode body .gallery-item-title { color: #e0e0e0; }
+        .dark-mode body .gallery-item-meta { color: #888; }
+        .dark-mode body .filter-label { color: #c9a84c; }
+        .dark-mode body .back-link { color: #c9a84c; }
+        .dark-mode body .search-box { background: #2a2a2a; color: #e0e0e0; border-color: #444; }
+        .dark-mode body .result-count { color: #777; }
+        .dark-mode body .stat-label { color: #aaa; }
+        .dark-mode body .load-more-btn { background: #6b4f10; }
 
         .empty-hint {
             text-align: center;
@@ -159,7 +159,7 @@
             font-size: 0.85rem;
             color: #8b6914;
         }
-        body.dark-mode .empty-hint .path-info { background: #333; color: #c9a84c; }
+        .dark-mode body .empty-hint .path-info { background: #333; color: #c9a84c; }
 /* ==== 行内样式转类（更新计划 C6，2026-11-07）==== */
 .ph-i01.ph-i01{font-size:0.9rem;opacity:0.7;margin-top:0.3rem;}
 .ph-i02.ph-i02{grid-column:1/-1;}

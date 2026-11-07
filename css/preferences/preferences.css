@@ -329,7 +329,7 @@
             font-size: 0.84rem;
             line-height: 1.6;
         }
-        body.dark-mode {
+        .dark-mode body {
             --prefs-bg: linear-gradient(180deg, #101010 0%, #151515 100%);
             --prefs-surface: rgba(28, 28, 28, 0.86);
             --prefs-border: rgba(255, 255, 255, 0.08);
@@ -338,24 +338,24 @@
             --prefs-shadow-hover: 0 22px 50px rgba(0, 0, 0, 0.42);
             color: #f3f4f6;
         }
-        body.dark-mode .prefs-sidebar-title,
-        body.dark-mode .prefs-panel-title,
-        body.dark-mode .prefs-entry-title,
-        body.dark-mode .prefs-setting-value,
-        body.dark-mode .prefs-field label { color: #f9fafb; }
-        body.dark-mode .prefs-nav-item,
-        body.dark-mode .prefs-entry-card,
-        body.dark-mode .prefs-panel-card,
-        body.dark-mode .prefs-empty-card { background: rgba(20,20,20,0.8); border-color: rgba(255,255,255,0.08); }
-        body.dark-mode .prefs-search { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
-        body.dark-mode .prefs-search input { color: #f3f4f6; }
-        body.dark-mode .prefs-btn.secondary { background: rgba(255,255,255,0.06); color: #f3f4f6; border-color: rgba(255,255,255,0.08); }
-        body.dark-mode .prefs-field select,
-        body.dark-mode .prefs-field input,
-        body.dark-mode .prefs-field textarea { background: rgba(17,17,17,0.95); color: #f3f4f6; border-color: rgba(255,255,255,0.08); }
-        body.dark-mode .prefs-setting-tile { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
-        body.dark-mode .prefs-chip { background: rgba(255,215,0,0.12); color: #ffd700; }
-        body.dark-mode .prefs-nav-item.active { color: #fff; }
+        .dark-mode body .prefs-sidebar-title,
+        .dark-mode body .prefs-panel-title,
+        .dark-mode body .prefs-entry-title,
+        .dark-mode body .prefs-setting-value,
+        .dark-mode body .prefs-field label { color: #f9fafb; }
+        .dark-mode body .prefs-nav-item,
+        .dark-mode body .prefs-entry-card,
+        .dark-mode body .prefs-panel-card,
+        .dark-mode body .prefs-empty-card { background: rgba(20,20,20,0.8); border-color: rgba(255,255,255,0.08); }
+        .dark-mode body .prefs-search { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+        .dark-mode body .prefs-search input { color: #f3f4f6; }
+        .dark-mode body .prefs-btn.secondary { background: rgba(255,255,255,0.06); color: #f3f4f6; border-color: rgba(255,255,255,0.08); }
+        .dark-mode body .prefs-field select,
+        .dark-mode body .prefs-field input,
+        .dark-mode body .prefs-field textarea { background: rgba(17,17,17,0.95); color: #f3f4f6; border-color: rgba(255,255,255,0.08); }
+        .dark-mode body .prefs-setting-tile { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+        .dark-mode body .prefs-chip { background: rgba(255,215,0,0.12); color: #ffd700; }
+        .dark-mode body .prefs-nav-item.active { color: #fff; }
         @media (max-width: 1080px) {
             .prefs-shell { grid-template-columns: 1fr; }
             .prefs-sidebar { position: static; }

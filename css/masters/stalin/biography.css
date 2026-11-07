@@ -93,7 +93,7 @@
 .stalin-empty-state span { display: grid; place-items: center; width: 2rem; height: 2rem; background: var(--master-primary, #7f1d1d); color: var(--master-paper, #f1eadc); }
 @media (max-width: 900px) { .stalin-story-header-inner, .stalin-reader-shell { grid-template-columns: 1fr; } .stalin-thread-panel { position: static; max-height: none; } .thread-board { max-height: none; } .thread-nav { max-height: 50vh; } }
 @media (max-width: 560px) { .stalin-story-header-inner, .stalin-reader-shell { width: min(100% - 28px, 1180px); } .stalin-volume-strip { grid-template-columns: 1fr; } .article-chapter-head { grid-template-columns: 1fr; } .stalin-article-content, .stalin-intro-card { padding: 1.2rem; } .stalin-article-paragraph { font-size: .96rem; padding-left: .75rem; } .reading-progress-label { display: none; } }
-body.dark-mode .stalin-intro-card, body.dark-mode .stalin-article-content, body.dark-mode .thread-board, body.dark-mode .stalin-volume-strip a, body.dark-mode .chapter-note { border-color: rgba(255,255,255,.13); }
-body.dark-mode .chapter-note { background: rgba(255,255,255,.05); }
-body.dark-mode .thread-board::before { background: linear-gradient(var(--master-paper, #1f1f1f), rgba(31,31,31,0)); }
-body.dark-mode .thread-board::after { background: linear-gradient(rgba(31,31,31,0), var(--master-paper, #1f1f1f)); }
+.dark-mode body .stalin-intro-card, .dark-mode body .stalin-article-content, .dark-mode body .thread-board, .dark-mode body .stalin-volume-strip a, .dark-mode body .chapter-note { border-color: rgba(255,255,255,.13); }
+.dark-mode body .chapter-note { background: rgba(255,255,255,.05); }
+.dark-mode body .thread-board::before { background: linear-gradient(var(--master-paper, #1f1f1f), rgba(31,31,31,0)); }
+.dark-mode body .thread-board::after { background: linear-gradient(rgba(31,31,31,0), var(--master-paper, #1f1f1f)); }

@@ -60,7 +60,7 @@ body[data-style="book"] .xc-back-ornament {
 }
 
 /* 暗色 */
-body.dark-mode[data-style="book"] {
+.dark-mode body[data-style="book"] {
   --paper: #1c1c1c;
   --ink: #e8e8e8;
   --accent: #c96a6a;
@@ -68,6 +68,6 @@ body.dark-mode[data-style="book"] {
   --line: #333333;
   --muted: #9a9a9a;
 }
-body.dark-mode[data-style="book"] .xc-body-content {
+.dark-mode body[data-style="book"] .xc-body-content {
   color: #d0d0d0;
 }

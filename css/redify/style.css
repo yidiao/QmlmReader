@@ -11,7 +11,7 @@
   --rd-metal: #8a8a8e;
   --rd-muted: #6a6a6e;
 }
-body.dark-mode {
+.dark-mode body {
   --rd-bg: #1c1c1e;
   --rd-panel: #2a2a2c;
   --rd-red: #ff3b30;

@@ -139,14 +139,14 @@
 }
 
 /* 黑暗模式 */
-body.dark-mode .funfact-body blockquote {
+.dark-mode body .funfact-body blockquote {
     background: #2a2a2a;
     border-left-color: #555;
 }
-body.dark-mode .funfact-footer {
+.dark-mode body .funfact-footer {
     background: #2a2a2a;
 }
-body.dark-mode .back-link { color: #b388ff; }
+.dark-mode body .back-link { color: #b388ff; }
 
 @media (max-width: 768px) {
     .funfacts-grid { grid-template-columns: 1fr; }

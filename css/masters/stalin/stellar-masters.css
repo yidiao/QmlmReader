@@ -15,7 +15,7 @@ body {
     background: var(--void, #05070c);
 }
 
-body.dark-mode {
+.dark-mode body {
     background: var(--void, #05070c);
 }
 

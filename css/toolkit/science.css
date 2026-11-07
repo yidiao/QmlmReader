@@ -68,16 +68,16 @@
                 color: white;
             }
 
-        body.dark-mode .science-tab {
+        .dark-mode body .science-tab {
             color: #aaa;
         }
 
-            body.dark-mode .science-tab:hover {
+            .dark-mode body .science-tab:hover {
                 background: #4a3a1a;
                 color: #fbbf24;
             }
 
-            body.dark-mode .science-tab.active {
+            .dark-mode body .science-tab.active {
                 background: #ff6b6b;
                 color: #1a1a1a;
             }
@@ -125,21 +125,21 @@
             border-bottom: 1px solid #f0e6e6;
         }
 
-        body.dark-mode .science-card {
+        .dark-mode body .science-card {
             background: #2a2a2a;
             box-shadow: 0 2px 12px rgba(0,0,0,0.3);
         }
-        body.dark-mode .science-card:hover {
+        .dark-mode body .science-card:hover {
             box-shadow: 0 12px 28px rgba(0,0,0,0.4);
         }
-        body.dark-mode .science-card-header {
+        .dark-mode body .science-card-header {
             background: #333;
             border-color: #444;
         }
-        body.dark-mode .science-card-body {
+        .dark-mode body .science-card-body {
             background: #2a2a2a;
         }
-        body.dark-mode .science-card-body p {
+        .dark-mode body .science-card-body p {
             color: #bbb;
         }
 
@@ -200,31 +200,31 @@
                 margin: 0 0 0.8rem 0;
             }
 
-        body.dark-mode .science-card-header .sub { color: #aaa; }
-        body.dark-mode .science-card.figures h3,
-        body.dark-mode .science-card.fig-west h3,
-        body.dark-mode .science-card.txt-found h3,
-        body.dark-mode .science-card.mov-organized h3 { color: #ff8a8a; }
-        body.dark-mode .science-card.movements h3,
-        body.dark-mode .science-card.term-strategy h3,
-        body.dark-mode .science-card.mov-spontaneous h3,
-        body.dark-mode .science-card.txt-lenin h3 { color: #fbbf24; }
-        body.dark-mode .science-card.terms h3,
-        body.dark-mode .science-card.term-econ h3,
-        body.dark-mode .science-card.fig-global h3 { color: #6ee7b7; }
-        body.dark-mode .science-card.texts h3,
-        body.dark-mode .science-card.term-org h3,
-        body.dark-mode .science-card.txt-west h3,
-        body.dark-mode .science-card.fig-culture h3 { color: #c4b5fd; }
-        body.dark-mode .science-card.term-philo h3 { color: #67e8f9; }
-        body.dark-mode .science-card.fig-system h3 { color: #93c5fd; }
-        body.dark-mode .science-card.fig-critique h3 { color: #fcd34d; }
-        body.dark-mode .science-card.fig-invert h3,
-        body.dark-mode .science-card.txt-polemic h3,
-        body.dark-mode .science-card.mov-turn h3 { color: #d1d5db; }
-        body.dark-mode .science-card.mov-china h3,
-        body.dark-mode .science-card.txt-mao h3 { color: #fca5a5; }
-        body.dark-mode .science-card.mov-antiimp h3 { color: #93c5fd; }
+        .dark-mode body .science-card-header .sub { color: #aaa; }
+        .dark-mode body .science-card.figures h3,
+        .dark-mode body .science-card.fig-west h3,
+        .dark-mode body .science-card.txt-found h3,
+        .dark-mode body .science-card.mov-organized h3 { color: #ff8a8a; }
+        .dark-mode body .science-card.movements h3,
+        .dark-mode body .science-card.term-strategy h3,
+        .dark-mode body .science-card.mov-spontaneous h3,
+        .dark-mode body .science-card.txt-lenin h3 { color: #fbbf24; }
+        .dark-mode body .science-card.terms h3,
+        .dark-mode body .science-card.term-econ h3,
+        .dark-mode body .science-card.fig-global h3 { color: #6ee7b7; }
+        .dark-mode body .science-card.texts h3,
+        .dark-mode body .science-card.term-org h3,
+        .dark-mode body .science-card.txt-west h3,
+        .dark-mode body .science-card.fig-culture h3 { color: #c4b5fd; }
+        .dark-mode body .science-card.term-philo h3 { color: #67e8f9; }
+        .dark-mode body .science-card.fig-system h3 { color: #93c5fd; }
+        .dark-mode body .science-card.fig-critique h3 { color: #fcd34d; }
+        .dark-mode body .science-card.fig-invert h3,
+        .dark-mode body .science-card.txt-polemic h3,
+        .dark-mode body .science-card.mov-turn h3 { color: #d1d5db; }
+        .dark-mode body .science-card.mov-china h3,
+        .dark-mode body .science-card.txt-mao h3 { color: #fca5a5; }
+        .dark-mode body .science-card.mov-antiimp h3 { color: #93c5fd; }
 
         .tag-group {
             display: flex;
@@ -243,7 +243,7 @@
             font-weight: 600;
         }
 
-        body.dark-mode .tag {
+        .dark-mode body .tag {
             background: #4a3a1a;
             color: #fbbf24;
         }
@@ -266,21 +266,21 @@
         .science-search-icon { font-size: 0.95rem; opacity: 0.5; flex-shrink: 0; }
         .science-search input { flex: 1; border: none; background: transparent; font-size: 0.85rem; outline: none; color: #333; font-family: inherit; }
         .science-search input::placeholder { color: #aaa; }
-        body.dark-mode .science-search { background: #333; border-color: #444; }
-        body.dark-mode .science-search input { color: #ddd; }
+        .dark-mode body .science-search { background: #333; border-color: #444; }
+        .dark-mode body .science-search input { color: #ddd; }
         .science-section-header { display: flex; align-items: center; gap: 0.55rem; padding: 0.6rem 0; margin: 1.8rem 0 0.9rem; border-bottom: 2px solid #eee; font-size: 0.9rem; font-weight: 700; grid-column: 1 / -1; color: #444; }
         .science-section-header:first-child { margin-top: 0; }
-        body.dark-mode .science-section-header { border-bottom-color: #3a3a3a; color: #ccc; }
+        .dark-mode body .science-section-header { border-bottom-color: #3a3a3a; color: #ccc; }
         .science-section-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
         .science-section-count { font-size: 0.7rem; font-weight: 400; color: #999; margin-left: auto; }
-        body.dark-mode .science-section-count { color: #777; }
+        .dark-mode body .science-section-count { color: #777; }
         .science-filter { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
         .science-filter-btn { background: #f3f4f6; border: 1px solid #e5e7eb; padding: 0.35rem 0.9rem; font-size: 0.75rem; font-weight: 500; color: #666; cursor: pointer; border-radius: 20px; transition: all 0.15s; font-family: inherit; }
         .science-filter-btn:hover { background: #fef3c7; color: #d97706; border-color: #fcd34d; }
         .science-filter-btn.active { background: #c41e3a; color: white; border-color: #c41e3a; }
-        body.dark-mode .science-filter-btn { background: #333; border-color: #444; color: #aaa; }
-        body.dark-mode .science-filter-btn:hover { background: #4a3a1a; color: #fbbf24; }
-        body.dark-mode .science-filter-btn.active { background: #ff6b6b; color: #1a1a1a; }
+        .dark-mode body .science-filter-btn { background: #333; border-color: #444; color: #aaa; }
+        .dark-mode body .science-filter-btn:hover { background: #4a3a1a; color: #fbbf24; }
+        .dark-mode body .science-filter-btn.active { background: #ff6b6b; color: #1a1a1a; }
 
         /* ========== 浮窗弹窗样式 ========== */
         .modal-overlay {
@@ -356,7 +356,7 @@
                 color: #333;
             }
 
-        body.dark-mode .modal-close:hover {
+        .dark-mode body .modal-close:hover {
             background: #444;
             color: #eee;
         }
@@ -413,28 +413,28 @@
             line-height: 1.7;
         }
 
-        body.dark-mode .modal {
+        .dark-mode body .modal {
             background: #2a2a2a;
             color: #ddd;
         }
 
-        body.dark-mode .modal-header {
+        .dark-mode body .modal-header {
             border-bottom-color: #444;
         }
 
-            body.dark-mode .modal-header h2 {
+            .dark-mode body .modal-header h2 {
                 color: #ff6b6b;
             }
 
-        body.dark-mode .modal-sub {
+        .dark-mode body .modal-sub {
             color: #aaa;
         }
 
-        body.dark-mode .modal-section-content {
+        .dark-mode body .modal-section-content {
             color: #ccc;
         }
 
-        body.dark-mode .modal-warning {
+        .dark-mode body .modal-warning {
             background: #3d3000;
             border-left-color: #f59e0b;
             color: #fbbf24;

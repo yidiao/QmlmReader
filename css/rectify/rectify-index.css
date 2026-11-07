@@ -3,7 +3,7 @@
 /* 正名页面样式 */
         /* ===== 正名 — 论战台，锐利红黑 ===== */
         body { background: #f5f0e8; }
-        body.dark-mode { background: #121212; }
+        .dark-mode body { background: #121212; }
 
         .rectify-hero {
             position: relative; background: #0d0000;
@@ -15,7 +15,7 @@
             content: ''; position: absolute; right: 0; top: 0; bottom: 0;
             width: 6px; background: #8b0000;
         }
-        body.dark-mode .rectify-hero { background: #050000; }
+        .dark-mode body .rectify-hero { background: #050000; }
 
         .rectify-hero-badge {
             display: inline-block; background: #c41e3a; color: #fff;
@@ -46,8 +46,8 @@
         }
         .section-nav-btn .icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
         .section-nav-btn .title { font-weight: 700; font-size: 1.1rem; }
-        body.dark-mode .section-nav-btn { background: #1a1010; border-color: #8b0000; color: #ddd; box-shadow: 4px 4px 0 #300000; }
-        body.dark-mode .section-nav-btn:hover { background: #c41e3a; color: #fff; box-shadow: 6px 6px 0 #200000; }
+        .dark-mode body .section-nav-btn { background: #1a1010; border-color: #8b0000; color: #ddd; box-shadow: 4px 4px 0 #300000; }
+        .dark-mode body .section-nav-btn:hover { background: #c41e3a; color: #fff; box-shadow: 6px 6px 0 #200000; }
 
         /* 文章卡片 */
         .rectify-article-card {
@@ -56,7 +56,7 @@
             transition: box-shadow 0.2s;
         }
         .rectify-article-card:hover { box-shadow: 5px 5px 0 #c41e3a30; }
-        body.dark-mode .rectify-article-card { background: #1a1010; border-color: #8b0000; box-shadow: 3px 3px 0 #150808; }
+        .dark-mode body .rectify-article-card { background: #1a1010; border-color: #8b0000; box-shadow: 3px 3px 0 #150808; }
         
         .rectify-container {
             max-width: 1200px;
@@ -86,7 +86,7 @@
             align-items: center;
             justify-content: center;
         }
-        body.dark-mode .section-nav-btn { background: #1e1e2a; border-color: #555; box-shadow: 4px 4px 0 #0a0a10; }
+        .dark-mode body .section-nav-btn { background: #1e1e2a; border-color: #555; box-shadow: 4px 4px 0 #0a0a10; }
 
         .section-nav-btn:hover {
             background: #c41e3a;
@@ -94,7 +94,7 @@
             transform: translateY(-2px);
             box-shadow: 6px 6px 0 #1a1a1a;
         }
-        body.dark-mode .section-nav-btn:hover { box-shadow: 6px 6px 0 #0a0a10; }
+        .dark-mode body .section-nav-btn:hover { box-shadow: 6px 6px 0 #0a0a10; }
         
         .section-nav-btn.active {
             background: #c41e3a;
@@ -275,58 +275,58 @@
             color: white;
         }
 
-        body.dark-mode .video-entry-card {
+        .dark-mode body .video-entry-card {
             background: linear-gradient(135deg, #8b0000 0%, #5c0000 100%);
         }
         
         /* 黑夜模式 */
-        body.dark-mode .section-nav-btn {
+        .dark-mode body .section-nav-btn {
             background: #2a2a2a;
             border-color: #ff6b6b;
             color: #e0e0e0;
         }
         
-        body.dark-mode .section-nav-btn:hover,
-        body.dark-mode .section-nav-btn.active {
+        .dark-mode body .section-nav-btn:hover,
+        .dark-mode body .section-nav-btn.active {
             background: #ff6b6b;
             color: #1a1a1a;
         }
         
-        body.dark-mode .section-content {
+        .dark-mode body .section-content {
             background: #2a2a2a;
         }
         
-        body.dark-mode .section-content h2 {
+        .dark-mode body .section-content h2 {
             color: #ff6b6b;
             border-color: #ff6b6b;
         }
         
-        body.dark-mode .section-content h3 {
+        .dark-mode body .section-content h3 {
             color: #e0e0e0;
         }
         
-        body.dark-mode .section-content p {
+        .dark-mode body .section-content p {
             color: #ccc;
         }
         
-        body.dark-mode .article-card {
+        .dark-mode body .article-card {
             background: #3a3a3a;
             border-color: #555;
         }
         
-        body.dark-mode .article-card h4 {
+        .dark-mode body .article-card h4 {
             color: #ff6b6b;
         }
         
-        body.dark-mode .article-card .summary {
+        .dark-mode body .article-card .summary {
             color: #aaa;
         }
         
-        body.dark-mode .article-card a {
+        .dark-mode body .article-card a {
             color: #ff6b6b;
         }
         
-        body.dark-mode .placeholder-box {
+        .dark-mode body .placeholder-box {
             background: #3a3a3a;
             border-color: #555;
             color: #888;

@@ -14,7 +14,7 @@
             border-bottom: 1px solid #e0e0e0;
             padding: 10px 0;
         }
-        body.dark-mode .back-nav { background: #1a1a1a; border-color: #333; }
+        .dark-mode body .back-nav { background: #1a1a1a; border-color: #333; }
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -25,7 +25,7 @@
             color: var(--col-primary);
             transition: color 0.2s;
         }
-        body.dark-mode .back-link { color: #ff6b6b; }
+        .dark-mode body .back-link { color: #ff6b6b; }
         .back-link:hover { color: var(--col-secondary); }
 
         /* ==================== 文章头部 ==================== */
@@ -108,7 +108,7 @@
             padding: 2.5rem 3rem;
             box-shadow: 0 2px 16px rgba(0,0,0,0.06);
         }
-        body.dark-mode .article-content { background: #2a2a2a; }
+        .dark-mode body .article-content { background: #2a2a2a; }
 
         .article-content h2 {
             color: var(--col-primary);
@@ -118,7 +118,7 @@
             font-size: 1.55rem;
             line-height: 1.4;
         }
-        body.dark-mode .article-content h2 { color: #ff6b6b; border-left-color: #ff6b6b; }
+        .dark-mode body .article-content h2 { color: #ff6b6b; border-left-color: #ff6b6b; }
 
         .article-content h3 {
             color: #2c2c2c;
@@ -127,7 +127,7 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 0.5rem;
         }
-        body.dark-mode .article-content h3 { color: #e0e0e0; border-bottom-color: #444; }
+        .dark-mode body .article-content h3 { color: #e0e0e0; border-bottom-color: #444; }
 
         .article-content h4 {
             color: #555;
@@ -135,7 +135,7 @@
             font-size: 1.1rem;
             font-weight: bold;
         }
-        body.dark-mode .article-content h4 { color: #ccc; }
+        .dark-mode body .article-content h4 { color: #ccc; }
 
         .article-content h5 {
             color: #777;
@@ -143,7 +143,7 @@
             font-size: 1rem;
             font-weight: bold;
         }
-        body.dark-mode .article-content h5 { color: #aaa; }
+        .dark-mode body .article-content h5 { color: #aaa; }
 
         .article-content p {
             line-height: 2;
@@ -152,18 +152,18 @@
             text-align: justify;
             font-size: 1.05rem;
         }
-        body.dark-mode .article-content p { color: #ccc; }
+        .dark-mode body .article-content p { color: #ccc; }
 
         .article-content strong {
             color: var(--col-secondary);
         }
-        body.dark-mode .article-content strong { color: #ff6b6b; }
+        .dark-mode body .article-content strong { color: #ff6b6b; }
 
         .article-content ul, .article-content ol {
             margin: 0.8rem 0 1.5rem 2rem;
             color: #444;
         }
-        body.dark-mode .article-content ul, body.dark-mode .article-content ol { color: #ccc; }
+        .dark-mode body .article-content ul, .dark-mode body .article-content ol { color: #ccc; }
         .article-content li {
             margin-bottom: 0.4rem;
             line-height: 1.8;
@@ -174,7 +174,7 @@
             border-top: 1px solid #ddd;
             margin: 2.5rem 0;
         }
-        body.dark-mode .article-content hr.section-divider { border-top-color: #444; }
+        .dark-mode body .article-content hr.section-divider { border-top-color: #444; }
 
         /* 表格 */
         .data-table {
@@ -197,9 +197,9 @@
             vertical-align: top;
         }
         .data-table tr:nth-child(even) td { background: #fafafa; }
-        body.dark-mode .data-table th { background: #4a0000; }
-        body.dark-mode .data-table td { color: #ccc; border-color: #444; }
-        body.dark-mode .data-table tr:nth-child(even) td { background: #333; }
+        .dark-mode body .data-table th { background: #4a0000; }
+        .dark-mode body .data-table td { color: #ccc; border-color: #444; }
+        .dark-mode body .data-table tr:nth-child(even) td { background: #333; }
 
         /* 摘要框 */
         .abstract-box {
@@ -209,11 +209,11 @@
             padding: 1.5rem 2rem;
             margin-bottom: 2rem;
         }
-        body.dark-mode .abstract-box { background: linear-gradient(135deg, #2a1a1a 0%, #2a2020 100%); border-color: #4a3030; }
+        .dark-mode body .abstract-box { background: linear-gradient(135deg, #2a1a1a 0%, #2a2020 100%); border-color: #4a3030; }
         .abstract-box p { margin-bottom: 0.5rem; color: #5a3030; }
-        body.dark-mode .abstract-box p { color: #d0a0a0; }
+        .dark-mode body .abstract-box p { color: #d0a0a0; }
         .abstract-box .keywords { color: #888; font-size: 0.9rem; margin-top: 0.8rem; }
-        body.dark-mode .abstract-box .keywords { color: #999; }
+        .dark-mode body .abstract-box .keywords { color: #999; }
 
         /* 高亮框 */
         .highlight-box {
@@ -224,7 +224,7 @@
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
-        body.dark-mode .highlight-box { background: linear-gradient(135deg, #2a2520 0%, #2a2820 100%); border-color: #554030; }
+        .dark-mode body .highlight-box { background: linear-gradient(135deg, #2a2520 0%, #2a2820 100%); border-color: #554030; }
 
         /* 文章尾部 */
         .article-footer {
@@ -235,7 +235,7 @@
             font-size: 0.9rem;
             text-align: center;
         }
-        body.dark-mode .article-footer { border-top-color: #444; color: #888; }
+        .dark-mode body .article-footer { border-top-color: #444; color: #888; }
         .article-footer p { margin-bottom: 0.3rem; text-align: center !important; }
 
         /* 响应式 */
@@ -335,7 +335,7 @@
             color: #999 !important;
             font-size: 0.78rem !important;
         }
-        body.dark-mode .sfn-panel { background: #2a2a2a; border-color: #444; }
-        body.dark-mode .sfn-panel a { color: #ddd; }
-        body.dark-mode .sfn-panel a:hover { background: #3a2020; color: #ff6b6b; }
-        body.dark-mode .sfn-divider { background: #444; }
+        .dark-mode body .sfn-panel { background: #2a2a2a; border-color: #444; }
+        .dark-mode body .sfn-panel a { color: #ddd; }
+        .dark-mode body .sfn-panel a:hover { background: #3a2020; color: #ff6b6b; }
+        .dark-mode body .sfn-divider { background: #444; }

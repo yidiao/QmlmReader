@@ -23,7 +23,7 @@ html {
   --qm-track: #e2dac8;
   --qm-shadow: #b0a890;
 }
-body.dark-mode {
+.dark-mode body {
   --qm-bg: #1a1a18;
   --qm-text: #e8dcc8;
   --qm-muted: #999;

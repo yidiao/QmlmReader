@@ -127,15 +127,15 @@ body[data-master="mao"] {
   --master-theme-dark-2: #301a1a;
 }
 
-body.dark-mode[data-master="marx"],
-body.dark-mode[data-master="engels"],
-body.dark-mode[data-master="lenin"],
-body.dark-mode[data-master="mao"] {
+.dark-mode body[data-master="marx"],
+.dark-mode body[data-master="engels"],
+.dark-mode body[data-master="lenin"],
+.dark-mode body[data-master="mao"] {
   --master-paper: var(--gray-dark-surface);
   --master-ink: var(--gray-dark-text);
 }
 
-body.dark-mode[data-master="stalin"] {
+.dark-mode body[data-master="stalin"] {
   --master-primary: #b33a45;
   --master-secondary: #8b96a6;
   --master-accent: #d7b65a;

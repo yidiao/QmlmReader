@@ -71,8 +71,8 @@
     --cat-gradient: linear-gradient(135deg, var(--theme-dark, #5a101b), var(--theme-primary, #8b1e2d) 55%, var(--theme-secondary, #b33a45));
 }
 
-body.dark-mode .article-category-tag,
-body.dark-mode .category-theme-tag {
+.dark-mode body .article-category-tag,
+.dark-mode body .category-theme-tag {
     background: color-mix(in srgb, var(--theme-primary, #666) 30%, #171717);
     color: #fff8e8;
     border-color: color-mix(in srgb, var(--theme-secondary, #999) 70%, transparent);

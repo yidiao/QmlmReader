@@ -121,6 +121,14 @@ def render_page(entry: dict, paragraphs: list[str]) -> str:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        /* qmlm:dark-mode-prerender */
+        (function () {
+            try {
+                if (localStorage.getItem('darkMode') === 'true') document.documentElement.classList.add('dark-mode');
+            } catch (e) { /* localStorage 不可用时维持白日模式 */ }
+        })();
+    </script>
     <title>{title} - 青年马列毛主义驿站</title>
     <link rel="icon" href="{prefix}favicon.svg" type="image/svg+xml">
     <link rel="shortcut icon" href="{prefix}favicon.ico">

@@ -5,7 +5,7 @@
         body {
             background: #f5f0e8;
         }
-        body.dark-mode {
+        .dark-mode body {
             background: #121212;
         }
 
@@ -82,10 +82,10 @@
             margin: 0;
         }
 
-        body.dark-mode .arsenal-hero {
+        .dark-mode body .arsenal-hero {
             background: #0a0a10;
         }
-        body.dark-mode .arsenal-hero h1 {
+        .dark-mode body .arsenal-hero h1 {
             color: #e8e4dc;
         }
 
@@ -109,12 +109,12 @@
             box-shadow: 7px 7px 0 #1a1a1a;
         }
 
-        body.dark-mode .tool-card {
+        .dark-mode body .tool-card {
             background: #1e1e2a;
             border-color: #333;
             box-shadow: 5px 5px 0 #0a0a10;
         }
-        body.dark-mode .tool-card:hover {
+        .dark-mode body .tool-card:hover {
             box-shadow: 7px 7px 0 #0a0a10;
         }
 
@@ -131,7 +131,7 @@
             border-bottom: 1px solid #eee;
         }
 
-        body.dark-mode .tool-card-header {
+        .dark-mode body .tool-card-header {
             border-color: #2a2a38;
         }
 
@@ -147,7 +147,7 @@
             flex-shrink: 0;
         }
 
-        body.dark-mode .tool-card-icon {
+        .dark-mode body .tool-card-icon {
             background: #333;
         }
 
@@ -164,7 +164,7 @@
             letter-spacing: 0.5px;
         }
 
-        body.dark-mode .tool-card-meta h2 {
+        .dark-mode body .tool-card-meta h2 {
             color: #e0e0e0;
         }
 
@@ -175,7 +175,7 @@
             line-height: 1.5;
         }
 
-        body.dark-mode .tool-card-meta p {
+        .dark-mode body .tool-card-meta p {
             color: #999;
         }
 
@@ -214,7 +214,7 @@
             letter-spacing: 0.5px;
         }
 
-        body.dark-mode .tag-dev {
+        .dark-mode body .tag-dev {
             background: #4a4a4a;
             color: #e0e0e0;
         }
@@ -256,10 +256,10 @@
         .fi-blue   .fi-sub { color: #1e40af; font-size:0.78rem; }
         .fi-green  .fi-sub { color: #047857; font-size:0.78rem; }
 
-        body.dark-mode .fi-gold  { background: #1e1608; }
-        body.dark-mode .fi-pink  { background: #1e0a14; }
-        body.dark-mode .fi-blue  { background: #0a1428; }
-        body.dark-mode .fi-green { background: #081a12; }
+        .dark-mode body .fi-gold  { background: #1e1608; }
+        .dark-mode body .fi-pink  { background: #1e0a14; }
+        .dark-mode body .fi-blue  { background: #0a1428; }
+        .dark-mode body .fi-green { background: #081a12; }
 
         /* 占位卡片 */
         .placeholder-body {
@@ -280,7 +280,7 @@
             margin: 0 0 8px;
         }
 
-        body.dark-mode .placeholder-body h3 {
+        .dark-mode body .placeholder-body h3 {
             color: #999;
         }
 
@@ -292,7 +292,7 @@
             line-height: 1.6;
         }
 
-        body.dark-mode .placeholder-body .ph-desc {
+        .dark-mode body .placeholder-body .ph-desc {
             color: #888;
         }
 
@@ -306,7 +306,7 @@
             letter-spacing: 1px;
         }
 
-        body.dark-mode .placeholder-body .ph-demo {
+        .dark-mode body .placeholder-body .ph-demo {
             background: #2a2a34;
             border-color: #444;
             color: #aaa;
@@ -344,7 +344,7 @@
             letter-spacing: 1px;
         }
 
-        body.dark-mode .roadmap-bar {
+        .dark-mode body .roadmap-bar {
             background: #0a0a10;
         }
 

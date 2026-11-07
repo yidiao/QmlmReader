@@ -1350,105 +1350,105 @@
 /* ================================================================
    暗色模式（母站 toggle）
    ================================================================ */
-body.dark-mode .ms-app { background: #1a1a1a; }
-body.dark-mode .ms-app::before { background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px); }
-body.dark-mode .ms-app::after  { background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1.5px, transparent 1.5px); }
+.dark-mode body .ms-app { background: #1a1a1a; }
+.dark-mode body .ms-app::before { background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px); }
+.dark-mode body .ms-app::after  { background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1.5px, transparent 1.5px); }
 
 /* 暗色模式下工作区几何色块微调 */
-body.dark-mode .ms-workspace::before { opacity: 0.8; }
-body.dark-mode .ms-period-col::before { background: #0d0d0d; }
+.dark-mode body .ms-workspace::before { opacity: 0.8; }
+.dark-mode body .ms-period-col::before { background: #0d0d0d; }
 
 /* Hero */
-body.dark-mode .ms-hero-title { color: #eee; }
-body.dark-mode .ms-hero-sub { color: #eee; }
-body.dark-mode .ms-hero-desc { color: #aaa; }
-body.dark-mode .ms-hero::before { background: rgba(196,30,58,0.15); }
+.dark-mode body .ms-hero-title { color: #eee; }
+.dark-mode body .ms-hero-sub { color: #eee; }
+.dark-mode body .ms-hero-desc { color: #aaa; }
+.dark-mode body .ms-hero::before { background: rgba(196,30,58,0.15); }
 
 /* 卡片 */
-body.dark-mode .ms-input-card,
-body.dark-mode .ms-output-card,
-body.dark-mode .ms-card-compare { background: #222; border-color: rgba(255,255,255,0.2); box-shadow: 6px 6px 0 rgba(0,0,0,0.5); }
-body.dark-mode .ms-mentor-card { background: #1e1e1e; border-color: rgba(255,255,255,0.15); box-shadow: 5px 5px 0 rgba(0,0,0,0.5); }
-body.dark-mode .ms-mentor-card.active { background: #1a1a1a; }
-body.dark-mode .ms-mentor-card:hover { box-shadow: 7px 7px 0 rgba(196,30,58,0.3); }
-body.dark-mode .ms-period-tag { background: #1e1e1e; border-color: rgba(255,255,255,0.15); box-shadow: 4px 4px 0 rgba(0,0,0,0.5); color: #aaa; }
-body.dark-mode .ms-period-tag:hover { box-shadow: 6px 6px 0 rgba(196,30,58,0.3); color: #fff; }
-body.dark-mode .ms-period-tag.active { color: #fff; }
-body.dark-mode .ms-analysis-panel { background: #1e1e1e; border-color: rgba(255,255,255,0.15); box-shadow: 6px 6px 0 rgba(0,0,0,0.5); }
-body.dark-mode .ms-ap-header { border-bottom-color: #c41e3a; }
-body.dark-mode #ms-ap-title { color: #ffd700; }
-body.dark-mode .ms-ap-close { color: #999; border-color: #ccc; }
-body.dark-mode .ms-ap-close:hover { color: #c41e3a; border-color: #c41e3a; }
-body.dark-mode .ms-detail-dim h4 { color: #999; border-bottom-color: rgba(255,255,255,0.1); }
-body.dark-mode .ms-detail-dim p { color: #bbb; }
-body.dark-mode .ms-sub-bar-track { background: #333; }
-body.dark-mode .ms-sub-bar-val { color: #ddd; }
+.dark-mode body .ms-input-card,
+.dark-mode body .ms-output-card,
+.dark-mode body .ms-card-compare { background: #222; border-color: rgba(255,255,255,0.2); box-shadow: 6px 6px 0 rgba(0,0,0,0.5); }
+.dark-mode body .ms-mentor-card { background: #1e1e1e; border-color: rgba(255,255,255,0.15); box-shadow: 5px 5px 0 rgba(0,0,0,0.5); }
+.dark-mode body .ms-mentor-card.active { background: #1a1a1a; }
+.dark-mode body .ms-mentor-card:hover { box-shadow: 7px 7px 0 rgba(196,30,58,0.3); }
+.dark-mode body .ms-period-tag { background: #1e1e1e; border-color: rgba(255,255,255,0.15); box-shadow: 4px 4px 0 rgba(0,0,0,0.5); color: #aaa; }
+.dark-mode body .ms-period-tag:hover { box-shadow: 6px 6px 0 rgba(196,30,58,0.3); color: #fff; }
+.dark-mode body .ms-period-tag.active { color: #fff; }
+.dark-mode body .ms-analysis-panel { background: #1e1e1e; border-color: rgba(255,255,255,0.15); box-shadow: 6px 6px 0 rgba(0,0,0,0.5); }
+.dark-mode body .ms-ap-header { border-bottom-color: #c41e3a; }
+.dark-mode body #ms-ap-title { color: #ffd700; }
+.dark-mode body .ms-ap-close { color: #999; border-color: #ccc; }
+.dark-mode body .ms-ap-close:hover { color: #c41e3a; border-color: #c41e3a; }
+.dark-mode body .ms-detail-dim h4 { color: #999; border-bottom-color: rgba(255,255,255,0.1); }
+.dark-mode body .ms-detail-dim p { color: #bbb; }
+.dark-mode body .ms-sub-bar-track { background: #333; }
+.dark-mode body .ms-sub-bar-val { color: #ddd; }
 
 /* 文字 */
-body.dark-mode .ms-mc-name { color: #ddd; }
-body.dark-mode .ms-mc-posture { color: #888; }
-body.dark-mode .ms-mc-quote { color: #aaa; }
-body.dark-mode .ms-mc-geo.circle,
-body.dark-mode .ms-mc-geo.square,
-body.dark-mode .ms-mc-geo.diamond { border-color: #ddd; }
-body.dark-mode .ms-mc-geo.triangle { border-bottom-color: #ddd; }
-body.dark-mode .ms-section-title { color: #eee; }
-body.dark-mode .ms-profile-subtitle { color: #999; }
-body.dark-mode .ms-compare-text { color: #ddd; }
-body.dark-mode .ms-compare-converted .ms-compare-text { color: #ffd700; }
-body.dark-mode .ms-compare-label { color: #999; }
-body.dark-mode .ms-label-dot { background: #888; }
-body.dark-mode .ms-output-card .ms-card-title { color: #ffd700; border-bottom-color: #c41e3a; }
-body.dark-mode .ms-change-item { background: #2a2a2a; color: #ddd; }
-body.dark-mode .ms-change-repl { color: #ffd700; }
-body.dark-mode .ms-change-orig { color: #888; }
-body.dark-mode .ms-change-arrow { color: #ffd700; }
-body.dark-mode .ms-radar-label { color: #999; }
-body.dark-mode .ms-source-rec p { color: #ddd; }
+.dark-mode body .ms-mc-name { color: #ddd; }
+.dark-mode body .ms-mc-posture { color: #888; }
+.dark-mode body .ms-mc-quote { color: #aaa; }
+.dark-mode body .ms-mc-geo.circle,
+.dark-mode body .ms-mc-geo.square,
+.dark-mode body .ms-mc-geo.diamond { border-color: #ddd; }
+.dark-mode body .ms-mc-geo.triangle { border-bottom-color: #ddd; }
+.dark-mode body .ms-section-title { color: #eee; }
+.dark-mode body .ms-profile-subtitle { color: #999; }
+.dark-mode body .ms-compare-text { color: #ddd; }
+.dark-mode body .ms-compare-converted .ms-compare-text { color: #ffd700; }
+.dark-mode body .ms-compare-label { color: #999; }
+.dark-mode body .ms-label-dot { background: #888; }
+.dark-mode body .ms-output-card .ms-card-title { color: #ffd700; border-bottom-color: #c41e3a; }
+.dark-mode body .ms-change-item { background: #2a2a2a; color: #ddd; }
+.dark-mode body .ms-change-repl { color: #ffd700; }
+.dark-mode body .ms-change-orig { color: #888; }
+.dark-mode body .ms-change-arrow { color: #ffd700; }
+.dark-mode body .ms-radar-label { color: #999; }
+.dark-mode body .ms-source-rec p { color: #ddd; }
 
 /* 输入 */
-body.dark-mode .ms-textarea { background: #2a2a2a; color: #ddd; border-color: rgba(255,255,255,0.15); }
-body.dark-mode .ms-textarea:focus { background: #333; border-color: #c41e3a; }
-body.dark-mode .ms-textarea::placeholder { color: #666; }
-body.dark-mode .ms-author-selector label { color: #888; }
-body.dark-mode .ms-author-selector select { background: #2a2a2a; color: #ddd; border-color: rgba(255,255,255,0.2); }
-body.dark-mode .ms-char-limit { color: #888; }
+.dark-mode body .ms-textarea { background: #2a2a2a; color: #ddd; border-color: rgba(255,255,255,0.15); }
+.dark-mode body .ms-textarea:focus { background: #333; border-color: #c41e3a; }
+.dark-mode body .ms-textarea::placeholder { color: #666; }
+.dark-mode body .ms-author-selector label { color: #888; }
+.dark-mode body .ms-author-selector select { background: #2a2a2a; color: #ddd; border-color: rgba(255,255,255,0.2); }
+.dark-mode body .ms-char-limit { color: #888; }
 
 /* 模式标签 */
-body.dark-mode .ms-mode-tab { color: #999; }
-body.dark-mode .ms-mode-tab.active { background: #222; color: #eee; border-color: #eee; }
+.dark-mode body .ms-mode-tab { color: #999; }
+.dark-mode body .ms-mode-tab.active { background: #222; color: #eee; border-color: #eee; }
 
 /* 按钮 */
-body.dark-mode .ms-btn-secondary { background: #2a2a2a; color: #ddd; border-color: rgba(255,255,255,0.2); }
-body.dark-mode .ms-btn-secondary:hover { border-color: #c41e3a; color: #ffd700; }
+.dark-mode body .ms-btn-secondary { background: #2a2a2a; color: #ddd; border-color: rgba(255,255,255,0.2); }
+.dark-mode body .ms-btn-secondary:hover { border-color: #c41e3a; color: #ffd700; }
 
 /* 弹窗 */
-body.dark-mode .ms-modal-overlay { background: rgba(0,0,0,0.85); }
-body.dark-mode .ms-modal-card { background: #1e1e1e; border-color: rgba(255,255,255,0.2); box-shadow: 10px 10px 0 rgba(0,0,0,0.5); }
-body.dark-mode .ms-modal-header { border-bottom-color: #c41e3a; }
-body.dark-mode #ms-modal-title { color: #ffd700; }
-body.dark-mode .ms-modal-close { color: #888; border-color: rgba(255,255,255,0.2); }
-body.dark-mode .ms-modal-close:hover { color: #ffd700; border-color: #c41e3a; }
+.dark-mode body .ms-modal-overlay { background: rgba(0,0,0,0.85); }
+.dark-mode body .ms-modal-card { background: #1e1e1e; border-color: rgba(255,255,255,0.2); box-shadow: 10px 10px 0 rgba(0,0,0,0.5); }
+.dark-mode body .ms-modal-header { border-bottom-color: #c41e3a; }
+.dark-mode body #ms-modal-title { color: #ffd700; }
+.dark-mode body .ms-modal-close { color: #888; border-color: rgba(255,255,255,0.2); }
+.dark-mode body .ms-modal-close:hover { color: #ffd700; border-color: #c41e3a; }
 
 /* 演示区微调 */
-body.dark-mode .ms-demo-section { background: #0d0d0d; }
-body.dark-mode .ms-demo-card { background: #0a0a0a; }
-body.dark-mode .ms-demo-bg-red { opacity: 0.55; }
-body.dark-mode .ms-demo-bg-black { background: #0d0d0d; }
+.dark-mode body .ms-demo-section { background: #0d0d0d; }
+.dark-mode body .ms-demo-card { background: #0a0a0a; }
+.dark-mode body .ms-demo-bg-red { opacity: 0.55; }
+.dark-mode body .ms-demo-bg-black { background: #0d0d0d; }
 
 /* 红五星横幅 */
-body.dark-mode .ms-red-seal .ms-rs-star { background: #8b1a1a; }
-body.dark-mode .ms-red-seal .ms-rs-line { background: #8b1a1a; }
+.dark-mode body .ms-red-seal .ms-rs-star { background: #8b1a1a; }
+.dark-mode body .ms-red-seal .ms-rs-line { background: #8b1a1a; }
 
 /* 卡片堆叠 */
-body.dark-mode .ms-card-stack::before,
-body.dark-mode .ms-card-stack::after { background: #1a1a1a; border-color: rgba(255,255,255,0.1); }
+.dark-mode body .ms-card-stack::before,
+.dark-mode body .ms-card-stack::after { background: #1a1a1a; border-color: rgba(255,255,255,0.1); }
 
 /* 杂项 */
-body.dark-mode .ms-share-preview-inline { border-color: #444; background: #222; }
-body.dark-mode #ms-toast { background: #333; }
-body.dark-mode .ms-src-row:hover { background: rgba(255,255,255,0.015); }
-body.dark-mode .ms-ap-header { border-bottom-color: #c41e3a; }
+.dark-mode body .ms-share-preview-inline { border-color: #444; background: #222; }
+.dark-mode body #ms-toast { background: #333; }
+.dark-mode body .ms-src-row:hover { background: rgba(255,255,255,0.015); }
+.dark-mode body .ms-ap-header { border-bottom-color: #c41e3a; }
 
 /* ================================================================
    时期标签选择器
@@ -1836,22 +1836,22 @@ body.dark-mode .ms-ap-header { border-bottom-color: #c41e3a; }
 }
 
 /* 暗色模式 */
-body.dark-mode .ms-chat-section { background: #1a1a1a; }
-body.dark-mode .ms-chat-title { color: #eee; border-bottom-color: #ffd700; }
-body.dark-mode .ms-chat-hint { color: #888; }
-body.dark-mode .ms-chat-mentor { background: #1e1e1e; border-color: rgba(255,255,255,0.1); }
-body.dark-mode .ms-chat-mentor:hover { border-color: rgba(255,255,255,0.3); }
-body.dark-mode .ms-chat-mentor-name { color: #ddd; }
-body.dark-mode .ms-chat-card { background: #222; border-color: rgba(255,255,255,0.15); box-shadow: 6px 6px 0 rgba(0,0,0,0.5); }
-body.dark-mode .ms-chat-messages { background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px); }
-body.dark-mode .ms-chat-bubble.mentor { background: #333; color: #ddd; border-color: rgba(255,255,255,0.1); }
-body.dark-mode .ms-chat-bubble.mentor .ms-chat-sender { color: #ffd700; }
-body.dark-mode .ms-chat-bubble.user { background: #1b5e20; color: #ddd; }
-body.dark-mode .ms-chat-input { background: #2a2a2a; color: #ddd; }
-body.dark-mode .ms-chat-input:focus { background: #333; }
-body.dark-mode .ms-chat-input-row { border-top-color: rgba(255,255,255,0.1); }
-body.dark-mode .ms-chat-footer { border-top-color: rgba(255,255,255,0.1); color: #888; }
-body.dark-mode .ms-chat-empty { color: #666; }
+.dark-mode body .ms-chat-section { background: #1a1a1a; }
+.dark-mode body .ms-chat-title { color: #eee; border-bottom-color: #ffd700; }
+.dark-mode body .ms-chat-hint { color: #888; }
+.dark-mode body .ms-chat-mentor { background: #1e1e1e; border-color: rgba(255,255,255,0.1); }
+.dark-mode body .ms-chat-mentor:hover { border-color: rgba(255,255,255,0.3); }
+.dark-mode body .ms-chat-mentor-name { color: #ddd; }
+.dark-mode body .ms-chat-card { background: #222; border-color: rgba(255,255,255,0.15); box-shadow: 6px 6px 0 rgba(0,0,0,0.5); }
+.dark-mode body .ms-chat-messages { background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px); }
+.dark-mode body .ms-chat-bubble.mentor { background: #333; color: #ddd; border-color: rgba(255,255,255,0.1); }
+.dark-mode body .ms-chat-bubble.mentor .ms-chat-sender { color: #ffd700; }
+.dark-mode body .ms-chat-bubble.user { background: #1b5e20; color: #ddd; }
+.dark-mode body .ms-chat-input { background: #2a2a2a; color: #ddd; }
+.dark-mode body .ms-chat-input:focus { background: #333; }
+.dark-mode body .ms-chat-input-row { border-top-color: rgba(255,255,255,0.1); }
+.dark-mode body .ms-chat-footer { border-top-color: rgba(255,255,255,0.1); color: #888; }
+.dark-mode body .ms-chat-empty { color: #666; }
 
 @media (prefers-reduced-motion: reduce) {
   .ms-btn-primary, .ms-btn-deep { transition: none; }

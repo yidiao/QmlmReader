@@ -148,7 +148,7 @@ body {
   background: #e9e6e0;
   padding: 36px 0;
 }
-body.dark-mode .xc-booklet-wrap {
+.dark-mode body .xc-booklet-wrap {
   background: #141414;
 }
 

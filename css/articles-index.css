@@ -16,7 +16,7 @@
     background: linear-gradient(135deg, #f6f0e8 0%, #ede4d6 100%);
 }
 
-body.dark-mode .articles-page {
+.dark-mode body .articles-page {
     background: linear-gradient(135deg, #181827 0%, #121a2b 100%);
 }
 
@@ -37,7 +37,7 @@ body.dark-mode .articles-page {
     text-align: center;
 }
 
-body.dark-mode .page-hero {
+.dark-mode body .page-hero {
     background: var(--articles-surface-dark);
 }
 
@@ -47,7 +47,7 @@ body.dark-mode .page-hero {
     color: var(--articles-accent);
 }
 
-body.dark-mode .page-hero h1 {
+.dark-mode body .page-hero h1 {
     color: #ff7b7b;
 }
 
@@ -57,7 +57,7 @@ body.dark-mode .page-hero h1 {
     line-height: 1.6;
 }
 
-body.dark-mode .page-hero p {
+.dark-mode body .page-hero p {
     color: #c1c7d0;
 }
 
@@ -78,7 +78,7 @@ body.dark-mode .page-hero p {
     font-weight: 600;
 }
 
-body.dark-mode .hero-stat {
+.dark-mode body .hero-stat {
     background: rgba(255, 123, 123, 0.14);
     color: #ffadad;
 }
@@ -91,7 +91,7 @@ body.dark-mode .hero-stat {
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
 }
 
-body.dark-mode .section-box {
+.dark-mode body .section-box {
     background: var(--articles-surface-dark);
 }
 
@@ -109,7 +109,7 @@ body.dark-mode .section-box {
     color: #2b3a4a;
 }
 
-body.dark-mode .section-head h2 {
+.dark-mode body .section-head h2 {
     color: #d7dfeb;
 }
 
@@ -119,7 +119,7 @@ body.dark-mode .section-head h2 {
     white-space: nowrap;
 }
 
-body.dark-mode .section-count {
+.dark-mode body .section-count {
     color: #a8b0bc;
 }
 
@@ -140,7 +140,7 @@ body.dark-mode .section-count {
     outline: none;
 }
 
-body.dark-mode .filter-input {
+.dark-mode body .filter-input {
     background: rgba(18, 18, 24, 0.92);
     border-color: rgba(255, 255, 255, 0.12);
     color: #e6edf6;
@@ -158,7 +158,7 @@ body.dark-mode .filter-input {
     font-weight: 600;
 }
 
-body.dark-mode .filter-btn {
+.dark-mode body .filter-btn {
     background: #2c3442;
     color: #dbe3ef;
 }
@@ -197,8 +197,8 @@ body.dark-mode .filter-btn {
     overflow: hidden;
 }
 
-body.dark-mode .collection-card,
-body.dark-mode .article-card {
+.dark-mode body .collection-card,
+.dark-mode body .article-card {
     background: #232838;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
@@ -221,9 +221,9 @@ body.dark-mode .article-card {
     color: #16202c;
 }
 
-body.dark-mode .collection-title,
-body.dark-mode .card-title a,
-body.dark-mode .card-title span {
+.dark-mode body .collection-title,
+.dark-mode body .card-title a,
+.dark-mode body .card-title span {
     color: #eef3fb;
 }
 
@@ -235,11 +235,11 @@ body.dark-mode .card-title span {
     color: #67727e;
 }
 
-body.dark-mode .collection-sub,
-body.dark-mode .collection-desc,
-body.dark-mode .article-desc,
-body.dark-mode .card-meta,
-body.dark-mode .card-author {
+.dark-mode body .collection-sub,
+.dark-mode body .collection-desc,
+.dark-mode body .article-desc,
+.dark-mode body .card-meta,
+.dark-mode body .card-author {
     color: #b7c1ce;
 }
 
@@ -342,7 +342,7 @@ body.dark-mode .card-author {
     font-size: 0.72rem;
 }
 
-body.dark-mode .meta-pill {
+.dark-mode body .meta-pill {
     background: rgba(255, 255, 255, 0.08);
 }
 
@@ -383,12 +383,12 @@ body.dark-mode .meta-pill {
     border-color: #c9a64e;
 }
 
-body.dark-mode .article-card-favorite {
+.dark-mode body .article-card-favorite {
     color: #d7b65a;
 }
 
-body.dark-mode .article-card-favorite:hover,
-body.dark-mode .article-card-favorite.is-active {
+.dark-mode body .article-card-favorite:hover,
+.dark-mode body .article-card-favorite.is-active {
     color: #ffe29a;
     background: #493b1b;
 }
@@ -455,7 +455,7 @@ body.dark-mode .article-card-favorite.is-active {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
 }
 
-body.dark-mode .modal-dialog {
+.dark-mode body .modal-dialog {
     background: #232838;
 }
 
@@ -503,7 +503,7 @@ body.dark-mode .modal-dialog {
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-body.dark-mode .modal-article {
+.dark-mode body .modal-article {
     border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -531,7 +531,7 @@ body.dark-mode .modal-article {
     color: #17212c;
 }
 
-body.dark-mode .modal-title {
+.dark-mode body .modal-title {
     color: #e8eef8;
 }
 

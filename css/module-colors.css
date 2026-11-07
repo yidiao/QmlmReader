@@ -64,7 +64,7 @@ body[data-module="preferences"] {
   color: var(--module-accent, var(--app-primary));
 }
 
-body.dark-mode .module-hero h1,
-body.dark-mode .module-title {
+.dark-mode body .module-hero h1,
+.dark-mode body .module-title {
   color: var(--module-accent-dark, var(--app-accent));
 }

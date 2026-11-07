@@ -118,7 +118,7 @@
             color: var(--primary-color);
         }
 
-        body.dark-mode .music-versions-list {
+        .dark-mode body .music-versions-list {
             background: #3a3a3a;
         }
 

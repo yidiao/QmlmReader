@@ -79,3 +79,14 @@
 
 ### 20. 构成主义 UI 的灰阶纪律（color-system §8）
 - 同一灰值不同时承担正文/边框/背景；用 `--gray-950…050` 十二档，暗色另有 `--gray-dark-*` 九档。灰阶混乱是"有的地方偏黑有的边框发白"的根源。
+
+## 四、黑夜模式与浏览器验证（2026-11-07）
+
+### 21. 黑夜模式首帧预渲染（反 FOUC 三件套）
+- **场景**：暗色用户跳转页面先闪一帧白日样式。
+- **坑**：主题类靠 `</body>` 前的外部 darkmode.js 挂 `<body>`，首帧渲染早于脚本执行；**今后新生成页面若漏带 head 内联脚本，白闪即复发**。
+- **解法**：head 内联脚本（`qmlm:dark-mode-prerender` 标记注释，幂等可复跑 `_tools/add_dark_mode_head_script.py`）置于所有样式表之前给 `<html>` 挂类 + CSS 全量 `body.dark-mode`→`.dark-mode body`（特异性不变，765 处）+ darkmode.js 双类同步。importer 模板与 soviet-jokes 页（独立 `sj-archive-theme` key）均已补丁。
+
+### 22. 浏览器自动化验证的三个伪象
+- **坑**：① IAB/无头环境合成器节流，全页 `CSSTransition` 冻结在 `currentTime=0`，"点击切换后颜色不变"是假象，`getAnimations()` 一眼识破；② 页面 `pagehide`/`beforeunload` 挂持久化钩子（preferences.js:1174），测试中 `localStorage.clear()` 后 reload 会被内存态回写，制造"清不掉"；③ state-center 的 `qmlm:state:v1` 优先级高于 legacy `darkMode` 键，手改 legacy 制造分歧必被覆盖。
+- **解法**：模拟"首帧时外链脚本未执行"用资源改名 404 法（darkmode.js→.bak 后 goto，看首帧状态）；状态变更一律走页面真实按钮路径；对照基线用 `git worktree` + 独立端口起服务（跨端口=跨 origin，localStorage 隔离，两边都要各自设偏好）。

@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        /* qmlm:dark-mode-prerender：首帧前同步挂 dark-mode 类，防暗色用户跳转时白闪 */
+        (function () {
+            try {
+                if (localStorage.getItem('darkMode') === 'true') document.documentElement.classList.add('dark-mode');
+            } catch (e) { /* localStorage 不可用时维持白日模式 */ }
+        })();
+    </script>
     <title>《约·菲·贝克尔、约·狄慈根、弗·恩格斯、卡·马克思等致弗·阿·左尔格等书信集》俄译本序言 （１９０７年４月６日〔１９日〕） - 青年马列毛主义驿站</title>
     <link rel="icon" href="../../../../favicon.svg" type="image/svg+xml">
     <link rel="shortcut icon" href="../../../../favicon.ico">

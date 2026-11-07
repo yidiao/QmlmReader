@@ -360,67 +360,67 @@
             margin-top: 0.3rem;
         }
 
-        body.dark-mode .filter-bar,
-        body.dark-mode .gallery-item {
+        .dark-mode body .filter-bar,
+        .dark-mode body .gallery-item {
             background: #2a2a2a;
         }
 
-        body.dark-mode .stats-bar {
+        .dark-mode body .stats-bar {
             background: #2a2a2a;
         }
 
-        body.dark-mode .filter-btn {
+        .dark-mode body .filter-btn {
             background: #2a2a2a;
             border-color: #444;
             color: #ccc;
         }
 
-            body.dark-mode .filter-btn:hover {
+            .dark-mode body .filter-btn:hover {
                 border-color: #e06060;
                 color: #e06060;
             }
 
-            body.dark-mode .filter-btn.active {
+            .dark-mode body .filter-btn.active {
                 background: #8b1a1a;
                 border-color: #8b1a1a;
                 color: white;
             }
 
-        body.dark-mode .gallery-item-title {
+        .dark-mode body .gallery-item-title {
             color: #e0e0e0;
         }
 
-        body.dark-mode .gallery-item-meta {
+        .dark-mode body .gallery-item-meta {
             color: #888;
         }
 
-        body.dark-mode .gallery-item-cat {
+        .dark-mode body .gallery-item-cat {
             background: #3a1a1a;
         }
 
-        body.dark-mode .filter-label {
+        .dark-mode body .filter-label {
             color: #e06060;
         }
 
-        body.dark-mode .back-link {
+        .dark-mode body .back-link {
             color: #e06060;
         }
 
-        body.dark-mode .search-box {
+        .dark-mode body .search-box {
             background: #2a2a2a;
             color: #e0e0e0;
             border-color: #444;
         }
 
-        body.dark-mode .result-count {
+        .dark-mode body .result-count {
             color: #777;
         }
 
-        body.dark-mode .stat-label {
+        .dark-mode body .stat-label {
             color: #aaa;
         }
 
-        body.dark-mode .stat-number {
+        .dark-mode body .stat-number {
             color: #e06060;
         }
 
@@ -429,12 +429,12 @@
             background: white; border-radius: 12px; padding: 1.5rem;
             margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
-        body.dark-mode .download-section { background: #2a2a2a; }
+        .dark-mode body .download-section { background: #2a2a2a; }
         .download-section-title {
             margin: 0 0 1rem 0; font-size: 1.2rem; color: #8b1a1a;
             border-bottom: 2px solid #8b1a1a; padding-bottom: 0.5rem;
         }
-        body.dark-mode .download-section-title { color: #e06060; border-color: #e06060; }
+        .dark-mode body .download-section-title { color: #e06060; border-color: #e06060; }
         .download-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 0.8rem;
@@ -446,8 +446,8 @@
             border: 1px solid #eee;
         }
         .dl-card:hover { background: #8b1a1a; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139,26,26,0.3); }
-        body.dark-mode .dl-card { background: #3a3a3a; border-color: #444; color: #e0e0e0; }
-        body.dark-mode .dl-card:hover { background: #8b1a1a; color: white; }
+        .dark-mode body .dl-card { background: #3a3a3a; border-color: #444; color: #e0e0e0; }
+        .dark-mode body .dl-card:hover { background: #8b1a1a; color: white; }
         .dl-card-icon { font-size: 1.6rem; flex-shrink: 0; }
         .dl-card-info { flex: 1; min-width: 0; }
         .dl-card-label { font-size: 0.88rem; font-weight: 600; line-height: 1.3; }

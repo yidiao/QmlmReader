@@ -2,7 +2,7 @@
 
 /* ===== 国际共运 — 图志风格，深海蓝 + 红金 ===== */
         body { background: #f5f0e8; }
-        body.dark-mode { background: #121212; }
+        .dark-mode body { background: #121212; }
 
         .page-header {
             position: relative; background: linear-gradient(170deg, #0a1a2a 0%, #0d2035 40%, #0a1520 100%);
@@ -17,7 +17,7 @@
                 radial-gradient(ellipse at 20% 80%, rgba(212,160,23,0.06) 0%, transparent 50%);
             pointer-events: none;
         }
-        body.dark-mode .page-header { background: linear-gradient(170deg, #050d15 0%, #081520 40%, #040a10 100%); }
+        .dark-mode body .page-header { background: linear-gradient(170deg, #050d15 0%, #081520 40%, #040a10 100%); }
 
         .page-header-badge {
             position: relative; display: inline-block;
@@ -39,7 +39,7 @@
             border-radius: 0; padding: 1.2rem; margin-bottom: 1.5rem;
             display: flex; justify-content: space-around; flex-wrap: wrap;
         }
-        body.dark-mode .stats-bar { background: #081520; border-color: #152840; }
+        .dark-mode body .stats-bar { background: #081520; border-color: #152840; }
         .stat-number { color: #c41e3a; font-size: 1.6rem; font-weight: 900; }
         .stat-label { color: #6a8aa5; font-size: 0.78rem; }
 
@@ -50,8 +50,8 @@
             transition: box-shadow 0.2s, border-color 0.2s;
         }
         .intl-card:hover { border-color: #4a8ab5; box-shadow: 5px 5px 0 #b0b8c4; }
-        body.dark-mode .intl-card { background: #141a22; border-color: #1e2a38; box-shadow: 3px 3px 0 #0a1018; }
-        body.dark-mode .intl-card:hover { border-color: #3a6a95; box-shadow: 5px 5px 0 #080c14; }
+        .dark-mode body .intl-card { background: #141a22; border-color: #1e2a38; box-shadow: 3px 3px 0 #0a1018; }
+        .dark-mode body .intl-card:hover { border-color: #3a6a95; box-shadow: 5px 5px 0 #080c14; }
         
         /* 主布局 */
         .main-layout {
@@ -423,60 +423,60 @@
         .tag.ongoing { background: #fff3cd; color: #856404; }
         
         /* 黑夜模式 */
-        body.dark-mode .timeline-wrapper {
+        .dark-mode body .timeline-wrapper {
             background: #2a2a2a;
         }
         
-        body.dark-mode .timeline-card {
+        .dark-mode body .timeline-card {
             background: #3a3a3a;
         }
         
-        body.dark-mode .card-title {
+        .dark-mode body .card-title {
             color: #e0e0e0;
         }
         
-        body.dark-mode .card-desc {
+        .dark-mode body .card-desc {
             color: #bbb;
         }
         
-        body.dark-mode .stats-bar {
+        .dark-mode body .stats-bar {
             background: #2a2a2a;
         }
         
-        body.dark-mode .era-btn {
+        .dark-mode body .era-btn {
             background: #2a2a2a;
             color: #ff6b6b;
             border-color: #ff6b6b;
         }
         
-        body.dark-mode .era-btn:hover, body.dark-mode .era-btn.active {
+        .dark-mode body .era-btn:hover, .dark-mode body .era-btn.active {
             background: #ff6b6b;
             color: #1a1a1a;
         }
         
-        body.dark-mode .timeline-content {
+        .dark-mode body .timeline-content {
             background: #3a3a3a;
             border-color: #444;
         }
         
-        body.dark-mode .timeline-content h3 {
+        .dark-mode body .timeline-content h3 {
             color: #ff6b6b;
         }
         
-        body.dark-mode .timeline-content p {
+        .dark-mode body .timeline-content p {
             color: #ccc;
         }
         
-        body.dark-mode .tag {
+        .dark-mode body .tag {
             background: #444;
             color: #ccc;
         }
         
-        body.dark-mode .detailed-timeline h2 {
+        .dark-mode body .detailed-timeline h2 {
             color: #ff6b6b;
         }
         
-        body.dark-mode .detailed-timeline {
+        .dark-mode body .detailed-timeline {
             border-color: #444;
         }
         
