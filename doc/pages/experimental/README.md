@@ -45,7 +45,7 @@ html/experimental/yangbanxi.html      # 剧本/分镜/Prompt 生成工具
 | 剧本/分镜工具 | `html/experimental/yangbanxi.html` | `js/yangbanxi/yangbanxi.js`、`yangbanxi-prompt.js` | `css/yangbanxi/style.css` | 刚起了个头（2026-11-07 所有者口径） |
 | 图像风格化工具 | `html/experimental/redify.html` | 暂未发现独立核心 JS | `css/redify/style.css` | 刚起了个头，页面壳已挂（2026-11-07 所有者口径） |
 
-> 五工具均未竣工，完成度工程牌与进度档见 [preparing/experimental-tools.md](../../preparing/experimental-tools.md)（产品层③ 筹备与规划）。
+> 五工具均未竣工，完成度工程牌与路线要点见 [preparing/experimental-tools.md](../../preparing/experimental-tools.md)（产品层③ 筹备与规划）；各工具进度档：[马列体生成器-开发进度](../../preparing/马列体生成器-开发进度.md)、[青马的奇妙冒险-实际进度](../../preparing/青马的奇妙冒险-实际进度.md)、[赛博样板戏-开发进度](../../preparing/赛博样板戏-开发进度.md)、[小册子-开发进度](../../preparing/小册子-开发进度.md)、[万物皆可红-开发进度](../../preparing/万物皆可红-开发进度.md)。
 | 留言板 | `html/experimental/message-board.html` | 无模块脚本（仅公共层 site-data/main/darkmode/cursor） | 内联 | 定论（2026-11 审计） |
 
 ---
@@ -81,16 +81,18 @@ html/experimental/yangbanxi.html      # 剧本/分镜/Prompt 生成工具
 - 流程：上传 `.docx` -> mammoth 解析 -> 结构识别 -> A5 分页 -> 打印导出 PDF。
 - 样式以 `body[data-style]` 切换，当前有“手作油印”和“精致书刊”两套风格。
 - 不做文本编辑器，写作留在 Word，工具只负责排版美化。
+- 路线（建议待裁定）：阶段 2 风格面板 -> 阶段 3 AI 生成风格 -> 联动件；见 [preparing/小册子-开发进度.md](../../preparing/小册子-开发进度.md)。
 
 ### 剧本/分镜工具
 
 - 已有三阶段流程：定框架、逐段协作、导出分镜/Prompt 包。
-- 当前升级方向：分镜 AI 化、音乐/视频 Prompt、骨架库、历史记录、独立通读视图等。
+- 当前升级方向：分镜 AI 化、音乐/视频 Prompt、骨架库、历史记录、独立通读视图等；八项已按内容层→生成层→UI 层排批，见 [preparing/赛博样板戏-开发进度.md](../../preparing/赛博样板戏-开发进度.md)。
 - 完整研究稿放在 `research/`，入口只保留工程结论。
 
 ### 图像风格化工具
 
 - 当前按概念/早期入口管理。
+- 技术路线三选一（纯 AI / 纯本地 canvas / 混合，建议混合），见 [preparing/万物皆可红-开发进度.md](../../preparing/万物皆可红-开发进度.md)。
 - 若后续实现，应重点记录：上传、参数、预览、生成 API、导出、隐私/缓存策略。
 
 ---

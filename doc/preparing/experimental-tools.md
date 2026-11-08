@@ -7,9 +7,30 @@
 |---|---|---|---|---|---|
 | 文体工具 marxist-style | `html/experimental/marxist-style.html` | **~80%**（基本能跑，存在问题与提升空间） | 🔨 | [马列体生成器-开发进度.md](马列体生成器-开发进度.md) | research/马列体/{大纲架构, 美术设计} |
 | 文字游戏 qingma | `html/experimental/qingma.html` | **~60%**（第一个能玩的版本） | 🔨 | [青马的奇妙冒险-实际进度.md](青马的奇妙冒险-实际进度.md) | research/青马/设计大纲 |
-| 小册子 xiaocezi | `html/experimental/xiaocezi.html` | 刚起了个头 | ⬜ | — | research/小册子/设计文档 |
-| 剧本/分镜 yangbanxi | `html/experimental/yangbanxi.html` | 刚起了个头 | ⬜ | — | research/赛博样板戏/（含八大戏研究） |
-| 万物皆可红 redify | `html/experimental/redify.html` | 刚起了个头（页面壳已挂） | ⬜ | — | research/万物皆可红/设计文档（注意：其状态行仍写"概念未实现"，已过时） |
+| 小册子 xiaocezi | `html/experimental/xiaocezi.html` | 刚起了个头 | ⬜ | [小册子-开发进度.md](小册子-开发进度.md) | research/小册子/设计文档 |
+| 剧本/分镜 yangbanxi | `html/experimental/yangbanxi.html` | 刚起了个头 | ⬜ | [赛博样板戏-开发进度.md](赛博样板戏-开发进度.md) | research/赛博样板戏/（含八大戏研究） |
+| 万物皆可红 redify | `html/experimental/redify.html` | 刚起了个头（页面壳已挂） | ⬜ | [万物皆可红-开发进度.md](万物皆可红-开发进度.md) | research/万物皆可红/设计文档（注意：其状态行仍写"概念未实现"，已过时） |
+
+## 口径登记（2026-11-07 路线讨论代码核对）
+
+- **小册子**：设计稿称「阶段 1 原型已完成」，代码核对吻合（上传→解析→结构识别→分页→持久化全通）；本牌完成度仍按所有者口径「刚起了个头」。事实以进度档为准。
+- **yangbanxi**：设计稿 §1 称「v3 原型已实现」，代码核对吻合（三阶段可跑；分镜/Prompt 为硬编码模板、无持久化）；本牌口径「刚起了个头」。八项升级清单及批次见进度档。
+- **redify**：设计稿状态行「概念未实现」过时（页面壳已挂）——原登记继续有效。
+
+## 五工具路线要点（2026-11-07 讨论 · ⬜ 均待所有者裁定）
+
+| 工具 | 建议路线（按序） | 关键决策点 |
+|---|---|---|
+| 马列体 | ① 马/恩导师复制（管线已验证三次） ② Vercel 代理部署 ③ 导入导出/溯源跳转/二维码生产化 ④ 缓做：社区贡献、LoRA、敏感保护 | 「隐藏毛」敏感保护政策口径；推进顺序 |
+| 青马 | 先定「竣工口径」再排期；已知项：劳保敌人、Key 迁代理 | 剩余 ~40% 的构成待所有者明确 |
+| yangbanxi | ① 内容层：骨架库+旁观者+唱段命名 ② 生成层：AI 分镜结构化→音乐/视频 Prompt ③ UI 层：通读视图+剧种渲染+历史记录 | 批次顺序 |
+| xiaocezi | ① 阶段 2 风格面板 ② 阶段 3 AI 风格（约束沙箱） ③ 联动件 ④ CDN vendor 本地化 | 阶段 2/3 先后；CDN 本地化 |
+| redify | 建议混合路线：本地 canvas MVP（滑块即本地参数）→「AI 冲印」叠加 | A 纯 AI / B 纯本地 / C 混合 |
+
+## 跨工具事项
+
+- **AI 代理（key 裸奔问题）**：马列体/青马 DLC/yangbanxi 三处各自 LS 存 DeepSeek key，公开部署后额度无保护。方案：Vercel serverless 单函数（env 存 key + 限流 + CORS 锁 GitHub Pages 域）统一代理。⬜ 是否立项待所有者裁定；若立项属跨模块任务，登记 [../PLAN.md](../PLAN.md)。
+- **工具联动链**（马列体→小册子「对话录」、redify→青马立绘/小册子插图）：是武器库成库的关键卖点，建议各端竣工前不接，避免半成品互相拖累。
 
 ## 维护约定
 
