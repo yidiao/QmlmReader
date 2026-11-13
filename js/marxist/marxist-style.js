@@ -181,14 +181,22 @@
       return { author: topAuthor, topWorks: topWorks, description: description };
     },
 
-    async deepPolish(text, author) {
+    async deepPolish(text, author, period, tone, inputType) {
       var apiBase = this._getApiBase();
       try {
         var resp = await fetch(apiBase + '/api/translate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text: text, author: author, mode: 'deep_polish' }),
-          signal: AbortSignal.timeout(60000)
+          body: JSON.stringify({
+            text: text,
+            author: author,
+            period: period || 'standard',
+            tone: tone || 'auto',
+            inputType: inputType || null,
+            mode: 'deep_polish'
+          }),
+          // 长文两遍加工更慢：输入 ≥800 字时给 240s，短文本仍 60s
+          signal: AbortSignal.timeout(String(text || '').length >= 800 ? 240000 : 60000)
         });
         if (!resp.ok) {
           var errData = await resp.json().catch(function () { return {}; });
@@ -203,6 +211,7 @@
           diagnostics: data.diagnostics || {},
           inputType: data.inputType || null,
           matchedArticles: data.matchedArticles || [],
+          fragments: data.fragments || [],
           windowRemaining: data.windowRemaining,
           dailyRemaining: data.dailyRemaining
         };
@@ -274,6 +283,9 @@
     elements: {},
     currentAuthor: 'stalin',
     currentPeriod: 'standard',
+    currentTone: 'auto',
+    topicSource: 'all',
+    topicQuery: '',
     lastResult: null,
     // 分析缓存（直到下次转换或刷新才清空）
     changesCache: null,
@@ -288,6 +300,8 @@
       this._bindEvents();
       this._updateCharCount();
       this._initPeriodTags();
+      this._initToneTags();
+      this._initTopicPicker();
     },
 
     _cacheElements() {
@@ -306,7 +320,19 @@
         btnCopy:        $('ms-btn-copy'),
         aiMeta:         $('ms-ai-meta'),
         periodSelector: $('ms-period-selector'),
-        psTags:         $('ms-ps-tags')
+        psTags:         $('ms-ps-tags'),
+        toneSelector:   $('ms-tone-selector'),
+        toneTags:       $('ms-tone-tags'),
+        topicOpen:      $('ms-topic-open'),
+        topicRandom:    $('ms-topic-random'),
+        topicCurrent:   $('ms-topic-current'),
+        topicDrawer:    $('ms-topic-drawer'),
+        topicOverlay:   $('ms-topic-overlay'),
+        topicClose:     $('ms-topic-close'),
+        topicSearch:    $('ms-topic-search'),
+        topicTabs:      $('ms-topic-tabs'),
+        topicList:      $('ms-topic-list'),
+        topicCount:     $('ms-topic-count')
       };
     },
 
@@ -418,6 +444,168 @@
       });
     },
 
+    // ---- 语气标签（C2 语气光谱，正交于导师时期） ----
+    _initToneTags() {
+      var self = this;
+      if (!this.elements.toneTags) return;
+      this.elements.toneTags.querySelectorAll('.ms-ps-tag').forEach(function (tag) {
+        tag.addEventListener('click', function () {
+          self.selectTone(this.getAttribute('data-tone'));
+        });
+      });
+    },
+
+    selectTone(tone) {
+      this.currentTone = tone || 'auto';
+      if (!this.elements.toneTags) return;
+      this.elements.toneTags.querySelectorAll('.ms-ps-tag').forEach(function (t) {
+        t.classList.toggle('active', t.getAttribute('data-tone') === tone);
+      });
+    },
+
+    /** 结果区副标题：只写真实用到的导师 + 时期，标准时期不再挂一长串“综合…经典风格” */
+    _subtitleFor(author, period) {
+      var authorNames = { marx: '马克思', engels: '恩格斯', lenin: '列宁', stalin: '斯大林', mao: '毛泽东' };
+      var label = authorNames[author] || '';
+      if (!label) return 'AI 深度修习';
+      var entry = window.StalinAI_MENTOR_REGISTRY && window.StalinAI_MENTOR_REGISTRY[author];
+      var mod = entry && entry.module;
+      if (period && period !== 'standard' && mod && mod.periods && mod.periods[period]) {
+        return label + ' · ' + mod.periods[period].desc;
+      }
+      return label + ' · 综合全部时期';
+    },
+
+    // ---- 议题库（C4）：一百问 + 青马题库，抽屉挑选 / 随机抽题 ----
+    _initTopicPicker() {
+      var self = this;
+      if (this.elements.topicOpen) {
+        this.elements.topicOpen.addEventListener('click', function () { self._openTopicDrawer(); });
+      }
+      if (this.elements.topicClose) {
+        this.elements.topicClose.addEventListener('click', function () { self._closeTopicDrawer(); });
+      }
+      if (this.elements.topicOverlay) {
+        this.elements.topicOverlay.addEventListener('click', function () { self._closeTopicDrawer(); });
+      }
+      if (this.elements.topicRandom) {
+        this.elements.topicRandom.addEventListener('click', function () { self._fillRandomTopic(); });
+      }
+      if (this.elements.topicSearch) {
+        this.elements.topicSearch.addEventListener('input', function () {
+          self.topicQuery = this.value.trim();
+          self._renderTopicList();
+        });
+      }
+      if (this.elements.topicTabs) {
+        this.elements.topicTabs.addEventListener('click', function (e) {
+          var btn = e.target.closest('.ms-drawer-tab');
+          if (!btn) return;
+          self.topicSource = btn.getAttribute('data-src') || 'all';
+          self.elements.topicTabs.querySelectorAll('.ms-drawer-tab').forEach(function (b) {
+            b.classList.toggle('active', b === btn);
+          });
+          self._renderTopicList();
+        });
+      }
+      if (this.elements.topicList) {
+        this.elements.topicList.addEventListener('click', function (e) {
+          var item = e.target.closest('.ms-topic-item');
+          if (!item) return;
+          self._applyTopic(item.getAttribute('data-id'));
+        });
+      }
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') self._closeTopicDrawer();
+      });
+      this._renderTopicList();
+    },
+
+    _openTopicDrawer() {
+      if (!this.elements.topicDrawer) return;
+      this.elements.topicDrawer.classList.add('open');
+      this.elements.topicDrawer.setAttribute('aria-hidden', 'false');
+      if (this.elements.topicOverlay) this.elements.topicOverlay.classList.add('show');
+      this._renderTopicList();
+      if (this.elements.topicSearch) {
+        var input = this.elements.topicSearch;
+        setTimeout(function () { input.focus(); }, 120);
+      }
+    },
+
+    _closeTopicDrawer() {
+      if (!this.elements.topicDrawer) return;
+      this.elements.topicDrawer.classList.remove('open');
+      this.elements.topicDrawer.setAttribute('aria-hidden', 'true');
+      if (this.elements.topicOverlay) this.elements.topicOverlay.classList.remove('show');
+    },
+
+    _topicMeta(t) {
+      if (t.source === 'hundred') {
+        var tags = (t.tags && t.tags.length) ? ' · ' + t.tags.join(' / ') : '';
+        return '一百问 · 第' + String(t.id).replace('hundred-', '') + '问 · ' + t.category + tags;
+      }
+      return '青马 · ' + (t.enemy || '') + ' · ' + t.category;
+    },
+
+    _renderTopicList() {
+      var lib = window.MarxistTopics;
+      var list = this.elements.topicList;
+      if (!list) return;
+      if (!lib) {
+        list.innerHTML = '<div class="ms-topic-empty">议题库未加载</div>';
+        return;
+      }
+      var src = this.topicSource || 'all';
+      var q = (this.topicQuery || '').toLowerCase();
+      var rows = lib.all().filter(function (t) {
+        if (src !== 'all' && t.source !== src) return false;
+        if (!q) return true;
+        var hay = [t.title, t.category, t.enemy || '', (t.tags || []).join(' ')].join(' ').toLowerCase();
+        return hay.indexOf(q) !== -1;
+      });
+      if (this.elements.topicCount) this.elements.topicCount.textContent = String(rows.length);
+      if (this.elements.topicOpen) {
+        this.elements.topicOpen.textContent = '📚 选题库（' + lib.all().length + '）';
+      }
+      if (!rows.length) {
+        list.innerHTML = '<div class="ms-topic-empty">没有匹配的议题，换个关键词试试</div>';
+        return;
+      }
+      list.innerHTML = rows.map(function (t) {
+        return '<button class="ms-topic-item" data-id="' + escHTML(t.id) + '">'
+          + '<span class="ms-topic-item-title">' + escHTML(t.title) + '</span>'
+          + '<span class="ms-topic-item-meta">' + escHTML(this._topicMeta(t)) + '</span>'
+          + '</button>';
+      }, this).join('');
+    },
+
+    _applyTopic(id) {
+      var lib = window.MarxistTopics;
+      if (!lib) return;
+      var topic = lib.all().filter(function (t) { return t.id === id; })[0];
+      if (!topic) return;
+      this.elements.inputText.value = topic.title;
+      this._updateCharCount();
+      if (this.elements.topicCurrent) {
+        this.elements.topicCurrent.textContent = this._topicMeta(topic);
+      }
+      this._closeTopicDrawer();
+      this.elements.inputText.focus();
+    },
+
+    _fillRandomTopic() {
+      var lib = window.MarxistTopics;
+      if (!lib) { this._showToast('议题库未加载'); return; }
+      var src = this.topicSource || 'all';
+      var pool = lib.all().filter(function (t) {
+        return src === 'all' || t.source === src;
+      });
+      if (!pool.length) return;
+      var topic = pool[Math.floor(Math.random() * pool.length)];
+      this._applyTopic(topic.id);
+    },
+
     // ---- 字数统计 ----
     _updateCharCount() {
       var len = this.elements.inputText.value.length;
@@ -454,30 +642,22 @@
       if (meta) meta.style.display = 'none';
 
       if (this.elements.outputSubtitle) {
-        var authorNames = { marx: '马克思', engels: '恩格斯', lenin: '列宁', stalin: '斯大林', mao: '毛泽东' };
-        var mentorLabel = authorNames[author] || '';
-        var mentorModule = (window.StalinAI_MENTOR_REGISTRY && window.StalinAI_MENTOR_REGISTRY[author])
-          ? window.StalinAI_MENTOR_REGISTRY[author].module : null;
-        if (mentorModule && mentorModule.periods) {
-          var pd = mentorModule.periods[period];
-          this.elements.outputSubtitle.textContent = mentorLabel + ' · ' + (pd ? pd.desc : '');
-        } else {
-          this.elements.outputSubtitle.textContent = 'AI 深度修习';
-        }
+        this.elements.outputSubtitle.textContent = this._subtitleFor(author, period);
       }
 
       var self = this;
 
-      // 优先走 Vercel 后端（免 Key）；失败则回退到用户个人 Key
+      // 优先走服务端代理（Vercel / 本地 local_server）；失败则回退到用户个人 Key
       try {
-        var vercelResult = await APIController.deepPolish(text, author);
+        var inputType = window.StalinAI_classifyInput ? window.StalinAI_classifyInput(text) : null;
+        var vercelResult = await MarxistStyleEngine.deepPolish(text, author, period, self.currentTone, inputType);
         self._renderResult(vercelResult, outText, meta, text, 'vercel');
       } catch (vercelErr) {
         console.warn('[马列体] Vercel 后端不可用:', vercelErr.message);
         // 回退：用户个人 API Key
         if (window.StalinAI_hasApiKey && window.StalinAI_hasApiKey()) {
           try {
-            var directResult = await window.StalinAIController.deepPolish(text, author, period);
+            var directResult = await window.StalinAIController.deepPolish(text, author, period, null, null, self.currentTone);
             self._renderResult(directResult, outText, meta, text, 'direct');
           } catch (directErr) {
             console.error('[马列体] 直连也失败:', directErr);
@@ -503,6 +683,11 @@
 
     _renderResult(result, outText, meta, text, source) {
       this.lastResult = result;
+      // 副标题以服务端实际使用的导师/时期为准，避免“选了别人却还显示斯大林”
+      if (this.elements.outputSubtitle && result.diagnostics && result.diagnostics.author) {
+        this.elements.outputSubtitle.textContent = this._subtitleFor(
+          result.diagnostics.author, result.diagnostics.period);
+      }
       this.inputPages[this.currentPage].result = result;
       this.inputPages[this.currentPage].changesCache = null;
       this.inputPages[this.currentPage].diagnosisCache = null;
@@ -519,13 +704,33 @@
         var typeLabel = typeLabels[result.inputType] || result.inputType || '';
         var articlesInfo = '';
         if (result.matchedArticles && result.matchedArticles.length > 0) {
-          articlesInfo = '<span style="margin-left:12px;">📖 ' + result.matchedArticles.map(function(a){return '《'+a.title+'》';}).join(' ') + '</span>';
+          articlesInfo = '<span style="margin-left:12px;">📖 ' + result.matchedArticles.map(function(a){
+            var href = articleHref(a.title);
+            return href
+              ? '<a class="ms-trace-link" href="' + href + '" target="_blank" rel="noopener">《' + escHTML(a.title) + '》去读原文</a>'
+              : '《' + escHTML(a.title) + '》';
+          }).join(' ') + '</span>';
         }
-        var sourceLabel = source === 'vercel' ? '<span style="margin-left:12px;color:#059669;">通过 Vercel</span>' : '<span style="margin-left:12px;color:#d97706;">个人 Key 直连</span>';
+        var traceInfo = '';
+        if (result.fragments && result.fragments.length > 0) {
+          var seen = {};
+          var links = [];
+          result.fragments.forEach(function(f){
+            if (!f || !f.work || f.work === '综合' || seen[f.work]) return;
+            seen[f.work] = 1;
+            var href = articleHref(f.work);
+            links.push(href
+              ? '<a class="ms-trace-link" href="' + href + '" target="_blank" rel="noopener">《' + escHTML(f.work) + '》</a>'
+              : '《' + escHTML(f.work) + '》');
+          });
+          if (links.length) traceInfo = '<div class="ms-trace-line">溯源片段：' + links.join(' ') + '</div>';
+        }
+        var sourceLabel = source === 'vercel' ? '<span style="margin-left:12px;color:#059669;">服务端代理</span>' : '<span style="margin-left:12px;color:#d97706;">个人 Key 直连</span>';
         meta.innerHTML = '<span>Tokens: ' + tokens + '</span>'
           + (typeLabel ? '<span style="margin-left:12px;">类型: ' + typeLabel + '</span>' : '')
           + articlesInfo
-          + sourceLabel;
+          + sourceLabel
+          + traceInfo;
       }
 
       if (this.elements.outputPanel) this.elements.outputPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -1605,6 +1810,74 @@
     d.appendChild(document.createTextNode(s));
     return d.innerHTML;
   }
+
+  /* 溯源：把篇名解析为站内原文链接（html/articles/…），供「去读原文」跳转。
+     短篇名（如「费尔巴哈论」）用别名表补全；找不到则返回空串，只显示书名不显示链接。 */
+  var ARTICLE_ALIAS = {
+    '费尔巴哈论': '路德维希·费尔巴哈和德国古典哲学的终结',
+    '家庭起源': '家庭、私有制和国家的起源',
+    '自然辩证法': '自然辩证法（节选）',
+    '1844年经济学哲学手稿': '1844年经济学哲学手稿（节选）',
+    '《资本论》第一卷': '《资本论》第一卷（节选）',
+    '德意志意识形态': '德意志意识形态（节选）',
+    '英国工人阶级状况': '英国工人阶级状况（节选）',
+    '第一个五年计划总结': '第一个五年计划的总结',
+    '学习与时局': '学习和时局',
+    '在克里姆林宫学员毕业典礼上的讲话': '在克里姆林宫举行的红军高等院校学员毕业典礼上的讲话',
+    '论党的工作缺点和消灭托洛茨基两面派的办法': '论党的工作缺点和消灭托洛茨基两面派及其他两面派的办法'
+  };
+
+  /* 篇名归一化：去书名号/引号/括注/标点/空白，全角数字转半角，去“节选/序言”尾巴。
+     articleIndex 的标题带 OCR 式的日期与副题，靠归一化后的包含关系匹配。 */
+  function normTitle(s) {
+    return String(s)
+      .replace(/[０-９]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+      .replace(/[（(][^）)]*[）)]/g, '')
+      .replace(/[《》〈〉“”"'‘’「」『』【】\[\]（）()]/g, '')
+      .replace(/[？?！!，,。.、：:；;·—–\-\s]/g, '')
+      .replace(/节选|序言|一书导言/g, '');
+  }
+
+  function findArticleEntry(title) {
+    var idx = (window.SITE_DATA && window.SITE_DATA.articleIndex) ? window.SITE_DATA.articleIndex : [];
+    if (!idx.length || !title) return null;
+    var want = normTitle(title);
+    var alias = ARTICLE_ALIAS[title] || ARTICLE_ALIAS[String(title).replace(/^《|》$/g, '')];
+    if (alias) want = normTitle(alias);
+    if (!want) return null;
+    var i, a, norm;
+    for (i = 0; i < idx.length; i++) {
+      a = idx[i];
+      if (!a.title) continue;
+      if (a.title === title) return a;
+      if (normTitle(a.title) === want) return a;
+    }
+    for (i = 0; i < idx.length; i++) {
+      a = idx[i];
+      if (!a.title) continue;
+      norm = normTitle(a.title);
+      if (norm.length >= 4 && want.length >= 4 && (norm.indexOf(want) >= 0 || want.indexOf(norm) >= 0)) return a;
+    }
+    return null;
+  }
+
+  function getSiteHtmlPrefix() {
+    var path = (window.location && window.location.pathname) || '';
+    var dir = path.replace(/\/[^\/]*\.html$/, '');
+    var parts = dir.split('/').filter(function (p) { return p.length > 0; });
+    var htmlIdx = parts.indexOf('html');
+    var depth = htmlIdx === -1 ? 0 : parts.length - htmlIdx - 1;
+    var prefix = '';
+    for (var i = 0; i < depth; i++) prefix += '../';
+    return prefix;
+  }
+
+  function articleHref(title) {
+    var entry = findArticleEntry(title);
+    if (!entry || !entry.file) return '';
+    return getSiteHtmlPrefix() + String(entry.file).replace(/^\.\//, '');
+  }
+
   function truncate(text, maxLen) {
     if (text.length <= maxLen) return text;
     return text.slice(0, maxLen) + '…';
@@ -1929,6 +2202,11 @@
 
       this._populatePeriods(mentor, color, shadow);
       this.selectPeriod(0);
+
+      // 反向同步聊天侧栏，避免两处导师选择各说各话
+      if (window.ChatController && window.ChatController.setMentor) {
+        window.ChatController.setMentor(author);
+      }
     },
 
     _populatePeriods(mentor, color, shadow) {
@@ -2239,6 +2517,26 @@
       this.messages = [];
       this._renderMessages();
       this._updateCounter();
+
+      // 关键：聊天侧栏换导师必须同步到生成链路，否则右侧结果永远用默认导师
+      var card = document.querySelector('.ms-mentor-card[data-author="' + author + '"]');
+      if (card) {
+        card.click();
+      } else if (window.UIController) {
+        window.UIController.currentAuthor = author;
+        window.UIController.currentPeriod = 'standard';
+      }
+    },
+
+    /** 供左栏调用：只同步高亮与 chatAuthor，不清空对话 */
+    setMentor: function (author) {
+      if (!author || this.chatAuthor === author) return;
+      this.chatAuthor = author;
+      var sidebar = document.getElementById('ms-chat-sidebar');
+      if (!sidebar) return;
+      sidebar.querySelectorAll('.ms-chat-mentor').forEach(function (c) {
+        c.classList.toggle('active', c.getAttribute('data-author') === author);
+      });
     },
 
     _getChatPrompt: function (isLast) {
@@ -2306,7 +2604,9 @@
         '',
         '【底线】',
         '不居高临下。不讲假话。不替对方做决定。指出问题，但不代替对方思考。',
-        '你的角色：益友。不是政委，不是教师，不是在大会上讲话。是那个私下跟你说真话的人。'
+        '你的角色：益友。不是政委，不是教师，不是在大会上讲话。是那个私下跟你说真话的人。',
+        '',
+        window.MarxistGuards ? window.MarxistGuards.buildChatGuards() : ''
       ];
 
       if (isLast) {
@@ -2503,6 +2803,7 @@
     }
   };
 
+  window.ChatController = ChatController;
   // 初始化聊天
   ChatController.init();
 })();

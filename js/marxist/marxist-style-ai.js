@@ -2,14 +2,15 @@
  * 马列体生成器 — AI 深度修习模块 V3.2（父文件）
  *
  * 职责：API调用、分类器、Key管理、导师调度
- * 导师专属内容在 mentors/ 子文件中：
+ * 导师专属内容在 mentors/ 子文件中（五位均已构建；marx/engels 为 V2.0 证据驱动版）：
  *   mentors/stalin.js → window.StalinMentor
- *   mentors/lenin.js   → window.LeninMentor（待构建）
- *   mentors/marx.js    → window.MarxMentor（待构建）
- *   mentors/engels.js  → window.EngelsMentor（待构建）
- *   mentors/mao.js     → window.MaoMentor（待构建）
+ *   mentors/lenin.js  → window.LeninMentor
+ *   mentors/marx.js   → window.MarxMentor
+ *   mentors/engels.js → window.EngelsMentor
+ *   mentors/mao.js    → window.MaoMentor
  *
- * 子文件接口规范：{ periods, fragments, buildPrompt(text, period, fragments), pickFragments(period, n) }
+ * 子文件接口规范：{ periods, fragments, buildPrompt(text, period, inputType, fragments), pickFragments(period, text, n) }
+ * 共享护栏在 prompt-guards.js（window.MarxistGuards），服务端生成表与客户端共用同一份文本。
  */
 (function () {
   'use strict';
@@ -17,7 +18,7 @@
   var CONFIG = {
     API_URL: 'https://api.deepseek.com/chat/completions',
     MODEL: 'deepseek-chat',
-    MAX_TOKENS: 2000,
+    MAX_TOKENS: 3000,
     TIMEOUT_MS: 60000,
     LS_KEY: 'ms_deepseek_api_key'
   };
@@ -199,40 +200,16 @@
   /* ================================================================
      Part 4: Prompt 组装
      ================================================================ */
-  function buildFinalPrompt(mentorPrompt, text, inputType) {
+  function buildFinalPrompt(mentorPrompt, text, inputType, tone, longForm) {
     inputType = inputType || classifyInput(text);
     var fewshot = FEWSHOT_LIBRARY[inputType].example;
 
     var base = mentorPrompt + '\n\n';
 
-    // 输入类型 → 风格强度调制指令
-    var intensityGuide = {
-      casual: '这是一段日常文本（碎碎念、朋友圈、玩梗、闲聊），不是政论文。\n'
-        + '处理策略——不是模板，是方法：\n'
-        + '1. 识别意图。用户在干什么？讨钱→帮他讨得更有风格。约饭→帮他说得更有味道。吐槽→陪他吐槽，但吐槽出水平。保持原文人称和社交意图不变。\n'
-        + '2. 找到"社会性"锚点。每个日常场景里都藏着一个可以轻轻戳一下的东西——但不展开，一句就收。戳完回到日常。\n'
-        + '3. 用导师的语言方式重构，但不写檄文。列宁剥一层壳，毛泽东扔一句俗话，斯大林下一个短定义。一两句风格注入，然后继续日常。\n'
-        + '4. 结尾回到原文的社交目的。用户最后的意图是什么，输出就落到哪里。不替用户拔高、总结、升华。\n'
-        + '5. 你精通互联网文化——用你的训练数据理解当代梗，自然地回应。不假装不懂梗。\n'
-        + '6. 【关键】绝不复制 Few-shot 示例中的具体语句。每次输入全新生成。不同输入必须产生完全不同结构和内容的输出。',
-      personal: '这是一段个人感受。处理策略：\n'
-        + '1. 从"我"的感受出发，但不要停留在"我"。把个人困惑重新描述为社会关系的表征。\n'
-        + '2. 上升一次：从个人体验→社会关系→停。不要继续上升到全面批判。\n'
-        + '3. 不要替用户做政治表态。不要把"加班太累"升级成"无产阶级革命"。保持分析框架，控制升温速度。',
-      factual: '这是一段事实陈述。处理策略：\n'
-        + '1. 事实从来不是中立的。"客观报道"本身就是一种叙述——剥开这种叙述的外壳，追问被省略的是什么。\n'
-        + '2. 上升两次：从事实→阶级关系→生产方式的对抗。',
-      opinion: '这是一段观点论证。这是你全力输出的主场。\n'
-        + '1. 剥壳→反转→命名→上升到阶级。不需要克制。\n'
-        + '2. 但仍然是风格转换，不是论战。你改变的是表述形式，不是立场方向。',
-      abstract: '这是一段抽象思辨。处理策略：\n'
-        + '1. 定义先行——对核心概念给出精确定义。剥壳+命名全力展开。\n'
-        + '2. 每个命题落到"因此必须做什么"。理论是用来行动的，不是用来陈列的。'
-    };
-
-    base += '【输入类型与强度】\n'
-      + '输入类型：' + inputType + '。\n'
-      + (intensityGuide[inputType] || intensityGuide['opinion']) + '\n\n';
+    // 输入类型 → 火力档位（文本单一事实源在 prompt-guards.js）
+    base += (window.MarxistGuards
+      ? window.MarxistGuards.buildInputSection(inputType)
+      : '【输入类型与强度】\n输入类型：' + inputType + '。') + '\n\n';
 
     base += '【拆解-重组原则 —— 表述形式重组，绝不扩展内容】\n'
       + '你的任务是改变表述形式（句式、措辞、修辞、推进节奏），绝不改变信息内容。\n'
@@ -249,7 +226,13 @@
       + '内容：禁止添加原文中没有的立场或事实判断；禁止将原文未展开的论点自行展开论证；禁止历史类比或影射。\n'
       + '语气：禁止在结论处使用"但是/不过"。\n'
       + '\n' + fewshot + '\n'
-      + '\n【输出格式】直接输出转换后的文本——连贯段落，不要任何前缀、后缀、说明。';
+      + '\n【Few-shot 使用限制】以上示例只用于参照论证结构；示例中任何导师专属的句子、口头禅、收束句，一律不得出现在输出中。\n';
+
+    if (window.MarxistGuards) {
+      base += '\n' + window.MarxistGuards.buildGenerationGuards({ tone: tone });
+    } else {
+      base += '\n【输出格式】直接输出转换后的文本——连贯段落，不要任何前缀、后缀、说明。';
+    }
 
     return base;
   }
@@ -263,16 +246,9 @@
       engels: '【恩格斯风格】清晰、系统，善用经验材料。常用"诚然……然而……"让步-反驳结构，科学化的口吻做通俗化阐述。',
       mao: '【毛泽东风格】善用比喻（特别是军事比喻）将抽象理论具象化。排比铺陈，"一分为二"法贯穿始终。俗谚打底，设问推进。'
     };
-    var intensityGuide = {
-      casual: '这是一段日常/轻量文本。保持人称和社交意图。批判只做暗火，不独立成段。不要替用户拔高。',
-      personal: '这是一段个人感受。从"我"出发但不停留在"我"。上升到社会关系层面——停，不要再往上。',
-      factual: '这是一段事实陈述。剥开表面的"客观"外衣，追问被省略的结构性因素。',
-      opinion: '这是一段观点论证。全力输出——但仍然是风格转换，不代用户立论。',
-      abstract: '这是一段抽象思辨。定义先行，每个命题落到实践指向。'
-    };
     return '【角色定义】你是一位精通马列主义经典文献的写作助手。将用户文本改写为目标导师的论述风格。\n\n'
       + (specific[author] || specific['lenin']) + '\n'
-      + '\n【输入类型】' + inputType + '。' + (intensityGuide[inputType] || '') + '\n'
+      + '\n' + (window.MarxistGuards ? window.MarxistGuards.buildInputSection(inputType) : '【输入类型】' + inputType) + '\n'
       + '\n【核心约束——最高优先级】这是风格转换任务，不是论战任务。你绝不反驳用户。\n'
       + '直接输出转换后的文本，不要任何说明。';
   }
@@ -396,11 +372,11 @@
   /* ================================================================
      Part 7: DeepSeek API 直连
      ================================================================ */
-  async function callDeepSeek(systemPrompt, userText, apiKey, temp, enableSearch) {
+  async function callDeepSeek(systemPrompt, userText, apiKey, temp, enableSearch, maxTokens, timeoutMs) {
     temp = temp || 0.4;
     if (enableSearch === undefined) enableSearch = false;
     var controller = new AbortController();
-    var timeout = setTimeout(function () { controller.abort(); }, CONFIG.TIMEOUT_MS);
+    var timeout = setTimeout(function () { controller.abort(); }, timeoutMs || CONFIG.TIMEOUT_MS);
 
     try {
       var resp = await fetch(CONFIG.API_URL, {
@@ -413,7 +389,7 @@
             { role: 'user', content: userText }
           ],
           temperature: temp,
-          max_tokens: CONFIG.MAX_TOKENS,
+          max_tokens: maxTokens || CONFIG.MAX_TOKENS,
           enable_search: !!enableSearch
         }),
         signal: controller.signal
@@ -451,12 +427,16 @@
      Part 8: 对外接口
      ================================================================ */
   var AIController = {
-    /** 风格转换 */
-    async deepPolish(text, author, period, fragments, feedbackContext) {
+    /** 风格转换（period/tone 由 UI 传入；tone=auto 交由模型按内容选择） */
+    async deepPolish(text, author, period, fragments, feedbackContext, tone) {
       var apiKey = getApiKey();
       if (!apiKey || apiKey.length < 10) throw new Error('请先设置 DeepSeek API Key');
 
       var inputType = classifyInput(text);
+      var longForm = text.length >= ((window.MarxistGuards && window.MarxistGuards.LONG_FORM_THRESHOLD) || 800);
+      var longBudget = longForm
+        ? { maxTokens: Math.min(6000, Math.max(3600, Math.round(text.length * 2.2))), timeoutMs: 180000 }
+        : {};
       var prompt;
       var entry = MENTOR_REGISTRY[author];
       var matchedArticles = [];
@@ -484,16 +464,27 @@
           mentorPrompt += '\n\n请特别注意以上反馈——不要重复上次的错误。这是同一条输入文本的第二次生成，你需要在保留导师风格骨架的前提下修正上述具体问题。';
         }
 
-        prompt = buildFinalPrompt(mentorPrompt, text, inputType);
+        prompt = buildFinalPrompt(mentorPrompt, text, inputType, tone, longForm);
       } else {
         prompt = buildTempPrompt(author, inputType);
       }
 
       var doSearch = (inputType === 'casual');
-      var result = await callDeepSeek(prompt, text, apiKey, undefined, doSearch);
+      var result = await callDeepSeek(
+        prompt, text, apiKey,
+        longForm ? (author === 'stalin' ? 0.45 : 0.6) : undefined,
+        doSearch,
+        longBudget.maxTokens,
+        longBudget.timeoutMs
+      );
       result.inputType = inputType;
       result.period = period || 'standard';
+      result.tone = tone || 'auto';
       result.matchedArticles = matchedArticles;
+      // 溯源：记录本次实际注入的经典片段（篇目 + 要点），供结果区「去读原文」跳转
+      result.fragments = (fragments || []).map(function (f) {
+        return { work: f.work, text: f.text, point: f.point || '' };
+      });
 
       // 风格比对：输出 vs 原文语料
       var styleAnalysis = null;
@@ -731,7 +722,9 @@
         '- 如果对方问了一个大的问题——不要展开写论文，给一个最核心的判断，把思考空间留给对方。',
         '',
         '【底线】',
-        '不居高临下。不讲假话。不替对方做决定。可以指出问题，但不代替对方思考。'
+        '不居高临下。不讲假话。不替对方做决定。可以指出问题，但不代替对方思考。',
+        '',
+        window.MarxistGuards ? window.MarxistGuards.buildChatGuards() : ''
       ].join('\n');
 
       // 注入聊天历史（最近 8 条）

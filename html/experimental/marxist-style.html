@@ -132,6 +132,47 @@
                                 <button class="ms-ps-tag" data-period="period3"></button>
                             </div>
                         </div>
+                        <!-- 语气选择（C2 语气光谱，正交于时期） -->
+                        <div class="ms-period-selector ms-tone-selector" id="ms-tone-selector">
+                            <span class="ms-ps-label">语 气</span>
+                            <div class="ms-ps-tags" id="ms-tone-tags">
+                                <button class="ms-ps-tag active" data-tone="auto" title="按内容自动选择（默认冷静分析）">自动</button>
+                                <button class="ms-ps-tag" data-tone="calm" title="克制陈述，判断藏在事实里">冷静</button>
+                                <button class="ms-ps-tag" data-tone="refute" title="先立对方最强论点，再拆">驳斥</button>
+                                <button class="ms-ps-tag" data-tone="irony" title="先引后翻，只针对观点">讽刺</button>
+                                <button class="ms-ps-tag" data-tone="declarative" title="短句、排比、判断句">激昂</button>
+                                <button class="ms-ps-tag" data-tone="lament" title="事实堆叠后的克制控诉">悲悯</button>
+                                <button class="ms-ps-tag" data-tone="speculative" title="概念先行，层层推演">思辨</button>
+                                <button class="ms-ps-tag" data-tone="epistolary" title="对具体对象的恳切论辩">书信</button>
+                            </div>
+                        </div>
+
+                        <!-- 议题库（C4 强化训练：一百问 + 青马题库） -->
+                        <div class="ms-topic-bar" id="ms-topic-bar">
+                            <span class="ms-ps-label">议 题</span>
+                            <button class="ms-topic-btn" id="ms-topic-open" title="打开议题库，按来源/关键词挑选">📚 选题库（179）</button>
+                            <button class="ms-topic-btn" id="ms-topic-random" title="随机抽一题填入输入框">🎲 随机一题</button>
+                            <span class="ms-topic-current" id="ms-topic-current"></span>
+                        </div>
+
+                        <!-- 议题抽屉：179 条议题，可搜索、按来源筛选 -->
+                        <div class="ms-drawer-overlay" id="ms-topic-overlay"></div>
+                        <aside class="ms-drawer" id="ms-topic-drawer" aria-hidden="true">
+                            <div class="ms-drawer-head">
+                                <div class="ms-drawer-title">议题库 <span class="ms-drawer-count" id="ms-topic-count">179</span></div>
+                                <button class="ms-drawer-close" id="ms-topic-close" title="关闭">×</button>
+                            </div>
+                            <div class="ms-drawer-tools">
+                                <input class="ms-drawer-search" id="ms-topic-search" type="search" placeholder="搜索议题 / 派别 / 标签…" autocomplete="off">
+                                <div class="ms-drawer-tabs" id="ms-topic-tabs">
+                                    <button class="ms-drawer-tab active" data-src="all">全部 179</button>
+                                    <button class="ms-drawer-tab" data-src="hundred">一百问 100</button>
+                                    <button class="ms-drawer-tab" data-src="qingma">青马 79</button>
+                                </div>
+                            </div>
+                            <div class="ms-drawer-list" id="ms-topic-list"></div>
+                            <div class="ms-drawer-foot">点一条议题 → 填入输入框；生成后结果区可点「去读原文」溯源。</div>
+                        </aside>
 
                         <div class="ms-input-header">
                             <div class="ms-char-limit">
@@ -316,6 +357,8 @@
         window.QMLM_API_BASE = 'https://qmlm-reader.vercel.app';
     </script>
     <script src="../../js/marxist/marxist-style-rules-data.js"></script>
+    <script src="../../js/marxist/prompt-guards.js"></script>
+    <script src="../../js/marxist/topics.js"></script>
     <script src="../../js/marxist/mentors/stalin.js"></script>
     <script src="../../js/marxist/mentors/lenin.js"></script>
     <script src="../../js/marxist/mentors/marx.js"></script>
@@ -332,6 +375,7 @@
         <div class="container">
             <p>青年马列毛主义驿站 | Qmlm Reader</p>
             <p class="footer-note">学习他 / 成为他 / 超越他</p>
+            <p class="footer-note">文体方法借鉴 <a href="https://github.com/youaifuou/karl-marx-skill" target="_blank" rel="noopener">karl-marx-skill</a>（MIT License, © 2026 youaifuou）</p>
         </div>
     </footer>
 </body>

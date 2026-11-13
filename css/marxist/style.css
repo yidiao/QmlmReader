@@ -1458,6 +1458,224 @@
   padding-bottom: 12px;
   border-bottom: 1px solid #e0e0e0;
 }
+/* 语气选择与时期选择同排样式，但紧贴输入框、不重复分隔线 */
+.ms-tone-selector {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-top: -6px;
+}
+/* 议题库（C4）：一行选择来源 + 随机抽题 */
+.ms-topic-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  padding-bottom: 10px;
+  border-bottom: none;
+  flex-wrap: wrap;
+}
+.ms-topic-bar .ms-ps-label {
+  margin-bottom: 0;
+}
+.ms-topic-select {
+  font-size: 0.72rem;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  cursor: pointer;
+}
+.ms-topic-btn {
+  font-size: 0.72rem;
+  padding: 4px 10px;
+  border: 1px solid #c41e3a;
+  background: transparent;
+  color: #c41e3a;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background 0.15s, color 0.15s;
+}
+.ms-topic-btn:hover {
+  background: #c41e3a;
+  color: #fff;
+}
+.ms-topic-current {
+  font-size: 0.68rem;
+  color: #999;
+  letter-spacing: 0.02em;
+}
+
+/* ===== 议题抽屉（C4 选题库） ===== */
+.ms-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 26, 26, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 900;
+}
+.ms-drawer-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.ms-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(460px, 92vw);
+  background: #faf8f3;
+  border-left: 2px solid #1a1a1a;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.18);
+  transform: translateX(102%);
+  transition: transform 0.24s cubic-bezier(0.22, 0.61, 0.36, 1);
+  z-index: 901;
+  display: flex;
+  flex-direction: column;
+}
+.ms-drawer.open {
+  transform: translateX(0);
+}
+.ms-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid #e2ddd2;
+}
+.ms-drawer-title {
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #1a1a1a;
+}
+.ms-drawer-count {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #fff;
+  background: #c41e3a;
+  border-radius: 999px;
+  vertical-align: 2px;
+}
+.ms-drawer-close {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+  padding: 0 4px;
+}
+.ms-drawer-close:hover {
+  color: #c41e3a;
+}
+.ms-drawer-tools {
+  padding: 12px 18px;
+  border-bottom: 1px solid #e2ddd2;
+  background: #fff;
+}
+.ms-drawer-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #1a1a1a;
+  outline: none;
+}
+.ms-drawer-search:focus {
+  border-color: #c41e3a;
+}
+.ms-drawer-tabs {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+.ms-drawer-tab {
+  flex: 1;
+  padding: 5px 4px;
+  font-size: 0.72rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+.ms-drawer-tab.active {
+  border-color: #c41e3a;
+  background: #c41e3a;
+  color: #fff;
+}
+.ms-drawer-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 12px 18px;
+}
+.ms-topic-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 9px 10px;
+  margin-bottom: 6px;
+  border: 1px solid #e2ddd2;
+  border-left: 3px solid #d8d2c4;
+  background: #fff;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+}
+.ms-topic-item:hover {
+  border-left-color: #c41e3a;
+  background: #fffdf8;
+}
+.ms-topic-item-title {
+  display: block;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #1a1a1a;
+}
+.ms-topic-item-meta {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.66rem;
+  color: #999;
+  letter-spacing: 0.02em;
+}
+.ms-topic-empty {
+  padding: 30px 10px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #999;
+}
+.ms-drawer-foot {
+  padding: 10px 18px 14px;
+  border-top: 1px solid #e2ddd2;
+  font-size: 0.66rem;
+  color: #999;
+  line-height: 1.5;
+}
+/* 溯源：结果区的「去读原文」链接 */
+.ms-trace-link {
+  color: #c41e3a;
+  text-decoration: none;
+  border-bottom: 1px dotted #c41e3a;
+}
+.ms-trace-link:hover {
+  border-bottom-style: solid;
+}
+.ms-trace-line {
+  margin-top: 6px;
+  font-size: 0.72rem;
+  color: #777;
+}
 .ms-ps-label {
   display: block;
   font-size: 0.7rem;
