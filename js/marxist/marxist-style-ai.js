@@ -428,7 +428,7 @@
      ================================================================ */
   var AIController = {
     /** 风格转换（period/tone 由 UI 传入；tone=auto 交由模型按内容选择） */
-    async deepPolish(text, author, period, fragments, feedbackContext, tone) {
+    async deepPolish(text, author, period, fragments, feedbackContext, tone, pageContext, pageIndex, pageCount) {
       var apiKey = getApiKey();
       if (!apiKey || apiKey.length < 10) throw new Error('请先设置 DeepSeek API Key');
 
@@ -467,6 +467,17 @@
         prompt = buildFinalPrompt(mentorPrompt, text, inputType, tone, longForm);
       } else {
         prompt = buildTempPrompt(author, inputType);
+      }
+
+      // 多页生成：注入页码与上一页结尾，保证整篇连贯
+      var pIdx = typeof pageIndex === 'number' ? pageIndex : 0;
+      var pCnt = typeof pageCount === 'number' ? pageCount : 1;
+      if (pCnt > 1) {
+        var nav = ['【多页生成】这是全文第 ' + (pIdx + 1) + ' / ' + pCnt + ' 页。'];
+        if (pIdx > 0) nav.push('本页开头要与上一页结尾自然衔接，不复述上一页已经说过的内容。');
+        if (pIdx < pCnt - 1) nav.push('本页不要写收尾总结，把推进留给下一页。');
+        if (pageContext) nav.push('【上一页结尾（仅供衔接，不要照抄）】' + String(pageContext).slice(-400));
+        prompt += '\n\n' + nav.join('\n');
       }
 
       var doSearch = (inputType === 'casual');

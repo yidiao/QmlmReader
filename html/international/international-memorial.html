@@ -117,14 +117,27 @@
         body.dark-mode .memorial-desc { color: #aaa; }
         body.dark-mode .memorial-quote { border-color: #444; }
         body.dark-mode .legacy-placeholder { background: #2a2a2a; }
+
+        /* 名言出处行：每条名言注明文献出处，与本站"历史有出处"原则一致 */
+        .quote-source {
+            display: inline-block;
+            margin-top: 0.4rem;
+            font-size: 0.72rem;
+            color: #999;
+            text-decoration: none;
+            border-bottom: 1px dashed #ccc;
+        }
+        .quote-source:hover { color: #c41e3a; border-color: #c41e3a; }
+        body.dark-mode .quote-source { color: #888; border-color: #555; }
+        body.dark-mode .quote-source:hover { color: #ff8a8a; border-color: #ff8a8a; }
     </style>
 </head>
 <body>
     <div id="nav-placeholder"></div>
      <main>
-        <section class="page-header"><h1> 为了忘却的纪念</h1><p>一切社会福利来自斗争！享受美好的今天罢...别忘却那些平凡的悲壮的前行者......</p></section>
+        <section class="page-header"><h1> 为了忘却的纪念</h1><p>一切社会福利来自斗争！享受美好的今天罢……别忘却那些平凡的、悲壮的前行者……</p></section>
         <div class="content-wrapper">
-            
+
             <div class="memorial-grid">
                 <div class="memorial-card">
                     <div class="memorial-avatar">罗</div>
@@ -132,37 +145,41 @@
                     <div class="memorial-years">1871 - 1919</div>
                     <div class="memorial-desc">德国共产党创始人之一，马克思主义理论家，1919年遭反动的自由军团杀害</div>
                     <div class="memorial-quote">“自由始终是持不同思想者的自由”</div>
+                    <a class="quote-source" href="https://www.marxists.org/chinese/rosa-luxemburg/marxist.org-chinese-rosa-1918.htm" target="_blank" rel="noopener">出处：《论俄国革命》（1918）↗</a>
                 </div>
-                
+
                 <div class="memorial-card">
                     <div class="memorial-avatar">卡</div>
                     <div class="memorial-name">卡尔·李卜克内西</div>
                     <div class="memorial-years">1871 - 1919</div>
-                    <div class="memorial-desc">德国共产党创始人之一，与卢森堡一同领导1919年柏林起义，英勇就义</div>
-                    <div class="memorial-quote">“敌人不死于你的同情，而是死于你的武器”</div>
+                    <div class="memorial-desc">德国共产党创始人之一，反军国主义战士，与卢森堡一同领导1919年柏林一月起义，英勇就义</div>
+                    <div class="memorial-quote">“德国人民的主要敌人就在德国”</div>
+                    <a class="quote-source" href="https://www.marxists.org/chinese/liebknecht-k/mia-chinese-karl-liebknecht-191505.htm" target="_blank" rel="noopener">出处：《主要敌人在国内！》（1915）↗</a>
                 </div>
-                
+
                 <div class="memorial-card">
                     <div class="memorial-avatar">胡</div>
                     <div class="memorial-name">胡志明</div>
                     <div class="memorial-years">1890 - 1969</div>
                     <div class="memorial-desc">越南共产党创始人，越南民主共和国主席，民族解放运动的伟大领袖</div>
                     <div class="memorial-quote">“没有什么比独立自由更可贵”</div>
+                    <a class="quote-source" href="https://zh.wikiquote.org/wiki/%E8%83%A1%E5%BF%97%E6%98%8E" target="_blank" rel="noopener">出处：《告全国同胞书》（1966.7.17）↗</a>
                 </div>
-                
+
                 <div class="memorial-card">
                     <div class="memorial-avatar">切</div>
                     <div class="memorial-name">切·格瓦拉</div>
                     <div class="memorial-years">1928 - 1967</div>
                     <div class="memorial-desc">阿根廷-古巴革命家，游击战理论家，在玻利维亚执行革命任务时牺牲</div>
-                    <div class="memorial-quote">“让我们面对现实，让我们忠于理想”</div>
+                    <div class="memorial-quote">“直到最后的胜利，祖国或死亡！”</div>
+                    <a class="quote-source" href="https://www.marxists.org/chinese/guevara/mia-chinese-che-19650401.htm" target="_blank" rel="noopener">出处：致菲德尔·卡斯特罗的告别信（1965.4.1）↗</a>
                 </div>
             </div>
-            
+
             <div class="legacy-placeholder">
                 <div class="legacy-placeholder-icon"></div>
                 <h3>我还想纪念那些平凡的敢于发声的劳苦大众</h3>
-                <p>可将要开口却把名字都忘了<br>—— 先这样搞未完待续 ——</p>
+                <p>他们中的许多人没有留下名字，名字散落在传单、厂志与亲人的记忆里——暂且先把能查证的留下<br>—— 未完待续 ——</p>
             </div>
         </div>
     </main>

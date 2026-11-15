@@ -175,6 +175,21 @@ async function main() {
   ok('缩水初稿未被替换', dShrink.result === '输出文本。', dShrink.result);
   refineMode = 'long';
 
+  // 3.8) 多页生成：页码 / 页数 / 上一页结尾注入 system prompt
+  calls = [];
+  const rPage = await call(handler, {
+    text: '这是第二页的正文。', author: 'mao', pageIndex: 1, pageCount: 3,
+    context: '上一页最后一句是「因此问题不在于解释世界」。'
+  });
+  const dPage = JSON.parse(rPage.body || '{}');
+  const pageSys = String((calls[0] && calls[0].messages && calls[0].messages[0].content) || '');
+  ok('多页：注入页码', pageSys.indexOf('第 2 / 3 页') !== -1, pageSys.slice(-160));
+  ok('多页：要求与上文衔接', pageSys.indexOf('自然衔接') !== -1);
+  ok('多页：非末页不写收尾', pageSys.indexOf('不要写收尾总结') !== -1);
+  ok('多页：带上上一页结尾', pageSys.indexOf('因此问题不在于解释世界') !== -1);
+  ok('多页：diagnostics 回传页码', dPage.diagnostics && dPage.diagnostics.pageIndex === 1 && dPage.diagnostics.pageCount === 3,
+    JSON.stringify(dPage.diagnostics && { i: dPage.diagnostics.pageIndex, n: dPage.diagnostics.pageCount }));
+
   // 4) 过短输入 / 缺 Key
   const r4 = await call(handler, { text: '短' });
   ok('过短输入 400', r4.code === 400, r4.code);

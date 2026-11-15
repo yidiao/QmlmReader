@@ -20,14 +20,14 @@ import assembler from './marxist-prompt-assembler.cjs';
 
 // ---- 配置 ----
 var CONFIG = {
-  MAX_INPUT_LENGTH: 2000,
+  MAX_INPUT_LENGTH: 6000,
   MIN_INPUT_LENGTH: 5,
   RATE_WINDOW_MS: 10 * 60 * 1000,
   RATE_WINDOW_LIMIT: 10,
   RATE_DAY_LIMIT: 30,
   API_URL: 'https://api.deepseek.com/chat/completions',
   MODEL: 'deepseek-chat',
-  // 输入上限 2000 字、输出允许 +30%（约 2600 字）；1200 tokens 会截断长文。
+  // 输入上限 6000 字（长文可切页逐段生成）；输出预算按输入长度动态给（见 budgetFor）。
   // 这里取 2800 留余量（deepseek-chat 单次输出上限足够）。
   MAX_OUTPUT_TOKENS: 2800,
   TIMEOUT_MS: 60000,
@@ -301,6 +301,18 @@ export default async function handler(req, res) {
     var systemPrompt = promptBuild.systemPrompt;
     var promptMeta = promptBuild.meta;
 
+    // V3.2：多页生成——页码 + 上一页结尾，保证整篇连贯
+    var pageIndex = Number.isInteger(body.pageIndex) ? body.pageIndex : 0;
+    var pageCount = Number.isInteger(body.pageCount) ? body.pageCount : 1;
+    var pageContext = typeof body.context === 'string' ? body.context.trim().slice(-400) : '';
+    if (pageCount > 1) {
+      var navLines = ['【多页生成】这是全文第 ' + (pageIndex + 1) + ' / ' + pageCount + ' 页。'];
+      if (pageIndex > 0) navLines.push('本页开头要与上一页结尾自然衔接，不复述上一页已经说过的内容。');
+      if (pageIndex < pageCount - 1) navLines.push('本页不要写收尾总结，把推进留给下一页。');
+      if (pageContext) navLines.push('【上一页结尾（仅供衔接，不要照抄）】' + pageContext);
+      systemPrompt += String.fromCharCode(10, 10) + navLines.join(String.fromCharCode(10));
+    }
+
     var apiResp = await fetch(CONFIG.API_URL, {
       method: 'POST',
       headers: {
@@ -376,6 +388,8 @@ export default async function handler(req, res) {
         inputType: promptMeta.inputType,
         tone: promptMeta.tone,
         longForm: promptMeta.longForm,
+        pageIndex: pageIndex,
+        pageCount: pageCount,
         maxTokens: budget.maxTokens,
         promptChars: promptMeta.promptChars
       },

@@ -1514,7 +1514,7 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
-  z-index: 900;
+  z-index: 9990;
 }
 .ms-drawer-overlay.show {
   opacity: 1;
@@ -1531,7 +1531,7 @@
   box-shadow: -8px 0 24px rgba(0, 0, 0, 0.18);
   transform: translateX(102%);
   transition: transform 0.24s cubic-bezier(0.22, 0.61, 0.36, 1);
-  z-index: 901;
+  z-index: 9991;
   display: flex;
   flex-direction: column;
 }
@@ -1848,6 +1848,36 @@
 .ms-page-btn:hover { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
 .ms-page-btn:disabled { opacity: 0.3; cursor: default; }
 .ms-page-add { font-size: 1rem; font-weight: 700; color: #c41e3a; }
+.ms-page-merge { width: auto; padding: 0 8px; font-size: 0.7rem; letter-spacing: 0.02em; }
+
+/* 长文引导条 */
+.ms-long-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 2px;
+  padding: 8px 10px;
+  border: 1px dashed #c41e3a;
+  background: #fff6f4;
+  font-size: 0.72rem;
+  color: #8a1a2c;
+  line-height: 1.5;
+}
+.ms-long-hint-text { flex: 1 1 100%; }
+.ms-long-hint-close {
+  border: none;
+  background: transparent;
+  color: #999;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+.ms-long-hint-close:hover { color: #c41e3a; }
+
+/* 抽屉打开时锁住页面滚动 */
+body.ms-drawer-open { overflow: hidden; }
 .ms-page-add:hover { background: #c41e3a; color: #fff; border-color: #c41e3a; }
 .ms-page-indicator {
   font-size: 0.75rem;

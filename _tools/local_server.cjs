@@ -188,6 +188,9 @@ function mockResponse(body) {
       inputType: built.meta.inputType,
       tone: built.meta.tone,
       longForm: longForm,
+      pageIndex: Number.isInteger(body.pageIndex) ? body.pageIndex : 0,
+      pageCount: Number.isInteger(body.pageCount) ? body.pageCount : 1,
+      hasContext: !!(body.context && String(body.context).trim()),
       maxTokens: longForm ? Math.min(6000, Math.max(3600, Math.round(text0.length * 2.2))) : 2800,
       promptChars: built.meta.promptChars || 0
     },
@@ -213,6 +216,7 @@ async function handleTranslate(req, res) {
     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify(payload));
     console.log('[mock] ' + (body.author || '?') + '/' + (body.period || '?') + '/' + (body.tone || '?')
+      + (body.pageCount > 1 ? ' page ' + ((body.pageIndex || 0) + 1) + '/' + body.pageCount : '')
       + ' ' + String(body.text || '').length + ' 字 → 占位输出，片段 ' + payload.fragments.length + ' 条');
     return;
   }

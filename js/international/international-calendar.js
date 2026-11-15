@@ -86,6 +86,7 @@
     };
 
     let drawerOpener = null; // 关闭抽屉后归还焦点
+    let closeTimer = null;   // 抽屉关闭动画的延迟隐藏句柄（防止关-开竞态）
 
     /* ---------------- 工具 ---------------- */
 
@@ -107,7 +108,7 @@
         }
         if (state.query) {
             const q = state.query.toLowerCase();
-            const hay = (ev.title + ' ' + (ev.desc || '') + ' ' + ev.year).toLowerCase();
+            const hay = (ev.title + ' ' + (ev.desc || '') + ' ' + (ev.think || '') + ' ' + ev.year).toLowerCase();
             if (!hay.includes(q)) return false;
         }
         return true;
@@ -119,6 +120,33 @@
     const monthCount = m => Object.keys(index[m] || {})
         .reduce((s, d) => s + eventsForDay(m, d).length, 0);
 
+    /* ---------------- URL 状态同步（模式参照世界图志 readURL/syncURL） ---------------- */
+
+    function readURL() {
+        const p = new URLSearchParams(location.search);
+        const m = parseInt(p.get('m'), 10);
+        if (m >= 1 && m <= 12 && m !== state.month) { state.month = m; state.selectedDay = null; }
+        const cats = (p.get('cat') || '').split(',').filter(c => CATEGORIES[c]);
+        if (cats.length) state.cats = new Set(cats);
+        const eras = (p.get('era') || '').split(',').filter(id => ERA_MAP[id]);
+        if (eras.length) state.eras = new Set(eras);
+        const q = p.get('q');
+        if (q) state.query = q.slice(0, 200);
+        const d = parseInt(p.get('d'), 10);
+        return d >= 1 && d <= 31 ? d : null; // 深链日期，交由 init 打开抽屉
+    }
+
+    function syncURL(openDay) {
+        const u = new URL(location.href);
+        const setOrDel = (k, v) => { if (v) u.searchParams.set(k, v); else u.searchParams.delete(k); };
+        setOrDel('m', state.month !== today.getMonth() + 1 ? String(state.month) : '');
+        setOrDel('d', openDay ? String(openDay) : '');
+        setOrDel('cat', state.cats.size ? [...state.cats].join(',') : '');
+        setOrDel('era', state.eras.size ? [...state.eras].join(',') : '');
+        setOrDel('q', state.query || '');
+        history.replaceState(history.state, '', u.href);
+    }
+
     /* ---------------- 渲染：统计 ---------------- */
 
     function renderStats() {
@@ -128,6 +156,9 @@
             '<span class="stat-chip"><b>' + all.length + '</b> 条史实</span>' +
             '<span class="stat-chip">覆盖 <b>' + minYear + '–' + maxYear + '</b> 年</span>' +
             '<span class="stat-chip">' + ERAS.length + ' 个时代</span>';
+        // 页头副标题跟随数据实际年份范围（HTML 内保留静态文字作无 JS 回退）
+        const sub = $('#calSubtitle');
+        if (sub) sub.textContent = '国际共产主义运动史上的今天 | ' + minYear + '–' + maxYear;
     }
 
     /* ---------------- 渲染：月份侧栏 ---------------- */
@@ -162,6 +193,7 @@
                 state.selectedDay = null;
                 renderMonthList();
                 renderGrid();
+                syncURL();
             });
         });
     }
@@ -195,6 +227,7 @@
                 renderCategoryChips();
                 renderMonthList();
                 renderGrid();
+                syncURL();
             });
         });
     }
@@ -228,6 +261,7 @@
                 renderEraChips();
                 renderMonthList();
                 renderGrid();
+                syncURL();
             });
         });
     }
@@ -319,8 +353,8 @@
     }
 
     function openDrawer(day, opener) {
+        clearTimeout(closeTimer); // 上一次关闭的延迟隐藏尚未执行时先取消，避免刚打开就被藏掉
         state.selectedDay = day;
-        drawerOpener = opener || null;
 
         const evs = rawEventsForDay(state.month, day);
         $('#popupTitle').textContent = state.month + '月' + day + '日';
@@ -341,7 +375,14 @@
         overlay.classList.add('is-open');
         document.body.classList.add('cal-locked');
         $('#popupClose').focus();
-        renderGrid();
+        // 只切换选中格的高亮，不整格重建——否则 opener 会被 innerHTML 销毁，焦点归还失效
+        const grid = $('#daysGrid');
+        const prev = grid.querySelector('.day-cell.is-selected');
+        if (prev) prev.classList.remove('is-selected');
+        const cell = grid.querySelector('.day-cell[data-day="' + day + '"]');
+        if (cell) cell.classList.add('is-selected');
+        drawerOpener = (opener && opener.isConnected) ? opener : cell;
+        syncURL(day);
     }
 
     function closeDrawer() {
@@ -350,11 +391,14 @@
         popup.classList.remove('is-open');
         overlay.classList.remove('is-open');
         document.body.classList.remove('cal-locked');
-        window.setTimeout(() => { popup.hidden = true; overlay.hidden = true; }, 220);
+        clearTimeout(closeTimer);
+        closeTimer = window.setTimeout(() => { popup.hidden = true; overlay.hidden = true; }, 220);
         state.selectedDay = null;
+        const sel = $('#daysGrid .day-cell.is-selected');
+        if (sel) sel.classList.remove('is-selected');
         if (drawerOpener && document.contains(drawerOpener)) drawerOpener.focus();
         drawerOpener = null;
-        renderGrid();
+        syncURL();
     }
 
     /* ---------------- 随机回眸 ---------------- */
@@ -387,17 +431,20 @@
         state.selectedDay = today.getDate();
         renderMonthList();
         renderGrid();
+        syncURL();
         announce('已回到今天：' + (today.getMonth() + 1) + '月' + today.getDate() + '日');
     }
 
     /* ---------------- 初始化 ---------------- */
 
     function init() {
+        const deepDay = readURL(); // 深链：?m=月&d=日 打开抽屉，cat/era/q 恢复筛选
         renderStats();
         renderMonthList();
         renderCategoryChips();
         renderEraChips();
         renderGrid();
+        if (state.query) $('#calSearch').value = state.query;
 
         $('#popupClose').addEventListener('click', closeDrawer);
         $('#popupOverlay').addEventListener('click', closeDrawer);
@@ -405,7 +452,27 @@
         $('#backTodayBtn').addEventListener('click', backToday);
 
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && !$('#dayPopup').hidden) closeDrawer();
+            const popup = $('#dayPopup');
+            if (popup.hidden) return;
+            if (e.key === 'Escape') closeDrawer();
+            if (e.key === 'Tab') {
+                // 简单焦点圈禁：Tab 在抽屉内首尾往返，不漏到底层页面
+                const focusables = popup.querySelectorAll('button, a[href], textarea, input, select, [tabindex]:not([tabindex="-1"])');
+                if (!focusables.length) return;
+                const first = focusables[0], last = focusables[focusables.length - 1];
+                if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+            }
+        });
+
+        // 浏览器前进/后退时按 URL 恢复筛选与抽屉
+        window.addEventListener('popstate', () => {
+            const day = readURL();
+            renderMonthList();
+            renderCategoryChips();
+            renderEraChips();
+            renderGrid();
+            if (day) openDrawer(day, null);
         });
 
         // 搜索（防抖）
@@ -417,8 +484,11 @@
                 state.selectedDay = null;
                 renderMonthList();
                 renderGrid();
+                syncURL();
             }, 200);
         });
+
+        if (deepDay) openDrawer(deepDay, null);
     }
 
     if (document.readyState === 'loading') {

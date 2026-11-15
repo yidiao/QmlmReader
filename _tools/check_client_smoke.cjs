@@ -25,17 +25,22 @@ const failures = [];
 function assert(cond, name, detail) { cond ? pass++ : failures.push(name + (detail ? ' — ' + detail : '')); }
 
 function fakeEl(id) {
+  let _html = '';
   const el = {
     id: id, style: { setProperty() {}, removeProperty() {}, getPropertyValue() { return ''; } }, dataset: {}, children: [], value: '', textContent: '', innerHTML: '',
     disabled: false, className: '',
     classList: { add() {}, remove() {}, toggle() {}, contains() { return false; } },
     addEventListener() {}, removeEventListener() {},
-    appendChild(c) { this.children.push(c); return c; },
+    appendChild(c) { this.children.push(c); if (c && typeof c.textContent === 'string') _html += c.textContent; return c; },
     insertBefore(c) { return c; }, removeChild() {}, setAttribute() {}, getAttribute() { return null; },
     querySelector() { return fakeEl(); }, querySelectorAll() { return []; },
     scrollIntoView() {}, focus() {}, click() {}, remove() {},
     getBoundingClientRect() { return { top: 0, left: 0, width: 100, height: 100 }; }
   };
+  Object.defineProperty(el, 'innerHTML', {
+    get() { return _html; },
+    set(v) { _html = String(v); }
+  });
   return el;
 }
 
@@ -183,6 +188,43 @@ try {
   assert(meta2.innerHTML.indexOf('../articles/Engels/feuerbach.html') !== -1, '别名篇名可解析原文链接', meta2.innerHTML.slice(0, 160));
 } catch (e) {
   failures.push('溯源渲染 — ' + e.message);
+}
+
+// 5) 长文引导：自动切页 + 合并全文
+try {
+  const ui = sandbox.window.UIController;
+  const NL = String.fromCharCode(10, 10);
+  const seg = Array(120).join('长文段落内容。');
+  const longText = [seg, seg, seg, seg, seg, seg].join(NL);
+  ui.elements.inputText = fakeEl('ms-input-text');
+  ui.elements.inputText.value = longText;
+  ui.elements.longHint = fakeEl('ms-long-hint');
+  ui.elements.longHintText = fakeEl('ms-long-hint-text');
+  ui.elements.outputText = fakeEl('ms-output-text');
+  ui.elements.aiMeta = fakeEl('ms-ai-meta');
+  ui.inputPages = [{ text: '', result: null, changesCache: null, diagnosisCache: null }];
+  ui.currentPage = 0;
+  ui.longHintDismissed = false;
+
+  ui._maybeShowLongHint();
+  assert(ui.elements.longHint.style.display === 'flex', '长文提示条出现', ui.elements.longHint.style.display);
+  assert(String(ui.elements.longHintText.textContent).indexOf('长文') !== -1, '提示条带字数说明', ui.elements.longHintText.textContent);
+
+  ui._autoSplitLongText();
+  assert(ui.inputPages.length >= 2 && ui.inputPages.length <= 6, '自动切页页数在 2-6 之间', ui.inputPages.length);
+  assert(ui.elements.inputText.value === ui.inputPages[0].text, '切页后输入框显示第 1 页');
+  assert(ui.elements.longHint.style.display === 'none', '切页后提示条收起', ui.elements.longHint.style.display);
+  const tooLong = ui.inputPages.filter(function (p) { return p.text.length > 900; });
+  assert(tooLong.length === 0, '每页字数不超过 900（超 6 页时均分）', tooLong.length);
+
+  // 合并全文：把各页结果拼起来
+  ui.inputPages.forEach(function (p, i) { p.result = { result: '第' + (i + 1) + '页正文' }; });
+  ui._setOutputText('PROBE', false);
+  ui._mergeAllPages();
+  const merged = ui.elements.outputText.innerHTML;
+  assert(merged.indexOf('第1页正文') !== -1 && merged.indexOf('第' + ui.inputPages.length + '页正文') !== -1, '合并全文包含首尾页', 'len=' + ui.inputPages.length + ' html=' + merged.slice(0, 200));
+} catch (e) {
+  failures.push('长文切页/合并 — ' + e.message);
 }
 
 console.log('客户端冒烟：' + pass + ' 通过 / ' + failures.length + ' 失败');

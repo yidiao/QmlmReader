@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>国际共运图房 v2.1 · 全幅地图画布（讨论稿）</title>
+<style>
+/* ============================================================
+   国际共运图房 v2.1 —— HOI4 式全幅地图画布
+   v2.1 变更：
+   · 取消左缘时代泳道：底缘标尺升级为"双层级时间之轴"
+     （时代分段 × 段内截面 × 史实密度曲线，按住可横扫换截面）
+   · 站牌卡与顶部工具栏可拖动（点击/拖拽阈值区分，拖后自由停靠）
+   · 站牌"打开X室"再点一次收回抽屉（toggle）
+   · 导览条关闭态彻底隐藏（此前露半截）
+   ============================================================ */
+:root{
+  --sea:#122c3d; --sea-2:#0b2231;
+  --red:#c41e3a; --red-deep:#8b0000; --soc:#df444a; --cap:#5b7f96;
+  --gold:#ffd700; --gold-soft:#e8c36a; --cyan:#65bac5;
+  --paper:#f1eee5; --surface:#fffdf7; --ink:#252822; --muted:#6d736a; --line:#d0cbbf;
+  --glass:rgba(255,253,247,.93); --glass-line:rgba(255,253,247,.5);
+  --shadow:0 14px 40px rgba(4,16,24,.35); --shadow-sm:0 4px 14px rgba(4,16,24,.22);
+  --mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;background:var(--sea);color:var(--ink);overflow:hidden}
+body.dragging,body.dragging *{user-select:none!important;cursor:grabbing!important}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+.kicker{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;color:var(--red);text-transform:uppercase}
+body.dark{--glass:rgba(13,23,31,.90);--glass-line:rgba(101,186,197,.25);--surface:#132430;--ink:#e0e7e3;--muted:#aebfc5;--line:#31424d;--paper:#101d26}
+
+/* ================= 全幅地图平面 ================= */
+.stage{position:fixed;inset:0;overflow:hidden;cursor:grab}
+.stage.dragging{cursor:grabbing}
+.plane{position:absolute;left:0;top:0;width:3200px;height:1900px;transform-origin:0 0;will-change:transform}
+.plane svg{display:block;width:3200px;height:1900px}
+.plane.flash svg{animation:mapflash .45s ease-out}
+@keyframes mapflash{0%{opacity:.55}100%{opacity:1}}
+.map-label{font-family:var(--mono);font-size:26px;fill:#8fb0bd;opacity:.55;letter-spacing:.3em}
+.map-label.cn{font-family:"Noto Sans SC",sans-serif;letter-spacing:.5em}
+
+/* ================= 引导线覆盖层 ================= */
+.leader-overlay{position:fixed;inset:0;z-index:60;pointer-events:none}
+.leader{fill:none;stroke-width:1.6;opacity:.9}
+.leader .arrow{stroke:none}
+.leader .pulse{animation:pulse 2.2s ease-out infinite}
+@keyframes pulse{0%{r:5;opacity:.9}70%{r:14;opacity:0}100%{r:14;opacity:0}}
+body.touring .leader{opacity:.18;transition:opacity .4s}
+body.touring .leader.hot{opacity:1}
+
+/* ================= 玻璃卡片通用 ================= */
+.glass{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-line);
+  box-shadow:var(--shadow);border-radius:12px;color:var(--ink)}
+body.dragging .glass{box-shadow:0 26px 60px rgba(4,16,24,.45)}
+
+/* 顶部工具栏（⠿ 手柄可拖动整体） */
+.topbar{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;gap:8px;
+  padding:8px 10px;white-space:nowrap;max-width:min(1420px,97vw)}
+.topbar.folded .opt{display:none}
+.topbar.folded{border-radius:999px}
+.topbar .fold-toggle{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;color:var(--muted);font-size:12px;flex:none;cursor:grab}
+.topbar .fold-toggle:hover{color:var(--red);background:rgba(196,30,58,.10)}
+.topbar.folded .fold-toggle{cursor:pointer}
+.topbar .brand{display:flex;align-items:center;gap:9px;padding:3px 8px 3px 3px;border-radius:9px;flex:none}
+.topbar .brand:hover{background:rgba(196,30,58,.09)}
+.topbar .brand .mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--red-deep),var(--red));display:grid;place-items:center;color:var(--gold);font-size:15px;flex:none}
+.topbar .brand b{font-size:14.5px;letter-spacing:.05em;display:block;line-height:1.25}
+.topbar .brand small{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--muted);display:block}
+.topbar .crumb{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.topbar .search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:7px 13px;min-width:170px;color:var(--muted);font-size:12.5px;overflow:hidden}
+.chip{padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:12.5px;color:var(--muted);white-space:nowrap;flex:none}
+.chip:hover{border-color:var(--red);color:var(--red)}
+.chip.active{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
+.chip.view.active{background:#252822;border-color:#252822}
+body.dark .chip.view.active{background:#e0e7e3;border-color:#e0e7e3;color:#172a34}
+.topbar .divider{width:1px;height:22px;background:var(--line);flex:none}
+
+/* 状态徽章 */
+.statusline{position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:99;display:flex;gap:13px;align-items:center;
+  padding:5px 14px;font-family:var(--mono);font-size:10px;color:#cfe0e6;background:rgba(9,28,40,.72);border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;letter-spacing:.04em;backdrop-filter:blur(8px)}
+.statusline b{color:#fff}
+.statusline .dot{width:7px;height:7px;border-radius:50%;background:#69c08b;box-shadow:0 0 8px currentColor}
+.statusline .era-mark{color:#ffd9a0}
+
+/* ================= 底缘：双层级时间之轴 ================= */
+.axis-bottom{position:fixed;left:0;right:0;bottom:0;height:104px;z-index:80;background:rgba(9,28,40,.86);backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;cursor:pointer}
+.axis-bottom .axis-hint{position:absolute;top:5px;right:16px;font-family:var(--mono);font-size:9px;color:#7d99a6;letter-spacing:.1em;pointer-events:none}
+.ruler-track{flex:1;display:flex;align-items:stretch;padding:0 8px}
+.era-seg{display:flex;flex-direction:column;flex:var(--w,1);border-left:1px dashed rgba(255,255,255,.16);position:relative;min-width:0}
+.era-seg:first-child{border-left:0}
+.era-seg::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--ec);opacity:.55}
+.era-seg.era-on::before{opacity:1;box-shadow:0 0 9px var(--ec)}
+.era-name{display:flex;align-items:baseline;justify-content:center;gap:7px;padding:9px 4px 2px;cursor:pointer;white-space:nowrap;overflow:hidden}
+.era-name b{font-size:11.5px;color:#cfe0e6;letter-spacing:.08em}
+.era-name small{font-family:var(--mono);font-size:8.5px;color:#7d99a6}
+.era-name:hover b{color:var(--gold)}
+.era-seg.era-on .era-name b{color:#ffd9a0}
+.seg-ticks{flex:1;display:flex;align-items:stretch}
+.tick{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:1px;padding:2px 0 7px;position:relative;min-width:0;cursor:pointer}
+.tick .bar{width:36%;max-width:44px;background:var(--ec);border-radius:2px 2px 0 0;opacity:.5;transition:height .3s,opacity .3s}
+.tick .yr{font-family:var(--mono);font-size:10.5px;color:#9fb9c4}
+.tick .nm{font-size:9px;color:#7d99a6;white-space:nowrap;overflow:hidden;max-width:100%}
+.tick:hover .yr{color:var(--gold)}
+.tick.active .bar{opacity:1;box-shadow:0 0 8px var(--ec)}
+.tick.active .yr{color:#ffd9a0;font-weight:700}
+.tick.active .nm{color:#e8d9b0}
+.tick.active::after{content:"";position:absolute;bottom:0;left:8%;right:8%;height:2px;background:var(--gold-soft);border-radius:2px;box-shadow:0 0 8px var(--gold-soft)}
+
+/* 内容站牌（可拖动、可折叠） */
+.station{position:fixed;z-index:90;width:238px;border-radius:12px;overflow:hidden;
+  background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--glass-line);box-shadow:var(--shadow);color:var(--ink);transition:box-shadow .25s}
+.station.hot{box-shadow:0 0 0 2px var(--st),var(--shadow)}
+.station .head{display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:grab;border-left:4px solid var(--st);touch-action:none}
+.station .head:active{cursor:grabbing}
+.station .head i.dot{width:9px;height:9px;border-radius:50%;background:var(--st);box-shadow:0 0 9px var(--st);flex:none}
+.station .head .tt{flex:1;min-width:0}
+.station .head b{font-size:14px;display:block;line-height:1.3;pointer-events:none}
+.station .head small{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--muted);display:block;pointer-events:none}
+.station .head .fold{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;color:var(--muted);font-size:11px;flex:none;pointer-events:auto}
+.station .head:hover .fold{background:rgba(196,30,58,.10);color:var(--red)}
+.station .body{padding:2px 14px 12px;border-top:1px dashed var(--line)}
+.station .body p{font-size:12px;line-height:1.8;color:var(--muted);margin-top:8px}
+.station .body .go{display:inline-flex;gap:6px;align-items:center;margin-top:8px;font-size:12.5px;font-weight:700;color:var(--st)}
+.station .body .go i{font-style:normal;transition:transform .2s}
+.station:hover .body .go i{transform:translateX(3px)}
+.station .body .badge{float:right;font-family:var(--mono);font-size:9px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 7px;margin-top:8px}
+.station.folded .body{display:none}
+.station.folded{width:186px}
+
+/* 相机控制 */
+.control{position:fixed;right:14px;bottom:118px;z-index:95;display:flex;flex-direction:column;align-items:center;padding:7px;gap:1px}
+.control button{width:33px;height:33px;border-radius:9px;display:grid;place-items:center;font-size:14px;color:var(--muted)}
+.control button:hover{background:rgba(232,195,106,.15);color:#ffd9a0}
+.control .zoom-read{font-family:var(--mono);font-size:9px;color:#9fb9c4;padding:1px 0 2px;text-align:center}
+.control .zoom-read b{display:block;color:#fff;font-size:11px}
+.control hr{width:24px;border:0;border-top:1px solid var(--line);margin:2px 0}
+
+/* 图例弹层 */
+.legend-pop{position:fixed;left:14px;bottom:118px;z-index:96;padding:13px 16px;font-size:11.5px;color:var(--ink);display:none}
+.legend-pop.open{display:block}
+.legend-pop h4{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--muted);margin-bottom:8px}
+.legend-pop .row{display:flex;align-items:center;gap:8px;margin:6px 0;color:var(--muted)}
+.legend-pop .sw{width:12px;height:12px;border-radius:3px;flex:none}
+
+/* 抽屉（档案室） */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(470px,94vw);z-index:150;background:var(--surface);color:var(--ink);
+  border-left:1px solid var(--line);box-shadow:-24px 0 60px rgba(4,16,24,.45);transform:translateX(calc(100% + 30px));
+  transition:transform .3s cubic-bezier(.33,0,.15,1);display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.drawer header{padding:16px 20px 12px;border-bottom:2px solid var(--red);display:flex;justify-content:space-between;align-items:center}
+.drawer header h2{font-size:17px;margin-top:3px}
+.drawer header .x{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:15px;color:var(--muted)}
+.drawer header .x:hover{color:var(--red);border-color:var(--red)}
+.drawer .body{padding:14px 20px 30px;overflow:auto;flex:1}
+.drawer .body::-webkit-scrollbar{width:9px}
+.drawer .body::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px}
+.entry{border:1px solid var(--line);border-left:4px solid var(--ec,#3f7966);border-radius:9px;padding:13px 15px;margin:11px 0;background:var(--glass)}
+.entry .meta{font-family:var(--mono);font-size:10px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:baseline}
+.entry .meta .yr{color:var(--red);font-weight:700;font-size:13px}
+.entry h4{font-size:14.5px;margin:4px 0 5px}
+.entry p{font-size:12.5px;line-height:1.85;color:var(--muted)}
+.entry .src{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--muted);border-bottom:1px dashed var(--line);text-decoration:none}
+.entry .src:hover{color:var(--red);border-color:var(--red)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font-family:var(--mono);font-size:10.5px;margin:8px 0 6px}
+.cal-grid .wd{color:var(--muted);text-align:center;padding:4px 0}
+.cal-grid .d{text-align:center;padding:7px 0;border-radius:7px}
+.cal-grid .d.has{background:rgba(196,30,58,.10);color:var(--red);font-weight:700;cursor:pointer}
+.cal-grid .d.has:hover{background:rgba(196,30,58,.22)}
+.cal-grid .d.today{outline:2px solid var(--red);outline-offset:-2px}
+.full-link{display:block;text-align:center;margin-top:14px;padding:11px;border:1px dashed var(--line);border-radius:9px;font-size:12.5px;color:var(--muted);text-decoration:none}
+.full-link:hover{color:var(--red);border-color:var(--red)}
+.mock-btn{display:inline-block;margin:4px 0 10px;padding:8px 15px;border:1px solid var(--line);border-radius:9px;font-size:12px;color:var(--ink)}
+.mock-btn:hover{color:var(--red);border-color:var(--red)}
+
+/* 导览条（关闭态彻底隐藏） */
+.tour-bar{position:fixed;left:50%;bottom:118px;z-index:160;width:min(640px,92vw);
+  padding:14px 18px;transform:translateX(-50%) translateY(24px);visibility:hidden;opacity:0;
+  transition:transform .35s cubic-bezier(.33,0,.15,1),visibility .35s,opacity .35s}
+.tour-bar.open{transform:translateX(-50%);visibility:visible;opacity:1}
+.tour-bar .t-head{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.tour-bar .t-head .kicker{font-size:9px}
+.tour-bar .t-head b{font-size:14px}
+.tour-bar .t-head .dots{margin-left:auto;display:flex;gap:5px}
+.tour-bar .t-head .dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.tour-bar .t-head .dots i.on{background:var(--red)}
+.tour-bar .t-text{font-size:13px;line-height:1.9;color:var(--muted)}
+.tour-bar .t-text b{color:var(--ink)}
+.tour-bar .t-ctrl{display:flex;gap:8px;margin-top:10px;align-items:center}
+.tour-bar .t-ctrl .stepno{font-family:var(--mono);font-size:10px;color:var(--muted);margin-right:auto}
+.tour-bar .t-ctrl button{padding:7px 14px;border:1px solid var(--line);border-radius:8px;font-size:12px;color:var(--ink)}
+.tour-bar .t-ctrl button:hover{color:var(--red);border-color:var(--red)}
+.tour-bar .t-ctrl button.primary{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
+
+/* 封面 */
+.cover{position:fixed;inset:0;z-index:300;display:grid;place-items:center;background:rgba(4,16,24,.5);backdrop-filter:blur(8px);transition:opacity .45s,visibility .45s}
+.cover.hidden{opacity:0;visibility:hidden}
+.cover .sheet{width:min(740px,92vw);background:var(--surface);color:var(--ink);border-radius:14px;box-shadow:0 40px 110px rgba(0,0,0,.4);
+  border-top:4px solid;padding:44px 48px 34px;position:relative;border-image:linear-gradient(90deg,#9b6b2f,#3f7966,#1b64aa,#c41e3a) 1}
+.cover h1{font-family:"Noto Serif SC","Songti SC",serif;font-size:clamp(34px,5vw,52px);letter-spacing:.06em;margin:10px 0 6px}
+.cover .sub{font-size:15px;color:var(--muted);margin-bottom:20px}
+.cover p.desc{font-size:13.5px;line-height:2.05;margin-bottom:22px}
+.cover .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.cover .chips span{border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.cover .chips b{color:var(--ink)}
+.cover .cta{display:flex;gap:10px;flex-wrap:wrap}
+.cover .cta .primary{background:#252822;color:#fff;padding:12px 24px;border-radius:9px;font-weight:700;font-size:14px;letter-spacing:.08em}
+.cover .cta .ghost{border:1px solid var(--line);padding:12px 22px;border-radius:9px;font-size:14px}
+.cover .hint{margin-top:18px;font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.05em}
+.cover .close{position:absolute;top:14px;right:16px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:16px;color:var(--muted)}
+@media(max-width:900px){
+  .topbar{flex-wrap:wrap;justify-content:center}
+  .era-name small{display:none}
+  .station{width:200px}
+}
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+  <div class="plane" id="plane">
+    <svg viewBox="0 0 3200 1900" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="seaG" cx="50%" cy="42%" r="75%">
+          <stop offset="0%" stop-color="#1a3d52"/><stop offset="55%" stop-color="#122c3d"/><stop offset="100%" stop-color="#0a1f2c"/>
+        </radialGradient>
+        <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="#a886c9"/><path d="M-2,3L3,-2M3,11L11,3M9,13L13,9" stroke="#2f3d63" stroke-width="2.2"/></pattern>
+        <filter id="landShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#04121c" flood-opacity=".55"/></filter>
+      </defs>
+      <rect width="3200" height="1900" fill="url(#seaG)"/>
+      <g stroke="#4f7f95" stroke-opacity=".13">
+        <path d="M0,320 H3200 M0,640 H3200 M0,960 H3200 M0,1280 H3200 M0,1600 H3200"/>
+        <path d="M200,0 V1900 M600,0 V1900 M1000,0 V1900 M1400,0 V1900 M1800,0 V1900 M2200,0 V1900 M2600,0 V1900 M3000,0 V1900"/>
+      </g>
+      <g filter="url(#landShadow)">
+        <path d="M210,300 Q260,190 430,205 Q560,215 700,205 Q860,190 950,260 Q1010,330 940,400 Q900,470 820,500 Q860,560 800,620 Q740,700 640,690 Q560,760 480,710 Q400,760 350,680 Q260,650 250,540 Q180,420 210,300Z" fill="#5b7f96" stroke="#2c4a5e" stroke-width="3"/>
+        <path d="M1040,150 Q1150,110 1230,170 Q1260,230 1190,270 Q1100,300 1050,250 Q1020,190 1040,150Z" fill="#71929f" stroke="#2c4a5e" stroke-width="3"/>
+        <path d="M560,880 Q680,850 760,930 Q830,1010 800,1130 Q770,1280 700,1420 Q650,1560 600,1520 Q540,1400 520,1230 Q500,1010 560,880Z" fill="#7e9a92" stroke="#2c4a5e" stroke-width="3"/>
+        <path d="M1470,320 Q1560,280 1650,300 Q1720,320 1710,390 Q1690,450 1600,470 Q1510,480 1460,430 Q1430,360 1470,320Z" fill="#5b7f96" stroke="#2c4a5e" stroke-width="3"/>
+        <path d="M1740,240 Q1900,160 2150,190 Q2400,215 2540,290 Q2620,350 2560,430 Q2500,520 2380,560 Q2300,640 2180,600 Q2050,650 1940,590 Q1810,560 1760,460 Q1700,340 1740,240Z" fill="#df444a" stroke="#5e1f26" stroke-width="3"/>
+        <path d="M2380,600 Q2520,570 2620,620 Q2680,680 2620,730 Q2520,770 2430,730 Q2360,670 2380,600Z" fill="#df444a" stroke="#5e1f26" stroke-width="3"/>
+        <path d="M2400,740 Q2560,700 2680,760 Q2770,830 2740,930 Q2700,1030 2580,1060 Q2460,1080 2400,1000 Q2330,900 2360,810 Q2370,770 2400,740Z" fill="#df444a" stroke="#5e1f26" stroke-width="3"/>
+        <path d="M1700,380 Q1750,360 1790,385 Q1800,420 1760,445 Q1710,450 1695,420 Z" fill="url(#hatch)" stroke="#2c4a5e" stroke-width="2"/>
+        <path d="M2820,640 Q2860,625 2880,655 Q2875,695 2840,700 Q2810,680 2820,640Z" fill="url(#hatch)" stroke="#2c4a5e" stroke-width="2"/>
+        <path d="M2900,560 Q2960,520 3000,570 Q3020,640 2970,690 Q2920,700 2900,650 Q2890,600 2900,560Z" fill="#5b7f96" stroke="#2c4a5e" stroke-width="3"/>
+        <path d="M1560,640 Q1700,600 1830,650 Q1930,700 1920,830 Q1900,980 1830,1100 Q1770,1230 1700,1300 Q1620,1330 1580,1220 Q1520,1050 1510,880 Q1500,720 1560,640Z" fill="#607982" stroke="#2c4a5e" stroke-width="3"/>
+        <path d="M1880,560 Q1980,530 2060,580 Q2100,640 2050,700 Q1960,730 1900,680 Q1860,620 1880,560Z" fill="#d08a4e" stroke="#2c4a5e" stroke-width="3"/>
+        <path d="M2340,820 Q2440,790 2510,860 Q2560,930 2520,1010 Q2470,1090 2400,1060 Q2340,990 2330,900 Q2330,850 2340,820Z" fill="#7e9a92" stroke="#2c4a5e" stroke-width="3"/>
+        <path d="M2600,1120 Q2700,1090 2780,1140 Q2820,1200 2750,1240 Q2650,1260 2600,1210 Q2570,1160 2600,1120Z" fill="#7e9a92" stroke="#2c4a5e" stroke-width="3"/>
+        <path d="M2700,1380 Q2850,1330 2980,1400 Q3060,1470 3010,1560 Q2930,1640 2800,1610 Q2700,1560 2700,1470 Q2690,1420 2700,1380Z" fill="#5b7f96" stroke="#2c4a5e" stroke-width="3"/>
+      </g>
+      <g>
+        <circle cx="1830" cy="420" r="10" fill="#ffe18a" stroke="#0a2231" stroke-width="3" id="anchor-petro"/>
+        <circle cx="1698" cy="388" r="9"  fill="#ffe18a" stroke="#0a2231" stroke-width="3" id="anchor-berlin"/>
+        <circle cx="1600" cy="392" r="9"  fill="#ffe18a" stroke="#0a2231" stroke-width="3" id="anchor-paris"/>
+        <circle cx="2560" cy="880" r="10" fill="#ffe18a" stroke="#0a2231" stroke-width="3" id="anchor-yanan"/>
+      </g>
+      <g class="map-label">
+        <text x="500" y="480" class="map-label">N.AMERICA</text>
+        <text x="600" y="1150" class="map-label">S.AMERICA</text>
+        <text x="2140" y="380" class="map-label">EURASIA</text>
+        <text x="1660" y="960" class="map-label">AFRICA</text>
+        <text x="2860" y="1480" class="map-label">OCEANIA</text>
+        <text x="1150" y="900" class="map-label cn" font-size="30">太 平 洋</text>
+        <text x="1180" y="560" class="map-label cn" font-size="24">大 西 洋</text>
+        <text x="2130" y="1180" class="map-label cn" font-size="24">印 度 洋</text>
+        <text x="2140" y="90" class="kicker" font-size="24" fill="#e8c36a" opacity=".9">1949 · 历史截面 12/24</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<svg class="leader-overlay" id="leaderOverlay"></svg>
+
+<!-- 顶部工具栏（⠿ 拖动整体） -->
+<div class="glass topbar" id="topbar">
+  <button class="fold-toggle" id="topbarFold" title="拖动工具栏 / 单击折叠">⠿</button>
+  <button class="brand opt"><span class="mark">☭</span><span><b>国际共运图房</b><small>ICM · OBSERVATORY</small></span></button>
+  <span class="crumb opt">驿站 › 国际共运 › 总览</span>
+  <span class="search opt">全文查找… <kbd>/</kbd></span>
+  <button class="chip view active opt">历史节点</button>
+  <button class="chip view opt">当代组织</button>
+  <span class="divider opt"></span>
+  <button class="chip opt" id="tourChip">导览</button>
+  <button class="chip opt" id="legendChip">图例</button>
+  <button class="chip opt" id="themeBtn">暗色</button>
+  <button class="chip opt">关于</button>
+</div>
+
+<div class="statusline" id="statusline">
+  <span class="dot"></span><span><b>44</b> 节点 · <b>12</b> 组织 · <b>24</b> 截面 · <b>57</b> 政权记录</span>
+  <span>拖动画布 · 滚轮缩放 · 按住底缘标尺可横扫年份</span>
+</div>
+
+<!-- 底缘：双层级时间之轴（时代分段 × 截面 × 密度） -->
+<nav class="axis-bottom" id="axisBottom" aria-label="时间之轴">
+  <span class="axis-hint">TIME AXIS · 时代分段 × 24 截面 × 641 条史实密度 · 按住横扫 / ← → 切换</span>
+  <div class="ruler-track" id="rulerTrack">
+    <div class="era-seg" data-era="awakening" style="--ec:#627389;--w:.9">
+      <div class="era-name"><b>觉醒前夜</b><small>1789–1863</small></div>
+      <div class="seg-ticks"><div class="tick" data-year="1848" style="--h:14px"><span class="bar"></span><span class="yr">1848</span><span class="nm">宣言元年</span></div></div>
+    </div>
+    <div class="era-seg" data-era="first-intl" style="--ec:#596d60;--w:.8">
+      <div class="era-name"><b>第一国际</b><small>1864–1876</small></div>
+      <div class="seg-ticks"><div class="tick" data-year="1864" style="--h:22px"><span class="bar"></span><span class="yr">1864</span><span class="nm">第一国际</span></div></div>
+    </div>
+    <div class="era-seg" data-era="second-intl" style="--ec:#366c9a;--w:1">
+      <div class="era-name"><b>第二国际</b><small>1877–1916</small></div>
+      <div class="seg-ticks"><div class="tick" data-year="1889" style="--h:34px"><span class="bar"></span><span class="yr">1889</span><span class="nm">第二国际</span></div></div>
+    </div>
+    <div class="era-seg" data-era="october-wave" style="--ec:#df444a;--w:1.25">
+      <div class="era-name"><b>十月浪潮</b><small>1917–1936</small></div>
+      <div class="seg-ticks">
+        <div class="tick" data-year="1917" style="--h:52px"><span class="bar"></span><span class="yr">1917</span><span class="nm">十月革命</span></div>
+        <div class="tick" data-year="1935" style="--h:46px"><span class="bar"></span><span class="yr">1935</span><span class="nm">七大统一战线</span></div>
+      </div>
+    </div>
+    <div class="era-seg" data-era="antifascist" style="--ec:#9d4039;--w:.9">
+      <div class="era-name"><b>反法西斯</b><small>1937–1945</small></div>
+      <div class="seg-ticks"><div class="tick" data-year="1943" style="--h:40px"><span class="bar"></span><span class="yr">1943</span><span class="nm">战争转折</span></div></div>
+    </div>
+    <div class="era-seg" data-era="camp-era" style="--ec:#e8c36a;--w:1.6">
+      <div class="era-name"><b>阵营时代</b><small>1946–1976</small></div>
+      <div class="seg-ticks">
+        <div class="tick active" data-year="1949" style="--h:66px"><span class="bar"></span><span class="yr">1949</span><span class="nm">新中国成立</span></div>
+        <div class="tick" data-year="1956" style="--h:58px"><span class="bar"></span><span class="yr">1956</span><span class="nm">苏共二十大</span></div>
+        <div class="tick" data-year="1966" style="--h:70px"><span class="bar"></span><span class="yr">1966</span><span class="nm">论战十年</span></div>
+      </div>
+    </div>
+    <div class="era-seg" data-era="epilogue" style="--ec:#65bac5;--w:1.4">
+      <div class="era-name"><b>剧变回望</b><small>1977–今</small></div>
+      <div class="seg-ticks">
+        <div class="tick" data-year="1979" style="--h:38px"><span class="bar"></span><span class="yr">1979</span><span class="nm">改革开局</span></div>
+        <div class="tick" data-year="1991" style="--h:26px"><span class="bar"></span><span class="yr">1991</span><span class="nm">苏联解体</span></div>
+        <div class="tick" data-year="2024" style="--h:14px"><span class="bar"></span><span class="yr">2024</span><span class="nm">当代截面</span></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- 四张内容站牌（头部可拖动；折叠后整卡可拖动） -->
+<div class="station" id="st-cal" data-key="cal" data-anchor="anchor-petro" style="--st:#e8c36a;top:96px;left:16px">
+  <div class="head"><i class="dot"></i><span class="tt"><b>历史日历</b><small>CALENDAR · 时间轴读法</small></span><span class="fold">—</span></div>
+  <div class="body"><span class="badge">641 条</span>
+    <p>历史上的今天：641 条史实按月历铺开，附"想一想"与文献串联。</p>
+    <span class="go">打开日历室 <i>→</i></span>
+  </div>
+</div>
+<div class="station" id="st-col" data-key="col" data-anchor="anchor-yanan" style="--st:#366c9a;top:96px;right:16px">
+  <div class="head"><i class="dot"></i><span class="tt"><b>深度专栏</b><small>COLUMN · 长文读法</small></span><span class="fold">—</span></div>
+  <div class="body"><span class="badge">3+2 篇</span>
+    <p>铁流与先锋、围剿与反围剿……万字体量长文的安静阅读区，另有专题筹备中。</p>
+    <span class="go">打开专栏室 <i>→</i></span>
+  </div>
+</div>
+<div class="station" id="st-mem" data-key="mem" data-anchor="anchor-berlin" style="--st:#596d60;bottom:124px;left:16px">
+  <div class="head"><i class="dot"></i><span class="tt"><b>为了忘却的纪念</b><small>MEMORIAL · 纪念读法</small></span><span class="fold">—</span></div>
+  <div class="body"><span class="badge">4 人</span>
+    <p>被记住的名字与名言，每条附文献出处。</p>
+    <span class="go">打开纪念室 <i>→</i></span>
+  </div>
+</div>
+<div class="station" id="st-cur" data-key="cur" data-anchor="anchor-paris" style="--st:#9d4039;bottom:124px;right:16px">
+  <div class="head"><i class="dot"></i><span class="tt"><b>时事档案</b><small>ARCHIVE · 时事读法</small></span><span class="fold">—</span></div>
+  <div class="body"><span class="badge">4 则</span>
+    <p>按档案口径收录的工人运动与左翼动向，每条注明出处。</p>
+    <span class="go">打开时事室 <i>→</i></span>
+  </div>
+</div>
+
+<!-- 图例弹层 -->
+<div class="glass legend-pop" id="legendPop">
+  <h4>CAMP · 阵营底色（1949 截面）</h4>
+  <div class="row"><span class="sw" style="background:#df444a"></span>社会主义国家（中国 1949 年起固定红）</div>
+  <div class="row"><span class="sw" style="background:#5b7f96"></span>资本主义阵营</div>
+  <div class="row"><span class="sw" style="background:repeating-linear-gradient(45deg,#a886c9 0 3px,#2f3d63 3px 6px)"></span>分治／混合（斜纹）</div>
+  <div class="row"><span class="sw" style="background:#607982"></span>其他国家／地区</div>
+  <div class="row"><span class="sw" style="background:#d08a4e"></span>武装冲突地带（示意）</div>
+</div>
+
+<!-- 相机控制 -->
+<div class="glass control" id="controlPanel">
+  <button id="zin">＋</button>
+  <div class="zoom-read"><b id="zoomPct">72%</b>中景 · 档案</div>
+  <button id="zout">−</button><hr>
+  <button id="fitBtn" title="适配全图">⤢</button>
+  <button id="resetBtn" title="重置相机">⟲</button>
+  <button id="themeBtn2" title="明暗">◐</button>
+</div>
+
+<!-- 抽屉 -->
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <header><div><span class="kicker" id="dKicker">CALENDAR</span><h2 id="dTitle">历史日历</h2></div><button class="x" id="dClose">×</button></header>
+  <div class="body" id="dBody"></div>
+</aside>
+
+<!-- 导览条 -->
+<div class="glass tour-bar" id="tourBar">
+  <div class="t-head"><span class="kicker">GUIDED TOUR</span><b id="tTitle">欢迎来到图房</b>
+    <span class="dots" id="tDots"></span></div>
+  <div class="t-text" id="tText"></div>
+  <div class="t-ctrl"><span class="stepno" id="tStep">第 1 / 7 站</span>
+    <button id="tPrev">← 上一步</button>
+    <button id="tNext" class="primary">下一步 →</button>
+    <button id="tExit">退出导览</button>
+  </div>
+</div>
+
+<!-- 封面 -->
+<div class="cover" id="cover">
+  <div class="sheet">
+    <button class="close" id="coverX">×</button>
+    <span class="kicker">INTERNATIONAL · OBSERVATORY · 1848—2026</span>
+    <h1>国际共运图房</h1>
+    <div class="sub">整张世界地图就是展厅的地面</div>
+    <p class="desc">没有边框，没有分栏——铺满视口的地图就是画布本身，像一间随历史年份变换陈列的图房。底缘的时间之轴是全站唯一的时钟：七个时代分段、廿四个截面、一条 641 条史实的密度曲线；按住它左右横扫，世界就在你眼前换装。四间档案室以引导线钉在地图坐标上。</p>
+    <div class="chips">
+      <span><b>44</b> 历史节点</span><span><b>12</b> 组织资料</span><span><b>24</b> 地图截面</span><span><b>641</b> 日历史实</span><span><b>212</b> 国家参考面</span>
+    </div>
+    <div class="cta">
+      <button class="primary" id="coverEnter">进 入 图 房</button>
+      <button class="ghost" id="coverTour">跟随导览参观</button>
+      <button class="ghost" id="coverAbout">方法与来源</button>
+    </div>
+    <div class="hint">拖动画布平移 · 滚轮缩放（远景看结构 · 近景读档案） · 站牌头部可拖动停靠 · ？随时查看说明</div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+/* ================= 相机 ================= */
+var stage=document.getElementById('stage'),plane=document.getElementById('plane');
+var view={x:-700,y:-120,s:.72},MIN=.28,MAX=2.2,HOME={x:-700,y:-120,s:.72};
+function apply(){
+  plane.style.transform='translate('+view.x+'px,'+view.y+'px) scale('+view.s+')';
+  var pct=document.getElementById('zoomPct');
+  if(pct){pct.textContent=Math.round(view.s*100)+'%';
+    pct.parentElement.lastChild.textContent=view.s<.5?'远景 · 结构':(view.s<1.1?'中景 · 档案':'近景 · 精读');}
+  drawLeaders();
+}
+function toScreen(px,py){return [px*view.s+view.x,py*view.s+view.y]}
+var tweener=null;
+function tweenView(to,dur,done){
+  if(tweener)cancelAnimationFrame(tweener);
+  var from={x:view.x,y:view.y,s:view.s},t0=performance.now();
+  function step(t){var k=Math.min(1,(t-t0)/dur);
+    k=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+    view.x=from.x+(to.x-from.x)*k;view.y=from.y+(to.y-from.y)*k;view.s=from.s+(to.s-from.s)*k;apply();
+    if(k<1)tweener=requestAnimationFrame(step);else{tweener=null;done&&done();}}
+  tweener=requestAnimationFrame(step);}
+stage.addEventListener('wheel',function(e){e.preventDefault();
+  var cx=e.clientX,cy=e.clientY;
+  var ns=Math.max(MIN,Math.min(MAX,view.s*(e.deltaY<0?1.12:0.89)));
+  var k=ns/view.s;
+  view.x=cx-(cx-view.x)*k;view.y=cy-(cy-view.y)*k;view.s=ns;apply();},{passive:false});
+var drag=null;
+stage.addEventListener('pointerdown',function(e){
+  if(e.target.closest('.axis-bottom')||e.target.closest('.topbar')||e.target.closest('.station')||e.target.closest('.control')||e.target.closest('.drawer')||e.target.closest('.legend-pop')||e.target.closest('.tour-bar'))return;
+  drag={x:e.clientX,y:e.clientY,vx:view.x,vy:view.y};stage.classList.add('dragging')});
+window.addEventListener('pointermove',function(e){if(!drag)return;
+  view.x=drag.vx+(e.clientX-drag.x);view.y=drag.vy+(e.clientY-drag.y);apply();});
+window.addEventListener('pointerup',function(){drag=null;stage.classList.remove('dragging')});
+document.getElementById('zin').onclick=function(){tweenView({x:view.x,y:view.y,s:Math.min(MAX,view.s*1.18)},260)};
+document.getElementById('zout').onclick=function(){tweenView({x:view.x,y:view.y,s:Math.max(MIN,view.s*.85)},260)};
+document.getElementById('fitBtn').onclick=function(){tweenView({x:0,y:0,s:Math.min(innerWidth/3200,innerHeight/1900)},900)};
+document.getElementById('resetBtn').onclick=function(){tweenView(HOME,900)};
+
+/* ================= 引导线 ================= */
+var overlay=document.getElementById('leaderOverlay');
+var NS='http://www.w3.org/2000/svg';
+function fitOverlay(){overlay.setAttribute('width',innerWidth);overlay.setAttribute('height',innerHeight);}
+fitOverlay();window.addEventListener('resize',function(){fitOverlay();drawLeaders();});
+function drawLeaders(){
+  overlay.innerHTML='';
+  document.querySelectorAll('.station').forEach(function(card){
+    var anchor=document.getElementById(card.dataset.anchor);
+    if(!anchor||card.classList.contains('folded'))return;
+    var ab=anchor.getBoundingClientRect();
+    if(ab.width===0)return;
+    var ax=ab.left+ab.width/2,ay=ab.top+ab.height/2;
+    var r=card.getBoundingClientRect();
+    var cx=r.left+r.width/2,cy=r.top+r.height/2,dx=ax-cx,dy=ay-cy;
+    var sx,sy;
+    if(Math.abs(dx)>=Math.abs(dy)){sx=dx>0?r.right+4:r.left-4;sy=cy;}
+    else{sy=dy>0?r.bottom+4:r.top-4;sx=cx;}
+    var elbow = Math.abs(dx)>=Math.abs(dy) ? [ax-(ax-sx)*.35, sy] : [sx, ay-(ay-sy)*.35];
+    var g=document.createElementNS(NS,'g');g.setAttribute('class','leader');
+    var col=card.style.getPropertyValue('--st')||'#e8c36a';
+    g.setAttribute('stroke',col);
+    var p=document.createElementNS(NS,'path');
+    p.setAttribute('d','M'+sx+','+sy+' L'+elbow[0]+','+elbow[1]+' L'+ax+','+(ay+12));
+    overlay.append(g);g.append(p);
+    var dotS=document.createElementNS(NS,'circle');
+    dotS.setAttribute('cx',sx);dotS.setAttribute('cy',sy);dotS.setAttribute('r',3.5);dotS.setAttribute('fill',col);
+    g.append(dotS);
+    var pulse=document.createElementNS(NS,'circle');
+    pulse.setAttribute('cx',ax);pulse.setAttribute('cy',ay);pulse.setAttribute('r',5);
+    pulse.setAttribute('fill','none');pulse.setAttribute('stroke',col);pulse.setAttribute('class','pulse');
+    g.append(pulse);
+    var arrow=document.createElementNS(NS,'path');
+    arrow.setAttribute('class','arrow');
+    arrow.setAttribute('d','M'+(ax-6)+','+(ay+6)+' L'+ax+','+(ay+14)+' L'+(ax+6)+','+(ay+6)+' Z');
+    arrow.setAttribute('fill',col);
+    g.append(arrow);
+    card._leaderG=g;
+  });
+}
+
+/* ================= 通用拖动（站牌 / 顶栏） ================= */
+function makeDraggable(el,handle,onClick){
+  var st=null;
+  handle.style.cursor='grab';
+  handle.addEventListener('pointerdown',function(e){
+    if(e.button!==0)return;
+    if(e.target.closest('.go')||e.target.closest('button:not(.fold-toggle):not(.head)')&&!el.classList.contains('topbar')){if(e.target.closest('.go'))return;}
+    var r=el.getBoundingClientRect();
+    st={px:r.left,py:r.top,ox:e.clientX-r.left,oy:e.clientY-r.top,moved:false,sx:e.clientX,sy:e.clientY,id:e.pointerId};
+    el.style.left=r.left+'px';el.style.top=r.top+'px';el.style.right='auto';el.style.bottom='auto';el.style.transform='none';
+    handle.setPointerCapture&&handle.setPointerCapture(e.pointerId);
+    document.body.classList.add('dragging');
+    e.preventDefault();
+  });
+  handle.addEventListener('pointermove',function(e){
+    if(!st||st.id!==e.pointerId)return;
+    var dx=e.clientX-st.sx,dy=e.clientY-st.sy;
+    if(!st.moved&&Math.hypot(dx,dy)>5)st.moved=true;
+    if(st.moved){
+      var w=el.offsetWidth,h=el.offsetHeight;
+      var nl=Math.max(6,Math.min(innerWidth-w-6,st.px+dx));
+      var nt=Math.max(6,Math.min(innerHeight-h-6,st.py+dy));
+      el.style.left=nl+'px';el.style.top=nt+'px';
+    }
+  });
+  handle.addEventListener('pointerup',function(e){
+    if(!st||st.id!==e.pointerId)return;
+    document.body.classList.remove('dragging');
+    var wasMoved=st.moved;st=null;
+    if(!wasMoved&&onClick)onClick(e);
+  });
+  handle.addEventListener('pointercancel',function(){st=null;document.body.classList.remove('dragging')});
+}
+
+/* 站牌：头部拖动；单击头部=折叠；"打开X室"=toggle 抽屉 */
+var drawer=document.getElementById('drawer'),dK=document.getElementById('dKicker'),dT=document.getElementById('dTitle'),dB=document.getElementById('dBody');
+var openKey=null;
+function entry(y,t,d,meta,c){return '<div class="entry" style="--ec:'+(c||'#3f7966')+'"><div class="meta"><span class="yr">'+y+'</span><span>'+meta+'</span></div><h4>'+t+'</h4><p>'+d+'</p></div>'}
+function entrySrc(y,t,d,src,c){return '<div class="entry" style="--ec:'+(c||'#3f7966')+'"><div class="meta"><span class="yr">'+y+'</span></div><h4>'+t+'</h4><p>'+d+'</p><a class="src" href="#" onclick="return false">'+src+' ↗</a></div>'}
+var CONTENT={
+ cal:{k:'CALENDAR · 11 月',t:'历史日历',h:function(){
+   var wd=['日','一','二','三','四','五','六'],html='<div class="cal-grid">';
+   wd.forEach(function(w){html+='<div class="wd">'+w+'</div>'});
+   for(var i=1;i<=30;i++){html+='<div class="d'+([7,12,16,22,28].indexOf(i)>=0?' has':'')+(i===13?' today':'')+'">'+i+'</div>'}
+   html+='</div>';
+   html+='<button class="mock-btn">🎲 随机回眸（未读 612 条）</button>';
+   html+=entry('1917','十月社会革命胜利','阿芙乐尔号炮响，攻打冬宫；全俄苏维埃第二次代表大会通过和平法令与土地法令，世界上第一个社会主义国家由此起步。','革命事件 · 史实','#e77776');
+   html+=entry('1918','德国十一月革命','基尔水兵起义点燃革命，慕尼黑苏维埃成立；革命潮涌至中欧，次年一月遭遇挫折。','革命事件 · 史实','#366c9a');
+   html+=entry('1972','勃列日涅夫与尼克松会晤','冷战双方签署《反导条约》，缓和表象下路线之争未停。','政治事件 · 转折','#e8c36a');
+   html+=entry('1949','中国革命重心从乡村转入城市','七届二中全会定策：工作重心由乡村移向城市，新中国的大政在此铺开。','政治事件 · 史实','#df444a');
+   html+='<a class="full-link" href="#">进入完整日历（641 条 · 时代筛选 · 想一想 · 文献串联）→</a>';
+   return html;}},
+ col:{k:'COLUMN · 深度专栏',t:'深度专栏',h:function(){
+   return entry('连载中','铁流与先锋','国际共运人物群像的长卷写法：从第一国际的匠人，到十月浪潮里的先锋，再到散落各洲的坚守者。九章，约 3.4 万字。','长文 · 人物谱系','#366c9a')
+   +entry('专题','围剿与反围剿','把"围堵"与"突围"作为一对互为条件的运动来写：资本主义的封锁线如何划定，社会主义的突破线如何落笔。','长文 · 专题','#9d4039')
+   +entry('专题','美共基础建设','美国共产主义运动的组织史切片：支部、报刊、工分会与它的对手。','长文 · 组织史','#596d60')
+   +entry('筹备','红色高棉研究笔记','档案整理中。','[筹备中]','#6d736a')
+   +entry('筹备','阿尔巴尼亚的孤立年代','档案整理中。','[筹备中]','#6d736a')
+   +'<a class="full-link" href="#">进入专栏目录 →</a>';}},
+ cur:{k:'ARCHIVE · 时事档案',t:'时事档案',h:function(){
+   return entrySrc('2026.11.05','法国全国罢工：数十万人抗议生活成本','工会发动全国性罢工与示威，反对政府 2027 年度预算、要求提高工资和养老金。内政部估计约 57.5 万人参加，埃菲尔铁塔当日关闭；政府随后加快上调最低工资以回应抗议。','来源：半岛电视台','#9d4039')
+   +entrySrc('2026.09.17','巴西"家庭补助金"上调 15%','卢拉政府颁布法令，最低月补助从 600 雷亚尔提高至 691 雷亚尔，10 月起惠及约 2000 万困难家庭。','来源：路透社','#e8c36a')
+   +entrySrc('2026.05.01','五一国际劳动节：全球工人联合示威','从首尔到巴黎，从墨西哥城到约翰内斯堡，各地工人举行集会与游行，生活成本上涨成为多国动员的共同主题。','来源：美联社','#df444a')
+   +entrySrc('2026.02.13','尼泊尔人民战争三十周年','尼共（毛中心）在鲁库姆东县举行纪念活动，普拉昌达表示党处于"革命的和平战线"。','来源：Nepali Times','#596d60')
+   +'<a class="full-link" href="#">进入时事档案 →</a>';}},
+ mem:{k:'MEMORIAL · 纪念',t:'为了忘却的纪念',h:function(){
+   return entry('1871–1919','罗莎·卢森堡','"自由始终是持不同思想者的自由"——德国共产党创始人之一，马克思主义理论家，1919 年 1 月遭自由军团杀害。','出处：《论俄国革命》','#596d60')
+   +entry('1871–1919','卡尔·李卜克内西','"德国人民的主要敌人就在德国"——反军国主义战士，与卢森堡一同领导柏林一月起义，英勇就义。','出处：《主要敌人在国内！》','#596d60')
+   +entry('1890–1969','胡志明','"没有什么比独立自由更可贵"——越南共产党创始人，民族解放运动的领袖。','出处：《告全国同胞书》','#596d60')
+   +entry('1928–1967','切·格瓦拉','"直到最后的胜利，祖国或死亡！"——阿根廷-古巴革命家，游击战理论家，在玻利维亚牺牲。','出处：致卡斯特罗的告别信','#596d60')
+   +'<a class="full-link" href="#">进入纪念页 →</a>';}}
+};
+function openDrawer(key){var c=CONTENT[key];if(!c)return;
+  dK.textContent=c.k;dT.textContent=c.t;dB.innerHTML=c.h();
+  drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');openKey=key;drawLeaders();}
+function closeDrawer(){drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');openKey=null;drawLeaders();}
+function toggleDrawer(key){openKey===key?closeDrawer():openDrawer(key);}
+document.getElementById('dClose').onclick=closeDrawer;
+document.querySelectorAll('.station').forEach(function(s){
+  var key=s.dataset.key;
+  s.querySelector('.go').addEventListener('click',function(e){e.stopPropagation();toggleDrawer(key)});
+  makeDraggable(s,s.querySelector('.head'),function(){
+    s.classList.toggle('folded');
+    s.querySelector('.fold').textContent=s.classList.contains('folded')?'+':'—';
+    drawLeaders();});
+  s.querySelector('.fold').addEventListener('click',function(e){
+    e.stopPropagation();
+    s.classList.toggle('folded');
+    s.querySelector('.fold').textContent=s.classList.contains('folded')?'+':'—';
+    drawLeaders();});
+});
+
+/* 顶栏：手柄拖动；单击手柄=折叠 */
+var topbar=document.getElementById('topbar');
+makeDraggable(topbar,document.getElementById('topbarFold'),function(){
+  topbar.classList.toggle('folded');
+  document.getElementById('statusline').style.display=topbar.classList.contains('folded')?'none':'flex';});
+
+/* ================= 时间之轴：分段 × 截面 × 密度 + 横扫 ================= */
+var ticks=[].slice.call(document.querySelectorAll('#rulerTrack .tick'));
+var segs=[].slice.call(document.querySelectorAll('.era-seg'));
+var mapCaption=document.querySelector('.map-label.kicker');
+function setTick(tick){
+  if(!tick||tick.classList.contains('active'))return;
+  ticks.forEach(function(x){x.classList.remove('active')});
+  tick.classList.add('active');
+  segs.forEach(function(sg){
+    sg.classList.toggle('era-on',!!sg.querySelector('.tick.active'));});
+  if(mapCaption)mapCaption.textContent=tick.dataset.year+' · 历史截面 '+(ticks.indexOf(tick)+1)+'/'+ticks.length;
+  plane.classList.remove('flash');void plane.offsetWidth;plane.classList.add('flash');
+  drawLeaders();
+}
+ticks.forEach(function(t){t.addEventListener('click',function(e){e.stopPropagation();setTick(t)})});
+segs.forEach(function(sg){
+  sg.querySelector('.era-name').addEventListener('click',function(e){
+    e.stopPropagation();
+    segs.forEach(function(x){x.classList.toggle('era-on',x===sg)});
+    var st=document.getElementById('statusline');
+    if(st)st.lastElementChild.innerHTML='时代筛选：<span class="era-mark">'+sg.querySelector('b').textContent+'</span>（正式版联动日历与事件筛选）';
+  });
+});
+/* 按住横扫：在标尺上滑动即连续切换截面 */
+var ruler=document.getElementById('axisBottom'),scrubbing=false,scrubLast=null;
+ruler.addEventListener('pointerdown',function(e){
+  if(e.target.closest('.era-name'))return;
+  scrubbing=true;scrubLast=null;ruler.setPointerCapture&&ruler.setPointerCapture(e.pointerId);
+  scrubAt(e);});
+ruler.addEventListener('pointermove',function(e){if(scrubbing)scrubAt(e)});
+ruler.addEventListener('pointerup',function(){scrubbing=false});
+ruler.addEventListener('pointercancel',function(){scrubbing=false});
+function scrubAt(e){
+  var el=document.elementFromPoint(e.clientX,e.clientY);
+  var t=el&&el.closest?el.closest('.tick'):null;
+  if(t&&t!==scrubLast){scrubLast=t;setTick(t);}
+}
+/* ← → 键切换截面（非导览状态） */
+document.addEventListener('keydown',function(e){
+  if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  var i=ticks.findIndex(function(t){return t.classList.contains('active')});
+  var n=Math.max(0,Math.min(ticks.length-1,i+(e.key==='ArrowRight'?1:-1)));
+  if(n!==i)setTick(ticks[n]);
+});
+
+/* ================= 图例 / 明暗 ================= */
+var legendPop=document.getElementById('legendPop');
+document.getElementById('legendChip').onclick=function(){legendPop.classList.toggle('open')};
+var dark=false;
+function setDark(v){dark=v;document.body.classList.toggle('dark',dark);}
+document.getElementById('themeBtn').onclick=function(){setDark(!dark)};
+document.getElementById('themeBtn2').onclick=function(){setDark(!dark)};
+
+/* ================= 导览 ================= */
+var tourBar=document.getElementById('tourBar'),tT=document.getElementById('tTitle'),tX=document.getElementById('tText'),
+    tStepEl=document.getElementById('tStep'),tDots=document.getElementById('tDots');
+var TOUR=[
+ {t:'欢迎来到图房',x:'整张世界地图就是展厅的地面——脚下没有展墙，只有<b>1949 年岁末的世界</b>。社会主义阵营红、资本主义阵营蓝、分治之地斜纹；往任意方向拖动，地图就跟着你的手走。',
+  v:{x:-640,y:-80,s:.66}},
+ {t:'中央画布 · 历史阵营地图',x:'地图承载 <b>24 个历史截面</b>与 212 个国家参考面。中国自 1949 年起固定红——这是展示约定，历史记录不随底色改写；德国与朝鲜半岛的斜纹，表示同一地理单元内的分治。',
+  v:{x:-1050,y:-320,s:1.05},anchor:'anchor-berlin'},
+ {t:'时间之轴 · 图房的唯一时钟',x:'底缘这根轴身兼三职：<b>七个时代分段</b>是阅读分组，段内刻度是 24 个截面，上沿的线是 641 条史实的密度。<b>按住它左右横扫</b>，世界跟着换装——也可以用 ← → 键逐格翻。',
+  v:{x:-900,y:-260,s:.9},anchor:'anchor-petro'},
+ {t:'左上 · 历史日历',x:'日历室收着 <b>641 条"历史上的今天"</b>——每一天都可能改写世界。抽屉展示当日与月历，完整玩法在子页。',
+  v:{x:-330,y:-160,s:.95},anchor:'anchor-paris',drawer:'cal'},
+ {t:'右下 · 时事档案',x:'时事室按<b>档案口径</b>收录今天的斗争，每条注明出处与观察立场——报纸会老，出处不会。',
+  v:{x:-1180,y:-420,s:1.0},anchor:'anchor-paris',drawer:'cur'},
+ {t:'左下 · 为了忘却的纪念',x:'纪念室里是被记住的名字，每句名言都附<b>文献出处</b>。纪念不是装饰，是史料的另一种读法。',
+  v:{x:-120,y:-380,s:.9},anchor:'anchor-berlin',drawer:'mem'},
+ {t:'图房的门开着',x:'<b>现在交给你。</b>双击任意站牌进入完整页面；站牌头部可以拖着走，把四间档案室摆成你顺手的布局。Esc 随时退出任何一层。',
+  v:HOME}
+];
+var tourActive=false,tourStep=0;
+function renderDots(){tDots.innerHTML=TOUR.map(function(_,i){return '<i'+(i===tourStep?' class="on"':'')+'></i>'}).join('')}
+function tourGo(n){
+  if(n<0||n>=TOUR.length)return;
+  tourStep=n;var st=TOUR[n];
+  tT.textContent=st.t;tX.innerHTML=st.x;
+  tStepEl.textContent='第 '+(n+1)+' / '+TOUR.length+' 站';renderDots();
+  document.querySelectorAll('.leader').forEach(function(g){g.classList.remove('hot')});
+  if(st.anchor){var card=document.querySelector('.station[data-anchor="'+st.anchor+'"]');
+    if(card&&card._leaderG)card._leaderG.classList.add('hot');}
+  closeDrawer();
+  var to=st.v;
+  if(st.anchor){var a=document.getElementById(st.anchor);
+    var ax=parseFloat(a.getAttribute('cx')),ay=parseFloat(a.getAttribute('cy'));
+    var s=(st.v&&st.v.s)||1;
+    var sx=(innerWidth-(st.drawer?470:0))/2, sy=innerHeight*0.44;
+    to={x:sx-ax*s, y:sy-ay*s, s:s};}
+  tweenView(to,1150,function(){
+    if(st.drawer)openDrawer(st.drawer);else drawLeaders();
+  });
+}
+function startTour(){tourActive=true;document.body.classList.add('touring');tourBar.classList.add('open');tourGo(0);}
+function stopTour(){if(!tourActive)return;tourActive=false;document.body.classList.remove('touring');tourBar.classList.remove('open');closeDrawer();drawLeaders();}
+document.getElementById('tNext').onclick=function(){if(tourStep<TOUR.length-1)tourGo(tourStep+1);else stopTour()};
+document.getElementById('tPrev').onclick=function(){tourGo(tourStep-1)};
+document.getElementById('tExit').onclick=stopTour;
+document.getElementById('tourChip').onclick=function(){tourActive?stopTour():startTour()};
+
+/* ================= 封面 ================= */
+var cover=document.getElementById('cover');
+function hideCover(){cover.classList.add('hidden')}
+document.getElementById('coverX').onclick=hideCover;
+document.getElementById('coverEnter').onclick=hideCover;
+document.getElementById('coverAbout').onclick=hideCover;
+document.getElementById('coverTour').onclick=function(){hideCover();setTimeout(startTour,300)};
+
+/* Esc：关抽屉 → 退导览 */
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Escape')return;
+  if(drawer.classList.contains('open'))closeDrawer();
+  else if(tourActive)stopTour();
+});
+apply();
+})();
+</script>
+</body>
+</html>

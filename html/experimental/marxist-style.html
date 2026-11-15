@@ -117,9 +117,9 @@
                     <div class="ms-input-card">
                         <!-- 多页导航 -->
                         <div class="ms-page-nav" id="ms-input-page-nav">
-                            <button class="ms-page-btn" id="ms-input-prev"></button>
+                            <button class="ms-page-btn" id="ms-input-prev" title="上一页" aria-label="上一页">‹</button>
                             <span class="ms-page-indicator" id="ms-input-page-num">1 / 1</span>
-                            <button class="ms-page-btn" id="ms-input-next"></button>
+                            <button class="ms-page-btn" id="ms-input-next" title="下一页" aria-label="下一页">›</button>
                             <button class="ms-page-btn ms-page-add" id="ms-input-add" title="新增输入页">+</button>
                         </div>
                         <!-- 时期标签 -->
@@ -177,14 +177,21 @@
                         <div class="ms-input-header">
                             <div class="ms-char-limit">
                                 <span id="ms-char-count">0</span><span style="font-size:0.7rem;color:#999;"> 字</span>
-                                <span style="font-size:0.65rem;color:#aaa;">（≤2000）</span>
+                                <span style="font-size:0.65rem;color:#aaa;">（≤6000，长文可切页）</span>
                             </div>
                         </div>
                         <textarea id="ms-input-text"
                                   class="ms-textarea"
-                                  placeholder="输入你想转换的文字……&#10;&#10;长文建议控制在 2000 字以内，效果最佳"
-                                  maxlength="2000"
+                                  placeholder="输入你想转换的文字……&#10;&#10;超过 800 字会提示切页：逐页生成、页间自动衔接，长文更连贯"
+                                  maxlength="6000"
                                   rows="5"></textarea>
+                        <!-- 长文引导：检测到长文时提示切页，保证整篇连贯 -->
+                        <div class="ms-long-hint" id="ms-long-hint" style="display:none;">
+                            <span class="ms-long-hint-text" id="ms-long-hint-text"></span>
+                            <button class="ms-topic-btn" id="ms-long-autosplit" title="按空行/段落自动切成多页">自动切页</button>
+                            <button class="ms-topic-btn" id="ms-long-manual" title="插入 --- 标记自定义分页">手动切页</button>
+                            <button class="ms-long-hint-close" id="ms-long-dismiss" title="保持单页">×</button>
+                        </div>
                         <div class="ms-input-actions">
                             <button id="ms-convert-btn" class="ms-btn-primary">
                                 <span id="ms-convert-btn-text">转 为 马 列 体</span>
@@ -229,9 +236,10 @@
                     <div class="ms-output-card ms-output-ai" id="ms-output-panel">
                         <!-- 输出页导航 -->
                         <div class="ms-page-nav" id="ms-output-page-nav" style="margin-bottom:10px;">
-                            <button class="ms-page-btn" id="ms-output-prev"></button>
+                            <button class="ms-page-btn" id="ms-output-prev" title="上一页" aria-label="上一页">‹</button>
                             <span class="ms-page-indicator" id="ms-output-page-num">1 / 1</span>
-                            <button class="ms-page-btn" id="ms-output-next"></button>
+                            <button class="ms-page-btn" id="ms-output-next" title="下一页" aria-label="下一页">›</button>
+                            <button class="ms-page-btn ms-page-merge" id="ms-output-merge" title="把所有页的结果合并成一篇">合并全文</button>
                         </div>
                         <div class="ms-ai-output-header">
                             <h3 class="ms-card-title" style="margin-bottom:0;">转 换 结 果</h3>

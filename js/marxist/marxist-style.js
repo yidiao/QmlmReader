@@ -181,7 +181,7 @@
       return { author: topAuthor, topWorks: topWorks, description: description };
     },
 
-    async deepPolish(text, author, period, tone, inputType) {
+    async deepPolish(text, author, period, tone, inputType, pageContext, pageIndex, pageCount) {
       var apiBase = this._getApiBase();
       try {
         var resp = await fetch(apiBase + '/api/translate', {
@@ -193,10 +193,13 @@
             period: period || 'standard',
             tone: tone || 'auto',
             inputType: inputType || null,
-            mode: 'deep_polish'
+            mode: 'deep_polish',
+            context: pageContext || '',
+            pageIndex: typeof pageIndex === 'number' ? pageIndex : 0,
+            pageCount: typeof pageCount === 'number' ? pageCount : 1
           }),
           // 长文两遍加工更慢：输入 ≥800 字时给 240s，短文本仍 60s
-          signal: AbortSignal.timeout(String(text || '').length >= 800 ? 240000 : 60000)
+          signal: AbortSignal.timeout(String(text || '').length >= 800 ? 400000 : 60000)
         });
         if (!resp.ok) {
           var errData = await resp.json().catch(function () { return {}; });
@@ -302,6 +305,7 @@
       this._initPeriodTags();
       this._initToneTags();
       this._initTopicPicker();
+      this._initLongFormGuide();
     },
 
     _cacheElements() {
@@ -332,7 +336,13 @@
         topicSearch:    $('ms-topic-search'),
         topicTabs:      $('ms-topic-tabs'),
         topicList:      $('ms-topic-list'),
-        topicCount:     $('ms-topic-count')
+        topicCount:     $('ms-topic-count'),
+        outputMerge:    $('ms-output-merge'),
+        longHint:       $('ms-long-hint'),
+        longHintText:   $('ms-long-hint-text'),
+        longAutoSplit:  $('ms-long-autosplit'),
+        longManual:     $('ms-long-manual'),
+        longDismiss:    $('ms-long-dismiss')
       };
     },
 
@@ -479,6 +489,11 @@
     // ---- 议题库（C4）：一百问 + 青马题库，抽屉挑选 / 随机抽题 ----
     _initTopicPicker() {
       var self = this;
+      // 抽屉与遮罩挂到 body：避免被祖先的 transform / overflow / stacking 裁掉
+      var dr = this.elements.topicDrawer;
+      var ov = this.elements.topicOverlay;
+      if (dr && dr.parentElement !== document.body) document.body.appendChild(dr);
+      if (ov && ov.parentElement !== document.body) document.body.appendChild(ov);
       if (this.elements.topicOpen) {
         this.elements.topicOpen.addEventListener('click', function () { self._openTopicDrawer(); });
       }
@@ -523,9 +538,13 @@
 
     _openTopicDrawer() {
       if (!this.elements.topicDrawer) return;
-      this.elements.topicDrawer.classList.add('open');
-      this.elements.topicDrawer.setAttribute('aria-hidden', 'false');
+      var dr = this.elements.topicDrawer;
+      dr.classList.add('open');
+      // 内联 transform 兜底：不依赖 .open 规则是否被覆盖 / 过渡是否被浏览器冻结
+      dr.style.transform = 'translateX(0)';
+      dr.setAttribute('aria-hidden', 'false');
       if (this.elements.topicOverlay) this.elements.topicOverlay.classList.add('show');
+      document.body.classList.add('ms-drawer-open');
       this._renderTopicList();
       if (this.elements.topicSearch) {
         var input = this.elements.topicSearch;
@@ -535,9 +554,12 @@
 
     _closeTopicDrawer() {
       if (!this.elements.topicDrawer) return;
-      this.elements.topicDrawer.classList.remove('open');
-      this.elements.topicDrawer.setAttribute('aria-hidden', 'true');
+      var dr = this.elements.topicDrawer;
+      dr.classList.remove('open');
+      dr.style.transform = 'translateX(102%)';
+      dr.setAttribute('aria-hidden', 'true');
       if (this.elements.topicOverlay) this.elements.topicOverlay.classList.remove('show');
+      document.body.classList.remove('ms-drawer-open');
     },
 
     _topicMeta(t) {
@@ -606,14 +628,163 @@
       this._applyTopic(topic.id);
     },
 
+    // ---- 长文引导：检测长文 → 自动/手动切页 → 页间衔接 ----
+    _initLongFormGuide() {
+      var self = this;
+      if (this.elements.inputText) {
+        this.elements.inputText.addEventListener('input', function () { self._maybeShowLongHint(); });
+      }
+      if (this.elements.longAutoSplit) {
+        this.elements.longAutoSplit.addEventListener('click', function () { self._autoSplitLongText(); });
+      }
+      if (this.elements.longManual) {
+        this.elements.longManual.addEventListener('click', function () { self._openManualSplit(); });
+      }
+      if (this.elements.longDismiss) {
+        this.elements.longDismiss.addEventListener('click', function () {
+          self.longHintDismissed = true;
+          self._hideLongHint();
+        });
+      }
+      if (this.elements.outputMerge) {
+        this.elements.outputMerge.addEventListener('click', function () { self._mergeAllPages(); });
+      }
+    },
+
+    _maybeShowLongHint() {
+      var len = this.elements.inputText ? this.elements.inputText.value.trim().length : 0;
+      if (this.longHintDismissed || this.inputPages.length > 1 || len < 800) {
+        this._hideLongHint();
+        return;
+      }
+      if (this.elements.longHintText) {
+        this.elements.longHintText.textContent = '检测到长文 ' + len + ' 字：建议切成多页生成，页与页之间会自动衔接，整篇更连贯。';
+      }
+      if (this.elements.longHint) this.elements.longHint.style.display = 'flex';
+    },
+
+    _hideLongHint() {
+      if (this.elements.longHint) this.elements.longHint.style.display = 'none';
+    },
+
+    _autoSplitLongText() {
+      var text = this.elements.inputText.value.trim();
+      if (!text) { this._showToast('请先输入文字'); return; }
+      var maxChars = 700;   // 每页控制在长文阈值（800）以下：单遍生成 + 上文衔接，快且稳
+      var self = this;
+      // 先按空行拆段；超长段落再按句末标点拆成不超过 maxChars 的小块
+      var pieces = [];
+      text.split(/\n\s*\n+/).map(function (s) { return s.trim(); }).filter(Boolean).forEach(function (p) {
+        self._splitToPieces(p, maxChars).forEach(function (x) { pieces.push(x); });
+      });
+      if (pieces.length < 2) pieces = self._splitToPieces(text, maxChars);
+      // 再把小块拼成页；超过 6 页时按总字数重新均分，保证每页仍不超预算
+      var totalLen = pieces.reduce(function (n, p) { return n + p.length; }, 0);
+      var chunks = self._packPieces(pieces, maxChars);
+      if (chunks.length > 6) {
+        chunks = self._packPieces(pieces, Math.ceil(totalLen / 6) + 2);
+      }
+      if (chunks.length < 2) { this._showToast('这段文字不需要切页'); return; }
+      this._applySplitPages(chunks);
+    },
+
+    _packPieces(pieces, maxChars) {
+      var chunks = [];
+      var cur = '';
+      pieces.forEach(function (p) {
+        if (cur && (cur.length + p.length + 2) > maxChars) {
+          chunks.push(cur);
+          cur = p;
+        } else {
+          cur = cur ? cur + '\n\n' + p : p;
+        }
+      });
+      if (cur) chunks.push(cur);
+      return chunks;
+    },
+
+    // 把一段文字拆成若干不超过 max 字的小块：优先按句末标点，单句过长则硬切
+    _splitToPieces(p, max) {
+      var sents = p.split(/(?<=[。！？；!?;])/).map(function (s) { return s.trim(); }).filter(Boolean);
+      if (!sents.length) sents = [p];
+      var out = [];
+      var cur = '';
+      sents.forEach(function (sn) {
+        if (cur && (cur.length + sn.length) > max) { out.push(cur); cur = sn; }
+        else { cur += sn; }
+      });
+      if (cur) out.push(cur);
+      var hard = [];
+      out.forEach(function (seg) {
+        while (seg.length > max) { hard.push(seg.slice(0, max)); seg = seg.slice(max); }
+        if (seg) hard.push(seg);
+      });
+      return hard;
+    },
+
+    _applySplitPages(chunks) {
+      this.inputPages = chunks.map(function (t) {
+        return { text: t, result: null, changesCache: null, diagnosisCache: null };
+      });
+      this.currentPage = 0;
+      this.lastResult = null;
+      this.elements.inputText.value = chunks[0];
+      this._updateCharCount();
+      this._updatePageNav();
+      if (this.elements.outputText) this._setOutputText('转换后的文本将显示在这里……', true);
+      if (this.elements.aiMeta) this.elements.aiMeta.style.display = 'none';
+      this.longHintDismissed = true;
+      this._hideLongHint();
+      this._showToast('已切成 ' + chunks.length + ' 页：逐页生成，页间自动衔接');
+    },
+
+    _openManualSplit() {
+      var self = this;
+      var text = this.elements.inputText.value;
+      if (!text.trim()) { this._showToast('请先输入文字'); return; }
+      var prefill = text.split(/\n\s*\n+/).join('\n\n---\n\n');
+      ModalController.open(
+        '手动切页',
+        '<p style="margin:0 0 10px;font-size:0.78rem;color:#666;line-height:1.6;">在需要分页的位置单独一行写 <code>---</code>，然后点「按标记切页」。最多 6 页，页与页之间会自动衔接。</p>'
+          + '<textarea id="ms-split-text" class="ms-textarea" rows="12" style="width:100%;box-sizing:border-box;">' + escHTML(prefill) + '</textarea>',
+        '<button class="ms-btn-primary" id="ms-split-confirm">按标记切页</button>'
+          + '<button class="ms-btn-secondary" id="ms-split-cancel">取消</button>'
+      );
+      var confirmBtn = document.getElementById('ms-split-confirm');
+      var cancelBtn = document.getElementById('ms-split-cancel');
+      if (cancelBtn) cancelBtn.addEventListener('click', function () { ModalController.close(); });
+      if (confirmBtn) confirmBtn.addEventListener('click', function () {
+        var raw = document.getElementById('ms-split-text').value;
+        var chunks = raw.split(/\n\s*---+\s*\n/).map(function (s) { return s.trim(); }).filter(Boolean);
+        if (chunks.length < 2) { self._showToast('至少需要一处 --- 标记才能切页'); return; }
+        if (chunks.length > 6) { self._showToast('最多 6 页，请减少标记'); return; }
+        ModalController.close();
+        self._applySplitPages(chunks);
+      });
+    },
+
+    _mergeAllPages() {
+      var parts = this.inputPages.map(function (p) {
+        var t = p.result && (p.result.result || p.result.text);
+        return t ? String(t).trim() : '';
+      }).filter(Boolean);
+      if (!parts.length) { this._showToast('还没有可合并的结果'); return; }
+      var merged = parts.join('\n\n');
+      this._setOutputText(escHTML(merged).replace(/\n/g, '<br>'), false);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(merged).catch(function () {});
+      }
+      this._showToast('已合并 ' + parts.length + '/' + this.inputPages.length + ' 页，全文已复制');
+    },
+
     // ---- 字数统计 ----
     _updateCharCount() {
       var len = this.elements.inputText.value.length;
       if (this.elements.charCount) {
         this.elements.charCount.textContent = len;
-        if (len > 2000) {
+        if (len > 5000) {
           this.elements.charCount.style.color = '#c41e3a';
-        } else if (len > 1500) {
+        } else if (len > 3000) {
           this.elements.charCount.style.color = '#d97706';
         } else {
           this.elements.charCount.style.color = '';
@@ -625,7 +796,7 @@
     async _handleConvert() {
       var text = this.elements.inputText.value.trim();
       if (!text) { this._showToast('请先输入文字'); return; }
-      if (text.length > 2000) { this._showToast('请控制在 2000 字以内'); return; }
+      if (text.length > 6000) { this._showToast('请控制在 6000 字以内（长文建议切页）'); return; }
 
       var author = this.currentAuthor;
       var hasModule = window.StalinAI_MENTOR_REGISTRY && window.StalinAI_MENTOR_REGISTRY[author] && window.StalinAI_MENTOR_REGISTRY[author].hasChild;
@@ -647,10 +818,20 @@
 
       var self = this;
 
+      // 多页生成：把上一页结果尾部作为衔接上下文，保证整篇连贯
+      var prevPage = this.currentPage > 0 ? this.inputPages[this.currentPage - 1] : null;
+      var prevText = '';
+      if (prevPage) {
+        prevText = prevPage.result ? String(prevPage.result.result || prevPage.result.text || '') : String(prevPage.text || '');
+      }
+      var pageContext = prevText ? prevText.slice(-400) : '';
+      var pageIndex = this.currentPage;
+      var pageCount = this.inputPages.length;
+
       // 优先走服务端代理（Vercel / 本地 local_server）；失败则回退到用户个人 Key
       try {
         var inputType = window.StalinAI_classifyInput ? window.StalinAI_classifyInput(text) : null;
-        var vercelResult = await MarxistStyleEngine.deepPolish(text, author, period, self.currentTone, inputType);
+        var vercelResult = await MarxistStyleEngine.deepPolish(text, author, period, self.currentTone, inputType, pageContext, pageIndex, pageCount);
         self._renderResult(vercelResult, outText, meta, text, 'vercel');
       } catch (vercelErr) {
         console.warn('[马列体] Vercel 后端不可用:', vercelErr.message);
